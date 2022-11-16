@@ -1,0 +1,17 @@
+{
+  "name": "davi-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo for DAVI",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "pnpm": {
+    "overrides": {
+      "electron": "^17.1.2",
+      "leveldown": "^6.1.1"
+    }
+  },
+  "devDependencies": {
+    "turbo": "^1.6.3"
+  }
+}

@@ -2,13 +2,14 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "dev": {
-      "dependsOn": ["^typechain"]
+      "dependsOn": ["^typechain", "updateBytecodes"]
     },
     "build": {
-      "dependsOn": ["typechain"]
+      "dependsOn": ["typechain", "updateBytecodes"]
     },
     "lint": {},
 
-    "typechain": {}
+    "typechain": {},
+    "updateBytecodes": {}
   }
 }

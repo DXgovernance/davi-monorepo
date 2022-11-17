@@ -1,8 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "compile": {},
-    "build": {},
-    "lint": {}
+    "dev": {
+      "dependsOn": ["^typechain"]
+    },
+    "build": {
+      "dependsOn": ["typechain"]
+    },
+    "lint": {},
+
+    "typechain": {}
   }
 }

@@ -1,15 +1,20 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
+    "clean": {},
+    "compile": {
+      "dependsOn": ["^clean"]
+    },
+    "setup": {
+      "dependsOn": ["^compile"]
+    },
     "dev": {
-      "dependsOn": ["^typechain", "updateBytecodes"]
+      "dependsOn": ["^setup"]
     },
     "build": {
-      "dependsOn": ["typechain", "updateBytecodes"]
+      "dependsOn": ["^setup"]
     },
     "lint": {},
-
-    "typechain": {},
-    "updateBytecodes": {}
+    "test": {}
   }
 }

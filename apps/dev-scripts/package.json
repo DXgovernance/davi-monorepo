@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "./src/dev.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "./src/dev.sh"
   },
   "keywords": [],
   "author": "",

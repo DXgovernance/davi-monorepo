@@ -51,6 +51,7 @@ const config: HardhatUserConfig = {
       allowUnlimitedContractSize: true,
       gasPrice: 10000000000,
       initialDate: moment.unix(0).toDate().toString(),
+      chainId: 1337,
       mining: {
         auto: true,
         interval: 5000,

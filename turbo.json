@@ -1,15 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "clean": {},
-    "compile": {
+    "clean": {
       "dependsOn": ["^clean"]
     },
+    "compile": {
+      "dependsOn": ["^compile", "clean"]
+    },
     "setup": {
-      "dependsOn": ["^compile"]
+      "dependsOn": ["^setup", "compile"]
     },
     "dev": {
-      "dependsOn": ["^setup"]
+      "dependsOn": ["setup"]
     },
     "build": {
       "dependsOn": ["^setup"]
@@ -19,6 +21,9 @@
     },
     "test": {
       "dependsOn": ["^setup"]
+    },
+    "davi-frontend#dev": {
+      "dependsOn": ["dev-scripts#dev"]
     }
   }
 }

@@ -18,12 +18,6 @@ hardhat_running() {
 }
 
 start_hardhat_node() {
-
-  rm -rf contracts
-  cp -r node_modules/dxdao-contracts/contracts ./
-
-  pnpm hardhat compile
-  
   pnpm hardhat node --hostname 0.0.0.0
 
   hardhat_pid=$!

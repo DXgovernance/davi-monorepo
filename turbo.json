@@ -14,7 +14,11 @@
     "build": {
       "dependsOn": ["^setup"]
     },
-    "lint": {},
-    "test": {}
+    "lint": {
+      "dependsOn": ["^setup"]
+    },
+    "test": {
+      "dependsOn": ["^setup"]
+    }
   }
 }

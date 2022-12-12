@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
 import moment from "moment";
-require('@nomiclabs/hardhat-truffle5');
+require("@nomiclabs/hardhat-truffle5");
 import "@typechain/hardhat";
 import "hardhat-ethernal";
 import "hardhat-deploy";
@@ -30,7 +30,7 @@ const config: HardhatUserConfig = {
             runs: 200,
           },
         },
-      },      
+      },
     ],
   },
 
@@ -38,9 +38,9 @@ const config: HardhatUserConfig = {
     contracts: [
       {
         artifacts: "artifacts",
-        deploy: "node_modules/dxdao-contracts/deploy"
-      }
-    ]
+        deploy: "node_modules/dxdao-contracts/deploy",
+      },
+    ],
   },
 
   networks: {
@@ -56,7 +56,8 @@ const config: HardhatUserConfig = {
         auto: true,
         interval: 5000,
       },
-    }
+      loggingEnabled: false,
+    },
   },
 
   ethernal: {
@@ -64,15 +65,17 @@ const config: HardhatUserConfig = {
     password: process.env.ETHERNAL_PASSWORD,
     disableSync: false, // If set to true, plugin will not sync blocks & txs
     disableTrace: false, // If set to true, plugin won't trace transaction
-    workspace: 'localhost', // Set the workspace to use, will default to the default workspace (latest one used in the dashboard). It is also possible to set it through the ETHERNAL_WORKSPACE env variable
+    workspace: "localhost", // Set the workspace to use, will default to the default workspace (latest one used in the dashboard). It is also possible to set it through the ETHERNAL_WORKSPACE env variable
     uploadAst: false, // If set to true, plugin will upload AST, and you'll be able to use the storage feature (longer sync time though)
     disabled: !process.env.ETHERNAL_PASSWORD && !process.env.ETHERNAL_EMAIL, // If set to true, the plugin will be disabled, nohting will be synced, ethernal.push won't do anything either
-    resetOnStart: 'localhost', // Pass a workspace name to reset it automatically when restarting the node, note that if the workspace doesn't exist it won't error
+    resetOnStart: "localhost", // Pass a workspace name to reset it automatically when restarting the node, note that if the workspace doesn't exist it won't error
   },
 
   namedAccounts: {
     deployer: 0,
     tokenHolder: 1,
+    tokenHolder2: 2,
+    tokenHolder3: 3,
   },
 
   deterministicDeployment: {
@@ -80,9 +83,10 @@ const config: HardhatUserConfig = {
       factory: "0x4e59b44847b379578588920ca78fbf26c0b4956c",
       deployer: "0x3fab184622dc19b6109349b94811493bf2a45362",
       funding: "1000000000000000000000",
-      signedTx: "0xf8a58085174876e800830186a08080b853604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf31ba02222222222222222222222222222222222222222222222222222222222222222a02222222222222222222222222222222222222222222222222222222222222222",
-    }
-  }
+      signedTx:
+        "0xf8a58085174876e800830186a08080b853604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf31ba02222222222222222222222222222222222222222222222222222222222222222a02222222222222222222222222222222222222222222222222222222222222222",
+    },
+  },
 };
 
 export default config;

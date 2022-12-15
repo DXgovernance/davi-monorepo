@@ -10,8 +10,28 @@
     "setup": {
       "dependsOn": ["^setup", "compile"]
     },
+     "dxdao-contracts#compile": {
+      "dependsOn": ["clean"],
+      "outputs": ["artifacts/**"]
+    },
+    "dev-scripts#compile": {
+      "dependsOn": ["^dxdao-contracts#compile"]
+    },
+    "dev-scripts#dev": {
+      "dependsOn": ["^dev-scripts#compile"],
+      "outputs": [
+        "deployments/localhost/**"
+      ]
+    },
+    "dxdao-subgraph#dev": {
+        "dependsOn": ["^dev-scripts#compile"]
+    },
     "dev": {
-      "dependsOn": ["setup"]
+      "dependsOn": [
+        "setup",
+        "^dxdao-contracts#compile",
+        "^dev-scripts#compile"
+      ]
     },
     "build": {
       "dependsOn": ["^setup"]
@@ -21,9 +41,6 @@
     },
     "test": {
       "dependsOn": ["^setup"]
-    },
-    "davi-frontend#dev": {
-      "dependsOn": ["dev-scripts#dev"]
     }
   }
 }

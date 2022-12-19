@@ -5,6 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "turbo run dev"
+  },
   "pnpm": {
     "overrides": {
       "electron": "^17.1.2",

@@ -10,7 +10,7 @@
     "setup": {
       "dependsOn": ["^setup", "compile"]
     },
-     "dxdao-contracts#compile": {
+    "dxdao-contracts#compile": {
       "dependsOn": ["clean"],
       "outputs": ["artifacts/**"]
     },
@@ -18,20 +18,13 @@
       "dependsOn": ["^dxdao-contracts#compile"]
     },
     "dev-scripts#dev": {
-      "dependsOn": ["^dev-scripts#compile"],
-      "outputs": [
-        "deployments/localhost/**"
-      ]
+      "dependsOn": ["dev-scripts#compile"]
     },
     "dxdao-subgraph#dev": {
-        "dependsOn": ["^dev-scripts#compile"]
+      "dependsOn": ["^dev-scripts#compile"]
     },
     "dev": {
-      "dependsOn": [
-        "setup",
-        "^dxdao-contracts#compile",
-        "^dev-scripts#compile"
-      ]
+      "dependsOn": ["setup", "^dxdao-contracts#compile", "^dev-scripts#compile"]
     },
     "build": {
       "dependsOn": ["^setup"]

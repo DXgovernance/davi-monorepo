@@ -5,7 +5,15 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
+    "clean": "turbo run clean",
+    "compile": "turbo run compile",
+    "dev-script": "turbo run dev --scope=\"dev-scripts\"",
+    "davi-dev": "turbo run dev --filter=davi-frontend",
     "dev": "turbo run dev"
   },
   "pnpm": {

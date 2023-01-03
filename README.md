@@ -9,7 +9,7 @@
 1. Clone this repo.
 2. Clone DAVI into apps/davi-frontend: `git clone -b feature/monorepo-setup https://github.com/DXgovernance/DAVI apps/davi-frontend`
 3. Clone dxdao-contracts into apps/dxdao-contracts `git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts`
-4. Clone subgraph into apps/dxdao-subgraph `git clone -b feature/monorepo-setup https://github.com/DXgovernance/dxdao-subgraph apps/dxdao-subgraph`
+4. Clone subgraph into apps/dxdao-subgraph `git clone -b master https://github.com/DXgovernance/dxdao-subgraph apps/dxdao-subgraph`
 5. Install dependencies `pnpm i`
 
 ### Common Issues and Solutions

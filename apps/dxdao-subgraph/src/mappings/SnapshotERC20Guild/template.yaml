@@ -1,0 +1,12 @@
+abis:
+  - SnapshotRepERC20Guild
+  - BaseERC20Guild
+  - ERC20
+  - SnapshotERC20Guild
+entities:
+  - Guild
+  - Token
+eventHandlers:
+  - event: GuildInitialized()
+    handler: handleGuildInitialized
+

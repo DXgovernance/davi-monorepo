@@ -1,0 +1,7 @@
+abis:
+  - PermissionRegistry
+entities:
+  - GuildPermission
+eventHandlers:
+  - event: PermissionSet(address,address,bytes4,uint256,uint256)
+    handler: handleSetPermission

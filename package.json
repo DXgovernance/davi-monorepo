@@ -15,6 +15,7 @@
     "devScript": "turbo run dev --filter=\"dev-scripts\"",
     "davi:dev": "turbo run dev --filter=davi",
     "davi:test": "turbo run test --filter=davi",
+    "davi:build": "turbo run build --filter=davi",
     "subgraph:dev": "turbo run dev --filter=\"dxdao-subgraph\"",
     "dev": "turbo run dev",
     "test": "turbo run test",

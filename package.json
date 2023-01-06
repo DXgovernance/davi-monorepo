@@ -12,9 +12,12 @@
   "scripts": {
     "clean": "turbo run clean",
     "compile": "turbo run compile",
-    "dev-script": "turbo run dev --scope=\"dev-scripts\"",
-    "davi-dev": "turbo run dev --filter=davi-frontend",
-    "dev": "turbo run dev"
+    "devScript": "turbo run dev --filter=\"dev-scripts\"",
+    "davi:dev": "turbo run dev --filter=davi",
+    "davi:test": "turbo run test --filter=davi",
+    "subgraph:dev": "turbo run dev --filter=\"dxdao-subgraph\"",
+    "dev": "turbo run dev",
+    "test": "turbo run test"
   },
   "pnpm": {
     "overrides": {

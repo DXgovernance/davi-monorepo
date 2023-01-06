@@ -1,0 +1,836 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "WalletScheme",
+  "sourceName": "dxdao-contracts/contracts/dxvote/WalletScheme.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool[]",
+          "name": "_callsSucessResult",
+          "type": "bool[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes[]",
+          "name": "_callsDataResult",
+          "type": "bytes[]"
+        }
+      ],
+      "name": "ExecutionResults",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_state",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposalStateChange",
+      "type": "event"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ANY_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ANY_SIGNATURE",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ERC20_APPROVE_SIGNATURE",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ERC20_TRANSFER_SIGNATURE",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "SCHEME_TYPE",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "SET_MAX_SECONDS_FOR_EXECUTION_SIGNATURE",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "avatar",
+      "outputs": [
+        {
+          "internalType": "contract Avatar",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "_stakingToken",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "balanceOfStakingToken",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "burnReputation",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "controllerAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "erc20TransferOrApproveDecode",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "int256",
+          "name": "_decision",
+          "type": "int256"
+        }
+      ],
+      "name": "executeProposal",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "getFuncSignature",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getOrganizationProposal",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "to",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "callData",
+          "type": "bytes[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "value",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "enum WalletScheme.ProposalState",
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "descriptionHash",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "submittedTime",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "proposalIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getOrganizationProposalByIndex",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "to",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "callData",
+          "type": "bytes[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "value",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "enum WalletScheme.ProposalState",
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "descriptionHash",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "submittedTime",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getOrganizationProposals",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getOrganizationProposalsLength",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getTotalReputationSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "contract Avatar",
+          "name": "_avatar",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IntVoteInterface",
+          "name": "_votingMachine",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_voteParams",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "_controllerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_permissionRegistry",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_schemeName",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxSecondsForExecution",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxRepPercentageChange",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxRepPercentageChange",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxSecondsForExecution",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "mintReputation",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "permissionRegistry",
+      "outputs": [
+        {
+          "internalType": "contract PermissionRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "proposals",
+      "outputs": [
+        {
+          "internalType": "enum WalletScheme.ProposalState",
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "descriptionHash",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "submittedTime",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "proposalsInfo",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "blockNumber",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract Avatar",
+          "name": "avatar",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "proposalsList",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_to",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "_callData",
+          "type": "bytes[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_value",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "string",
+          "name": "_title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_descriptionHash",
+          "type": "string"
+        }
+      ],
+      "name": "proposeCalls",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "reputationOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "schemeName",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_maxSecondsForExecution",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxSecondsForExecution",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "_stakingToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "stakingTokenTransfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "voteParams",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "votingMachine",
+      "outputs": [
+        {
+          "internalType": "contract IntVoteInterface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "noImplicitAny": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2018",
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": false,
+    "noEmit": true,
+    "declaration": true,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false,
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": false,
+    "noUnusedLocals": true
+  },
+  "include": [
+    "src",
+    "scripts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "cache",
+    "artifacts",
+    "public"
+  ]
+}

@@ -1,0 +1,44 @@
+type Guild @entity {
+  id: ID!
+  name: String
+  token: Token
+  permissionRegistry: String
+  proposalTime: BigInt
+  lockTime: BigInt
+  timeForExecution: BigInt
+  votingPowerForProposalCreation: BigInt
+  votingPowerForProposalExecution: BigInt
+  voteGas: BigInt
+  maxGasPrice: BigInt
+  maxActiveProposals: BigInt
+  minimumMembersForProposalCreation: BigInt
+  minimumTokensLockedForProposalCreation: BigInt
+  type: GuildType
+  permissions: [GuildPermission!]! @derivedFrom(field: "guild")
+  proposals: [Proposal!]
+  members: [Member!]
+  isActive: Boolean
+  bytecodeHash: String
+}
+
+enum TokenType {
+  ERC20
+}
+
+enum GuildType {
+  ERC20Guild
+  DXDGuild
+  SnapshotRepERC20Guild
+  SnapshotERC20Guild
+}
+
+type Token @entity {
+  id: ID!
+  type: TokenType!
+  name: String!
+  symbol: String!
+  decimals: Int!
+  guildAddress: String!
+  # permissions: GuildPermission[]
+}
+

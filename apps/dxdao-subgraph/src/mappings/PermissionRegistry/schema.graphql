@@ -1,0 +1,10 @@
+type GuildPermission @entity {
+  id: ID!
+  from: String!
+  to: String!
+  functionSignature: Bytes!
+  valueAllowed: BigInt!
+  fromTime: BigInt!
+  allowed: Boolean!
+  guild: Guild
+}

@@ -1,0 +1,19 @@
+entities:
+  - Proposal
+  - Vote
+  - Option
+  - Action
+  - Member
+eventHandlers:
+  - event: ProposalStateChanged(indexed bytes32,uint256)
+    handler: handleProposalStateChange
+  - event: TokensLocked(address,uint256)
+    handler: handleTokenLocking
+  - event: TokensWithdrawn(address,uint256)
+    handler: handleTokenWithdrawal
+  - event: VoteAdded(indexed bytes32,indexed uint256,address,uint256)
+    handler: handleVoting
+callHandlers:
+  - function: setConfig(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)
+    handler: handleConfigChange
+

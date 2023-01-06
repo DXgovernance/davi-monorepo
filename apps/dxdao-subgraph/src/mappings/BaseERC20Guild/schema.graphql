@@ -1,0 +1,68 @@
+type Proposal @entity {
+  id: ID!
+  creator: String!
+  startTime: BigInt!
+  endTime: BigInt!
+  to: [String!]
+  data: [String!]
+  value: [BigInt!]
+  title: String!
+  contentHash: String!
+  contractState: BigInt!
+  guildId: String!
+  totalVotes: [BigInt!]
+  votes: [Vote!]
+  options: [Option!]
+  # TODO: use correct metadata type (ProposalMetadata)
+  metadata: String
+  description: String
+  executionTransactionHash: String
+  statesLog: [ProposalStateLog!]
+}
+
+type ProposalStateLog @entity {
+  id: ID!
+  state: BigInt!
+  timestamp: BigInt!
+  transactionHash: String!
+}
+
+type Option @entity {
+  id: ID!
+  label: String
+  proposalId: String
+  actions: [Action!]
+  voteAmount: BigInt
+  votes: [Vote!]!
+}
+
+type Action @entity {
+  id: ID!
+  optionId: String!
+  to: String!
+  data: String!
+  value: BigInt!
+  from: String!
+}
+
+# type ProposalMetadata @entity {
+#   id: ID!
+#   description: String!
+#   voteOptions: [String!]
+# }
+
+type Vote @entity {
+  id: ID!
+  proposalId: String!
+  option: BigInt!
+  voter: String!
+  votingPower: BigInt!
+  transactionHash: String!
+}
+
+type Member @entity {
+  id: ID!
+  address: String!
+  tokensLocked: BigInt!
+}
+

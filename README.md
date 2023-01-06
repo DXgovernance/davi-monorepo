@@ -7,9 +7,8 @@
 ### How to setup
 
 1. Clone this repo.
-2. Clone DAVI into apps/davi-frontend: `git clone -b develop https://github.com/DXgovernance/DAVI apps/davi-frontend`
-3. Clone dxdao-contracts into apps/dxdao-contracts `git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts`
-4. Install dependencies `pnpm i`
+2. Clone dxdao-contracts into apps/dxdao-contracts `git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts`
+3. Install dependencies `pnpm i`
 
 ### Common Issues and Solutions
 

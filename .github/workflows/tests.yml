@@ -1,4 +1,4 @@
-name: Jest Tests
+name: Tests
 on:
   push:
     branches:
@@ -34,10 +34,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build local config
-        run: cd apps/davi & node scripts/beforeBuild.js
+        run: node apps/davi/scripts/beforeBuild.js
 
       - name: Build local bytecodes
-        run: cd apps/davi & node scripts/updateBytecodes.js
+        run: node apps/davi/scripts/updateBytecodes.js
 
       - name: Run Jests Test
         run: pnpm run test

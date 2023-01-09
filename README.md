@@ -1,20 +1,76 @@
 # DAVI Monorepo
 
-### Prerequisites
+## Prerequisites
 
 1. `pnpm` (`npm` and `yarn` are **not supported**.)
 
-### How to setup
+## How to setup
 
 1. Clone this repo.
 2. Clone dxdao-contracts into apps/dxdao-contracts `git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts`
 3. Install dependencies `pnpm i`
+4. Make an `.env` file (see `.env.example`) and write a seed phrase for hardhat
 
-### Common Issues and Solutions
+### If you're on Linux:
+
+First, do the steps above.
+
+1. Run a hardhat instance
+
+```
+cd apps/dev-scripts
+
+pnpm dev
+```
+
+2. In another terminal, run the Linux subgraph setup
+
+```
+cd apps/dxdao-subgraph
+
+sudo ./setup-linux.sh
+```
+
+3. When it finishes, terminate the hardhat instance
+
+## Common Issues and Solutions
 
 1. `pnpm i` fails with `node-gyp` errors
 
 You might not have the relavant build tools for node-gyp to run. Check this if you're on [Mac OS](https://github.com/nodejs/node-gyp/blob/HEAD/macOS_Catalina.md#The-acid-test).
+
+2. `listen tcp4 0.0.0.0:5432: bind: address already in use`
+
+There's a process already running on port 5432 (usually postgres).
+
+Run
+
+```
+sudo lsof -i :5432
+```
+
+to get the PID of the process, and
+
+```
+sudo kill -9 [PID]
+```
+
+to terminate it.
+
+3. If you're on Linux and get this error
+
+```
+dxdao-subgraph:dev: ✖ Failed to deploy to Graph node http://127.0.0.1:8020/: subgraph validation error: [the specified block must exist on the Ethereum network]
+dxdao-subgraph:dev: error Command failed with exit code 1.
+dxdao-subgraph:dev: info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+dxdao-subgraph:dev:  ELIFECYCLE  Command failed with exit code 1.
+dxdao-subgraph:dev:  ELIFECYCLE  Command failed with exit code 1.
+```
+
+Then there was a problem during the Linux setup. Common sources of this are
+
+1. The subgraph was already running during the setup: make sure there are no instances of the subraph running. Run `docker compose down`
+2. The hardhat instance wasn't running while doing the setup: make sure the hardhat instance is running, and only then run the linux setup.
 
 ### Develop
 

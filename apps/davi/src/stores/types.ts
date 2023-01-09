@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
 import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
 import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
@@ -28,6 +29,45 @@ export interface FetcherHooksInterface {
   ) => ReturnType<typeof useTotalLocked>;
 }
 
+export interface WriterHooksInteface {
+  useApproveTokens: (
+    tokenAddress: `0x${string}`
+  ) => (daoTokenVault: string, amount?: string) => Promise<void>;
+  useCreateProposal: (
+    daoAddress: string
+  ) => (
+    title: string,
+    proposalData: any,
+    cb?: (error?: any, txtHash?: any) => void
+  ) => Promise<void>;
+  useExecuteProposal: (
+    daoAddress: string
+  ) => (proposalId: `0x${string}`) => Promise<void>;
+  useLockTokens: (
+    daoAddress: string
+  ) => (
+    stakeAmount: BigNumber,
+    decimals?: number,
+    symbol?: string
+  ) => Promise<void>;
+  useVoteOnProposal: (
+    daoAddress: string
+  ) => (
+    proposalId: string,
+    option: BigNumber,
+    votingPower: BigNumber,
+    title?: string,
+    cb?: (error?: any, txtHash?: any) => void
+  ) => Promise<void>;
+  useWithdrawTokens: (
+    daoAddress: string
+  ) => (
+    amount: BigNumber,
+    tokenDecimals?: number,
+    tokenSymbol?: string
+  ) => Promise<void>;
+}
+
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>
 
 // TODO: useSnapshotId and implementation-specific hooks should be removed when all the hooks are ported. That logic should only reside inside the implementation, not as a global hook
@@ -37,7 +77,7 @@ interface HooksInterfaceWithFallback {
     default: FetcherHooksInterface;
     fallback: FetcherHooksInterface;
   };
-  writers: null;
+  writers: WriterHooksInteface;
 }
 
 interface HooksInterfaceWithoutFallback

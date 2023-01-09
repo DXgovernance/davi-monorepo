@@ -2,7 +2,7 @@ name: IPFS Deploy
 
 on:
   workflow_run:
-    workflows: ["Code Build"]
+    workflows: ["Davi Build"]
     types:
       - completed
 

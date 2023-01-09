@@ -1,10 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import {
-  BsEmojiLaughing,
-  BsEmojiLaughingFill,
-  BsHandThumbsDown,
-  BsHandThumbsDownFill,
-} from 'react-icons/bs';
+import { BsHandThumbsDown, BsHandThumbsDownFill } from 'react-icons/bs';
 import { OrbisContext } from 'contexts/Guilds/orbis';
 import {
   IoArrowUndoOutline,
@@ -25,6 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import { IOrbisPost } from 'types/types.orbis';
+import { FaLaughSquint, FaRegLaughSquint } from 'react-icons/fa';
 
 const PostActions = ({
   post,
@@ -36,10 +32,10 @@ const PostActions = ({
 }: {
   post: IOrbisPost;
   showThreadButton?: boolean;
-  toggleThread: () => void;
-  toggleReply: () => void;
-  onClickEdit: () => void;
-  onClickDelete: () => void;
+  toggleThread?: () => void;
+  toggleReply?: () => void;
+  onClickEdit?: () => void;
+  onClickDelete?: () => void;
 }) => {
   const { t } = useTranslation();
   const { orbis, profile, checkOrbisConnection } = useContext(OrbisContext);
@@ -111,13 +107,15 @@ const PostActions = ({
   return (
     <>
       {/* Reply to post button */}
-      <PostActionButton
-        title={t('postActions.reply')}
-        onClick={handleClickReply}
-        disabled={isConnected && isReadOnly(connector)}
-      >
-        <IoArrowUndoOutline size={20} />
-      </PostActionButton>
+      {toggleReply && (
+        <PostActionButton
+          title={t('postActions.reply')}
+          onClick={handleClickReply}
+          disabled={isConnected && isReadOnly(connector)}
+        >
+          <IoArrowUndoOutline size={20} />
+        </PostActionButton>
+      )}
 
       {/* Toggle Thread */}
       {showThreadButton && (
@@ -153,9 +151,9 @@ const PostActions = ({
         disabled={isConnected && isReadOnly(connector)}
       >
         {reacted === 'haha' ? (
-          <BsEmojiLaughingFill size={18} />
+          <FaLaughSquint size={18} />
         ) : (
-          <BsEmojiLaughing size={18} />
+          <FaRegLaughSquint size={18} />
         )}
         <PostActionCount>{haha}</PostActionCount>
       </PostActionButton>
@@ -182,23 +180,27 @@ const PostActions = ({
           </PostActionButton>
           {showPopover && (
             <PostPopover ref={postPopover}>
-              <PostOptionsButton
-                onClick={() => {
-                  onClickEdit();
-                  setShowPopover(false);
-                }}
-              >
-                {t('postOptions.edit')}
-              </PostOptionsButton>
-              <PostOptionsButton
-                danger
-                onClick={() => {
-                  onClickDelete();
-                  setShowPopover(false);
-                }}
-              >
-                {t('postOptions.delete')}
-              </PostOptionsButton>
+              {onClickEdit && (
+                <PostOptionsButton
+                  onClick={() => {
+                    onClickEdit();
+                    setShowPopover(false);
+                  }}
+                >
+                  {t('postOptions.edit')}
+                </PostOptionsButton>
+              )}
+              {onClickDelete && (
+                <PostOptionsButton
+                  danger
+                  onClick={() => {
+                    onClickDelete();
+                    setShowPopover(false);
+                  }}
+                >
+                  {t('postOptions.delete')}
+                </PostOptionsButton>
+              )}
             </PostPopover>
           )}
         </PostOptions>

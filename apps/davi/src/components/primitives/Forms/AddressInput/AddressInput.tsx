@@ -29,7 +29,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   const [disabledState, setDisabledState] = useState(
     defaultValue ? true : disabled
   );
-
+  console.log({ localValue });
   const { address: addressFromLocalValue } = useENS(
     localValue.endsWith('.eth') ? localValue : `${localValue}.eth`
   );

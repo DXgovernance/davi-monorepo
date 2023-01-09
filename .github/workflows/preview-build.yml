@@ -1,4 +1,4 @@
-name: Code Build
+name: Davi Build
 
 on:
   workflow_dispatch:

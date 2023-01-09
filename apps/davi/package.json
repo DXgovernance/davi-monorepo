@@ -16,7 +16,7 @@
     "test": "react-app-rewired test --watchAll=false --verbose --testTimeout=10000",
     "test:coverage": "yarn run test --coverage",
     "updateContracts": "yarn hardhat compile && node scripts/updateContracts.js",
-    "prepare": "husky install",
+    "prepare": "cd ../..  && husky install apps/davi/.husky",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "pre-commit": "lint-staged"
@@ -149,7 +149,7 @@
     "cypress-wait-until": "^1.7.2",
     "eslint": "^8.30.0",
     "hardhat-ethernal": "^1.0.0",
-    "husky": "^6.0.0",
+    "husky": "^8.0.3",
     "jest-styled-components": "^7.0.8",
     "lint-staged": "^12.4.3",
     "node-polyfill-webpack-plugin": "^2.0.1",

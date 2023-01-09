@@ -81,7 +81,7 @@ importers:
       hardhat-dependency-compiler: ^1.1.2
       hardhat-ethernal: ^1.0.0
       highlight.js: ^11.6.0
-      husky: ^6.0.0
+      husky: ^8.0.3
       i18next: ^21.6.16
       interweave: ^13.0.0
       ipfs: 0.62.3
@@ -253,7 +253,7 @@ importers:
       cypress-wait-until: 1.7.2
       eslint: 8.30.0
       hardhat-ethernal: 1.1.1_3mpss4owsstbijogechjg2qcye
-      husky: 6.0.0
+      husky: 8.0.3
       jest-styled-components: 7.1.1_styled-components@5.3.6
       lint-staged: 12.5.0
       node-polyfill-webpack-plugin: 2.0.1_webpack@4.44.2
@@ -21173,14 +21173,15 @@ packages:
       strip-url-auth: 1.0.1
     dev: true
 
-  /husky/6.0.0:
-    resolution: {integrity: sha512-SQS2gDTB7tBN486QSoKPKQItZw97BMOd+Kdb6ghfpBc0yXyzrddI0oDV5MkDAbuB4X2mO3/nj60TRMcYxwzZeQ==}
-    hasBin: true
-    dev: true
-
   /husky/7.0.4:
     resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
     engines: {node: '>=12'}
+    hasBin: true
+    dev: true
+
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
@@ -24010,6 +24011,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonexport/3.2.0:
     resolution: {integrity: sha512-GbO9ugb0YTZatPd/hqCGR0FSwbr82H6OzG04yzdrG7XOe4QZ0jhQ+kOsB29zqkzoYJLmLxbbrFiuwbQu891XnQ==}

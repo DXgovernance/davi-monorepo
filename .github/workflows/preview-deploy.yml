@@ -38,14 +38,14 @@ jobs:
           workflow: preview-build.yml
           workflow_conclusion: success
           name: ${{ steps.source-run-info.outputs.targetCommitSha }}
-          path: 'apps/davi/build'
+          path: 'build'
 
       - name: Deploy to IPFS
         uses: web3-storage/add-to-web3@v1
         id: web3
         with:
           web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
-          path_to_add: 'apps/davi/build'
+          path_to_add: 'build'
 
       - name: Update DNS record for Develop branch
         run: npx dnslink-cloudflare --domain project-davi.dev --record _dnslink --link /ipfs/${{ steps.web3.outputs.cid }}

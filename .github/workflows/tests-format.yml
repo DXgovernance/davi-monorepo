@@ -24,6 +24,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          set-safe-directory: false
 
       - name: Cloning contracts
         run: git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts

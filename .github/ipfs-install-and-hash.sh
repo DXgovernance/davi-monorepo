@@ -4,4 +4,5 @@ cd go-ipfs
 sudo bash install.sh
 ipfs --version
 ipfs init
-ipfs add ../build -r -n
+ipfs add ../apps/davi/build -r -n
+

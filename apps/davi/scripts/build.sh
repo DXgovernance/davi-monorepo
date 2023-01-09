@@ -2,8 +2,7 @@
 echo "Executing beforeBuild"
 node scripts/beforeBuild.js
 
-echo "Updating DAVI bytecodes"
-node scripts/updateBytecodes.js
+
 # yarn hardhat compile
 # Add in once we upgrade to support ordered environment variables
 # export REACT_APP_GIT_SHA=$(echo $(git rev-parse  HEAD) | cut -c1-9)

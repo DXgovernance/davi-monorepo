@@ -16,38 +16,39 @@ jobs:
         node-version: [16.13.0]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      # - name: Checkout
+      #   uses: actions/checkout@v2
 
-      - name: Pnpm setup
-        uses: pnpm/action-setup@v2
+      # - name: Pnpm setup
+      #   uses: pnpm/action-setup@v2
+      #   with:
+      #     version: 7.18.2
+
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: "pnpm"
+
+      # - name: Install dependencies
+      #   run: pnpm install --frozen-lockfile
+      - uses: ./setup
         with:
-          version: 7.18.2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          matrix.node-version: 16.13.0
 
       - name: Build local config
         run: node apps/davi/scripts/beforeBuild.js
 
       - name: Build local bytecodes
         run: node apps/davi/scripts/updateBytecodes.js
-  test: 
-    steps:
+
       - name: Run Jests Test
         run: pnpm run test
-        
-  format-check:
-    steps:
+
       - name: Run code format check
         run: pnpm run format-check
 
+uses: ./.github/workflows/setup.yml
       
 
 

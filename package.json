@@ -10,6 +10,7 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "clean": "turbo run clean",
     "compile": "turbo run compile",
     "devScript": "turbo run dev --filter=\"dev-scripts\"",
@@ -17,7 +18,8 @@
     "davi:test": "turbo run test --filter=davi",
     "subgraph:dev": "turbo run dev --filter=\"dxdao-subgraph\"",
     "dev": "turbo run dev",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "pre-commit": "turbo run pre-commit"
   },
   "pnpm": {
     "overrides": {
@@ -26,6 +28,7 @@
     }
   },
   "devDependencies": {
-    "turbo": "^1.6.3"
+    "turbo": "^1.6.3",
+    "husky": "^7.0.4"
   }
 }

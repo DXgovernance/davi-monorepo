@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rm -rf artifacts cache contracts deployments",
     "compile": "cp -r node_modules/dxdao-contracts/contracts ./ && hardhat compile",
-    "dev": "./src/dev.sh"
+    "dev": "./src/dev.sh",
+    "pre-commit": "echo \"TODO: Build pre-commit for dev-scripts\" && exit 0"
   },
   "keywords": [],
   "author": "",

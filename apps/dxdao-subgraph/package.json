@@ -16,7 +16,8 @@
     "clean": "rm -rf ./data && docker compose down",
     "updateBytecodes": "node ./scripts/updateBytecodes.js",
     "dev": "./scripts/dev.sh",
-    "start-docker": "pnpm run clean && docker compose up"
+    "start-docker": "pnpm run clean && docker compose up",
+    "pre-commit": "echo \"TODO: Build pre-commit for dev-scripts\" && exit 0"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.30.2",

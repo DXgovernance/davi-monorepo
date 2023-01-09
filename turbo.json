@@ -33,7 +33,7 @@
       "dependsOn": ["^setup"]
     },
     "test": {
-      "dependsOn": ["^setup"]
+      "dependsOn": ["^setup", "^dxdao-contracts#compile"]
     },
     "pre-commit": {},
     "format-check": {}

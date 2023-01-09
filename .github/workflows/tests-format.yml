@@ -47,9 +47,6 @@ jobs:
       - name: Build local config
         run: node apps/davi/scripts/beforeBuild.js
 
-      - name: Build local bytecodes
-        run: node apps/davi/scripts/updateBytecodes.js
-
       - name: Run Jests Test
         run: pnpm run test
 

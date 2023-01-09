@@ -24,7 +24,7 @@ jobs:
       #     token: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Checkout
-      #   uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       # - name: Cloning contracts
       #   run: git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts

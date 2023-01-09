@@ -1,5 +1,6 @@
 import { useProposal } from './modules/common/fetchers/useProposal';
 import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
+import { useVotingPowerOf } from './modules/SnapshotERC20Guild/fetchers/rpc';
 import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
 
 interface GovernanceCapabilities {
@@ -26,6 +27,12 @@ export interface FetcherHooksInterface {
     daoId: string,
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
+  useVotingPowerOf: (useVotingPowerOfProps: {
+    contractAddress: string;
+    userAddress: `0x${string}`;
+    snapshotId?: string;
+    fallbackSnapshotId?: boolean;
+  }) => ReturnType<typeof useVotingPowerOf>;
 }
 
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>

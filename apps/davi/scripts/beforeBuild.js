@@ -1,11 +1,12 @@
 const fs = require('fs');
+const path = require('path');
 
-if (!fs.existsSync('./src/configs/localhost')) {
-  fs.mkdirSync('./src/configs/localhost');
+if (!fs.existsSync(path.resolve(__dirname, './src/configs/localhost'))) {
+  fs.mkdirSync(path.resolve(__dirname, './src/configs/localhost'));
 }
 
 fs.writeFileSync(
-  './src/configs/localhost/config.json',
+  path.resolve(__dirname, './src/configs/localhost/config.json'),
   JSON.stringify(
     {
       cache: {

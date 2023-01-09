@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -33,6 +33,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build local config
+        run: cd apps/davi & node scripts/beforeBuild.js
+
+      - name: Build local bytecodes
+        run: cd apps/davi & node scripts/updateBytecodes.js
 
       - name: Run Jests Test
         run: pnpm run test

@@ -26,6 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Cloning contracts
+        run: git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts
+
       - name: Pnpm setup
         uses: pnpm/action-setup@v2
         with:
@@ -38,7 +41,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install --prefer-offline --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build dapp
         run: CI=false pnpm run davi:build

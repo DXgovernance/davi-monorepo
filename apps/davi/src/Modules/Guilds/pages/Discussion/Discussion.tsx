@@ -8,6 +8,7 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { IOrbisPost } from 'types/types.orbis';
 import {
+  ActionsGroup,
   HeaderTopRow,
   PageContainer,
   PageContent,
@@ -22,6 +23,7 @@ import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { OrbisContext } from 'contexts/Guilds/orbis';
 import { StyledButton } from 'Modules/Guilds/styles';
+import PostActions from 'components/Discussion/Post/PostActions';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();
@@ -44,6 +46,15 @@ const DiscussionPage: React.FC = () => {
     getPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this post?\r\nIf you ask for deletion your post might be removed from the Ceramic nodes hosting it.'
+    );
+    if (confirmed) {
+      orbis.deletePost(discussionId);
+    }
+  };
 
   return (
     <PageContainer>
@@ -81,6 +92,14 @@ const DiscussionPage: React.FC = () => {
           metadata={{ description: op?.content?.body }}
           error={null}
         />
+
+        <ActionsGroup>
+          <PostActions
+            post={op}
+            showThreadButton={false}
+            onClickDelete={handleDelete}
+          />
+        </ActionsGroup>
 
         <SidebarCard
           header={

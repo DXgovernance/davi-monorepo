@@ -54,5 +54,3 @@ jobs:
         with:
           name: ${{ steps.workflow-run-info.outputs.targetCommitSha }}
           path: apps/davi/build/
-          
-uses: ./.github/workflows/setup.yml

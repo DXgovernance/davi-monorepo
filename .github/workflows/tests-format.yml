@@ -46,9 +46,7 @@ jobs:
         run: pnpm run test
 
       - name: Run code format check
-        run: pnpm run format-check
-
-uses: ./.github/workflows/setup.yml
+        run: pnpm run format-check  
       
 
 

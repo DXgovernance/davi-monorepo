@@ -16,7 +16,6 @@
     "test": "react-app-rewired test --watchAll=false --verbose --testTimeout=10000",
     "test:coverage": "yarn run test --coverage",
     "updateContracts": "yarn hardhat compile && node scripts/updateContracts.js",
-    "prepare": "husky install",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "pre-commit": "lint-staged"
@@ -43,6 +42,7 @@
     "@nomiclabs/hardhat-truffle5": "^2.0.5",
     "@nomiclabs/hardhat-web3": "^2.0.0",
     "@orbisclub/orbis-sdk": "^0.3.80",
+    "@tanstack/react-query": "4.20.9",
     "@tiptap/extension-focus": "^2.0.0-beta.39",
     "@tiptap/extension-highlight": "^2.0.0-beta.32",
     "@tiptap/extension-placeholder": "^2.0.0-beta.48",
@@ -117,8 +117,7 @@
     "wagmi": "^0.7.15",
     "webpack": "4.44.2",
     "webpack-manifest-plugin": "^2.2.0",
-    "workbox-webpack-plugin": "^5.1.4",
-    "@tanstack/react-query": "4.20.9"
+    "workbox-webpack-plugin": "^5.1.4"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.4.22",
@@ -149,7 +148,6 @@
     "cypress-wait-until": "^1.7.2",
     "eslint": "^8.30.0",
     "hardhat-ethernal": "^1.0.0",
-    "husky": "^6.0.0",
     "jest-styled-components": "^7.0.8",
     "lint-staged": "^12.4.3",
     "node-polyfill-webpack-plugin": "^2.0.1",

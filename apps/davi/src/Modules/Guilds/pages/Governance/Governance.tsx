@@ -24,7 +24,6 @@ const Governance = ({ guildId }) => {
   const { t } = useTranslation();
   const { data: activeProposals } = useActiveProposalsNow(guildId);
   const { chainName } = useTypedParams();
-  const isProposalCreationAllowed = useIsProposalCreationAllowed();
 
   /*
   Since filters are a global state, we need to reset all of them
@@ -88,13 +87,11 @@ const Governance = ({ guildId }) => {
           icon={<AiOutlineSearch size={24} />}
           placeholder={t('searchTitleEnsAddress')}
         />
-        {isProposalCreationAllowed && (
-          <UnstyledLink to={`/${chainName}/${guildId}/create`}>
-            <Button variant="secondary" data-testid="create-discussion-button">
-              {t('forum.createDiscussion')}
-            </Button>
-          </UnstyledLink>
-        )}
+        <UnstyledLink to={`/${chainName}/${guildId}/create`}>
+          <Button variant="secondary" data-testid="create-discussion-button">
+            {t('forum.createDiscussion')}
+          </Button>
+        </UnstyledLink>
       </Flex>
       <ProposalsList data-testid="proposals-list">
         <StyledHeading size={2}>{t('proposals')}</StyledHeading>

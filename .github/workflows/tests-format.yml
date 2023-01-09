@@ -1,4 +1,4 @@
-name: Tests
+name: Tests & Format Check
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,9 +38,15 @@ jobs:
 
       - name: Build local bytecodes
         run: node apps/davi/scripts/updateBytecodes.js
-
+  test: 
+    steps:
       - name: Run Jests Test
         run: pnpm run test
+        
+  format-check:
+    steps:
+      - name: Run code format check
+        run: pnpm run format-check
 
       
 

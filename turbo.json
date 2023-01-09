@@ -35,6 +35,7 @@
     "test": {
       "dependsOn": ["^setup"]
     },
-    "pre-commit": {}
+    "pre-commit": {},
+    "format-check": {}
   }
 }

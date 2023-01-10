@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
-import useGuildToken from 'Modules/Guilds/Hooks/useGuildToken';
+import { useHookStoreProvider } from 'stores';
 import { useContractReads } from 'wagmi';
 import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
@@ -45,6 +45,12 @@ export const useGuildConfig = (
   guildAddress: string,
   proposalId?: `0x${string}`
 ) => {
+  const {
+    hooks: {
+      fetchers: { useDAOToken },
+    },
+  } = useHookStoreProvider();
+
   const { data, ...rest } = useContractReads({
     contracts: GETTER_FUNCTIONS.map(functionName => ({
       address: guildAddress,
@@ -53,7 +59,7 @@ export const useGuildConfig = (
     })),
   });
 
-  const { data: token } = useGuildToken(guildAddress);
+  const { data: token } = useDAOToken(guildAddress);
   const { data: votingPowerForProposalExecution } =
     useVotingPowerForProposalExecution({
       contractAddress: guildAddress,

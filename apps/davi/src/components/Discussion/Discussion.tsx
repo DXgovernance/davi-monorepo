@@ -81,7 +81,7 @@ function Discussion({
 
   const handleDeletion = async (post: IOrbisPost) => {
     const confirmed = window.confirm(
-      'Are you sure you want to delete this post?\r\nIf you ask for deletion your post might be removed from the Ceramic nodes hosting it.'
+      `${t('deletionMessage1')}'\r\n${t('deletionMessage2')}`
     );
     if (confirmed) {
       const res = await orbis.deletePost(post.stream_id);

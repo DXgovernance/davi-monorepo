@@ -34,6 +34,7 @@ export const useTransactionSimulation = () => {
             currentAction,
             chain?.id
           );
+          console.log({ simulationResult });
           currentOption.decodedActions[j].simulationResult =
             await simulationResult;
 

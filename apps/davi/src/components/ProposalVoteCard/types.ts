@@ -4,7 +4,7 @@ import { ERC20Guild } from 'dxdao-contracts/types';
 import { ProposalMetadata } from 'types/types.guilds';
 import { Moment } from 'moment';
 import { providers } from 'ethers';
-import { UseProposalVotesOfVoterReturn } from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
+import { FetcherHooksInterface } from 'stores/types';
 
 export interface VoteConfirmationModalProps {
   isOpen: boolean;
@@ -37,6 +37,10 @@ interface Proposal {
   endTime: Moment;
   title?: string;
 }
+
+type UseProposalVotesOfVoterReturn = ReturnType<
+  FetcherHooksInterface['useProposalVotesOfVoter']
+>['data'];
 
 export interface ProposalVoteCardProps {
   voteData: VoteData;

@@ -8,14 +8,13 @@ import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { ProposalVoteCard } from 'components/ProposalVoteCard';
 import { useTransactions } from 'contexts/Guilds';
 import { useAccount } from 'wagmi';
-import useProposalVotesOfVoter from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
 import useGuildImplementationTypeConfig from '../Hooks/useGuildImplementationType';
 import { useHookStoreProvider } from 'stores';
 
 const ProposalVoteCardWrapper = () => {
   const {
     hooks: {
-      fetchers: { useProposal, useSnapshotId },
+      fetchers: { useProposal, useSnapshotId, useProposalVotesOfVoter },
     },
   } = useHookStoreProvider();
   const { guildId, proposalId } = useTypedParams();

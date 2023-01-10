@@ -1,0 +1,26 @@
+import { unix } from 'moment';
+import { useContractRead } from 'wagmi';
+import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
+import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
+import { useListenToVoteAdded } from 'stores/modules/common/events';
+
+export const useVoterLockTimestamp = (
+  contractAddress: `0x${string}`,
+  userAddress: `0x${string}`
+) => {
+  const { data, refetch, ...rest } = useContractRead({
+    address: contractAddress ?? null,
+    abi: BaseERC20Guild.abi,
+    functionName: 'getVoterLockTimestamp',
+    args: [userAddress],
+  });
+
+  useListenToLockAndWithdrawTokens(contractAddress, refetch);
+  useListenToVoteAdded(contractAddress, refetch);
+
+  return {
+    data: data ? unix(Number(data)) : undefined,
+    refetch,
+    ...rest,
+  };
+};

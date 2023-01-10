@@ -92,7 +92,7 @@ const PostActions = ({
     }
   };
 
-  const handleModeratorRemove = async IOrbisPost => {
+  const handleModeratorRemove = () => {
     const confirmed = window.confirm(
       `${t('removalMessage1')}'\r\n${t('removalMessage2')}`
     );

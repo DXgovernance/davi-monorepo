@@ -71,4 +71,4 @@ export const OrbisProvider = ({ children }) => {
   );
 };
 
-export const useOrbisContext = useContext(OrbisContext);
+export const useOrbisContext = () => useContext(OrbisContext);

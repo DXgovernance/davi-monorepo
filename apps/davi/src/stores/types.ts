@@ -26,6 +26,10 @@ export interface FetcherHooksInterface {
     daoId: string,
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
+  useVotingResults: (
+    optionalDaoId?: string,
+    optionalProposalId?: `0x${string}`
+  ) => ReturnType<typeof useVotingResults>;
 }
 
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>

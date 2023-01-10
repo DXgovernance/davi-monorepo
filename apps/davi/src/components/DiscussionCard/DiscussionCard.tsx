@@ -6,8 +6,8 @@ import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
 import { DiscussionCardProps } from './types';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { MdReply } from 'react-icons/md';
-import { useContext, useEffect, useState } from 'react';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useEffect, useState } from 'react';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { BsHandThumbsDown } from 'react-icons/bs';
 import { IoHeartOutline } from 'react-icons/io5';
 import { Avatar } from 'components/Avatar';
@@ -17,7 +17,7 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
   discussion,
 }) => {
   const { guildId, chainName } = useTypedParams();
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const creatorAddress = discussion.creator_details.metadata?.address;
   const { ensName } = useENSAvatar(creatorAddress, 1);
   const [replyCount, setReplyCount] = useState(0);
@@ -27,7 +27,7 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
       let { data } = await orbis.getPosts({
         context: `DAVI-${guildId}-${discussion.stream_id}-discussions`,
       });
-      setReplyCount(data.length);
+      setReplyCount(data?.length);
     };
     fetchData();
   }, [discussion, guildId, orbis]);

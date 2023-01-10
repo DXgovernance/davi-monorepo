@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscCommentDiscussion } from 'react-icons/vsc';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { useInterval } from 'utils';
 
 import { Postbox } from './Postbox';
@@ -28,7 +28,7 @@ function Discussion({
   algorithm?: keyof typeof IOrbisGetPostsAlgorithm;
 }) {
   const { t } = useTranslation();
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [isFetching, setIsFetching] = useState(false);

@@ -1,6 +1,6 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import { BsHandThumbsDown, BsHandThumbsDownFill } from 'react-icons/bs';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import {
   IoArrowUndoOutline,
   IoChatboxOutline,
@@ -40,7 +40,7 @@ const PostActions = ({
   onClickDelete?: () => void;
 }) => {
   const { t } = useTranslation();
-  const { orbis, profile, checkOrbisConnection } = useContext(OrbisContext);
+  const { orbis, profile, checkOrbisConnection } = useOrbisContext();
   const { isConnected, connector, address } = useAccount();
 
   const [reacted, setReacted] = useState<string>(null);

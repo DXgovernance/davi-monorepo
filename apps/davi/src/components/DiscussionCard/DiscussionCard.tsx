@@ -52,7 +52,7 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
             <IoHeartOutline size="20px" /> {discussion?.count_likes}
           </FooterElement>
           <FooterElement>
-            <FaRegLaughSquint size="20px" /> {discussion?.count_haha}
+            <FaRegLaughSquint size="18px" /> {discussion?.count_haha}
           </FooterElement>
           <FooterElement>
             <BsHandThumbsDown size="20px" /> {discussion?.count_downvotes}

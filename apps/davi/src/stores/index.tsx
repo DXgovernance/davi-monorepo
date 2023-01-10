@@ -58,7 +58,6 @@ export const HookStoreProvider = ({ children }) => {
 
   const governanceType: GovernanceTypeInterface = useMemo(() => {
     const match = governanceInterfaces.find(governance => {
-      console.log({ governance });
       return governance.bytecodes.find(bytecode => bytecode === daoBytecode);
     });
 

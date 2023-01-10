@@ -21,6 +21,8 @@ import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import { IOrbisPost } from 'types/types.orbis';
 import { FaLaughSquint, FaRegLaughSquint } from 'react-icons/fa';
+import { moderators } from 'configs';
+import { ImHammer2 } from 'react-icons/im';
 
 const PostActions = ({
   post,
@@ -39,7 +41,7 @@ const PostActions = ({
 }) => {
   const { t } = useTranslation();
   const { orbis, profile, checkOrbisConnection } = useContext(OrbisContext);
-  const { isConnected, connector } = useAccount();
+  const { isConnected, connector, address } = useAccount();
 
   const [reacted, setReacted] = useState<string>(null);
   const [likes, setLikes] = useState<number>(0);
@@ -87,6 +89,15 @@ const PostActions = ({
           setDownvotes(prev => prev + 1);
         }
       }
+    }
+  };
+
+  const handleModeratorRemove = async IOrbisPost => {
+    const confirmed = window.confirm(
+      `${t('removalMessage1')}'\r\n${t('removalMessage2')}`
+    );
+    if (confirmed) {
+      react('downvote');
     }
   };
 
@@ -163,7 +174,9 @@ const PostActions = ({
         title={t('postActions.downvote')}
         active={reacted === 'downvote'}
         onClick={() => react('downvote')}
-        disabled={isConnected && isReadOnly(connector)}
+        disabled={
+          (isConnected && isReadOnly(connector)) || moderators.includes(address)
+        }
       >
         {reacted === 'downvote' ? (
           <BsHandThumbsDownFill size={18} />
@@ -172,6 +185,15 @@ const PostActions = ({
         )}
         <PostActionCount>{downvotes}</PostActionCount>
       </PostActionButton>
+      {moderators.includes(address) && (
+        <PostActionButton
+          title={t('postActions.downvote')}
+          active={reacted === 'downvote'}
+          onClick={() => handleModeratorRemove()}
+        >
+          <ImHammer2 size={18} />
+        </PostActionButton>
+      )}
 
       {post?.creator_details?.did === profile?.did && (
         <PostOptions style={{ marginLeft: 'auto' }}>

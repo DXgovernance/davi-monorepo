@@ -113,7 +113,7 @@ export class ReadOnlyConnector extends Connector<
 
   protected onAccountsChanged = (accounts: string[]) => {
     if (accounts.length === 0) this.emit('disconnect');
-    this.emit('change', { account: null });
+    else this.emit('change', { account: null });
   };
 
   protected onChainChanged = (chainId: number | string) => {

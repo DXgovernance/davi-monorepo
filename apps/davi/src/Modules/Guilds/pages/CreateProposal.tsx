@@ -44,7 +44,7 @@ import {
   createPost,
   postTemplate,
 } from 'components/Forum';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { DiscussionContent } from 'components/Forum/types';
 
 export const EMPTY_CALL: Call = {
@@ -62,7 +62,7 @@ const CreateProposalPage: React.FC = () => {
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
   );
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
 
   const navigate = useNavigate();
   const { t } = useTranslation();

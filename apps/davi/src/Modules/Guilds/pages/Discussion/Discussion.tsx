@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
 import { UnstyledLink } from 'components/primitives/Links';
@@ -21,7 +21,7 @@ import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
 import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { StyledButton } from 'Modules/Guilds/styles';
 import PostActions from 'components/Discussion/Post/PostActions';
 
@@ -32,7 +32,7 @@ const DiscussionPage: React.FC = () => {
   const [op, setOp] = useState<IOrbisPost>();
 
   const { data: guildConfig } = useGuildConfig(guildId);
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const { context } = useDiscussionContext(
     `${guildId}-${discussionId}-discussions`
   );

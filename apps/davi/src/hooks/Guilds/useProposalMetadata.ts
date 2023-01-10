@@ -1,9 +1,9 @@
 import useIPFSFile from 'hooks/Guilds/ipfs/useIPFSFile';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProposalMetadata } from 'types/types.guilds';
 // import contentHash from '@ensdomains/content-hash';
 import { useHookStoreProvider } from 'stores';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 
 function useProposalMetadata(guildId: string, proposalId: `0x${string}`) {
   const {
@@ -12,7 +12,7 @@ function useProposalMetadata(guildId: string, proposalId: `0x${string}`) {
     },
   } = useHookStoreProvider();
   const { data: proposal, error } = useProposal(guildId, proposalId);
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const [orbisData, setOrbisData] = useState<any>();
 
   // Get orbis data

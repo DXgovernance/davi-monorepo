@@ -5,7 +5,7 @@ import {
   IOrbisProfile,
   IOrbisPostMention,
 } from 'types/types.orbis';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import {
   PostboxWrapper,
   PostboxInput,
@@ -52,7 +52,7 @@ const Postbox = ({
 }) => {
   const { t } = useTranslation();
   const { orbis, profile, connectOrbis, checkOrbisConnection } =
-    useContext(OrbisContext);
+    const { orbis } = useOrbisContext();
   const { isConnected, connector } = useAccount();
 
   const postboxArea = useRef<HTMLDivElement>(null);

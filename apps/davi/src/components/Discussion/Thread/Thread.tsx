@@ -1,12 +1,5 @@
-import {
-  useState,
-  useMemo,
-  useRef,
-  useEffect,
-  useContext,
-  LegacyRef,
-} from 'react';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useState, useMemo, useRef, useEffect, LegacyRef } from 'react';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { useInterval } from 'utils';
 import { MasterGroup, MasterGroupPostbox, ThreadGroup } from './Thread.styled';
 import { Post } from '../Post';
@@ -70,7 +63,7 @@ const Thread = ({
   onNewPost: (el: HTMLElement) => void;
   onThreadUpdated: (posts: IOrbisPost[]) => void;
 }) => {
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const { t } = useTranslation();
 
   const mainGroup = useRef<HTMLDivElement>(null);

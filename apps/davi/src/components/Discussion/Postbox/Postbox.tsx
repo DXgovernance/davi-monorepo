@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect, KeyboardEvent } from 'react';
+import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { debounce } from 'lodash';
 import {
   IOrbisPost,
@@ -52,7 +52,7 @@ const Postbox = ({
 }) => {
   const { t } = useTranslation();
   const { orbis, profile, connectOrbis, checkOrbisConnection } =
-    const { orbis } = useOrbisContext();
+    useOrbisContext();
   const { isConnected, connector } = useAccount();
 
   const postboxArea = useRef<HTMLDivElement>(null);

@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { BsHandThumbsDown, BsHandThumbsDownFill } from 'react-icons/bs';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
 import {

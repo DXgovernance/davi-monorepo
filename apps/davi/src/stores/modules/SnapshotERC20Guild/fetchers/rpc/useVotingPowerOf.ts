@@ -1,4 +1,3 @@
-// import useGuildImplementationType from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import useVotingPowerOfAt from 'Modules/Guilds/Hooks/useVotingPowerOfAt';
 import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';

@@ -19,7 +19,7 @@ export const useTotalLocked = (
   const { data: guildTokenAddress } = useGuildToken(guildAddress);
 
   const { data: snapshotId } = useSnapshotId({
-    contractAddress: guildTokenAddress,
+    contractAddress: guildAddress,
     proposalId,
   });
 

@@ -3,7 +3,6 @@ import { useContractRead } from 'wagmi';
 import { useHookStoreProvider } from 'stores';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { ERC20SnapshotRep } from 'contracts/ts-files/ERC20SnapshotRep';
-import useGuildToken from 'Modules/Guilds/Hooks/useGuildToken';
 import { useListenToTokenTransfer } from '../../events/useListenToTokenTransfer';
 
 export const useTotalLocked = (
@@ -12,14 +11,14 @@ export const useTotalLocked = (
 ) => {
   const {
     hooks: {
-      fetchers: { useSnapshotId },
+      fetchers: { useSnapshotId, useDAOToken },
     },
   } = useHookStoreProvider();
 
-  const { data: guildTokenAddress } = useGuildToken(guildAddress);
+  const { data: tokenAddress } = useDAOToken(guildAddress);
 
   const { data: snapshotId } = useSnapshotId({
-    contractAddress: guildTokenAddress,
+    contractAddress: tokenAddress,
     proposalId,
   });
 
@@ -38,13 +37,13 @@ export const useTotalLocked = (
     refetch: refetchTotalSupplyAtSnapshotResponse,
     ...totalSupplyAtSnapshotResponseRest
   } = useContractRead({
-    address: guildTokenAddress,
+    address: tokenAddress,
     abi: ERC20SnapshotRep.abi,
     functionName: 'totalSupplyAt',
     args: [BigNumber.from(snapshotId ? snapshotId : '0')],
   });
 
-  useListenToTokenTransfer(guildTokenAddress, () => {
+  useListenToTokenTransfer(tokenAddress, () => {
     refetchTotalLockedResponse();
     refetchTotalSupplyAtSnapshotResponse();
   });

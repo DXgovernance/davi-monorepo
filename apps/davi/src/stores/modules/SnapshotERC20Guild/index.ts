@@ -1,13 +1,13 @@
 import { FullGovernanceImplementation } from 'stores/types';
-import { useProposal, useSnapshotId } from '../common/fetchers';
+import { useProposal, useSnapshotId, useDAOToken } from '../common/fetchers';
 import { useTotalLocked } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'dxdao-contracts/bytecodes/local.json';
 
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const config = localBytecodes.find(({ type }) => type === GUILD_TYPE);
-/* 
-  I left this case purposefully with just one data source (default), 
+/*
+  I left this case purposefully with just one data source (default),
   to show that a governance implementation doesn't need two sources.
 */
 export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementation> =
@@ -25,11 +25,13 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
         },
         fallback: {
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
         },
       },
       writers: null,

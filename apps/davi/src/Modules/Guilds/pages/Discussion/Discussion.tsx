@@ -49,7 +49,7 @@ const DiscussionPage: React.FC = () => {
 
   const handleDelete = () => {
     const confirmed = window.confirm(
-      'Are you sure you want to delete this post?\r\nIf you ask for deletion your post might be removed from the Ceramic nodes hosting it.'
+      `${t('deletionMessage1')}'\r\n${t('deletionMessage2')}`
     );
     if (confirmed) {
       orbis.deletePost(discussionId);

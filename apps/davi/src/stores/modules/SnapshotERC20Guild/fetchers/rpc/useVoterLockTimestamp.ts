@@ -3,11 +3,18 @@ import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
 import { useListenToVoteAdded } from 'stores/modules/common/events';
+import { FetcherHooksInterface } from 'stores/types';
 
-export const useVoterLockTimestamp = (
+type IUseVoterLockTimestamp = FetcherHooksInterface['useVoterLockTimestamp'];
+
+type IUseVoterLockTimestampReturn = ReturnType<
+  FetcherHooksInterface['useVoterLockTimestamp']
+>;
+
+export const useVoterLockTimestamp: IUseVoterLockTimestamp = (
   contractAddress: `0x${string}`,
   userAddress: `0x${string}`
-) => {
+): IUseVoterLockTimestampReturn => {
   const { data, refetch, ...rest } = useContractRead({
     address: contractAddress ?? null,
     abi: BaseERC20Guild.abi,

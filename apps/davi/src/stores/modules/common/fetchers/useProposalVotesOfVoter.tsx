@@ -3,12 +3,20 @@ import { BigNumber } from 'ethers';
 import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { useListenToVoteAdded } from '../events';
+import { FetcherHooksInterface } from 'stores/types';
 
-export const useProposalVotesOfVoter = (
+type IUseProposalVotesOfVoter =
+  FetcherHooksInterface['useProposalVotesOfVoter'];
+
+type IUseProposalVotesOfVoterReturn = ReturnType<
+  FetcherHooksInterface['useProposalVotesOfVoter']
+>;
+
+export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   daoAddress: `0x${string}`,
   proposalId: `0x${string}`,
   userAddress: `0x${string}`
-) => {
+): IUseProposalVotesOfVoterReturn => {
   const { data, refetch, ...rest } = useContractRead({
     enabled: !!daoAddress && !!proposalId && !!userAddress,
     address: daoAddress,

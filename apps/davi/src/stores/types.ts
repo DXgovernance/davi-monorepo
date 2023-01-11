@@ -1,6 +1,7 @@
 import { useProposal } from './modules/common/fetchers/useProposal';
 import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
 import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
+import { BigNumber } from 'ethers';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -26,6 +27,25 @@ export interface FetcherHooksInterface {
     daoId: string,
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
+  useProposalVotesOfVoter: (
+    daoAddress: `0x${string}`,
+    proposalId: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: { option: string; votingPower: BigNumber };
+    refetch: () => void;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useVoterLockTimestamp: (
+    daoAddress: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: moment.Moment;
+    refetch: () => void;
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>

@@ -1,11 +1,14 @@
 import { Moment } from 'moment';
-import {
-  BigNumber
-} from 'ethers';
-import { UseProposalVotesOfVoterReturn } from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
+import { BigNumber } from 'ethers';
+import { FetcherHooksInterface } from 'stores/types';
+
+type UseProposalVotesOfVoterReturn = ReturnType<
+  FetcherHooksInterface['useProposalVotesOfVoter']
+>['data'];
+
 export interface Proposal {
   id: `0x${string}`;
-  creator: string; 
+  creator: string;
   startTime: Moment;
   endTime: Moment;
   to: string[];
@@ -20,8 +23,8 @@ export interface Proposal {
 }
 
 export type InitialProposal = Partial<Proposal> & {
-  state: number
-}
+  state: number;
+};
 
 export enum ProposalState {
   Active = 'Active',
@@ -29,7 +32,7 @@ export enum ProposalState {
   Executed = 'Executed',
   Rejected = 'Rejected',
   Failed = 'Failed',
-  Finished = 'Finished', 
+  Finished = 'Finished',
 }
 
 export enum ContractState {
@@ -44,20 +47,20 @@ export interface ProposalMetadata {
   link?: {
     master: string;
     context: string;
-  }
+  };
 }
 export interface Transaction {
-  hash: string
-  from: string
-  summary?: string
+  hash: string;
+  from: string;
+  summary?: string;
   receipt?: {
-    transactionHash: string,
-    blockNumber: number,
-    status: number,
-  }
-  lastCheckedBlockNumber?: number
-  addedTime: number
-  confirmedTime?: number
+    transactionHash: string;
+    blockNumber: number;
+    status: number;
+  };
+  lastCheckedBlockNumber?: number;
+  addedTime: number;
+  confirmedTime?: number;
 }
 
 export enum GuildImplementationType {
@@ -72,3 +75,4 @@ export interface ENSAvatar {
   imageUrl?: string;
   ensName?: string;
 }
+

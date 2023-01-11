@@ -13,7 +13,7 @@ jest.mock('wagmi', () => ({
 }));
 
 describe('useVoterLockTimestamp', () => {
-  it('should return the timestamp of voter tokens', () => {
+  it('should return null because the method is not supported', () => {
     const { data } = useVoterLockTimestamp(
       MOCK_CONTRACT_ADDRESS,
       MOCK_USER_ADDRESS

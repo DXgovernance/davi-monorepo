@@ -1,5 +1,4 @@
 import { BigNumber } from 'ethers';
-import type { VoteData } from 'Modules/Guilds/Hooks/useVotingResults';
 import { ERC20Guild } from 'dxdao-contracts/types';
 import { ProposalMetadata } from 'types/types.guilds';
 import { Moment } from 'moment';

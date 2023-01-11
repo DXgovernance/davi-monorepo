@@ -53,6 +53,13 @@ declare global {
     preBoosted: boolean;
   }
 
+  interface VoteData {
+    options: { [name: string]: BigNumber };
+    quorum: BigNumber;
+    totalLocked: BigNumber;
+    token: ERC20Info;
+  }
+
   interface Stake extends ProposalEvent {
     staker: string;
     amount: BigNumber;
@@ -194,9 +201,9 @@ declare global {
     blockNumber: number;
     address: string;
     reputation: {
-      events: RepEvent[],
-      total: BigNumber
-    },
+      events: RepEvent[];
+      total: BigNumber;
+    };
     schemes: { [address: string]: Scheme };
     proposals: { [id: string]: Proposal };
     callPermissions: CallPermissions;
@@ -221,21 +228,23 @@ declare global {
       };
     };
     daostack?: {
-      [address: string] : {
-        supported: boolean,
-        name: string,
-        type: string,
-        contractToCall: string,
-        creationLogEncoding: Array<Array<{
-          name: string,
-          type: string
-        }>>,
-        newProposalTopics: string[],
-        voteParams: string,
-        votingMachine: string,
-        redeemer?: string
-      }
-    },
+      [address: string]: {
+        supported: boolean;
+        name: string;
+        type: string;
+        contractToCall: string;
+        creationLogEncoding: Array<
+          Array<{
+            name: string;
+            type: string;
+          }>
+        >;
+        newProposalTopics: string[];
+        voteParams: string;
+        votingMachine: string;
+        redeemer?: string;
+      };
+    };
   }
 
   interface NetworkConfig {

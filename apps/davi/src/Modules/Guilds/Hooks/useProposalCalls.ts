@@ -3,7 +3,6 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { bulkDecodeCallsFromOptions } from 'hooks/Guilds/contracts/useDecodedCall';
 import { decodeCall } from 'hooks/Guilds/contracts/useDecodedCall';
-import { useVotingResults } from 'Modules/Guilds/Hooks/useVotingResults';
 import { Call, Option } from 'components/ActionsBuilder/types';
 import { preventEmptyString, ZERO_HASH } from 'utils';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
@@ -24,7 +23,7 @@ const useProposalCalls = (guildId: string, proposalId: `0x${string}`) => {
   // Decode calls from existing proposal
   const {
     hooks: {
-      fetchers: { useProposal },
+      fetchers: { useProposal, useVotingResults },
     },
   } = useHookStoreProvider();
   const { data: proposal } = useProposal(guildId, proposalId);

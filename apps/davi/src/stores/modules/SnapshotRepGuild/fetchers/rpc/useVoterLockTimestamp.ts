@@ -4,14 +4,10 @@ import { FetcherHooksInterface } from 'stores/types';
 
 type IUseVoterLockTimestamp = FetcherHooksInterface['useVoterLockTimestamp'];
 
-type IUseVoterLockTimestampReturn = ReturnType<
-  FetcherHooksInterface['useVoterLockTimestamp']
->;
-
 export const useVoterLockTimestamp: IUseVoterLockTimestamp = (
   contractAddress: `0x${string}`,
   userAddress: `0x${string}`
-): IUseVoterLockTimestampReturn => {
+) => {
   // This method isn't supported in REP guilds
   const { data, refetch, ...rest } = useContractRead({
     address: null,

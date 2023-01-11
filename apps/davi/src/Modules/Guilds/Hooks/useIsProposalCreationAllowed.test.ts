@@ -45,8 +45,6 @@ describe('useIsProposalCreationAllowed', () => {
   it('should return true if it has more voting power than required', async () => {
     mockUseVotingPowerOf.mockReturnValue({
       data: mockBigNumber(2000022),
-      isValidating: false,
-      mutate: null,
     });
     const { result } = renderHook(() => useIsProposalCreationAllowed());
     expect(result.current).toBeTruthy();
@@ -76,8 +74,6 @@ describe('useIsProposalCreationAllowed', () => {
 
     mockUseVotingPowerOf.mockReturnValue({
       data: mockBigNumber(100002),
-      isValidating: false,
-      mutate: null,
     });
 
     const { result } = renderHook(() => useIsProposalCreationAllowed());
@@ -96,8 +92,6 @@ describe('useIsProposalCreationAllowed', () => {
 
     mockUseVotingPowerOf.mockReturnValue({
       data: mockBigNumber(1000000),
-      isValidating: false,
-      mutate: null,
     });
 
     const { result } = renderHook(() => useIsProposalCreationAllowed());
@@ -107,8 +101,6 @@ describe('useIsProposalCreationAllowed', () => {
   it('should return false if there is no votingPower', async () => {
     mockUseVotingPowerOf.mockReturnValue({
       data: null,
-      isValidating: false,
-      mutate: null,
     });
 
     const { result } = renderHook(() => useIsProposalCreationAllowed());

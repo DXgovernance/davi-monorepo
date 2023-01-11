@@ -22,7 +22,8 @@ export const useVotingPowerOf = ({
   const {
     data: votingPowerOfResponse,
     refetch: refetchVotingPowerOf,
-    ...rest
+    isError,
+    isLoading,
   } = useContractRead({
     address: guildAddress,
     abi: SnapshotERC20Guild.abi,
@@ -47,6 +48,7 @@ export const useVotingPowerOf = ({
         data: votingPowerOfResponse
           ? BigNumber.from(votingPowerOfResponse)
           : undefined,
-        ...rest,
+        isError,
+        isLoading,
       };
 };

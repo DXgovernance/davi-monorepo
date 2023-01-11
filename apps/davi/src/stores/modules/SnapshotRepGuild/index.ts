@@ -1,5 +1,13 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { useProposal, useSnapshotId } from '../common/fetchers';
+import {
+  useApproveTokens,
+  useCreateProposal,
+  useExecuteProposal,
+  useLockTokens,
+  useVoteOnProposal,
+  useWithdrawTokens,
+} from './writers';
 import { useTotalLocked } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'dxdao-contracts/bytecodes/local.json';
@@ -30,7 +38,14 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useTotalLocked,
         },
       },
-      writers: null,
+      writers: {
+        useApproveTokens,
+        useCreateProposal,
+        useExecuteProposal,
+        useLockTokens,
+        useVoteOnProposal,
+        useWithdrawTokens,
+      },
     },
     capabilities: {
       votingPower: 'soulbound',

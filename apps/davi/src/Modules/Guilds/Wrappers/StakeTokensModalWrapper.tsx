@@ -8,7 +8,6 @@ import { useERC20Allowance } from 'hooks/Guilds/erc20/useERC20Allowance';
 import { useERC20Balance } from 'hooks/Guilds/erc20/useERC20Balance';
 import useGuildImplementationType from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import { useERC20, useERC20Guild } from 'hooks/Guilds/contracts/useContract';
-import { useVotingPowerOf } from 'Modules/Guilds/Hooks/useVotingPowerOf';
 import { useAccount } from 'wagmi';
 import { useHookStoreProvider } from 'stores';
 
@@ -17,7 +16,7 @@ const StakeTokensModalWrapper = ({ isOpen, onDismiss }) => {
 
   const {
     hooks: {
-      fetchers: { useTotalLocked },
+      fetchers: { useTotalLocked, useVotingPowerOf },
     },
   } = useHookStoreProvider();
 

@@ -3,6 +3,7 @@ import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { SnapshotRepERC20Guild } from 'contracts/ts-files/SnapshotRepERC20Guild';
 import { useListenToTokenTransfer } from '../../events/useListenToTokenTransfer';
+import { FetcherHooksInterface } from 'stores/types';
 
 interface useVotingPowerOfProps {
   contractAddress: string;
@@ -10,10 +11,12 @@ interface useVotingPowerOfProps {
   snapshotId?: string;
   fallbackSnapshotId?: boolean;
 }
+type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
+
 /**
  * Get the voting power of an account
  */
-export const useVotingPowerOf = ({
+export const useVotingPowerOf: IUseVotingPowerOf = ({
   contractAddress,
   userAddress,
   snapshotId,

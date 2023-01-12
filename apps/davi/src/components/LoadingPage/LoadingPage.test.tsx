@@ -1,4 +1,4 @@
-import Header from './Header';
+import LoadingPage from './LoadingPage';
 import { render } from 'utils/tests';
 import { mockChain } from 'components/Web3Modals/fixtures';
 
@@ -33,9 +33,9 @@ jest.mock('provider/wallets', () => ({
   isReadOnly: () => true,
 }));
 
-describe('Header', () => {
-  it('Should match snapshot', () => {
-    const { container } = render(<Header />);
+describe('LoadingPage', () => {
+  it('should match snapshot', () => {
+    const { container } = render(<LoadingPage />);
     expect(container).toMatchSnapshot();
   });
 });

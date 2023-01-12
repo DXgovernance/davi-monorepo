@@ -1,4 +1,3 @@
-import type { VoteData } from 'Modules/Guilds/Hooks/useVotingResults';
 import { FetcherHooksInterface } from 'stores/types';
 
 type UseProposalVotesOfVoterReturn = ReturnType<

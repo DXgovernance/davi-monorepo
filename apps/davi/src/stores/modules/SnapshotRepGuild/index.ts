@@ -3,8 +3,14 @@ import {
   useProposal,
   useSnapshotId,
   useProposalVotesOfVoter,
+  useProposalCalls,
+  useVotingResults,
 } from '../common/fetchers';
-import { useTotalLocked, useVoterLockTimestamp } from './fetchers/rpc';
+import {
+  useTotalLocked,
+  useVoterLockTimestamp,
+  useVotingPowerOf,
+} from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'dxdao-contracts/bytecodes/local.json';
 
@@ -29,6 +35,9 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useTotalLocked,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
+          useProposalCalls,
+          useVotingResults,
+          useVotingPowerOf,
         },
         fallback: {
           useProposal,
@@ -36,6 +45,9 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useTotalLocked,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
+          useProposalCalls,
+          useVotingResults,
+          useVotingPowerOf,
         },
       },
       writers: null,

@@ -32,11 +32,17 @@ jest.mock('contexts/Guilds/filters', () => ({
 jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   useTokenList: () => [],
 }));
-jest.mock('Modules/Guilds/Hooks/useVotingPowerOf', () => ({
-  useVotingPowerOf: () => ({
-    data: bn(10000),
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useVotingPowerOf: jest.fn().mockReturnValueOnce({ data: bn(10000) }),
+      },
+    },
   }),
 }));
+
 jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
   useGuildConfig: () => ({
     data: {

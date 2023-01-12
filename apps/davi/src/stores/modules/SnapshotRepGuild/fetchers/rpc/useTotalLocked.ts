@@ -1,25 +1,19 @@
 import { BigNumber } from 'ethers';
 import { useContractRead } from 'wagmi';
-import { useHookStoreProvider } from 'stores';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { ERC20SnapshotRep } from 'contracts/ts-files/ERC20SnapshotRep';
 import useGuildToken from 'Modules/Guilds/Hooks/useGuildToken';
 import { useListenToTokenTransfer } from '../../events/useListenToTokenTransfer';
+import { useSnapshotId } from 'stores/modules/common/fetchers';
 
 export const useTotalLocked = (
   guildAddress: string,
   proposalId?: `0x${string}`
 ) => {
-  const {
-    hooks: {
-      fetchers: { useSnapshotId },
-    },
-  } = useHookStoreProvider();
-
   const { data: guildTokenAddress } = useGuildToken(guildAddress);
 
   const { data: snapshotId } = useSnapshotId({
-    contractAddress: guildTokenAddress,
+    contractAddress: guildAddress,
     proposalId,
   });
 

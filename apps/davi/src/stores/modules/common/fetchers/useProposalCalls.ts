@@ -3,7 +3,6 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { bulkDecodeCallsFromOptions } from 'hooks/Guilds/contracts/useDecodedCall';
 import { decodeCall } from 'hooks/Guilds/contracts/useDecodedCall';
-import { useVotingResults } from 'Modules/Guilds/Hooks/useVotingResults';
 import { Call, Option } from 'components/ActionsBuilder/types';
 import { preventEmptyString, ZERO_HASH } from 'utils';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
@@ -13,7 +12,7 @@ import { useNetwork } from 'wagmi';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
 import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
-import { useProposal } from './useProposal';
+import { useProposal, useVotingResults } from './';
 import { FetcherHooksInterface } from 'stores/types';
 
 const isApprovalData = (data: string) =>
@@ -29,10 +28,9 @@ export const useProposalCalls: IUseProposalCalls = (
 ) => {
   // Decode calls from existing proposal
 
-  const { data: proposal } = useProposal(daoId, proposalId);
   const { data: metadata } = useProposalMetadata(daoId, proposalId);
+  const { data: proposal } = useProposal(daoId, proposalId);
   const votingResults = useVotingResults(daoId, proposalId);
-
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
   const { t } = useTranslation();

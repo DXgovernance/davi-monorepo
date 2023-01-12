@@ -4,8 +4,11 @@ import { useHookStoreProvider } from 'stores';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+import { FetcherHooksInterface } from 'stores/types';
 
-export const useVotingResults = (
+type IUseVotingResults = FetcherHooksInterface['useVotingResults'];
+
+export const useVotingResults: IUseVotingResults = (
   optionalDaoId?: string,
   optionalProposalId?: `0x${string}`
 ): VoteData => {

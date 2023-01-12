@@ -5,13 +5,6 @@ import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAn
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { FetcherHooksInterface } from 'stores/types';
 
-interface useVotingPowerOfProps {
-  contractAddress: string;
-  userAddress: `0x${string}`;
-  snapshotId?: string;
-  fallbackSnapshotId?: boolean;
-}
-
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
 
 /**
@@ -22,7 +15,7 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
   userAddress,
   snapshotId,
   fallbackSnapshotId = true,
-}: useVotingPowerOfProps) => {
+}) => {
   const {
     data: votingPowerOfResponse,
     refetch: refetchVotingPowerOf,

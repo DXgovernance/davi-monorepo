@@ -5,12 +5,6 @@ import { SnapshotRepERC20Guild } from 'contracts/ts-files/SnapshotRepERC20Guild'
 import { useListenToTokenTransfer } from '../../events/useListenToTokenTransfer';
 import { FetcherHooksInterface } from 'stores/types';
 
-interface useVotingPowerOfProps {
-  contractAddress: string;
-  userAddress: `0x${string}`;
-  snapshotId?: string;
-  fallbackSnapshotId?: boolean;
-}
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
 
 /**
@@ -21,7 +15,7 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
   userAddress,
   snapshotId,
   fallbackSnapshotId = true,
-}: useVotingPowerOfProps) => {
+}) => {
   const {
     data: votingPowerOfResponse,
     refetch: refetchVotingPowerOf,

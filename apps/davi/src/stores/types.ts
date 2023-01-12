@@ -27,10 +27,7 @@ export interface FetcherHooksInterface {
     daoId: string,
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
-  useVotingResults: (
-    optionalDaoId?: string,
-    optionalProposalId?: `0x${string}`
-  ) => VoteData;
+  useVotingResults: (daoId?: string, proposalId?: `0x${string}`) => VoteData;
   useVotingPowerOf: (useVotingPowerOfProps: {
     contractAddress: string;
     userAddress: `0x${string}`;

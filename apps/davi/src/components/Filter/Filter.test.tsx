@@ -29,6 +29,7 @@ jest.mock('contexts/Guilds/filters', () => ({
     };
   },
 }));
+
 jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   useTokenList: () => [],
 }));
@@ -65,6 +66,25 @@ const mockAddress = ZERO_ADDRESS;
 jest.mock('wagmi', () => ({
   useAccount: () => ({ address: mockAddress }),
   useNetwork: () => ({ chain: mockChain }),
+  chain: {
+    mainnet: {},
+  },
+}));
+
+jest.mock('provider/ReadOnlyConnector', () => ({
+  READ_ONLY_CONNECTOR_ID: 'readOnly',
+}));
+
+jest.mock('contexts/Guilds/orbis', () => ({}));
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useIsProposalCreationAllowed: jest.fn(),
+      },
+    },
+  }),
 }));
 
 describe('Filter', () => {

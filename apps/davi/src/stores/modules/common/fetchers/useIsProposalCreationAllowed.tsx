@@ -1,22 +1,26 @@
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useMemo } from 'react';
-import { useAccount } from 'wagmi';
 import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
+import { FetcherHooksInterface } from 'stores/types';
 import { useHookStoreProvider } from 'stores';
 
-const useIsProposalCreationAllowed = () => {
+type IUseIsProposalCreationAllowed =
+  FetcherHooksInterface['useIsProposalCreationAllowed'];
+
+export const useIsProposalCreationAllowed: IUseIsProposalCreationAllowed = (
+  daoId,
+  userAddress
+) => {
+  const { data: guildConfig } = useGuildConfig(daoId);
+
   const {
     hooks: {
       fetchers: { useVotingPowerOf },
     },
   } = useHookStoreProvider();
 
-  const { guildId } = useTypedParams();
-  const { address } = useAccount();
-  const { data: guildConfig } = useGuildConfig(guildId);
   const { data: votingPower } = useVotingPowerOf({
-    contractAddress: guildId,
-    userAddress: address,
+    contractAddress: daoId,
+    userAddress,
   });
 
   const isProposalCreationAllowed = useMemo(() => {
@@ -31,5 +35,3 @@ const useIsProposalCreationAllowed = () => {
 
   return isProposalCreationAllowed;
 };
-
-export default useIsProposalCreationAllowed;

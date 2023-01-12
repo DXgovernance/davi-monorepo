@@ -2,6 +2,7 @@ import { FullGovernanceImplementation } from 'stores/types';
 import {
   useProposal,
   useSnapshotId,
+  useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
@@ -36,6 +37,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,
@@ -46,6 +48,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,

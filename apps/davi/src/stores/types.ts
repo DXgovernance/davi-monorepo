@@ -28,6 +28,10 @@ export interface FetcherHooksInterface {
     daoId: string,
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
+  useIsProposalCreationAllowed: (
+    daoId: string,
+    userAddress: `0x${string}`
+  ) => boolean;
   useProposalVotesOfVoter: (
     daoAddress: `0x${string}`,
     proposalId: `0x${string}`,

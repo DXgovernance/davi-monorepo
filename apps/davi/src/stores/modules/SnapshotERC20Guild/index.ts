@@ -2,6 +2,7 @@ import { FullGovernanceImplementation } from 'stores/types';
 import {
   useProposal,
   useSnapshotId,
+  useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
@@ -39,6 +40,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,
@@ -49,6 +51,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,

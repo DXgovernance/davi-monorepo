@@ -4,6 +4,10 @@ import { mockChain } from 'components/Web3Modals/fixtures';
 
 jest.mock('contexts/Guilds/orbis', () => ({}));
 
+jest.mock('stores/modules/common/fetchers', () => ({
+  useProposalCalls: () => ({ options: [] }),
+}));
+
 jest.mock('wagmi', () => ({
   chain: {},
   useAccount: () => ({ isConnected: false }),

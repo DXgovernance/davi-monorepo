@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
-import { useVotingPowerOf } from 'Modules/Guilds/Hooks/useVotingPowerOf';
 import { FetcherHooksInterface } from 'stores/types';
+import { useHookStoreProvider } from 'stores';
 
 type IUseIsProposalCreationAllowed =
   FetcherHooksInterface['useIsProposalCreationAllowed'];
@@ -11,6 +11,13 @@ export const useIsProposalCreationAllowed: IUseIsProposalCreationAllowed = (
   userAddress
 ) => {
   const { data: guildConfig } = useGuildConfig(daoId);
+
+  const {
+    hooks: {
+      fetchers: { useVotingPowerOf },
+    },
+  } = useHookStoreProvider();
+
   const { data: votingPower } = useVotingPowerOf({
     contractAddress: daoId,
     userAddress,

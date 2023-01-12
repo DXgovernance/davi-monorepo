@@ -17,8 +17,14 @@ jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
   useGuildConfig: () => mockUseGuildConfigReturn,
 }));
 
-jest.mock('Modules/Guilds/Hooks/useVotingPowerOf', () => ({
-  useVotingPowerOf: () => mockUseVotingPowerOfReturn,
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useVotingPowerOf: () => mockUseVotingPowerOfReturn,
+      },
+    },
+  }),
 }));
 
 jest.mock('provider/ReadOnlyConnector', () => ({

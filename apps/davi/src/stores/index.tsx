@@ -4,6 +4,7 @@ import { useMatch } from 'react-router-dom';
 import { GovernanceTypeInterface, HookStoreContextInterface } from './types';
 import { governanceInterfaces } from './governanceInterfaces';
 import Web3 from 'web3';
+import { LoadingPage } from 'components/LoadingPage';
 
 export const HookStoreContext = createContext<HookStoreContextInterface>(null);
 
@@ -124,7 +125,7 @@ export const HookStoreProvider = ({ children }) => {
   // TODO: Make a better loading screen
 
   return isLoading ? (
-    <>Loading...</>
+    <LoadingPage />
   ) : (
     <HookStoreContext.Provider value={{ ...governanceType, isLoading, daoId }}>
       {children}

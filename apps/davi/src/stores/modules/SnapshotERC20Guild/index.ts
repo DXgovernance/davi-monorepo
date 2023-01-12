@@ -1,11 +1,16 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import {
   useProposal,
-  useProposalCalls,
   useSnapshotId,
+  useProposalVotesOfVoter,
+  useProposalCalls,
   useVotingResults,
 } from '../common/fetchers';
-import { useTotalLocked, useVotingPowerOf } from './fetchers/rpc';
+import {
+  useTotalLocked,
+  useVoterLockTimestamp,
+  useVotingPowerOf,
+} from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
 import prodBytecodes from 'bytecodes/prod.json';
@@ -34,6 +39,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useProposalVotesOfVoter,
+          useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
@@ -42,6 +49,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useProposalVotesOfVoter,
+          useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,

@@ -28,6 +28,23 @@ export interface FetcherHooksInterface {
     daoId: string,
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
+  useProposalVotesOfVoter: (
+    daoAddress: `0x${string}`,
+    proposalId: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: { option: string; votingPower: BigNumber };
+    refetch: () => void;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useVoterLockTimestamp: (
+    daoAddress: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: moment.Moment;
+    refetch: () => void;
+  };
   useProposalCalls: (
     daoId: string,
     proposalId: `0x${string}`

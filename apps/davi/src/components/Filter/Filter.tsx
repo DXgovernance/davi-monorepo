@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
+import { useAccount } from 'wagmi';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
+import { useHookStoreProvider } from 'stores';
 import { Button } from 'components/primitives/Button';
 import { Input } from 'components/primitives/Forms/Input';
 import { FilterMenu, FilterButton } from './components';
@@ -16,7 +18,6 @@ import {
   FilterBadge,
 } from './Filter.styled';
 import { UnstyledLink } from 'components/primitives/Links';
-import useIsProposalCreationAllowed from 'Modules/Guilds/Hooks/useIsProposalCreationAllowed';
 
 interface FilterProps {
   openSearchBar: boolean;
@@ -27,11 +28,20 @@ export const Filter: React.FC<FilterProps> = ({
   openSearchBar,
   setOpenSearchBar,
 }) => {
+  const {
+    hooks: {
+      fetchers: { useIsProposalCreationAllowed },
+    },
+  } = useHookStoreProvider();
   const { t } = useTranslation();
   const { chainName, guildId } = useTypedParams();
+  const { address: userAddress } = useAccount();
   const [viewFilter, setViewFilter] = useState(false);
   const { totalFilters, searchQuery, setSearchQuery } = useFilter();
-  const isProposalCreationAllowed = useIsProposalCreationAllowed();
+  const isProposalCreationAllowed = useIsProposalCreationAllowed(
+    guildId,
+    userAddress
+  );
 
   return (
     <FilterContainer>

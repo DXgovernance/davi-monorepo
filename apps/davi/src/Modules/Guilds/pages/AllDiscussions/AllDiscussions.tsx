@@ -1,17 +1,28 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Flex } from 'components/primitives/Layout';
+import { useHookStoreProvider } from 'stores';
+import { useAccount } from 'wagmi';
 import { useTranslation } from 'react-i18next';
+import { Flex } from 'components/primitives/Layout';
 import { useTypedParams } from '../../Hooks/useTypedParams';
 import { UnstyledLink } from 'components/primitives/Links';
 import { Button } from 'components/primitives/Button';
 import { ProposalsList } from './AllDiscussions.styled';
 import Discussions from 'Modules/Social/Discussions';
-import useIsProposalCreationAllowed from 'Modules/Guilds/Hooks/useIsProposalCreationAllowed';
 
 const AllDiscussions = ({ guildId }) => {
   const { t } = useTranslation();
   const { chainName } = useTypedParams();
-  const isProposalCreationAllowed = useIsProposalCreationAllowed();
+  const { address: userAddress } = useAccount();
+
+  const {
+    hooks: {
+      fetchers: { useIsProposalCreationAllowed },
+    },
+  } = useHookStoreProvider();
+
+  const isProposalCreationAllowed = useIsProposalCreationAllowed(
+    guildId,
+    userAddress
+  );
 
   return (
     <>

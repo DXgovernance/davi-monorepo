@@ -1,5 +1,9 @@
 import { FullGovernanceImplementation } from 'stores/types';
-import { useProposal, useSnapshotId } from '../common/fetchers';
+import {
+  useProposal,
+  useSnapshotId,
+  useIsProposalCreationAllowed,
+} from '../common/fetchers';
 import { useTotalLocked } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'dxdao-contracts/bytecodes/local.json';
@@ -23,11 +27,13 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
         },
         fallback: {
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
         },
       },
       writers: null,

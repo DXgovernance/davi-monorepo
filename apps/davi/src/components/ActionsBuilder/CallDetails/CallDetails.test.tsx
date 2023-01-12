@@ -9,6 +9,10 @@ import {
 
 const mockBigNumber = BigNumber.from(0);
 
+jest.mock('stores/modules/common/fetchers', () => ({
+  useProposalCalls: () => ({ options: [] }),
+}));
+
 jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
   __esModule: true,
   default: () => ({
@@ -58,6 +62,12 @@ jest.mock('wagmi', () => ({
     data: '0x0000000000000000000000000000000000000000',
   }),
 }));
+
+jest.mock('provider/ReadOnlyConnector', () => ({
+  READ_ONLY_CONNECTOR_ID: 'readOnly',
+}));
+
+jest.mock('contexts/Guilds/orbis', () => ({}));
 
 describe('CallDetails', () => {
   it('Should match', () => {

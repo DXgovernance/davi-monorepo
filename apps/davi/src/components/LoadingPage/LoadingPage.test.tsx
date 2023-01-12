@@ -1,4 +1,4 @@
-import Header from './Header';
+import LoadingPage from './LoadingPage';
 import { render } from 'utils/tests';
 import { mockChain } from 'components/Web3Modals/fixtures';
 
@@ -6,6 +6,12 @@ jest.mock('contexts/Guilds/orbis', () => ({}));
 
 jest.mock('stores/modules/common/fetchers', () => ({
   useProposalCalls: () => ({ options: [] }),
+}));
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
 }));
 
 jest.mock('wagmi', () => ({
@@ -33,15 +39,9 @@ jest.mock('provider/wallets', () => ({
   isReadOnly: () => true,
 }));
 
-jest.mock('stores', () => ({
-  useHookStoreProvider: () => ({
-    hooks: { writers: { useLockTokens: jest.fn() } },
-  }),
-}));
-
-describe('Header', () => {
-  it('Should match snapshot', () => {
-    const { container } = render(<Header />);
+describe('LoadingPage', () => {
+  it('should match snapshot', () => {
+    const { container } = render(<LoadingPage />);
     expect(container).toMatchSnapshot();
   });
 });

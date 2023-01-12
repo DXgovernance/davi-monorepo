@@ -16,6 +16,10 @@ optionWithoutVotes.votePercentage = null;
 
 const mockBigNumber = BigNumber.from(100000000);
 
+jest.mock('stores/modules/common/fetchers', () => ({
+  useProposalCalls: () => ({ options: [] }),
+}));
+
 jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
   __esModule: true,
   default: () => ({
@@ -52,6 +56,12 @@ jest.mock('stores', () => ({
     hooks: { writers: { useLockTokens: jest.fn() } },
   }),
 }));
+
+jest.mock('provider/ReadOnlyConnector', () => ({
+  READ_ONLY_CONNECTOR_ID: 'readOnly',
+}));
+
+jest.mock('contexts/Guilds/orbis', () => ({}));
 
 describe('ProposalCardWinningOption', () => {
   it('renders properly with one action', () => {

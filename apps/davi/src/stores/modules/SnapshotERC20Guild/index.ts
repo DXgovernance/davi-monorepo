@@ -1,5 +1,4 @@
 import { FullGovernanceImplementation } from 'stores/types';
-import { useProposal, useSnapshotId } from '../common/fetchers';
 import {
   useApproveTokens,
   useCreateProposal,
@@ -8,19 +7,41 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
-import { useTotalLocked } from './fetchers/rpc';
-import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 
+import {
+  useProposal,
+  useSnapshotId,
+  useIsProposalCreationAllowed,
+  useProposalVotesOfVoter,
+  useProposalCalls,
+  useVotingResults,
+} from '../common/fetchers';
+import {
+  useTotalLocked,
+  useVoterLockTimestamp,
+  useVotingPowerOf,
+} from './fetchers/rpc';
+import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import localBytecodes from 'bytecodes/local.json';
+import prodBytecodes from 'bytecodes/prod.json';
+
+const GUILD_TYPE = 'SnapshotERC20Guild';
+const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
+const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
 /* 
   I left this case purposefully with just one data source (default), 
   to show that a governance implementation doesn't need two sources.
 */
+
 export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementation> =
   {
     name: 'SnapshotERC20Guild',
     bytecodes: [
       '0xfc721cf4ee3e10d6df0dc8659bc71c86ec7b2116001838e1d9bc30ccfbe8cfac',
       '0xcfe42d56f58ab49603c49e6c7ca4bd3d2260cec51d296e4a5cfa2a407e299b6c',
+      localConfig.bytecodeHash as `0x${string}`,
+      localConfig.deployedBytecodeHash as `0x${string}`,
+      prodConfig.deployedBytecodeHash as `0x${string}`,
     ],
     hooks: {
       fetchers: {
@@ -28,11 +49,23 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
+          useProposalVotesOfVoter,
+          useVoterLockTimestamp,
+          useProposalCalls,
+          useVotingResults,
+          useVotingPowerOf,
         },
         fallback: {
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useIsProposalCreationAllowed,
+          useProposalVotesOfVoter,
+          useVoterLockTimestamp,
+          useProposalCalls,
+          useVotingResults,
+          useVotingPowerOf,
         },
       },
       writers: {

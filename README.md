@@ -2,7 +2,8 @@
 
 ## Prerequisites
 
-1. `pnpm` (`npm` and `yarn` are **not supported**.)
+1. `pnpm` v7.18.2(`npm` and `yarn` are **not supported**.)
+https://pnpm.io/installation
 
 ## How to setup
 

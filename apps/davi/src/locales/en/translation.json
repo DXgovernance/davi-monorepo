@@ -325,5 +325,6 @@
   },
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
-  }
+  },
+  "loadingDao": "Loading DAO"
 }

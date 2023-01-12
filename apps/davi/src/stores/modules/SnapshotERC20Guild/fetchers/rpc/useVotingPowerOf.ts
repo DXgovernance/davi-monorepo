@@ -3,6 +3,7 @@ import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
+import { FetcherHooksInterface } from 'stores/types';
 
 interface useVotingPowerOfProps {
   contractAddress: string;
@@ -10,10 +11,13 @@ interface useVotingPowerOfProps {
   snapshotId?: string;
   fallbackSnapshotId?: boolean;
 }
+
+type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
+
 /**
  * Get the voting power of an account
  */
-export const useVotingPowerOf = ({
+export const useVotingPowerOf: IUseVotingPowerOf = ({
   contractAddress: guildAddress,
   userAddress,
   snapshotId,

@@ -1,6 +1,7 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import {
   useProposal,
+  useProposalCalls,
   useSnapshotId,
   useVotingResults,
 } from '../common/fetchers';
@@ -27,6 +28,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
         },
@@ -34,6 +36,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
         },

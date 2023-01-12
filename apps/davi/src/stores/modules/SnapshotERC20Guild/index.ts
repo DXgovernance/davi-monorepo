@@ -1,6 +1,7 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import {
   useProposal,
+  useProposalCalls,
   useSnapshotId,
   useVotingResults,
 } from '../common/fetchers';
@@ -29,6 +30,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
         },
@@ -36,6 +38,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
         },

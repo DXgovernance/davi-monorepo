@@ -16,6 +16,10 @@ optionWithoutVotes.votePercentage = null;
 
 const mockBigNumber = BigNumber.from(100000000);
 
+jest.mock('stores/modules/common/fetchers', () => ({
+  useProposalCalls: () => ({ options: [] }),
+}));
+
 jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
   __esModule: true,
   default: () => ({

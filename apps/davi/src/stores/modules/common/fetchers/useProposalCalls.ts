@@ -11,30 +11,31 @@ import { ERC20_APPROVE_SIGNATURE } from 'utils';
 import { useNetwork } from 'wagmi';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
-import useGuildImplementationTypeConfig from './useGuildImplementationType';
-import { useHookStoreProvider } from 'stores';
+import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
+import { useProposal, useVotingResults } from './';
+import { FetcherHooksInterface } from 'stores/types';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
 const isApprovalCall = (call: Call) => isApprovalData(call?.data);
 const isZeroHash = (data: string) => data === ZERO_HASH;
 
-const useProposalCalls = (guildId: string, proposalId: `0x${string}`) => {
-  // Decode calls from existing proposal
-  const {
-    hooks: {
-      fetchers: { useProposal, useVotingResults },
-    },
-  } = useHookStoreProvider();
-  const { data: proposal } = useProposal(guildId, proposalId);
-  const { data: metadata } = useProposalMetadata(guildId, proposalId);
-  const votingResults = useVotingResults(guildId, proposalId);
+type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
+export const useProposalCalls: IUseProposalCalls = (
+  daoId: string,
+  proposalId: `0x${string}`
+) => {
+  // Decode calls from existing proposal
+
+  const { data: metadata } = useProposalMetadata(daoId, proposalId);
+  const { data: proposal } = useProposal(daoId, proposalId);
+  const votingResults = useVotingResults(daoId, proposalId);
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
   const { t } = useTranslation();
   // Used to wait for the bytecode to be fetched
-  const { loaded } = useGuildImplementationTypeConfig(guildId);
+  const { loaded } = useGuildImplementationTypeConfig(daoId);
   const theme = useTheme();
   const [options, setOptions] = useState<Option[]>([]);
 
@@ -55,7 +56,7 @@ const useProposalCalls = (guildId: string, proposalId: `0x${string}`) => {
 
   const calls: Call[] = useMemo(() => {
     const buildCall = (idx: number): Call => ({
-      from: guildId,
+      from: daoId,
       to: toArray[idx],
       data: dataArray[idx],
       value: valuesArray[idx],
@@ -77,7 +78,7 @@ const useProposalCalls = (guildId: string, proposalId: `0x${string}`) => {
         return call;
       })
       .filter(Boolean);
-  }, [guildId, toArray, dataArray, valuesArray]);
+  }, [daoId, toArray, dataArray, valuesArray]);
 
   const splitCalls = useMemo(() => {
     if (!calls) return null;
@@ -92,7 +93,7 @@ const useProposalCalls = (guildId: string, proposalId: `0x${string}`) => {
   }, [calls, callsPerOption, totalOptionsNum]);
 
   useEffect(() => {
-    if (!guildId || !proposalId || !splitCalls || !loaded) {
+    if (!daoId || !proposalId || !splitCalls || !loaded) {
       setOptions([]);
       return;
     }
@@ -162,7 +163,7 @@ const useProposalCalls = (guildId: string, proposalId: `0x${string}`) => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    guildId,
+    daoId,
     proposalId,
     contracts,
     chain,

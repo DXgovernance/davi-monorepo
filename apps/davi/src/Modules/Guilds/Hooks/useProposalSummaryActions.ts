@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import useProposalCalls from 'Modules/Guilds/Hooks/useProposalCalls';
 import { DecodedAction } from 'components/ActionsBuilder/types';
 import { getActionPoints } from 'components/ActionsBuilder/SupportedActions';
+import { useHookStoreProvider } from 'stores';
 
 export interface PointedDecodedAction extends DecodedAction {
   points: number;
@@ -18,6 +18,12 @@ export const useProposalSummaryActions = (
   proposalId: `0x${string}`,
   maxActions?: number
 ): PointedDecodedAction[] => {
+  const {
+    hooks: {
+      fetchers: { useProposalCalls },
+    },
+  } = useHookStoreProvider();
+
   const { options } = useProposalCalls(guildId, proposalId);
 
   return useMemo(() => {

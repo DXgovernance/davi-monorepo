@@ -1,7 +1,9 @@
-import { useDAOToken } from './modules/common/fetchers';
+import { BigNumber } from 'ethers';
+import { useDAOToken } from './modules/common/fetchers/useDAOToken';
 import { useProposal } from './modules/common/fetchers/useProposal';
 import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
 import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
+import { Option } from 'components/ActionsBuilder/types';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -28,8 +30,43 @@ export interface FetcherHooksInterface {
     proposalId?: `0x${string}`
   ) => ReturnType<typeof useTotalLocked>;
   useDAOToken: (daoId: string) => ReturnType<typeof useDAOToken>;
+  useIsProposalCreationAllowed: (
+    daoId: string,
+    userAddress: `0x${string}`
+  ) => boolean;
+  useProposalVotesOfVoter: (
+    daoAddress: `0x${string}`,
+    proposalId: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: { option: string; votingPower: BigNumber };
+    refetch: () => void;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useVoterLockTimestamp: (
+    daoAddress: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: moment.Moment;
+    refetch: () => void;
+  };
+  useProposalCalls: (
+    daoId: string,
+    proposalId: `0x${string}`
+  ) => { options: Option[] };
+  useVotingResults: (daoId?: string, proposalId?: `0x${string}`) => VoteData;
+  useVotingPowerOf: (useVotingPowerOfProps: {
+    contractAddress: string;
+    userAddress: `0x${string}`;
+    snapshotId?: string;
+    fallbackSnapshotId?: boolean;
+  }) => {
+    data: BigNumber;
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
-
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>
 
 // TODO: useSnapshotId and implementation-specific hooks should be removed when all the hooks are ported. That logic should only reside inside the implementation, not as a global hook

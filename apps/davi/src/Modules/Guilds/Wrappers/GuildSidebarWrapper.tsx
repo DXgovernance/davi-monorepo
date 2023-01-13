@@ -1,12 +1,10 @@
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import useGuildMemberTotal from 'Modules/Guilds/Hooks/useGuildMemberTotal';
-import { useVotingPowerOf } from 'Modules/Guilds/Hooks/useVotingPowerOf';
 import { GuildSidebar } from 'components/GuildSidebar';
 import { MemberActions } from 'components/GuildSidebar/MemberActions';
 import { GuestActions } from 'components/GuildSidebar/GuestActions';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import { useVoterLockTimestamp } from 'Modules/Guilds/Hooks/useVoterLockTimestamp';
 import useGuildImplementationType from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import { useTransactions } from 'contexts/Guilds';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
@@ -25,7 +23,7 @@ const GuildSidebarWrapper = () => {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const {
     hooks: {
-      fetchers: { useTotalLocked },
+      fetchers: { useTotalLocked, useVotingPowerOf, useVoterLockTimestamp },
     },
   } = useHookStoreProvider();
 

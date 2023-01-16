@@ -44,20 +44,26 @@ jest.mock('stores', () => ({
   }),
 }));
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => ({
-    data: {
-      name: 'REPGuild',
-      token: '0x0000000000000000000000000000000000000000',
-      permissionRegistry: '0x0000000000000000000000000000000000000000',
-      proposalTime: bn(10000),
-      timeForExecution: bn(100002),
-      maxActiveProposals: bn(1000330),
-      votingPowerForProposalCreation: bn(1000022),
-      votingPowerForProposalExecution: bn(10044400),
-      tokenVault: '0x0000000000000000000000000000000000000000',
-      lockTime: bn(1004440022),
-      totalLocked: bn(200),
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => ({
+          data: {
+            name: 'REPGuild',
+            token: '0x0000000000000000000000000000000000000000',
+            permissionRegistry: '0x0000000000000000000000000000000000000000',
+            proposalTime: bn(10000),
+            timeForExecution: bn(100002),
+            maxActiveProposals: bn(1000330),
+            votingPowerForProposalCreation: bn(1000022),
+            votingPowerForProposalExecution: bn(10044400),
+            tokenVault: '0x0000000000000000000000000000000000000000',
+            lockTime: bn(1004440022),
+            totalLocked: bn(200),
+          },
+        }),
+      },
     },
   }),
 }));

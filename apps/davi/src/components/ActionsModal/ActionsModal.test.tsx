@@ -13,10 +13,17 @@ jest.mock('Modules/Guilds/Hooks/useGuildImplementationType', () => ({
     isSnapshotGuild: false,
   }),
 }));
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => ({
-    data: {
-      permissionRegistry: '0x0000000000000000000000000000000000000000',
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => ({
+          data: {
+            permissionRegistry: '0x0000000000000000000000000000000000000000',
+          },
+        }),
+      },
     },
   }),
 }));

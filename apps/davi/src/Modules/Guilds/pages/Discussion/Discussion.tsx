@@ -5,7 +5,6 @@ import { UnstyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { Loading } from 'components/primitives/Loading';
 import { FaChevronLeft } from 'react-icons/fa';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { IOrbisPost } from 'types/types.orbis';
 import {
   HeaderTopRow,
@@ -22,13 +21,18 @@ import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { OrbisContext } from 'contexts/Guilds/orbis';
 import { StyledButton } from 'Modules/Guilds/styles';
+import { useHookStoreProvider } from 'stores';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();
   const { chainName, guildId, discussionId } = useTypedParams();
 
   const [op, setOp] = useState<IOrbisPost>();
-
+  const {
+    hooks: {
+      fetchers: { useGuildConfig },
+    },
+  } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildId);
   const { orbis } = useContext(OrbisContext);
   const { context } = useDiscussionContext(

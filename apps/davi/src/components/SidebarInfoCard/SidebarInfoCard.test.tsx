@@ -2,8 +2,14 @@ import SidebarInfoCard from './SidebarInfoCard';
 import { render } from 'utils/tests';
 import { BigNumber } from 'ethers';
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => jest.fn(),
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => jest.fn(),
+      },
+    },
+  }),
 }));
 
 describe('SidebarInfoCard', () => {

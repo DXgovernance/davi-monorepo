@@ -4,8 +4,14 @@ import { ProposalStatusProps } from './types';
 import { ProposalState } from 'types/types.guilds.d';
 import moment from 'moment';
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => jest.fn(),
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => jest.fn(),
+      },
+    },
+  }),
 }));
 
 const validProps: ProposalStatusProps = {

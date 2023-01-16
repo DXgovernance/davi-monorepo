@@ -3,6 +3,7 @@ import { useProposal } from './modules/common/fetchers/useProposal';
 import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
 import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
 import { Option } from 'components/ActionsBuilder/types';
+import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -61,6 +62,14 @@ export interface FetcherHooksInterface {
     fallbackSnapshotId?: boolean;
   }) => {
     data: BigNumber;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useGuildConfig: (
+    guildAddress: string,
+    proposalId?: `0x${string}`
+  ) => {
+    data: GuildConfigProps;
     isError: boolean;
     isLoading: boolean;
   };

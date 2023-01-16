@@ -270,7 +270,7 @@
     "errorWhileUploading": "Error while uploading to IPFS",
     "couldntUploadToPinata": "Couldn't upload and pin to Pinata"
   },
-  "createAnyway": "Create anyways",
+  "createAnyway": "Create anyway",
   "retry": "Retry",
   "error": "Error",
   "displayRawData": "Display Raw Data",

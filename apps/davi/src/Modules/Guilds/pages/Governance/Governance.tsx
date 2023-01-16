@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useMemo } from 'react';
-import { useAccount } from 'wagmi';
-import { useHookStoreProvider } from 'stores';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { Result, ResultState } from 'components/Result';
 import { Flex } from 'components/primitives/Layout';
@@ -20,21 +18,11 @@ import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
 
 const Governance = ({ guildId }) => {
-  const {
-    hooks: {
-      fetchers: { useIsProposalCreationAllowed },
-    },
-  } = useHookStoreProvider();
   const { isLoading } = useContext(GuildAvailabilityContext);
   const { data: proposalIds, error } = useGuildProposalIds(guildId);
   const { t } = useTranslation();
   const { data: activeProposals } = useActiveProposalsNow(guildId);
   const { chainName } = useTypedParams();
-  const { address: userAddress } = useAccount();
-  const isProposalCreationAllowed = useIsProposalCreationAllowed(
-    guildId,
-    userAddress
-  );
 
   /*
   Since filters are a global state, we need to reset all of them
@@ -98,13 +86,11 @@ const Governance = ({ guildId }) => {
           icon={<AiOutlineSearch size={24} />}
           placeholder={t('searchTitleEnsAddress')}
         />
-        {isProposalCreationAllowed && (
-          <UnstyledLink to={`/${chainName}/${guildId}/create`}>
-            <Button variant="secondary" data-testid="create-discussion-button">
-              {t('forum.createDiscussion')}
-            </Button>
-          </UnstyledLink>
-        )}
+        <UnstyledLink to={`/${chainName}/${guildId}/create`}>
+          <Button variant="secondary" data-testid="create-discussion-button">
+            {t('forum.createDiscussion')}
+          </Button>
+        </UnstyledLink>
       </Flex>
       <ProposalsList data-testid="proposals-list">
         <StyledHeading size={2}>{t('proposals')}</StyledHeading>

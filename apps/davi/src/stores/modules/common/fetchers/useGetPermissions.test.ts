@@ -37,6 +37,7 @@ jest.mock('wagmi', () => ({
   useEnsAddress: () => ({
     data: '0x0000000000000000000000000000000000000000',
   }),
+  useContractEvent: () => jest.fn(),
 }));
 
 describe('useGetPermissions', () => {

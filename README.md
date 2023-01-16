@@ -7,8 +7,8 @@ https://pnpm.io/installation
 
 ## How to setup
 
-1. Clone this repo.
-2. Clone dxdao-contracts into apps/dxdao-contracts `git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts`
+1. Create a fork of this repo.
+2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`
 3. Install dependencies `pnpm i`
 4. Make an `.env` file (see `.env.example`) and write a seed phrase and deploy salt for hardhat
 

@@ -1,7 +1,5 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
-import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
 import { Option } from 'components/ActionsBuilder/types';
 
 interface GovernanceCapabilities {
@@ -23,11 +21,13 @@ export interface FetcherHooksInterface {
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;
-  }) => ReturnType<typeof useSnapshotId>;
+  }) => { data: BigNumber };
   useTotalLocked: (
     daoId: string,
     proposalId?: `0x${string}`
-  ) => ReturnType<typeof useTotalLocked>;
+  ) => {
+    data: BigNumber;
+  };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`

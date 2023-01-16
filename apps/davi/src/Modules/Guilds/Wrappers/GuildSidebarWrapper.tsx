@@ -33,7 +33,6 @@ const GuildSidebarWrapper = () => {
 
   const { guildId: guildAddress } = useTypedParams();
   const { data: guildConfig } = useGuildConfig(guildAddress);
-  debugger;
   const { isRepGuild } = useGuildImplementationType(guildAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
   const { data: numberOfMembers } = useGuildMemberTotal(

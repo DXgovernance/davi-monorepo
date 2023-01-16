@@ -26,7 +26,9 @@ import { ConfirmRemoveActionModal } from '../ConfirmRemoveActionModal';
 import { ActionModal } from 'components/ActionsModal';
 import { Permission } from 'components/ActionsBuilder/types';
 import { preventEmptyString } from 'utils';
-import { useETHPermissions } from 'Modules/Guilds/Hooks/useETHPermissions';
+import { useHookStoreProvider } from 'stores';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+
 interface ActionViewProps {
   call?: Call;
   decodedAction?: DecodedAction;
@@ -52,6 +54,12 @@ export const ActionRow: React.FC<ActionViewProps> = ({
   onEdit,
   onRemove,
 }) => {
+  const {
+    hooks: {
+      fetchers: { useGetPermissions },
+    },
+  } = useHookStoreProvider();
+  const { guildId } = useTypedParams();
   const { t } = useTranslation();
   const {
     attributes,
@@ -64,7 +72,7 @@ export const ActionRow: React.FC<ActionViewProps> = ({
   const action = useDecodedCall(call);
   const decodedCall = action.decodedCall || decodedAction?.decodedCall;
   const approval = action.approval || decodedAction?.approval;
-  const permissions = useETHPermissions(permissionArgs);
+  const permissions = useGetPermissions(guildId, permissionArgs);
 
   const [expanded, setExpanded] = useState(false);
   const [confirmRemoveActionModalIsOpen, setConfirmRemoveActionModalIsOpen] =
@@ -85,7 +93,7 @@ export const ActionRow: React.FC<ActionViewProps> = ({
     let hasValueTransferOnContractCall: boolean =
       decodedCall?.args && preventEmptyString(decodedCall?.value).gt(0);
 
-    if (permissions?.data === '0') {
+    if (permissions?.data?.fromTime.toString() === '0') {
       return CardStatus.permissionDenied;
     }
 

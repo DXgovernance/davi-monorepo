@@ -2,7 +2,7 @@ import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
 import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
 import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
-import { Option } from 'components/ActionsBuilder/types';
+import { Option, Permission } from 'components/ActionsBuilder/types';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -63,6 +63,15 @@ export interface FetcherHooksInterface {
     data: BigNumber;
     isError: boolean;
     isLoading: boolean;
+  };
+  useGetPermissions: (
+    daoAddress: `0x${string}`,
+    permissionArgs: Permission
+  ) => {
+    data: {
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+    };
   };
 }
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>

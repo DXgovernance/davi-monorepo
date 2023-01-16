@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
 import { UnstyledLink } from 'components/primitives/Links';
@@ -7,11 +7,13 @@ import { Loading } from 'components/primitives/Loading';
 import { FaChevronLeft } from 'react-icons/fa';
 import { IOrbisPost } from 'types/types.orbis';
 import {
+  ActionsGroup,
   HeaderTopRow,
   PageContainer,
   PageContent,
   PageHeader,
   PageTitle,
+  PostDetailsRow,
   StyledIconButton,
 } from './Discussion.styled';
 import { useTranslation } from 'react-i18next';
@@ -19,9 +21,11 @@ import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
 import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { StyledButton } from 'Modules/Guilds/styles';
 import { useHookStoreProvider } from 'stores';
+import PostActions from 'components/Discussion/Post/PostActions';
+import moment from 'moment';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();
@@ -34,7 +38,7 @@ const DiscussionPage: React.FC = () => {
     },
   } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildId);
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const { context } = useDiscussionContext(
     `${guildId}-${discussionId}-discussions`
   );
@@ -48,6 +52,15 @@ const DiscussionPage: React.FC = () => {
     getPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `${t('deletionMessage1')}'\r\n${t('deletionMessage2')}`
+    );
+    if (confirmed) {
+      orbis.deletePost(discussionId);
+    }
+  };
 
   return (
     <PageContainer>
@@ -78,13 +91,23 @@ const DiscussionPage: React.FC = () => {
             )}
           </PageTitle>
         </PageHeader>
-
-        <AddressButton address={op?.creator_details.metadata?.address} />
+        <PostDetailsRow>
+          <AddressButton address={op?.creator_details.metadata?.address} />
+          {op?.timestamp && moment.unix(op.timestamp).fromNow()}
+        </PostDetailsRow>
 
         <ProposalDescription
           metadata={{ description: op?.content?.body }}
           error={null}
         />
+
+        <ActionsGroup>
+          <PostActions
+            post={op}
+            showThreadButton={false}
+            onClickDelete={handleDelete}
+          />
+        </ActionsGroup>
 
         <SidebarCard
           header={

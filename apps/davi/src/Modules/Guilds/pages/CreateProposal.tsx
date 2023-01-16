@@ -43,7 +43,7 @@ import {
   createPost,
   postTemplate,
 } from 'components/Forum';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { DiscussionContent } from 'components/Forum/types';
 import { useHookStoreProvider } from 'stores';
 
@@ -62,12 +62,12 @@ const CreateProposalPage: React.FC = () => {
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
   );
-  const { orbis } = useContext(OrbisContext);
   const {
     hooks: {
       writers: { useCreateProposal },
     },
   } = useHookStoreProvider();
+  const { orbis } = useOrbisContext();
 
   const createProposal = useCreateProposal(guildId);
   const navigate = useNavigate();

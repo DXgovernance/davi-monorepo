@@ -26,6 +26,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
     name: 'SnapshotRepGuild',
     bytecodes: [
       '0x56735be1df2293bbbc687502a3673244d05fac86940394cb2222ea884f304daf',
+      '0xec75e00a4daa1f5d4636a962298f55e322161e54b292f04a928c91f4f5333aed',
       localConfig.bytecodeHash as `0x${string}`,
       localConfig.deployedBytecodeHash as `0x${string}`,
       prodConfig.deployedBytecodeHash as `0x${string}`,

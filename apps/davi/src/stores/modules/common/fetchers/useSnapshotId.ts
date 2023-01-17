@@ -3,16 +3,14 @@ import { BigNumber } from 'ethers';
 import { useContractEvent, useContractRead } from 'wagmi';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { useHookStoreProvider } from 'stores';
+import { FetcherHooksInterface } from 'stores/types';
 
-interface useSnapshotIdProps {
-  contractAddress: string;
-  proposalId: `0x${string}`;
-}
+type IUseSnapshotId = FetcherHooksInterface['useSnapshotId'];
 
-export const useSnapshotId = ({
+export const useSnapshotId: IUseSnapshotId = ({
   contractAddress,
   proposalId,
-}: useSnapshotIdProps) => {
+}) => {
   const {
     capabilities: { votingPowerTally },
   } = useHookStoreProvider();

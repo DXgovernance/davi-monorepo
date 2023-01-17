@@ -21,7 +21,20 @@ export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
   return (
     <ProposalDescriptionWrapper>
       {metadata?.description ? (
-        <Markdown>{metadata.description}</Markdown>
+        <Markdown
+          options={{
+            overrides: {
+              a: {
+                props: {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                },
+              },
+            },
+          }}
+        >
+          {metadata.description}
+        </Markdown>
       ) : (
         <Loading loading text skeletonProps={{ width: '100%' }} />
       )}

@@ -1,12 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useHookStoreProvider } from 'stores';
 import { useGuildRegistry } from 'Modules/Guilds/Hooks/useGuildRegistry';
 import { GuildCard } from 'components/GuildCard/GuildCard';
 
 import useGuildMemberTotal from 'Modules/Guilds/Hooks/useGuildMemberTotal';
-import useActiveProposalsNow from 'Modules/Guilds/Hooks/useGuildActiveProposals';
 import useENSNameFromAddress from 'hooks/Guilds/ens/useENSNameFromAddress';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 
 import { CardsContainer } from './LandingPage.styled';
 import useGuildImplementationType from 'Modules/Guilds/Hooks/useGuildImplementationType';
@@ -26,6 +25,11 @@ const GuildCardLoader = () => {
 };
 
 const GuildCardWithContent = ({ guildAddress, t }) => {
+  const {
+    hooks: {
+      fetchers: { useGuildConfig, useGetActiveProposals },
+    },
+  } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildAddress);
   const { isRepGuild } = useGuildImplementationType(guildAddress);
   const { data: numberOfMembers } = useGuildMemberTotal(
@@ -33,9 +37,8 @@ const GuildCardWithContent = ({ guildAddress, t }) => {
     guildConfig?.token,
     isRepGuild
   );
-  const { data: numberOfActiveProposals } = useActiveProposalsNow(guildAddress);
+  const { data: numberOfActiveProposals } = useGetActiveProposals(guildAddress);
   const ensName = useENSNameFromAddress(guildAddress)?.ensName?.split('.')[0];
-  const { data } = useGuildConfig(guildAddress);
 
   return (
     <GuildCard
@@ -44,7 +47,7 @@ const GuildCardWithContent = ({ guildAddress, t }) => {
       t={t}
       numberOfActiveProposals={numberOfActiveProposals}
       ensName={ensName}
-      data={data}
+      data={guildConfig}
     />
   );
 };

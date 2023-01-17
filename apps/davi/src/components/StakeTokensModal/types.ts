@@ -1,8 +1,8 @@
 import { BigNumber } from 'ethers';
 import { ERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { ERC20, ERC20Guild } from 'dxdao-contracts/types';
-import { GuildConfigProps } from 'Modules/Guilds/Hooks/useGuildConfig';
 import React from 'react';
+import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
 export interface StakeTokensModalProps {
   isOpen: boolean;
   onDismiss: () => void;

@@ -10,8 +10,14 @@ import {
 import { BigNumber } from 'ethers';
 import { mockChain } from 'components/Web3Modals/fixtures';
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => jest.fn(),
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => jest.fn(),
+      },
+    },
+  }),
 }));
 
 const mockBigNumber = BigNumber.from(100000000);

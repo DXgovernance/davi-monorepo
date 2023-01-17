@@ -9,19 +9,25 @@ import { useFilter } from 'contexts/Guilds';
 import { Input } from 'components/primitives/Forms/Input';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
-import useActiveProposalsNow from 'Modules/Guilds/Hooks/useGuildActiveProposals';
 import { useTypedParams } from '../../Hooks/useTypedParams';
 import { UnstyledLink } from 'components/primitives/Links';
 import { Button } from 'components/primitives/Button';
 import { ProposalsList, StyledHeading, StyledLink } from './Governance.styled';
 import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
+import { useHookStoreProvider } from 'stores';
 
 const Governance = ({ guildId }) => {
+  const {
+    hooks: {
+      fetchers: { useGetActiveProposals },
+    },
+  } = useHookStoreProvider();
+
   const { isLoading } = useContext(GuildAvailabilityContext);
   const { data: proposalIds, error } = useGuildProposalIds(guildId);
   const { t } = useTranslation();
-  const { data: activeProposals } = useActiveProposalsNow(guildId);
+  const { data: activeProposals } = useGetActiveProposals(guildId);
   const { chainName } = useTypedParams();
 
   /*

@@ -15,7 +15,6 @@ import { FiArrowLeft } from 'react-icons/fi';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
 import { useProposalState } from 'hooks/Guilds/useProposalState';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
@@ -45,7 +44,12 @@ const ProposalPage: React.FC = () => {
   const {
     hooks: {
       writers: { useExecuteProposal },
-      fetchers: { useProposal, useTotalLocked, useProposalCalls },
+      fetchers: {
+        useProposal,
+        useTotalLocked,
+        useProposalCalls,
+        useGuildConfig,
+      },
     },
   } = useHookStoreProvider();
   const { t } = useTranslation();

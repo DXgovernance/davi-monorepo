@@ -1,8 +1,7 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
-import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
 import { Option } from 'components/ActionsBuilder/types';
+import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -16,6 +15,10 @@ interface GovernanceCapabilities {
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 
 export interface FetcherHooksInterface {
+  useGetActiveProposals: (daoId: string) => {
+    data: BigNumber;
+    refetch: () => void;
+  };
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
@@ -23,11 +26,13 @@ export interface FetcherHooksInterface {
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;
-  }) => ReturnType<typeof useSnapshotId>;
+  }) => { data: BigNumber };
   useTotalLocked: (
     daoId: string,
     proposalId?: `0x${string}`
-  ) => ReturnType<typeof useTotalLocked>;
+  ) => {
+    data: BigNumber;
+  };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`
@@ -61,6 +66,14 @@ export interface FetcherHooksInterface {
     fallbackSnapshotId?: boolean;
   }) => {
     data: BigNumber;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useGuildConfig: (
+    guildAddress: string,
+    proposalId?: `0x${string}`
+  ) => {
+    data: GuildConfigProps;
     isError: boolean;
     isLoading: boolean;
   };

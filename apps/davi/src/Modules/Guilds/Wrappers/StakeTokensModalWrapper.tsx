@@ -1,7 +1,6 @@
 import { StakeTokensModal } from 'components/StakeTokensModal';
 import StakeTokensForm from 'components/StakeTokensModal/components/StakeTokensForm/StakeTokensForm';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useERC20Allowance } from 'hooks/Guilds/erc20/useERC20Allowance';
 import { useERC20Balance } from 'hooks/Guilds/erc20/useERC20Balance';
@@ -15,7 +14,7 @@ const StakeTokensModalWrapper = ({ isOpen, onDismiss }) => {
 
   const {
     hooks: {
-      fetchers: { useTotalLocked, useVotingPowerOf },
+      fetchers: { useTotalLocked, useVotingPowerOf, useGuildConfig },
     },
   } = useHookStoreProvider();
 

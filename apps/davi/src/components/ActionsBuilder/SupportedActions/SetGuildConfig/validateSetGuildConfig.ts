@@ -2,7 +2,7 @@ import { TFunction } from 'react-i18next';
 import { SetGuildConfigFields } from './types';
 import { bn } from 'utils/safeBn';
 import { removeNullValues } from 'utils/object';
-import { GuildConfigProps } from 'Modules/Guilds/Hooks/useGuildConfig';
+import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
 
 interface Context {
   t: TFunction;

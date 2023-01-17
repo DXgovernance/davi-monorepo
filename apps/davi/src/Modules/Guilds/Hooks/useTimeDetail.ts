@@ -1,11 +1,11 @@
 import moment, { Moment } from 'moment';
 import { useTranslation } from 'react-i18next';
+import { useHookStoreProvider } from 'stores';
 import { ProposalState } from 'types/types.guilds.d';
 import {
   getTimeDifferenceHumanized,
   isBeforeCurrentTime,
 } from 'utils/time/time';
-import { useGuildConfig } from './useGuildConfig';
 
 const useTimeDetail = (
   guildId: string,
@@ -13,6 +13,11 @@ const useTimeDetail = (
   endTime: Moment
 ) => {
   const { t } = useTranslation();
+  const {
+    hooks: {
+      fetchers: { useGuildConfig },
+    },
+  } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildId);
 
   let endTimeDetail: string = null;

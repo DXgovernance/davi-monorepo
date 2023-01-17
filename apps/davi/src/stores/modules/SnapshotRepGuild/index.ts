@@ -6,6 +6,7 @@ import {
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGuildConfig,
   useGetActiveProposals,
 } from '../common/fetchers';
 import {
@@ -43,6 +44,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
           useGetActiveProposals,
         },
         fallback: {
@@ -55,6 +57,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
           useGetActiveProposals,
         },
       },

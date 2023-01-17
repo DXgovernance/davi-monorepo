@@ -11,6 +11,7 @@ import {
   useTotalLocked,
   useVoterLockTimestamp,
   useVotingPowerOf,
+  useMemberCount,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
@@ -19,8 +20,8 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-/* 
-  I left this case purposefully with just one data source (default), 
+/*
+  I left this case purposefully with just one data source (default),
   to show that a governance implementation doesn't need two sources.
 */
 
@@ -46,6 +47,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
         },
         fallback: {
           useProposal,
@@ -57,6 +59,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
         },
       },
       writers: null,

@@ -11,6 +11,7 @@ import {
   useTotalLocked,
   useVoterLockTimestamp,
   useVotingPowerOf,
+  useMemberCount,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
@@ -43,6 +44,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
         },
         fallback: {
           useProposal,
@@ -54,6 +56,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
         },
       },
       writers: null,

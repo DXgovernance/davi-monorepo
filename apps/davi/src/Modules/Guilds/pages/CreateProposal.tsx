@@ -26,7 +26,6 @@ import { preventEmptyString, ZERO_ADDRESS, ZERO_HASH } from 'utils';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import { isValidProposal } from 'utils';
 import {
   PageContainer,
   PageContent,
@@ -253,32 +252,27 @@ const CreateProposalPage: React.FC = () => {
       valueArray.push(BigNumber.from(0));
     }
 
-    const { isValid, error } = isValidProposal({
+    const otherFields = { contentHash };
+
+    createProposal(
+      title,
+      proposalBodyHTML,
       toArray,
       dataArray,
       valueArray,
       totalOptions,
-      title,
-    });
-
-    if (!isValid) {
-      toast.error(error);
-    } else {
-      const proposalData = {
-        toArray,
-        dataArray,
-        valueArray,
-        totalOptions,
-        contentHash,
-      };
-      createProposal(title, proposalData, err => {
+      otherFields,
+      err => {
         setIsCreatingProposal(false);
         if (!err) {
           editMode && clear();
           navigate(`/${chain}/${guildId}`);
         }
-      });
-    }
+      }
+    ).catch((err: Error) => {
+      setIsCreatingProposal(false);
+      toast.error(err.message);
+    });
   };
   useEffect(() => {
     if (ignoreWarning) checkIfWarningIgnored();

@@ -87,8 +87,13 @@ export interface WriterHooksInteface {
     daoAddress: string
   ) => (
     title: string,
-    proposalData: any,
-    cb?: (error?: any, txtHash?: any) => void
+    description: string,
+    toArray: string[],
+    dataArray: string[],
+    valueArray: BigNumber[],
+    totalOptions: number,
+    otherFields: Record<string, any>,
+    cb: (error?: any, txtHash?: any) => void
   ) => Promise<void>;
   useExecuteProposal: (
     daoAddress: string

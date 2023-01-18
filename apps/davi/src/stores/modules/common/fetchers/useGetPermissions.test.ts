@@ -13,9 +13,6 @@ jest.mock('contexts/Guilds/orbis', () => ({}));
 
 jest.mock('stores/modules/common/fetchers', () => ({
   useProposalCalls: () => ({ options: [] }),
-}));
-
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
   useGuildConfig: () => ({
     data: {
       permissionRegistry: '0x23120390909dq0w9adsj832921293989',

@@ -1,10 +1,10 @@
 import { useContractRead } from 'wagmi';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { Permission } from 'components/ActionsBuilder/types';
 import { PermissionRegistry } from 'contracts/ts-files/PermissionRegistry';
 import { FetcherHooksInterface } from 'stores/types';
 import { useListenToPermissionSet } from '../events';
 import { ZERO_ADDRESS, ZERO_FUNC_SIGNATURE } from 'utils';
+import { useGuildConfig } from '.';
 
 type IUseGetPermissions = FetcherHooksInterface['useGetPermissions'];
 

@@ -13,15 +13,12 @@ jest.mock('wagmi', () => ({
 let mockUseGuildConfigReturn;
 let mockUseVotingPowerOfReturn;
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => mockUseGuildConfigReturn,
-}));
-
 jest.mock('stores', () => ({
   useHookStoreProvider: () => ({
     hooks: {
       fetchers: {
         useVotingPowerOf: () => mockUseVotingPowerOfReturn,
+        useGuildConfig: () => mockUseGuildConfigReturn,
       },
     },
   }),

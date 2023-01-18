@@ -3,30 +3,26 @@ import { BigNumber } from 'ethers';
 import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { useSnapshotId } from 'stores/modules/common/fetchers';
+import { FetcherHooksInterface } from 'stores/types';
 
-export const useTotalLocked = (
-  guildAddress: string,
-  proposalId?: `0x${string}`
-) => {
+type IUseTotalLocked = FetcherHooksInterface['useTotalLocked'];
+
+export const useTotalLocked: IUseTotalLocked = (guildAddress, proposalId?) => {
   const { data: snapshotId } = useSnapshotId({
     contractAddress: guildAddress,
     proposalId,
   });
 
-  const {
-    data: totalLockedResponse,
-    refetch: refetchGetTotalLocked,
-    ...totalLockedResponseRest
-  } = useContractRead({
-    address: guildAddress,
-    abi: SnapshotERC20Guild.abi,
-    functionName: 'getTotalLocked',
-  });
+  const { data: totalLockedResponse, refetch: refetchGetTotalLocked } =
+    useContractRead({
+      address: guildAddress,
+      abi: SnapshotERC20Guild.abi,
+      functionName: 'getTotalLocked',
+    });
 
   const {
     data: totalLockedAtProposalSnapshotResponse,
     refetch: refetchTotalLockedAt,
-    ...totalLockedAtProposalSnapshotResponseRest
   } = useContractRead({
     address: guildAddress,
     abi: SnapshotERC20Guild.abi,
@@ -44,12 +40,10 @@ export const useTotalLocked = (
         data: totalLockedAtProposalSnapshotResponse
           ? BigNumber.from(totalLockedAtProposalSnapshotResponse)
           : undefined,
-        ...totalLockedAtProposalSnapshotResponseRest,
       }
     : {
         data: totalLockedResponse
           ? BigNumber.from(totalLockedResponse)
           : undefined,
-        ...totalLockedResponseRest,
       };
 };

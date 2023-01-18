@@ -1,15 +1,25 @@
+import { useMemo, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BigNumber } from 'ethers';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+
+import { useHookStoreProvider } from 'stores';
+import { preventEmptyString } from 'utils';
+
+import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
+import { ActionModal } from 'components/ActionsModal';
+import { Permission } from 'components/ActionsBuilder/types';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+
 import { CallDetails } from '../CallDetails';
 import { getInfoLineView } from '../SupportedActions';
 import UndecodableCallDetails from '../UndecodableCalls/UndecodableCallDetails';
 import UndecodableCallInfoLine from '../UndecodableCalls/UndecodableCallInfoLine';
 import { Call, DecodedAction } from '../types';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
-import { useMemo, useState, useEffect } from 'react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { ConfirmRemoveActionModal } from '../ConfirmRemoveActionModal';
+
 import {
   CardActions,
   CardHeader,
@@ -23,12 +33,6 @@ import {
   SectionHeader,
   Separator,
 } from './Action.styled';
-import { ConfirmRemoveActionModal } from '../ConfirmRemoveActionModal';
-import { ActionModal } from 'components/ActionsModal';
-import { Permission } from 'components/ActionsBuilder/types';
-import { preventEmptyString } from 'utils';
-import { useHookStoreProvider } from 'stores';
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 
 interface ActionViewProps {
   call?: Call;

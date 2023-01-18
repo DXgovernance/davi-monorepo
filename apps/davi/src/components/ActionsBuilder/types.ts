@@ -70,5 +70,5 @@ export interface Permission {
   from: string;
   to: string;
   functionSignature: string;
-  callType?: string;
+  callType?: SupportedAction;
 }

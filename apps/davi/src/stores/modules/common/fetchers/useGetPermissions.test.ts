@@ -1,10 +1,10 @@
-import { useGetPermissions } from './useGetPermissions';
+import { BigNumber } from 'ethers';
 import {
   MOCK_GUILD_ADDRESS,
   MOCK_USER_ADDRESS,
 } from 'Modules/Guilds/Hooks/fixtures';
-import { Permission } from 'components/ActionsBuilder/types';
-import { BigNumber } from 'ethers';
+import { Permission, SupportedAction } from 'components/ActionsBuilder/types';
+import { useGetPermissions } from './useGetPermissions';
 
 const mockFromTime = BigNumber.from(500000);
 const mockValueAllowed = BigNumber.from(700000);
@@ -45,7 +45,7 @@ describe('useGetPermissions', () => {
     const permission: Permission = {
       from: MOCK_GUILD_ADDRESS,
       to: MOCK_USER_ADDRESS,
-      callType: 'NATIVE_TRANSFER',
+      callType: SupportedAction.NATIVE_TRANSFER,
       functionSignature: '0x',
     };
 

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { BigNumber } from 'ethers';
 import { CallDetails } from '../CallDetails';
 import { getInfoLineView } from '../SupportedActions';
 import UndecodableCallDetails from '../UndecodableCalls/UndecodableCallDetails';
@@ -94,6 +95,15 @@ export const ActionRow: React.FC<ActionViewProps> = ({
       decodedCall?.args && preventEmptyString(decodedCall?.value).gt(0);
 
     if (permissions?.data?.fromTime.toString() === '0') {
+      return CardStatus.permissionDenied;
+    }
+
+    if (
+      decodedCall?.value &&
+      permissions?.data?.valueAllowed &&
+      BigNumber.isBigNumber(decodedCall?.value) &&
+      decodedCall?.value?.gt(permissions?.data?.valueAllowed)
+    ) {
       return CardStatus.permissionDenied;
     }
 

@@ -4,6 +4,7 @@ import { Permission } from 'components/ActionsBuilder/types';
 import { PermissionRegistry } from 'contracts/ts-files/PermissionRegistry';
 import { FetcherHooksInterface } from 'stores/types';
 import { useListenToPermissionSet } from '../events';
+import { ZERO_ADDRESS, ZERO_FUNC_SIGNATURE } from 'utils';
 
 type IUseGetPermissions = FetcherHooksInterface['useGetPermissions'];
 
@@ -24,7 +25,9 @@ export const useGetPermissions: IUseGetPermissions = (
     functionName: 'getETHPermission',
     args: [
       from as `0x${string}`,
-      to as `0x${string}`,
+      functionSignature === ZERO_FUNC_SIGNATURE
+        ? ZERO_ADDRESS
+        : (to as `0x${string}`),
       functionSignature as `0x${string}`,
     ],
   });

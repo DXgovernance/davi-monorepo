@@ -6,18 +6,17 @@ import { useTransactions } from 'contexts/Guilds';
 import { useERC20 } from 'hooks/Guilds/contracts/useContract';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 
-type UseApproveTokensInterface = WriterHooksInteface['useApproveTokens'];
+type IUseApproveTokens = WriterHooksInteface['useApproveTokens'];
+type IHandleApproveTokens = ReturnType<IUseApproveTokens>;
 
-export const useApproveTokens: UseApproveTokensInterface = (
-  tokenAddress: string
-) => {
+export const useApproveTokens: IUseApproveTokens = tokenAddress => {
   const { t } = useTranslation();
   const { createTransaction } = useTransactions();
   const tokenContract = useERC20(tokenAddress);
   const { data: tokenInfo } = useERC20Info(tokenAddress);
 
-  const handleApproveTokens = useCallback(
-    async (daoTokenVault: string, amount: string = MAX_UINT) => {
+  const handleApproveTokens: IHandleApproveTokens = useCallback(
+    async (daoTokenVault, amount = MAX_UINT) => {
       createTransaction(
         t('approveTokenSpending', {
           tokenSymbol: tokenInfo?.symbol,

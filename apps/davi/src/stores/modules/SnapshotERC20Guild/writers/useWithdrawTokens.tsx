@@ -1,20 +1,20 @@
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BigNumber } from 'ethers';
 import { useTransactions } from 'contexts/Guilds';
 import { WriterHooksInteface } from 'stores/types';
 import { formatUnits } from 'ethers/lib/utils';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
 
-type UseWithdrawTokens = WriterHooksInteface['useWithdrawTokens'];
+type IUseWithdrawTokens = WriterHooksInteface['useWithdrawTokens'];
+type IHandleWithdrawTokens = ReturnType<IUseWithdrawTokens>;
 
-export const useWithdrawTokens: UseWithdrawTokens = (daoAddress: string) => {
+export const useWithdrawTokens: IUseWithdrawTokens = daoAddress => {
   const { t } = useTranslation();
   const { createTransaction } = useTransactions();
   const guildContract = useERC20Guild(daoAddress);
 
-  const withdrawTokens = useCallback(
-    async (amount: BigNumber, decimals?: number, symbol?: string) => {
+  const handleWithdrawTokens: IHandleWithdrawTokens = useCallback(
+    async (amount, decimals?, symbol?) => {
       const formattedAmount = decimals
         ? ` ${formatUnits(amount, decimals)}`
         : '';
@@ -30,5 +30,5 @@ export const useWithdrawTokens: UseWithdrawTokens = (daoAddress: string) => {
     [guildContract, createTransaction, t]
   );
 
-  return withdrawTokens;
+  return handleWithdrawTokens;
 };

@@ -1,27 +1,19 @@
 import { useCallback } from 'react';
-import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTransactions } from 'contexts/Guilds';
 import { WriterHooksInteface } from 'stores/types';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
 
-type UseVoteOnProposalInterface = WriterHooksInteface['useVoteOnProposal'];
+type IUseVoteOnProposal = WriterHooksInteface['useVoteOnProposal'];
+type IHandleVoteOnProposal = ReturnType<IUseVoteOnProposal>;
 
-export const useVoteOnProposal: UseVoteOnProposalInterface = (
-  daoAddress: string
-) => {
+export const useVoteOnProposal: IUseVoteOnProposal = daoAddress => {
   const { t } = useTranslation();
   const { createTransaction } = useTransactions();
   const daoContract = useERC20Guild(daoAddress, true);
 
-  const voteOnProposal = useCallback(
-    async (
-      proposalId: string,
-      option: BigNumber,
-      votingPower: BigNumber,
-      title: string = '',
-      cb: (error?: any, txtHash?: any) => void = null
-    ) => {
+  const handleVoteOnProposal: IHandleVoteOnProposal = useCallback(
+    async (proposalId, option, votingPower, title = '', cb = null) => {
       createTransaction(
         `${t('voteOnProposal')}${` ${title}` ?? ''}`,
         async () => daoContract.setVote(proposalId, option, votingPower),
@@ -32,5 +24,5 @@ export const useVoteOnProposal: UseVoteOnProposalInterface = (
     [daoContract, createTransaction, t]
   );
 
-  return voteOnProposal;
+  return handleVoteOnProposal;
 };

@@ -4,17 +4,16 @@ import { useTransactions } from 'contexts/Guilds';
 import { WriterHooksInteface } from 'stores/types';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
 
-type UseExecuteProposalInterface = WriterHooksInteface['useExecuteProposal'];
+type IExecuteProposal = WriterHooksInteface['useExecuteProposal'];
+type IHandleExecuteProposal = ReturnType<IExecuteProposal>;
 
-export const useExecuteProposal: UseExecuteProposalInterface = (
-  daoAddress: string
-) => {
+export const useExecuteProposal: IExecuteProposal = daoAddress => {
   const { t } = useTranslation();
   const { createTransaction } = useTransactions();
   const daoContract = useERC20Guild(daoAddress);
 
-  const executeProposal = useCallback(
-    async (proposalId: `0x${string}`) => {
+  const handleExecuteProposal: IHandleExecuteProposal = useCallback(
+    async proposalId => {
       createTransaction(t('executeProposal'), async () => {
         return daoContract.endProposal(proposalId);
       });
@@ -22,5 +21,5 @@ export const useExecuteProposal: UseExecuteProposalInterface = (
     [daoContract, createTransaction, t]
   );
 
-  return executeProposal;
+  return handleExecuteProposal;
 };

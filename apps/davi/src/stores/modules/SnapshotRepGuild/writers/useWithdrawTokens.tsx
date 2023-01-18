@@ -1,21 +1,15 @@
-import { BigNumber } from 'ethers';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { WriterHooksInteface } from 'stores/types';
 
-type UseWithdrawTokensInterface = WriterHooksInteface['useWithdrawTokens'];
+type IUseWithdrawTokens = WriterHooksInteface['useWithdrawTokens'];
+type IMethodNotSupported = ReturnType<IUseWithdrawTokens>;
 
-export const useWithdrawTokens: UseWithdrawTokensInterface = (
-  daoAddress: string
-) => {
+export const useWithdrawTokens: IUseWithdrawTokens = daoAddress => {
   const { t } = useTranslation();
 
-  const methodNotSupported = useCallback(
-    async (
-      amount: BigNumber,
-      tokenDecimals?: number,
-      tokenSymbol?: string
-    ): Promise<void> => {
+  const methodNotSupported: IMethodNotSupported = useCallback(
+    async (amount, tokenDecimals?, tokenSymbol?): Promise<void> => {
       return new Promise((resolve, reject) => {
         reject(t('hookStoreErrors.methodNotSupported'));
       });

@@ -1,20 +1,20 @@
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BigNumber } from 'ethers';
 import { formatUnits } from 'ethers/lib/utils';
 import { useTransactions } from 'contexts/Guilds';
 import { WriterHooksInteface } from 'stores/types';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
 
-type UseLockTokensInterface = WriterHooksInteface['useLockTokens'];
+type IUseLockTokens = WriterHooksInteface['useLockTokens'];
+type IHandleLockTokens = ReturnType<IUseLockTokens>;
 
-export const useLockTokens: UseLockTokensInterface = (daoAddress: string) => {
+export const useLockTokens: IUseLockTokens = daoAddress => {
   const { t } = useTranslation();
   const { createTransaction } = useTransactions();
   const guildContract = useERC20Guild(daoAddress);
 
-  const handleCreateTransaction = useCallback(
-    async (amount: BigNumber, decimals?: number, symbol?: string) => {
+  const handleLockTokens: IHandleLockTokens = useCallback(
+    async (amount, decimals?, symbol?) => {
       const formattedAmount = decimals
         ? ` ${formatUnits(amount, decimals)}`
         : '';
@@ -27,5 +27,5 @@ export const useLockTokens: UseLockTokensInterface = (daoAddress: string) => {
     [createTransaction, guildContract, t]
   );
 
-  return handleCreateTransaction;
+  return handleLockTokens;
 };

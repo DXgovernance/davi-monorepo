@@ -1,29 +1,31 @@
 import { BigNumber } from 'ethers';
 import i18next from 'i18next';
 
-export const isValidProposal = ({
+export const isValidGuildProposal = ({
   toArray,
   dataArray,
   valueArray,
   totalOptions,
   title,
+  contentHash,
 }: {
   toArray: string[];
   dataArray: string[];
   valueArray: BigNumber[];
   totalOptions: number;
   title: string;
+  contentHash: string;
 }): { isValid: boolean; error?: string } => {
   if (!title) {
     return {
       isValid: false,
-      error: 'Title is required',
+      error: i18next.t('proposal.errors.titleRequired'),
     };
   }
   if (totalOptions === 0) {
     return {
       isValid: false,
-      error: 'At least one Option is required',
+      error: i18next.t('proposal.errors.atLeastOneOptionRequired'),
     };
   }
   if (
@@ -33,7 +35,13 @@ export const isValidProposal = ({
   ) {
     return {
       isValid: false,
-      error: 'At least one action per option is required',
+      error: i18next.t('proposal.errors.atLeastOneActionPerOptionRequired'),
+    };
+  }
+  if (!contentHash) {
+    return {
+      isValid: false,
+      error: i18next.t('proposal.errors.contentHashRequired'),
     };
   }
 

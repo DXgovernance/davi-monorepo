@@ -119,9 +119,15 @@
   "onChainActions_other": "{{count}} on-chain actions",
   "onchainAction": "On-chain Action",
   "noOnchainAction": "No on-chain action",
-  "errorMessage": {
-    "proposalDescriptionError": "We ran into an error while trying to load the proposal content. Please refresh the page and try again.",
-    "genericProposalError": "We ran into an error."
+  "proposal": {
+    "errors": {
+      "proposalDescriptionError": "We ran into an error while trying to load the proposal content. Please refresh the page and try again.",
+      "contentHashRequired": "Content hash is not present",
+      "titleRequired": "Title is required",
+      "atLeastOneOptionRequired": "At least one option is required",
+      "atLeastOneActionPerOptionRequired": "At least one action per option is required",
+      "genericProposalError": "We ran into an error."
+    }
   },
   "selectAToken": "Select a token",
   "searchToken": "Search token",

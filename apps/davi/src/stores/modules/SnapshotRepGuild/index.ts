@@ -36,6 +36,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
     bytecodes: [
       '0x56735be1df2293bbbc687502a3673244d05fac86940394cb2222ea884f304daf',
       '0xec75e00a4daa1f5d4636a962298f55e322161e54b292f04a928c91f4f5333aed',
+      '0xb33418b664bfb6eba3ea37a77429d95daee4f0ab24f47ee63c4669340c4aae5a',
       localConfig.bytecodeHash as `0x${string}`,
       localConfig.deployedBytecodeHash as `0x${string}`,
       prodConfig.deployedBytecodeHash as `0x${string}`,

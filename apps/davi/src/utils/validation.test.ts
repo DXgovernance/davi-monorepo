@@ -1,4 +1,15 @@
-import { isEnsName } from './validations';
+import { MOCK_BIG_NUMBER } from 'Modules/Guilds/Hooks/fixtures';
+import { ZERO_ADDRESS, ZERO_HASH } from './constants';
+import { isEnsName, isValidGuildProposal } from './validations';
+
+const guildProposalData = {
+  toArray: [ZERO_ADDRESS],
+  dataArray: [ZERO_HASH],
+  valueArray: [MOCK_BIG_NUMBER],
+  totalOptions: 2,
+  title: 'test proposal',
+  contentHash: ZERO_HASH,
+};
 
 jest.mock('i18next', () => {
   return {
@@ -54,6 +65,60 @@ describe('ENS update validations', () => {
           'ens.validation.domainCannotBeMoreThanThreeLevels'
         );
       });
+    });
+  });
+});
+
+describe('isValidGuildProposal', () => {
+  describe('valid results', () => {
+    it('should be valid if every field is correct', () => {
+      const { isValid, error } = isValidGuildProposal(guildProposalData);
+      expect(isValid).toEqual(true);
+      expect(error).toBeNull();
+    });
+  });
+
+  describe('invalid results', () => {
+    it("should be invalid if there's no title", () => {
+      const data = { ...guildProposalData, title: '' };
+      const { isValid, error } = isValidGuildProposal(data);
+      expect(isValid).toEqual(false);
+      expect(error).toBeTruthy();
+    });
+
+    it('should be invalid if total options is zero', () => {
+      const data = { ...guildProposalData, totalOptions: 0 };
+      const { isValid, error } = isValidGuildProposal(data);
+      expect(isValid).toEqual(false);
+      expect(error).toBeTruthy();
+    });
+
+    it('should be invalid if toArray has no elements', () => {
+      const data = { ...guildProposalData, toArray: [] };
+      const { isValid, error } = isValidGuildProposal(data);
+      expect(isValid).toEqual(false);
+      expect(error).toBeTruthy();
+    });
+
+    it('should be invalid if dataArray has no elements', () => {
+      const data = { ...guildProposalData, dataArray: [] };
+      const { isValid, error } = isValidGuildProposal(data);
+      expect(isValid).toEqual(false);
+      expect(error).toBeTruthy();
+    });
+
+    it('should be invalid if valueArray has no elements', () => {
+      const data = { ...guildProposalData, valueArray: [] };
+      const { isValid, error } = isValidGuildProposal(data);
+      expect(isValid).toEqual(false);
+      expect(error).toBeTruthy();
+    });
+
+    it('should be invalid if there is no content hash', () => {
+      const data = { ...guildProposalData, contentHash: '' };
+      const { isValid, error } = isValidGuildProposal(data);
+      expect(isValid).toEqual(false);
+      expect(error).toBeTruthy();
     });
   });
 });

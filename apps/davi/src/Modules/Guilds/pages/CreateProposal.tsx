@@ -1,16 +1,3 @@
-import SidebarInfoCardWrapper from 'Modules/Guilds/Wrappers/SidebarInfoCardWrapper';
-import { Input } from 'components/primitives/Forms/Input';
-import { Box, Flex } from 'components/primitives/Layout';
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import ensContentHash from '@ensdomains/content-hash';
-import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
-import { BigNumber } from 'ethers';
-import { bulkEncodeCallsFromOptions } from 'hooks/Guilds/contracts/useEncodedCall';
-import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
-import { ActionsBuilder } from 'components/ActionsBuilder';
-import { Call, Option } from 'components/ActionsBuilder/types';
-import { useTextEditor } from 'components/Editor';
-import { Loading } from 'components/primitives/Loading';
 import React, {
   useContext,
   useEffect,
@@ -18,14 +5,41 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import { FiChevronLeft, FiX } from 'react-icons/fi';
-import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import sanitizeHtml from 'sanitize-html';
-import { preventEmptyString, ZERO_ADDRESS, ZERO_HASH } from 'utils';
+import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import sanitizeHtml from 'sanitize-html';
+import { FiChevronLeft, FiX } from 'react-icons/fi';
+import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
+import ensContentHash from '@ensdomains/content-hash';
+
+import { preventEmptyString, ZERO_ADDRESS, ZERO_HASH } from 'utils';
+import { useHookStoreProvider } from 'stores';
+
+import SidebarInfoCardWrapper from 'Modules/Guilds/Wrappers/SidebarInfoCardWrapper';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+import { Input } from 'components/primitives/Forms/Input';
+import { Box, Flex } from 'components/primitives/Layout';
+import { ActionsBuilder } from 'components/ActionsBuilder';
+import { Call, Option } from 'components/ActionsBuilder/types';
+import { useTextEditor } from 'components/Editor';
+import { Loading } from 'components/primitives/Loading';
+import { Modal } from 'components/primitives/Modal';
+import { WarningCircle } from 'components/primitives/StatusCircles';
+import { DiscussionContent } from 'components/Forum/types';
+import {
+  connect,
+  isConnected,
+  createPost,
+  postTemplate,
+} from 'components/Forum';
+import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { bulkEncodeCallsFromOptions } from 'hooks/Guilds/contracts/useEncodedCall';
+import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
+import usePinataIPFS from 'hooks/Guilds/ipfs/usePinataIPFS';
 import {
   PageContainer,
   PageContent,
@@ -33,18 +47,6 @@ import {
   SidebarContent,
   Label,
 } from '../styles';
-import usePinataIPFS from 'hooks/Guilds/ipfs/usePinataIPFS';
-import { Modal } from 'components/primitives/Modal';
-import { WarningCircle } from 'components/primitives/StatusCircles';
-import {
-  connect,
-  isConnected,
-  createPost,
-  postTemplate,
-} from 'components/Forum';
-import { useOrbisContext } from 'contexts/Guilds/orbis';
-import { DiscussionContent } from 'components/Forum/types';
-import { useHookStoreProvider } from 'stores';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,

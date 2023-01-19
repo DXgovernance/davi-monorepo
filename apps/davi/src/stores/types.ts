@@ -93,6 +93,8 @@ export interface WriterHooksInteface {
     valueArray: BigNumber[],
     totalOptions: number,
     otherFields: Record<string, any>,
+    skipMetadataUpload: boolean,
+    handleMetadataUploadError: (error: Error) => void,
     cb: (error?: any, txtHash?: any) => void
   ) => Promise<void>;
   useExecuteProposal: (

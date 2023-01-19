@@ -122,10 +122,11 @@
   "proposal": {
     "errors": {
       "proposalDescriptionError": "We ran into an error while trying to load the proposal content. Please refresh the page and try again.",
-      "contentHashRequired": "Content hash is not present",
+      "invalidContentHash": "Invalid content hash",
       "titleRequired": "Title is required",
       "atLeastOneOptionRequired": "At least one option is required",
       "atLeastOneActionPerOptionRequired": "At least one action per option is required",
+      "optionsArrayIsEmpty": "Options array is empty",
       "genericProposalError": "We ran into an error."
     }
   },

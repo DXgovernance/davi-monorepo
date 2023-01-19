@@ -9,11 +9,10 @@ import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
 import { FiChevronLeft, FiX } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
-import ensContentHash from '@ensdomains/content-hash';
 
 import { preventEmptyString, ZERO_ADDRESS, ZERO_HASH } from 'utils';
 import { useHookStoreProvider } from 'stores';
@@ -28,18 +27,10 @@ import { useTextEditor } from 'components/Editor';
 import { Loading } from 'components/primitives/Loading';
 import { Modal } from 'components/primitives/Modal';
 import { WarningCircle } from 'components/primitives/StatusCircles';
-import { DiscussionContent } from 'components/Forum/types';
-import {
-  connect,
-  isConnected,
-  createPost,
-  postTemplate,
-} from 'components/Forum';
+import { connect, isConnected } from 'components/Forum';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { bulkEncodeCallsFromOptions } from 'hooks/Guilds/contracts/useEncodedCall';
-import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
-import usePinataIPFS from 'hooks/Guilds/ipfs/usePinataIPFS';
 import {
   PageContainer,
   PageContent,
@@ -57,8 +48,6 @@ export const EMPTY_CALL: Call = {
 
 const CreateProposalPage: React.FC = () => {
   const { guildId, chainName: chain } = useTypedParams();
-  const [searchParams] = useSearchParams();
-  const discussionId = searchParams.get('ref');
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
@@ -101,9 +90,11 @@ const CreateProposalPage: React.FC = () => {
     t('enterProposalDescription')
   );
 
-  const [ipfsError, setIpfsError] = useState('');
-  const [isIpfsErrorModalOpen, setIsIpfsErrorModalOpen] = useState(false);
-  const [skipUploadToIPFs, setSkipUploadToIPFs] = useState(false);
+  const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
+    useState(false);
+  const [skipMetadataUpload, setSkipMetadataUpload] = useState(false);
+  const [metadataUploadError, setMetadataUploadError] = useState<string>(null);
+
   const [user, setUser] = useState('');
 
   const isActionDenied = useMemo(
@@ -121,38 +112,26 @@ const CreateProposalPage: React.FC = () => {
 
   const handleBack = () => navigate(`/${chain}/${guildId}`);
 
-  const ipfs = useIPFSNode();
-  const { pinToPinata } = usePinataIPFS();
-
-  const uploadToIPFS = async () => {
-    const content = {
-      description: proposalBodyHTML,
-      voteOptions: ['', ...options.map(({ label }) => label)],
-    };
-    const cid = await ipfs.add(JSON.stringify(content));
-    await ipfs.pin(cid);
-    const pinataPinResult = await pinToPinata(cid, content);
-
-    if (pinataPinResult.IpfsHash !== `${cid}`) {
-      throw new Error(t('ipfs.hashNotTheSame'));
-    }
-    return ensContentHash.fromIpfs(cid);
+  const handleSkipMetadataUpload = () => {
+    setIsMetadataErrorModalOpen(false);
+    setSkipMetadataUpload(true);
   };
 
-  const handleSkipUploadToIPFS = () => {
-    setIsIpfsErrorModalOpen(false);
-    setSkipUploadToIPFs(true);
+  const handleRetryMetadataUpload = () => {
+    setIsMetadataErrorModalOpen(false);
+    handleCreateProposal();
+  };
+
+  const handleMetadataUploadError = (error: Error) => {
+    console.log(error);
+    setMetadataUploadError(error.message);
+    setIsMetadataErrorModalOpen(true);
   };
 
   useEffect(() => {
-    if (skipUploadToIPFs && !isIpfsErrorModalOpen) handleCreateProposal();
+    if (skipMetadataUpload && !isMetadataErrorModalOpen) handleCreateProposal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [skipUploadToIPFs, isIpfsErrorModalOpen]);
-
-  const handleRetryUploadToIPFS = () => {
-    setIsIpfsErrorModalOpen(false);
-    handleCreateProposal();
-  };
+  }, [skipMetadataUpload, isMetadataErrorModalOpen]);
 
   useEffect(() => {
     isConnected(orbis).then(res => {
@@ -166,14 +145,6 @@ const CreateProposalPage: React.FC = () => {
     });
   }, [user, orbis]);
 
-  const handleCreateOrbisMetadata = async (post: DiscussionContent) => {
-    const res = await createPost(orbis, post);
-    return {
-      res,
-      postTemplate,
-    };
-  };
-
   const checkIfWarningIgnored = useCallback(async () => {
     if (!ignoreWarning && isActionDenied) {
       setIsPermissionWarningModalOpen(true);
@@ -184,41 +155,7 @@ const CreateProposalPage: React.FC = () => {
   }, [ignoreWarning, isActionDenied]);
 
   const handleCreateProposal = async () => {
-    let contentHash: Promise<string> | string;
     setIsCreatingProposal(true);
-    if (!!discussionId && isConnected(orbis)) {
-      const { res } = await handleCreateOrbisMetadata({
-        title,
-        body: proposalBodyHTML,
-        context: `DAVI-${guildId}`,
-        master: discussionId,
-        replyTo: null,
-        mentions: [],
-        data: {
-          voteOptions: ['', ...options.map(({ label }) => label)],
-        },
-      });
-      if (res.status === 200) {
-        contentHash = `streamId://${res.doc}`;
-      } else {
-        console.log(res);
-        setIpfsError(res.result);
-        setIsIpfsErrorModalOpen(true);
-        return;
-      }
-    } else if (!skipUploadToIPFs) {
-      try {
-        contentHash = await uploadToIPFS();
-      } catch (e) {
-        console.log(e);
-        setIpfsError(e.message);
-        setIsIpfsErrorModalOpen(true);
-        return;
-      }
-    }
-    setSkipUploadToIPFs(false);
-    setIsIpfsErrorModalOpen(false);
-
     const encodedOptions = bulkEncodeCallsFromOptions(options);
     const totalOptions = encodedOptions.length;
     const maxActionsPerOption = encodedOptions.reduce(
@@ -254,7 +191,7 @@ const CreateProposalPage: React.FC = () => {
       valueArray.push(BigNumber.from(0));
     }
 
-    const otherFields = { contentHash };
+    const otherFields = { options };
 
     createProposal(
       title,
@@ -264,6 +201,8 @@ const CreateProposalPage: React.FC = () => {
       valueArray,
       totalOptions,
       otherFields,
+      skipMetadataUpload,
+      handleMetadataUploadError,
       err => {
         setIsCreatingProposal(false);
         if (!err) {
@@ -364,9 +303,9 @@ const CreateProposalPage: React.FC = () => {
         <SidebarInfoCardWrapper />
       </SidebarContent>
       <Modal
-        isOpen={isIpfsErrorModalOpen}
-        onDismiss={() => setIsIpfsErrorModalOpen(false)}
-        header={t('ipfs.errorWhileUploading')}
+        isOpen={isMetadataErrorModalOpen}
+        onDismiss={() => setIsMetadataErrorModalOpen(false)}
+        header={'Metadata upload error'}
         maxWidth={390}
       >
         <Flex padding={'1.5rem'}>
@@ -374,19 +313,22 @@ const CreateProposalPage: React.FC = () => {
             <WarningCircle>
               <FiX size={40} />
             </WarningCircle>
-            <Flex padding={'1.5rem 0'}>{ipfsError}</Flex>
+            <Flex padding={'1.5rem 0'}>{metadataUploadError}</Flex>
           </Flex>
           <Flex direction="row" style={{ columnGap: '1rem' }}>
-            <StyledButton onClick={handleRetryUploadToIPFS}>
+            <StyledButton onClick={handleRetryMetadataUpload}>
               {t('retry')}
             </StyledButton>
-            <StyledButton onClick={handleSkipUploadToIPFS} variant="secondary">
+            <StyledButton
+              onClick={handleSkipMetadataUpload}
+              variant="secondary"
+            >
               {t('createAnyway')}
             </StyledButton>
             <StyledButton
               onClick={() => {
                 setIsCreatingProposal(false);
-                setIsIpfsErrorModalOpen(false);
+                setIsMetadataErrorModalOpen(false);
               }}
               variant="secondary"
             >

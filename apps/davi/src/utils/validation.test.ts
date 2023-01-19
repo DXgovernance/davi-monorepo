@@ -113,12 +113,5 @@ describe('isValidGuildProposal', () => {
       expect(isValid).toEqual(false);
       expect(error).toBeTruthy();
     });
-
-    it('should be invalid if there is no content hash', () => {
-      const data = { ...guildProposalData, contentHash: '' };
-      const { isValid, error } = isValidGuildProposal(data);
-      expect(isValid).toEqual(false);
-      expect(error).toBeTruthy();
-    });
   });
 });

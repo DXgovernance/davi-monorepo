@@ -7,14 +7,12 @@ export const isValidGuildProposal = ({
   valueArray,
   totalOptions,
   title,
-  contentHash,
 }: {
   toArray: string[];
   dataArray: string[];
   valueArray: BigNumber[];
   totalOptions: number;
   title: string;
-  contentHash: string;
 }): { isValid: boolean; error?: string } => {
   if (!title) {
     return {
@@ -36,12 +34,6 @@ export const isValidGuildProposal = ({
     return {
       isValid: false,
       error: i18next.t('proposal.errors.atLeastOneActionPerOptionRequired'),
-    };
-  }
-  if (!contentHash) {
-    return {
-      isValid: false,
-      error: i18next.t('proposal.errors.contentHashRequired'),
     };
   }
 

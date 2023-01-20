@@ -16,7 +16,6 @@ import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWra
 import { ExecuteButton } from 'components/ExecuteButton';
 import { useProposalState } from 'hooks/Guilds/useProposalState';
 import useExecutable from 'hooks/Guilds/useExecutable';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
@@ -45,7 +44,12 @@ import { useHookStoreProvider } from 'stores';
 const ProposalPage: React.FC = () => {
   const {
     hooks: {
-      fetchers: { useProposal, useTotalLocked, useProposalCalls },
+      fetchers: {
+        useProposal,
+        useTotalLocked,
+        useProposalCalls,
+        useGuildConfig,
+      },
     },
   } = useHookStoreProvider();
   const { t } = useTranslation();

@@ -1,5 +1,4 @@
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { GuildSidebar } from 'components/GuildSidebar';
 import { MemberActions } from 'components/GuildSidebar/MemberActions';
 import { GuestActions } from 'components/GuildSidebar/GuestActions';
@@ -27,6 +26,7 @@ const GuildSidebarWrapper = () => {
         useVotingPowerOf,
         useVoterLockTimestamp,
         useMemberCount,
+        useGuildConfig,
       },
     },
   } = useHookStoreProvider();

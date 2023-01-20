@@ -3,7 +3,6 @@ import { BigNumber } from 'ethers';
 import moment from 'moment';
 import { Proposal, ContractState, ProposalState } from 'types/types.guilds.d';
 import { ENSAvatar } from 'types/types.guilds';
-import { GuildConfigProps } from 'Modules/Guilds/Hooks/useGuildConfig';
 import {
   Call,
   DecodedAction,
@@ -11,6 +10,7 @@ import {
   Option,
   SupportedAction,
 } from 'components/ActionsBuilder/types';
+import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
 
 export const proposalMock: Proposal = {
   id: '0x1234567890123456789012345678901234567890',

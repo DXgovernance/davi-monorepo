@@ -1,8 +1,7 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
-import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
 import { Option } from 'components/ActionsBuilder/types';
+import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -17,6 +16,10 @@ type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
+  useGetActiveProposals: (daoId: string) => {
+    data: BigNumber;
+    refetch: () => void;
+  };
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
@@ -24,11 +27,13 @@ export interface FetcherHooksInterface {
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;
-  }) => ReturnType<typeof useSnapshotId>;
+  }) => { data: BigNumber };
   useTotalLocked: (
     daoId: string,
     proposalId?: `0x${string}`
-  ) => ReturnType<typeof useTotalLocked>;
+  ) => {
+    data: BigNumber;
+  };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`
@@ -66,6 +71,14 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
   };
   useMemberCount: (daoId: `0x${string}`) => { data: number };
+  useGuildConfig: (
+    guildAddress: string,
+    proposalId?: `0x${string}`
+  ) => {
+    data: GuildConfigProps;
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 // TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>
 

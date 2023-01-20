@@ -1,5 +1,4 @@
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { SidebarInfoCard } from 'components/SidebarInfoCard';
 import { useHookStoreProvider } from 'stores';
@@ -7,7 +6,7 @@ import { useHookStoreProvider } from 'stores';
 const SidebarInfoCardWrapper = () => {
   const {
     hooks: {
-      fetchers: { useTotalLocked },
+      fetchers: { useTotalLocked, useGuildConfig },
     },
   } = useHookStoreProvider();
   const { guildId } = useTypedParams();

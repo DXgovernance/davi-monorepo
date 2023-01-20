@@ -59,6 +59,7 @@ export const useGuildConfig = (
       contractAddress: guildAddress,
       proposalId,
     });
+
   const transformedData = useMemo(() => {
     if (!data) return undefined;
     const [

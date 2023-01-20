@@ -305,7 +305,7 @@ const CreateProposalPage: React.FC = () => {
       <Modal
         isOpen={isMetadataErrorModalOpen}
         onDismiss={() => setIsMetadataErrorModalOpen(false)}
-        header={'Metadata upload error'}
+        header={t('proposal.errors.metadataUploadError')}
         maxWidth={390}
       >
         <Flex padding={'1.5rem'}>

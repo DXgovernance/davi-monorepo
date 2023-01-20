@@ -127,6 +127,7 @@
       "atLeastOneOptionRequired": "At least one option is required",
       "atLeastOneActionPerOptionRequired": "At least one action per option is required",
       "optionsArrayIsEmpty": "Options array is empty",
+      "metadataUploadError": "Metadata upload error",
       "genericProposalError": "We ran into an error."
     }
   },

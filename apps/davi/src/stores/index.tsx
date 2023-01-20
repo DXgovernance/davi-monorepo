@@ -64,8 +64,6 @@ export const HookStoreProvider = ({ children }) => {
 
     let returnedGovernanceType: GovernanceTypeInterface;
 
-    // TODO: throw an error instead of falling back to a default if the store can't match the governance implementation
-
     if (match) {
       returnedGovernanceType = {
         name: match.name,
@@ -122,8 +120,6 @@ export const HookStoreProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, [governanceType, useDefaultDataSource]);
 
-  // TODO: Make a better loading screen
-
   return isLoading ? (
     <LoadingPage />
   ) : (
@@ -134,23 +130,3 @@ export const HookStoreProvider = ({ children }) => {
 };
 
 export const useHookStoreProvider = () => useContext(HookStoreContext);
-
-// General TODOS
-// TODO: port writer hooks
-// TODO: port fetching hooks
-// TODO: extract events from hooks (?)
-// TODO: implement subgraph data fetching
-// TODO: replace mentions of "guilds" for "dao" as is a more general term
-
-/*
-  React really doesn't like to switch hooks, and this has been a source of bugs. As far
-  as I tested, it's been fixed.
-  A way to trigger potential bugs is to navigate to different governance implementations
-  using the UI and entering the guild address directly in the URL.
-*/
-
-/*
-  REP guild: http://localhost:3000/#/localhost/0x140d68e4E3f80cdCf7036De007b3bCEC54D38b1f
-  DXD guild: http://localhost:3000/#/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2
-  SWP guild: http://localhost:3000/#/localhost/0xBF81De2C44B15e0d2c7AEaa0FBba4f1Dd02E3570
-*/

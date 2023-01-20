@@ -7,6 +7,8 @@ import {
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGuildConfig,
+  useGetActiveProposals,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -25,9 +27,8 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
   {
     name: 'SnapshotRepGuild',
     bytecodes: [
-      '0x5220f03f768c7f09437ccf760eb5307dc60f60e18c9c9ff9599a9ab3ad71d2a0',
-      '0xb33418b664bfb6eba3ea37a77429d95daee4f0ab24f47ee63c4669340c4aae5a',
       '0x56735be1df2293bbbc687502a3673244d05fac86940394cb2222ea884f304daf',
+      '0xec75e00a4daa1f5d4636a962298f55e322161e54b292f04a928c91f4f5333aed',
       localConfig.bytecodeHash as `0x${string}`,
       localConfig.deployedBytecodeHash as `0x${string}`,
       prodConfig.deployedBytecodeHash as `0x${string}`,
@@ -45,6 +46,8 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
+          useGetActiveProposals,
         },
         fallback: {
           useProposal,
@@ -57,6 +60,8 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
+          useGetActiveProposals,
         },
       },
       writers: null,

@@ -1,4 +1,3 @@
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import {
   MOCK_BIG_NUMBER,
   MOCK_GUILD_ADDRESS,
@@ -6,7 +5,9 @@ import {
   MOCK_TOKEN,
   MOCK_CONTRACT_ADDRESS,
 } from 'Modules/Guilds/Hooks/fixtures';
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
+import { useGuildConfig } from './useGuildConfig';
+
+jest.mock('stores/modules/common/fetchers/useGuildConfig', () => ({
   useGuildConfig: () => ({
     data: {
       name: MOCK_NAME,

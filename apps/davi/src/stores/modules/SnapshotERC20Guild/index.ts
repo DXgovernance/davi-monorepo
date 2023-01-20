@@ -7,6 +7,8 @@ import {
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGuildConfig,
+  useGetActiveProposals,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -48,6 +50,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
+          useGetActiveProposals,
         },
         fallback: {
           useProposal,
@@ -60,6 +64,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
+          useGetActiveProposals,
         },
       },
       writers: null,

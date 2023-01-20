@@ -1,9 +1,9 @@
 import PermissionRegistry from 'contracts/PermissionRegistry.json';
 import { useContractRead } from 'wagmi';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { Permission } from 'components/ActionsBuilder/types';
 import { useMemo } from 'react';
+import { useGuildConfig } from 'stores/modules/common/fetchers';
 const FROM_TIME = 1;
 
 export const useETHPermissions = (permissionArgs: Permission) => {

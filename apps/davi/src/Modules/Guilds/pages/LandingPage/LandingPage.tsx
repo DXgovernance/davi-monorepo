@@ -8,7 +8,7 @@ import useENSNameFromAddress from 'hooks/Guilds/ens/useENSNameFromAddress';
 import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 
 import { CardsContainer } from './LandingPage.styled';
-import { useHookStoreProvider } from 'stores';
+import { HookStoreProvider, useHookStoreProvider } from 'stores';
 
 const GuildCardLoader = () => {
   return (
@@ -78,11 +78,13 @@ const LandingPage: React.FC = () => {
           <>{/* Render error state */}</>
         ) : (
           allGuilds.map(guildAddress => (
-            <GuildCardWithContent
-              key={guildAddress}
-              guildAddress={guildAddress}
-              t={t}
-            />
+            <HookStoreProvider daoId={guildAddress}>
+              <GuildCardWithContent
+                key={guildAddress}
+                guildAddress={guildAddress}
+                t={t}
+              />
+            </HookStoreProvider>
           ))
         )}
       </CardsContainer>

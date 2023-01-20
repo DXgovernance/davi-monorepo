@@ -61,6 +61,7 @@ export interface Transaction {
   lastCheckedBlockNumber?: number;
   addedTime: number;
   confirmedTime?: number;
+  runOnFinality?: (receipt: providers.TransactionReceipt) => void;
 }
 
 export enum GuildImplementationType {

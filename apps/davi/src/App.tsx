@@ -17,8 +17,10 @@ import { GuildsDarkTheme } from 'components/theme';
 import CreateDiscussionPage from 'Modules/Guilds/pages/CreateDiscussion';
 import { OnlineStatus } from 'components/OnlineStatus';
 import { DiscussionPage } from 'Modules/Guilds/pages/Discussion';
+import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
 
 const App = () => {
+  useIPFSNode();
   return (
     <ThemeProvider theme={GuildsDarkTheme}>
       <TransactionsProvider>

@@ -36,7 +36,8 @@ interface TransactionsContextInterface {
     summary: string,
     txFunction: () => Promise<providers.TransactionResponse>,
     showModal?: boolean,
-    cb?: (error?: any, txtHash?: any) => void
+    cb?: (error?: any, txtHash?: any) => void,
+    runOnFinality?: (receipt: providers.TransactionReceipt) => void
   ) => void;
   clearAllTransactions: () => void;
 }
@@ -62,7 +63,8 @@ export const TransactionsProvider = ({ children }) => {
 
   const addTransaction = (
     txResponse: providers.TransactionResponse,
-    summary?: string
+    summary?: string,
+    runOnFinality?: (receipt: providers.TransactionReceipt) => void
   ) => {
     if (!txResponse.hash) return;
 
@@ -71,6 +73,7 @@ export const TransactionsProvider = ({ children }) => {
       from: txResponse.from,
       summary,
       addedTime: Date.now(),
+      runOnFinality: runOnFinality,
     };
 
     setTransactions(prevState => ({
@@ -90,11 +93,18 @@ export const TransactionsProvider = ({ children }) => {
   };
 
   const finalizeTransaction = useCallback(
-    (hash: string, receipt: providers.TransactionReceipt) => {
+    (
+      hash: string,
+      receipt: providers.TransactionReceipt,
+      runOnFinality?: (receipt: providers.TransactionReceipt) => void
+    ) => {
+      console.log({ receipt });
       if (!transactions[chainId] || !transactions[chainId][hash]) {
         return;
       }
-
+      if (runOnFinality) {
+        runOnFinality(receipt);
+      }
       setTransactions(prevState => ({
         ...prevState,
         [chainId]: {
@@ -123,7 +133,12 @@ export const TransactionsProvider = ({ children }) => {
       .filter(transaction => !transaction.receipt)
       .forEach(transaction => {
         provider.waitForTransaction(transaction.hash).then(receipt => {
-          if (isSubscribed) finalizeTransaction(transaction.hash, receipt);
+          if (isSubscribed)
+            finalizeTransaction(
+              transaction.hash,
+              receipt,
+              transaction.runOnFinality
+            );
         });
       });
 
@@ -174,7 +189,8 @@ export const TransactionsProvider = ({ children }) => {
     summary: string,
     txFunction: () => Promise<providers.TransactionResponse>,
     showModal: boolean = true,
-    cb: (error?: any, txtHash?: any) => void = null
+    cb: (error?: any, txtHash?: any) => void = null,
+    runOnFinality?: (receipt: providers.TransactionReceipt) => void
   ) => {
     setPendingTransaction({
       summary,
@@ -186,7 +202,7 @@ export const TransactionsProvider = ({ children }) => {
     try {
       const txResponse = await txFunction();
       transactionHash = txResponse.hash;
-      addTransaction(txResponse, summary);
+      addTransaction(txResponse, summary, runOnFinality);
       setPendingTransaction(pendingTransaction => ({
         ...pendingTransaction,
         transactionHash,

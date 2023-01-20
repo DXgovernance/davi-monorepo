@@ -1,14 +1,14 @@
 [
   {
     "type": "ERC20Guild",
-    "bytecodeHash": "0x5f9bc2ac033872f0be074a3af5a7d66c92c74c1c36845a57ea8dadee717567ca",
-    "deployedBytecodeHash": "0x94a25e371de5ea56fde15fc7418a8d28f9ae525364356a248a7d1117ff5af228",
+    "bytecodeHash": "0x946cda015525e920957e6d1f72d350ba9cdadf2461dacb479cf13d8ccc8f47c5",
+    "deployedBytecodeHash": "0x73b3bbf79394482b90246b47a2b2968521c3f4e01230fb2ae4a33ca9975c9166",
     "features": []
   },
   {
     "type": "SnapshotRepERC20Guild",
-    "bytecodeHash": "0x498c7250d0224e9e67c1ada9ca77c76ebe085f5b6ba4ff96e9dc441de83ca0e2",
-    "deployedBytecodeHash": "0xec75e00a4daa1f5d4636a962298f55e322161e54b292f04a928c91f4f5333aed",
+    "bytecodeHash": "0x345f0ee269c46278f442db8cfdf18954092025caa8b7d30196b00469727dc066",
+    "deployedBytecodeHash": "0x3e69834ec324d588d1e334dc8660bf3d10b070c3e7a7b5364f79c03b5ee1e1ff",
     "features": [
       "REP",
       "SNAPSHOT"
@@ -16,16 +16,16 @@
   },
   {
     "type": "SnapshotERC20Guild",
-    "bytecodeHash": "0xc0325dd0be0d6428c119dd207dbd3d6c55a8c0da173947021ed50fee2a32ffa5",
-    "deployedBytecodeHash": "0xde7ce3c98a37ed91e93fd9aba12a1e110d65e6a395f11fbf99042b485d73e8b3",
+    "bytecodeHash": "0x81681150afcdabc59e66998de1dbf6eb392c50e902a3ae0e4ec79191618eb36b",
+    "deployedBytecodeHash": "0xb79ad1521611a2035347a8e1bfdee11bb52eab831f4070dec76730e69674d36a",
     "features": [
       "SNAPSHOT"
     ]
   },
   {
     "type": "DXDGuild",
-    "bytecodeHash": "0x8ca6ea7a01d60f5570f16e111421a941d31770593944ba735ac69cc348b28db5",
-    "deployedBytecodeHash": "0x2f4fd2af0538c4f2299353c6bc740c9705cc6f744792990ca456ea46a7a9ff73",
+    "bytecodeHash": "0x7f341343b9c604c60837d3687fec3232d2a1955d69dd4e3794db77fa326c60dc",
+    "deployedBytecodeHash": "0xa68a425e0b36d3be6b0305f8a5e596ca8b4446ea9fff5bddb906b36ecb3d7797",
     "features": []
   }
 ]

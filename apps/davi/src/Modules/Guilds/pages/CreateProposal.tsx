@@ -9,7 +9,7 @@ import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
 import { FiChevronLeft, FiX } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
@@ -38,6 +38,7 @@ import {
   SidebarContent,
   Label,
 } from '../styles';
+import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -48,6 +49,8 @@ export const EMPTY_CALL: Call = {
 
 const CreateProposalPage: React.FC = () => {
   const { guildId, chainName: chain } = useTypedParams();
+  const [searchParams] = useSearchParams();
+  const discussionId = searchParams.get('ref');
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
@@ -58,8 +61,9 @@ const CreateProposalPage: React.FC = () => {
     },
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
+  useIPFSNode();
 
-  const createProposal = useCreateProposal(guildId);
+  const createProposal = useCreateProposal(guildId, discussionId);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();

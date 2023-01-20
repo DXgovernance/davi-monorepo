@@ -48,6 +48,16 @@ jest.mock('hooks/Guilds/contracts/useContract', () => ({
   useERC20Guild: () => jest.fn(),
 }));
 
+jest.mock('contexts/Guilds/orbis', () => ({
+  useOrbisContext: () => ({
+    orbis: {
+      getPosts: () => ({
+        data: [1, 2, 3],
+      }),
+    },
+  }),
+}));
+
 describe('useCreateProposal', () => {
   it('should create a transaction if the data is valid', async () => {
     const { result } = renderHook(() => useCreateProposal(ZERO_ADDRESS));

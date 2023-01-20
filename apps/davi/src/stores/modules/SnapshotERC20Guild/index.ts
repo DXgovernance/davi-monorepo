@@ -1,5 +1,14 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import {
+  useApproveTokens,
+  useCreateProposal,
+  useExecuteProposal,
+  useLockTokens,
+  useVoteOnProposal,
+  useWithdrawTokens,
+} from './writers';
+
+import {
   useProposal,
   useSnapshotId,
   useIsProposalCreationAllowed,
@@ -65,7 +74,14 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetActiveProposals,
         },
       },
-      writers: null,
+      writers: {
+        useApproveTokens,
+        useCreateProposal,
+        useExecuteProposal,
+        useLockTokens,
+        useVoteOnProposal,
+        useWithdrawTokens,
+      },
     },
     capabilities: {
       votingPower: 'liquid',

@@ -33,6 +33,12 @@ jest.mock('provider/wallets', () => ({
   isReadOnly: () => true,
 }));
 
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
+}));
+
 describe('Header', () => {
   it('Should match snapshot', () => {
     const { container } = render(<Header />);

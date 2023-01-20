@@ -51,6 +51,12 @@ jest.mock('wagmi', () => ({
   useNetwork: () => ({ chain: mockChain, chains: [mockChain] }),
 }));
 
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
+}));
+
 jest.mock('provider/ReadOnlyConnector', () => ({
   READ_ONLY_CONNECTOR_ID: 'readOnly',
 }));

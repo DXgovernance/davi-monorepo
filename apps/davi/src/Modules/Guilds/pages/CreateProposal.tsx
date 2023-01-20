@@ -1,17 +1,3 @@
-import SidebarInfoCardWrapper from 'Modules/Guilds/Wrappers/SidebarInfoCardWrapper';
-import { Input } from 'components/primitives/Forms/Input';
-import { Box, Flex } from 'components/primitives/Layout';
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { useTransactions } from 'contexts/Guilds';
-import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
-import { BigNumber } from 'ethers';
-import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
-import { bulkEncodeCallsFromOptions } from 'hooks/Guilds/contracts/useEncodedCall';
-import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
-import { ActionsBuilder } from 'components/ActionsBuilder';
-import { Call, Option } from 'components/ActionsBuilder/types';
-import { useTextEditor } from 'components/Editor';
-import { Loading } from 'components/primitives/Loading';
 import React, {
   useContext,
   useEffect,
@@ -19,15 +5,32 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import { FiChevronLeft, FiX } from 'react-icons/fi';
-import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import sanitizeHtml from 'sanitize-html';
-import { preventEmptyString, ZERO_ADDRESS, ZERO_HASH } from 'utils';
+import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import { isValidProposal } from 'utils';
+import { useNavigate } from 'react-router-dom';
+import sanitizeHtml from 'sanitize-html';
+import { FiChevronLeft, FiX } from 'react-icons/fi';
+import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
+
+import { preventEmptyString, ZERO_ADDRESS, ZERO_HASH } from 'utils';
+import { useHookStoreProvider } from 'stores';
+
+import SidebarInfoCardWrapper from 'Modules/Guilds/Wrappers/SidebarInfoCardWrapper';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+import { Input } from 'components/primitives/Forms/Input';
+import { Box, Flex } from 'components/primitives/Layout';
+import { ActionsBuilder } from 'components/ActionsBuilder';
+import { Call, Option } from 'components/ActionsBuilder/types';
+import { useTextEditor } from 'components/Editor';
+import { Loading } from 'components/primitives/Loading';
+import { Modal } from 'components/primitives/Modal';
+import { WarningCircle } from 'components/primitives/StatusCircles';
+import { connect, isConnected } from 'components/Forum';
+import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { bulkEncodeCallsFromOptions } from 'hooks/Guilds/contracts/useEncodedCall';
 import {
   PageContainer,
   PageContent,
@@ -35,17 +38,6 @@ import {
   SidebarContent,
   Label,
 } from '../styles';
-import usePinataIPFS from 'hooks/Guilds/ipfs/usePinataIPFS';
-import { Modal } from 'components/primitives/Modal';
-import { WarningCircle } from 'components/primitives/StatusCircles';
-import {
-  connect,
-  isConnected,
-  createPost,
-  postTemplate,
-} from 'components/Forum';
-import { useOrbisContext } from 'contexts/Guilds/orbis';
-import { DiscussionContent } from 'components/Forum/types';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -56,14 +48,18 @@ export const EMPTY_CALL: Call = {
 
 const CreateProposalPage: React.FC = () => {
   const { guildId, chainName: chain } = useTypedParams();
-  const [searchParams] = useSearchParams();
-  const discussionId = searchParams.get('ref');
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
   );
+  const {
+    hooks: {
+      writers: { useCreateProposal },
+    },
+  } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
+  const createProposal = useCreateProposal(guildId);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
@@ -94,9 +90,11 @@ const CreateProposalPage: React.FC = () => {
     t('enterProposalDescription')
   );
 
-  const [ipfsError, setIpfsError] = useState('');
-  const [isIpfsErrorModalOpen, setIsIpfsErrorModalOpen] = useState(false);
-  const [skipUploadToIPFs, setSkipUploadToIPFs] = useState(false);
+  const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
+    useState(false);
+  const [skipMetadataUpload, setSkipMetadataUpload] = useState(false);
+  const [metadataUploadError, setMetadataUploadError] = useState<string>(null);
+
   const [user, setUser] = useState('');
 
   const isActionDenied = useMemo(
@@ -114,42 +112,26 @@ const CreateProposalPage: React.FC = () => {
 
   const handleBack = () => navigate(`/${chain}/${guildId}`);
 
-  const ipfs = useIPFSNode();
-  const { pinToPinata } = usePinataIPFS();
-
-  const uploadToIPFS = async () => {
-    const content = {
-      description: proposalBodyHTML,
-      voteOptions: ['', ...options.map(({ label }) => label)],
-    };
-    const cid = await ipfs.add(JSON.stringify(content));
-    await ipfs.pin(cid);
-    const pinataPinResult = await pinToPinata(cid, content);
-
-    if (pinataPinResult.IpfsHash !== `${cid}`) {
-      throw new Error(t('ipfs.hashNotTheSame'));
-    }
-    return `ipfs://${pinataPinResult.IpfsHash}`;
+  const handleSkipMetadataUpload = () => {
+    setIsMetadataErrorModalOpen(false);
+    setSkipMetadataUpload(true);
   };
 
-  const handleSkipUploadToIPFS = () => {
-    setIsIpfsErrorModalOpen(false);
-    setSkipUploadToIPFs(true);
-  };
-
-  useEffect(() => {
-    if (skipUploadToIPFs && !isIpfsErrorModalOpen) handleCreateProposal();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [skipUploadToIPFs, isIpfsErrorModalOpen]);
-
-  const handleRetryUploadToIPFS = () => {
-    setIsIpfsErrorModalOpen(false);
+  const handleRetryMetadataUpload = () => {
+    setIsMetadataErrorModalOpen(false);
     handleCreateProposal();
   };
 
-  const { createTransaction } = useTransactions();
-  const { guildId: guildAddress } = useTypedParams();
-  const guildContract = useERC20Guild(guildAddress);
+  const handleMetadataUploadError = (error: Error) => {
+    console.log(error);
+    setMetadataUploadError(error.message);
+    setIsMetadataErrorModalOpen(true);
+  };
+
+  useEffect(() => {
+    if (skipMetadataUpload && !isMetadataErrorModalOpen) handleCreateProposal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skipMetadataUpload, isMetadataErrorModalOpen]);
 
   useEffect(() => {
     isConnected(orbis).then(res => {
@@ -163,14 +145,6 @@ const CreateProposalPage: React.FC = () => {
     });
   }, [user, orbis]);
 
-  const handleCreateOrbisMetadata = async (post: DiscussionContent) => {
-    const res = await createPost(orbis, post);
-    return {
-      res,
-      postTemplate,
-    };
-  };
-
   const checkIfWarningIgnored = useCallback(async () => {
     if (!ignoreWarning && isActionDenied) {
       setIsPermissionWarningModalOpen(true);
@@ -181,41 +155,7 @@ const CreateProposalPage: React.FC = () => {
   }, [ignoreWarning, isActionDenied]);
 
   const handleCreateProposal = async () => {
-    let contentHash: string;
     setIsCreatingProposal(true);
-    if (!!discussionId && isConnected(orbis)) {
-      const { res } = await handleCreateOrbisMetadata({
-        title,
-        body: proposalBodyHTML,
-        context: `DAVI-${guildId}`,
-        master: discussionId,
-        replyTo: null,
-        mentions: [],
-        data: {
-          voteOptions: ['', ...options.map(({ label }) => label)],
-        },
-      });
-      if (res.status === 200) {
-        contentHash = `streamId://${res.doc}`;
-      } else {
-        console.log(res);
-        setIpfsError(res.result);
-        setIsIpfsErrorModalOpen(true);
-        return;
-      }
-    } else if (!skipUploadToIPFs) {
-      try {
-        contentHash = await uploadToIPFS();
-      } catch (e) {
-        console.log(e);
-        setIpfsError(e.message);
-        setIsIpfsErrorModalOpen(true);
-        return;
-      }
-    }
-    setSkipUploadToIPFs(false);
-    setIsIpfsErrorModalOpen(false);
-
     const encodedOptions = bulkEncodeCallsFromOptions(options);
     const totalOptions = encodedOptions.length;
     const maxActionsPerOption = encodedOptions.reduce(
@@ -251,39 +191,29 @@ const CreateProposalPage: React.FC = () => {
       valueArray.push(BigNumber.from(0));
     }
 
-    const { isValid, error } = isValidProposal({
+    const otherFields = { options };
+
+    createProposal(
+      title,
+      proposalBodyHTML,
       toArray,
       dataArray,
       valueArray,
       totalOptions,
-      title,
-    });
-
-    if (!isValid) {
-      toast.error(error);
-    } else {
-      createTransaction(
-        `Create proposal ${title}`,
-        async () => {
-          return guildContract.createProposal(
-            toArray,
-            dataArray,
-            valueArray,
-            totalOptions,
-            title,
-            contentHash
-          );
-        },
-        true,
-        err => {
-          setIsCreatingProposal(false);
-          if (!err) {
-            editMode && clear();
-            navigate(`/${chain}/${guildId}`);
-          }
+      otherFields,
+      skipMetadataUpload,
+      handleMetadataUploadError,
+      err => {
+        setIsCreatingProposal(false);
+        if (!err) {
+          editMode && clear();
+          navigate(`/${chain}/${guildId}`);
         }
-      );
-    }
+      }
+    ).catch((err: Error) => {
+      setIsCreatingProposal(false);
+      toast.error(err.message);
+    });
   };
   useEffect(() => {
     if (ignoreWarning) checkIfWarningIgnored();
@@ -373,9 +303,9 @@ const CreateProposalPage: React.FC = () => {
         <SidebarInfoCardWrapper />
       </SidebarContent>
       <Modal
-        isOpen={isIpfsErrorModalOpen}
-        onDismiss={() => setIsIpfsErrorModalOpen(false)}
-        header={t('ipfs.errorWhileUploading')}
+        isOpen={isMetadataErrorModalOpen}
+        onDismiss={() => setIsMetadataErrorModalOpen(false)}
+        header={t('proposal.errors.metadataUploadError')}
         maxWidth={390}
       >
         <Flex padding={'1.5rem'}>
@@ -383,19 +313,22 @@ const CreateProposalPage: React.FC = () => {
             <WarningCircle>
               <FiX size={40} />
             </WarningCircle>
-            <Flex padding={'1.5rem 0'}>{ipfsError}</Flex>
+            <Flex padding={'1.5rem 0'}>{metadataUploadError}</Flex>
           </Flex>
           <Flex direction="row" style={{ columnGap: '1rem' }}>
-            <StyledButton onClick={handleRetryUploadToIPFS}>
+            <StyledButton onClick={handleRetryMetadataUpload}>
               {t('retry')}
             </StyledButton>
-            <StyledButton onClick={handleSkipUploadToIPFS} variant="secondary">
+            <StyledButton
+              onClick={handleSkipMetadataUpload}
+              variant="secondary"
+            >
               {t('createAnyway')}
             </StyledButton>
             <StyledButton
               onClick={() => {
                 setIsCreatingProposal(false);
-                setIsIpfsErrorModalOpen(false);
+                setIsMetadataErrorModalOpen(false);
               }}
               variant="secondary"
             >

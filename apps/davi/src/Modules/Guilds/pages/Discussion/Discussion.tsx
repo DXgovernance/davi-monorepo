@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { Loading } from 'components/primitives/Loading';
 import { FaChevronLeft } from 'react-icons/fa';
@@ -15,7 +15,6 @@ import {
   PageHeader,
   PageTitle,
   PostDetailsRow,
-  StyledIconButton,
 } from './Discussion.styled';
 import { useTranslation } from 'react-i18next';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
@@ -26,6 +25,8 @@ import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { StyledButton } from 'Modules/Guilds/styles';
 import PostActions from 'components/Discussion/Post/PostActions';
 import moment from 'moment';
+import { IconButton } from 'components/primitives/Button';
+import { linkStyles } from '../Proposal/Proposal.styled';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();
@@ -63,23 +64,31 @@ const DiscussionPage: React.FC = () => {
       <PageContent>
         <PageHeader>
           <HeaderTopRow>
-            <UnstyledLink to={`/${chainName}/${guildId}`}>
-              <StyledIconButton variant="secondary" iconLeft>
+            <StyledLink
+              to={`/${chainName}/${guildId}`}
+              customStyles={linkStyles}
+            >
+              <IconButton
+                variant="secondary"
+                iconLeft
+                padding={'0.6rem 0.8rem'}
+                marginTop={'5px;'}
+              >
                 <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
                 {guildConfig?.name}
-              </StyledIconButton>
-            </UnstyledLink>
+              </IconButton>
+            </StyledLink>
 
-            <UnstyledLink
+            <StyledLink
               to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
             >
               <StyledButton
-                variant="secondary"
+                variant="terciary"
                 data-testid="create-proposal-button"
               >
                 {t('createProposal')}
               </StyledButton>
-            </UnstyledLink>
+            </StyledLink>
           </HeaderTopRow>
           <PageTitle>
             {op?.content?.title || (

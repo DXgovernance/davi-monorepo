@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'minimal';
+  variant?: 'primary' | 'secondary' | 'terciary' | 'minimal';
   fullWidth?: boolean;
   m?: string | number;
 };
@@ -76,6 +76,37 @@ const variantStyles = (variant = 'primary') =>
         color: ${({ theme }) => theme.colors.border1};
       }
     `,
+    terciary: css<{
+      padding?: string;
+      margin?: string;
+      active?: boolean;
+      selected?: boolean;
+    }>`
+      border: 1px solid ${({ theme }) => theme.colors.border1};
+      background-color: ${({ theme }) => theme.colors.darkGreen1};
+      color: ${({ theme }) => theme.colors.yellow};
+      border-radius: ${({ theme }) => theme.radii.pill};
+      padding: ${({ padding }) => (padding ? padding : ' 0.5rem 0.8rem')};
+      margin: ${({ margin }) => (margin ? margin : '0.2rem')};
+
+      :hover:enabled {
+        border-color: ${({ theme }) => theme.colors.border3};
+      }
+
+      :active:enabled {
+        border: 1px solid ${({ theme }) => theme.colors.border1};
+      }
+      :disabled {
+        color: ${({ theme }) => theme.colors.border1};
+      }
+
+      ${({ active, selected }) =>
+        (active || selected) &&
+        css`
+          background-color: ${({ theme }) => theme.colors.primary1};
+          color: ${({ theme }) => theme.colors.bg1};
+        `}
+    `,
   }[variant]);
 
 export const Button = styled.button<ButtonProps>`
@@ -85,6 +116,7 @@ export const Button = styled.button<ButtonProps>`
   text-align: center;
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.body};
+  outline: 1px solid ${({ theme }) => theme.colors.grey3};
 
   :disabled {
     color: initial;

@@ -111,6 +111,8 @@
   "backToOverview": "Back to Overview",
   "createProposal": "Create Proposal",
   "chooseProposal": "Choose Proposal",
+  "seeAllProposals": "See all proposals",
+  "createdBy": "Created by",
   "continue": "Continue",
   "onChainActions_zero": "No on-chain action",
   "onChainActions_one": "{{count}} on-chain action",

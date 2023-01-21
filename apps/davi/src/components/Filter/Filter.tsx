@@ -17,7 +17,7 @@ import {
   StyledInputWrapper,
   FilterBadge,
 } from './Filter.styled';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 
 interface FilterProps {
   openSearchBar: boolean;
@@ -65,14 +65,14 @@ export const Filter: React.FC<FilterProps> = ({
           </StyledIconButton>
           {isProposalCreationAllowed && (
             <>
-              <UnstyledLink to={`/${chainName}/${guildId}/create-proposal`}>
+              <StyledLink to={`/${chainName}/${guildId}/create-proposal`}>
                 <Button
                   variant="secondary"
                   data-testid="create-proposal-button"
                 >
                   {t('createProposal')}
                 </Button>
-              </UnstyledLink>
+              </StyledLink>
             </>
           )}
         </ButtonContainer>

@@ -17,6 +17,7 @@ exports[`WalletButton Should match snapshot and display connect wallet 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;
@@ -69,6 +70,7 @@ exports[`WalletButton Should match snapshot and display connected address 1`] = 
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: transparent;
   color: #fff;
@@ -104,7 +106,8 @@ exports[`WalletButton Should match snapshot and display connected address 1`] = 
 .c1,
 .c1 button {
   padding: .25rem 0.6rem;
-  background-color: #1B1D1F;
+  background-color: none;
+  outline: none;
 }
 
 .c4 {

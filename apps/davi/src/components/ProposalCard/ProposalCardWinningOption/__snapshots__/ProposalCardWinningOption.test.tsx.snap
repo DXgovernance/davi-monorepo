@@ -17,6 +17,7 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;
@@ -403,6 +404,7 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;
@@ -606,6 +608,7 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;
@@ -823,6 +826,7 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;
@@ -1024,6 +1028,7 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;

@@ -17,11 +17,13 @@ const InputWrapper = styled.div<{
   textAlign?: string;
   muted?: boolean;
   disabled?: boolean;
+  marginRight: string;
 }>`
   display: flex;
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-right: ${({ marginRight }) => marginRight || '0'};
 
   border: 1px solid
     ${({ theme, isInvalid }) =>
@@ -29,6 +31,9 @@ const InputWrapper = styled.div<{
   border-radius: 1.5rem;
   padding: 0.5rem 0.8rem;
   background-color: transparent;
+  outline: 1px solid
+    ${({ theme, isInvalid, disabled }) =>
+      isInvalid ? theme.colors.red : disabled ? 'inherit' : theme.colors.grey3};
 
   input {
     color: ${({ theme, isInvalid, muted, disabled }) => {
@@ -66,6 +71,7 @@ const InputWrapper = styled.div<{
 
 const IconContainer = styled.div<{ right?: boolean }>`
   margin-${({ right }) => (right ? 'left' : 'right')}: 0.3rem;
+  color: ${({ theme }) => theme.colors.grey3};
 `;
 
 export interface InputProps<T>
@@ -79,6 +85,7 @@ export interface InputProps<T>
   defaultValue?: string;
   ariaLabel?: string;
   displayClearIcon?: boolean;
+  marginRight?: string;
 }
 
 export const Input: React.FC<InputProps<any>> = ({
@@ -88,6 +95,7 @@ export const Input: React.FC<InputProps<any>> = ({
   textAlign,
   muted,
   disabled,
+  marginRight,
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -108,6 +116,7 @@ export const Input: React.FC<InputProps<any>> = ({
       muted={muted}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
+      marginRight={marginRight}
     >
       <IconContainer>{icon}</IconContainer>
       <UnstyledInput ref={inputRef} disabled={disabled} {...rest} />

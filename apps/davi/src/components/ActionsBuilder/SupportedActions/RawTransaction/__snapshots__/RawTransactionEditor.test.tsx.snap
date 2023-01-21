@@ -17,6 +17,7 @@ exports[`RawTransactionEditor valid inputs should match snapshot 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: #295FF4;
   color: #fff;
@@ -67,10 +68,12 @@ exports[`RawTransactionEditor valid inputs should match snapshot 1`] = `
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-right: 0;
   border: 1px solid #303338;
   border-radius: 1.5rem;
   padding: 0.5rem 0.8rem;
   background-color: transparent;
+  outline: 1px solid #737977;
 }
 
 .c4 input {
@@ -107,10 +110,12 @@ exports[`RawTransactionEditor valid inputs should match snapshot 1`] = `
 
 .c5 {
   margin-right: 0.3rem;
+  color: #737977;
 }
 
 .c9 {
   margin-left: 0.3rem;
+  color: #737977;
 }
 
 .c7 {

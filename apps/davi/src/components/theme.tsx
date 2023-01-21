@@ -13,6 +13,8 @@ export interface GuildsTheme extends ThemeBase {
     red: string;
     grey: string;
     grey2: string;
+    grey3: string;
+    yellow: string;
     failed: string;
     active: string;
 
@@ -26,6 +28,8 @@ export interface GuildsTheme extends ThemeBase {
     bg2: string;
     bg3: string;
     bg4: string;
+
+    darkGreen1: string;
 
     border1: string;
     border2: string;

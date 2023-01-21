@@ -2,8 +2,7 @@ import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
 import { ProposalInfoCard } from 'components/ProposalInfoCard';
 import { ProposalStatus } from 'components/ProposalStatus';
-import { IconButton } from 'components/primitives/Button';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
@@ -25,13 +24,13 @@ import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import {
   HeaderTopRow,
+  linkStyles,
   PageContainer,
   PageContent,
   PageHeader,
   PageTitle,
   ProposalActionsWrapper,
   SidebarContent,
-  StyledIconButton,
 } from './Proposal.styled';
 import { useTranslation } from 'react-i18next';
 import useTimeDetail from 'Modules/Guilds/Hooks/useTimeDetail';
@@ -41,6 +40,8 @@ import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { useHookStoreProvider } from 'stores';
+import { Flex } from 'components/primitives/Layout';
+import { IconButton } from 'components/primitives/Button';
 
 const ProposalPage: React.FC = () => {
   const {
@@ -92,11 +93,20 @@ const ProposalPage: React.FC = () => {
             title="We couldn't find that proposal."
             subtitle="It probably doesn't exist."
             extra={
-              <UnstyledLink to={`/${chainName}/${guildId}`}>
-                <IconButton iconLeft>
-                  <FiArrowLeft /> See all proposals
+              <StyledLink
+                to={`/${chainName}/${guildId}`}
+                customStyles={linkStyles}
+              >
+                <IconButton
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                >
+                  <FiArrowLeft style={{ marginRight: '15px' }} />{' '}
+                  {t('seeAllProposals')}
                 </IconButton>
-              </UnstyledLink>
+              </StyledLink>
             }
           />
         );
@@ -116,12 +126,20 @@ const ProposalPage: React.FC = () => {
         <PageContent>
           <PageHeader>
             <HeaderTopRow>
-              <UnstyledLink to={`/${chainName}/${guildId}`}>
-                <StyledIconButton variant="secondary" iconLeft>
+              <StyledLink
+                to={`/${chainName}/${guildId}`}
+                customStyles={linkStyles}
+              >
+                <IconButton
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                >
                   <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
                   {guildConfig?.name}
-                </StyledIconButton>
-              </UnstyledLink>
+                </IconButton>
+              </StyledLink>
 
               <ProposalStatus status={status} endTime={endTime} />
               {status === ProposalState.Executable &&
@@ -134,16 +152,15 @@ const ProposalPage: React.FC = () => {
                 <Loading loading text skeletonProps={{ width: '800px' }} />
               )}
             </PageTitle>
+            <Flex direction="row" justifyContent="left">
+              {t('createdBy')}
+              <AddressButton address={proposal?.creator} />
+            </Flex>
           </PageHeader>
-
-          <AddressButton address={proposal?.creator} />
-
           <ProposalDescription metadata={metadata} error={metadataError} />
-
           <ProposalActionsWrapper>
             <ActionsBuilder options={options} editable={false} />
           </ProposalActionsWrapper>
-
           <SidebarCard
             header={
               <SidebarCardHeaderSpaced>

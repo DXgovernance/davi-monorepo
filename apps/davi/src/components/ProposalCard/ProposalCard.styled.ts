@@ -8,6 +8,7 @@ export const ProposalCardWrapper = styled(CardWrapper)<{ disabled?: boolean }>`
   margin-bottom: 1rem;
   padding: 1rem;
   color: ${({ theme }) => theme.colors.grey2};
+  background-color: ${({ theme }) => theme.colors.bg1};
 
   &:hover {
     ${({ theme, disabled }) =>

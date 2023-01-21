@@ -18,14 +18,14 @@ export const GuestActions: React.FC<GuestActionsProps> = ({
       {userWalletAddress ? (
         <Button
           data-testid="open-stake-tokens-modal-btn"
-          variant="secondary"
+          variant="terciary"
           onClick={onShowStakeModal}
         >
           {t('join')}
         </Button>
       ) : (
         <Button
-          variant="secondary"
+          variant="terciary"
           onClick={onShowWalletModal}
           data-testid={'guest-action-connect-wallet'}
         >

@@ -4,13 +4,13 @@ import { Virtuoso } from 'react-virtuoso';
 import { DiscussionCard } from 'components/DiscussionCard';
 import { Discussion } from 'components/Forum/types';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { StyledLink } from 'Modules/Guilds/pages/Governance/Governance.styled';
 import { Loading } from 'components/primitives/Loading';
 import { ErrorLabel } from 'components/primitives/Forms/ErrorLabel';
 import { Button } from 'components/primitives/Button';
 import { DISCUSSIONS_TO_SHOW, REFRESH_DISCUSSIONS_INTERVAL } from './constants';
 import { Box } from 'components/primitives/Layout';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { StyledLink } from 'components/primitives/Links';
 
 const Discussions = () => {
   const { orbis } = useOrbisContext();

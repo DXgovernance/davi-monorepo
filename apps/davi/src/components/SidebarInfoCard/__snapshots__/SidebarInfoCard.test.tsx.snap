@@ -15,6 +15,7 @@ Object {
   border-radius: 10px;
   margin-bottom: 1rem;
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  background-color: #1B1D1F;
 }
 
 .c2 {
@@ -171,6 +172,7 @@ Object {
   border-radius: 10px;
   margin-bottom: 1rem;
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  background-color: #1B1D1F;
 }
 
 .c2 {

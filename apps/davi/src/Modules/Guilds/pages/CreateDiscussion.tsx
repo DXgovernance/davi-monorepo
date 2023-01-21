@@ -26,6 +26,9 @@ import {
 } from 'components/Forum';
 import { DiscussionContent } from 'components/Forum/types';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { IconButton } from 'components/primitives/Button';
+import { StyledLink } from 'components/primitives/Links';
+import { linkStyles } from './Proposal/Proposal.styled';
 
 const CreateDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
@@ -102,10 +105,17 @@ const CreateDiscussionPage: React.FC = () => {
           justifyContent="space-between"
           margin="0px 0px 24px"
         >
-          <StyledButton iconLeft onClick={handleBack}>
-            <FiChevronLeft />
-            {t('backToOverview')}
-          </StyledButton>
+          <StyledLink to={`/${chain}/${guildId}`} customStyles={linkStyles}>
+            <IconButton
+              variant="secondary"
+              iconLeft
+              padding={'0.6rem 0.8rem'}
+              marginTop={'5px;'}
+            >
+              <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
+              {t('backToOverview')}{' '}
+            </IconButton>
+          </StyledLink>
 
           <StyledButton
             onClick={handleToggleEditMode}
@@ -156,7 +166,9 @@ const CreateDiscussionPage: React.FC = () => {
                 data: {},
               });
             }}
-            variant="secondary"
+            backgroundColor={isValid ? 'none' : '#1B1D1F'}
+            outline={'1px solid #A1A6B0'}
+            variant="terciary"
             disabled={!isValid}
             data-testid="create-proposal-action-button"
           >

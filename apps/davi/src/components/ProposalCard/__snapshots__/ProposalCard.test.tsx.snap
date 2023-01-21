@@ -1,45 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
-.c16 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
-  border-radius: 32px;
-  padding: 0.5rem 0.8rem;
-  margin: 0.2rem;
-  width: auto;
-}
-
-.c16:disabled {
-  color: initial;
-  opacity: 0.4;
-  cursor: auto;
-}
-
-.c16:hover:enabled {
-  border-color: #fff;
-}
-
-.c16:active:enabled {
-  border: 1px solid #303338;
-}
-
 .c1 {
   box-sizing: 'border-box';
   min-width: 0;
@@ -92,9 +53,9 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   align-items: center;
   margin: 0.5rem;
   border-radius: 15px;
-  border: 1px solid #1DE9B6;
+  border: 1px solid #DEFF4E;
   background-color: #1B1D1F;
-  color: #1DE9B6;
+  color: #DEFF4E;
   padding: 0.25rem 0.4rem;
 }
 
@@ -133,6 +94,46 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   align-items: center;
 }
 
+.c16 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: 1px solid #737977;
+  border: 1px solid #303338;
+  background-color: #295FF4;
+  color: #fff;
+  border-radius: 32px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.2rem;
+  width: auto;
+}
+
+.c16:disabled {
+  color: initial;
+  opacity: 0.4;
+  cursor: auto;
+}
+
+.c16:hover:enabled {
+  border-color: #fff;
+}
+
+.c16:active:enabled {
+  border: 1px solid #303338;
+}
+
 .c12 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 20px;
@@ -149,6 +150,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   margin-bottom: 1rem;
   padding: 1rem;
   color: #BDC0C7;
+  background-color: #1B1D1F;
 }
 
 .c3:hover {
@@ -322,59 +324,6 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
         <div
           class="c1 c5"
         >
-          <div
-            class="paper"
-            style="border-radius: 50px; display: inline-block; margin: 0px; overflow: hidden; padding: 0px; background-color: rgb(245, 228, 0); height: 24px; width: 24px;"
-          >
-            <svg
-              height="24"
-              width="24"
-              x="0"
-              xmlns="http://www.w3.org/2000/svg"
-              y="0"
-            >
-              <rect
-                fill="#F2BE02"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(4.11204385070503 -3.89652025148055) rotate(387.1 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#01778E"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-1.9540919563657109 12.528454691642345) rotate(227.4 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#C81435"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(13.477268130678231 -9.444486788922836) rotate(422.3 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#FA9600"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(14.838094142329384 -25.57490104209306) rotate(308.5 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-            </svg>
-          </div>
           <div
             class="c1 c6"
           >
@@ -516,45 +465,6 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
 `;
 
 exports[`ProposalCard ProposalCard Renders properly with more than one option  1`] = `
-.c16 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
-  border-radius: 32px;
-  padding: 0.5rem 0.8rem;
-  margin: 0.2rem;
-  width: auto;
-}
-
-.c16:disabled {
-  color: initial;
-  opacity: 0.4;
-  cursor: auto;
-}
-
-.c16:hover:enabled {
-  border-color: #fff;
-}
-
-.c16:active:enabled {
-  border: 1px solid #303338;
-}
-
 .c1 {
   box-sizing: 'border-box';
   min-width: 0;
@@ -607,9 +517,9 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   align-items: center;
   margin: 0.5rem;
   border-radius: 15px;
-  border: 1px solid #1DE9B6;
+  border: 1px solid #DEFF4E;
   background-color: #1B1D1F;
-  color: #1DE9B6;
+  color: #DEFF4E;
   padding: 0.25rem 0.4rem;
 }
 
@@ -648,6 +558,46 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   align-items: center;
 }
 
+.c16 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: 1px solid #737977;
+  border: 1px solid #303338;
+  background-color: #295FF4;
+  color: #fff;
+  border-radius: 32px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.2rem;
+  width: auto;
+}
+
+.c16:disabled {
+  color: initial;
+  opacity: 0.4;
+  cursor: auto;
+}
+
+.c16:hover:enabled {
+  border-color: #fff;
+}
+
+.c16:active:enabled {
+  border: 1px solid #303338;
+}
+
 .c12 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 20px;
@@ -664,6 +614,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   margin-bottom: 1rem;
   padding: 1rem;
   color: #BDC0C7;
+  background-color: #1B1D1F;
 }
 
 .c3:hover {
@@ -838,59 +789,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
           class="c1 c5"
         >
           <div
-            class="paper"
-            style="border-radius: 50px; display: inline-block; margin: 0px; overflow: hidden; padding: 0px; background-color: rgb(245, 228, 0); height: 24px; width: 24px;"
-          >
-            <svg
-              height="24"
-              width="24"
-              x="0"
-              xmlns="http://www.w3.org/2000/svg"
-              y="0"
-            >
-              <rect
-                fill="#F2BE02"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(4.11204385070503 -3.89652025148055) rotate(387.1 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#01778E"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-1.9540919563657109 12.528454691642345) rotate(227.4 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#C81435"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(13.477268130678231 -9.444486788922836) rotate(422.3 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#FA9600"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(14.838094142329384 -25.57490104209306) rotate(308.5 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-            </svg>
-          </div>
-          <div
             class="c1 c6"
           >
             venky0x.eth
@@ -1031,45 +929,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
 `;
 
 exports[`ProposalCard ProposalCard Renders properly with more than one option containing more than one action 1`] = `
-.c16 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
-  border-radius: 32px;
-  padding: 0.5rem 0.8rem;
-  margin: 0.2rem;
-  width: auto;
-}
-
-.c16:disabled {
-  color: initial;
-  opacity: 0.4;
-  cursor: auto;
-}
-
-.c16:hover:enabled {
-  border-color: #fff;
-}
-
-.c16:active:enabled {
-  border: 1px solid #303338;
-}
-
 .c1 {
   box-sizing: 'border-box';
   min-width: 0;
@@ -1122,9 +981,9 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   align-items: center;
   margin: 0.5rem;
   border-radius: 15px;
-  border: 1px solid #1DE9B6;
+  border: 1px solid #DEFF4E;
   background-color: #1B1D1F;
-  color: #1DE9B6;
+  color: #DEFF4E;
   padding: 0.25rem 0.4rem;
 }
 
@@ -1147,6 +1006,46 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   text-decoration: none;
 }
 
+.c16 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: 1px solid #737977;
+  border: 1px solid #303338;
+  background-color: #295FF4;
+  color: #fff;
+  border-radius: 32px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.2rem;
+  width: auto;
+}
+
+.c16:disabled {
+  color: initial;
+  opacity: 0.4;
+  cursor: auto;
+}
+
+.c16:hover:enabled {
+  border-color: #fff;
+}
+
+.c16:active:enabled {
+  border: 1px solid #303338;
+}
+
 .c12 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 20px;
@@ -1163,6 +1062,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   margin-bottom: 1rem;
   padding: 1rem;
   color: #BDC0C7;
+  background-color: #1B1D1F;
 }
 
 .c3:hover {
@@ -1369,59 +1269,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
           class="c1 c5"
         >
           <div
-            class="paper"
-            style="border-radius: 50px; display: inline-block; margin: 0px; overflow: hidden; padding: 0px; background-color: rgb(245, 228, 0); height: 24px; width: 24px;"
-          >
-            <svg
-              height="24"
-              width="24"
-              x="0"
-              xmlns="http://www.w3.org/2000/svg"
-              y="0"
-            >
-              <rect
-                fill="#F2BE02"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(4.11204385070503 -3.89652025148055) rotate(387.1 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#01778E"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-1.9540919563657109 12.528454691642345) rotate(227.4 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#C81435"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(13.477268130678231 -9.444486788922836) rotate(422.3 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#FA9600"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(14.838094142329384 -25.57490104209306) rotate(308.5 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-            </svg>
-          </div>
-          <div
             class="c1 c6"
           >
             venky0x.eth
@@ -1592,6 +1439,7 @@ exports[`ProposalCard ProposalCard loading 1`] = `
   margin-bottom: 1rem;
   padding: 1rem;
   color: #BDC0C7;
+  background-color: #1B1D1F;
 }
 
 .c3:hover {
@@ -1717,22 +1565,6 @@ exports[`ProposalCard ProposalCard loading 1`] = `
         <div
           class="c1 c5"
         >
-          <div
-            class=""
-          >
-            <span
-              aria-busy="true"
-              aria-live="polite"
-            >
-              <span
-                class="react-loading-skeleton"
-                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
-              >
-                ‌
-              </span>
-              <br />
-            </span>
-          </div>
           <div
             class="c1 c6"
           >

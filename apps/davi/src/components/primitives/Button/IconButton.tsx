@@ -4,6 +4,10 @@ import { Button } from '.';
 type IconButtonProps = {
   iconLeft?: boolean;
   iconRight?: boolean;
+  backgroundColor?: string;
+  outline?: string;
+  padding?: string;
+  marginTop?: string;
 };
 
 export const IconButton = styled(Button)<IconButtonProps>`
@@ -14,7 +18,13 @@ export const IconButton = styled(Button)<IconButtonProps>`
   },
   button {
     ${props =>
-      props.iconLeft && `padding: .25rem 0.6rem; background-color: #1B1D1F`};
+      props.iconLeft &&
+      `padding: .25rem 0.6rem; 
+    `};
+    ${props =>
+      `background-color: ${props.backgroundColor ?? '#1B1D1F'};
+      outline: ${props.outline ?? '1px solid #303338'} 
+      `}
 `;
 
 export const ButtonIcon = styled.img`

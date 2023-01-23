@@ -53,13 +53,14 @@ export const IconDetailWrapper = styled(Box)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  border: 0
+  
   flex: 1;
 `;
 
-export const Detail = styled(Box)`
+export const Detail = styled(Heading)`
   font-size: 0.95rem;
   font-weight: 600;
-  margin-left: 0.5rem;
 `;
 
 export const ActionsWrapper = styled(Box)`

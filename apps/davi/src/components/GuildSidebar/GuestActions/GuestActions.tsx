@@ -1,5 +1,7 @@
 import { Button } from 'components/primitives/Button';
+import { StyledButton } from 'Modules/Guilds/styles';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components';
 export interface GuestActionsProps {
   userWalletAddress?: string;
   onShowStakeModal?: () => void;
@@ -12,20 +14,20 @@ export const GuestActions: React.FC<GuestActionsProps> = ({
   onShowWalletModal,
 }) => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
     <>
       {userWalletAddress ? (
-        <Button
+        <StyledButton
           data-testid="open-stake-tokens-modal-btn"
-          variant="terciary"
+          backgroundColor={theme.colors.darkGreen1}
           onClick={onShowStakeModal}
         >
           {t('join')}
-        </Button>
+        </StyledButton>
       ) : (
         <Button
-          variant="terciary"
           onClick={onShowWalletModal}
           data-testid={'guest-action-connect-wallet'}
         >

@@ -86,10 +86,7 @@ const DiscussionPage: React.FC = () => {
             <StyledLink
               to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
             >
-              <StyledButton
-                variant="terciary"
-                data-testid="create-proposal-button"
-              >
+              <StyledButton data-testid="create-proposal-button">
                 {t('createProposal')}
               </StyledButton>
             </StyledLink>

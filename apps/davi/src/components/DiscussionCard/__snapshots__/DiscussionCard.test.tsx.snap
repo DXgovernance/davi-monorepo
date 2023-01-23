@@ -66,15 +66,15 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   border-radius: 10px;
 }
 
-.c6 {
+.c5 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 500;
 }
 
-.c6 strong,
-.c6 b {
+.c5 strong,
+.c5 b {
   font-weight: 600;
 }
 
@@ -95,7 +95,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   font-weight: 600;
 }
 
-.c5 {
+.c6 {
   font-size: 0.95rem;
   font-weight: 600;
   margin-left: 0.5rem;
@@ -186,14 +186,14 @@ exports[`DiscussionCard should render with full parameters 1`] = `
             />
           </svg>
         </div>
-        <div
-          class="c1 c5"
+        <h2
+          class="c5 c6"
         >
           test.eth
-        </div>
+        </h2>
       </div>
       <h2
-        class="c6 c7"
+        class="c5 c7"
       >
         Title of the discussion
       </h2>

@@ -29,6 +29,7 @@ import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { IconButton } from 'components/primitives/Button';
 import { StyledLink } from 'components/primitives/Links';
 import { linkStyles } from './Proposal/Proposal.styled';
+import { useTheme } from 'styled-components';
 
 const CreateDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
@@ -43,6 +44,7 @@ const CreateDiscussionPage: React.FC = () => {
   const [user, setUser] = useState('');
   const [editMode, setEditMode] = useState(true);
   const [title, setTitle] = useState('');
+  const theme = useTheme();
 
   useEffect(() => {
     isConnected(orbis).then(res => {
@@ -166,9 +168,7 @@ const CreateDiscussionPage: React.FC = () => {
                 data: {},
               });
             }}
-            backgroundColor={isValid ? 'none' : '#1B1D1F'}
-            outline={'1px solid #A1A6B0'}
-            variant="terciary"
+            backgroundColor={isValid ? 'none' : theme.colors.bg1}
             disabled={!isValid}
             data-testid="create-proposal-action-button"
           >

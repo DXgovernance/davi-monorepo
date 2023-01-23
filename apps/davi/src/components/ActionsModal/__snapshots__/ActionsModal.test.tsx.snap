@@ -24,7 +24,6 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  outline: 1px solid #737977;
   border: 1px solid #303338;
   background-color: transparent;
   color: #fff;

@@ -22,10 +22,10 @@ export const IconButton = styled(Button)<IconButtonProps>`
       `padding: .25rem 0.6rem; 
     `};
     ${props =>
-      `background-color: ${props.backgroundColor ?? '#1B1D1F'};
-      outline: ${props.outline ?? '1px solid #303338'} 
+      `background-color: ${props.backgroundColor ?? props.theme.colors.bg1};
+      color: ${props.theme.colors.white}
       `}
-`;
+      `;
 
 export const ButtonIcon = styled.img`
   height: 1.6rem;

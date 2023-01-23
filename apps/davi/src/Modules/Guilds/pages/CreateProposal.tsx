@@ -299,7 +299,6 @@ const CreateProposalPage: React.FC = () => {
                 handleCreateProposal();
               }
             }}
-            variant="terciary"
             disabled={!isValid || isCreatingProposal}
             data-testid="create-proposal-action-button"
             backgroundColor={isValid ? 'none' : '#1B1D1F'}

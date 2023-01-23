@@ -2,8 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Flex } from 'components/primitives/Layout';
 import { useTypedParams } from '../../Hooks/useTypedParams';
 import { StyledLink } from 'components/primitives/Links';
-import { Button } from 'components/primitives/Button';
-import { ProposalsList } from './AllDiscussions.styled';
+import { ProposalsList, StyledButton } from './AllDiscussions.styled';
 import Discussions from 'Modules/Social/Discussions';
 
 const AllDiscussions = ({ guildId }) => {
@@ -14,9 +13,9 @@ const AllDiscussions = ({ guildId }) => {
     <>
       <Flex direction="row" justifyContent="right">
         <StyledLink to={`/${chainName}/${guildId}/create`}>
-          <Button variant="terciary" data-testid="create-discussion-button">
+          <StyledButton data-testid="create-discussion-button">
             {t('forum.createDiscussion')}
-          </Button>
+          </StyledButton>
         </StyledLink>
       </Flex>
       <ProposalsList>

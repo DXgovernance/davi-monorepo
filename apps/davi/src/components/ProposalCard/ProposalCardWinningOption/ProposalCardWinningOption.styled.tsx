@@ -21,12 +21,12 @@ export const ActionDetailsButton = styled(Button)<{ isClickable: boolean }>`
   justify-content: flex-start;
   flex: none;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.border1};
   border-radius: 0rem 1rem 1rem 0rem;
   height: 32px;
   width: fit-content;
   margin: 0;
   padding: 0 12px;
+  outline: 1px solid #303338;
   color: ${({ theme }) => theme.colors.grey};
 
   :hover {

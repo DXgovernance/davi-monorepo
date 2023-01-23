@@ -1,5 +1,5 @@
 import { CardWrapper } from 'components/Card';
-import { Box, Flex } from 'components/primitives/Layout';
+import { Flex } from 'components/primitives/Layout';
 import { Heading } from 'components/primitives/Typography';
 import styled from 'styled-components';
 
@@ -20,7 +20,7 @@ export const FooterElement = styled(Flex)`
   font-weight: 600;
 `;
 
-export const Detail = styled(Box)`
+export const Detail = styled(Heading)`
   font-size: 0.95rem;
   font-weight: 600;
   margin-left: 0.5rem;

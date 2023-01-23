@@ -4,7 +4,6 @@ import { useAccount } from 'wagmi';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useHookStoreProvider } from 'stores';
-import { Button } from 'components/primitives/Button';
 import { Input } from 'components/primitives/Forms/Input';
 import { FilterMenu, FilterButton } from './components';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
@@ -16,6 +15,7 @@ import {
   StyledIconButton,
   StyledInputWrapper,
   FilterBadge,
+  StyledButton,
 } from './Filter.styled';
 import { StyledLink } from 'components/primitives/Links';
 
@@ -66,12 +66,9 @@ export const Filter: React.FC<FilterProps> = ({
           {isProposalCreationAllowed && (
             <>
               <StyledLink to={`/${chainName}/${guildId}/create-proposal`}>
-                <Button
-                  variant="secondary"
-                  data-testid="create-proposal-button"
-                >
+                <StyledButton data-testid="create-proposal-button">
                   {t('createProposal')}
-                </Button>
+                </StyledButton>
               </StyledLink>
             </>
           )}

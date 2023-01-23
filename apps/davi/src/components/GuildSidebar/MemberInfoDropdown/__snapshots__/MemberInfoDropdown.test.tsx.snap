@@ -17,10 +17,9 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  outline: 1px solid #737977;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -39,6 +38,10 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
 
 .c6:active:enabled {
   border: 1px solid #303338;
+}
+
+.c6:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -179,10 +182,9 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  outline: 1px solid #737977;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -201,6 +203,10 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
 
 .c6:active:enabled {
   border: 1px solid #303338;
+}
+
+.c6:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -386,10 +392,9 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  outline: 1px solid #737977;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -408,6 +413,10 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
 
 .c6:active:enabled {
   border: 1px solid #303338;
+}
+
+.c6:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -548,10 +557,9 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  outline: 1px solid #737977;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -570,6 +578,10 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
 
 .c6:active:enabled {
   border: 1px solid #303338;
+}
+
+.c6:disabled {
+  color: #303338;
 }
 
 .c0 {

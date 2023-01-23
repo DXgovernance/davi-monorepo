@@ -17,10 +17,9 @@ exports[`Header Should match snapshot 1`] = `
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  outline: 1px solid #737977;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -41,47 +40,7 @@ exports[`Header Should match snapshot 1`] = `
   border: 1px solid #303338;
 }
 
-.c9 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  outline: 1px solid #737977;
-  border: 1px solid #303338;
-  background-color: #2F3533;
-  color: #DEFF4E;
-  border-radius: 32px;
-  padding: 0.5rem 0.8rem;
-  margin: 0.2rem;
-  width: auto;
-}
-
-.c9:disabled {
-  color: initial;
-  opacity: 0.4;
-  cursor: auto;
-}
-
-.c9:hover:enabled {
-  border-color: #fff;
-}
-
-.c9:active:enabled {
-  border: 1px solid #303338;
-}
-
-.c9:disabled {
+.c8:disabled {
   color: #303338;
 }
 
@@ -199,7 +158,7 @@ exports[`Header Should match snapshot 1`] = `
           notConnected
         </button>
         <button
-          class="c9"
+          class="c8"
           data-testid="connect-wallet-btn"
         >
           connectWallet

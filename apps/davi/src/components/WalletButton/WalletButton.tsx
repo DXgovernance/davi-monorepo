@@ -53,7 +53,11 @@ const WalletButton = () => {
       );
     } else {
       return (
-        <Button data-testid="connect-wallet-btn" onClick={toggleWalletModal}>
+        <Button
+          data-testid="connect-wallet-btn"
+          variant="terciary"
+          onClick={toggleWalletModal}
+        >
           {t('connectWallet')}
         </Button>
       );

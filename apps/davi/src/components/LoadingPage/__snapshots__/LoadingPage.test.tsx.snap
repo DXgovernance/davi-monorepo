@@ -41,6 +41,50 @@ exports[`LoadingPage should match snapshot 1`] = `
   border: 1px solid #303338;
 }
 
+.c9 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: 1px solid #737977;
+  border: 1px solid #303338;
+  background-color: #2F3533;
+  color: #DEFF4E;
+  border-radius: 32px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.2rem;
+  width: auto;
+}
+
+.c9:disabled {
+  color: initial;
+  opacity: 0.4;
+  cursor: auto;
+}
+
+.c9:hover:enabled {
+  border-color: #fff;
+}
+
+.c9:active:enabled {
+  border: 1px solid #303338;
+}
+
+.c9:disabled {
+  color: #303338;
+}
+
 .c4 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 20px;
@@ -61,7 +105,7 @@ exports[`LoadingPage should match snapshot 1`] = `
   margin: 0 auto;
 }
 
-.c10 {
+.c11 {
   -webkit-animation: fvtopB 1s cubic-bezier(0.42,0.8,0.6,0.83) infinite;
   animation: fvtopB 1s cubic-bezier(0.42,0.8,0.6,0.83) infinite;
   width: -webkit-fit-content;
@@ -124,14 +168,14 @@ exports[`LoadingPage should match snapshot 1`] = `
   max-height: 50px;
 }
 
-.c9 {
+.c10 {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin: 0 auto;
 }
 
-.c11 {
+.c12 {
   font-size: 1rem;
 }
 
@@ -175,7 +219,7 @@ exports[`LoadingPage should match snapshot 1`] = `
           notConnected
         </button>
         <button
-          class="c8"
+          class="c9"
           data-testid="connect-wallet-btn"
         >
           connectWallet
@@ -187,13 +231,13 @@ exports[`LoadingPage should match snapshot 1`] = `
     class="c1 c2"
   >
     <div
-      class="c9"
+      class="c10"
     >
       <div
         class=""
       >
         <div
-          class="c10"
+          class="c11"
         >
           <svg
             fill="currentColor"
@@ -211,7 +255,7 @@ exports[`LoadingPage should match snapshot 1`] = `
         </div>
       </div>
       <p
-        class="c11"
+        class="c12"
       >
         loadingDao
       </p>

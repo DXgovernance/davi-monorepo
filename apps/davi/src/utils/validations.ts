@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
 import i18next from 'i18next';
 
-export const isValidProposal = ({
+export const isValidGuildProposal = ({
   toArray,
   dataArray,
   valueArray,
@@ -17,13 +17,13 @@ export const isValidProposal = ({
   if (!title) {
     return {
       isValid: false,
-      error: 'Title is required',
+      error: i18next.t('proposal.errors.titleRequired'),
     };
   }
   if (totalOptions === 0) {
     return {
       isValid: false,
-      error: 'At least one Option is required',
+      error: i18next.t('proposal.errors.atLeastOneOptionRequired'),
     };
   }
   if (
@@ -33,7 +33,7 @@ export const isValidProposal = ({
   ) {
     return {
       isValid: false,
-      error: 'At least one action per option is required',
+      error: i18next.t('proposal.errors.atLeastOneActionPerOptionRequired'),
     };
   }
 

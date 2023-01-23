@@ -113,15 +113,25 @@
   "chooseProposal": "Choose Proposal",
   "seeAllProposals": "See all proposals",
   "createdBy": "Created by",
+  "executeProposal": "Execute proposal",
+  "voteOnProposal": "Vote on proposal",
   "continue": "Continue",
   "onChainActions_zero": "No on-chain action",
   "onChainActions_one": "{{count}} on-chain action",
   "onChainActions_other": "{{count}} on-chain actions",
   "onchainAction": "On-chain Action",
   "noOnchainAction": "No on-chain action",
-  "errorMessage": {
-    "proposalDescriptionError": "We ran into an error while trying to load the proposal content. Please refresh the page and try again.",
-    "genericProposalError": "We ran into an error."
+  "proposal": {
+    "errors": {
+      "proposalDescriptionError": "We ran into an error while trying to load the proposal content. Please refresh the page and try again.",
+      "invalidContentHash": "Invalid content hash",
+      "titleRequired": "Title is required",
+      "atLeastOneOptionRequired": "At least one option is required",
+      "atLeastOneActionPerOptionRequired": "At least one action per option is required",
+      "optionsArrayIsEmpty": "Options array is empty",
+      "metadataUploadError": "Metadata upload error",
+      "genericProposalError": "We ran into an error."
+    }
   },
   "selectAToken": "Select a token",
   "searchToken": "Search token",
@@ -276,10 +286,13 @@
   "retry": "Retry",
   "error": "Error",
   "displayRawData": "Display Raw Data",
-  "displayFormatedData": "Display Formated Data",
+  "displayFormattedData": "Display Formatted Data",
   "approveSpendingCall": "Approve spending call",
   "addressToWhichTheExpenseIsBeingAuthorized": "Address to which the expense is being authorized",
   "amountBeingApproved": "Amount being approved",
+  "approveTokenSpending": "Approve {{tokenSymbol}} token spending",
+  "lockingTokens": "Locking{{amount}} {{symbol}} tokens",
+  "unlockAndWithdrawTokens": "Unlock and withdraw{{amount}} {{symbol}} tokens",
   "youVotedForOption": "You voted for option \"{{optionLabel}}\"",
   "with": "With",
   "noActiveProposalsMessage": "There are no active proposals",
@@ -323,6 +336,9 @@
   "postOptions": {
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "hookStoreErrors": {
+    "methodNotSupported": "This method isn't supported in this governance implementation"
   },
   "loadingDao": "Loading DAO"
 }

@@ -1,11 +1,21 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import {
+  useApproveTokens,
+  useCreateProposal,
+  useExecuteProposal,
+  useLockTokens,
+  useVoteOnProposal,
+  useWithdrawTokens,
+} from './writers';
+
+import {
   useProposal,
   useSnapshotId,
   useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGuildConfig,
   useGetActiveProposals,
 } from '../common/fetchers';
 import {
@@ -47,6 +57,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
           useGetActiveProposals,
         },
         fallback: {
@@ -59,10 +70,18 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGuildConfig,
           useGetActiveProposals,
         },
       },
-      writers: null,
+      writers: {
+        useApproveTokens,
+        useCreateProposal,
+        useExecuteProposal,
+        useLockTokens,
+        useVoteOnProposal,
+        useWithdrawTokens,
+      },
     },
     capabilities: {
       votingPower: 'liquid',

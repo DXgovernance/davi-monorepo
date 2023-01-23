@@ -1,9 +1,7 @@
 import { StakeTokensModal } from 'components/StakeTokensModal';
 import StakeTokensForm from 'components/StakeTokensModal/components/StakeTokensForm/StakeTokensForm';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { useTransactions } from 'contexts/Guilds';
 import { useERC20Allowance } from 'hooks/Guilds/erc20/useERC20Allowance';
 import { useERC20Balance } from 'hooks/Guilds/erc20/useERC20Balance';
 import useGuildImplementationType from 'Modules/Guilds/Hooks/useGuildImplementationType';
@@ -16,7 +14,7 @@ const StakeTokensModalWrapper = ({ isOpen, onDismiss }) => {
 
   const {
     hooks: {
-      fetchers: { useTotalLocked, useVotingPowerOf },
+      fetchers: { useTotalLocked, useVotingPowerOf, useGuildConfig },
     },
   } = useHookStoreProvider();
 
@@ -31,7 +29,6 @@ const StakeTokensModalWrapper = ({ isOpen, onDismiss }) => {
   );
   const { isRepGuild } = useGuildImplementationType(guildAddress);
   const tokenContract = useERC20(guildConfig?.token);
-  const { createTransaction } = useTransactions();
   const guildContract = useERC20Guild(guildAddress);
 
   const { data: tokenAllowance } = useERC20Allowance(
@@ -56,7 +53,6 @@ const StakeTokensModalWrapper = ({ isOpen, onDismiss }) => {
           contract: tokenContract,
         }}
         userVotingPower={userVotingPower}
-        createTransaction={createTransaction}
         guild={{ contract: guildContract, config: guildConfig, totalLocked }}
         isRepGuild={isRepGuild}
       />

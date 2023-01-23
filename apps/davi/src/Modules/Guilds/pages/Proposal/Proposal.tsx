@@ -14,8 +14,6 @@ import { FiArrowLeft } from 'react-icons/fi';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
 import { useProposalState } from 'hooks/Guilds/useProposalState';
-import useExecutable from 'hooks/Guilds/useExecutable';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
@@ -46,7 +44,13 @@ import { IconButton } from 'components/primitives/Button';
 const ProposalPage: React.FC = () => {
   const {
     hooks: {
-      fetchers: { useProposal, useTotalLocked, useProposalCalls },
+      writers: { useExecuteProposal },
+      fetchers: {
+        useProposal,
+        useTotalLocked,
+        useProposalCalls,
+        useGuildConfig,
+      },
     },
   } = useHookStoreProvider();
   const { t } = useTranslation();
@@ -78,9 +82,8 @@ const ProposalPage: React.FC = () => {
   const status = useProposalState(proposal);
   const endTime = useTimeDetail(guildId, status, proposal?.endTime);
 
-  const {
-    data: { executeProposal },
-  } = useExecutable();
+  const executeProposal = useExecuteProposal(guildId);
+  const handleExecuteProposal = () => executeProposal(proposalId);
 
   if (!loaded) {
     return <></>;
@@ -114,7 +117,7 @@ const ProposalPage: React.FC = () => {
         return (
           <Result
             state={ResultState.ERROR}
-            title={t('errorMessage.genericProposalError')}
+            title={t('proposal.errors.genericProposalError')}
             subtitle={error.message}
           />
         );
@@ -144,7 +147,7 @@ const ProposalPage: React.FC = () => {
               <ProposalStatus status={status} endTime={endTime} />
               {status === ProposalState.Executable &&
                 !isReadOnly(connector) && (
-                  <ExecuteButton executeProposal={executeProposal} />
+                  <ExecuteButton executeProposal={handleExecuteProposal} />
                 )}
             </HeaderTopRow>
             <PageTitle data-testid="proposal-page-title">

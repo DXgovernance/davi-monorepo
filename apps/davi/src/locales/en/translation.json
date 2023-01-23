@@ -169,7 +169,7 @@
     "proposalHistory": "Proposal History"
   },
   "filter": "Filter",
-  "searchTitleEnsAddress": "Search proposal, discussion, ENS, address",
+  "searchTitleEnsAddress": "Search proposal",
   "state": "State",
   "reset": "Reset",
   "type": "Type",

@@ -87,7 +87,7 @@ echo "Subgraph::: Updating Bytecodes"
 node ./scripts/updateBytecodes.js
 
 echo "Subgraph::: Starting docker compose"
-docker-compose up &
+docker compose up &
 
 waitForGraphContainer
 

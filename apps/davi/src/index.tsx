@@ -13,14 +13,22 @@ import SyncRouterWithWagmi from 'components/Web3Modals/SyncRouterWithWagmi';
 import { useEffect } from 'react';
 import { loadFathom } from 'analytics/fathom';
 import { SITE_ID } from 'configs';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { GraphApolloLink } from '@graphprotocol/client-apollo';
+import * as GraphClient from '.graphclient';
 
 const { provider, webSocketProvider } = configureChains(chains, providers);
 
-const client = createClient({
+const wagmiClient = createClient({
   autoConnect: true,
   connectors: getConnectors(chains),
   provider,
   webSocketProvider,
+});
+
+const apolloClient = new ApolloClient({
+  link: new GraphApolloLink(GraphClient),
+  cache: new InMemoryCache(),
 });
 
 initializeI18Next();
@@ -46,16 +54,18 @@ const Root = () => {
   }, []);
 
   return (
-    <WagmiConfig client={client}>
-      <HashRouter>
-        <SyncRouterWithWagmi>
-          <>
-            <App />
-            <EnsureReadOnlyConnection />
-          </>
-        </SyncRouterWithWagmi>
-      </HashRouter>
-    </WagmiConfig>
+    <ApolloProvider client={apolloClient}>
+      <WagmiConfig client={wagmiClient}>
+        <HashRouter>
+          <SyncRouterWithWagmi>
+            <>
+              <App />
+              <EnsureReadOnlyConnection />
+            </>
+          </SyncRouterWithWagmi>
+        </HashRouter>
+      </WagmiConfig>
+    </ApolloProvider>
   );
 };
 const rootElement = document.getElementById('root');

@@ -1,19 +1,22 @@
+import { useEffect, useMemo, useState } from 'react';
 import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
+import { FiSearch } from 'react-icons/fi';
 
 import { useHookStoreProvider } from 'stores';
+import useMiniSearch from 'hooks/useMiniSearch';
+import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
+import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { Heading } from 'components/primitives/Typography';
 import { Divider } from 'components/Divider';
 import { IconHolder } from 'components/AddressButton/AddressButton.styled';
 import { Avatar } from 'components/Avatar';
 import { Loading } from 'components/primitives/Loading';
 import { Flex } from 'components/primitives/Layout';
+import { Input } from 'components/primitives/Forms/Input';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
-import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
-import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-
 import {
   AddressSpan,
   MainContainer,
@@ -27,6 +30,10 @@ import {
 interface IMemberData {
   address: `0x${string}`;
   tokensLocked: BigNumber;
+}
+
+interface IMemberDataIndexable extends IMemberData {
+  id: string;
 }
 
 interface IMemberRow extends IMemberData {
@@ -66,7 +73,11 @@ const fakeData: IMemberData[] = [
   },
 ];
 
-// TODO: Implement searching
+// TODO: add styling to match new design
+// TODO: replace fake data with subgraph fetcher
+// TODO: make logic to display when the subgraph data isn't available
+// TODO: replace hardcoded hex codes with theme references in Members.styled
+// TODO: make columns sortable?
 
 const MemberRow = ({
   address,
@@ -83,36 +94,41 @@ const MemberRow = ({
   const { ensName, imageUrl } = useENSAvatar(address);
 
   return (
-    <TableRow>
-      <TableCell width="auto">
-        <Flex direction="row" justifyContent="flex-start">
-          <IconHolder>
-            <Avatar src={imageUrl} defaultSeed={address} />
-          </IconHolder>
-          <AddressSpan>
-            {address ? ensName || address : <Loading loading text />}
-          </AddressSpan>
-        </Flex>
-      </TableCell>
-      <TableCell alignment={'right'} width="15%">
-        {roundedBalance} {tokenSymbol ?? ''}
-      </TableCell>
-      <TableCell alignment={'right'} width="15%">
-        {votingPowerPercent !== null ? (
-          votingPowerPercent.toString()
-        ) : (
-          <Loading loading text skeletonProps={{ width: '40px' }} />
-        )}{' '}
-        %
-      </TableCell>
-    </TableRow>
+    <>
+      <TableRow>
+        <TableCell width="auto">
+          <Flex direction="row" justifyContent="flex-start">
+            <IconHolder>
+              <Avatar src={imageUrl} defaultSeed={address} />
+            </IconHolder>
+            <AddressSpan>
+              {address ? (
+                ensName || address
+              ) : (
+                <Loading loading text skeletonProps={{ width: '40px' }} />
+              )}
+            </AddressSpan>
+          </Flex>
+        </TableCell>
+        <TableCell alignment={'right'} width="15%">
+          {roundedBalance} {tokenSymbol ?? ''}
+        </TableCell>
+        <TableCell alignment={'right'} width="15%">
+          {votingPowerPercent !== null ? (
+            votingPowerPercent.toString()
+          ) : (
+            <Loading loading text skeletonProps={{ width: '40px' }} />
+          )}{' '}
+          %
+        </TableCell>
+      </TableRow>
+    </>
   );
 };
 
 const Members = () => {
   const { t } = useTranslation();
   const { guildId: daoAddress } = useTypedParams();
-
   const {
     hooks: {
       fetchers: { useTotalLocked, useGuildConfig },
@@ -123,10 +139,46 @@ const Members = () => {
   const { data: guildConfig } = useGuildConfig(daoAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
 
+  const indexedMembers = useMemo(() => {
+    return fakeData?.map(member => {
+      return {
+        ...member,
+        id: member.address,
+      };
+    });
+  }, []);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const { instance, buildIndex, query } = useMiniSearch<IMemberDataIndexable>({
+    fields: ['address'],
+    searchOptions: {
+      fuzzy: 2,
+      prefix: true,
+    },
+  });
+
+  useEffect(() => {
+    if (indexedMembers && instance?.documentCount !== indexedMembers?.length) {
+      buildIndex(indexedMembers);
+    }
+  }, [buildIndex, indexedMembers, instance]);
+
+  const searchResults = useMemo(() => {
+    if (!searchQuery) return [];
+    return query({ queries: [searchQuery] });
+  }, [searchQuery, query]);
+
   return (
     <MainContainer>
+      <Input
+        icon={<FiSearch />}
+        placeholder={t('searchMemberOrAddress')}
+        value={searchQuery}
+        onChange={e => setSearchQuery(e?.target?.value)}
+      />
       <Heading size={2}>{t('members')}</Heading>
       <Divider />
+
       <Table>
         <TableHead>
           <tr>
@@ -139,7 +191,7 @@ const Members = () => {
           </tr>
         </TableHead>
         <tbody>
-          {fakeData.map(member => {
+          {(searchQuery ? searchResults : indexedMembers)?.map(member => {
             return (
               <MemberRow
                 address={member.address}

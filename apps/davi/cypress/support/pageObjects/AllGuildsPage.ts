@@ -152,7 +152,7 @@ class AllGuilds {
     cy.findByTestId(this.searchbarBtn).should('be.visible').click();
     cy.findByTestId(this.searchbarInputField)
       .should('be.visible')
-      .get('input[placeholder="Search proposal, discussion, ENS, address"]');
+      .get('input[placeholder="Search proposal"]');
   }
 
   goToFirstProposalPage() {

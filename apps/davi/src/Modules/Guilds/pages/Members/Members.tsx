@@ -6,19 +6,15 @@ import { FiSearch } from 'react-icons/fi';
 import { useHookStoreProvider } from 'stores';
 import useMiniSearch from 'hooks/useMiniSearch';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
-import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { Heading } from 'components/primitives/Typography';
 import { Divider } from 'components/Divider';
-import { IconHolder } from 'components/AddressButton/AddressButton.styled';
-import { Avatar } from 'components/Avatar';
 import { Loading } from 'components/primitives/Loading';
-import { Flex } from 'components/primitives/Layout';
 import { Input } from 'components/primitives/Forms/Input';
+import { BlockExplorerLink } from 'components/primitives/Links';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
-  AddressSpan,
   MainContainer,
   Table,
   TableCell,
@@ -91,24 +87,12 @@ const MemberRow = ({
     tokensLocked,
     totalTokensLocked
   );
-  const { ensName, imageUrl } = useENSAvatar(address);
 
   return (
     <>
       <TableRow>
         <TableCell width="auto">
-          <Flex direction="row" justifyContent="flex-start">
-            <IconHolder>
-              <Avatar src={imageUrl} defaultSeed={address} />
-            </IconHolder>
-            <AddressSpan>
-              {address ? (
-                ensName || address
-              ) : (
-                <Loading loading text skeletonProps={{ width: '40px' }} />
-              )}
-            </AddressSpan>
-          </Flex>
+          <BlockExplorerLink address={address} showAvatar />
         </TableCell>
         <TableCell alignment={'right'} width="15%">
           {roundedBalance} {tokenSymbol ?? ''}

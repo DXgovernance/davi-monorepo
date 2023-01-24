@@ -5,10 +5,6 @@ export const MainContainer = styled(Box)`
   border-radius: ${({ theme }) => theme.radii.curved};
 `;
 
-export const AddressSpan = styled.span`
-  padding-left: 10px;
-`;
-
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;

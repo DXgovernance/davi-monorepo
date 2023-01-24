@@ -111,6 +111,8 @@
   "backToOverview": "Back to Overview",
   "createProposal": "Create Proposal",
   "chooseProposal": "Choose Proposal",
+  "seeAllProposals": "See all proposals",
+  "createdBy": "Created by",
   "executeProposal": "Execute proposal",
   "voteOnProposal": "Vote on proposal",
   "continue": "Continue",

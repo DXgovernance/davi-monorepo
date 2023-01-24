@@ -8,7 +8,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   padding: 0;
 }
 
-.c6 {
+.c4 {
   display: Flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
@@ -27,7 +27,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   padding: 0;
 }
 
-.c7 {
+.c8 {
   display: Flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
@@ -66,26 +66,26 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   border-radius: 10px;
 }
 
-.c4 {
+.c5 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 500;
 }
 
-.c4 strong,
-.c4 b {
+.c5 strong,
+.c5 b {
   font-weight: 600;
 }
 
-.c5 {
+.c7 {
   font-size: 1rem;
   font-weight: 700;
-  margin: 0;
+  margin: 1rem 0;
   margin-bottom: 12px;
 }
 
-.c8 {
+.c9 {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -95,10 +95,17 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   font-weight: 600;
 }
 
+.c6 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
 .c3 {
   margin-bottom: 1rem;
   padding: 20px 24px;
   color: #BDC0C7;
+  background-color: #1B1D1F;
 }
 
 .c3:hover {
@@ -107,7 +114,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
 }
 
 @media only screen and (min-width:768px) {
-  .c5 {
+  .c7 {
     font-size: 1.25rem;
   }
 }
@@ -122,75 +129,80 @@ exports[`DiscussionCard should render with full parameters 1`] = `
     <div
       class="c1 c2 c3"
     >
+      <div
+        class="c4"
+        direction="row"
+      >
+        <div
+          class="paper"
+          style="border-radius: 50px; display: inline-block; margin: 0px; overflow: hidden; padding: 0px; background-color: rgb(24, 100, 242); height: 24px; width: 24px;"
+        >
+          <svg
+            height="24"
+            width="24"
+            x="0"
+            xmlns="http://www.w3.org/2000/svg"
+            y="0"
+          >
+            <rect
+              fill="#C81420"
+              height="24"
+              rx="0"
+              ry="0"
+              transform="translate(-2.5649494316480768 1.3597929928351298) rotate(161.7 12 12)"
+              width="24"
+              x="0"
+              y="0"
+            />
+            <rect
+              fill="#01668E"
+              height="24"
+              rx="0"
+              ry="0"
+              transform="translate(-1.5048841922350045 12.390589562651318) rotate(115.6 12 12)"
+              width="24"
+              x="0"
+              y="0"
+            />
+            <rect
+              fill="#2336E1"
+              height="24"
+              rx="0"
+              ry="0"
+              transform="translate(-2.1373441046026795 17.010442887534964) rotate(149.4 12 12)"
+              width="24"
+              x="0"
+              y="0"
+            />
+            <rect
+              fill="#033A5E"
+              height="24"
+              rx="0"
+              ry="0"
+              transform="translate(-27.527986953805755 -8.364564860691045) rotate(364.2 12 12)"
+              width="24"
+              x="0"
+              y="0"
+            />
+          </svg>
+        </div>
+        <h2
+          class="c5 c6"
+        >
+          test.eth
+        </h2>
+      </div>
       <h2
-        class="c4 c5"
+        class="c5 c7"
       >
         Title of the discussion
       </h2>
       <div
-        class="c6"
+        class="c4"
         direction="row"
       >
         <div
-          class="c7 c8"
-        >
-          <div
-            class="paper"
-            style="border-radius: 50px; display: inline-block; margin: 0px; overflow: hidden; padding: 0px; background-color: rgb(24, 100, 242); height: 24px; width: 24px;"
-          >
-            <svg
-              height="24"
-              width="24"
-              x="0"
-              xmlns="http://www.w3.org/2000/svg"
-              y="0"
-            >
-              <rect
-                fill="#C81420"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-2.5649494316480768 1.3597929928351298) rotate(161.7 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#01668E"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-1.5048841922350045 12.390589562651318) rotate(115.6 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#2336E1"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-2.1373441046026795 17.010442887534964) rotate(149.4 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#033A5E"
-                height="24"
-                rx="0"
-                ry="0"
-                transform="translate(-27.527986953805755 -8.364564860691045) rotate(364.2 12 12)"
-                width="24"
-                x="0"
-                y="0"
-              />
-            </svg>
-          </div>
-          test.eth
-        </div>
-        <div
-          class="c7 c8"
+          class="c8 c9"
         >
           <svg
             fill="currentColor"
@@ -213,7 +225,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
           7
         </div>
         <div
-          class="c7 c8"
+          class="c8 c9"
         >
           <svg
             fill="currentColor"
@@ -232,7 +244,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
           0
         </div>
         <div
-          class="c7 c8"
+          class="c8 c9"
         >
           <svg
             fill="currentColor"
@@ -251,7 +263,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
           0
         </div>
         <div
-          class="c7 c8"
+          class="c8 c9"
         >
           <svg
             fill="currentColor"

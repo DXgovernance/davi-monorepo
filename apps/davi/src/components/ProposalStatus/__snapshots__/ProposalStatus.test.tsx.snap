@@ -151,9 +151,9 @@ exports[`ProposalStatus votes 1`] = `
   align-items: center;
   margin: 0.5rem;
   border-radius: 15px;
-  border: 1px solid #1DE9B6;
+  border: 1px solid #DEFF4E;
   background-color: #1B1D1F;
-  color: #1DE9B6;
+  color: #DEFF4E;
   padding: 0.25rem 0.4rem;
 }
 

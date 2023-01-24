@@ -38,6 +38,9 @@ import {
   SidebarContent,
   Label,
 } from '../styles';
+import { StyledLink } from 'components/primitives/Links';
+import { IconButton } from 'components/primitives/Button';
+import { linkStyles } from './Proposal/Proposal.styled';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -109,8 +112,6 @@ const CreateProposalPage: React.FC = () => {
     if (editMode && !title.trim() && !proposalBodyMd.trim()) return;
     setEditMode(v => !v);
   };
-
-  const handleBack = () => navigate(`/${chain}/${guildId}`);
 
   const handleSkipMetadataUpload = () => {
     setIsMetadataErrorModalOpen(false);
@@ -236,10 +237,17 @@ const CreateProposalPage: React.FC = () => {
           justifyContent="space-between"
           margin="0px 0px 24px"
         >
-          <StyledButton iconLeft onClick={handleBack}>
-            <FiChevronLeft />
-            {t('backToOverview')}
-          </StyledButton>
+          <StyledLink to={`/${chain}/${guildId}`} customStyles={linkStyles}>
+            <IconButton
+              variant="secondary"
+              iconLeft
+              padding={'0.6rem 0.8rem'}
+              marginTop={'5px;'}
+            >
+              <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
+              {t('backToOverview')}{' '}
+            </IconButton>
+          </StyledLink>
 
           <StyledButton
             onClick={handleToggleEditMode}
@@ -291,9 +299,10 @@ const CreateProposalPage: React.FC = () => {
                 handleCreateProposal();
               }
             }}
-            variant="secondary"
             disabled={!isValid || isCreatingProposal}
             data-testid="create-proposal-action-button"
+            backgroundColor={isValid ? 'none' : '#1B1D1F'}
+            outline={'1px solid #A1A6B0'}
           >
             {t('createProposal')}
           </StyledButton>

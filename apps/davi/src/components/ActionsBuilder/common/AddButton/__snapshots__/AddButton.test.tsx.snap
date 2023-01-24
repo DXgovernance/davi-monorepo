@@ -53,6 +53,7 @@ exports[`AddButton Should match snapshot 1`] = `
 .c1 button {
   padding: .25rem 0.6rem;
   background-color: #1B1D1F;
+  color: #fff;
 }
 
 .c2 {

@@ -52,7 +52,8 @@ exports[`AddressButton Should render properly with full props 1`] = `
 .c1,
 .c1 button {
   padding: .25rem 0.6rem;
-  background-color: #1B1D1F;
+  background-color: none;
+  color: #fff;
 }
 
 .c4 {
@@ -217,7 +218,8 @@ exports[`AddressButton Should render properly with partial props 1`] = `
 .c1,
 .c1 button {
   padding: .25rem 0.6rem;
-  background-color: #1B1D1F;
+  background-color: none;
+  color: #fff;
 }
 
 .c4 {

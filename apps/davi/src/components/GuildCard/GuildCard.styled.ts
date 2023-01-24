@@ -11,4 +11,5 @@ export const cardWrapperStyles = css`
     flex: 1 0 auto;
     margin: 2rem;
   }
+  background-color: ${({ theme }) => theme.colors.bg1};
 `;

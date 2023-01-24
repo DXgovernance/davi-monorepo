@@ -11,14 +11,11 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useTypedParams } from '../../Hooks/useTypedParams';
 import { StyledLink } from 'components/primitives/Links';
-import {
-  ProposalsList,
-  StyledButton,
-  StyledHeading,
-} from './Governance.styled';
+import { ProposalsList, StyledHeading } from './Governance.styled';
 import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
 import { useHookStoreProvider } from 'stores';
+import { Button } from 'components/primitives/Button';
 
 const Governance = ({ guildId }) => {
   const {
@@ -97,9 +94,12 @@ const Governance = ({ guildId }) => {
           marginRight={'1rem'}
         />
         <StyledLink to={`/${chainName}/${guildId}/create`}>
-          <StyledButton data-testid="create-discussion-button">
+          <Button
+            variant="primaryWithBorder"
+            data-testid="create-discussion-button"
+          >
             {t('forum.createDiscussion')}
-          </StyledButton>
+          </Button>
         </StyledLink>
       </Flex>
       <ProposalsList data-testid="proposals-list">

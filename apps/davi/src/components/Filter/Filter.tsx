@@ -15,9 +15,9 @@ import {
   StyledIconButton,
   StyledInputWrapper,
   FilterBadge,
-  StyledButton,
 } from './Filter.styled';
 import { StyledLink } from 'components/primitives/Links';
+import { Button } from 'components/primitives/Button';
 
 interface FilterProps {
   openSearchBar: boolean;
@@ -66,9 +66,12 @@ export const Filter: React.FC<FilterProps> = ({
           {isProposalCreationAllowed && (
             <>
               <StyledLink to={`/${chainName}/${guildId}/create-proposal`}>
-                <StyledButton data-testid="create-proposal-button">
+                <Button
+                  variant="primaryWithBorder"
+                  data-testid="create-proposal-button"
+                >
                   {t('createProposal')}
-                </StyledButton>
+                </Button>
               </StyledLink>
             </>
           )}

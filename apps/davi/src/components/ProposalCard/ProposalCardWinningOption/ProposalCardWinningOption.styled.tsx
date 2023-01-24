@@ -26,7 +26,6 @@ export const ActionDetailsButton = styled(Button)<{ isClickable: boolean }>`
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: ${({ theme }) => theme.colors.grey};
 
   :hover {

@@ -21,11 +21,10 @@ import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
-import { StyledButton } from 'Modules/Guilds/styles';
 import { useHookStoreProvider } from 'stores';
 import PostActions from 'components/Discussion/Post/PostActions';
 import moment from 'moment';
-import { IconButton } from 'components/primitives/Button';
+import { Button, IconButton } from 'components/primitives/Button';
 import { linkStyles } from '../Proposal/Proposal.styled';
 
 const DiscussionPage: React.FC = () => {
@@ -86,9 +85,12 @@ const DiscussionPage: React.FC = () => {
             <StyledLink
               to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
             >
-              <StyledButton data-testid="create-proposal-button">
+              <Button
+                variant="primaryWithBorder"
+                data-testid="create-proposal-button"
+              >
                 {t('createProposal')}
-              </StyledButton>
+              </Button>
             </StyledLink>
           </HeaderTopRow>
           <PageTitle>

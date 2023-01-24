@@ -43,6 +43,10 @@ const App = () => {
                   element={<GuildsPage pageContent={'members'} />}
                 />
                 <Route
+                  path="/:chainName/:guildId/permissions"
+                  element={<GuildsPage pageContent={'permissions'} />}
+                />
+                <Route
                   path="/:chainName/:guildId/proposal-type"
                   element={<ProposalTypes data={ProposalTypesConfig} />}
                 />

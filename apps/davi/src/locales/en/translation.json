@@ -81,6 +81,7 @@
   "functionCall": "Function Call",
   "functionCalls": "Function Calls",
   "permissions": {
+    "permissions": "Permissions",
     "setPermissions": "Set Permissions",
     "setPermissionsFor": "Set permissions for",
     "setApprovalPermissionsFor": "Set approval permissions for",

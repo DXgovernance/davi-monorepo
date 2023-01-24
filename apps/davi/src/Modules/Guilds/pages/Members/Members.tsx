@@ -22,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from './Members.styled';
+import { Box } from 'components/primitives/Layout';
 
 interface IMemberData {
   address: `0x${string}`;
@@ -123,6 +124,8 @@ const Members = () => {
   const { data: guildConfig } = useGuildConfig(daoAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
 
+  const [isMemberInfoAvailable] = useState(true);
+
   const indexedMembers = useMemo(() => {
     return fakeData?.map(member => {
       return {
@@ -163,32 +166,36 @@ const Members = () => {
       <Heading size={2}>{t('members')}</Heading>
       <Divider />
 
-      <Table>
-        <TableHead>
-          <tr>
-            <TableHeader alignment={'left'}>{t('member')}</TableHeader>
-            <TableHeader alignment={'right'}>
-              {guildToken?.symbol ?? ''}
-              {` ${t('amount')}`}
-            </TableHeader>
-            <TableHeader alignment={'right'}>{t('votingPower')}</TableHeader>
-          </tr>
-        </TableHead>
-        <tbody>
-          {(searchQuery ? searchResults : indexedMembers)?.map(member => {
-            return (
-              <MemberRow
-                address={member.address}
-                tokensLocked={member.tokensLocked}
-                totalTokensLocked={totalTokensLocked}
-                tokenSymbol={guildToken.symbol}
-                decimals={guildToken.decimals}
-                key={member.address}
-              />
-            );
-          })}
-        </tbody>
-      </Table>
+      {isMemberInfoAvailable ? (
+        <Table>
+          <TableHead>
+            <tr>
+              <TableHeader alignment={'left'}>{t('member')}</TableHeader>
+              <TableHeader alignment={'right'}>
+                {guildToken?.symbol ?? ''}
+                {` ${t('amount')}`}
+              </TableHeader>
+              <TableHeader alignment={'right'}>{t('votingPower')}</TableHeader>
+            </tr>
+          </TableHead>
+          <tbody>
+            {(searchQuery ? searchResults : indexedMembers)?.map(member => {
+              return (
+                <MemberRow
+                  address={member.address}
+                  tokensLocked={member.tokensLocked}
+                  totalTokensLocked={totalTokensLocked}
+                  tokenSymbol={guildToken.symbol}
+                  decimals={guildToken.decimals}
+                  key={member.address}
+                />
+              );
+            })}
+          </tbody>
+        </Table>
+      ) : (
+        <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
+      )}
     </MainContainer>
   );
 };

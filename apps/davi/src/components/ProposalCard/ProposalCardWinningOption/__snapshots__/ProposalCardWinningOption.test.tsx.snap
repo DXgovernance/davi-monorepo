@@ -105,7 +105,6 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 
@@ -493,7 +492,6 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 
@@ -698,7 +696,6 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 
@@ -917,7 +914,6 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 
@@ -1120,7 +1116,6 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 

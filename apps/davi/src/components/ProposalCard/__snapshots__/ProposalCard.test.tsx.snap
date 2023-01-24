@@ -274,7 +274,6 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 
@@ -750,7 +749,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 
@@ -1210,7 +1208,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   width: fit-content;
   margin: 0;
   padding: 0 12px;
-  outline: 1px solid #303338;
   color: #A1A6B0;
 }
 

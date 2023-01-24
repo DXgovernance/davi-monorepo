@@ -1,8 +1,18 @@
+import { Divider } from 'components/Divider';
 import { Box } from 'components/primitives/Layout';
 import styled from 'styled-components';
 
 export const MainContainer = styled(Box)`
   border-radius: ${({ theme }) => theme.radii.curved};
+  background-color: ${({ theme }) => theme.colors.bg4};
+  margin-top: 20px;
+  padding: 1px 24px 8px 24px;
+`;
+
+export const StyledDivider = styled(Divider)`
+  margin: 0;
+  margin-left: -24px;
+  width: calc(100% + 48px);
 `;
 
 export const Table = styled.table`
@@ -11,13 +21,12 @@ export const Table = styled.table`
   margin-top: 20px;
 `;
 
-// TODO: change this color to a reference when the theme is updated
 export const TableRow = styled.tr`
-  border-bottom: 1px solid #2f3533;
+  border-top: 1px solid ${({ theme }) => theme.colors.darkGreen1};
 `;
 
 export const TableHead = styled.thead`
-  border-bottom: 1px solid #2f3533;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.darkGreen1};
 `;
 
 export const TableHeader = styled.th<{

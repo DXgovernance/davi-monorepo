@@ -8,7 +8,6 @@ import useMiniSearch from 'hooks/useMiniSearch';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { Heading } from 'components/primitives/Typography';
-import { Divider } from 'components/Divider';
 import { Loading } from 'components/primitives/Loading';
 import { Input } from 'components/primitives/Forms/Input';
 import { BlockExplorerLink } from 'components/primitives/Links';
@@ -16,6 +15,7 @@ import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
   MainContainer,
+  StyledDivider,
   Table,
   TableCell,
   TableHead,
@@ -70,11 +70,8 @@ const fakeData: IMemberData[] = [
   },
 ];
 
-// TODO: add styling to match new design
 // TODO: replace fake data with subgraph fetcher
 // TODO: make logic to display when the subgraph data isn't available
-// TODO: replace hardcoded hex codes with theme references in Members.styled
-// TODO: make columns sortable?
 
 const MemberRow = ({
   address,
@@ -156,47 +153,51 @@ const Members = () => {
   }, [searchQuery, query]);
 
   return (
-    <MainContainer>
+    <>
       <Input
         icon={<FiSearch />}
         placeholder={t('searchMemberOrAddress')}
         value={searchQuery}
         onChange={e => setSearchQuery(e?.target?.value)}
       />
-      <Heading size={2}>{t('members')}</Heading>
-      <Divider />
+      <MainContainer>
+        <Heading size={2}>{t('members')}</Heading>
+        <StyledDivider />
 
-      {isMemberInfoAvailable ? (
-        <Table>
-          <TableHead>
-            <tr>
-              <TableHeader alignment={'left'}>{t('member')}</TableHeader>
-              <TableHeader alignment={'right'}>
-                {guildToken?.symbol ?? ''}
-                {` ${t('amount')}`}
-              </TableHeader>
-              <TableHeader alignment={'right'}>{t('votingPower')}</TableHeader>
-            </tr>
-          </TableHead>
-          <tbody>
-            {(searchQuery ? searchResults : indexedMembers)?.map(member => {
-              return (
-                <MemberRow
-                  address={member.address}
-                  tokensLocked={member.tokensLocked}
-                  totalTokensLocked={totalTokensLocked}
-                  tokenSymbol={guildToken.symbol}
-                  decimals={guildToken.decimals}
-                  key={member.address}
-                />
-              );
-            })}
-          </tbody>
-        </Table>
-      ) : (
-        <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
-      )}
-    </MainContainer>
+        {isMemberInfoAvailable ? (
+          <Table>
+            <TableHead>
+              <tr>
+                <TableHeader alignment={'left'}>{t('member')}</TableHeader>
+                <TableHeader alignment={'right'}>
+                  {guildToken?.symbol ?? ''}
+                  {` ${t('amount')}`}
+                </TableHeader>
+                <TableHeader alignment={'right'}>
+                  {t('votingPower')}
+                </TableHeader>
+              </tr>
+            </TableHead>
+            <tbody>
+              {(searchQuery ? searchResults : indexedMembers)?.map(member => {
+                return (
+                  <MemberRow
+                    address={member.address}
+                    tokensLocked={member.tokensLocked}
+                    totalTokensLocked={totalTokensLocked}
+                    tokenSymbol={guildToken.symbol}
+                    decimals={guildToken.decimals}
+                    key={member.address}
+                  />
+                );
+              })}
+            </tbody>
+          </Table>
+        ) : (
+          <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
+        )}
+      </MainContainer>
+    </>
   );
 };
 

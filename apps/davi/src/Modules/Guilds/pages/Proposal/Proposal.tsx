@@ -41,6 +41,7 @@ import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { useHookStoreProvider } from 'stores';
+import { ProposalVotesCard } from 'components/ProposalVotesCard';
 
 const ProposalPage: React.FC = () => {
   const {
@@ -156,6 +157,7 @@ const ProposalPage: React.FC = () => {
         </PageContent>
         <SidebarContent>
           <ProposalVoteCardWrapper />
+          <ProposalVotesCard />
           <ProposalInfoCard
             proposal={proposal}
             guildConfig={guildConfig}

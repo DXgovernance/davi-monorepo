@@ -37,6 +37,12 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   }),
 }));
 
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
+}));
+
 jest.mock('utils', () => ({
   getNetworkById: () => ({
     nativeAsset: {

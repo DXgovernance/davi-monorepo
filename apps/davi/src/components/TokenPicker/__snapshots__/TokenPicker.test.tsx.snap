@@ -22,10 +22,12 @@ exports[`TokenPicker Should match snapshot 1`] = `
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-right: 0;
   border: 1px solid #303338;
   border-radius: 1.5rem;
   padding: 0.5rem 0.8rem;
   background-color: transparent;
+  outline: 1px solid #737977;
 }
 
 .c10 input {
@@ -62,10 +64,12 @@ exports[`TokenPicker Should match snapshot 1`] = `
 
 .c11 {
   margin-right: 0.3rem;
+  color: #737977;
 }
 
 .c13 {
   margin-left: 0.3rem;
+  color: #737977;
 }
 
 .c18 {

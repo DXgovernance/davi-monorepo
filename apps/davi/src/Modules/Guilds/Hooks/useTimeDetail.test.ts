@@ -5,10 +5,16 @@ import moment from 'moment';
 import { BigNumber } from 'ethers';
 const bn = (value: number) => BigNumber.from(value);
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => ({
-    data: {
-      timeForExecution: bn(100002),
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => ({
+          data: {
+            timeForExecution: bn(100002),
+          },
+        }),
+      },
     },
   }),
 }));

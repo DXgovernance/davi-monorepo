@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { getUpdatedValues, UpdatedValuesReturn } from './utils';
 import { BigNumber } from 'ethers';
+import { useHookStoreProvider } from 'stores';
 
 interface ArgConfigValues {
   _proposalTime?: BigNumber;
@@ -21,6 +21,11 @@ export const useUpdatedGuildConfigValues = (
   newValues: ArgConfigValues
 ): UpdatedValuesReturn | {} => {
   const { guildId } = useTypedParams();
+  const {
+    hooks: {
+      fetchers: { useGuildConfig },
+    },
+  } = useHookStoreProvider();
   const { data: currentGuildConfig } = useGuildConfig(guildId);
   const parsedData = useMemo(() => {
     if (!newValues) return null;

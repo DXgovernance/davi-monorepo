@@ -44,13 +44,9 @@ type UseProposalVotesOfVoterReturn = ReturnType<
 export interface ProposalVoteCardProps {
   voteData: VoteData;
   proposal: Proposal;
-  timestamp: number;
   votingPower: VotingPower;
-  contract: ERC20Guild;
-  createTransaction: (
-    summary: string,
-    txFunction: () => Promise<providers.TransactionResponse>
-  ) => void;
+  timestamp: number;
+  votingMachineAddress: string;
   userVote?: UseProposalVotesOfVoterReturn;
 }
 

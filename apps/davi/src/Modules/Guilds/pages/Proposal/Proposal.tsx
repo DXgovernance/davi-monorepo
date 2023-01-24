@@ -2,8 +2,7 @@ import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
 import { ProposalInfoCard } from 'components/ProposalInfoCard';
 import { ProposalStatus } from 'components/ProposalStatus';
-import { IconButton } from 'components/primitives/Button';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
@@ -15,8 +14,6 @@ import { FiArrowLeft } from 'react-icons/fi';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
 import { useProposalState } from 'hooks/Guilds/useProposalState';
-import useExecutable from 'hooks/Guilds/useExecutable';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
@@ -25,13 +22,13 @@ import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import {
   HeaderTopRow,
+  linkStyles,
   PageContainer,
   PageContent,
   PageHeader,
   PageTitle,
   ProposalActionsWrapper,
   SidebarContent,
-  StyledIconButton,
 } from './Proposal.styled';
 import { useTranslation } from 'react-i18next';
 import useTimeDetail from 'Modules/Guilds/Hooks/useTimeDetail';
@@ -42,11 +39,19 @@ import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { useHookStoreProvider } from 'stores';
 import { ProposalVotesCard } from 'components/ProposalVotesCard';
+import { Flex } from 'components/primitives/Layout';
+import { IconButton } from 'components/primitives/Button';
 
 const ProposalPage: React.FC = () => {
   const {
     hooks: {
-      fetchers: { useProposal, useTotalLocked, useProposalCalls },
+      writers: { useExecuteProposal },
+      fetchers: {
+        useProposal,
+        useTotalLocked,
+        useProposalCalls,
+        useGuildConfig,
+      },
     },
   } = useHookStoreProvider();
   const { t } = useTranslation();
@@ -78,9 +83,8 @@ const ProposalPage: React.FC = () => {
   const status = useProposalState(proposal);
   const endTime = useTimeDetail(guildId, status, proposal?.endTime);
 
-  const {
-    data: { executeProposal },
-  } = useExecutable();
+  const executeProposal = useExecuteProposal(guildId);
+  const handleExecuteProposal = () => executeProposal(proposalId);
 
   if (!loaded) {
     return <></>;
@@ -93,11 +97,20 @@ const ProposalPage: React.FC = () => {
             title="We couldn't find that proposal."
             subtitle="It probably doesn't exist."
             extra={
-              <UnstyledLink to={`/${chainName}/${guildId}`}>
-                <IconButton iconLeft>
-                  <FiArrowLeft /> See all proposals
+              <StyledLink
+                to={`/${chainName}/${guildId}`}
+                customStyles={linkStyles}
+              >
+                <IconButton
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                >
+                  <FiArrowLeft style={{ marginRight: '15px' }} />{' '}
+                  {t('seeAllProposals')}
                 </IconButton>
-              </UnstyledLink>
+              </StyledLink>
             }
           />
         );
@@ -105,7 +118,7 @@ const ProposalPage: React.FC = () => {
         return (
           <Result
             state={ResultState.ERROR}
-            title={t('errorMessage.genericProposalError')}
+            title={t('proposal.errors.genericProposalError')}
             subtitle={error.message}
           />
         );
@@ -117,17 +130,25 @@ const ProposalPage: React.FC = () => {
         <PageContent>
           <PageHeader>
             <HeaderTopRow>
-              <UnstyledLink to={`/${chainName}/${guildId}`}>
-                <StyledIconButton variant="secondary" iconLeft>
+              <StyledLink
+                to={`/${chainName}/${guildId}`}
+                customStyles={linkStyles}
+              >
+                <IconButton
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                >
                   <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
                   {guildConfig?.name}
-                </StyledIconButton>
-              </UnstyledLink>
+                </IconButton>
+              </StyledLink>
 
               <ProposalStatus status={status} endTime={endTime} />
               {status === ProposalState.Executable &&
                 !isReadOnly(connector) && (
-                  <ExecuteButton executeProposal={executeProposal} />
+                  <ExecuteButton executeProposal={handleExecuteProposal} />
                 )}
             </HeaderTopRow>
             <PageTitle data-testid="proposal-page-title">
@@ -135,16 +156,15 @@ const ProposalPage: React.FC = () => {
                 <Loading loading text skeletonProps={{ width: '800px' }} />
               )}
             </PageTitle>
+            <Flex direction="row" justifyContent="left">
+              {t('createdBy')}
+              <AddressButton address={proposal?.creator} />
+            </Flex>
           </PageHeader>
-
-          <AddressButton address={proposal?.creator} />
-
           <ProposalDescription metadata={metadata} error={metadataError} />
-
           <ProposalActionsWrapper>
             <ActionsBuilder options={options} editable={false} />
           </ProposalActionsWrapper>
-
           <SidebarCard
             header={
               <SidebarCardHeaderSpaced>

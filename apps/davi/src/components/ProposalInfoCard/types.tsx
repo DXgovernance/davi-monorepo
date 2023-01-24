@@ -1,5 +1,5 @@
+import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
 import { Proposal } from 'types/types.guilds.d';
-import { GuildConfigProps } from 'Modules/Guilds/Hooks/useGuildConfig';
 
 export interface ProposalInfoCardProps {
   proposal: Proposal;

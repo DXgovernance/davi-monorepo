@@ -9,10 +9,6 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   useTokenList: () => [],
 }));
 
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => jest.fn(),
-}));
-
 jest.mock('stores/modules/common/fetchers', () => ({
   useProposalCalls: () => ({ options: [] }),
 }));
@@ -25,6 +21,7 @@ jest.mock('stores', () => ({
         useIsProposalCreationAllowed: jest.fn(),
         useSnapshotId: jest.fn(),
         useProposalCalls: jest.fn(),
+        useGuildConfig: () => jest.fn(),
       },
     },
   }),

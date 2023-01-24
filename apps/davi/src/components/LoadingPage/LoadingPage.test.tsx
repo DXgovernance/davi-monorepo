@@ -8,6 +8,12 @@ jest.mock('stores/modules/common/fetchers', () => ({
   useProposalCalls: () => ({ options: [] }),
 }));
 
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
+}));
+
 jest.mock('wagmi', () => ({
   chain: {},
   useAccount: () => ({ isConnected: false }),

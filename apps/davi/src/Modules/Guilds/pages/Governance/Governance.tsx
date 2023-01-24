@@ -10,12 +10,12 @@ import { Input } from 'components/primitives/Forms/Input';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useTypedParams } from '../../Hooks/useTypedParams';
-import { UnstyledLink } from 'components/primitives/Links';
-import { Button } from 'components/primitives/Button';
-import { ProposalsList, StyledHeading, StyledLink } from './Governance.styled';
+import { StyledLink } from 'components/primitives/Links';
+import { ProposalsList, StyledHeading } from './Governance.styled';
 import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
 import { useHookStoreProvider } from 'stores';
+import { Button } from 'components/primitives/Button';
 
 const Governance = ({ guildId }) => {
   const {
@@ -75,7 +75,7 @@ const Governance = ({ guildId }) => {
     return (
       <Result
         state={ResultState.ERROR}
-        title={t('errorMessage.genericProposalError')}
+        title={t('proposal.errors.genericProposalError')}
         subtitle={error.message}
       />
     );
@@ -91,12 +91,16 @@ const Governance = ({ guildId }) => {
           }}
           icon={<AiOutlineSearch size={24} />}
           placeholder={t('searchTitleEnsAddress')}
+          marginRight={'1rem'}
         />
-        <UnstyledLink to={`/${chainName}/${guildId}/create`}>
-          <Button variant="secondary" data-testid="create-discussion-button">
+        <StyledLink to={`/${chainName}/${guildId}/create`}>
+          <Button
+            variant="primaryWithBorder"
+            data-testid="create-discussion-button"
+          >
             {t('forum.createDiscussion')}
           </Button>
-        </UnstyledLink>
+        </StyledLink>
       </Flex>
       <ProposalsList data-testid="proposals-list">
         <StyledHeading size={2}>{t('proposals')}</StyledHeading>

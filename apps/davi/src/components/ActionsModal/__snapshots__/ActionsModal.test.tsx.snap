@@ -254,6 +254,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   border-radius: 2rem;
+  outline: 0px;
 }
 
 .c14:active,

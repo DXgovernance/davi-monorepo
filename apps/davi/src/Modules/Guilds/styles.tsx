@@ -33,6 +33,7 @@ export const StyledButton = styled(IconButton)<{
   margin: 0;
   padding: 0.5rem 0.8rem;
   margin-left: ${props => props.marginLeft || 0};
+  border-color: ${({ theme }) => theme.colors.grey3};
 `;
 
 export const Label = styled.span<{

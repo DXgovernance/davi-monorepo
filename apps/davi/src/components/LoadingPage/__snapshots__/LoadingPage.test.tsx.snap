@@ -18,8 +18,8 @@ exports[`LoadingPage should match snapshot 1`] = `
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -38,6 +38,10 @@ exports[`LoadingPage should match snapshot 1`] = `
 
 .c8:active:enabled {
   border: 1px solid #303338;
+}
+
+.c8:disabled {
+  color: #303338;
 }
 
 .c4 {
@@ -162,7 +166,7 @@ exports[`LoadingPage should match snapshot 1`] = `
         <svg
           class="c6"
         >
-          project_davi_logo_white.svg
+          project_davi_logo_yellow.svg
         </svg>
       </h2>
       <div

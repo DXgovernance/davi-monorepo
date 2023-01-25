@@ -40,7 +40,7 @@ export const apolloClient: {
   ),
   [SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID]: setupApolloClient(
     SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID
-  ), // FIXME: fix this once the subgraph is deployed
+  ),
   [SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID]: setupApolloClient(
     SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID
   ),

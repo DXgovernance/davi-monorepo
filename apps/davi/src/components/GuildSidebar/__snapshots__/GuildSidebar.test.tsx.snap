@@ -307,6 +307,16 @@ exports[`GuildSidebar Should render with data 1`] = `
           members
         </div>
       </a>
+      <a
+        class="c13"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/permissions"
+      >
+        <div
+          class="c14"
+        >
+          permissions.permissions
+        </div>
+      </a>
     </div>
   </div>
    
@@ -597,6 +607,16 @@ exports[`GuildSidebar Should render without data 1`] = `
           class="c12"
         >
           members
+        </div>
+      </a>
+      <a
+        class="c11"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/permissions"
+      >
+        <div
+          class="c12"
+        >
+          permissions.permissions
         </div>
       </a>
     </div>

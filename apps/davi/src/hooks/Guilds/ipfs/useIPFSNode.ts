@@ -10,9 +10,7 @@ export default function useIPFSNode() {
   useEffect(() => {
     async function start() {
       setIsReady(false);
-      console.log({ ipfs });
       if (!ipfs) {
-        console.log(window.ipfs);
         // Check existing ipfs instance
         if (window.ipfs) {
           setIpfs(window.ipfs);
@@ -20,7 +18,6 @@ export default function useIPFSNode() {
         } else {
           // Create new ipfs instance
           try {
-            console.log('create');
             const newNode = await IPFS.create();
             setIpfs(newNode);
             window.ipfs = newNode;
@@ -38,11 +35,9 @@ export default function useIPFSNode() {
   }, []); //eslint-disable-line
 
   async function add(content: string) {
-    console.log('add');
-    console.log(window.ipfs);
     if (!isReady) return null;
 
-    const { cid } = await window.ipfs.add(content);
+    const { cid } = await ipfs.add(content);
     console.debug(`[useIPFSNode] Added content with CID ${cid.toString()}.`);
     return cid.toString();
   }

@@ -24,7 +24,6 @@ importers:
       '@dnd-kit/utilities': ^3.1.0
       '@ensdomains/content-hash': ^2.5.7
       '@ethersproject/providers': ^5.7.2
-      '@graphprotocol/client-apollo': ^1.0.13
       '@graphprotocol/client-cli': ^2.2.16
       '@graphql-mesh/cache-localforage': ^0.7.5
       '@graphql-mesh/cross-helpers': ^0.3.1
@@ -160,7 +159,6 @@ importers:
       '@dnd-kit/utilities': 3.2.0_react@18.2.0
       '@ensdomains/content-hash': 2.5.7
       '@ethersproject/providers': 5.7.2
-      '@graphprotocol/client-apollo': 1.0.13_rutdcfnxnd54pks52qrac365u4
       '@graphql-mesh/cache-localforage': 0.7.5_graphql@16.6.0
       '@graphql-mesh/cross-helpers': 0.3.1_graphql@16.6.0
       '@graphql-mesh/graphql': 0.33.8_dvgirfdsy4cky7rqkuzgo4keja
@@ -4685,20 +4683,6 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@graphprotocol/client-apollo/1.0.13_rutdcfnxnd54pks52qrac365u4:
-    resolution: {integrity: sha512-LLzdFxPOQwkpuJgdKOTJUFi9qrW82K5E58Yx9+/MTYVm1FPRo3ZqZWyuB8hBqQsg269PrUQHJ5uDpCCQCpW1LA==}
-    peerDependencies:
-      '@apollo/client': ^3.5.0
-      graphql: ^15.2.0 || ^16.0.0
-    dependencies:
-      '@apollo/client': 3.7.4_gdcq4dv6opitr3wbfwyjmanyra
-      '@graphql-mesh/apollo-link': 10.0.1_rutdcfnxnd54pks52qrac365u4
-      graphql: 16.6.0
-      tslib: 2.4.1
-    transitivePeerDependencies:
-      - '@graphql-mesh/runtime'
-    dev: false
-
   /@graphprotocol/client-auto-pagination/1.1.12_graphql@16.6.0:
     resolution: {integrity: sha512-Y3xSSxwmHNsmLOzktTmeNRx9DFiQxit1ArmUnegDJSedeWJLyortVoAE5eIF3MI1lExDz0+2ksNJNNLhqW2Sew==}
     peerDependencies:
@@ -5009,20 +4993,6 @@ packages:
       graphql: 16.6.0
       object-inspect: 1.10.3
       tslib: 2.4.1
-
-  /@graphql-mesh/apollo-link/10.0.1_rutdcfnxnd54pks52qrac365u4:
-    resolution: {integrity: sha512-OWFWiTq49dDjTYW6OaZRQFsVpWQKHMTADMTfgfXxwbpfKAL9NIs96aD6mBKk+xkH2ZefrCrEgSjOGkHZSMQBow==}
-    peerDependencies:
-      '@apollo/client': ^3.5.9
-      '@graphql-mesh/runtime': ^0.46.2
-      graphql: ^15.2.0 || ^16.0.0
-    dependencies:
-      '@apollo/client': 3.7.4_gdcq4dv6opitr3wbfwyjmanyra
-      '@graphql-mesh/runtime': 0.46.5_graphql@16.6.0
-      '@graphql-tools/utils': 9.1.3_graphql@16.6.0
-      graphql: 16.6.0
-      tslib: 2.4.1
-    dev: false
 
   /@graphql-mesh/cache-localforage/0.7.3_graphql@16.6.0:
     resolution: {integrity: sha512-YgWWYz88dvlvpC/n1SHd8hSofIrCf6Qhv+h6mjCOI7y51Q9sDk3phhYIz3iqhDhvuwEgzYal3X9FVrG8p6Ilxg==}

@@ -4,8 +4,8 @@ import { isValidGuildProposal } from 'utils';
 import { WriterHooksInteface } from 'stores/types';
 import { useTransactions } from 'contexts/Guilds';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
-import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
 import usePinataIPFS from 'hooks/Guilds/ipfs/usePinataIPFS';
+import useWeb3Storage from 'hooks/Guilds/ipfs/useWeb3Storage';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { createPost } from 'components/Forum';
 import { providers } from 'ethers';
@@ -20,8 +20,8 @@ export const useCreateProposal: IUseCreateProposal = (
   const { t } = useTranslation();
   const daoContract = useERC20Guild(daoAddress);
   const { createTransaction } = useTransactions();
-  const ipfs = useIPFSNode();
   const { pinToPinata } = usePinataIPFS();
+  const { pinToStorage } = useWeb3Storage();
   const { orbis } = useOrbisContext();
 
   const handleCreateProposal: IHandleCreateProposal = useCallback(
@@ -65,20 +65,15 @@ export const useCreateProposal: IUseCreateProposal = (
           voteOptions: ['', ...options.map(({ label }) => label)],
           discussionRef: discussionRef,
         };
-        // while (!ipfs.isReady) {
-        console.log(ipfs.isReady);
-        // }
-        const cid = await ipfs.add(JSON.stringify(content));
-        await ipfs.pin(cid);
-        const pinataPinResult = await pinToPinata(cid, content);
-        console.log({ pinataPinResult });
-        console.log({ cid });
-        if (pinataPinResult.IpfsHash !== `${cid}`) {
-          throw new Error(t('ipfs.hashNotTheSame'));
+        const pinataPin = pinToPinata(content).then(result => result?.IpfsHash);
+        const web3storagePin = pinToStorage(content);
+        const results = await Promise.all([pinataPin, web3storagePin]);
+        // TODO: Loop through array looking for at least two matching hashes when we have >2 pinning services
+        if (results[0] !== results[1]) {
+          console.warn(t('ipfs.hashNotTheSame'), results);
         }
-        return `ipfs://${pinataPinResult.IpfsHash}`;
+        return `ipfs://${results[0]}`;
       };
-
       if (!isValid) throw new Error(error);
 
       if (options.length === 0) {
@@ -89,6 +84,7 @@ export const useCreateProposal: IUseCreateProposal = (
 
       if (!skipMetadataUpload) {
         try {
+          console.log('try');
           contentHash = await uploadToIPFS();
         } catch (error) {
           handleMetadataUploadError(error);
@@ -110,15 +106,14 @@ export const useCreateProposal: IUseCreateProposal = (
         },
         true,
         cb,
-        true,
         linkToOrbis
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       daoContract,
       createTransaction,
       t,
-      ipfs,
       pinToPinata,
       discussionRef,
       daoAddress,

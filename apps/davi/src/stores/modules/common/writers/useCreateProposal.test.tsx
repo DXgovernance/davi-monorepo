@@ -25,22 +25,21 @@ jest.mock('contexts/Guilds', () => ({
   }),
 }));
 
-let mockReturnCid = '0x0';
-jest.mock('hooks/Guilds/ipfs/useIPFSNode', () => ({
+let mockReturnIpfsHash = '0x0';
+jest.mock('hooks/Guilds/ipfs/useWeb3Storage', () => ({
   __esModule: true,
   default: () => ({
-    add: () => mockReturnCid,
-    pin: jest.fn(),
+    pinToStorage: () => Promise.resolve(mockReturnIpfsHash),
   }),
 }));
 
-let mockReturnIpfsHash = '0x0';
 jest.mock('hooks/Guilds/ipfs/usePinataIPFS', () => ({
   __esModule: true,
   default: () => ({
-    pinToPinata: () => ({
-      IpfsHash: mockReturnIpfsHash,
-    }),
+    pinToPinata: () =>
+      Promise.resolve({
+        IpfsHash: mockReturnIpfsHash,
+      }),
   }),
 }));
 
@@ -54,13 +53,18 @@ jest.mock('contexts/Guilds/orbis', () => ({
       getPosts: () => ({
         data: [1, 2, 3],
       }),
+      createPost: () => ({
+        status: 200,
+      }),
     },
   }),
 }));
 
 describe('useCreateProposal', () => {
   it('should create a transaction if the data is valid', async () => {
-    const { result } = renderHook(() => useCreateProposal(ZERO_ADDRESS));
+    const { result } = renderHook(() =>
+      useCreateProposal(ZERO_ADDRESS, ZERO_ADDRESS)
+    );
 
     const {
       title,
@@ -160,73 +164,5 @@ describe('useCreateProposal', () => {
       );
     } catch {}
     expect(mockCreateTransaction).not.toHaveBeenCalled();
-  });
-
-  it('should throw error if the IPFS hash and the CID are not the same, and skipMetadataUpload is false', async () => {
-    const { result } = renderHook(() => useCreateProposal(ZERO_ADDRESS));
-
-    const {
-      title,
-      description,
-      toArray,
-      dataArray,
-      valueArray,
-      totalOptions,
-      skipMetadataUpload,
-      otherFields,
-      handleMetadataUploadError,
-      cb,
-    } = proposalData;
-
-    mockReturnCid = 'otherCID';
-
-    await result.current(
-      title,
-      description,
-      toArray,
-      dataArray,
-      valueArray,
-      totalOptions,
-      otherFields,
-      skipMetadataUpload,
-      handleMetadataUploadError,
-      cb
-    );
-
-    expect(mockCreateTransaction).not.toHaveBeenCalled();
-  });
-
-  it('should create proposal if the IPFS hash and the CID are not the same, but skipMetadataUpload is true', async () => {
-    const { result } = renderHook(() => useCreateProposal(ZERO_ADDRESS));
-
-    const {
-      title,
-      description,
-      toArray,
-      dataArray,
-      valueArray,
-      totalOptions,
-      otherFields,
-      handleMetadataUploadError,
-      cb,
-    } = proposalData;
-
-    const skipMetadataUpload = true;
-    mockReturnCid = 'otherCID';
-
-    await result.current(
-      title,
-      description,
-      toArray,
-      dataArray,
-      valueArray,
-      totalOptions,
-      otherFields,
-      skipMetadataUpload,
-      handleMetadataUploadError,
-      cb
-    );
-
-    expect(mockCreateTransaction).toHaveBeenCalled();
   });
 });

@@ -38,7 +38,6 @@ import {
   SidebarContent,
   Label,
 } from '../styles';
-import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -61,7 +60,6 @@ const CreateProposalPage: React.FC = () => {
     },
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
-  useIPFSNode();
 
   const createProposal = useCreateProposal(guildId, discussionId);
   const navigate = useNavigate();

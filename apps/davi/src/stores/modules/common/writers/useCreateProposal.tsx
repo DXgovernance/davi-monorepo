@@ -84,7 +84,6 @@ export const useCreateProposal: IUseCreateProposal = (
 
       if (!skipMetadataUpload) {
         try {
-          console.log('try');
           contentHash = await uploadToIPFS();
         } catch (error) {
           handleMetadataUploadError(error);

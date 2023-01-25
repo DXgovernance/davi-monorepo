@@ -35,9 +35,5 @@ export const VoteOption = styled.div`
 `;
 
 export const Amount = styled.div`
-  color: #a1a6b0;
-`;
-
-export const VotesAMount = styled.div`
-  color: black;
+  color: ${({ theme }) => theme.colors.grey};
 `;

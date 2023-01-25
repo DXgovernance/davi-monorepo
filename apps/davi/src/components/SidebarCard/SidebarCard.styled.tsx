@@ -29,13 +29,4 @@ export const SidebarCardContentWrapper = styled(Box)`
   overflow: auto;
   max-height: 10rem;
   margin-bottom: 1rem;
-  *::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.yellow};
-    border-radius: 10px;
-    border: 3px solid ${({ theme }) => theme.colors.bg3};
-  }
-  * {
-    scrollbar-width: 12px;
-    scrollbar-color: ${({ theme }) => theme.colors.border1} transparent;
-  }
 `;

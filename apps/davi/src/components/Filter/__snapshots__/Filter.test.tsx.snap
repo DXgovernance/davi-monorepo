@@ -18,8 +18,8 @@ exports[`Filter Should match snapshot 1`] = `
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -38,6 +38,10 @@ exports[`Filter Should match snapshot 1`] = `
 
 .c6:active:enabled {
   border: 1px solid #303338;
+}
+
+.c6:disabled {
+  color: #303338;
 }
 
 .c15 {
@@ -86,6 +90,18 @@ exports[`Filter Should match snapshot 1`] = `
 .c7 svg,
 .c7 img {
   margin-left: .2rem;
+}
+
+.c7,
+.c7 button {
+  background-color: #1B1D1F;
+  color: #fff;
+}
+
+.c16,
+.c16 button {
+  background-color: #1B1D1F;
+  color: #fff;
 }
 
 .c0 {
@@ -242,7 +258,7 @@ exports[`Filter Should match snapshot 1`] = `
   width: 57%;
 }
 
-.c16 {
+.c17 {
   border-radius: 20px;
   padding: 0.4rem;
 }
@@ -445,7 +461,7 @@ exports[`Filter Should match snapshot 1`] = `
         class="c2 c14"
       >
         <button
-          class="c15 c16"
+          class="c15 c16 c17"
           data-testid="search-btn-all-proposals"
         >
           <svg

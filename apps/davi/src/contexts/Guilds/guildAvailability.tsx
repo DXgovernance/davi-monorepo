@@ -2,7 +2,7 @@ import { MultichainContext } from 'contexts/MultichainProvider';
 import { ButtonIcon, IconButton } from 'components/primitives/Button';
 import { Box } from 'components/primitives/Layout/Box';
 import { Result, ResultState } from 'components/Result';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import styled from 'styled-components';
@@ -120,11 +120,11 @@ const GuildAvailabilityProvider = ({ children }) => {
               </div>
             </>
           ) : (
-            <UnstyledLink to={`/${chainName}`}>
+            <StyledLink to={`/${chainName}`}>
               <IconButton iconLeft>
                 <FiArrowLeft /> {t('takeMeHome')}
               </IconButton>
-            </UnstyledLink>
+            </StyledLink>
           )
         }
       />

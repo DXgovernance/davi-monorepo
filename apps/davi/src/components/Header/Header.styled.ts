@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Box, Container } from 'components/primitives/Layout';
 import { Heading } from 'components/primitives/Typography';
-import { ReactComponent as DaviLogo } from '../../assets/images/project_davi_logo_white.svg';
+import { ReactComponent as DaviLogo } from '../../assets/images/project_davi_logo_yellow.svg';
 
 export const HeaderWrapper = styled.nav`
   padding: 0.75rem 0;

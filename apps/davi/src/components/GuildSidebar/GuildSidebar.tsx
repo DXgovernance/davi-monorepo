@@ -1,5 +1,5 @@
 import dxIcon from 'assets/images/dxdao-icon.svg';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { Loading } from 'components/primitives/Loading';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useTranslation } from 'react-i18next';
@@ -64,24 +64,24 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
         {actions}
       </DaoInfoPanel>
       <SidebarMenu>
-        <UnstyledLink data-testid="governance-page" to={locations.governance}>
+        <StyledLink data-testid="governance-page" to={locations.governance}>
           <SidebarMenuItem current={pathname === locations.governance}>
             {t('governance')}
           </SidebarMenuItem>
-        </UnstyledLink>
-        <UnstyledLink
+        </StyledLink>
+        <StyledLink
           data-testid="all-proposals-page"
           to={locations.allProposals}
         >
           <SidebarMenuItem current={pathname === locations.allProposals}>
             {t('allProposals')}
           </SidebarMenuItem>
-        </UnstyledLink>
-        <UnstyledLink to={locations.allDiscussions}>
+        </StyledLink>
+        <StyledLink to={locations.allDiscussions}>
           <SidebarMenuItem current={pathname === locations.allDiscussions}>
             {t('allDiscussions')}
           </SidebarMenuItem>
-        </UnstyledLink>
+        </StyledLink>
       </SidebarMenu>
     </SidebarWrapper>
   );

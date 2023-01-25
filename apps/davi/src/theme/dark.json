@@ -4,8 +4,10 @@
     "red": "#E75C5C",
     "grey": "#A1A6B0",
     "grey2": "#BDC0C7",
+    "grey3": "#737977",
+    "yellow": "#DEFF4E",
     "failed": "#D500F9",
-    "active": "#1DE9B6",
+    "active": "#DEFF4E",
 
     "params": {
       "0": "#9575CD",
@@ -22,6 +24,8 @@
     "bg2": "#282B30",
     "bg3": "#26282D",
     "bg4": "#181B1B",
+
+    "darkGreen1": "#2F3533",
 
     "border1": "#303338",
     "border2": "#D17A06",

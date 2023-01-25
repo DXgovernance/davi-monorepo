@@ -1,2 +1,2 @@
-export { UnstyledLink } from './UnstyledLink';
+export { StyledLink } from './StyledLink';
 export { BlockExplorerLink } from './BlockExplorerLink';

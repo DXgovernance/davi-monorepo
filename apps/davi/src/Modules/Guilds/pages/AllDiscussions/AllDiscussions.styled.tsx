@@ -20,4 +20,5 @@ export const StyledLink = styled(Link)`
 export const StyledButton = styled(Button)`
   white-space: nowrap;
   height: 45px;
+  border-color: ${({ theme }) => theme.colors.grey3};
 `;

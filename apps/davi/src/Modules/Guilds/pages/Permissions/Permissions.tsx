@@ -1,7 +1,14 @@
-import { Heading } from 'components/primitives/Typography';
-import { useGetAllERC20Permissions } from 'hooks/Guilds/erc20/useGetAllERC20Permissions';
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BiInfinite } from 'react-icons/bi';
+import { ZERO_ADDRESS } from 'utils';
+import { Heading } from 'components/primitives/Typography';
+import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import {
+  TokenWithPermission,
+  useGetAllTokensPermissions,
+} from 'hooks/Guilds/erc20/useGetAllTokensPermissions';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
   MainContainer,
   Table,
@@ -10,17 +17,31 @@ import {
   TableHeader,
   TableRow,
 } from './Permissions.styled';
+import { Loading } from 'components/primitives/Loading';
 
-const AssetPermissionRow = () => {
+interface IAssetPermissionRow {
+  token: TokenWithPermission;
+}
+
+const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
+  const { valueAllowed, fromTime } = token.permission;
+  const formattedValue = useBigNumberToNumber(
+    valueAllowed,
+    token?.decimals,
+    3
+  ).toString();
+
+  const tokenValueAllowed = useMemo(() => {
+    if (fromTime?.toString() === '0') return '0';
+    if (valueAllowed?.toString() === '0') return <BiInfinite size={20} />;
+    return formattedValue;
+  }, [valueAllowed, fromTime, formattedValue]);
+
   return (
     <TableRow>
-      <TableCell width="auto" alignment="left">
-        Token
-      </TableCell>
-      <TableCell width="auto">Address</TableCell>
-      <TableCell width="auto" alignment="right">
-        Allowed amount
-      </TableCell>
+      <TableCell alignment="left">{token.symbol}</TableCell>
+      <TableCell alignment="left">{token.address ?? ZERO_ADDRESS}</TableCell>
+      <TableCell alignment="right">{tokenValueAllowed}</TableCell>
     </TableRow>
   );
 };
@@ -28,9 +49,8 @@ const AssetPermissionRow = () => {
 const Permissions = () => {
   const { t } = useTranslation();
   const { guildId } = useTypedParams();
-
-  const { data: permissions } = useGetAllERC20Permissions(guildId);
-  console.log(permissions);
+  const { data: erc20TokensWithPermissions } =
+    useGetAllTokensPermissions(guildId);
 
   return (
     <MainContainer>
@@ -39,14 +59,28 @@ const Permissions = () => {
         <TableHead>
           <tr>
             <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
-            <TableHeader alignment={'center'}>{t('assetAddress')}</TableHeader>
+            <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
             <TableHeader alignment={'right'}>{t('allowedAmount')}</TableHeader>
           </tr>
         </TableHead>
         <tbody>
-          <AssetPermissionRow />
-          <AssetPermissionRow />
-          <AssetPermissionRow />
+          {erc20TokensWithPermissions ? (
+            erc20TokensWithPermissions?.map(token => {
+              return <AssetPermissionRow token={token} key={token.address} />;
+            })
+          ) : (
+            <TableRow>
+              <TableCell alignment={'left'}>
+                <Loading loading text />
+              </TableCell>
+              <TableCell alignment={'left'}>
+                <Loading loading text />
+              </TableCell>
+              <TableCell alignment={'right'}>
+                <Loading loading text />
+              </TableCell>
+            </TableRow>
+          )}
         </tbody>
       </Table>
     </MainContainer>

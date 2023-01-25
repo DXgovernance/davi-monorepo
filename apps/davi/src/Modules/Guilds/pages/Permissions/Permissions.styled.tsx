@@ -33,13 +33,12 @@ export const TableHeader = styled.th<{
 `;
 
 export const TableCell = styled.td<{
-  width: string;
+  width?: string;
   alignment?: 'left' | 'center' | 'right';
 }>`
   height: 24px;
   padding: 12px 0px;
   font-weight: 400;
-  text-align: ${({ alignment }) => (alignment ? alignment : 'center')};
-  width: ${({ width }) => width};
+  text-align: ${({ alignment }) => alignment ?? 'center'};
+  width: ${({ width }) => width ?? 'auto'};
 `;
-

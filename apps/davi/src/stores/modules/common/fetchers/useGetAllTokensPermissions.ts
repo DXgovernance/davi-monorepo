@@ -8,17 +8,14 @@ import {
 } from 'utils';
 import { useHookStoreProvider } from 'stores';
 import { PermissionRegistry } from 'contracts/ts-files/PermissionRegistry';
-import { useTokenList } from '../tokens/useTokenList';
-import { TokenInfoWithType } from '../tokens/useTokenList';
+import { useTokenList } from '../../../../hooks/Guilds/tokens/useTokenList';
+import { TokenInfoWithType, TokenWithPermission } from 'types/types';
+import { FetcherHooksInterface } from 'stores/types';
 
-export interface TokenWithPermission extends TokenInfoWithType {
-  permission: {
-    fromTime: BigNumber;
-    valueAllowed: BigNumber;
-  };
-}
+type IUseGetAllTokensPermissions =
+  FetcherHooksInterface['useGetAllTokensPermissions'];
 
-export const useGetAllTokensPermissions = (
+export const useGetAllTokensPermissions: IUseGetAllTokensPermissions = (
   daoId: `0x${string}`,
   includeNativeToken: boolean = true
 ) => {

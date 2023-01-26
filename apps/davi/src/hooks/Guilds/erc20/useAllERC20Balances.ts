@@ -1,12 +1,9 @@
 import ERC20 from 'contracts/ERC20.json';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
-import {
-  TokenInfoWithType,
-  TokenType,
-  useTokenList,
-} from 'hooks/Guilds/tokens/useTokenList';
+import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useBalance, useContractReads, useNetwork } from 'wagmi';
+import { TokenInfoWithType } from 'types/types';
 
 export type TokenWithBalance = TokenInfoWithType & {
   balance?: BigNumber;
@@ -21,7 +18,7 @@ export const useAllERC20Balances = (
 
   // Get ERC20 Balances
   const erc20Tokens = useMemo(
-    () => tokens.filter(token => token.type === TokenType.ERC20),
+    () => tokens.filter(token => token.type === 'ERC20'),
     [tokens]
   );
   const { data: erc20Balances, ...rest } = useContractReads({
@@ -53,7 +50,7 @@ export const useAllERC20Balances = (
     if (!nativeTokenBalance) return null;
 
     const nativeToken: TokenWithBalance = tokens.find(
-      token => token.type === TokenType.NATIVE
+      token => token.type === 'NATIVE'
     );
     if (!nativeToken) return null;
 

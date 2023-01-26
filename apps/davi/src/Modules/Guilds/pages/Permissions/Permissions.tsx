@@ -2,12 +2,10 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiInfinite } from 'react-icons/bi';
 import { ZERO_ADDRESS } from 'utils';
+import { useHookStoreProvider } from 'stores';
+import { TokenWithPermission } from 'types/types';
 import { Heading } from 'components/primitives/Typography';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
-import {
-  TokenWithPermission,
-  useGetAllTokensPermissions,
-} from 'hooks/Guilds/erc20/useGetAllTokensPermissions';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
   MainContainer,
@@ -47,6 +45,11 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
 };
 
 const Permissions = () => {
+  const {
+    hooks: {
+      fetchers: { useGetAllTokensPermissions },
+    },
+  } = useHookStoreProvider();
   const { t } = useTranslation();
   const { guildId } = useTypedParams();
   const { data: erc20TokensWithPermissions } =

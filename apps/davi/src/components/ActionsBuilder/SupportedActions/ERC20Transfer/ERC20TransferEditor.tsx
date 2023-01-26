@@ -7,11 +7,7 @@ import { Input } from 'components/primitives/Forms/Input';
 import { TokenAmountInput } from 'components/primitives/Forms/TokenAmountInput';
 import { Box } from 'components/primitives/Layout/Box';
 import { BigNumber, utils } from 'ethers';
-import {
-  TokenInfoWithType,
-  TokenType,
-  useTokenList,
-} from 'hooks/Guilds/tokens/useTokenList';
+import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useMemo, useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import styled from 'styled-components';
@@ -29,6 +25,7 @@ import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { SupportedAction } from 'components/ActionsBuilder/types';
 import ERC20 from 'contracts/ERC20.json';
 import { AddressInput } from 'components/primitives/Forms/AddressInput';
+import { TokenInfoWithType } from 'types/types';
 
 const Error = styled(ErrorLabel)`
   margin-top: 0.5rem;
@@ -67,7 +64,7 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
         recipientAddress: decodedCall.args._to,
       };
     } else if (decodedCall.callType === SupportedAction.NATIVE_TRANSFER) {
-      const token = tokens.find(token => token.type === TokenType.NATIVE);
+      const token = tokens.find(token => token.type === 'NATIVE');
       return {
         source: decodedCall.from,
         token,
@@ -88,7 +85,7 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
   const [isTokenPickerOpen, setIsTokenPickerOpen] = useState(false);
 
   const submitAction = (values: TransferValues) => {
-    if (values.token.type === TokenType.ERC20) {
+    if (values.token.type === 'ERC20') {
       const ERC20Contract = new utils.Interface(ERC20.abi);
 
       onSubmit([

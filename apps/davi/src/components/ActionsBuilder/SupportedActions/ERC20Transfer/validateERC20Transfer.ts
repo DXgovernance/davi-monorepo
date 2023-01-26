@@ -1,7 +1,7 @@
 import { BigNumber, utils } from 'ethers';
 import { TFunction } from 'react-i18next';
+import { TokenInfoWithType } from 'types/types';
 import { removeNullValues } from 'utils';
-import { TokenInfoWithType, TokenType } from 'hooks/Guilds/tokens/useTokenList';
 
 interface ValidateTokenTransferValues {
   recipientAddress: string;
@@ -26,10 +26,7 @@ const validateERC20Transfer = (
 
   if (!token) {
     errors.token = t('tokenIsRequired');
-  } else if (
-    token.type === TokenType.ERC20 &&
-    !utils.isAddress(token.address)
-  ) {
+  } else if (token.type === 'ERC20' && !utils.isAddress(token.address)) {
     errors.token = t('invalidTokenAddress');
   }
   if (!BigNumber.isBigNumber(amount)) {

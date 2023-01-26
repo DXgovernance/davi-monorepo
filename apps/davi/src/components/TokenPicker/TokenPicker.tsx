@@ -16,7 +16,6 @@ import {
   TokenList,
 } from './TokenPicker.styled';
 import { useAccount } from 'wagmi';
-import { TokenType } from 'hooks/Guilds/tokens/useTokenList';
 
 const TokenPicker: React.FC<TokenPickerProps> = ({
   walletAddress,
@@ -47,7 +46,7 @@ const TokenPicker: React.FC<TokenPickerProps> = ({
     return data.map(token => {
       return {
         ...token,
-        id: token.type === TokenType.NATIVE ? 'NATIVE' : token?.address,
+        id: token.type === 'NATIVE' ? 'NATIVE' : token?.address,
       };
     });
   }, [data]);

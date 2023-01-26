@@ -1,12 +1,8 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiInfinite } from 'react-icons/bi';
-import { ZERO_ADDRESS } from 'utils';
-import { useHookStoreProvider } from 'stores';
-import { TokenWithPermission } from 'types/types';
+import { ZERO_ADDRESS, getNetworkById } from 'utils';
 import { Heading } from 'components/primitives/Typography';
-import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
   MainContainer,
   Table,
@@ -16,44 +12,62 @@ import {
   TableRow,
 } from './Permissions.styled';
 import { Loading } from 'components/primitives/Loading';
+import { BlockExplorerLink } from 'components/primitives/Links';
+import { fakeDataTokens, ISubgraphPermissionData } from './fakeData';
+import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
+import { useNetwork } from 'wagmi';
+import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 
 interface IAssetPermissionRow {
-  token: TokenWithPermission;
+  token: ISubgraphPermissionData;
 }
 
 const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
-  const { valueAllowed, fromTime } = token.permission;
-  const formattedValue = useBigNumberToNumber(
-    valueAllowed,
-    token?.decimals,
+  const { chain } = useNetwork();
+  const tokenAddress = token.to;
+
+  const { data: tokenInfo } = useERC20Info(tokenAddress);
+
+  const tokenSymbol = useMemo(() => {
+    return tokenInfo?.symbol ?? getNetworkById(chain?.id).nativeAsset.symbol;
+  }, [chain?.id, tokenInfo?.symbol]);
+
+  const decimals =
+    tokenInfo?.decimals ?? getNetworkById(chain?.id).nativeAsset.decimals;
+
+  const formattedValueAllowed = useBigNumberToNumber(
+    token?.valueAllowed,
+    decimals,
     3
-  ).toString();
+  );
 
   const tokenValueAllowed = useMemo(() => {
-    if (fromTime?.toString() === '0') return '0';
-    if (valueAllowed?.toString() === '0') return <BiInfinite size={20} />;
-    return formattedValue;
-  }, [valueAllowed, fromTime, formattedValue]);
+    return token?.valueAllowed?.toString() === '0' ? (
+      <BiInfinite size={20} />
+    ) : (
+      formattedValueAllowed
+    );
+  }, [token?.valueAllowed, formattedValueAllowed]);
 
   return (
     <TableRow>
-      <TableCell alignment="left">{token.symbol}</TableCell>
-      <TableCell alignment="left">{token.address ?? ZERO_ADDRESS}</TableCell>
+      <TableCell alignment="left">{tokenSymbol}</TableCell>
+      <TableCell alignment="left">
+        <BlockExplorerLink
+          shortAddress
+          forceShowAddress
+          address={tokenAddress ?? ZERO_ADDRESS}
+        />
+      </TableCell>
       <TableCell alignment="right">{tokenValueAllowed}</TableCell>
     </TableRow>
   );
 };
 
 const Permissions = () => {
-  const {
-    hooks: {
-      fetchers: { useGetAllTokensPermissions },
-    },
-  } = useHookStoreProvider();
   const { t } = useTranslation();
-  const { guildId } = useTypedParams();
-  const { data: erc20TokensWithPermissions } =
-    useGetAllTokensPermissions(guildId);
+
+  const permissions = fakeDataTokens;
 
   return (
     <MainContainer>
@@ -67,9 +81,9 @@ const Permissions = () => {
           </tr>
         </TableHead>
         <tbody>
-          {erc20TokensWithPermissions ? (
-            erc20TokensWithPermissions?.map(token => {
-              return <AssetPermissionRow token={token} key={token.address} />;
+          {permissions ? (
+            permissions?.map(token => {
+              return <AssetPermissionRow token={token} key={token.id} />;
             })
           ) : (
             <TableRow>

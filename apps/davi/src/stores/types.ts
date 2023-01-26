@@ -2,7 +2,6 @@ import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
 import { Option } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
-import { TokenWithPermission } from 'types/types';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -19,12 +18,6 @@ export interface FetcherHooksInterface {
   useGetActiveProposals: (daoId: string) => {
     data: BigNumber;
     refetch: () => void;
-  };
-  useGetAllTokensPermissions: (
-    daoId: `0x${string}`,
-    includeNativeToken?: boolean
-  ) => {
-    data: TokenWithPermission[];
   };
   useProposal: (
     daoId: string,

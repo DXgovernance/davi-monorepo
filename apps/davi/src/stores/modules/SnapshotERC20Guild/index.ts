@@ -17,7 +17,6 @@ import {
   useVotingResults,
   useGuildConfig,
   useGetActiveProposals,
-  useGetAllTokensPermissions,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -60,7 +59,6 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useVotingPowerOf,
           useGuildConfig,
           useGetActiveProposals,
-          useGetAllTokensPermissions,
         },
         fallback: {
           useProposal,
@@ -74,7 +72,6 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useVotingPowerOf,
           useGuildConfig,
           useGetActiveProposals,
-          useGetAllTokensPermissions,
         },
       },
       writers: {

@@ -84,7 +84,8 @@ export interface WriterHooksInteface {
     tokenAddress: `0x${string}`
   ) => (daoTokenVault: string, amount?: string) => Promise<void>;
   useCreateProposal: (
-    daoAddress: string
+    daoAddress: string,
+    linkRef?: string
   ) => (
     title: string,
     description: string,

@@ -50,6 +50,7 @@ exports[`GuildSidebar Should render with data 1`] = `
 
 .c1 {
   color: #fff;
+  background-color: #1B1D1F;
 }
 
 .c2 {
@@ -345,6 +346,7 @@ exports[`GuildSidebar Should render without data 1`] = `
 
 .c1 {
   color: #fff;
+  background-color: #1B1D1F;
 }
 
 .c2 {

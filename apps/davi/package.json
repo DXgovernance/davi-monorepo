@@ -87,7 +87,7 @@
     "i18next": "^21.6.16",
     "interweave": "^13.0.0",
     "ipfs": "0.62.3",
-    "ipfs-core": "^0.14.1",
+    "ipfs-core": "^0.18.0",
     "ipfs-only-hash": "^4.0.0",
     "is-ipfs": "^6.0.2",
     "jsonexport": "^3.2.0",
@@ -129,6 +129,7 @@
     "typechain-target-ethers-v5": "^5.0.1",
     "typescript": "^4.9.3",
     "wagmi": "^0.7.15",
+    "web3.storage": "^4.4.0",
     "webpack": "4.44.2",
     "webpack-manifest-plugin": "^2.2.0",
     "workbox-webpack-plugin": "^5.1.4"

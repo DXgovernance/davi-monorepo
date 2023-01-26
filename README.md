@@ -10,7 +10,7 @@ https://pnpm.io/installation
 1. Create a fork of this repo.
 2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`
 3. Install dependencies `pnpm i`
-4. Make an `.env` file (see `.env.example`) and write a seed phrase and deploy salt for hardhat
+4. Make an `.env` file in the `dev-scripts`folder (see `.env.example`) and write a seed phrase and deploy salt for hardhat.
 
 ### If you're on Linux:
 

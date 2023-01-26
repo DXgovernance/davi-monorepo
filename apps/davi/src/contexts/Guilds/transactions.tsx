@@ -98,7 +98,6 @@ export const TransactionsProvider = ({ children }) => {
       receipt: providers.TransactionReceipt,
       runOnFinality?: (receipt: providers.TransactionReceipt) => void
     ) => {
-      console.log({ receipt });
       if (!transactions[chainId] || !transactions[chainId][hash]) {
         return;
       }

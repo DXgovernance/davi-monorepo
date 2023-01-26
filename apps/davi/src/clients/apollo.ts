@@ -13,7 +13,8 @@ export const subgraphClientsUris = {
   // testnets
   [SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID]: '',
   [SUPPORTED_DAVI_NETWORKS.GOERLI_ID]: '',
-  [SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID]: 'http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao/graphql',
+  [SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID]:
+    'http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao/graphql',
 };
 
 const setupApolloClient = (network: SUPPORTED_DAVI_NETWORKS) =>

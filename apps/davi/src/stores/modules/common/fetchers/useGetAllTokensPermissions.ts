@@ -11,6 +11,7 @@ import { PermissionRegistry } from 'contracts/ts-files/PermissionRegistry';
 import { useTokenList } from '../../../../hooks/Guilds/tokens/useTokenList';
 import { TokenInfoWithType, TokenWithPermission } from 'types/types';
 import { FetcherHooksInterface } from 'stores/types';
+import { useListenToPermissionSet } from '../events';
 
 type IUseGetAllTokensPermissions =
   FetcherHooksInterface['useGetAllTokensPermissions'];
@@ -36,14 +37,15 @@ export const useGetAllTokensPermissions: IUseGetAllTokensPermissions = (
     [tokens]
   );
 
-  const { data: erc20Permissions } = useContractReads({
-    contracts: erc20Tokens.map(token => ({
-      address: guildConfig?.permissionRegistry,
-      abi: PermissionRegistry.abi,
-      functionName: 'getETHPermission',
-      args: [daoId, token.address, ERC20_TRANSFER_SIGNATURE],
-    })),
-  });
+  const { data: erc20Permissions, refetch: refetchERC20TokenPermission } =
+    useContractReads({
+      contracts: erc20Tokens.map(token => ({
+        address: guildConfig?.permissionRegistry,
+        abi: PermissionRegistry.abi,
+        functionName: 'getETHPermission',
+        args: [daoId, token.address, ERC20_TRANSFER_SIGNATURE],
+      })),
+    });
 
   const erc20TokensWithPermissions: TokenWithPermission[] = useMemo(() => {
     if (!erc20Permissions) return null;
@@ -63,12 +65,13 @@ export const useGetAllTokensPermissions: IUseGetAllTokensPermissions = (
     [tokens]
   );
 
-  const { data: nativeTokenPermission } = useContractRead({
-    address: guildConfig?.permissionRegistry,
-    abi: PermissionRegistry.abi,
-    functionName: 'getETHPermission',
-    args: [daoId, ZERO_ADDRESS, ANY_FUNC_SIGNATURE],
-  });
+  const { data: nativeTokenPermission, refetch: refetchNativeTokenPermission } =
+    useContractRead({
+      address: guildConfig?.permissionRegistry,
+      abi: PermissionRegistry.abi,
+      functionName: 'getETHPermission',
+      args: [daoId, ZERO_ADDRESS, ANY_FUNC_SIGNATURE],
+    });
 
   const nativeTokenWithPermission: TokenWithPermission = useMemo(() => {
     if (!nativeToken) return null;
@@ -83,6 +86,9 @@ export const useGetAllTokensPermissions: IUseGetAllTokensPermissions = (
 
     return newToken;
   }, [nativeToken, nativeTokenPermission]);
+
+  useListenToPermissionSet(daoId, refetchERC20TokenPermission);
+  useListenToPermissionSet(daoId, refetchNativeTokenPermission);
 
   return {
     data: includeNativeToken

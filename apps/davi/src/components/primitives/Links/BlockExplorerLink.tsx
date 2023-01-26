@@ -27,6 +27,7 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
   shortAddress = false,
   avatarSize = 24,
   disableLink = false,
+  forceShowAddress = false,
 }) => {
   const { chain } = useNetwork();
   const { ensName, imageUrl } = useENSAvatar(address, MAINNET_ID);
@@ -45,6 +46,11 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
 
   const blockExplorerUrl = getBlockExplorerUrl(chain, address, 'address');
 
+  const displayAddress = shortAddress ? shortenAddress(address) : address;
+  const displayLinkText = forceShowAddress
+    ? displayAddress
+    : erc20Info?.symbol || ensName || displayAddress;
+
   return (
     <Flex
       direction="row"
@@ -62,16 +68,10 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
         </Segment>
       )}
       {disableLink ? (
-        <div>
-          {erc20Info?.symbol ||
-            ensName ||
-            (shortAddress ? shortenAddress(address) : address)}
-        </div>
+        <div> {displayLinkText} </div>
       ) : (
         <ExternalLink href={blockExplorerUrl} data-testid="external-link">
-          {erc20Info?.symbol ||
-            ensName ||
-            (shortAddress ? shortenAddress(address) : address)}
+          {displayLinkText}
         </ExternalLink>
       )}
     </Flex>

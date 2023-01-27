@@ -17,7 +17,7 @@ exports[`VoteChart matches the snapshot 1`] = `
   width: 100%;
 }
 
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -26,33 +26,37 @@ exports[`VoteChart matches the snapshot 1`] = `
   -ms-flex: 1;
   flex: 1;
   height: 0.75rem;
-  border-radius: 32px;
-  background-color: #303338;
   overflow: hidden;
+  border-radius: 32px;
 }
 
-.c2 {
+.c3 {
   width: 10%;
   background: #E75C5C;
   height: 0.75rem;
   overflow: hidden;
 }
 
-.c3 {
+.c4 {
   width: 10%;
   background: #295FF4;
   height: 0.75rem;
   overflow: hidden;
 }
 
-.c5 {
+.c6 {
   height: 18px;
-  margin-top: 10px;
+  margin-top: 20px;
   width: 1px;
   background: #303338;
 }
 
-.c6 {
+.c1 {
+  background-color: #303338;
+  border-radius: 32px;
+}
+
+.c7 {
   padding: 4px 8px;
   border: 1px solid #303338;
   border-radius: 0px 32px 32px;
@@ -68,11 +72,11 @@ exports[`VoteChart matches the snapshot 1`] = `
   display: flex;
 }
 
-.c6 span {
+.c7 span {
   margin-left: 2px;
 }
 
-.c4 {
+.c5 {
   width: 65px;
   position: absolute;
   display: -webkit-box;
@@ -92,7 +96,7 @@ exports[`VoteChart matches the snapshot 1`] = `
   left: 0%;
 }
 
-.c7 {
+.c8 {
   margin-right: 0.4rem;
 }
 
@@ -106,24 +110,32 @@ exports[`VoteChart matches the snapshot 1`] = `
     >
       <div
         class="c2"
-        color="#E75C5C"
-      />
+      >
+        <div
+          class="c3"
+          color="#E75C5C"
+        />
+      </div>
       <div
-        class="c3"
-        color="#295FF4"
-      />
+        class="c2"
+      >
+        <div
+          class="c4"
+          color="#295FF4"
+        />
+      </div>
     </div>
     <div
-      class="c4"
+      class="c5"
     >
       <div
-        class="c5"
+        class="c6"
       />
       <div
-        class="c6"
+        class="c7"
       >
         <svg
-          class="c7"
+          class="c8"
           fill="currentColor"
           height="1em"
           stroke="currentColor"

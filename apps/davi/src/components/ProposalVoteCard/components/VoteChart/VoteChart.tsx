@@ -11,6 +11,7 @@ import {
   VoteQuorumMarker,
   VoteQuorumLabel,
   PaddedFlagCheckered,
+  VoteChartRowsContainer,
 } from './VoteChart.styled';
 import { VoteChartProps } from '../../types';
 
@@ -27,10 +28,14 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
     voteData?.totalLocked
   );
 
+  const voteOptionswithVotingPower = Object.entries(voteData.options).filter(
+    ([idx, item]) => !BigNumber.from(item).isZero()
+  ).length;
+
   return (
     <VotesChartContainer>
       {voteData?.options ? (
-        <VotesChartRow>
+        <VoteChartRowsContainer>
           {Object.entries(voteData.options).map(([idx, item]) => {
             const percentBN = BigNumber.from(
               voteData?.totalLocked || 0
@@ -39,21 +44,28 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
               : item.mul(100).mul(Math.pow(10, 2)).div(voteData?.totalLocked);
             const percent = Math.round(percentBN.toNumber()) / Math.pow(10, 2);
 
-            return (
-              <ChartBar
-                key={idx}
-                percent={percent}
-                color={theme?.colors?.votes?.[idx]}
-              />
+            return percent > 0 ? (
+              <VotesChartRow>
+                <ChartBar
+                  key={idx}
+                  percent={percent}
+                  color={theme?.colors?.votes?.[idx]}
+                />
+              </VotesChartRow>
+            ) : (
+              <></>
             );
           })}
-        </VotesChartRow>
+        </VoteChartRowsContainer>
       ) : (
         <Loading loading text skeletonProps={{ height: 24, count: 2 }} />
       )}
       {voteData && (
         <VoteQuorumContainer quorum={flagCheckered}>
-          <VoteQuorumMarker quorum={flagCheckered} />
+          <VoteQuorumMarker
+            quorum={flagCheckered}
+            optionsAmount={voteOptionswithVotingPower}
+          />
           <VoteQuorumLabel quorum={flagCheckered}>
             <PaddedFlagCheckered />
             <span>{isPercent ? flagCheckered : nQuorum}</span>

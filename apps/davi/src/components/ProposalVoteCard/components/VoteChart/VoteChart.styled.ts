@@ -14,9 +14,8 @@ export const VotesChartRow = styled.div`
   display: flex;
   flex: 1;
   height: 0.75rem;
-  border-radius: ${({ theme }) => theme.radii.pill};
-  background-color: ${({ theme }) => theme.colors.border1};
   overflow: hidden;
+  border-radius: ${({ theme }) => theme.radii.pill};
 `;
 
 export const ChartBar = styled.div<{ percent?: number; color: string }>`
@@ -28,12 +27,23 @@ export const ChartBar = styled.div<{ percent?: number; color: string }>`
 
 // The margin top and height are different when quorum 0 or 100,
 // becase the border radious of the container, the marker needs to touch the curved line.
-export const VoteQuorumMarker = styled.div<{ quorum: number }>`
+export const VoteQuorumMarker = styled.div<{
+  quorum: number;
+  optionsAmount: number;
+}>`
   height: ${({ quorum }) => (quorum === 0 || quorum === 100 ? '18px' : '14px')};
-  margin-top: ${({ quorum }) =>
-    quorum === 0 || quorum === 100 ? '10px' : '14px'};
+  margin-top: ${({ quorum, optionsAmount }) =>
+    quorum === 0 || quorum === 100
+      ? `${10 * optionsAmount}px`
+      : `${14 * optionsAmount}px`};
   width: 1px;
   background: ${({ theme }) => theme.colors.border1};
+`;
+
+// todo: change to theme.
+export const VoteChartRowsContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.border1};
+  border-radius: ${({ theme }) => theme.radii.pill};
 `;
 
 export const VoteQuorumLabel = styled.div<{ quorum: number }>`

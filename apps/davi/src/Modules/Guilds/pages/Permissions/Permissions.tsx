@@ -4,13 +4,21 @@ import { BiInfinite } from 'react-icons/bi';
 import { BigNumber } from 'ethers';
 import { useNetwork } from 'wagmi';
 import {
-  ZERO_ADDRESS,
+  getChainIcon,
   getNetworkById,
+  resolveUri,
+  tokenList,
   ERC20_TRANSFER_SIGNATURE,
   ERC20_APPROVE_SIGNATURE,
   ANY_FUNC_SIGNATURE,
+  ZERO_ADDRESS,
 } from 'utils';
 import { Heading } from 'components/primitives/Typography';
+import { Loading } from 'components/primitives/Loading';
+import { BlockExplorerLink } from 'components/primitives/Links';
+import { Avatar } from 'components/Avatar';
+import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
+import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import {
   MainContainer,
   Table,
@@ -18,12 +26,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TokenNameAndSymbol,
 } from './Permissions.styled';
-import { Loading } from 'components/primitives/Loading';
-import { BlockExplorerLink } from 'components/primitives/Links';
 import { fakeDataTokens } from './fakeData';
-import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 
 interface ITokenPermission {
   tokenAddress: string;
@@ -37,9 +42,21 @@ interface IAssetPermissionRow {
 }
 
 const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
+  const { t } = useTranslation();
   const { chain } = useNetwork();
   const { tokenAddress } = token;
   const { data: tokenInfo } = useERC20Info(tokenAddress);
+  const tokenUri = useMemo(() => {
+    if (tokenAddress === ZERO_ADDRESS) {
+      return `${window.location.origin}${getChainIcon(chain?.id)}`;
+    } else {
+      const tokenData = tokenList?.tokens?.find(token => {
+        if (token?.address === tokenAddress) return true;
+        return false;
+      });
+      return tokenData.logoURI;
+    }
+  }, [chain?.id, tokenAddress]);
 
   const tokenSymbol = useMemo(() => {
     return tokenInfo?.symbol ?? getNetworkById(chain?.id).nativeAsset.symbol;
@@ -64,17 +81,29 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
 
   const tokenPermissions = useMemo(() => {
     const hasApproval = token?.hasApproval;
-    const canTransfer = token?.fromTime?.toString() !== '0';
+    const fromTime = token?.fromTime?.toString();
+    const canTransfer =
+      fromTime === '0' || fromTime === undefined ? false : true;
 
-    if (hasApproval && canTransfer) return 'Approve & Transfer';
-    else if (hasApproval) return 'Approve';
-    else if (canTransfer) return 'Transfer';
-    else return 'ERROR';
-  }, [token?.fromTime, token?.hasApproval]);
+    if (hasApproval && canTransfer) return `${t('approve')} & ${t('transfer')}`;
+    else if (hasApproval) return t('approve');
+    else if (canTransfer) return t('transfer');
+    return null;
+  }, [t, token?.fromTime, token?.hasApproval]);
 
   return (
     <TableRow>
-      <TableCell alignment="left">{tokenSymbol}</TableCell>
+      <TableCell alignment="left">
+        <TokenNameAndSymbol>
+          <Avatar
+            src={resolveUri(tokenUri)}
+            defaultSeed={tokenAddress}
+            size={24}
+          />
+
+          {tokenSymbol}
+        </TokenNameAndSymbol>
+      </TableCell>
       <TableCell alignment="left">
         <BlockExplorerLink
           shortAddress

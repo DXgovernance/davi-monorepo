@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box } from 'components/primitives/Layout';
+import { Box, Flex } from 'components/primitives/Layout';
 
 export const MainContainer = styled(Box)`
   border-radius: ${({ theme }) => theme.radii.curved};
@@ -41,4 +41,10 @@ export const TableCell = styled.td<{
   font-weight: 400;
   text-align: ${({ alignment }) => alignment ?? 'center'};
   width: ${({ width }) => width ?? 'auto'};
+`;
+
+export const TokenNameAndSymbol = styled(Flex)`
+  gap: 10px;
+  flex-direction: row;
+  justify-content: flex-start;
 `;

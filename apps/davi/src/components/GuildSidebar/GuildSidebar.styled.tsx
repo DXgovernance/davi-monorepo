@@ -5,6 +5,7 @@ import { Heading } from 'components/primitives/Typography';
 
 export const SidebarWrapper = styled(Box)`
   color: ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.bg1};
   @media only screen and (min-width: 768px) {
     margin-right: 1rem;
     border: 1px solid ${({ theme }) => theme.colors.border1};
@@ -73,11 +74,11 @@ export const SidebarMenu = styled(Menu)`
 export const SidebarMenuItem = styled.div<{ current?: boolean }>`
   padding: 0.8rem 1rem;
   color: ${({ current, theme }) =>
-    current ? theme.colors.text : theme.colors.grey};
+    current ? theme.colors.yellow : theme.colors.grey};
 
   @media only screen and (min-width: 768px) {
     border-left: 2px solid
-      ${({ current, theme }) => (current ? theme.colors.text : 'transparent')};
+      ${({ current, theme }) => (current ? theme.colors.yellow : 'transparent')};
   }
 
   &:hover {

@@ -1,7 +1,12 @@
 import { Flex } from 'components/primitives/Layout';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { shortenAddress } from 'utils';
-import { CardTitle, MainWrapper, FooterElement } from './DiscussionCard.styled';
+import {
+  CardTitle,
+  MainWrapper,
+  FooterElement,
+  Detail,
+} from './DiscussionCard.styled';
 import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
 import { DiscussionCardProps } from './types';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
@@ -33,21 +38,21 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
   }, [discussion, guildId, orbis]);
 
   return (
-    <UnstyledLink
+    <StyledLink
       to={`/${chainName}/${guildId}/discussion/${discussion.stream_id}`}
       data-testid="discussion-card"
     >
       <MainWrapper>
+        <Flex direction="row" justifyContent="flex-start">
+          <Avatar
+            src={discussion?.creator_details?.profile?.pfp}
+            defaultSeed={discussion?.creator_details?.metadata?.address}
+            size={24}
+          />
+          <Detail>{ensName || shortenAddress(creatorAddress)}</Detail>
+        </Flex>
         <CardTitle>{discussion.content?.title}</CardTitle>
         <Flex direction="row" justifyContent="flex-start">
-          <FooterElement>
-            <Avatar
-              src={discussion?.creator_details?.profile?.pfp}
-              defaultSeed={discussion?.creator_details?.metadata?.address}
-              size={24}
-            />
-            {ensName || shortenAddress(creatorAddress)}
-          </FooterElement>
           <FooterElement>
             <IoHeartOutline size="20px" /> {discussion?.count_likes}
           </FooterElement>
@@ -62,6 +67,6 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
           </FooterElement>
         </Flex>
       </MainWrapper>
-    </UnstyledLink>
+    </StyledLink>
   );
 };

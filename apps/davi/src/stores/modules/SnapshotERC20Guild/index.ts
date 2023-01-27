@@ -1,7 +1,18 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import {
+  useApproveTokens,
+  useCreateProposal,
+  useExecuteProposal,
+  useLockTokens,
+  useVoteOnProposal,
+  useWithdrawTokens,
+} from './writers';
+import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+
+import {
   useProposal,
   useSnapshotId,
+  useDAOToken,
   useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
@@ -22,8 +33,8 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-/* 
-  I left this case purposefully with just one data source (default), 
+/*
+  I left this case purposefully with just one data source (default),
   to show that a governance implementation doesn't need two sources.
 */
 
@@ -43,6 +54,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
@@ -50,13 +62,14 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useVotingResults,
           useVotingPowerOf,
           useGetPermissions,
-          useGuildConfig,
+          useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
         },
         fallback: {
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
@@ -68,7 +81,14 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetActiveProposals,
         },
       },
-      writers: null,
+      writers: {
+        useApproveTokens,
+        useCreateProposal,
+        useExecuteProposal,
+        useLockTokens,
+        useVoteOnProposal,
+        useWithdrawTokens,
+      },
     },
     capabilities: {
       votingPower: 'liquid',

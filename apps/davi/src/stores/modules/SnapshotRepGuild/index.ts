@@ -10,6 +10,7 @@ import {
 import {
   useProposal,
   useSnapshotId,
+  useDAOToken,
   useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
@@ -47,6 +48,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
@@ -60,6 +62,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,

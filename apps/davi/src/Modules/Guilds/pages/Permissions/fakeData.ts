@@ -28,7 +28,7 @@ export interface ISubgraphPermissionData {
 //   from: String!
 //   to: String!
 //   functionSignature: Bytes!
-//   isToken: Boolean!  //! <= Add, not in the schema
+//   isToken: Boolean!  //! <= New
 //   valueAllowed: BigInt!
 //   fromTime: BigInt!
 //   allowed: Boolean!
@@ -55,7 +55,7 @@ export const fakeDataTokens: ISubgraphPermissionData[] = [
     id: '2',
     from: guildAddress,
     to: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
-    functionSignature: ERC20_TRANSFER_SIGNATURE,
+    functionSignature: ERC20_APPROVE_SIGNATURE,
     isToken: true,
     valueAllowed: BigNumber.from(0),
     fromTime: BigNumber.from(1),
@@ -67,7 +67,7 @@ export const fakeDataTokens: ISubgraphPermissionData[] = [
     id: '3',
     from: guildAddress,
     to: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
-    functionSignature: ERC20_APPROVE_SIGNATURE,
+    functionSignature: ERC20_TRANSFER_SIGNATURE,
     isToken: true,
     valueAllowed: BigNumber.from(0),
     fromTime: BigNumber.from(1),

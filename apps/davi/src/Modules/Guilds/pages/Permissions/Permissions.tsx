@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiInfinite } from 'react-icons/bi';
 import { BigNumber } from 'ethers';
@@ -21,6 +21,8 @@ import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import {
   MainContainer,
+  TabContainer,
+  TabContent,
   Table,
   TableCell,
   TableHead,
@@ -122,6 +124,10 @@ const Permissions = () => {
 
   const permissions = fakeDataTokens;
 
+  const [activeTab, setActiveTab] = useState<'assets' | 'functionCalls'>(
+    'assets'
+  );
+
   const parsedPermissions = useMemo(() => {
     interface IPermissions {
       [key: string]: ITokenPermission;
@@ -162,43 +168,63 @@ const Permissions = () => {
   }, [permissions]);
 
   return (
-    <MainContainer>
-      <Heading size={2}>Permissions tab TODO</Heading>
-      <Table>
-        <TableHead>
-          <tr>
-            <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
-            <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
-            <TableHeader alignment={'right'}>{t('allowedAmount')}</TableHeader>
-            <TableHeader alignment={'right'}>
-              {t('permissions.permissions')}
-            </TableHeader>
-          </tr>
-        </TableHead>
-        <tbody>
-          {permissions ? (
-            Object.keys(parsedPermissions)?.map(tokenAddress => {
-              const currentValue = parsedPermissions[tokenAddress];
-              return (
-                <AssetPermissionRow token={currentValue} key={tokenAddress} />
-              );
-            })
-          ) : (
-            <TableRow>
-              <TableCell alignment={'left'}>
-                <Loading loading text />
-              </TableCell>
-              <TableCell alignment={'left'}>
-                <Loading loading text />
-              </TableCell>
-              <TableCell alignment={'right'}>
-                <Loading loading text />
-              </TableCell>
-            </TableRow>
-          )}
-        </tbody>
-      </Table>
-    </MainContainer>
+    <>
+      <TabContainer>
+        <TabContent
+          active={activeTab === 'assets'}
+          position="left"
+          onClick={() => setActiveTab('assets')}
+        >
+          <Heading size={2}>Asset permissions</Heading>
+        </TabContent>
+        <TabContent
+          active={activeTab === 'functionCalls'}
+          position="right"
+          onClick={() => setActiveTab('functionCalls')}
+        >
+          <Heading size={2}>Function call permissions</Heading>
+        </TabContent>
+      </TabContainer>
+
+      <MainContainer>
+        <Table>
+          <TableHead>
+            <tr>
+              <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
+              <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
+              <TableHeader alignment={'right'}>
+                {t('allowedAmount')}
+              </TableHeader>
+              <TableHeader alignment={'right'}>
+                {t('permissions.permissions')}
+              </TableHeader>
+            </tr>
+          </TableHead>
+          <tbody>
+            {permissions ? (
+              Object.keys(parsedPermissions)?.map(tokenAddress => {
+                const currentValue = parsedPermissions[tokenAddress];
+                return (
+                  <AssetPermissionRow token={currentValue} key={tokenAddress} />
+                );
+              })
+            ) : (
+              <TableRow>
+                <TableCell alignment={'left'}>
+                  <Loading loading text />
+                </TableCell>
+                <TableCell alignment={'left'}>
+                  <Loading loading text />
+                </TableCell>
+                <TableCell alignment={'right'}>
+                  <Loading loading text />
+                </TableCell>
+              </TableRow>
+            )}
+          </tbody>
+        </Table>
+      </MainContainer>
+    </>
   );
 };
 

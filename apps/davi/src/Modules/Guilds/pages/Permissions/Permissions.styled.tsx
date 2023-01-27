@@ -2,10 +2,43 @@ import styled from 'styled-components';
 import { Box, Flex } from 'components/primitives/Layout';
 
 export const MainContainer = styled(Box)`
-  border-radius: ${({ theme }) => theme.radii.curved};
+  border-bottom-left-radius: ${({ theme }) => theme.radii.curved};
+  border-bottom-right-radius: ${({ theme }) => theme.radii.curved};
   background-color: ${({ theme }) => theme.colors.bg4};
-  margin-top: 20px;
   padding: 1px 24px 8px 24px;
+`;
+
+export const TabContainer = styled(Flex)`
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const TabContent = styled.button<{
+  active: boolean;
+  position: 'left' | 'right';
+}>`
+  border: none;
+  width: 50%;
+
+  border-top-left-radius: ${({ position, theme }) =>
+    position === 'left' ? theme.radii.curved : 0};
+
+  border-top-right-radius: ${({ position, theme }) =>
+    position === 'right' ? theme.radii.curved : 0};
+
+  color: ${({ active, theme }) =>
+    active ? theme.colors.active : theme.colors.grey};
+
+  background-color: ${({ active, theme }) =>
+    active ? theme.colors.bg4 : theme.colors.darkGreen2};
+
+  border-bottom: 1px solid
+    ${({ active, theme }) =>
+      active ? theme.colors.yellow : theme.colors.darkGreen2};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Table = styled.table`

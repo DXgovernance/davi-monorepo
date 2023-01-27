@@ -96,4 +96,3 @@ The idea is that we'll add an isToken boolean in the subgraph to filter
 only the tokens, and only the function calls, so we don't have to do it
 on the frontend.
 */
-

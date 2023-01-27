@@ -18,6 +18,7 @@ import {
   useGuildConfig,
   useGetActiveProposals,
 } from '../common/fetchers';
+import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
 import {
   useTotalLocked,
   useVoterLockTimestamp,
@@ -55,7 +56,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
-          useGuildConfig,
+          useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
         },
         fallback: {

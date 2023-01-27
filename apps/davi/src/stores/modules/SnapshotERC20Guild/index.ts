@@ -7,6 +7,7 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
+import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
 
 import {
   useProposal,
@@ -59,7 +60,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
-          useGuildConfig,
+          useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
         },
         fallback: {

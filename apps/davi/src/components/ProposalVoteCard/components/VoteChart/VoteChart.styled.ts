@@ -15,11 +15,14 @@ export const VotesChartRow = styled.div`
   flex: 1;
   height: 0.75rem;
   overflow: hidden;
+  margin-top: 0.1rem;
   border-radius: ${({ theme }) => theme.radii.pill};
 `;
 
 export const ChartBar = styled.div<{ percent?: number; color: string }>`
   width: ${({ percent }) => (percent ? `${percent}%` : '')};
+  border-radius: ${({ theme }) => theme.radii.pill};
+
   background: ${({ color }) => color};
   height: 0.75rem;
   overflow: hidden;

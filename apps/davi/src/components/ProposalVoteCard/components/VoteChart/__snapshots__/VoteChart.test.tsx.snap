@@ -27,11 +27,13 @@ exports[`VoteChart matches the snapshot 1`] = `
   flex: 1;
   height: 0.75rem;
   overflow: hidden;
+  margin-top: 0.1rem;
   border-radius: 32px;
 }
 
 .c3 {
   width: 10%;
+  border-radius: 32px;
   background: #E75C5C;
   height: 0.75rem;
   overflow: hidden;
@@ -39,6 +41,7 @@ exports[`VoteChart matches the snapshot 1`] = `
 
 .c4 {
   width: 10%;
+  border-radius: 32px;
   background: #295FF4;
   height: 0.75rem;
   overflow: hidden;

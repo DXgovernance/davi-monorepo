@@ -15,7 +15,7 @@ exports[`ProposalDescription Should render an error 1`] = `
   <div
     class="c0"
   >
-    proposal.errors.proposalDescriptionError
+    errorMessage.proposalDescriptionError
   </div>
    
 </div>

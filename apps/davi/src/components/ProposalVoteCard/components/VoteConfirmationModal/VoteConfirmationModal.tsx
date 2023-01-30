@@ -56,7 +56,9 @@ const VoteConfirmationModal: React.FC<VoteConfirmationModalProps> = ({
         </Widget>
         <ActionWrapper>
           <CancelButton onClick={onDismiss}>{t('cancel')}</CancelButton>
-          <ConfirmButton onClick={onConfirm}>{t('vote')}</ConfirmButton>
+          <ConfirmButton variant="primaryWithBorder" onClick={onConfirm}>
+            {t('vote')}
+          </ConfirmButton>
         </ActionWrapper>
       </Container>
     </Modal>

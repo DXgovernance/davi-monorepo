@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { Option } from 'components/ActionsBuilder/types';
+import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
 interface GovernanceCapabilities {
@@ -72,6 +72,15 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
   };
   useMemberCount: (daoId: `0x${string}`) => { data: number };
+  useGetPermissions: (
+    daoAddress: `0x${string}`,
+    permissionArgs: Permission
+  ) => {
+    data: {
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+    };
+  };
   useGuildConfig: (
     guildAddress: string,
     proposalId?: `0x${string}`

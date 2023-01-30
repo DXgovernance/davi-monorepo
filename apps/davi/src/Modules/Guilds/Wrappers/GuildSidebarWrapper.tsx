@@ -1,5 +1,4 @@
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import useGuildMemberTotal from 'Modules/Guilds/Hooks/useGuildMemberTotal';
 import { GuildSidebar } from 'components/GuildSidebar';
 import { MemberActions } from 'components/GuildSidebar/MemberActions';
 import { GuestActions } from 'components/GuildSidebar/GuestActions';
@@ -24,6 +23,7 @@ const GuildSidebarWrapper = () => {
         useTotalLocked,
         useVotingPowerOf,
         useVoterLockTimestamp,
+        useMemberCount,
         useGuildConfig,
       },
     },
@@ -33,11 +33,8 @@ const GuildSidebarWrapper = () => {
   const { data: guildConfig } = useGuildConfig(guildAddress);
   const { isRepGuild } = useGuildImplementationType(guildAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
-  const { data: numberOfMembers } = useGuildMemberTotal(
-    guildAddress,
-    guildConfig?.token,
-    isRepGuild
-  );
+  const { data: numberOfMembers } = useMemberCount(guildAddress);
+
   const { address: userAddress, connector } = useAccount();
   const { ensName, imageUrl } = useENSAvatar(userAddress);
   const { data: unlockedAt } = useVoterLockTimestamp(guildAddress, userAddress);

@@ -39,38 +39,6 @@ interface IMemberRow extends IMemberData {
   decimals: number;
 }
 
-const fakeData: IMemberData[] = [
-  {
-    address: '0x0b17cf48420400e1D71F8231d4a8e43B3566BB5B',
-    tokensLocked: BigNumber.from('20400000000000000000'),
-  },
-  {
-    address: '0x95a223299319022a842D0DfE4851C145A2F615B9',
-    tokensLocked: BigNumber.from('20400000000000000000'),
-  },
-  {
-    address: '0x08EEc580AD41e9994599BaD7d2a74A9874A2852c',
-    tokensLocked: BigNumber.from('20400000000000000000'),
-  },
-  {
-    address: '0x3346987E123Ffb154229F1950981d46E9F5C90dE',
-    tokensLocked: BigNumber.from('17340000000000000000'),
-  },
-  {
-    address: '0x548872d38B4F29b59eb0b231C3F451539e9b5149',
-    tokensLocked: BigNumber.from('13260000000000000000'),
-  },
-  {
-    address: '0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6',
-    tokensLocked: BigNumber.from('3059999999999999600'),
-  },
-  {
-    address: '0x7958bA4a50498fAf40476D613D886F683c464bec',
-    tokensLocked: BigNumber.from('9180000000000000000'),
-  },
-];
-
-// TODO: replace fake data with subgraph fetcher
 // TODO: make logic to display when the subgraph data isn't available
 
 const MemberRow = ({
@@ -90,7 +58,11 @@ const MemberRow = ({
     <>
       <TableRow>
         <TableCell width="auto">
-          <BlockExplorerLink address={address} showAvatar />
+          <BlockExplorerLink
+            address={address}
+            showAvatar
+            fetchTokenData={false}
+          />
         </TableCell>
         <TableCell alignment={'right'} width="15%">
           {roundedBalance} {tokenSymbol ?? ''}
@@ -113,24 +85,15 @@ const Members = () => {
   const { guildId: daoAddress } = useTypedParams();
   const {
     hooks: {
-      fetchers: { useTotalLocked, useGuildConfig },
+      fetchers: { useTotalLocked, useGuildConfig, useGetMemberList },
     },
   } = useHookStoreProvider();
 
+  const { data: memberList, isLoading: isMemberListLoading } =
+    useGetMemberList(daoAddress);
   const { data: totalTokensLocked } = useTotalLocked(daoAddress);
   const { data: guildConfig } = useGuildConfig(daoAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
-
-  const [isMemberInfoAvailable] = useState(true);
-
-  const indexedMembers = useMemo(() => {
-    return fakeData?.map(member => {
-      return {
-        ...member,
-        id: member.address,
-      };
-    });
-  }, []);
 
   const [searchQuery, setSearchQuery] = useState('');
   const { instance, buildIndex, query } = useMiniSearch<IMemberDataIndexable>({
@@ -142,10 +105,10 @@ const Members = () => {
   });
 
   useEffect(() => {
-    if (indexedMembers && instance?.documentCount !== indexedMembers?.length) {
-      buildIndex(indexedMembers);
+    if (memberList && instance?.documentCount !== memberList?.length) {
+      buildIndex(memberList);
     }
-  }, [buildIndex, indexedMembers, instance]);
+  }, [buildIndex, memberList, instance]);
 
   const searchResults = useMemo(() => {
     if (!searchQuery) return [];
@@ -164,7 +127,7 @@ const Members = () => {
         <Heading size={2}>{t('members')}</Heading>
         <StyledDivider />
 
-        {isMemberInfoAvailable ? (
+        {!isMemberListLoading ? (
           <Table>
             <TableHead>
               <tr>
@@ -179,22 +142,24 @@ const Members = () => {
               </tr>
             </TableHead>
             <tbody>
-              {(searchQuery ? searchResults : indexedMembers)?.map(member => {
+              {(searchQuery ? searchResults : memberList)?.map(member => {
                 return (
                   <MemberRow
-                    address={member.address}
-                    tokensLocked={member.tokensLocked}
+                    address={member?.address}
+                    tokensLocked={member?.tokensLocked}
                     totalTokensLocked={totalTokensLocked}
-                    tokenSymbol={guildToken.symbol}
-                    decimals={guildToken.decimals}
-                    key={member.address}
+                    tokenSymbol={guildToken?.symbol}
+                    decimals={guildToken?.decimals}
+                    key={member?.address}
                   />
                 );
               })}
             </tbody>
           </Table>
         ) : (
-          <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
+          <Box margin={'20px 0px'}>
+            <Loading loading text />
+          </Box>
         )}
       </MainContainer>
     </>

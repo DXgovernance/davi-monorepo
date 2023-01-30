@@ -8,6 +8,7 @@ import {
   useWithdrawTokens,
 } from './writers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+import { useGetMemberList } from '../subgraph/common/useGetMemberList';
 
 import {
   useProposal,
@@ -66,6 +67,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
+          useGetMemberList,
         },
         fallback: {
           useProposal,
@@ -82,6 +84,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetPermissions,
           useGuildConfig,
           useGetActiveProposals,
+          useGetMemberList,
         },
       },
       writers: {

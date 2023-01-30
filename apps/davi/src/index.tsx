@@ -5,23 +5,15 @@ import moment from 'moment';
 import * as ReactDOMClient from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import { createClient, configureChains, WagmiConfig } from 'wagmi';
-import { chains, providers } from 'provider';
-import { getConnectors } from 'provider/wallets';
+import { WagmiConfig, useNetwork } from 'wagmi';
 import EnsureReadOnlyConnection from 'components/Web3Modals/EnsureReadOnlyConnection';
 import SyncRouterWithWagmi from 'components/Web3Modals/SyncRouterWithWagmi';
 import { useEffect } from 'react';
 import { loadFathom } from 'analytics/fathom';
 import { SITE_ID } from 'configs';
-
-const { provider, webSocketProvider } = configureChains(chains, providers);
-
-const client = createClient({
-  autoConnect: true,
-  connectors: getConnectors(chains),
-  provider,
-  webSocketProvider,
-});
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from 'clients/apollo';
+import { wagmiClient } from 'clients/wagmi';
 
 initializeI18Next();
 
@@ -35,6 +27,10 @@ moment.updateLocale('en', {
 });
 
 const Root = () => {
+  const {
+    chain: { id: chainId },
+  } = useNetwork();
+
   useEffect(() => {
     loadFathom(SITE_ID)
       .then(() => {
@@ -46,16 +42,18 @@ const Root = () => {
   }, []);
 
   return (
-    <WagmiConfig client={client}>
-      <HashRouter>
-        <SyncRouterWithWagmi>
-          <>
-            <App />
-            <EnsureReadOnlyConnection />
-          </>
-        </SyncRouterWithWagmi>
-      </HashRouter>
-    </WagmiConfig>
+    <ApolloProvider client={apolloClient[chainId]}>
+      <WagmiConfig client={wagmiClient}>
+        <HashRouter>
+          <SyncRouterWithWagmi>
+            <>
+              <App />
+              <EnsureReadOnlyConnection />
+            </>
+          </SyncRouterWithWagmi>
+        </HashRouter>
+      </WagmiConfig>
+    </ApolloProvider>
   );
 };
 const rootElement = document.getElementById('root');

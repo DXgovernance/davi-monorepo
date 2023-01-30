@@ -1,9 +1,8 @@
 import { BigNumber } from 'ethers';
+import { useQuery } from '@apollo/client';
+import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
 import { useMemo } from 'react';
-import { useHookStoreProvider } from 'stores';
-import { useContractReads } from 'wagmi';
-import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
-import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
+import { ZERO_ADDRESS } from 'utils';
 
 export type GuildConfigProps = {
   name: string;
@@ -24,75 +23,63 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-const GETTER_FUNCTIONS = [
-  'getPermissionRegistry',
-  'getName',
-  'getProposalTime',
-  'getTimeForExecution',
-  'getMaxActiveProposals',
-  'getVotingPowerForProposalCreation',
-  'getTokenVault',
-  'getLockTime',
-  'getVoteGas',
-  'getMaxGasPrice',
-  'votingPowerPercentageForProposalExecution',
-  'votingPowerPercentageForProposalCreation',
-  'getMinimumMembersForProposalCreation',
-  'getMinimumTokensLockedForProposalCreation',
-];
-
 export const useGuildConfig = (
   guildAddress: string,
   proposalId?: `0x${string}`
 ) => {
-  const {
-    hooks: {
-      fetchers: { useDAOToken },
-    },
-  } = useHookStoreProvider();
+  const { data, loading, error } = useQuery<getGuildConfigQuery>(
+    getGuildConfigDocument,
+    {
+      variables: { id: guildAddress?.toLowerCase() },
+    }
+  );
 
-  const { data, ...rest } = useContractReads({
-    contracts: GETTER_FUNCTIONS.map(functionName => ({
-      address: guildAddress,
-      abi: BaseERC20Guild.abi,
-      functionName,
-    })),
-  });
+  // const { data, ...rest } = useContractReads({
+  //   contracts: GETTER_FUNCTIONS.map(functionName => ({
+  //     address: guildAddress,
+  //     abi: BaseERC20Guild.abi,
+  //     functionName,
+  //   })),
+  // });
 
-  const { data: token } = useDAOToken(guildAddress);
-  const { data: votingPowerForProposalExecution } =
-    useVotingPowerForProposalExecution({
-      contractAddress: guildAddress,
-      proposalId,
-    });
+  // const { data: token } = useGuildToken(guildAddress);
+  // const { data: votingPowerForProposalExecution } =
+  //   useVotingPowerForProposalExecution({
+  //     contractAddress: guildAddress,
+  //     proposalId,
+  //   });
 
-  const transformedData = useMemo(() => {
+  const transformedData: GuildConfigProps = useMemo(() => {
     if (!data) return undefined;
-    const [
+    const guild = data.guild;
+    const {
+      token,
       permissionRegistry,
       name,
       proposalTime,
       timeForExecution,
       maxActiveProposals,
       votingPowerForProposalCreation,
-      tokenVault,
+      votingPowerForProposalExecution,
+      // tokenVault,
       lockTime,
       voteGas,
       maxGasPrice,
-      votingPowerPercentageForProposalExecution,
-      votingPowerPercentageForProposalCreation,
+      // votingPowerPercentageForProposalExecution,
+      // votingPowerPercentageForProposalCreation,
       minimumMembersForProposalCreation,
       minimumTokensLockedForProposalCreation,
-    ] = data;
+    } = guild;
 
     // Made to prevent
     // "Type '{} & readonly unknown[]' is not assignable to type '`0x${string}`'"
     // doesn't accept ternary operator
-    let safeTokenVault;
-    if (!tokenVault) safeTokenVault = undefined;
-    else safeTokenVault = tokenVault;
+    // let safeTokenVault;
+    // if (!tokenVault) safeTokenVault = undefined;
+    // else safeTokenVault = tokenVault;
 
     return {
+      token: token?.id as `0x${string}`,
       permissionRegistry: permissionRegistry?.toString(),
       name: name?.toString(),
       proposalTime: proposalTime ? BigNumber.from(proposalTime) : undefined,
@@ -105,18 +92,21 @@ export const useGuildConfig = (
       votingPowerForProposalCreation: votingPowerForProposalCreation
         ? BigNumber.from(votingPowerForProposalCreation)
         : undefined,
-      tokenVault: safeTokenVault,
+      votingPowerForProposalExecution: votingPowerForProposalExecution
+        ? BigNumber.from(votingPowerForProposalExecution)
+        : undefined,
+      tokenVault: ZERO_ADDRESS,
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
       maxGasPrice: maxGasPrice ? BigNumber?.from(maxGasPrice) : undefined,
-      votingPowerPercentageForProposalExecution:
-        votingPowerPercentageForProposalExecution
-          ? BigNumber?.from(votingPowerPercentageForProposalExecution)
-          : undefined,
-      votingPowerPercentageForProposalCreation:
-        votingPowerPercentageForProposalCreation
-          ? BigNumber?.from(votingPowerPercentageForProposalCreation)
-          : undefined,
+      votingPowerPercentageForProposalExecution: BigNumber.from(0),
+      //   votingPowerPercentageForProposalExecution
+      //     ? BigNumber?.from(votingPowerPercentageForProposalExecution)
+      //     : undefined,
+      votingPowerPercentageForProposalCreation: BigNumber.from(0),
+      //   votingPowerPercentageForProposalCreation
+      //     ? BigNumber?.from(votingPowerPercentageForProposalCreation)
+      //     : undefined,
       minimumMembersForProposalCreation: minimumMembersForProposalCreation
         ? BigNumber?.from(minimumMembersForProposalCreation)
         : undefined,
@@ -128,9 +118,8 @@ export const useGuildConfig = (
   }, [data]);
 
   return {
-    data: transformedData
-      ? { ...transformedData, votingPowerForProposalExecution, token }
-      : undefined,
-    ...rest,
+    data: transformedData,
+    isLoading: loading,
+    isError: !!error,
   };
 };

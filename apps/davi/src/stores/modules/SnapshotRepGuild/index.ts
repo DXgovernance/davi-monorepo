@@ -15,6 +15,7 @@ import {
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGetPermissions,
   useGuildConfig,
   useGetActiveProposals,
 } from '../common/fetchers';
@@ -56,6 +57,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
         },
@@ -70,6 +72,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useGetPermissions,
           useGuildConfig,
           useGetActiveProposals,
         },

@@ -61,7 +61,7 @@ const AllProposals = ({ guildId }) => {
     return (
       <Result
         state={ResultState.ERROR}
-        title={t('errorMessage.genericProposalError')}
+        title={t('proposal.errors.genericProposalError')}
         subtitle={error.message}
       />
     );

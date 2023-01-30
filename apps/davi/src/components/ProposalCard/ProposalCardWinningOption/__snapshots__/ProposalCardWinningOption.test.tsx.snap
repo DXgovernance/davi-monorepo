@@ -18,8 +18,8 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -38,6 +38,10 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
 
 .c3:active:enabled {
   border: 1px solid #303338;
+}
+
+.c3:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -59,9 +63,7 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  border: 0  flex:1;
 }
 
 .c2 {
@@ -96,7 +98,6 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   -ms-flex: none;
   flex: none;
   background-color: transparent;
-  border: 1px solid #303338;
   border-radius: 0rem 1rem 1rem 0rem;
   height: 32px;
   width: -webkit-fit-content;
@@ -404,8 +405,8 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -424,6 +425,10 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
 
 .c3:active:enabled {
   border: 1px solid #303338;
+}
+
+.c3:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -445,9 +450,7 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  border: 0  flex:1;
 }
 
 .c2 {
@@ -482,7 +485,6 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   -ms-flex: none;
   flex: none;
   background-color: transparent;
-  border: 1px solid #303338;
   border-radius: 0rem 1rem 1rem 0rem;
   height: 32px;
   width: -webkit-fit-content;
@@ -607,8 +609,8 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -627,6 +629,10 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
 
 .c3:active:enabled {
   border: 1px solid #303338;
+}
+
+.c3:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -648,9 +654,7 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  border: 0  flex:1;
 }
 
 .c2 {
@@ -685,7 +689,6 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   -ms-flex: none;
   flex: none;
   background-color: transparent;
-  border: 1px solid #303338;
   border-radius: 0rem 1rem 1rem 0rem;
   height: 32px;
   width: -webkit-fit-content;
@@ -824,8 +827,8 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -844,6 +847,10 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
 
 .c3:active:enabled {
   border: 1px solid #303338;
+}
+
+.c3:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -865,9 +872,7 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  border: 0  flex:1;
 }
 
 .c2 {
@@ -902,7 +907,6 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   -ms-flex: none;
   flex: none;
   background-color: transparent;
-  border: 1px solid #303338;
   border-radius: 0rem 1rem 1rem 0rem;
   height: 32px;
   width: -webkit-fit-content;
@@ -1025,8 +1029,8 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -1045,6 +1049,10 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
 
 .c3:active:enabled {
   border: 1px solid #303338;
+}
+
+.c3:disabled {
+  color: #303338;
 }
 
 .c0 {
@@ -1066,9 +1074,7 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  border: 0  flex:1;
 }
 
 .c2 {
@@ -1103,7 +1109,6 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   -ms-flex: none;
   flex: none;
   background-color: transparent;
-  border: 1px solid #303338;
   border-radius: 0rem 1rem 1rem 0rem;
   height: 32px;
   width: -webkit-fit-content;

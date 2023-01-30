@@ -4,7 +4,7 @@
 set -e
 
 # <<<<<---------- Constants ---------->>>>>
-MAX_RETRY=60
+MAX_RETRY=120
 
 
 # <<<<<---------- Utilities ---------->>>>>
@@ -28,14 +28,14 @@ safeDockerStart(){
     fi
 
     while true; do
-        if docker info > /dev/null 2>&1; then
+        if docker info > /dev/null 2>&1; then   
+            echo "Docker is running. Proceeding with script"
+            break
+        else
             if [ $retry_count -eq $MAX_RETRY ]; then
                 echo "Docker is not ready after $MAX_RETRY retries. Exiting script"
                 exit 1
             fi
-            echo "Docker is running. Proceeding with script"
-            break
-        else
             echo "Waiting for Docker to start. Sleeping. Attempt $retry_count of $MAX_RETRY"
             sleep 1
             retry_count=$((retry_count+1))
@@ -55,7 +55,7 @@ waitForHardhat(){
             echo "Hardhat Node is not ready after $MAX_RETRY retries. Exiting script"
             exit 1
         fi
-        echo "Hardhat Node is not ready. Sleeping. Attempt $retry_count of $MAX_RETRY"
+        echo "Hardhat Node is not ready. Sleeping. ($retry_count / $MAX_RETRY)"
         sleep 1
         retry_count=$((retry_count+1))
     done
@@ -64,17 +64,17 @@ waitForHardhat(){
 waitForGraphContainer(){
     retry_count=0
     while true; do
-        if [ $retry_count -eq $MAX_RETRY ]; then
-            echo "Hardhat Node is not ready after $MAX_RETRY retries. Exiting script"
-            exit 1
-        fi
 
-        status=$(docker ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
+        status=$(docker compose ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
         if [[ $status == *"running"* ]]; then
             echo "Graph node container is running"
             break
         else
-            echo "Waiting for graph-node to start"
+            if [ $retry_count -eq $MAX_RETRY ]; then
+                echo "Hardhat Node is not ready after $MAX_RETRY retries. Exiting script"
+                exit 1
+            fi
+            echo "Waiting for graph-node to start ($retry_count / $MAX_RETRY)"
             sleep 1
             retry_count=$((retry_count+1))
         fi
@@ -84,10 +84,6 @@ waitForGraphContainer(){
 startGraphQlPlayground(){
     retry_count=0
     while true; do
-        if [ $retry_count -eq $MAX_RETRY ]; then
-            echo "Hardhat Node is not ready after $MAX_RETRY retries. Exiting script"
-            exit 1
-        fi
         status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao/graphql)
         if [[ $status_code -eq 200 ]]; then
             echo "Subgraph::: Local deployment ready!. Opening graphql playground in Browser"
@@ -98,6 +94,10 @@ startGraphQlPlayground(){
             fi
             break
         else
+            if [ $retry_count -eq $MAX_RETRY ]; then
+                echo "Playground Error. Skipping auto open"
+                break
+            fi
             sleep 1
             retry_count=$((retry_count+1))
         fi

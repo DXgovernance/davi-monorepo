@@ -5,6 +5,8 @@
 1. `pnpm` v7.18.2(`npm` and `yarn` are **not supported**.)
 https://pnpm.io/installation
 
+2. `docker` & `docker-compose`
+
 ## How to setup
 
 1. Create a fork of this repo.

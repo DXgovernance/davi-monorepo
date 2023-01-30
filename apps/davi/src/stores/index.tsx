@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useProvider } from 'wagmi';
 import { useMatch } from 'react-router-dom';
 import { GovernanceTypeInterface, HookStoreContextInterface } from './types';
@@ -8,10 +15,23 @@ import { LoadingPage } from 'components/LoadingPage';
 
 export const HookStoreContext = createContext<HookStoreContextInterface>(null);
 
-export const HookStoreProvider = ({ children }) => {
+interface HookStoreProviderProps {
+  daoId?: string;
+}
+
+export const HookStoreProvider: React.FC<
+  PropsWithChildren<HookStoreProviderProps>
+> = ({ children, daoId: daoIdFromProps }) => {
   const urlParams = useMatch('/:chainName/:daoId/*');
 
-  const [daoId, setDaoId] = useState(urlParams ? urlParams.params.daoId : '');
+  const [daoIdFromUrl, setDaoIdFromUrl] = useState(
+    urlParams ? urlParams.params.daoId : ''
+  );
+  const daoId = useMemo(
+    () => daoIdFromProps || daoIdFromUrl,
+    [daoIdFromProps, daoIdFromUrl]
+  );
+
   const [daoBytecode, setDaoBytecode] = useState<string>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [useDefaultDataSource, setUseDefaultDataSource] = useState(true);
@@ -21,7 +41,7 @@ export const HookStoreProvider = ({ children }) => {
   const CHECK_DATA_SOURCE_INTERVAL = 5000;
 
   useEffect(() => {
-    /* 
+    /*
       This is here to handle the store unmounting while developing, because react
       refreshes the page. If not here, it might cause the page stuck on "loading..."
     */
@@ -31,70 +51,61 @@ export const HookStoreProvider = ({ children }) => {
   useEffect(() => {
     if (urlParams?.params?.daoId) {
       setIsLoading(true);
-      setDaoId(urlParams?.params?.daoId);
+      setDaoIdFromUrl(urlParams?.params?.daoId);
     }
-  }, [urlParams?.params?.daoId, daoId]);
+  }, [urlParams?.params?.daoId]);
 
   useEffect(() => {
     if (isMatched) setIsLoading(false);
   }, [isMatched]);
 
   useEffect(() => {
+    let cancelled = false;
+
     const getBytecode = async () => {
-      const localBtcode = localStorage.getItem(`hashed-bytecode-${daoId}`);
-      if (!localBtcode) {
-        const btcode = await provider.getCode(daoId);
-        const hashedBytecode = Web3.utils.keccak256(btcode);
-        setDaoBytecode(hashedBytecode);
-        localStorage.setItem(`hashed-bytecode-${daoId}`, hashedBytecode);
-        setIsLoading(false);
-        return;
+      let bytecodeHash = localStorage.getItem(`hashed-bytecode-${daoId}`);
+      if (!bytecodeHash) {
+        const bytecode = await provider.getCode(daoId);
+        bytecodeHash = Web3.utils.keccak256(bytecode);
+
+        localStorage.setItem(`hashed-bytecode-${daoId}`, bytecodeHash);
       }
-      setDaoBytecode(localBtcode);
-      setIsLoading(false);
+      return bytecodeHash;
     };
 
-    getBytecode();
+    getBytecode().then(bytecodeHash => {
+      if (!cancelled) {
+        setDaoBytecode(bytecodeHash);
+        setIsLoading(false);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [daoId, provider]);
 
   const governanceType: GovernanceTypeInterface = useMemo(() => {
-    const match = governanceInterfaces.find(governance => {
+    let match = governanceInterfaces.find(governance => {
       return governance.bytecodes.find(bytecode => bytecode === daoBytecode);
     });
 
-    let returnedGovernanceType: GovernanceTypeInterface;
+    // TODO: throw an error instead of falling back to a default if the store can't match the governance implementation
+    if (!match) match = governanceInterfaces[0];
 
-    if (match) {
-      returnedGovernanceType = {
-        name: match.name,
-        bytecodes: match.bytecodes,
-        capabilities: match.capabilities,
-        hooks: {
-          fetchers: useDefaultDataSource
-            ? match.hooks.fetchers.default
-            : match.hooks.fetchers.fallback,
-          writers: match.hooks.writers,
-        },
-        checkDataSourceAvailability: match.checkDataSourceAvailability,
-      };
-    } else {
-      returnedGovernanceType = {
-        name: governanceInterfaces[0].name,
-        bytecodes: governanceInterfaces[0].bytecodes,
-        capabilities: governanceInterfaces[0].capabilities,
-        hooks: {
-          fetchers: useDefaultDataSource
-            ? governanceInterfaces[0].hooks.fetchers.default
-            : governanceInterfaces[0].hooks.fetchers.fallback,
-          writers: governanceInterfaces[0].hooks.writers,
-        },
-
-        checkDataSourceAvailability:
-          governanceInterfaces[0].checkDataSourceAvailability,
-      };
-    }
     setIsMatched(true);
-    return returnedGovernanceType;
+    return {
+      name: match.name,
+      bytecodes: match.bytecodes,
+      capabilities: match.capabilities,
+      hooks: {
+        fetchers: useDefaultDataSource
+          ? match.hooks.fetchers.default
+          : match.hooks.fetchers.fallback,
+        writers: match.hooks.writers,
+      },
+      checkDataSourceAvailability: match.checkDataSourceAvailability,
+    };
   }, [daoBytecode, useDefaultDataSource]);
 
   useEffect(() => {

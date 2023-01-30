@@ -14,6 +14,7 @@ interface GovernanceCapabilities {
 
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 
+// TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
   useGetActiveProposals: (daoId: string) => {
     data: BigNumber;
@@ -70,6 +71,7 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useMemberCount: (daoId: `0x${string}`) => { data: number };
   useGetPermissions: (
     daoAddress: `0x${string}`,
     permissionArgs: Permission

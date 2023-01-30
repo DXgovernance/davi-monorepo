@@ -34,21 +34,6 @@ export const useGuildConfig = (
     }
   );
 
-  // const { data, ...rest } = useContractReads({
-  //   contracts: GETTER_FUNCTIONS.map(functionName => ({
-  //     address: guildAddress,
-  //     abi: BaseERC20Guild.abi,
-  //     functionName,
-  //   })),
-  // });
-
-  // const { data: token } = useGuildToken(guildAddress);
-  // const { data: votingPowerForProposalExecution } =
-  //   useVotingPowerForProposalExecution({
-  //     contractAddress: guildAddress,
-  //     proposalId,
-  //   });
-
   const transformedData: GuildConfigProps = useMemo(() => {
     if (!data?.guild) return undefined;
     const guild = data.guild;
@@ -61,22 +46,12 @@ export const useGuildConfig = (
       maxActiveProposals,
       votingPowerForProposalCreation,
       votingPowerForProposalExecution,
-      // tokenVault,
       lockTime,
       voteGas,
       maxGasPrice,
-      // votingPowerPercentageForProposalExecution,
-      // votingPowerPercentageForProposalCreation,
       minimumMembersForProposalCreation,
       minimumTokensLockedForProposalCreation,
     } = guild;
-
-    // Made to prevent
-    // "Type '{} & readonly unknown[]' is not assignable to type '`0x${string}`'"
-    // doesn't accept ternary operator
-    // let safeTokenVault;
-    // if (!tokenVault) safeTokenVault = undefined;
-    // else safeTokenVault = tokenVault;
 
     return {
       token: token?.id as `0x${string}`,
@@ -100,13 +75,7 @@ export const useGuildConfig = (
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
       maxGasPrice: maxGasPrice ? BigNumber?.from(maxGasPrice) : undefined,
       votingPowerPercentageForProposalExecution: BigNumber.from(0),
-      //   votingPowerPercentageForProposalExecution
-      //     ? BigNumber?.from(votingPowerPercentageForProposalExecution)
-      //     : undefined,
       votingPowerPercentageForProposalCreation: BigNumber.from(0),
-      //   votingPowerPercentageForProposalCreation
-      //     ? BigNumber?.from(votingPowerPercentageForProposalCreation)
-      //     : undefined,
       minimumMembersForProposalCreation: minimumMembersForProposalCreation
         ? BigNumber?.from(minimumMembersForProposalCreation)
         : undefined,

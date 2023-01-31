@@ -7,14 +7,17 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
+import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
 
 import {
   useProposal,
   useSnapshotId,
+  useDAOToken,
   useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGetPermissions,
   useGuildConfig,
   useGetActiveProposals,
 } from '../common/fetchers';
@@ -22,6 +25,7 @@ import {
   useTotalLocked,
   useVoterLockTimestamp,
   useVotingPowerOf,
+  useMemberCount,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
@@ -30,8 +34,8 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-/* 
-  I left this case purposefully with just one data source (default), 
+/*
+  I left this case purposefully with just one data source (default),
   to show that a governance implementation doesn't need two sources.
 */
 
@@ -51,25 +55,31 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
-          useGuildConfig,
+          useMemberCount,
+          useGetPermissions,
+          useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
         },
         fallback: {
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
+          useGetPermissions,
           useGuildConfig,
           useGetActiveProposals,
         },

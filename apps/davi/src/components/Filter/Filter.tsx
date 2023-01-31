@@ -4,7 +4,6 @@ import { useAccount } from 'wagmi';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useHookStoreProvider } from 'stores';
-import { Button } from 'components/primitives/Button';
 import { Input } from 'components/primitives/Forms/Input';
 import { FilterMenu, FilterButton } from './components';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
@@ -17,7 +16,8 @@ import {
   StyledInputWrapper,
   FilterBadge,
 } from './Filter.styled';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
+import { Button } from 'components/primitives/Button';
 
 interface FilterProps {
   openSearchBar: boolean;
@@ -65,14 +65,14 @@ export const Filter: React.FC<FilterProps> = ({
           </StyledIconButton>
           {isProposalCreationAllowed && (
             <>
-              <UnstyledLink to={`/${chainName}/${guildId}/create-proposal`}>
+              <StyledLink to={`/${chainName}/${guildId}/create-proposal`}>
                 <Button
-                  variant="secondary"
+                  variant="primaryWithBorder"
                   data-testid="create-proposal-button"
                 >
                   {t('createProposal')}
                 </Button>
-              </UnstyledLink>
+              </StyledLink>
             </>
           )}
         </ButtonContainer>

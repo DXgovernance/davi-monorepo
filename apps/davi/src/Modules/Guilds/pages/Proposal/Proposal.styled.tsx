@@ -1,6 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Box } from 'components/primitives/Layout/Box';
-import { IconButton } from 'components/primitives/Button';
 
 export const PageContainer = styled(Box)`
   display: grid;
@@ -37,13 +36,7 @@ export const PageTitle = styled.h3`
     font-weight: 700;
   }
 
-  margin: 0;
-  margin: 1rem 0;
-`;
-
-export const StyledIconButton = styled(IconButton)`
-  padding: 0.6rem 0.8rem;
-  margin-top: 5px;
+  margin: 0.5rem 0;
 `;
 
 export const ProposalActionsWrapper = styled(Box)`
@@ -55,4 +48,11 @@ export const HeaderTopRow = styled(Box)`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+`;
+
+export const linkStyles = css`
+  button {
+    background-color: ${({ theme }) => theme.colors.darkGreen1};
+    outline: 1px solid ${({ theme }) => theme.colors.grey};
+  }
 `;

@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { Option } from 'components/ActionsBuilder/types';
+import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
 interface GovernanceCapabilities {
@@ -14,6 +14,7 @@ interface GovernanceCapabilities {
 
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 
+// TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
   useGetActiveProposals: (daoId: string) => {
     data: BigNumber;
@@ -33,6 +34,7 @@ export interface FetcherHooksInterface {
   ) => {
     data: BigNumber;
   };
+  useDAOToken: (daoId: string) => { data: `0x${string}` };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`
@@ -69,6 +71,16 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useMemberCount: (daoId: `0x${string}`) => { data: number };
+  useGetPermissions: (
+    daoAddress: `0x${string}`,
+    permissionArgs: Permission
+  ) => {
+    data: {
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+    };
+  };
   useGuildConfig: (
     guildAddress: string,
     proposalId?: `0x${string}`
@@ -84,7 +96,8 @@ export interface WriterHooksInteface {
     tokenAddress: `0x${string}`
   ) => (daoTokenVault: string, amount?: string) => Promise<void>;
   useCreateProposal: (
-    daoAddress: string
+    daoAddress: string,
+    linkRef?: string
   ) => (
     title: string,
     description: string,

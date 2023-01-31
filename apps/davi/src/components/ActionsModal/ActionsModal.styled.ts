@@ -29,6 +29,7 @@ export const ActionsButton = styled(Button).attrs(() => ({
   &:focus {
     border: 2px solid ${({ theme }) => theme.colors.text};
   }
+  outline: 0px;
 `;
 
 export const SectionTitle = styled(ContainerText).attrs(() => ({

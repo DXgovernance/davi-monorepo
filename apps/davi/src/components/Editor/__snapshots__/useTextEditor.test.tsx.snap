@@ -141,7 +141,7 @@ exports[`Editor Should match snapshot 1`] = `
 }
 
 .c5 .ProseMirror mark {
-  background-color: #1DE9B6;
+  background-color: #DEFF4E;
 }
 
 .c5 .ProseMirror img {

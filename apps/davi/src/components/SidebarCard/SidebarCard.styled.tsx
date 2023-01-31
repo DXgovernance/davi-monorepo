@@ -21,4 +21,5 @@ export const SidebarCardContent = styled(Box)`
 export const cardWrapperStyles = css`
   margin-bottom: 1rem;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  background-color: ${({ theme }) => theme.colors.bg1};
 `;

@@ -27,6 +27,8 @@ const AddressButton: React.FC<AddressButtonProps> = ({
       onClick={onClick}
       iconLeft
       type={type}
+      backgroundColor={'none'}
+      outline={'none'}
     >
       <IconHolder>
         <Avatar src={imageUrl} defaultSeed={address} size={24} />

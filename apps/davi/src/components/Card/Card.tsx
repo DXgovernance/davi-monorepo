@@ -1,9 +1,14 @@
 import { ReactElement, ReactNode } from 'react';
-import styled, { FlattenSimpleInterpolation } from 'styled-components';
+import styled, {
+  DefaultTheme,
+  FlattenInterpolation,
+  FlattenSimpleInterpolation,
+  ThemeProps,
+} from 'styled-components';
 import { Box } from 'components/primitives/Layout/Box';
 
 export interface CardWrapperProps {
-  customStyles?: string | FlattenSimpleInterpolation;
+  customStyles?: string | FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 export const CardWrapper = styled(Box)<CardWrapperProps>`
   border: 1px solid ${({ theme }) => theme.colors.border1};

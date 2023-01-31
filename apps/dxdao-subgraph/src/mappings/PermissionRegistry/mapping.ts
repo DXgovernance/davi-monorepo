@@ -21,9 +21,9 @@ export function handleSetPermission(event: PermissionSet): void {
 
   let isToken = false;
   if (
-    event.params.functionSignature.toHexString() === ANY_FUNC_SIGNATURE ||
-    event.params.functionSignature.toHexString() === ERC20_APPROVE_SIGNATURE ||
-    event.params.functionSignature.toHexString() === ERC20_TRANSFER_SIGNATURE
+    event.params.functionSignature.toHexString() == ANY_FUNC_SIGNATURE ||
+    event.params.functionSignature.toHexString() == ERC20_APPROVE_SIGNATURE ||
+    event.params.functionSignature.toHexString() == ERC20_TRANSFER_SIGNATURE
   ) {
     isToken = true;
   }

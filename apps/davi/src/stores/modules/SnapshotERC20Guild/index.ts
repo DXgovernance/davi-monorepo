@@ -8,7 +8,7 @@ import {
   useWithdrawTokens,
 } from './writers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetMemberList } from '../subgraph/common/useGetMemberList';
+import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
 
 import {
   useProposal,
@@ -21,6 +21,7 @@ import {
   useGetPermissions,
   useGuildConfig,
   useGetActiveProposals,
+  useGetMemberList,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -35,10 +36,6 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-/*
-  I left this case purposefully with just one data source (default),
-  to show that a governance implementation doesn't need two sources.
-*/
 
 export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementation> =
   {
@@ -67,7 +64,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
-          useGetMemberList,
+          useGetMemberList: useGetMemberListFromSubgraph,
         },
         fallback: {
           useProposal,

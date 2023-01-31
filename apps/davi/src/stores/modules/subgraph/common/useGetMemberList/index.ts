@@ -2,8 +2,11 @@ import { useQuery } from '@apollo/client';
 import { getMemberListDocument, getMemberListQuery } from '.graphclient';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
+import { FetcherHooksInterface } from 'stores/types';
 
-export const useGetMemberList = (guildAddress: string) => {
+type IUseGetMemberList = FetcherHooksInterface['useGetMemberList'];
+
+export const useGetMemberList: IUseGetMemberList = guildAddress => {
   const { data, loading, error } = useQuery<getMemberListQuery>(
     getMemberListDocument,
     {

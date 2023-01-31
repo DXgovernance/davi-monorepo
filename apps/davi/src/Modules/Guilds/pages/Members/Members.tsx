@@ -145,17 +145,21 @@ const Members = () => {
         <StyledDivider />
 
         {dataState === 'error' && (
-          <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
+          <Box margin={'20px 0px'} data-testid={'error-message'}>
+            {t('membersNotAvailable')}.
+          </Box>
         )}
 
         {dataState === 'loading' && (
-          <Box margin={'20px 0px'}>
-            <Loading loading text data-testid={'loading'} />
+          <Box margin={'20px 0px'} data-testid={'loading'}>
+            <Loading loading text />
           </Box>
         )}
 
         {dataState === 'noMembers' && (
-          <Box margin={'20px 0px'}>{t('noMembers')}.</Box>
+          <Box margin={'20px 0px'} data-testid={'no-members-message'}>
+            {t('noMembers')}.
+          </Box>
         )}
 
         {dataState === 'memberData' && (

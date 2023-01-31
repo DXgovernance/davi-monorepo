@@ -1,8 +1,9 @@
 import { ProposalDescriptionWrapper } from './ProposalDescription.styled';
 import { ProposalDescriptionProps } from './types';
-import Markdown from 'markdown-to-jsx';
 import { Loading } from 'components/primitives/Loading';
 import { useTranslation } from 'react-i18next';
+import { Interweave } from 'interweave';
+import { GlobalErrorBoundary } from 'components/ErrorBoundary';
 
 export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
   metadata,
@@ -13,31 +14,20 @@ export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
   if (error) {
     return (
       <ProposalDescriptionWrapper>
-        {t('proposal.errors.proposalDescriptionError')}
+        {t('errorMessage.proposalDescriptionError')}
       </ProposalDescriptionWrapper>
     );
   }
 
   return (
     <ProposalDescriptionWrapper>
-      {metadata?.description ? (
-        <Markdown
-          options={{
-            overrides: {
-              a: {
-                props: {
-                  target: '_blank',
-                  rel: 'noopener noreferrer',
-                },
-              },
-            },
-          }}
-        >
-          {metadata.description}
-        </Markdown>
-      ) : (
-        <Loading loading text skeletonProps={{ width: '100%' }} />
-      )}
+      <GlobalErrorBoundary>
+        {metadata?.description ? (
+          <Interweave content={metadata.description} />
+        ) : (
+          <Loading loading text skeletonProps={{ width: '100%' }} />
+        )}
+      </GlobalErrorBoundary>
     </ProposalDescriptionWrapper>
   );
 };

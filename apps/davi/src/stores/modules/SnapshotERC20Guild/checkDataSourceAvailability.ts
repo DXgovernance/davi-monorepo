@@ -1,8 +1,7 @@
-/*
-  In this governance implementation we only have one data source (RPC call),
-  so the checkDataSourceAvailability will always return true, as we'll
-  only use the default source.
-*/
-export const checkDataSourceAvailability = () => true;
+import { subgraphClientsUris } from 'clients/apollo';
 
-// TODO: implement subgraph health check for data source switching
+// TODO: Check for health of connection if found
+
+export const checkDataSourceAvailability = chainId => {
+  return !!subgraphClientsUris[chainId];
+};

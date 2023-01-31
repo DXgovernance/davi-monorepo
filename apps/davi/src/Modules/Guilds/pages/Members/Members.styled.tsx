@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { Divider } from 'components/Divider';
 import { Box } from 'components/primitives/Layout';
-import styled from 'styled-components';
 
 export const MainContainer = styled(Box)`
   border-radius: ${({ theme }) => theme.radii.curved};
@@ -33,7 +33,7 @@ export const TableHeader = styled.th<{
 }>`
   padding-bottom: 12px;
   font-weight: 400;
-  text-align: ${({ alignment }) => (alignment ? alignment : 'center')};
+  text-align: ${({ alignment }) => alignment ?? 'center'};
   font-size: ${({ theme }) => theme.fontSizes.label};
   color: ${({ theme }) => theme.colors.grey};
 `;

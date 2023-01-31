@@ -1,7 +1,7 @@
-import { render } from 'utils/tests.js';
-import { screen } from '@testing-library/react';
-import { MembersPage } from '.';
 import { BigNumber } from 'ethers';
+import { screen } from '@testing-library/react';
+import { render } from 'utils/tests.js';
+import { MembersPage } from '.';
 
 // General mocks
 

@@ -1,7 +1,7 @@
+import { useMemo } from 'react';
+import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getMemberListDocument, getMemberListQuery } from '.graphclient';
-import { BigNumber } from 'ethers';
-import { useMemo } from 'react';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseGetMemberList = FetcherHooksInterface['useGetMemberList'];
@@ -15,7 +15,7 @@ export const useGetMemberList: IUseGetMemberList = guildAddress => {
   );
 
   const parsedData = useMemo(() => {
-    return data?.guild?.members.map(member => {
+    return data?.guild?.members?.map(member => {
       return {
         id: member.id,
         address: member.address as `0x${string}`,

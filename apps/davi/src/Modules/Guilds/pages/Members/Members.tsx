@@ -11,6 +11,7 @@ import { Heading } from 'components/primitives/Typography';
 import { Loading } from 'components/primitives/Loading';
 import { Input } from 'components/primitives/Forms/Input';
 import { BlockExplorerLink } from 'components/primitives/Links';
+import { Box } from 'components/primitives/Layout';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
@@ -22,18 +23,14 @@ import {
   TableHeader,
   TableRow,
 } from './Members.styled';
-import { Box } from 'components/primitives/Layout';
 
 interface IMemberData {
+  id: string;
   address: `0x${string}`;
   tokensLocked: BigNumber;
 }
 
-interface IMemberDataIndexable extends IMemberData {
-  id: string;
-}
-
-interface IMemberRow extends IMemberData {
+interface IMemberRow extends Omit<IMemberData, 'id'> {
   totalTokensLocked: BigNumber;
   tokenSymbol: string;
   decimals: number;
@@ -55,7 +52,7 @@ const MemberRow = ({
   return (
     <>
       <TableRow>
-        <TableCell width="auto">
+        <TableCell>
           <BlockExplorerLink
             address={address}
             showAvatar
@@ -97,7 +94,7 @@ const Members = () => {
   const { data: guildToken } = useERC20Info(guildConfig?.token);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const { instance, buildIndex, query } = useMiniSearch<IMemberDataIndexable>({
+  const { instance, buildIndex, query } = useMiniSearch<IMemberData>({
     fields: ['address'],
     searchOptions: {
       fuzzy: 2,

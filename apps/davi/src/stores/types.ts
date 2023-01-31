@@ -156,7 +156,7 @@ export interface FullGovernanceImplementation {
   bytecodes: `0x${string}`[];
   hooks: HooksInterfaceWithFallback;
   capabilities: GovernanceCapabilities;
-  checkDataSourceAvailability: () => boolean;
+  checkDataSourceAvailability: (chainId: number) => boolean;
 }
 
 export interface GovernanceTypeInterface

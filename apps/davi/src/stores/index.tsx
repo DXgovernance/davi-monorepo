@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useProvider } from 'wagmi';
+import { useNetwork, useProvider } from 'wagmi';
 import { useMatch } from 'react-router-dom';
 import { GovernanceTypeInterface, HookStoreContextInterface } from './types';
 import { governanceInterfaces } from './governanceInterfaces';
@@ -23,6 +23,7 @@ export const HookStoreProvider: React.FC<
   PropsWithChildren<HookStoreProviderProps>
 > = ({ children, daoId: daoIdFromProps }) => {
   const urlParams = useMatch('/:chainName/:daoId/*');
+  const { chain } = useNetwork();
 
   const [daoIdFromUrl, setDaoIdFromUrl] = useState(
     urlParams ? urlParams.params.daoId : ''
@@ -116,20 +117,24 @@ export const HookStoreProvider: React.FC<
   }, [shouldSwitchDataSource]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const getDataSourceAvailability = () => {
       if (governanceType) {
         const isDefaultSourceAvailable =
-          governanceType.checkDataSourceAvailability();
+          governanceType.checkDataSourceAvailability(chain?.id);
         if (useDefaultDataSource !== isDefaultSourceAvailable) {
           setIsLoading(true);
           setShouldSwitchDataSource(true);
           setUseDefaultDataSource(isDefaultSourceAvailable);
         }
       }
+    };
+    getDataSourceAvailability();
+    const interval = setInterval(() => {
+      getDataSourceAvailability();
     }, CHECK_DATA_SOURCE_INTERVAL); // This implementation makes a data source health check every 10 seconds. This interval is arbitrary.
 
     return () => clearInterval(interval);
-  }, [governanceType, useDefaultDataSource]);
+  }, [governanceType, useDefaultDataSource, chain]);
 
   return isLoading ? (
     <LoadingPage />

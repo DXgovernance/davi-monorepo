@@ -39,8 +39,6 @@ interface IMemberRow extends IMemberData {
   decimals: number;
 }
 
-// TODO: make logic to display when the subgraph data isn't available
-
 const MemberRow = ({
   address,
   tokensLocked,
@@ -89,8 +87,11 @@ const Members = () => {
     },
   } = useHookStoreProvider();
 
-  const { data: memberList, isLoading: isMemberListLoading } =
-    useGetMemberList(daoAddress);
+  const {
+    data: memberList,
+    isLoading: isMemberListLoading,
+    isError: memberListError,
+  } = useGetMemberList(daoAddress);
   const { data: totalTokensLocked } = useTotalLocked(daoAddress);
   const { data: guildConfig } = useGuildConfig(daoAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
@@ -115,20 +116,50 @@ const Members = () => {
     return query({ queries: [searchQuery] });
   }, [searchQuery, query]);
 
+  const [dataState, setDataState] = useState<
+    'loading' | 'error' | 'memberData' | 'noMembers'
+  >('loading');
+  useEffect(() => {
+    if (memberListError) return setDataState('error');
+    if (isMemberListLoading || !memberList) return setDataState('loading');
+    if (memberList.length > 0) return setDataState('memberData');
+    if (memberList.length === 0) return setDataState('noMembers');
+    else return setDataState('memberData');
+  }, [isMemberListLoading, memberList, memberListError]);
+
   return (
     <>
-      <Input
-        icon={<FiSearch />}
-        placeholder={t('searchMemberOrAddress')}
-        value={searchQuery}
-        onChange={e => setSearchQuery(e?.target?.value)}
-      />
+      {dataState === 'memberData' && (
+        <Box margin={'0px 0px 20px 0px'}>
+          <Input
+            icon={<FiSearch />}
+            placeholder={t('searchMemberOrAddress')}
+            value={searchQuery}
+            onChange={e => setSearchQuery(e?.target?.value)}
+            data-testid={'search'}
+          />
+        </Box>
+      )}
       <MainContainer>
         <Heading size={2}>{t('members')}</Heading>
         <StyledDivider />
 
-        {!isMemberListLoading ? (
-          <Table>
+        {dataState === 'error' && (
+          <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
+        )}
+
+        {dataState === 'loading' && (
+          <Box margin={'20px 0px'}>
+            <Loading loading text data-testid={'loading'} />
+          </Box>
+        )}
+
+        {dataState === 'noMembers' && (
+          <Box margin={'20px 0px'}>{t('noMembers')}.</Box>
+        )}
+
+        {dataState === 'memberData' && (
+          <Table data-testid={'members-table'}>
             <TableHead>
               <tr>
                 <TableHeader alignment={'left'}>{t('member')}</TableHeader>
@@ -156,10 +187,6 @@ const Members = () => {
               })}
             </tbody>
           </Table>
-        ) : (
-          <Box margin={'20px 0px'}>
-            <Loading loading text />
-          </Box>
         )}
       </MainContainer>
     </>

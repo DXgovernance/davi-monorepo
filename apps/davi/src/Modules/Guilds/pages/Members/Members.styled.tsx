@@ -5,7 +5,6 @@ import styled from 'styled-components';
 export const MainContainer = styled(Box)`
   border-radius: ${({ theme }) => theme.radii.curved};
   background-color: ${({ theme }) => theme.colors.bg4};
-  margin-top: 20px;
   padding: 1px 24px 8px 24px;
 `;
 

@@ -11,6 +11,7 @@ import { Heading } from 'components/primitives/Typography';
 import { Loading } from 'components/primitives/Loading';
 import { Input } from 'components/primitives/Forms/Input';
 import { BlockExplorerLink } from 'components/primitives/Links';
+import { Box } from 'components/primitives/Layout';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
@@ -22,56 +23,18 @@ import {
   TableHeader,
   TableRow,
 } from './Members.styled';
-import { Box } from 'components/primitives/Layout';
 
 interface IMemberData {
+  id: string;
   address: `0x${string}`;
   tokensLocked: BigNumber;
 }
 
-interface IMemberDataIndexable extends IMemberData {
-  id: string;
-}
-
-interface IMemberRow extends IMemberData {
+interface IMemberRow extends Omit<IMemberData, 'id'> {
   totalTokensLocked: BigNumber;
   tokenSymbol: string;
   decimals: number;
 }
-
-const fakeData: IMemberData[] = [
-  {
-    address: '0x0b17cf48420400e1D71F8231d4a8e43B3566BB5B',
-    tokensLocked: BigNumber.from('20400000000000000000'),
-  },
-  {
-    address: '0x95a223299319022a842D0DfE4851C145A2F615B9',
-    tokensLocked: BigNumber.from('20400000000000000000'),
-  },
-  {
-    address: '0x08EEc580AD41e9994599BaD7d2a74A9874A2852c',
-    tokensLocked: BigNumber.from('20400000000000000000'),
-  },
-  {
-    address: '0x3346987E123Ffb154229F1950981d46E9F5C90dE',
-    tokensLocked: BigNumber.from('17340000000000000000'),
-  },
-  {
-    address: '0x548872d38B4F29b59eb0b231C3F451539e9b5149',
-    tokensLocked: BigNumber.from('13260000000000000000'),
-  },
-  {
-    address: '0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6',
-    tokensLocked: BigNumber.from('3059999999999999600'),
-  },
-  {
-    address: '0x7958bA4a50498fAf40476D613D886F683c464bec',
-    tokensLocked: BigNumber.from('9180000000000000000'),
-  },
-];
-
-// TODO: replace fake data with subgraph fetcher
-// TODO: make logic to display when the subgraph data isn't available
 
 const MemberRow = ({
   address,
@@ -89,8 +52,12 @@ const MemberRow = ({
   return (
     <>
       <TableRow>
-        <TableCell width="auto">
-          <BlockExplorerLink address={address} showAvatar />
+        <TableCell>
+          <BlockExplorerLink
+            address={address}
+            showAvatar
+            fetchTokenData={false}
+          />
         </TableCell>
         <TableCell alignment={'right'} width="15%">
           {roundedBalance} {tokenSymbol ?? ''}
@@ -113,27 +80,21 @@ const Members = () => {
   const { guildId: daoAddress } = useTypedParams();
   const {
     hooks: {
-      fetchers: { useTotalLocked, useGuildConfig },
+      fetchers: { useTotalLocked, useGuildConfig, useGetMemberList },
     },
   } = useHookStoreProvider();
 
+  const {
+    data: memberList,
+    isLoading: isMemberListLoading,
+    isError: memberListError,
+  } = useGetMemberList(daoAddress);
   const { data: totalTokensLocked } = useTotalLocked(daoAddress);
   const { data: guildConfig } = useGuildConfig(daoAddress);
   const { data: guildToken } = useERC20Info(guildConfig?.token);
 
-  const [isMemberInfoAvailable] = useState(true);
-
-  const indexedMembers = useMemo(() => {
-    return fakeData?.map(member => {
-      return {
-        ...member,
-        id: member.address,
-      };
-    });
-  }, []);
-
   const [searchQuery, setSearchQuery] = useState('');
-  const { instance, buildIndex, query } = useMiniSearch<IMemberDataIndexable>({
+  const { instance, buildIndex, query } = useMiniSearch<IMemberData>({
     fields: ['address'],
     searchOptions: {
       fuzzy: 2,
@@ -142,30 +103,64 @@ const Members = () => {
   });
 
   useEffect(() => {
-    if (indexedMembers && instance?.documentCount !== indexedMembers?.length) {
-      buildIndex(indexedMembers);
+    if (memberList && instance?.documentCount !== memberList?.length) {
+      buildIndex(memberList);
     }
-  }, [buildIndex, indexedMembers, instance]);
+  }, [buildIndex, memberList, instance]);
 
   const searchResults = useMemo(() => {
     if (!searchQuery) return [];
     return query({ queries: [searchQuery] });
   }, [searchQuery, query]);
 
+  const [dataState, setDataState] = useState<
+    'loading' | 'error' | 'memberData' | 'noMembers'
+  >('loading');
+  useEffect(() => {
+    if (memberListError) return setDataState('error');
+    if (isMemberListLoading || !memberList) return setDataState('loading');
+    if (memberList.length > 0) return setDataState('memberData');
+    if (memberList.length === 0) return setDataState('noMembers');
+    else return setDataState('memberData');
+  }, [isMemberListLoading, memberList, memberListError]);
+
   return (
     <>
-      <Input
-        icon={<FiSearch />}
-        placeholder={t('searchMemberOrAddress')}
-        value={searchQuery}
-        onChange={e => setSearchQuery(e?.target?.value)}
-      />
+      {dataState === 'memberData' && (
+        <Box margin={'0px 0px 20px 0px'}>
+          <Input
+            icon={<FiSearch />}
+            placeholder={t('searchMemberOrAddress')}
+            value={searchQuery}
+            onChange={e => setSearchQuery(e?.target?.value)}
+            data-testid={'search'}
+          />
+        </Box>
+      )}
       <MainContainer>
         <Heading size={2}>{t('members')}</Heading>
         <StyledDivider />
 
-        {isMemberInfoAvailable ? (
-          <Table>
+        {dataState === 'error' && (
+          <Box margin={'20px 0px'} data-testid={'error-message'}>
+            {t('membersNotAvailable')}.
+          </Box>
+        )}
+
+        {dataState === 'loading' && (
+          <Box margin={'20px 0px'} data-testid={'loading'}>
+            <Loading loading text />
+          </Box>
+        )}
+
+        {dataState === 'noMembers' && (
+          <Box margin={'20px 0px'} data-testid={'no-members-message'}>
+            {t('noMembers')}.
+          </Box>
+        )}
+
+        {dataState === 'memberData' && (
+          <Table data-testid={'members-table'}>
             <TableHead>
               <tr>
                 <TableHeader alignment={'left'}>{t('member')}</TableHeader>
@@ -179,22 +174,20 @@ const Members = () => {
               </tr>
             </TableHead>
             <tbody>
-              {(searchQuery ? searchResults : indexedMembers)?.map(member => {
+              {(searchQuery ? searchResults : memberList)?.map(member => {
                 return (
                   <MemberRow
-                    address={member.address}
-                    tokensLocked={member.tokensLocked}
+                    address={member?.address}
+                    tokensLocked={member?.tokensLocked}
                     totalTokensLocked={totalTokensLocked}
-                    tokenSymbol={guildToken.symbol}
-                    decimals={guildToken.decimals}
-                    key={member.address}
+                    tokenSymbol={guildToken?.symbol}
+                    decimals={guildToken?.decimals}
+                    key={member?.address}
                   />
                 );
               })}
             </tbody>
           </Table>
-        ) : (
-          <Box margin={'20px 0px'}>{t('membersNotAvailable')}.</Box>
         )}
       </MainContainer>
     </>

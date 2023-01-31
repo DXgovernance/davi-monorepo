@@ -5,6 +5,8 @@
 1. `pnpm` v7.18.2(`npm` and `yarn` are **not supported**.)
 https://pnpm.io/installation
 
+2. `docker` & `docker-compose`
+
 ## How to setup
 
 1. Create a fork of this repo.
@@ -76,6 +78,8 @@ Then there was a problem during the Linux setup. Common sources of this are
 ## Develop
 
 To run project locally you need to compile contracts, run hardhat node from dev-scripts, run subgraph docker, create/deploy local subgraph and run davi-frontend. To do this you can do it in separate terminals or run `pnpm dev` from root project. See `turbo.json` for turbo config
+
+When the subgraph has been generated, go to the `davi`-folder and run `pnpm build-graph-client` and a folder named `.graphclient` will be generated.
 
 ### Issues:
 

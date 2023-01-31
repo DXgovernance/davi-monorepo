@@ -7,6 +7,7 @@ export interface BlockExplorerLinkProps {
   shortAddress?: boolean;
   disableLink?: boolean;
   forceShowAddress?: boolean;
+  fetchTokenData?: boolean;
 }
 
 export interface ExternalLinkProps {

@@ -2,6 +2,7 @@ import { GuildInitialized } from '../../types/templates/SnapshotRepERC20Guild/Sn
 import { BaseERC20Guild } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
 import { ERC20 } from '../../types/GuildRegistry/ERC20';
 import { Guild, Token } from '../../types/schema';
+import { ERC20SnapshotRep as ERC20SnapshotRepTemplate } from '../../types/templates';
 
 // Handler to upgradable initializer event.
 export function handleGuildInitialized(event: GuildInitialized): void {
@@ -12,6 +13,8 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   let tokenAddress = contract.getToken();
 
   let tokenContract = ERC20.bind(tokenAddress);
+  ERC20SnapshotRepTemplate.create(tokenAddress);
+
   let token = Token.load(tokenAddress.toHexString());
   if (!token) {
     token = new Token(tokenAddress.toHexString());

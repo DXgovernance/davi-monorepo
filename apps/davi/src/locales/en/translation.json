@@ -143,6 +143,7 @@
   "members_one": "{{count}} Member",
   "members_other": "{{count}} Members",
   "searchMemberOrAddress": "Search member or address",
+  "noMembers": "This DAO has no members",
   "membersNotAvailable": "Member data is not available",
   "portfolio": "Portfolio",
   "settings": "Settings",

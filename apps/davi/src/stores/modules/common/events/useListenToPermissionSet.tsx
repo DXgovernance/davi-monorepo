@@ -1,12 +1,12 @@
-import { PermissionRegistry } from 'contracts/ts-files/PermissionRegistry';
 import { useContractEvent } from 'wagmi';
+import { PermissionRegistry } from 'contracts/ts-files/PermissionRegistry';
 
 export const useListenToPermissionSet = (
-  daoId: string,
+  daoAddress: string,
   refetch: () => void
 ) => {
   useContractEvent({
-    address: daoId,
+    address: daoAddress,
     abi: PermissionRegistry.abi,
     eventName: 'PermissionSet',
     listener() {

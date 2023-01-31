@@ -10,23 +10,30 @@ import {
 import {
   useProposal,
   useSnapshotId,
+  useDAOToken,
   useIsProposalCreationAllowed,
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGetPermissions,
   useGuildConfig,
   useGetActiveProposals,
+  useGetMemberList,
 } from '../common/fetchers';
+import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
+
 import {
   useTotalLocked,
   useVoterLockTimestamp,
   useVotingPowerOf,
+  useMemberCount,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
 import prodBytecodes from 'bytecodes/prod.json';
 
-const GUILD_TYPE = 'SnapshotERC20Guild';
+const GUILD_TYPE = 'SnapshotRepERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
 
@@ -47,27 +54,35 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
-          useGuildConfig,
+          useMemberCount,
+          useGetPermissions,
+          useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
+          useGetMemberList: useGetMemberListFromSubgraph,
         },
         fallback: {
           useProposal,
           useSnapshotId,
           useTotalLocked,
+          useDAOToken,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
+          useGetPermissions,
           useGuildConfig,
           useGetActiveProposals,
+          useGetMemberList,
         },
       },
       writers: {

@@ -1,19 +1,33 @@
 import {
+  getAllPermissionsQuery,
+  getAllPermissionsDocument,
+  getAllFunctionCallPermissionsDocument,
   getAllTokenPermissionsDocument,
-  getAllTokenPermissionsQuery,
 } from '.graphclient';
 import { useQuery } from '@apollo/client';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
 import { FetcherHooksInterface } from 'stores/types';
 
-// ! This currently only fetches token permissions
-
 type IUseGetAllPermissions = FetcherHooksInterface['useGetAllPermissions'];
 
-export const useGetAllPermissions: IUseGetAllPermissions = (daoId: string) => {
-  const { data, loading, error } = useQuery<getAllTokenPermissionsQuery>(
-    getAllTokenPermissionsDocument,
+export const useGetAllPermissions: IUseGetAllPermissions = (daoId, filter) => {
+  const queryToExecute = useMemo(() => {
+    if (!filter) {
+      return getAllPermissionsDocument;
+    }
+
+    if (filter === 'functionCalls') {
+      return getAllFunctionCallPermissionsDocument;
+    }
+
+    if (filter === 'tokens') {
+      return getAllTokenPermissionsDocument;
+    }
+  }, [filter]);
+
+  const { data, loading, error } = useQuery<getAllPermissionsQuery>(
+    queryToExecute,
     {
       variables: { id: daoId?.toLocaleLowerCase() },
     }

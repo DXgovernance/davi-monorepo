@@ -25,7 +25,10 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
     isError: boolean;
   };
-  useGetAllPermissions: (daoId: string) => {
+  useGetAllPermissions: (
+    daoId: string,
+    filter?: 'tokens' | 'functionCalls'
+  ) => {
     data: {
       id: string;
       to: string;

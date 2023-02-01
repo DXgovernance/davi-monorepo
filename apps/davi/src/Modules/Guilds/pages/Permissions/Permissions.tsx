@@ -130,7 +130,7 @@ const Permissions = () => {
     },
   } = useHookStoreProvider();
 
-  const { data: permissions } = useGetAllPermissions(daoAddress);
+  const { data: tokenPermissions } = useGetAllPermissions(daoAddress, 'tokens');
 
   const [activeTab, setActiveTab] = useState<'assets' | 'functionCalls'>(
     'assets'
@@ -144,7 +144,7 @@ const Permissions = () => {
     const result: IPermissions = {};
 
     // This assumes that the data returns only tokens
-    permissions?.forEach(token => {
+    tokenPermissions?.forEach(token => {
       const tokenAddress = token.to;
 
       if (!result[tokenAddress]) {
@@ -173,7 +173,7 @@ const Permissions = () => {
     });
 
     return result;
-  }, [permissions]);
+  }, [tokenPermissions]);
 
   return (
     <>
@@ -209,7 +209,7 @@ const Permissions = () => {
             </tr>
           </TableHead>
           <tbody>
-            {permissions ? (
+            {tokenPermissions ? (
               Object.keys(parsedPermissions)?.map(tokenAddress => {
                 const currentValue = parsedPermissions[tokenAddress];
                 return (

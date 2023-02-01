@@ -23,4 +23,3 @@ describe('Treasury Page', () => {
     expect(container).toMatchSnapshot();
   });
 });
-

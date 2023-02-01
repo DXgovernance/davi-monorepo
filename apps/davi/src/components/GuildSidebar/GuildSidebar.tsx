@@ -38,7 +38,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
     governance: `/${chainName}/${guildId}`,
     allProposals: `/${chainName}/${guildId}/all-proposals`,
     allDiscussions: `/${chainName}/${guildId}/all-discussions`,
-    treasury: `/${chainName}/${guildId}/treasury`
+    treasury: `/${chainName}/${guildId}/treasury`,
   };
 
   return (

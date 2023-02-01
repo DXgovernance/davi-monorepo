@@ -15,6 +15,7 @@ import {
   useProposalVotesOfVoter,
   useProposalCalls,
   useVotingResults,
+  useGetPermissions,
   useGuildConfig,
   useGetActiveProposals,
 } from '../common/fetchers';
@@ -23,6 +24,7 @@ import {
   useTotalLocked,
   useVoterLockTimestamp,
   useVotingPowerOf,
+  useMemberCount,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
@@ -56,6 +58,8 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
+          useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
         },
@@ -70,6 +74,8 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useProposalCalls,
           useVotingResults,
           useVotingPowerOf,
+          useMemberCount,
+          useGetPermissions,
           useGuildConfig,
           useGetActiveProposals,
         },

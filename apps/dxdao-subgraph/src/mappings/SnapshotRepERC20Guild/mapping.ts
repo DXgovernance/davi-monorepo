@@ -10,6 +10,8 @@ import {   Guild,
   ProposalStateLog,  
   Token
 } from '../../types/schema';
+import { ERC20SnapshotRep as ERC20SnapshotRepTemplate } from '../../types/templates';
+
 import { log, json, JSONValueKind, ipfs, BigInt } from '@graphprotocol/graph-ts';
 
 // Handler to upgradable initializer event.
@@ -21,6 +23,8 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   let tokenAddress = contract.getToken();
 
   let tokenContract = ERC20.bind(tokenAddress);
+  ERC20SnapshotRepTemplate.create(tokenAddress);
+
   let token = Token.load(tokenAddress.toHexString());
   if (!token) {
     token = new Token(tokenAddress.toHexString());

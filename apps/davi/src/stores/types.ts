@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { Option } from 'components/ActionsBuilder/types';
+import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
 interface GovernanceCapabilities {
@@ -14,6 +14,7 @@ interface GovernanceCapabilities {
 
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 
+// TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
   useGetActiveProposals: (daoId: string) => {
     data: BigNumber;
@@ -69,6 +70,16 @@ export interface FetcherHooksInterface {
     data: BigNumber;
     isError: boolean;
     isLoading: boolean;
+  };
+  useMemberCount: (daoId: `0x${string}`) => { data: number };
+  useGetPermissions: (
+    daoAddress: `0x${string}`,
+    permissionArgs: Permission
+  ) => {
+    data: {
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+    };
   };
   useGuildConfig: (
     guildAddress: string,
@@ -145,12 +156,13 @@ export interface FullGovernanceImplementation {
   bytecodes: `0x${string}`[];
   hooks: HooksInterfaceWithFallback;
   capabilities: GovernanceCapabilities;
-  checkDataSourceAvailability: () => boolean;
+  checkDataSourceAvailability: (chainId: number) => boolean;
 }
 
 export interface GovernanceTypeInterface
   extends Omit<FullGovernanceImplementation, 'hooks'> {
   hooks: HooksInterfaceWithoutFallback;
+  dataSource: 'primary' | 'secondary' | null;
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {

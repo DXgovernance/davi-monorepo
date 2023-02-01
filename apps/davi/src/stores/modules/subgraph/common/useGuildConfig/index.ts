@@ -50,7 +50,7 @@ export const useGuildConfig = (
   //   });
 
   const transformedData: GuildConfigProps = useMemo(() => {
-    if (!data) return undefined;
+    if (!data?.guild) return undefined;
     const guild = data.guild;
     const {
       token,

@@ -19,9 +19,11 @@ import {
   useGuildConfig,
   useGetActiveProposals,
   useGetMemberList,
+  useGetAllPermissions,
 } from '../common/fetchers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
 import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
+import { useGetAllPermissions as useGetAllPermissionsFromSubgraph } from '../subgraph/common/useGetAllPermissions';
 
 import {
   useTotalLocked,
@@ -66,6 +68,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
           useGetMemberList: useGetMemberListFromSubgraph,
+          useGetAllPermissions: useGetAllPermissionsFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -83,6 +86,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useGuildConfig,
           useGetActiveProposals,
           useGetMemberList,
+          useGetAllPermissions,
         },
       },
       writers: {

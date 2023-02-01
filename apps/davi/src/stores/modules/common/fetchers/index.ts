@@ -9,3 +9,4 @@ export { useGetPermissions } from './useGetPermissions';
 export { useGuildConfig } from './useGuildConfig';
 export { useGetActiveProposals } from './useGetActiveProposals';
 export { useGetMemberList } from './useGetMemberList';
+export { useGetAllPermissions } from './useGetAllPermissions';

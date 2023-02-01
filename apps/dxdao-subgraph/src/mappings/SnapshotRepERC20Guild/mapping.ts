@@ -11,7 +11,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
 
   //   Get token config
   let tokenAddress = contract.getToken();
-  
+
   let tokenContract = ERC20.bind(tokenAddress);
   ERC20SnapshotRepTemplate.create(tokenAddress);
 
@@ -53,3 +53,4 @@ export function handleGuildInitialized(event: GuildInitialized): void {
 
   guild.save();
 }
+

@@ -162,6 +162,7 @@ export interface FullGovernanceImplementation {
 export interface GovernanceTypeInterface
   extends Omit<FullGovernanceImplementation, 'hooks'> {
   hooks: HooksInterfaceWithoutFallback;
+  dataSource: 'primary' | 'secondary' | null;
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {

@@ -96,7 +96,7 @@ const Treasury = () => {
 
         {(tokens?.length === 0 && !isBalancesLoading) ||
         isErrorRetrievingBalances ? (
-          <NoRecordsContainer>{t('thereAreNoTreasuryData')}</NoRecordsContainer>
+          <NoRecordsContainer>{t('noTreasuryAssets')}</NoRecordsContainer>
         ) : (
           <Table>
             <TableHead>

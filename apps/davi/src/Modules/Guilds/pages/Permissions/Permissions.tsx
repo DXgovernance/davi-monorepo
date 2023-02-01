@@ -30,7 +30,8 @@ import {
   TableRow,
   TokenNameAndSymbol,
 } from './Permissions.styled';
-import { fakeDataTokens } from './fakeData';
+import { useHookStoreProvider } from 'stores';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 
 interface ITokenPermission {
   tokenAddress: string;
@@ -56,7 +57,7 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
         if (token?.address === tokenAddress) return true;
         return false;
       });
-      return tokenData.logoURI;
+      return tokenData?.logoURI;
     }
   }, [chain?.id, tokenAddress]);
 
@@ -121,8 +122,15 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
 
 const Permissions = () => {
   const { t } = useTranslation();
+  const { guildId: daoAddress } = useTypedParams();
 
-  const permissions = fakeDataTokens;
+  const {
+    hooks: {
+      fetchers: { useGetAllPermissions },
+    },
+  } = useHookStoreProvider();
+
+  const { data: permissions } = useGetAllPermissions(daoAddress);
 
   const [activeTab, setActiveTab] = useState<'assets' | 'functionCalls'>(
     'assets'
@@ -136,7 +144,7 @@ const Permissions = () => {
     const result: IPermissions = {};
 
     // This assumes that the data returns only tokens
-    permissions.forEach(token => {
+    permissions?.forEach(token => {
       const tokenAddress = token.to;
 
       if (!result[tokenAddress]) {

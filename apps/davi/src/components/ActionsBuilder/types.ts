@@ -69,6 +69,6 @@ export interface ApproveSendTokens extends DecodedCall {
 export interface Permission {
   from: string;
   to: string;
-  callType?: string;
   functionSignature: string;
+  callType?: SupportedAction;
 }

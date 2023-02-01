@@ -1,0 +1,21 @@
+query getGuildConfig($id: ID!) {
+  guild(id: $id) {
+    id
+    name
+    token {
+      id
+    }
+    permissionRegistry
+    proposalTime
+    timeForExecution
+    maxActiveProposals
+    votingPowerForProposalCreation
+    votingPowerForProposalExecution
+    lockTime
+    voteGas
+    maxGasPrice
+    minimumMembersForProposalCreation
+    minimumTokensLockedForProposalCreation
+  }
+}
+

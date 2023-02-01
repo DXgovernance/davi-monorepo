@@ -67,10 +67,6 @@ export function handleProposalStateChange(
   let contract = SnapshotERC20Guild.bind(address);
 
   const proposalId = event.params.proposalId.toHexString();
-  log.info('---------------------------', []);
-  log.info('Proposal state changed: {}', [proposalId]);
-  log.info('---------------------------', []);
-
   let proposal = Proposal.load(proposalId);
 
   const proposalData = contract.getProposal(event.params.proposalId);

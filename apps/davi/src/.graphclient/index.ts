@@ -2608,6 +2608,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
     get documents() {
       return [
         {
+          document: GetVotesDocument,
+          get rawSDL() {
+            return printWithCache(GetVotesDocument);
+          },
+          location: 'GetVotesDocument.graphql',
+        },
+        {
           document: GetGuildConfigDocument,
           get rawSDL() {
             return printWithCache(GetGuildConfigDocument);
@@ -2660,6 +2667,16 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
     sdkRequester$.then(sdkRequester => sdkRequester(...args))
   );
 }
+export type getVotesQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getVotesQuery = {
+  proposal?: Maybe<{
+    votes?: Maybe<Array<Pick<Vote, 'voter' | 'votingPower' | 'option'>>>;
+  }>;
+};
+
 export type getGuildConfigQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2685,6 +2702,17 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export const getVotesDocument = gql`
+  query getVotes($id: ID!) {
+    proposal(id: $id) {
+      votes {
+        voter
+        votingPower
+        option
+      }
+    }
+  }
+` as unknown as DocumentNode<getVotesQuery, getVotesQueryVariables>;
 export const getGuildConfigDocument = gql`
   query getGuildConfig($id: ID!) {
     guild(id: $id) {
@@ -2715,6 +2743,16 @@ export type Requester<C = {}, E = unknown> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
+    getVotes(
+      variables: getVotesQueryVariables,
+      options?: C
+    ): Promise<getVotesQuery> {
+      return requester<getVotesQuery, getVotesQueryVariables>(
+        getVotesDocument,
+        variables,
+        options
+      ) as Promise<getVotesQuery>;
+    },
     getGuildConfig(
       variables: getGuildConfigQueryVariables,
       options?: C

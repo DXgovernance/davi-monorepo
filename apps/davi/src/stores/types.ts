@@ -89,6 +89,11 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useGetVotes: (proposalId: `0x${string}`) => {
+    data: { option: BigNumber; voter: string; votingPower: BigNumber }[];
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 
 export interface WriterHooksInteface {

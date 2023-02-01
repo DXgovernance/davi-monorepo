@@ -1,1 +1,1 @@
-export { default as ProposalVotesCard } from './ ProposalVotesCard';
+export { default as ProposalVotesCard } from './ProposalVotesCard';

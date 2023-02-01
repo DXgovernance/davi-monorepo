@@ -17,9 +17,11 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
+  useGetVotes,
   useGetActiveProposals,
 } from '../common/fetchers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+import { useGetVotes as useGetVotesFromSubgraph } from '../subgraph/common/useGetVotes';
 import {
   useTotalLocked,
   useVoterLockTimestamp,
@@ -30,7 +32,7 @@ import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
 import prodBytecodes from 'bytecodes/prod.json';
 
-const GUILD_TYPE = 'SnapshotERC20Guild';
+const GUILD_TYPE = 'SnapshotRepERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
 
@@ -62,6 +64,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetActiveProposals,
+          useGetVotes: useGetVotesFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -78,6 +81,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useGetPermissions,
           useGuildConfig,
           useGetActiveProposals,
+          useGetVotes,
         },
       },
       writers: {

@@ -8,10 +8,13 @@ import { ERC20SnapshotRep as ERC20SnapshotRepTemplate } from '../../types/templa
 export function handleGuildInitialized(event: GuildInitialized): void {
   const guildAddress = event.address;
   let contract = BaseERC20Guild.bind(guildAddress);
+  
   //   Get token config
   let tokenAddress = contract.getToken();
+  
   let tokenContract = ERC20.bind(tokenAddress);
   ERC20SnapshotRepTemplate.create(tokenAddress);
+  
   let token = Token.load(tokenAddress.toHexString());
   if (!token) {
     token = new Token(tokenAddress.toHexString());
@@ -22,11 +25,13 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   token.decimals = tokenContract.decimals();
   token.guildAddress = guildAddress.toHexString();
   token.save();
+  
   // Create Guild instance.
   let guild = Guild.load(guildAddress.toHexString());
   if (guild == null) {
     guild = new Guild(guildAddress.toHexString());
   }
+  
   // Save Guild config
   guild.name = contract.getName();
   guild.permissionRegistry = contract.getPermissionRegistry().toHexString();
@@ -45,5 +50,6 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.minimumTokensLockedForProposalCreation =
     contract.getMinimumTokensLockedForProposalCreation();
   guild.token = token.id;
+  
   guild.save();
 }

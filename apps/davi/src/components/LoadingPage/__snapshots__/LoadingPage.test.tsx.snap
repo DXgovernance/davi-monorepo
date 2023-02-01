@@ -216,7 +216,7 @@ exports[`LoadingPage should match snapshot 1`] = `
       <p
         class="c11"
       >
-        loadingDao
+        loading
       </p>
     </div>
   </div>

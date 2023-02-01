@@ -343,5 +343,6 @@
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },
   "loadingDao": "Loading DAO",
-  "thereAreNoTreasuryData": "There are no treasury data available"
+  "thereAreNoTreasuryData": "There are no treasury data available",
+  "loading": "Loading..."
 }

@@ -38,7 +38,9 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
     governance: `/${chainName}/${guildId}`,
     allProposals: `/${chainName}/${guildId}/all-proposals`,
     allDiscussions: `/${chainName}/${guildId}/all-discussions`,
+    treasury: `/${chainName}/${guildId}/treasury`
   };
+
   return (
     <SidebarWrapper data-testid="sidebar">
       <DaoInfoPanel>
@@ -80,6 +82,11 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
         <StyledLink to={locations.allDiscussions}>
           <SidebarMenuItem current={pathname === locations.allDiscussions}>
             {t('allDiscussions')}
+          </SidebarMenuItem>
+        </StyledLink>
+        <StyledLink to={locations.treasury}>
+          <SidebarMenuItem current={pathname === locations.treasury}>
+            {t('treasury')}
           </SidebarMenuItem>
         </StyledLink>
       </SidebarMenu>

@@ -8,6 +8,7 @@ import {
   useWithdrawTokens,
 } from './writers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+// import { useGetActiveProposals as useGetActiveProposalsFromSubgraph } from '../subgraph/common/useGetActiveProposals';
 
 import {
   useProposal,

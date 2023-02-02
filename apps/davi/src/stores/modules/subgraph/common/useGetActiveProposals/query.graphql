@@ -1,0 +1,9 @@
+query getActiveProposals($id: ID!) {
+  guild(id: $id) {
+    id
+    name
+    proposals {
+      id
+    }
+  }
+}

@@ -20,6 +20,7 @@ import {
   useGetActiveProposals,
 } from '../common/fetchers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+// import { useGetActiveProposals as useGetActiveProposalsFromSubgraph } from '../subgraph/common/useGetActiveProposals';
 import {
   useTotalLocked,
   useVoterLockTimestamp,

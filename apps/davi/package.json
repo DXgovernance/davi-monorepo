@@ -18,7 +18,7 @@
     "updateContracts": "pnpm hardhat compile && node scripts/updateContracts.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "build-graph-client": "graphclient build",
+    "build-graph-client": "graphclient build && mv .graphclient src",
     "pre-commit": "lint-staged"
   },
   "engines": {

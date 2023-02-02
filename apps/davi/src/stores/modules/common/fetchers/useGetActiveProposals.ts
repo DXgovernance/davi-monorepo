@@ -11,7 +11,7 @@ export const useGetActiveProposals: IUseGetActiveProposals = daoId => {
     abi: BaseERC20Guild.abi,
     functionName: 'getActiveProposalsNow',
   });
-
+  console.log(data.toString(), "GETACTIVE")
   useListenToProposalStateChanged(daoId, refetch);
   return { data, refetch, ...rest };
 };

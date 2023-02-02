@@ -93,7 +93,9 @@
     "permissionDenied": "Permission denied",
     "permissionDeniedMessage": "The DAO does not have permission to perform this action",
     "warningMessage": "Warning",
-    "proposalNotExecuted": "This proposal can't be executed. Are you sure you want to continue?"
+    "proposalNotExecuted": "This proposal can't be executed. Are you sure you want to continue?",
+    "noPermissionsSet": "This DAO has no permissions set",
+    "dataNotAvailable": "Permissions data not available"
   },
   "unknownAction": "Unknown Action",
   "default": "Default",

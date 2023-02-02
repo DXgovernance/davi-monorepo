@@ -1,5 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BigNumber } from 'ethers';
+import { BiInfinite } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
+import { useNetwork } from 'wagmi';
+
 import {
   ANY_FUNC_SIGNATURE,
   ERC20_APPROVE_SIGNATURE,
@@ -10,6 +14,13 @@ import {
   tokenList,
   ZERO_ADDRESS,
 } from 'utils';
+import { FetcherHooksInterface } from 'stores/types';
+import { Avatar } from 'components/Avatar';
+import { BlockExplorerLink } from 'components/primitives/Links';
+import { Loading } from 'components/primitives/Loading';
+import { Box } from 'components/primitives/Layout';
+import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
+import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import {
   Table,
   TableCell,
@@ -18,15 +29,10 @@ import {
   TableRow,
   TokenNameAndSymbol,
 } from './Permissions.styled';
-import { Avatar } from 'components/Avatar';
-import { BlockExplorerLink } from 'components/primitives/Links';
-import { BiInfinite } from 'react-icons/bi';
-import { useTranslation } from 'react-i18next';
-import { useNetwork } from 'wagmi';
-import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import { Loading } from 'components/primitives/Loading';
-import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
-import { FetcherHooksInterface } from 'stores/types';
+
+interface IAssetPermissions {
+  tokenPermissions: ReturnType<FetcherHooksInterface['useGetAllPermissions']>;
+}
 
 interface ITokenPermission {
   tokenAddress: string;
@@ -44,6 +50,7 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
   const { chain } = useNetwork();
   const { tokenAddress } = token;
   const { data: tokenInfo } = useERC20Info(tokenAddress);
+
   const tokenUri = useMemo(() => {
     if (tokenAddress === ZERO_ADDRESS) {
       return `${window.location.origin}${getChainIcon(chain?.id)}`;
@@ -115,10 +122,6 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
   );
 };
 
-interface IAssetPermissions {
-  tokenPermissions: ReturnType<FetcherHooksInterface['useGetAllPermissions']>;
-}
-
 const AssetPermissions = ({ tokenPermissions }: IAssetPermissions) => {
   const { t } = useTranslation();
 
@@ -160,41 +163,64 @@ const AssetPermissions = ({ tokenPermissions }: IAssetPermissions) => {
     return result;
   }, [tokenPermissions]);
 
+  const [dataState, setDataState] = useState<
+    'loading' | 'error' | 'permissionsData' | 'noPermissions'
+  >(tokenPermissions?.data?.length > 0 ? 'permissionsData' : 'loading');
+
+  useEffect(() => {
+    if (tokenPermissions.isError) return setDataState('error');
+    if (tokenPermissions.isLoading || !tokenPermissions)
+      return setDataState('loading');
+    if (tokenPermissions.data.length > 0)
+      return setDataState('permissionsData');
+    if (tokenPermissions.data.length === 0)
+      return setDataState('noPermissions');
+    else return setDataState('permissionsData');
+  }, [tokenPermissions]);
+
   return (
-    <Table>
-      <TableHead>
-        <tr>
-          <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
-          <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
-          <TableHeader alignment={'right'}>{t('allowedAmount')}</TableHeader>
-          <TableHeader alignment={'right'}>
-            {t('permissions.permissions')}
-          </TableHeader>
-        </tr>
-      </TableHead>
-      <tbody>
-        {tokenPermissions ? (
-          Object.keys(parsedPermissions)?.map(tokenAddress => {
-            const currentValue = parsedPermissions[tokenAddress];
-            return (
-              <AssetPermissionRow token={currentValue} key={tokenAddress} />
-            );
-          })
-        ) : (
-          <TableRow>
-            <TableCell alignment={'left'}>
-              <Loading loading text />
-            </TableCell>
-            <TableCell alignment={'left'}>
-              <Loading loading text />
-            </TableCell>
-            <TableCell alignment={'right'}>
-              <Loading loading text />
-            </TableCell>
-          </TableRow>
-        )}
-      </tbody>
-    </Table>
+    <>
+      {dataState === 'error' && (
+        <Box margin={'24px 0 0 0'}>{t('permissions.dataNotAvailable')}.</Box>
+      )}
+
+      {dataState === 'loading' && (
+        <Box margin={'24px 0 0 0'} data-testid={'loading'}>
+          <Loading loading text />
+        </Box>
+      )}
+
+      {dataState === 'noPermissions' && (
+        <Box margin={'24px 0 0 0'} data-testid={'no-permissions-message'}>
+          {t('permissions.noPermissionsSet')}.
+        </Box>
+      )}
+
+      {dataState === 'permissionsData' && (
+        <Table>
+          <TableHead>
+            <tr>
+              <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
+              <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
+              <TableHeader alignment={'right'}>
+                {t('allowedAmount')}
+              </TableHeader>
+              <TableHeader alignment={'right'}>
+                {t('permissions.permissions')}
+              </TableHeader>
+            </tr>
+          </TableHead>
+          <tbody>
+            {Object.keys(parsedPermissions)?.map(tokenAddress => {
+              const currentToken = parsedPermissions[tokenAddress];
+              return (
+                <AssetPermissionRow token={currentToken} key={tokenAddress} />
+              );
+            })}
+          </tbody>
+        </Table>
+      )}
+    </>
   );
 };
 

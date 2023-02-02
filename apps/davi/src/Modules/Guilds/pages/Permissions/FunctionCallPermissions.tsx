@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BiInfinite } from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 import { useNetwork } from 'wagmi';
@@ -94,10 +94,21 @@ const FunctionCallPermissionRow = ({
     }
   }, [decodedCall, functionCall?.functionSignature, showAdvancedView]);
 
+  const contractDisplay = useMemo(() => {
+    return (
+      <>
+        {ensName && <Box>{ensName}</Box>}
+        {(!ensName || showAdvancedView) && (
+          <Box>{shortenAddress(functionCall?.to)}</Box>
+        )}
+      </>
+    );
+  }, [ensName, functionCall?.to, showAdvancedView]);
+
   return (
     <TableRow>
       <TableCell width={'34%'} alignment="left">
-        {ensName || shortenAddress(functionCall?.to)}
+        {contractDisplay}
       </TableCell>
       <TableCell width={'33%'} alignment="left">
         {functionNameDisplay}
@@ -115,51 +126,74 @@ const FunctionCallPermissions = ({
   const { t } = useTranslation();
   const [showAdvancedView, setShowAdvancedView] = useState(false);
 
+  const [dataState, setDataState] = useState<
+    'loading' | 'error' | 'permissionsData' | 'noPermissions'
+  >(functionCallPermissions?.data?.length > 0 ? 'permissionsData' : 'loading');
+
+  useEffect(() => {
+    if (functionCallPermissions.isError) return setDataState('error');
+    if (functionCallPermissions.isLoading || !functionCallPermissions)
+      return setDataState('loading');
+    if (functionCallPermissions.data.length > 0)
+      return setDataState('permissionsData');
+    if (functionCallPermissions.data.length === 0)
+      return setDataState('noPermissions');
+    else return setDataState('permissionsData');
+  }, [functionCallPermissions]);
+
   return (
     <>
-      <Table>
-        <TableHead>
-          <tr>
-            <TableHeader alignment={'left'}>{t('contract')}</TableHeader>
-            <TableHeader alignment={'left'}>{t('function')}</TableHeader>
-            <TableHeader alignment={'right'}>{t('allowedAmount')}</TableHeader>
-          </tr>
-        </TableHead>
-        <tbody>
-          {functionCallPermissions ? (
-            functionCallPermissions?.data?.map(functionCall => {
-              return (
-                <FunctionCallPermissionRow
-                  functionCall={functionCall}
-                  showAdvancedView={showAdvancedView}
-                  key={functionCall?.id}
-                />
-              );
-            })
-          ) : (
-            <TableRow>
-              <TableCell alignment={'left'}>
-                <Loading loading text />
-              </TableCell>
-              <TableCell alignment={'left'}>
-                <Loading loading text />
-              </TableCell>
-              <TableCell alignment={'right'}>
-                <Loading loading text />
-              </TableCell>
-            </TableRow>
-          )}
-        </tbody>
-      </Table>
-      <ToggleContainer>
-        <ToggleLabel>{t('advancedView')}</ToggleLabel>
-        <Toggle
-          value={showAdvancedView}
-          onChange={() => setShowAdvancedView(!showAdvancedView)}
-          small
-          name="toggle-advanced-view"
-        />
-      </ToggleContainer>
+      {dataState === 'error' && (
+        <Box margin={'24px 0 0 0'}>{t('permissions.dataNotAvailable')}.</Box>
+      )}
+
+      {dataState === 'loading' && (
+        <Box margin={'24px 0 0 0'} data-testid={'loading'}>
+          <Loading loading text />
+        </Box>
+      )}
+
+      {dataState === 'noPermissions' && (
+        <Box margin={'24px 0 0 0'} data-testid={'no-permissions-message'}>
+          {t('permissions.noPermissionsSet')}.
+        </Box>
+      )}
+
+      {dataState === 'permissionsData' && (
+        <>
+          <Table>
+            <TableHead>
+              <tr>
+                <TableHeader alignment={'left'}>{t('contract')}</TableHeader>
+                <TableHeader alignment={'left'}>{t('function')}</TableHeader>
+                <TableHeader alignment={'right'}>
+                  {t('allowedAmount')}
+                </TableHeader>
+              </tr>
+            </TableHead>
+            <tbody>
+              {functionCallPermissions?.data?.map(functionCall => {
+                return (
+                  <FunctionCallPermissionRow
+                    functionCall={functionCall}
+                    showAdvancedView={showAdvancedView}
+                    key={functionCall?.id}
+                  />
+                );
+              })}
+            </tbody>
+          </Table>
+          <ToggleContainer>
+            <ToggleLabel>{t('advancedView')}</ToggleLabel>
+            <Toggle
+              value={showAdvancedView}
+              onChange={() => setShowAdvancedView(!showAdvancedView)}
+              small
+              name="toggle-advanced-view"
+            />
+          </ToggleContainer>
+        </>
+      )}
     </>
   );
 };

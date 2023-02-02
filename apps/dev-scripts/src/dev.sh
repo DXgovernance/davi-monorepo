@@ -18,7 +18,7 @@ hardhat_running() {
 }
 
 start_hardhat_node() {
-  pnpm hardhat node --hostname 0.0.0.0
+  pnpm hardhat node --silent --hostname 0.0.0.0 --export "../deployment-info.json"
 
   hardhat_pid=$!
 
@@ -38,3 +38,5 @@ fi
 
 echo "Starting our own hardhat node instance"
 start_hardhat_node
+
+node ./buildConfig.js

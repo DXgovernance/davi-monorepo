@@ -10,3 +10,5 @@ cache
 artifacts
 contracts
 deployments
+deployment-info.json
+src/deployed-addresses.json

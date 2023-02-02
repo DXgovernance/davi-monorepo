@@ -5,8 +5,13 @@ import { useNetwork } from 'wagmi';
 
 import { getNetworkById, MAINNET_ID, shortenAddress } from 'utils';
 import { FetcherHooksInterface } from 'stores/types';
-import { Loading } from 'components/primitives/Loading';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
+import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
+import { Call } from 'components/ActionsBuilder/types';
+import { Loading } from 'components/primitives/Loading';
+import { Box } from 'components/primitives/Layout';
+import { Toggle } from 'components/primitives/Forms/Toggle';
 import {
   Table,
   TableCell,
@@ -16,11 +21,6 @@ import {
   ToggleContainer,
   ToggleLabel,
 } from './Permissions.styled';
-import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
-import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
-import { Call } from 'components/ActionsBuilder/types';
-import { Box } from 'components/primitives/Layout';
-import { Toggle } from 'components/primitives/Forms/Toggle';
 
 interface IFunctionCallPermissions {
   functionCallPermissions: ReturnType<

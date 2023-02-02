@@ -1,5 +1,11 @@
 // @ts-nocheck
-import { GraphQLResolveInfo, SelectionSetNode, FieldNode, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import {
+  GraphQLResolveInfo,
+  SelectionSetNode,
+  FieldNode,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from 'graphql';
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import { gql } from '@graphql-mesh/utils';
 
@@ -7,28 +13,40 @@ import type { GetMeshOptions } from '@graphql-mesh/runtime';
 import type { YamlConfig } from '@graphql-mesh/types';
 import { PubSub } from '@graphql-mesh/utils';
 import { DefaultLogger } from '@graphql-mesh/utils';
-import MeshCache from "@graphql-mesh/cache-localforage";
+import MeshCache from '@graphql-mesh/cache-localforage';
 import { fetch as fetchFn } from '@whatwg-node/fetch';
 
 import { MeshResolvedSource } from '@graphql-mesh/runtime';
 import { MeshTransform, MeshPlugin } from '@graphql-mesh/types';
-import GraphqlHandler from "@graphql-mesh/graphql"
-import BareMerger from "@graphql-mesh/merger-bare";
+import GraphqlHandler from '@graphql-mesh/graphql';
+import BareMerger from '@graphql-mesh/merger-bare';
 import { printWithCache } from '@graphql-mesh/utils';
 import { createMeshHTTPHandler, MeshHTTPHandler } from '@graphql-mesh/http';
-import { getMesh, ExecuteMeshFn, SubscribeMeshFn, MeshContext as BaseMeshContext, MeshInstance } from '@graphql-mesh/runtime';
+import {
+  getMesh,
+  ExecuteMeshFn,
+  SubscribeMeshFn,
+  MeshContext as BaseMeshContext,
+  MeshInstance,
+} from '@graphql-mesh/runtime';
 import { MeshStore, FsStoreStorageAdapter } from '@graphql-mesh/store';
 import { path as pathModule } from '@graphql-mesh/cross-helpers';
 import { ImportFn } from '@graphql-mesh/types';
 import type { DxgovGuildSubgraphTypes } from './sources/dxgov-guild-subgraph/types';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
-
-
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -193,7 +211,6 @@ export type Guild = {
   bytecodeHash?: Maybe<Scalars['String']>;
 };
 
-
 export type GuildpermissionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -202,7 +219,6 @@ export type GuildpermissionsArgs = {
   where?: InputMaybe<GuildPermission_filter>;
 };
 
-
 export type GuildproposalsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -210,7 +226,6 @@ export type GuildproposalsArgs = {
   orderDirection?: InputMaybe<OrderDirection>;
   where?: InputMaybe<Proposal_filter>;
 };
-
 
 export type GuildmembersArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -488,15 +503,21 @@ export type Guild_filter = {
   minimumMembersForProposalCreation_gte?: InputMaybe<Scalars['BigInt']>;
   minimumMembersForProposalCreation_lte?: InputMaybe<Scalars['BigInt']>;
   minimumMembersForProposalCreation_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  minimumMembersForProposalCreation_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  minimumMembersForProposalCreation_not_in?: InputMaybe<
+    Array<Scalars['BigInt']>
+  >;
   minimumTokensLockedForProposalCreation?: InputMaybe<Scalars['BigInt']>;
   minimumTokensLockedForProposalCreation_not?: InputMaybe<Scalars['BigInt']>;
   minimumTokensLockedForProposalCreation_gt?: InputMaybe<Scalars['BigInt']>;
   minimumTokensLockedForProposalCreation_lt?: InputMaybe<Scalars['BigInt']>;
   minimumTokensLockedForProposalCreation_gte?: InputMaybe<Scalars['BigInt']>;
   minimumTokensLockedForProposalCreation_lte?: InputMaybe<Scalars['BigInt']>;
-  minimumTokensLockedForProposalCreation_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  minimumTokensLockedForProposalCreation_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  minimumTokensLockedForProposalCreation_in?: InputMaybe<
+    Array<Scalars['BigInt']>
+  >;
+  minimumTokensLockedForProposalCreation_not_in?: InputMaybe<
+    Array<Scalars['BigInt']>
+  >;
   type?: InputMaybe<GuildType>;
   type_not?: InputMaybe<GuildType>;
   type_in?: InputMaybe<Array<GuildType>>;
@@ -613,10 +634,7 @@ export type Member_filter = {
   _change_block?: InputMaybe<BlockChangedFilter>;
 };
 
-export type Member_orderBy =
-  | 'id'
-  | 'address'
-  | 'tokensLocked';
+export type Member_orderBy = 'id' | 'address' | 'tokensLocked';
 
 export type Option = {
   id: Scalars['ID'];
@@ -627,7 +645,6 @@ export type Option = {
   votes: Array<Vote>;
 };
 
-
 export type OptionactionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -635,7 +652,6 @@ export type OptionactionsArgs = {
   orderDirection?: InputMaybe<OrderDirection>;
   where?: InputMaybe<Action_filter>;
 };
-
 
 export type OptionvotesArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -729,9 +745,7 @@ export type Option_orderBy =
   | 'votes';
 
 /** Defines the order direction, either ascending or descending */
-export type OrderDirection =
-  | 'asc'
-  | 'desc';
+export type OrderDirection = 'asc' | 'desc';
 
 export type Proposal = {
   id: Scalars['ID'];
@@ -754,7 +768,6 @@ export type Proposal = {
   statesLog?: Maybe<Array<ProposalStateLog>>;
 };
 
-
 export type ProposalvotesArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -763,7 +776,6 @@ export type ProposalvotesArgs = {
   where?: InputMaybe<Vote_filter>;
 };
 
-
 export type ProposaloptionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -771,7 +783,6 @@ export type ProposaloptionsArgs = {
   orderDirection?: InputMaybe<OrderDirection>;
   where?: InputMaybe<Option_filter>;
 };
-
 
 export type ProposalstatesLogArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1049,7 +1060,9 @@ export type Proposal_filter = {
   executionTransactionHash_starts_with?: InputMaybe<Scalars['String']>;
   executionTransactionHash_starts_with_nocase?: InputMaybe<Scalars['String']>;
   executionTransactionHash_not_starts_with?: InputMaybe<Scalars['String']>;
-  executionTransactionHash_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  executionTransactionHash_not_starts_with_nocase?: InputMaybe<
+    Scalars['String']
+  >;
   executionTransactionHash_ends_with?: InputMaybe<Scalars['String']>;
   executionTransactionHash_ends_with_nocase?: InputMaybe<Scalars['String']>;
   executionTransactionHash_not_ends_with?: InputMaybe<Scalars['String']>;
@@ -1108,13 +1121,11 @@ export type Query = {
   _meta?: Maybe<_Meta_>;
 };
 
-
 export type QueryproposalArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryproposalsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1126,13 +1137,11 @@ export type QueryproposalsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryproposalStateLogArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryproposalStateLogsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1144,13 +1153,11 @@ export type QueryproposalStateLogsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryoptionArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryoptionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1162,13 +1169,11 @@ export type QueryoptionsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryactionArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryactionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1180,13 +1185,11 @@ export type QueryactionsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryvoteArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryvotesArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1198,13 +1201,11 @@ export type QueryvotesArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QuerymemberArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QuerymembersArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1216,13 +1217,11 @@ export type QuerymembersArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryguildArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryguildsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1234,13 +1233,11 @@ export type QueryguildsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QuerytokenArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QuerytokensArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1252,13 +1249,11 @@ export type QuerytokensArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryguildPermissionArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryguildPermissionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1269,7 +1264,6 @@ export type QueryguildPermissionsArgs = {
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type Query_metaArgs = {
   block?: InputMaybe<Block_height>;
@@ -1298,13 +1292,11 @@ export type Subscription = {
   _meta?: Maybe<_Meta_>;
 };
 
-
 export type SubscriptionproposalArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionproposalsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1316,13 +1308,11 @@ export type SubscriptionproposalsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionproposalStateLogArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionproposalStateLogsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1334,13 +1324,11 @@ export type SubscriptionproposalStateLogsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionoptionArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionoptionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1352,13 +1340,11 @@ export type SubscriptionoptionsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionactionArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionactionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1370,13 +1356,11 @@ export type SubscriptionactionsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionvoteArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionvotesArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1388,13 +1372,11 @@ export type SubscriptionvotesArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionmemberArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionmembersArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1406,13 +1388,11 @@ export type SubscriptionmembersArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionguildArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionguildsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1424,13 +1404,11 @@ export type SubscriptionguildsArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptiontokenArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptiontokensArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1442,13 +1420,11 @@ export type SubscriptiontokensArgs = {
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionguildPermissionArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionguildPermissionsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
@@ -1459,7 +1435,6 @@ export type SubscriptionguildPermissionsArgs = {
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type Subscription_metaArgs = {
   block?: InputMaybe<Block_height>;
@@ -1474,8 +1449,7 @@ export type Token = {
   guildAddress: Scalars['String'];
 };
 
-export type TokenType =
-  | 'ERC20';
+export type TokenType = 'ERC20';
 
 export type Token_filter = {
   id?: InputMaybe<Scalars['ID']>;
@@ -1712,7 +1686,6 @@ export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
@@ -1726,7 +1699,9 @@ export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
   selectionSet: string | ((fieldNode: FieldNode) => SelectionSetNode);
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type StitchingResolver<TResult, TParent, TContext, TArgs> = LegacyStitchingResolver<TResult, TParent, TContext, TArgs> | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
+export type StitchingResolver<TResult, TParent, TContext, TArgs> =
+  | LegacyStitchingResolver<TResult, TParent, TContext, TArgs>
+  | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | ResolverWithResolve<TResult, TParent, TContext, TArgs>
@@ -1753,9 +1728,25 @@ export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
-export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
-  subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>;
-  resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>;
+export interface SubscriptionSubscriberObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> {
+  subscribe: SubscriptionSubscribeFn<
+    { [key in TKey]: TResult },
+    TParent,
+    TContext,
+    TArgs
+  >;
+  resolve?: SubscriptionResolveFn<
+    TResult,
+    { [key in TKey]: TResult },
+    TContext,
+    TArgs
+  >;
 }
 
 export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
@@ -1763,12 +1754,26 @@ export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
   resolve: SubscriptionResolveFn<TResult, any, TContext, TArgs>;
 }
 
-export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
+export type SubscriptionObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> =
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+export type SubscriptionResolver<
+  TResult,
+  TKey extends string,
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> =
+  | ((
+      ...args: any[]
+    ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -1777,11 +1782,20 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+  obj: T,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
+export type DirectiveResolverFn<
+  TResult = {},
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> = (
   next: NextResolverFn<TResult>,
   parent: TParent,
   args: TArgs,
@@ -1874,23 +1888,41 @@ export type ResolversParentTypes = ResolversObject<{
   _Meta_: _Meta_;
 }>;
 
-export type entityDirectiveArgs = { };
+export type entityDirectiveArgs = {};
 
-export type entityDirectiveResolver<Result, Parent, ContextType = MeshContext, Args = entityDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+export type entityDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = MeshContext,
+  Args = entityDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type subgraphIdDirectiveArgs = {
   id: Scalars['String'];
 };
 
-export type subgraphIdDirectiveResolver<Result, Parent, ContextType = MeshContext, Args = subgraphIdDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+export type subgraphIdDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = MeshContext,
+  Args = subgraphIdDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type derivedFromDirectiveArgs = {
   field: Scalars['String'];
 };
 
-export type derivedFromDirectiveResolver<Result, Parent, ContextType = MeshContext, Args = derivedFromDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+export type derivedFromDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = MeshContext,
+  Args = derivedFromDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type ActionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Action'] = ResolversParentTypes['Action']> = ResolversObject<{
+export type ActionResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Action'] = ResolversParentTypes['Action']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   optionId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   to?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1900,47 +1932,119 @@ export type ActionResolvers<ContextType = MeshContext, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export interface BigDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigDecimal'], any> {
+export interface BigDecimalScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['BigDecimal'], any> {
   name: 'BigDecimal';
 }
 
-export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
+export interface BigIntScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
   name: 'BigInt';
 }
 
-export interface BytesScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Bytes'], any> {
+export interface BytesScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['Bytes'], any> {
   name: 'Bytes';
 }
 
-export type GuildResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Guild'] = ResolversParentTypes['Guild']> = ResolversObject<{
+export type GuildResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Guild'] = ResolversParentTypes['Guild']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['Token']>, ParentType, ContextType>;
-  permissionRegistry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  proposalTime?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
+  permissionRegistry?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  proposalTime?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
   lockTime?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  timeForExecution?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  votingPowerForProposalCreation?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  votingPowerForProposalExecution?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
+  timeForExecution?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
+  votingPowerForProposalCreation?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
+  votingPowerForProposalExecution?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
   voteGas?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  maxGasPrice?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  maxActiveProposals?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  minimumMembersForProposalCreation?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  minimumTokensLockedForProposalCreation?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
+  maxGasPrice?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
+  maxActiveProposals?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
+  minimumMembersForProposalCreation?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
+  minimumTokensLockedForProposalCreation?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
   type?: Resolver<Maybe<ResolversTypes['GuildType']>, ParentType, ContextType>;
-  permissions?: Resolver<Array<ResolversTypes['GuildPermission']>, ParentType, ContextType, RequireFields<GuildpermissionsArgs, 'skip' | 'first'>>;
-  proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType, RequireFields<GuildproposalsArgs, 'skip' | 'first'>>;
-  members?: Resolver<Maybe<Array<ResolversTypes['Member']>>, ParentType, ContextType, RequireFields<GuildmembersArgs, 'skip' | 'first'>>;
-  isActive?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  bytecodeHash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  permissions?: Resolver<
+    Array<ResolversTypes['GuildPermission']>,
+    ParentType,
+    ContextType,
+    RequireFields<GuildpermissionsArgs, 'skip' | 'first'>
+  >;
+  proposals?: Resolver<
+    Maybe<Array<ResolversTypes['Proposal']>>,
+    ParentType,
+    ContextType,
+    RequireFields<GuildproposalsArgs, 'skip' | 'first'>
+  >;
+  members?: Resolver<
+    Maybe<Array<ResolversTypes['Member']>>,
+    ParentType,
+    ContextType,
+    RequireFields<GuildmembersArgs, 'skip' | 'first'>
+  >;
+  isActive?: Resolver<
+    Maybe<ResolversTypes['Boolean']>,
+    ParentType,
+    ContextType
+  >;
+  bytecodeHash?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type GuildPermissionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['GuildPermission'] = ResolversParentTypes['GuildPermission']> = ResolversObject<{
+export type GuildPermissionResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['GuildPermission'] = ResolversParentTypes['GuildPermission']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   from?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   to?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  functionSignature?: Resolver<ResolversTypes['Bytes'], ParentType, ContextType>;
+  functionSignature?: Resolver<
+    ResolversTypes['Bytes'],
+    ParentType,
+    ContextType
+  >;
   valueAllowed?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   fromTime?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   allowed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -1948,46 +2052,115 @@ export type GuildPermissionResolvers<ContextType = MeshContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type MemberResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Member'] = ResolversParentTypes['Member']> = ResolversObject<{
+export type MemberResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Member'] = ResolversParentTypes['Member']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   address?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   tokensLocked?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type OptionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Option'] = ResolversParentTypes['Option']> = ResolversObject<{
+export type OptionResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Option'] = ResolversParentTypes['Option']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  proposalId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  actions?: Resolver<Maybe<Array<ResolversTypes['Action']>>, ParentType, ContextType, RequireFields<OptionactionsArgs, 'skip' | 'first'>>;
-  voteAmount?: Resolver<Maybe<ResolversTypes['BigInt']>, ParentType, ContextType>;
-  votes?: Resolver<Array<ResolversTypes['Vote']>, ParentType, ContextType, RequireFields<OptionvotesArgs, 'skip' | 'first'>>;
+  proposalId?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  actions?: Resolver<
+    Maybe<Array<ResolversTypes['Action']>>,
+    ParentType,
+    ContextType,
+    RequireFields<OptionactionsArgs, 'skip' | 'first'>
+  >;
+  voteAmount?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
+  votes?: Resolver<
+    Array<ResolversTypes['Vote']>,
+    ParentType,
+    ContextType,
+    RequireFields<OptionvotesArgs, 'skip' | 'first'>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ProposalResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']> = ResolversObject<{
+export type ProposalResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   creator?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   startTime?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   endTime?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
-  to?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  data?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  value?: Resolver<Maybe<Array<ResolversTypes['BigInt']>>, ParentType, ContextType>;
+  to?: Resolver<
+    Maybe<Array<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
+  data?: Resolver<
+    Maybe<Array<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
+  value?: Resolver<
+    Maybe<Array<ResolversTypes['BigInt']>>,
+    ParentType,
+    ContextType
+  >;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contentHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contractState?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   guildId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  totalVotes?: Resolver<Maybe<Array<ResolversTypes['BigInt']>>, ParentType, ContextType>;
-  votes?: Resolver<Maybe<Array<ResolversTypes['Vote']>>, ParentType, ContextType, RequireFields<ProposalvotesArgs, 'skip' | 'first'>>;
-  options?: Resolver<Maybe<Array<ResolversTypes['Option']>>, ParentType, ContextType, RequireFields<ProposaloptionsArgs, 'skip' | 'first'>>;
+  totalVotes?: Resolver<
+    Maybe<Array<ResolversTypes['BigInt']>>,
+    ParentType,
+    ContextType
+  >;
+  votes?: Resolver<
+    Maybe<Array<ResolversTypes['Vote']>>,
+    ParentType,
+    ContextType,
+    RequireFields<ProposalvotesArgs, 'skip' | 'first'>
+  >;
+  options?: Resolver<
+    Maybe<Array<ResolversTypes['Option']>>,
+    ParentType,
+    ContextType,
+    RequireFields<ProposaloptionsArgs, 'skip' | 'first'>
+  >;
   metadata?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  executionTransactionHash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  statesLog?: Resolver<Maybe<Array<ResolversTypes['ProposalStateLog']>>, ParentType, ContextType, RequireFields<ProposalstatesLogArgs, 'skip' | 'first'>>;
+  description?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  executionTransactionHash?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  statesLog?: Resolver<
+    Maybe<Array<ResolversTypes['ProposalStateLog']>>,
+    ParentType,
+    ContextType,
+    RequireFields<ProposalstatesLogArgs, 'skip' | 'first'>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ProposalStateLogResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['ProposalStateLog'] = ResolversParentTypes['ProposalStateLog']> = ResolversObject<{
+export type ProposalStateLogResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['ProposalStateLog'] = ResolversParentTypes['ProposalStateLog']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
@@ -1995,51 +2168,278 @@ export type ProposalStateLogResolvers<ContextType = MeshContext, ParentType exte
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type QueryResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryproposalArgs, 'id' | 'subgraphError'>>;
-  proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryproposalsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  proposalStateLog?: Resolver<Maybe<ResolversTypes['ProposalStateLog']>, ParentType, ContextType, RequireFields<QueryproposalStateLogArgs, 'id' | 'subgraphError'>>;
-  proposalStateLogs?: Resolver<Array<ResolversTypes['ProposalStateLog']>, ParentType, ContextType, RequireFields<QueryproposalStateLogsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  option?: Resolver<Maybe<ResolversTypes['Option']>, ParentType, ContextType, RequireFields<QueryoptionArgs, 'id' | 'subgraphError'>>;
-  options?: Resolver<Array<ResolversTypes['Option']>, ParentType, ContextType, RequireFields<QueryoptionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  action?: Resolver<Maybe<ResolversTypes['Action']>, ParentType, ContextType, RequireFields<QueryactionArgs, 'id' | 'subgraphError'>>;
-  actions?: Resolver<Array<ResolversTypes['Action']>, ParentType, ContextType, RequireFields<QueryactionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  vote?: Resolver<Maybe<ResolversTypes['Vote']>, ParentType, ContextType, RequireFields<QueryvoteArgs, 'id' | 'subgraphError'>>;
-  votes?: Resolver<Array<ResolversTypes['Vote']>, ParentType, ContextType, RequireFields<QueryvotesArgs, 'skip' | 'first' | 'subgraphError'>>;
-  member?: Resolver<Maybe<ResolversTypes['Member']>, ParentType, ContextType, RequireFields<QuerymemberArgs, 'id' | 'subgraphError'>>;
-  members?: Resolver<Array<ResolversTypes['Member']>, ParentType, ContextType, RequireFields<QuerymembersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  guild?: Resolver<Maybe<ResolversTypes['Guild']>, ParentType, ContextType, RequireFields<QueryguildArgs, 'id' | 'subgraphError'>>;
-  guilds?: Resolver<Array<ResolversTypes['Guild']>, ParentType, ContextType, RequireFields<QueryguildsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  token?: Resolver<Maybe<ResolversTypes['Token']>, ParentType, ContextType, RequireFields<QuerytokenArgs, 'id' | 'subgraphError'>>;
-  tokens?: Resolver<Array<ResolversTypes['Token']>, ParentType, ContextType, RequireFields<QuerytokensArgs, 'skip' | 'first' | 'subgraphError'>>;
-  guildPermission?: Resolver<Maybe<ResolversTypes['GuildPermission']>, ParentType, ContextType, RequireFields<QueryguildPermissionArgs, 'id' | 'subgraphError'>>;
-  guildPermissions?: Resolver<Array<ResolversTypes['GuildPermission']>, ParentType, ContextType, RequireFields<QueryguildPermissionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  _meta?: Resolver<Maybe<ResolversTypes['_Meta_']>, ParentType, ContextType, Partial<Query_metaArgs>>;
+export type QueryResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
+> = ResolversObject<{
+  proposal?: Resolver<
+    Maybe<ResolversTypes['Proposal']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryproposalArgs, 'id' | 'subgraphError'>
+  >;
+  proposals?: Resolver<
+    Array<ResolversTypes['Proposal']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryproposalsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  proposalStateLog?: Resolver<
+    Maybe<ResolversTypes['ProposalStateLog']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryproposalStateLogArgs, 'id' | 'subgraphError'>
+  >;
+  proposalStateLogs?: Resolver<
+    Array<ResolversTypes['ProposalStateLog']>,
+    ParentType,
+    ContextType,
+    RequireFields<
+      QueryproposalStateLogsArgs,
+      'skip' | 'first' | 'subgraphError'
+    >
+  >;
+  option?: Resolver<
+    Maybe<ResolversTypes['Option']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryoptionArgs, 'id' | 'subgraphError'>
+  >;
+  options?: Resolver<
+    Array<ResolversTypes['Option']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryoptionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  action?: Resolver<
+    Maybe<ResolversTypes['Action']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryactionArgs, 'id' | 'subgraphError'>
+  >;
+  actions?: Resolver<
+    Array<ResolversTypes['Action']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryactionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  vote?: Resolver<
+    Maybe<ResolversTypes['Vote']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryvoteArgs, 'id' | 'subgraphError'>
+  >;
+  votes?: Resolver<
+    Array<ResolversTypes['Vote']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryvotesArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  member?: Resolver<
+    Maybe<ResolversTypes['Member']>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerymemberArgs, 'id' | 'subgraphError'>
+  >;
+  members?: Resolver<
+    Array<ResolversTypes['Member']>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerymembersArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  guild?: Resolver<
+    Maybe<ResolversTypes['Guild']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryguildArgs, 'id' | 'subgraphError'>
+  >;
+  guilds?: Resolver<
+    Array<ResolversTypes['Guild']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryguildsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  token?: Resolver<
+    Maybe<ResolversTypes['Token']>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerytokenArgs, 'id' | 'subgraphError'>
+  >;
+  tokens?: Resolver<
+    Array<ResolversTypes['Token']>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerytokensArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  guildPermission?: Resolver<
+    Maybe<ResolversTypes['GuildPermission']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryguildPermissionArgs, 'id' | 'subgraphError'>
+  >;
+  guildPermissions?: Resolver<
+    Array<ResolversTypes['GuildPermission']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryguildPermissionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  _meta?: Resolver<
+    Maybe<ResolversTypes['_Meta_']>,
+    ParentType,
+    ContextType,
+    Partial<Query_metaArgs>
+  >;
 }>;
 
-export type SubscriptionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
-  proposal?: SubscriptionResolver<Maybe<ResolversTypes['Proposal']>, "proposal", ParentType, ContextType, RequireFields<SubscriptionproposalArgs, 'id' | 'subgraphError'>>;
-  proposals?: SubscriptionResolver<Array<ResolversTypes['Proposal']>, "proposals", ParentType, ContextType, RequireFields<SubscriptionproposalsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  proposalStateLog?: SubscriptionResolver<Maybe<ResolversTypes['ProposalStateLog']>, "proposalStateLog", ParentType, ContextType, RequireFields<SubscriptionproposalStateLogArgs, 'id' | 'subgraphError'>>;
-  proposalStateLogs?: SubscriptionResolver<Array<ResolversTypes['ProposalStateLog']>, "proposalStateLogs", ParentType, ContextType, RequireFields<SubscriptionproposalStateLogsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  option?: SubscriptionResolver<Maybe<ResolversTypes['Option']>, "option", ParentType, ContextType, RequireFields<SubscriptionoptionArgs, 'id' | 'subgraphError'>>;
-  options?: SubscriptionResolver<Array<ResolversTypes['Option']>, "options", ParentType, ContextType, RequireFields<SubscriptionoptionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  action?: SubscriptionResolver<Maybe<ResolversTypes['Action']>, "action", ParentType, ContextType, RequireFields<SubscriptionactionArgs, 'id' | 'subgraphError'>>;
-  actions?: SubscriptionResolver<Array<ResolversTypes['Action']>, "actions", ParentType, ContextType, RequireFields<SubscriptionactionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  vote?: SubscriptionResolver<Maybe<ResolversTypes['Vote']>, "vote", ParentType, ContextType, RequireFields<SubscriptionvoteArgs, 'id' | 'subgraphError'>>;
-  votes?: SubscriptionResolver<Array<ResolversTypes['Vote']>, "votes", ParentType, ContextType, RequireFields<SubscriptionvotesArgs, 'skip' | 'first' | 'subgraphError'>>;
-  member?: SubscriptionResolver<Maybe<ResolversTypes['Member']>, "member", ParentType, ContextType, RequireFields<SubscriptionmemberArgs, 'id' | 'subgraphError'>>;
-  members?: SubscriptionResolver<Array<ResolversTypes['Member']>, "members", ParentType, ContextType, RequireFields<SubscriptionmembersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  guild?: SubscriptionResolver<Maybe<ResolversTypes['Guild']>, "guild", ParentType, ContextType, RequireFields<SubscriptionguildArgs, 'id' | 'subgraphError'>>;
-  guilds?: SubscriptionResolver<Array<ResolversTypes['Guild']>, "guilds", ParentType, ContextType, RequireFields<SubscriptionguildsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  token?: SubscriptionResolver<Maybe<ResolversTypes['Token']>, "token", ParentType, ContextType, RequireFields<SubscriptiontokenArgs, 'id' | 'subgraphError'>>;
-  tokens?: SubscriptionResolver<Array<ResolversTypes['Token']>, "tokens", ParentType, ContextType, RequireFields<SubscriptiontokensArgs, 'skip' | 'first' | 'subgraphError'>>;
-  guildPermission?: SubscriptionResolver<Maybe<ResolversTypes['GuildPermission']>, "guildPermission", ParentType, ContextType, RequireFields<SubscriptionguildPermissionArgs, 'id' | 'subgraphError'>>;
-  guildPermissions?: SubscriptionResolver<Array<ResolversTypes['GuildPermission']>, "guildPermissions", ParentType, ContextType, RequireFields<SubscriptionguildPermissionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  _meta?: SubscriptionResolver<Maybe<ResolversTypes['_Meta_']>, "_meta", ParentType, ContextType, Partial<Subscription_metaArgs>>;
+export type SubscriptionResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']
+> = ResolversObject<{
+  proposal?: SubscriptionResolver<
+    Maybe<ResolversTypes['Proposal']>,
+    'proposal',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionproposalArgs, 'id' | 'subgraphError'>
+  >;
+  proposals?: SubscriptionResolver<
+    Array<ResolversTypes['Proposal']>,
+    'proposals',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionproposalsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  proposalStateLog?: SubscriptionResolver<
+    Maybe<ResolversTypes['ProposalStateLog']>,
+    'proposalStateLog',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionproposalStateLogArgs, 'id' | 'subgraphError'>
+  >;
+  proposalStateLogs?: SubscriptionResolver<
+    Array<ResolversTypes['ProposalStateLog']>,
+    'proposalStateLogs',
+    ParentType,
+    ContextType,
+    RequireFields<
+      SubscriptionproposalStateLogsArgs,
+      'skip' | 'first' | 'subgraphError'
+    >
+  >;
+  option?: SubscriptionResolver<
+    Maybe<ResolversTypes['Option']>,
+    'option',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionoptionArgs, 'id' | 'subgraphError'>
+  >;
+  options?: SubscriptionResolver<
+    Array<ResolversTypes['Option']>,
+    'options',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionoptionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  action?: SubscriptionResolver<
+    Maybe<ResolversTypes['Action']>,
+    'action',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionactionArgs, 'id' | 'subgraphError'>
+  >;
+  actions?: SubscriptionResolver<
+    Array<ResolversTypes['Action']>,
+    'actions',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionactionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  vote?: SubscriptionResolver<
+    Maybe<ResolversTypes['Vote']>,
+    'vote',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionvoteArgs, 'id' | 'subgraphError'>
+  >;
+  votes?: SubscriptionResolver<
+    Array<ResolversTypes['Vote']>,
+    'votes',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionvotesArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  member?: SubscriptionResolver<
+    Maybe<ResolversTypes['Member']>,
+    'member',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionmemberArgs, 'id' | 'subgraphError'>
+  >;
+  members?: SubscriptionResolver<
+    Array<ResolversTypes['Member']>,
+    'members',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionmembersArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  guild?: SubscriptionResolver<
+    Maybe<ResolversTypes['Guild']>,
+    'guild',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionguildArgs, 'id' | 'subgraphError'>
+  >;
+  guilds?: SubscriptionResolver<
+    Array<ResolversTypes['Guild']>,
+    'guilds',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionguildsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  token?: SubscriptionResolver<
+    Maybe<ResolversTypes['Token']>,
+    'token',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptiontokenArgs, 'id' | 'subgraphError'>
+  >;
+  tokens?: SubscriptionResolver<
+    Array<ResolversTypes['Token']>,
+    'tokens',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptiontokensArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  guildPermission?: SubscriptionResolver<
+    Maybe<ResolversTypes['GuildPermission']>,
+    'guildPermission',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionguildPermissionArgs, 'id' | 'subgraphError'>
+  >;
+  guildPermissions?: SubscriptionResolver<
+    Array<ResolversTypes['GuildPermission']>,
+    'guildPermissions',
+    ParentType,
+    ContextType,
+    RequireFields<
+      SubscriptionguildPermissionsArgs,
+      'skip' | 'first' | 'subgraphError'
+    >
+  >;
+  _meta?: SubscriptionResolver<
+    Maybe<ResolversTypes['_Meta_']>,
+    '_meta',
+    ParentType,
+    ContextType,
+    Partial<Subscription_metaArgs>
+  >;
 }>;
 
-export type TokenResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Token'] = ResolversParentTypes['Token']> = ResolversObject<{
+export type TokenResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Token'] = ResolversParentTypes['Token']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['TokenType'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2049,7 +2449,10 @@ export type TokenResolvers<ContextType = MeshContext, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type VoteResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Vote'] = ResolversParentTypes['Vote']> = ResolversObject<{
+export type VoteResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['Vote'] = ResolversParentTypes['Vote']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   proposalId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   option?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
@@ -2059,17 +2462,27 @@ export type VoteResolvers<ContextType = MeshContext, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type _Block_Resolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['_Block_'] = ResolversParentTypes['_Block_']> = ResolversObject<{
+export type _Block_Resolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['_Block_'] = ResolversParentTypes['_Block_']
+> = ResolversObject<{
   hash?: Resolver<Maybe<ResolversTypes['Bytes']>, ParentType, ContextType>;
   number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   timestamp?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type _Meta_Resolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['_Meta_'] = ResolversParentTypes['_Meta_']> = ResolversObject<{
+export type _Meta_Resolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['_Meta_'] = ResolversParentTypes['_Meta_']
+> = ResolversObject<{
   block?: Resolver<ResolversTypes['_Block_'], ParentType, ContextType>;
   deployment?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  hasIndexingErrors?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  hasIndexingErrors?: Resolver<
+    ResolversTypes['Boolean'],
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2100,70 +2513,87 @@ export type DirectiveResolvers<ContextType = MeshContext> = ResolversObject<{
 
 export type MeshContext = DxgovGuildSubgraphTypes.Context & BaseMeshContext;
 
-
 import { fileURLToPath } from '@graphql-mesh/utils';
-const baseDir = pathModule.join(pathModule.dirname(fileURLToPath(import.meta.url)), '..');
+const baseDir = pathModule.join(
+  pathModule.dirname(fileURLToPath(import.meta.url)),
+  '..'
+);
 
 const importFn: ImportFn = <T>(moduleId: string) => {
-  const relativeModuleId = (pathModule.isAbsolute(moduleId) ? pathModule.relative(baseDir, moduleId) : moduleId).split('\\').join('/').replace(baseDir + '/', '');
-  switch(relativeModuleId) {
-    case ".graphclient/sources/dxgov-guild-subgraph/introspectionSchema":
-      return import("./sources/dxgov-guild-subgraph/introspectionSchema") as T;
-    
+  const relativeModuleId = (
+    pathModule.isAbsolute(moduleId)
+      ? pathModule.relative(baseDir, moduleId)
+      : moduleId
+  )
+    .split('\\')
+    .join('/')
+    .replace(baseDir + '/', '');
+  switch (relativeModuleId) {
+    case '.graphclient/sources/dxgov-guild-subgraph/introspectionSchema':
+      return import('./sources/dxgov-guild-subgraph/introspectionSchema') as T;
+
     default:
-      return Promise.reject(new Error(`Cannot find module '${relativeModuleId}'.`));
+      return Promise.reject(
+        new Error(`Cannot find module '${relativeModuleId}'.`)
+      );
   }
 };
 
-const rootStore = new MeshStore('.graphclient', new FsStoreStorageAdapter({
-  cwd: baseDir,
-  importFn,
-  fileType: "ts",
-}), {
-  readonly: true,
-  validate: false
-});
+const rootStore = new MeshStore(
+  '.graphclient',
+  new FsStoreStorageAdapter({
+    cwd: baseDir,
+    importFn,
+    fileType: 'ts',
+  }),
+  {
+    readonly: true,
+    validate: false,
+  }
+);
 
-export const rawServeConfig: YamlConfig.Config['serve'] = undefined as any
+export const rawServeConfig: YamlConfig.Config['serve'] = undefined as any;
 export async function getMeshOptions(): Promise<GetMeshOptions> {
-const pubsub = new PubSub();
-const sourcesStore = rootStore.child('sources');
-const logger = new DefaultLogger("GraphClient");
-const cache = new (MeshCache as any)({
-      ...({} as any),
-      importFn,
-      store: rootStore.child('cache'),
-      pubsub,
-      logger,
-    } as any)
+  const pubsub = new PubSub();
+  const sourcesStore = rootStore.child('sources');
+  const logger = new DefaultLogger('GraphClient');
+  const cache = new (MeshCache as any)({
+    ...({} as any),
+    importFn,
+    store: rootStore.child('cache'),
+    pubsub,
+    logger,
+  } as any);
 
-const sources: MeshResolvedSource[] = [];
-const transforms: MeshTransform[] = [];
-const additionalEnvelopPlugins: MeshPlugin<any>[] = [];
-const dxgovGuildSubgraphTransforms = [];
-const additionalTypeDefs = [] as any[];
-const dxgovGuildSubgraphHandler = new GraphqlHandler({
-              name: "dxgov-guild-subgraph",
-              config: {"endpoint":"http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao"},
-              baseDir,
-              cache,
-              pubsub,
-              store: sourcesStore.child("dxgov-guild-subgraph"),
-              logger: logger.child("dxgov-guild-subgraph"),
-              importFn,
-            });
-sources[0] = {
-          name: 'dxgov-guild-subgraph',
-          handler: dxgovGuildSubgraphHandler,
-          transforms: dxgovGuildSubgraphTransforms
-        }
-const additionalResolvers = [] as any[]
-const merger = new(BareMerger as any)({
-        cache,
-        pubsub,
-        logger: logger.child('bareMerger'),
-        store: rootStore.child('bareMerger')
-      })
+  const sources: MeshResolvedSource[] = [];
+  const transforms: MeshTransform[] = [];
+  const additionalEnvelopPlugins: MeshPlugin<any>[] = [];
+  const dxgovGuildSubgraphTransforms = [];
+  const additionalTypeDefs = [] as any[];
+  const dxgovGuildSubgraphHandler = new GraphqlHandler({
+    name: 'dxgov-guild-subgraph',
+    config: {
+      endpoint: 'http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao',
+    },
+    baseDir,
+    cache,
+    pubsub,
+    store: sourcesStore.child('dxgov-guild-subgraph'),
+    logger: logger.child('dxgov-guild-subgraph'),
+    importFn,
+  });
+  sources[0] = {
+    name: 'dxgov-guild-subgraph',
+    handler: dxgovGuildSubgraphHandler,
+    transforms: dxgovGuildSubgraphTransforms,
+  };
+  const additionalResolvers = [] as any[];
+  const merger = new (BareMerger as any)({
+    cache,
+    pubsub,
+    logger: logger.child('bareMerger'),
+    store: rootStore.child('bareMerger'),
+  });
 
   return {
     sources,
@@ -2177,20 +2607,21 @@ const merger = new(BareMerger as any)({
     additionalEnvelopPlugins,
     get documents() {
       return [
-      {
-        document: GetActiveProposalsDocument,
-        get rawSDL() {
-          return printWithCache(GetActiveProposalsDocument);
+        {
+          document: GetNumberOfActiveProposalsDocument,
+          get rawSDL() {
+            return printWithCache(GetNumberOfActiveProposalsDocument);
+          },
+          location: 'GetNumberOfActiveProposalsDocument.graphql',
         },
-        location: 'GetActiveProposalsDocument.graphql'
-      },{
-        document: GetGuildConfigDocument,
-        get rawSDL() {
-          return printWithCache(GetGuildConfigDocument);
+        {
+          document: GetGuildConfigDocument,
+          get rawSDL() {
+            return printWithCache(GetGuildConfigDocument);
+          },
+          location: 'GetGuildConfigDocument.graphql',
         },
-        location: 'GetGuildConfigDocument.graphql'
-      }
-    ];
+      ];
     },
     fetchFn,
   };
@@ -2201,98 +2632,145 @@ export function createBuiltMeshHTTPHandler(): MeshHTTPHandler<MeshContext> {
     baseDir,
     getBuiltMesh: getBuiltGraphClient,
     rawServeConfig: undefined,
-  })
+  });
 }
-
 
 let meshInstance$: Promise<MeshInstance> | undefined;
 
 export function getBuiltGraphClient(): Promise<MeshInstance> {
   if (meshInstance$ == null) {
-    meshInstance$ = getMeshOptions().then(meshOptions => getMesh(meshOptions)).then(mesh => {
-      const id = mesh.pubsub.subscribe('destroy', () => {
-        meshInstance$ = undefined;
-        mesh.pubsub.unsubscribe(id);
+    meshInstance$ = getMeshOptions()
+      .then(meshOptions => getMesh(meshOptions))
+      .then(mesh => {
+        const id = mesh.pubsub.subscribe('destroy', () => {
+          meshInstance$ = undefined;
+          mesh.pubsub.unsubscribe(id);
+        });
+        return mesh;
       });
-      return mesh;
-    });
   }
   return meshInstance$;
 }
 
-export const execute: ExecuteMeshFn = (...args) => getBuiltGraphClient().then(({ execute }) => execute(...args));
+export const execute: ExecuteMeshFn = (...args) =>
+  getBuiltGraphClient().then(({ execute }) => execute(...args));
 
-export const subscribe: SubscribeMeshFn = (...args) => getBuiltGraphClient().then(({ subscribe }) => subscribe(...args));
-export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(globalContext?: TGlobalContext) {
-  const sdkRequester$ = getBuiltGraphClient().then(({ sdkRequesterFactory }) => sdkRequesterFactory(globalContext));
-  return getSdk<TOperationContext, TGlobalContext>((...args) => sdkRequester$.then(sdkRequester => sdkRequester(...args)));
+export const subscribe: SubscribeMeshFn = (...args) =>
+  getBuiltGraphClient().then(({ subscribe }) => subscribe(...args));
+export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
+  globalContext?: TGlobalContext
+) {
+  const sdkRequester$ = getBuiltGraphClient().then(({ sdkRequesterFactory }) =>
+    sdkRequesterFactory(globalContext)
+  );
+  return getSdk<TOperationContext, TGlobalContext>((...args) =>
+    sdkRequester$.then(sdkRequester => sdkRequester(...args))
+  );
 }
-export type getActiveProposalsQueryVariables = Exact<{
+export type getNumberOfActiveProposalsQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-
-export type getActiveProposalsQuery = { guild?: Maybe<(
-    Pick<Guild, 'id' | 'name'>
-    & { proposals?: Maybe<Array<Pick<Proposal, 'id'>>> }
-  )> };
+export type getNumberOfActiveProposalsQuery = {
+  guild?: Maybe<
+    Pick<Guild, 'id' | 'name'> & {
+      proposals?: Maybe<Array<Pick<Proposal, 'id'>>>;
+    }
+  >;
+};
 
 export type getGuildConfigQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
+export type getGuildConfigQuery = {
+  guild?: Maybe<
+    Pick<
+      Guild,
+      | 'id'
+      | 'name'
+      | 'permissionRegistry'
+      | 'proposalTime'
+      | 'timeForExecution'
+      | 'maxActiveProposals'
+      | 'votingPowerForProposalCreation'
+      | 'votingPowerForProposalExecution'
+      | 'lockTime'
+      | 'voteGas'
+      | 'maxGasPrice'
+      | 'minimumMembersForProposalCreation'
+      | 'minimumTokensLockedForProposalCreation'
+    > & { token?: Maybe<Pick<Token, 'id'>> }
+  >;
+};
 
-export type getGuildConfigQuery = { guild?: Maybe<(
-    Pick<Guild, 'id' | 'name' | 'permissionRegistry' | 'proposalTime' | 'timeForExecution' | 'maxActiveProposals' | 'votingPowerForProposalCreation' | 'votingPowerForProposalExecution' | 'lockTime' | 'voteGas' | 'maxGasPrice' | 'minimumMembersForProposalCreation' | 'minimumTokensLockedForProposalCreation'>
-    & { token?: Maybe<Pick<Token, 'id'>> }
-  )> };
-
-
-export const getActiveProposalsDocument = gql`
-    query getActiveProposals($id: ID!) {
-  guild(id: $id) {
-    id
-    name
-    proposals {
+export const getNumberOfActiveProposalsDocument = gql`
+  query getNumberOfActiveProposals($id: ID!) {
+    guild(id: $id) {
       id
+      name
+      proposals {
+        id
+      }
     }
   }
-}
-    ` as unknown as DocumentNode<getActiveProposalsQuery, getActiveProposalsQueryVariables>;
+` as unknown as DocumentNode<
+  getNumberOfActiveProposalsQuery,
+  getNumberOfActiveProposalsQueryVariables
+>;
 export const getGuildConfigDocument = gql`
-    query getGuildConfig($id: ID!) {
-  guild(id: $id) {
-    id
-    name
-    token {
+  query getGuildConfig($id: ID!) {
+    guild(id: $id) {
       id
+      name
+      token {
+        id
+      }
+      permissionRegistry
+      proposalTime
+      timeForExecution
+      maxActiveProposals
+      votingPowerForProposalCreation
+      votingPowerForProposalExecution
+      lockTime
+      voteGas
+      maxGasPrice
+      minimumMembersForProposalCreation
+      minimumTokensLockedForProposalCreation
     }
-    permissionRegistry
-    proposalTime
-    timeForExecution
-    maxActiveProposals
-    votingPowerForProposalCreation
-    votingPowerForProposalExecution
-    lockTime
-    voteGas
-    maxGasPrice
-    minimumMembersForProposalCreation
-    minimumTokensLockedForProposalCreation
   }
-}
-    ` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
+` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
 
-
-
-export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R> | AsyncIterable<R>
+export type Requester<C = {}, E = unknown> = <R, V>(
+  doc: DocumentNode,
+  vars?: V,
+  options?: C
+) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
-    getActiveProposals(variables: getActiveProposalsQueryVariables, options?: C): Promise<getActiveProposalsQuery> {
-      return requester<getActiveProposalsQuery, getActiveProposalsQueryVariables>(getActiveProposalsDocument, variables, options) as Promise<getActiveProposalsQuery>;
+    getNumberOfActiveProposals(
+      variables: getNumberOfActiveProposalsQueryVariables,
+      options?: C
+    ): Promise<getNumberOfActiveProposalsQuery> {
+      return requester<
+        getNumberOfActiveProposalsQuery,
+        getNumberOfActiveProposalsQueryVariables
+      >(
+        getNumberOfActiveProposalsDocument,
+        variables,
+        options
+      ) as Promise<getNumberOfActiveProposalsQuery>;
     },
-    getGuildConfig(variables: getGuildConfigQueryVariables, options?: C): Promise<getGuildConfigQuery> {
-      return requester<getGuildConfigQuery, getGuildConfigQueryVariables>(getGuildConfigDocument, variables, options) as Promise<getGuildConfigQuery>;
-    }
+    getGuildConfig(
+      variables: getGuildConfigQueryVariables,
+      options?: C
+    ): Promise<getGuildConfigQuery> {
+      return requester<getGuildConfigQuery, getGuildConfigQueryVariables>(
+        getGuildConfigDocument,
+        variables,
+        options
+      ) as Promise<getGuildConfigQuery>;
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

@@ -16,7 +16,7 @@ type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
-  useGetActiveProposals: (daoId: string) => {
+  useGetNumberOfActiveProposals: (daoId: string) => {
     data: BigNumber;
     refetch: () => void;
   };

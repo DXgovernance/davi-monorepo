@@ -23,9 +23,7 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-export const useGuildConfig = (
-  guildAddress: string,
-) => {
+export const useGuildConfig = (guildAddress: string) => {
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {

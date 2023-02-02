@@ -1,4 +1,4 @@
-query getActiveProposals($id: ID!) {
+query getNumberOfActiveProposals($id: ID!) {
   guild(id: $id) {
     id
     name

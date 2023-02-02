@@ -76,11 +76,14 @@
   "value": "Value",
   "data": "Data",
   "unknownToken": "Unknown token",
+  "function": "Function",
   "functionName": "Function Name",
   "functionSignature": "Function Signature",
   "assetTransfer": "Asset Transfer",
+  "assetPermissions": "Asset permissions",
   "functionCall": "Function Call",
   "functionCalls": "Function Calls",
+  "functionCallPermissions": "Function call permissions",
   "permissions": {
     "permissions": "Permissions",
     "setPermissions": "Set Permissions",
@@ -269,6 +272,7 @@
   "advancedOptions": "Advanced options",
   "rawTransaction": "Raw transaction",
   "none": "None",
+  "advancedView": "Advanced view",
   "expandLinesOfCode": "Expand {{numLines}} lines of code",
   "noGuildsRegistered": "No guilds registered on this network",
   "guildNotAvailable": "Guild not available",
@@ -347,5 +351,6 @@
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },
-  "loadingDao": "Loading DAO"
+  "loadingDao": "Loading DAO",
+  "contract": "Contract"
 }

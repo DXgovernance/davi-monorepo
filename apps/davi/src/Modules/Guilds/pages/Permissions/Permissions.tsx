@@ -1,179 +1,30 @@
-import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { BiInfinite } from 'react-icons/bi';
-import { BigNumber } from 'ethers';
-import { useNetwork } from 'wagmi';
-import {
-  getChainIcon,
-  getNetworkById,
-  resolveUri,
-  tokenList,
-  ERC20_TRANSFER_SIGNATURE,
-  ERC20_APPROVE_SIGNATURE,
-  ANY_FUNC_SIGNATURE,
-  ZERO_ADDRESS,
-} from 'utils';
-import { Heading } from 'components/primitives/Typography';
-import { Loading } from 'components/primitives/Loading';
-import { BlockExplorerLink } from 'components/primitives/Links';
-import { Avatar } from 'components/Avatar';
-import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
-import {
-  MainContainer,
-  TabContainer,
-  TabContent,
-  Table,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TokenNameAndSymbol,
-} from './Permissions.styled';
+import { useState } from 'react';
 import { useHookStoreProvider } from 'stores';
+import { Heading } from 'components/primitives/Typography';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-
-interface ITokenPermission {
-  tokenAddress: string;
-  hasApproval: boolean;
-  fromTime?: BigNumber;
-  valueAllowed?: BigNumber;
-}
-
-interface IAssetPermissionRow {
-  token: ITokenPermission;
-}
-
-const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
-  const { t } = useTranslation();
-  const { chain } = useNetwork();
-  const { tokenAddress } = token;
-  const { data: tokenInfo } = useERC20Info(tokenAddress);
-  const tokenUri = useMemo(() => {
-    if (tokenAddress === ZERO_ADDRESS) {
-      return `${window.location.origin}${getChainIcon(chain?.id)}`;
-    } else {
-      const tokenData = tokenList?.tokens?.find(token => {
-        if (token?.address === tokenAddress) return true;
-        return false;
-      });
-      return tokenData?.logoURI;
-    }
-  }, [chain?.id, tokenAddress]);
-
-  const tokenSymbol = useMemo(() => {
-    return tokenInfo?.symbol ?? getNetworkById(chain?.id).nativeAsset.symbol;
-  }, [chain?.id, tokenInfo?.symbol]);
-
-  const decimals =
-    tokenInfo?.decimals ?? getNetworkById(chain?.id).nativeAsset.decimals;
-
-  const formattedValueAllowed = useBigNumberToNumber(
-    token?.valueAllowed,
-    decimals,
-    3
-  );
-
-  const tokenValueAllowed = useMemo(() => {
-    return token?.valueAllowed?.toString() === '0' ? (
-      <BiInfinite size={20} />
-    ) : (
-      formattedValueAllowed
-    );
-  }, [token?.valueAllowed, formattedValueAllowed]);
-
-  const tokenPermissions = useMemo(() => {
-    const hasApproval = token?.hasApproval;
-    const fromTime = token?.fromTime?.toString();
-    const canTransfer =
-      fromTime === '0' || fromTime === undefined ? false : true;
-
-    if (hasApproval && canTransfer) return `${t('approve')} & ${t('transfer')}`;
-    else if (hasApproval) return t('approve');
-    else if (canTransfer) return t('transfer');
-    return null;
-  }, [t, token?.fromTime, token?.hasApproval]);
-
-  return (
-    <TableRow>
-      <TableCell alignment="left">
-        <TokenNameAndSymbol>
-          <Avatar
-            src={resolveUri(tokenUri)}
-            defaultSeed={tokenAddress}
-            size={24}
-          />
-
-          {tokenSymbol}
-        </TokenNameAndSymbol>
-      </TableCell>
-      <TableCell alignment="left">
-        <BlockExplorerLink
-          shortAddress
-          forceShowAddress
-          address={tokenAddress ?? ZERO_ADDRESS}
-        />
-      </TableCell>
-      <TableCell alignment="right">{tokenValueAllowed}</TableCell>
-      <TableCell alignment="right">{tokenPermissions}</TableCell>
-    </TableRow>
-  );
-};
+import { MainContainer, TabContainer, TabContent } from './Permissions.styled';
+import AssetPermissions from './AssetPermissions';
+import FunctionCallPermissions from './FunctionCallPermissions';
+import { useTranslation } from 'react-i18next';
 
 const Permissions = () => {
   const { t } = useTranslation();
-  const { guildId: daoAddress } = useTypedParams();
-
   const {
     hooks: {
       fetchers: { useGetAllPermissions },
     },
   } = useHookStoreProvider();
+  const { guildId: daoAddress } = useTypedParams();
 
-  const { data: tokenPermissions } = useGetAllPermissions(daoAddress, 'tokens');
+  const tokenPermissions = useGetAllPermissions(daoAddress, 'tokens');
+  const functionCallPermissions = useGetAllPermissions(
+    daoAddress,
+    'functionCalls'
+  );
 
   const [activeTab, setActiveTab] = useState<'assets' | 'functionCalls'>(
     'assets'
   );
-
-  const parsedPermissions = useMemo(() => {
-    interface IPermissions {
-      [key: string]: ITokenPermission;
-    }
-
-    const result: IPermissions = {};
-
-    // This assumes that the data returns only tokens
-    tokenPermissions?.forEach(token => {
-      const tokenAddress = token.to;
-
-      if (!result[tokenAddress]) {
-        result[tokenAddress] = {
-          tokenAddress,
-          hasApproval: false,
-        };
-      }
-
-      switch (token.functionSignature) {
-        case ERC20_APPROVE_SIGNATURE:
-          result[tokenAddress].hasApproval = true;
-          break;
-        case ERC20_TRANSFER_SIGNATURE:
-          result[tokenAddress].fromTime = token.fromTime;
-          result[tokenAddress].valueAllowed = token.valueAllowed;
-          break;
-        case ANY_FUNC_SIGNATURE:
-          result[tokenAddress].fromTime = token.fromTime;
-          result[tokenAddress].valueAllowed = token.valueAllowed;
-          result[tokenAddress].hasApproval = true;
-          break;
-        default:
-          break;
-      }
-    });
-
-    return result;
-  }, [tokenPermissions]);
 
   return (
     <>
@@ -183,54 +34,26 @@ const Permissions = () => {
           position="left"
           onClick={() => setActiveTab('assets')}
         >
-          <Heading size={2}>Asset permissions</Heading>
+          <Heading size={2}>{t('assetPermissions')}</Heading>
         </TabContent>
         <TabContent
           active={activeTab === 'functionCalls'}
           position="right"
           onClick={() => setActiveTab('functionCalls')}
         >
-          <Heading size={2}>Function call permissions</Heading>
+          <Heading size={2}>{t('functionCallPermissions')}</Heading>
         </TabContent>
       </TabContainer>
 
       <MainContainer>
-        <Table>
-          <TableHead>
-            <tr>
-              <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
-              <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
-              <TableHeader alignment={'right'}>
-                {t('allowedAmount')}
-              </TableHeader>
-              <TableHeader alignment={'right'}>
-                {t('permissions.permissions')}
-              </TableHeader>
-            </tr>
-          </TableHead>
-          <tbody>
-            {tokenPermissions ? (
-              Object.keys(parsedPermissions)?.map(tokenAddress => {
-                const currentValue = parsedPermissions[tokenAddress];
-                return (
-                  <AssetPermissionRow token={currentValue} key={tokenAddress} />
-                );
-              })
-            ) : (
-              <TableRow>
-                <TableCell alignment={'left'}>
-                  <Loading loading text />
-                </TableCell>
-                <TableCell alignment={'left'}>
-                  <Loading loading text />
-                </TableCell>
-                <TableCell alignment={'right'}>
-                  <Loading loading text />
-                </TableCell>
-              </TableRow>
-            )}
-          </tbody>
-        </Table>
+        {activeTab === 'assets' && (
+          <AssetPermissions tokenPermissions={tokenPermissions} />
+        )}
+        {activeTab === 'functionCalls' && (
+          <FunctionCallPermissions
+            functionCallPermissions={functionCallPermissions}
+          />
+        )}
       </MainContainer>
     </>
   );

@@ -5,12 +5,12 @@ export const MainContainer = styled(Box)`
   border-bottom-left-radius: ${({ theme }) => theme.radii.curved};
   border-bottom-right-radius: ${({ theme }) => theme.radii.curved};
   background-color: ${({ theme }) => theme.colors.bg4};
-  padding: 1px 24px 8px 24px;
+  padding: 1px 24px 24px 24px;
 `;
 
 export const TabContainer = styled(Flex)`
   flex-direction: row;
-  width: 100%;
+  align-items: stretch;
 `;
 
 export const TabContent = styled.button<{
@@ -49,6 +49,7 @@ export const Table = styled.table`
 
 export const TableRow = styled.tr`
   border-top: 1px solid ${({ theme }) => theme.colors.darkGreen1};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.darkGreen1};
 `;
 
 export const TableHead = styled.thead`
@@ -80,4 +81,18 @@ export const TokenNameAndSymbol = styled(Flex)`
   gap: 10px;
   flex-direction: row;
   justify-content: flex-start;
+`;
+
+export const ToggleContainer = styled(Flex)`
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 16px;
+  gap: 10px;
+`;
+
+export const ToggleLabel = styled.span`
+  font-size: 12px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.grey};
 `;

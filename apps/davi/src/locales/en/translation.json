@@ -341,5 +341,6 @@
   "votes": "Votes",
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
-  }
+  },
+  "loading": "Loading..."
 }

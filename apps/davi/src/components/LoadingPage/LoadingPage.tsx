@@ -14,7 +14,7 @@ const LoadingPage = () => {
       <Container>
         <MainDiv>
           <Loading loading={true} iconProps={{ size: 80 }} />
-          <LoadingText>{t('loadingDao')}</LoadingText>
+          <LoadingText>{t('loading')}</LoadingText>
         </MainDiv>
       </Container>
     </>

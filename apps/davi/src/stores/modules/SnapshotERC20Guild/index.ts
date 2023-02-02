@@ -7,8 +7,10 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+} from '../subgraph/common';
 
 import {
   useProposal,

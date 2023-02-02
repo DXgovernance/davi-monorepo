@@ -20,8 +20,10 @@ import {
   useGetActiveProposals,
   useGetMemberList,
 } from '../common/fetchers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+} from '../subgraph/common';
 
 import {
   useTotalLocked,

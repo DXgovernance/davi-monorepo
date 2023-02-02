@@ -68,8 +68,9 @@ export const HookStoreProvider: React.FC<
       if (!bytecodeHash) {
         const bytecode = await provider.getCode(daoId);
         bytecodeHash = Web3.utils.keccak256(bytecode);
-
-        localStorage.setItem(`hashed-bytecode-${daoId}`, bytecodeHash);
+        if (!bytecodeHash) {
+          localStorage.setItem(`hashed-bytecode-${daoId}`, bytecodeHash);
+        }
       }
       return bytecodeHash;
     };

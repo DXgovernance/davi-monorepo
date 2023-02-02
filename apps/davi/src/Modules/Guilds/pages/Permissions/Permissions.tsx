@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHookStoreProvider } from 'stores';
 import { Heading } from 'components/primitives/Typography';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { MainContainer, TabContainer, TabContent } from './Permissions.styled';
 import AssetPermissions from './AssetPermissions';
 import FunctionCallPermissions from './FunctionCallPermissions';
-import { useTranslation } from 'react-i18next';
+import { MainContainer, TabContainer, TabContent } from './Permissions.styled';
 
 const Permissions = () => {
   const { t } = useTranslation();

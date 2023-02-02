@@ -4,7 +4,7 @@ import { Box, Flex } from 'components/primitives/Layout';
 export const MainContainer = styled(Box)`
   border-bottom-left-radius: ${({ theme }) => theme.radii.curved};
   border-bottom-right-radius: ${({ theme }) => theme.radii.curved};
-  background-color: ${({ theme }) => theme.colors.bg4};
+  background-color: ${({ theme }) => theme.colors.bg1};
   padding: 1px 24px 24px 24px;
 `;
 
@@ -30,7 +30,7 @@ export const TabContent = styled.button<{
     active ? theme.colors.active : theme.colors.grey};
 
   background-color: ${({ active, theme }) =>
-    active ? theme.colors.bg4 : theme.colors.darkGreen2};
+    active ? theme.colors.bg1 : theme.colors.darkGreen2};
 
   border-bottom: 1px solid
     ${({ active, theme }) =>

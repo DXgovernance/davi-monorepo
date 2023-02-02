@@ -1,5 +1,7 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
+import { useGetNumberOfActiveProposals } from './modules/common/fetchers';
+import { useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph } from './modules/subgraph/common/useGetNumberOfActiveProposals';
 import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
 
@@ -13,13 +15,15 @@ interface GovernanceCapabilities {
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
+type useGetNumberOfActiveProposalsUni =
+  | ReturnType<typeof useGetNumberOfActiveProposals>
+  | ReturnType<typeof useGetNumberOfActiveProposalsFromSubgraph>;
 
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
-  useGetNumberOfActiveProposals: (daoId: string) => {
-    data: BigNumber;
-    refetch: () => void;
-  };
+  useGetNumberOfActiveProposals: (
+    daoId: string
+  ) => useGetNumberOfActiveProposalsUni;
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`

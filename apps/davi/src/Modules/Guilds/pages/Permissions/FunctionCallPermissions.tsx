@@ -3,6 +3,7 @@ import { BiInfinite } from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 import { useNetwork } from 'wagmi';
 
+import { getBlockExplorerUrl } from 'provider';
 import { getNetworkById, MAINNET_ID, shortenAddress } from 'utils';
 import { FetcherHooksInterface } from 'stores/types';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
@@ -12,6 +13,7 @@ import { Call } from 'components/ActionsBuilder/types';
 import { Loading } from 'components/primitives/Loading';
 import { Box } from 'components/primitives/Layout';
 import { Toggle } from 'components/primitives/Forms/Toggle';
+import { ExternalLink } from 'components/primitives/Links/ExternalLink';
 import {
   Table,
   TableCell,
@@ -95,15 +97,16 @@ const FunctionCallPermissionRow = ({
   }, [decodedCall, functionCall?.functionSignature, showAdvancedView]);
 
   const contractDisplay = useMemo(() => {
+    const contractUrl = getBlockExplorerUrl(chain, functionCall?.to, 'address');
     return (
-      <>
+      <ExternalLink href={contractUrl}>
         {ensName && <Box>{ensName}</Box>}
         {(!ensName || showAdvancedView) && (
           <Box>{shortenAddress(functionCall?.to)}</Box>
         )}
-      </>
+      </ExternalLink>
     );
-  }, [ensName, functionCall?.to, showAdvancedView]);
+  }, [chain, ensName, functionCall?.to, showAdvancedView]);
 
   return (
     <TableRow>

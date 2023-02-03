@@ -156,7 +156,7 @@ export const TransactionsProvider = ({ children }) => {
             render: (
               <TransactionOutcome
                 summary={transaction.summary}
-                chainId={chainId}
+                chain={chain}
                 transactionHash={transaction.hash}
               />
             ),
@@ -170,7 +170,7 @@ export const TransactionsProvider = ({ children }) => {
             render: (
               <TransactionOutcome
                 summary={transaction.summary}
-                chainId={chainId}
+                chain={chain}
                 transactionHash={transaction.hash}
               />
             ),
@@ -181,7 +181,7 @@ export const TransactionsProvider = ({ children }) => {
         }
       }
     });
-  }, [allTransactions, chainId]);
+  }, [allTransactions, chain]);
 
   // Trigger a new transaction request to the user wallet and track its progress
   const createTransaction = async (

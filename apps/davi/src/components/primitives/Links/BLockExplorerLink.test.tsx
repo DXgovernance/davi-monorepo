@@ -2,6 +2,10 @@ import { mockBigNumber } from 'components/ActionsBuilder/SupportedActions/SetGui
 import { render } from 'utils/tests';
 import { BlockExplorerLink } from './BlockExplorerLink';
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 jest.mock('wagmi', () => ({
   useNetwork: () => ({
     chain: {

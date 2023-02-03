@@ -20,6 +20,7 @@ import { useAllERC20Balances } from 'hooks/Guilds/erc20/useAllERC20Balances';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { TokenType } from 'hooks/Guilds/tokens/useTokenList';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import { Result, ResultState } from 'components/Result';
 
 interface IAssetRow {
   assetName: string;
@@ -65,6 +66,7 @@ const Treasury = () => {
     data,
     isLoading: isBalancesLoading,
     isError: isErrorRetrievingBalances,
+    error,
   } = useAllERC20Balances(daoAddress, true);
 
   /**
@@ -81,48 +83,70 @@ const Treasury = () => {
       .filter(token => !token?.balance?.isZero());
   }, [data]);
 
+  const PageContainer = ({ children }) => (
+    <Container>
+      <StyledHeading size={1}>{t('treasury')}</StyledHeading>
+      <StyledDivider />
+      {children}
+    </Container>
+  );
+
+  if (isBalancesLoading) {
+    return (
+      <PageContainer>
+        <NoRecordsContainer>
+          <Loading loading text skeletonProps={{ height: '100px' }} />
+        </NoRecordsContainer>
+      </PageContainer>
+    );
+  }
+
+  if (isErrorRetrievingBalances) {
+    return (
+      <PageContainer>
+        <Result
+          title={t('errorLoadingTreasuries')}
+          subtitle={error?.message}
+          state={ResultState.ERROR}
+        />
+      </PageContainer>
+    );
+  }
+
+  if (!tokens || tokens?.length === 0) {
+    return (
+      <PageContainer>
+        <NoRecordsContainer>{t('noTreasuryAssets')}</NoRecordsContainer>
+      </PageContainer>
+    );
+  }
+
   return (
-    <>
-      <Container>
-        <StyledHeading size={1}>{t('treasury')}</StyledHeading>
-        <StyledDivider />
-
-        {isBalancesLoading && (
-          <NoRecordsContainer>
-            <Loading loading text />
-          </NoRecordsContainer>
-        )}
-
-        {(tokens?.length === 0 && !isBalancesLoading) ||
-        isErrorRetrievingBalances ? (
-          <NoRecordsContainer>{t('noTreasuryAssets')}</NoRecordsContainer>
-        ) : (
-          <Table>
-            <TableHead>
-              <tr>
-                <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
-                <TableHeader alignment={'right'}>
-                  {` ${t('tokenAmount')}`}
-                </TableHeader>
-              </tr>
-            </TableHead>
-            <tbody>
-              {tokens?.map(token => {
-                return (
-                  <AssetRow
-                    key={token?.id}
-                    assetName={token?.name}
-                    tokenBalance={token?.balance}
-                    decimals={token?.decimals}
-                    logoURI={token?.logoURI}
-                  />
-                );
-              })}
-            </tbody>
-          </Table>
-        )}
-      </Container>
-    </>
+    <PageContainer>
+      <Table>
+        <TableHead>
+          <tr>
+            <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
+            <TableHeader alignment={'right'}>
+              {` ${t('tokenAmount')}`}
+            </TableHeader>
+          </tr>
+        </TableHead>
+        <tbody>
+          {tokens?.map(token => {
+            return (
+              <AssetRow
+                key={token?.id}
+                assetName={token?.name}
+                tokenBalance={token?.balance}
+                decimals={token?.decimals}
+                logoURI={token?.logoURI}
+              />
+            );
+          })}
+        </tbody>
+      </Table>
+    </PageContainer>
   );
 };
 

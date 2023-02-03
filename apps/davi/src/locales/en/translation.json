@@ -14,6 +14,7 @@
   "allProposals": "All proposals",
   "allDiscussions": "All discussions",
   "treasury": "Treasury",
+  "errorLoadingTreasuries": "Error loading treasuries",
   "actions_one": "Action",
   "actions_other": "Actions",
   "save": "Save",

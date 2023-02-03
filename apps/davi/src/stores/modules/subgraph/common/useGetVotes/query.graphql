@@ -3,7 +3,7 @@ query getVotes($id: ID!) {
     votes {
       voter
       votingPower
-      option
+      optionLabel
     }
   }
 }

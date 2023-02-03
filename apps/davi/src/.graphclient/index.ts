@@ -1548,6 +1548,7 @@ export type Vote = {
   id: Scalars['ID'];
   proposalId: Scalars['String'];
   option: Scalars['BigInt'];
+  optionLabel?: Maybe<Scalars['String']>;
   voter: Scalars['String'];
   votingPower: Scalars['BigInt'];
   transactionHash: Scalars['String'];
@@ -1590,6 +1591,26 @@ export type Vote_filter = {
   option_lte?: InputMaybe<Scalars['BigInt']>;
   option_in?: InputMaybe<Array<Scalars['BigInt']>>;
   option_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  optionLabel?: InputMaybe<Scalars['String']>;
+  optionLabel_not?: InputMaybe<Scalars['String']>;
+  optionLabel_gt?: InputMaybe<Scalars['String']>;
+  optionLabel_lt?: InputMaybe<Scalars['String']>;
+  optionLabel_gte?: InputMaybe<Scalars['String']>;
+  optionLabel_lte?: InputMaybe<Scalars['String']>;
+  optionLabel_in?: InputMaybe<Array<Scalars['String']>>;
+  optionLabel_not_in?: InputMaybe<Array<Scalars['String']>>;
+  optionLabel_contains?: InputMaybe<Scalars['String']>;
+  optionLabel_contains_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_contains?: InputMaybe<Scalars['String']>;
+  optionLabel_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_starts_with?: InputMaybe<Scalars['String']>;
+  optionLabel_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_starts_with?: InputMaybe<Scalars['String']>;
+  optionLabel_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_ends_with?: InputMaybe<Scalars['String']>;
+  optionLabel_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_ends_with?: InputMaybe<Scalars['String']>;
+  optionLabel_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
   voter?: InputMaybe<Scalars['String']>;
   voter_not?: InputMaybe<Scalars['String']>;
   voter_gt?: InputMaybe<Scalars['String']>;
@@ -1646,6 +1667,7 @@ export type Vote_orderBy =
   | 'id'
   | 'proposalId'
   | 'option'
+  | 'optionLabel'
   | 'voter'
   | 'votingPower'
   | 'transactionHash';
@@ -2456,6 +2478,11 @@ export type VoteResolvers<
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   proposalId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   option?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  optionLabel?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   voter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   votingPower?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   transactionHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2673,7 +2700,7 @@ export type getVotesQueryVariables = Exact<{
 
 export type getVotesQuery = {
   proposal?: Maybe<{
-    votes?: Maybe<Array<Pick<Vote, 'voter' | 'votingPower' | 'option'>>>;
+    votes?: Maybe<Array<Pick<Vote, 'voter' | 'votingPower' | 'optionLabel'>>>;
   }>;
 };
 
@@ -2708,7 +2735,7 @@ export const getVotesDocument = gql`
       votes {
         voter
         votingPower
-        option
+        optionLabel
       }
     }
   }

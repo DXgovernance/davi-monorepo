@@ -1523,6 +1523,7 @@ export namespace DxgovGuildSubgraphTypes {
     id: Scalars['ID'];
     proposalId: Scalars['String'];
     option: Scalars['BigInt'];
+    optionLabel?: Maybe<Scalars['String']>;
     voter: Scalars['String'];
     votingPower: Scalars['BigInt'];
     transactionHash: Scalars['String'];
@@ -1565,6 +1566,26 @@ export namespace DxgovGuildSubgraphTypes {
     option_lte?: InputMaybe<Scalars['BigInt']>;
     option_in?: InputMaybe<Array<Scalars['BigInt']>>;
     option_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+    optionLabel?: InputMaybe<Scalars['String']>;
+    optionLabel_not?: InputMaybe<Scalars['String']>;
+    optionLabel_gt?: InputMaybe<Scalars['String']>;
+    optionLabel_lt?: InputMaybe<Scalars['String']>;
+    optionLabel_gte?: InputMaybe<Scalars['String']>;
+    optionLabel_lte?: InputMaybe<Scalars['String']>;
+    optionLabel_in?: InputMaybe<Array<Scalars['String']>>;
+    optionLabel_not_in?: InputMaybe<Array<Scalars['String']>>;
+    optionLabel_contains?: InputMaybe<Scalars['String']>;
+    optionLabel_contains_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_not_contains?: InputMaybe<Scalars['String']>;
+    optionLabel_not_contains_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_starts_with?: InputMaybe<Scalars['String']>;
+    optionLabel_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_not_starts_with?: InputMaybe<Scalars['String']>;
+    optionLabel_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_ends_with?: InputMaybe<Scalars['String']>;
+    optionLabel_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_not_ends_with?: InputMaybe<Scalars['String']>;
+    optionLabel_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
     voter?: InputMaybe<Scalars['String']>;
     voter_not?: InputMaybe<Scalars['String']>;
     voter_gt?: InputMaybe<Scalars['String']>;
@@ -1621,6 +1642,7 @@ export namespace DxgovGuildSubgraphTypes {
     | 'id'
     | 'proposalId'
     | 'option'
+    | 'optionLabel'
     | 'voter'
     | 'votingPower'
     | 'transactionHash';

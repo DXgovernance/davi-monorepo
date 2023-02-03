@@ -53,3 +53,5 @@ storybook-static
 
 # turbo
 .turbo
+
+/src/bytecodes/local.json

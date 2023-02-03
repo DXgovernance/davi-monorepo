@@ -38,11 +38,11 @@ sudo ./setup-linux.sh
 
 ## Common Issues and Solutions
 
-1. `pnpm i` fails with `node-gyp` errors
+#### 1. `pnpm i` fails with `node-gyp` errors
 
 You might not have the relavant build tools for node-gyp to run. Check this if you're on [Mac OS](https://github.com/nodejs/node-gyp/blob/HEAD/macOS_Catalina.md#The-acid-test).
 
-2. `listen tcp4 0.0.0.0:5432: bind: address already in use`
+#### 2. `listen tcp4 0.0.0.0:5432: bind: address already in use`
 
 There's a process already running on port 5432 (usually postgres).
 
@@ -60,7 +60,7 @@ sudo kill -9 [PID]
 
 to terminate it.
 
-3. If you're on Linux and get this error
+### 3. If you're on Linux and get this error
 
 ```
 dxdao-subgraph:dev: ✖ Failed to deploy to Graph node http://127.0.0.1:8020/: subgraph validation error: [the specified block must exist on the Ethereum network]
@@ -74,6 +74,14 @@ Then there was a problem during the Linux setup. Common sources of this are
 
 1. The subgraph was already running during the setup: make sure there are no instances of the subraph running. Run `docker compose down`
 2. The hardhat instance wasn't running while doing the setup: make sure the hardhat instance is running, and only then run the linux setup.
+
+
+
+#### 4. Dev script permissions
+If you see `permission denied: ./apps/dxdao-subgraph/scripts/dev.sh` you might need to set permissions for dev script.  
+```
+chmod +x ./apps/dxdao-subgraph/scripts/dev.sh
+```
 
 ## Develop
 

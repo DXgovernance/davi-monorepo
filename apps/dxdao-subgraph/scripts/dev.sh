@@ -3,6 +3,11 @@
 # exit as soon as any command fails
 set -e
 
+if ! which docker 2>&1 > /dev/null; then
+    echo "Please install 'docker' first"
+    exit 1
+fi
+
 # <<<<<---------- Constants ---------->>>>>
 MAX_RETRY=120
 
@@ -44,9 +49,24 @@ safeDockerStart(){
 
 }
 
+
+
 isHardhatRunning() {
-  nc -z localhost 8545
+    nc_output=$(nc -z localhost 8545 2>&1)
+    last_word=$(echo "$nc_output" | rev | cut -d " " -f 1 | rev | xargs)
+    if [ "$last_word" == "succeeded!" ]; then
+       if [ -f "$PWD/../dev-scripts/build/deployment-info.json" ]; then
+            echo "Hardhat is running"
+            return 0
+        else
+            echo "Hardhat running but not deployment info yet"
+            return 1
+        fi
+    else
+        return 1
+    fi
 }
+
 
 waitForHardhat(){
     retry_count=0
@@ -64,10 +84,10 @@ waitForHardhat(){
 waitForGraphContainer(){
     retry_count=0
     while true; do
-
-        status=$(docker compose ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
-        if [[ $status == *"running"* ]]; then
-            echo "Graph node container is running"
+        graph_container_status=$(docker ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
+        if [ "$graph_container_status" == "running" ]; then
+            echo "Graph node container is running: $graph_container_status"
+            sleep 10
             break
         else
             if [ $retry_count -eq $MAX_RETRY ]; then
@@ -104,6 +124,24 @@ startGraphQlPlayground(){
     done
 }
 
+# Execute start-local script. If it fails will pause and try executing it 5 times.
+tryStartLocal(){
+    try_count=0
+
+    while true; do
+    pnpm run start-local && break
+
+    try_count=$((try_count + 1))
+    if [ $try_count -eq 5 ]; then
+        echo "pnpm run start-local failed after 5 attempts. Exiting..."
+        exit 1
+    fi
+
+    echo "Start Local script failed. Retrying in 10 seconds..."
+    sleep 10
+    done
+}
+
 
 # <<<<<---------- Start ---------->>>>>
 echo "Subgraph::: Starting Docker"
@@ -112,16 +150,16 @@ safeDockerStart
 echo "Subgraph::: Waiting for hardhat"
 waitForHardhat
 
-# Update bytecodes
-echo "Subgraph::: Updating Bytecodes"
-node ./scripts/updateBytecodes.js
-
 echo "Subgraph::: Starting docker compose"
-docker compose up &
+docker compose up --detach &
 
+echo "Subgraph::: Watching docker logs"
+docker compose logs -f &
+
+echo "Subgraph::: Waiting for graph node"
 waitForGraphContainer
 
 echo "Subgraph::: Creating graph and deploying local"
-pnpm run start-local &
+tryStartLocal &&
 
 startGraphQlPlayground

@@ -6,15 +6,8 @@ import {
 import { SidebarCardContentWrapper } from 'components/SidebarCard/SidebarCard.styled';
 import { useTranslation } from 'react-i18next';
 import { useHookStoreProvider } from 'stores';
-import { shortenAddress } from 'utils';
-import {
-  Amount,
-  InfoDetail,
-  VoteOption,
-  VoteOptionWrapper,
-  VotesAmount,
-  VotesAmountWrapper,
-} from './ProposalVotesCard.styled';
+import { VoteRow } from './components';
+import { VotesAmount, VotesAmountWrapper } from './ProposalVotesCard.styled';
 import { ProposalVotesCardProps } from './types';
 
 const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
@@ -29,8 +22,6 @@ const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
   } = useHookStoreProvider();
 
   const votes = useGetVotes(guildId, proposalId);
-
-  console.log({ votes });
 
   if (!votes.data) return null;
 
@@ -50,13 +41,7 @@ const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
       <SidebarCardContentWrapper>
         <SidebarCardContent>
           {votes?.data?.map(vote => (
-            <InfoDetail>
-              <span>{shortenAddress(vote.voter)}</span>
-              <VoteOptionWrapper>
-                <VoteOption>{vote.optionLabel}</VoteOption>
-              </VoteOptionWrapper>
-              <Amount>{vote.votingPower}%</Amount>
-            </InfoDetail>
+            <VoteRow {...vote} />
           ))}
         </SidebarCardContent>
       </SidebarCardContentWrapper>

@@ -67,7 +67,6 @@ const Treasury = () => {
     isError: isErrorRetrievingBalances,
   } = useAllERC20Balances(daoAddress, true);
 
-  console.log({ isBalancesLoading });
   /**
    * Setting up a key and filter out tokens with zero balances
    */

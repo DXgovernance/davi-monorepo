@@ -5,6 +5,7 @@ import {
 } from 'components/SidebarCard';
 import { SidebarCardContentWrapper } from 'components/SidebarCard/SidebarCard.styled';
 import { useTranslation } from 'react-i18next';
+import { useHookStoreProvider } from 'stores';
 import { shortenAddress } from 'utils';
 import {
   Amount,
@@ -14,52 +15,25 @@ import {
   VotesAmount,
   VotesAmountWrapper,
 } from './ProposalVotesCard.styled';
+import { ProposalVotesCardProps } from './types';
 
-const ProposalVotesCard: React.FC = () => {
+const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
+  guildId,
+  proposalId,
+}) => {
   const { t } = useTranslation();
+  const {
+    hooks: {
+      fetchers: { useGetVotes },
+    },
+  } = useHookStoreProvider();
 
-  const votes = [
-    {
-      voter: '0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'Against',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-    {
-      voter: '0xC5B20AdE9c9Cd5e0CC087C62b26B815A4bc1881f',
-      vote: 'For',
-      votingPower: '1,89%',
-    },
-  ];
+  const votes = useGetVotes(guildId, proposalId);
+
+  console.log({ votes });
+
+  if (!votes.data) return null;
+
   return (
     <SidebarCard
       header={
@@ -67,7 +41,7 @@ const ProposalVotesCard: React.FC = () => {
           <SidebarCardHeaderSpaced>
             {t('votes')}
             <VotesAmountWrapper>
-              <VotesAmount>{votes.length}</VotesAmount>
+              <VotesAmount>{votes?.data?.length}</VotesAmount>
             </VotesAmountWrapper>
           </SidebarCardHeaderSpaced>
         </>
@@ -75,13 +49,13 @@ const ProposalVotesCard: React.FC = () => {
     >
       <SidebarCardContentWrapper>
         <SidebarCardContent>
-          {votes?.map(vote => (
+          {votes?.data?.map(vote => (
             <InfoDetail>
               <span>{shortenAddress(vote.voter)}</span>
               <VoteOptionWrapper>
-                <VoteOption>{vote.vote}</VoteOption>
+                <VoteOption>{vote.optionLabel}</VoteOption>
               </VoteOptionWrapper>
-              <Amount>{vote.votingPower}</Amount>
+              <Amount>{vote.votingPower}%</Amount>
             </InfoDetail>
           ))}
         </SidebarCardContent>

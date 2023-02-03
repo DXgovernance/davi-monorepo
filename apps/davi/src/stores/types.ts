@@ -89,8 +89,11 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
-  useGetVotes: (proposalId: `0x${string}`) => {
-    data: { option: BigNumber; voter: string; votingPower: BigNumber }[];
+  useGetVotes: (
+    guildId: `0x${string}`,
+    proposalId: `0x${string}`
+  ) => {
+    data: { optionLabel: string; voter: string; votingPower: number }[];
     isError: boolean;
     isLoading: boolean;
   };

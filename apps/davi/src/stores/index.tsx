@@ -63,19 +63,22 @@ export const HookStoreProvider: React.FC<
   useEffect(() => {
     let cancelled = false;
 
-    const getBytecode = async () => {
-      let bytecodeHash = localStorage.getItem(`hashed-bytecode-${daoId}`);
-      if (!bytecodeHash) {
-        const bytecode = await provider.getCode(daoId);
-        bytecodeHash = Web3.utils.keccak256(bytecode);
-        if (!bytecodeHash) {
-          localStorage.setItem(`hashed-bytecode-${daoId}`, bytecodeHash);
+    const getBytecodeHash = async () => {
+      const localBytecodeHash = localStorage.getItem(
+        `hashed-bytecode-${daoId}`
+      );
+      if (!localBytecodeHash) {
+        const fetchedBytecode = await provider.getCode(daoId);
+        if (fetchedBytecode) {
+          const fetchedBytecodeHash = Web3.utils.keccak256(fetchedBytecode);
+          localStorage.setItem(`hashed-bytecode-${daoId}`, fetchedBytecodeHash);
+          return fetchedBytecodeHash;
         }
       }
-      return bytecodeHash;
+      return localBytecodeHash;
     };
 
-    getBytecode().then(bytecodeHash => {
+    getBytecodeHash().then(bytecodeHash => {
       if (!cancelled) {
         setDaoBytecode(bytecodeHash);
         setIsLoading(false);

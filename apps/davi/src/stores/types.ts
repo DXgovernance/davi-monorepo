@@ -166,6 +166,5 @@ export interface GovernanceTypeInterface
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {
-  isLoading: boolean;
   daoId: string;
 }

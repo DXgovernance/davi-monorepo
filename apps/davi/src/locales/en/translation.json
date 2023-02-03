@@ -340,5 +340,7 @@
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "unknownDAO": "Unknown DAO",
+  "unknownDAODetail": "You seem to be visiting an unknown address"
 }

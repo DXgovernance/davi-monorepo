@@ -16,7 +16,7 @@ const NotFound: React.FC = () => {
       title={t('pageNotExist')}
       subtitle={t('makeSureCorrectAddress')}
       extra={
-        <StyledLink to={`/${chainName}`}>
+        <StyledLink to={chainName ? `/${chainName}` : '/'}>
           <IconButton iconLeft>
             <FiArrowLeft /> {t('takeMeHome')}
           </IconButton>

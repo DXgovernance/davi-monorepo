@@ -20,6 +20,22 @@ const GuildCardLoader = () => {
   );
 };
 
+const GuildCardUnmatched = () => {
+  const { t } = useTranslation();
+  return (
+    <GuildCard
+      isUnmatched={true}
+      isLoading={false}
+      guildAddress={null}
+      numberOfMembers={null}
+      t={t}
+      numberOfActiveProposals={null}
+      ensName={null}
+      data={null}
+    />
+  );
+};
+
 const GuildCardWithContent = ({ guildAddress, t }) => {
   const {
     hooks: {
@@ -73,7 +89,11 @@ const LandingPage: React.FC = () => {
           <>{/* Render error state */}</>
         ) : (
           allGuilds.map(guildAddress => (
-            <HookStoreProvider daoId={guildAddress}>
+            <HookStoreProvider
+              daoId={guildAddress}
+              loadingIndicator={<GuildCardLoader />}
+              matchErrorIndicator={<GuildCardUnmatched />}
+            >
               <GuildCardWithContent
                 key={guildAddress}
                 guildAddress={guildAddress}

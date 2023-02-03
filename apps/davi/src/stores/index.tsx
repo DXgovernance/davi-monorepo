@@ -6,22 +6,30 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useNetwork, useProvider } from 'wagmi';
+import { useNetwork } from 'wagmi';
 import { useMatch } from 'react-router-dom';
 import { GovernanceTypeInterface, HookStoreContextInterface } from './types';
 import { governanceInterfaces } from './governanceInterfaces';
-import Web3 from 'web3';
-import { LoadingPage } from 'components/LoadingPage';
+import useContractBytecodeHash from 'hooks/Guilds/contracts/useContractBytecodeHash';
+
+const CHECK_DATA_SOURCE_INTERVAL = 5000;
 
 export const HookStoreContext = createContext<HookStoreContextInterface>(null);
 
 interface HookStoreProviderProps {
   daoId?: string;
+  loadingIndicator?: React.ReactElement;
+  matchErrorIndicator?: React.ReactElement;
 }
 
 export const HookStoreProvider: React.FC<
   PropsWithChildren<HookStoreProviderProps>
-> = ({ children, daoId: daoIdFromProps }) => {
+> = ({
+  children,
+  daoId: daoIdFromProps,
+  loadingIndicator,
+  matchErrorIndicator,
+}) => {
   const urlParams = useMatch('/:chainName/:daoId/*');
   const { chain } = useNetwork();
 
@@ -36,70 +44,34 @@ export const HookStoreProvider: React.FC<
     [daoIdFromProps, daoIdFromUrl]
   );
 
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    bytecodeHash: daoBytecodeHash,
+    isLoading: isDaoBytecodeLoading,
+    isError: isDaoBytecodeError,
+  } = useContractBytecodeHash(daoId);
+
+  const [dataSource, setDataSource] = useState<'primary' | 'secondary'>(null);
+  const [targetDataSource, setTargetDataSource] = useState<
+    'primary' | 'secondary'
+  >(null);
   useEffect(() => {
-    setIsLoading(true);
-  }, [daoId]);
-
-  const [daoBytecode, setDaoBytecode] = useState<string>(null);
-  const [dataSource, setDataSource] = useState<'primary' | 'secondary' | null>(
-    null
-  );
-  const [shouldSwitchDataSource, setShouldSwitchDataSource] = useState(false);
-  const [isMatched, setIsMatched] = useState(false);
-  const provider = useProvider();
-  const CHECK_DATA_SOURCE_INTERVAL = 5000;
-
-  useEffect(() => {
-    /*
-      This is here to handle the store unmounting while developing, because react
-      refreshes the page. If not here, it might cause the page stuck on "loading..."
-    */
-    return () => setIsLoading(true);
-  }, []);
-
-  useEffect(() => {
-    if (isMatched) setIsLoading(false);
-  }, [isMatched]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const getBytecode = async () => {
-      let bytecodeHash = localStorage.getItem(`hashed-bytecode-${daoId}`);
-      if (!bytecodeHash) {
-        const bytecode = await provider.getCode(daoId);
-        bytecodeHash = Web3.utils.keccak256(bytecode);
-
-        localStorage.setItem(`hashed-bytecode-${daoId}`, bytecodeHash);
-      }
-      return bytecodeHash;
-    };
-
-    getBytecode().then(bytecodeHash => {
-      if (!cancelled) {
-        setDaoBytecode(bytecodeHash);
-        setIsLoading(false);
-      }
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [daoId, provider]);
+    // This logic switches the data source after the loading indicators trigger
+    // due to targetDataSource !== dataSource
+    // Required to do switching this way to avoid React crashing
+    if (targetDataSource !== dataSource) {
+      setDataSource(targetDataSource);
+    }
+  }, [targetDataSource, dataSource]);
 
   const governanceType: GovernanceTypeInterface = useMemo(() => {
     let match = governanceInterfaces.find(governance => {
-      return governance.bytecodes.find(bytecode => bytecode === daoBytecode);
+      return governance.bytecodes.find(
+        bytecode => bytecode === daoBytecodeHash
+      );
     });
 
-    // TODO: throw an error instead of falling back to a default if the store can't match the governance implementation
-    if (!match) {
-      setIsMatched(false);
-      return null;
-    }
+    if (!match) return null;
 
-    setIsMatched(true);
     return {
       name: match.name,
       bytecodes: match.bytecodes,
@@ -116,14 +88,7 @@ export const HookStoreProvider: React.FC<
       },
       checkDataSourceAvailability: match.checkDataSourceAvailability,
     };
-  }, [daoBytecode, dataSource]);
-
-  useEffect(() => {
-    if (shouldSwitchDataSource) {
-      setShouldSwitchDataSource(false);
-      setIsLoading(false);
-    }
-  }, [shouldSwitchDataSource]);
+  }, [daoBytecodeHash, dataSource]);
 
   useEffect(() => {
     const getDataSourceAvailability = () => {
@@ -131,30 +96,32 @@ export const HookStoreProvider: React.FC<
         const isDefaultSourceAvailable =
           governanceType.checkDataSourceAvailability(chain?.id);
         if (isDefaultSourceAvailable && dataSource !== 'primary') {
-          setIsLoading(true);
-          setShouldSwitchDataSource(true);
-          setDataSource('primary');
+          setTargetDataSource('primary');
         }
         if (!isDefaultSourceAvailable && dataSource !== 'secondary') {
-          setIsLoading(true);
-          setShouldSwitchDataSource(true);
-          setDataSource('secondary');
+          setTargetDataSource('secondary');
         }
       }
     };
+
     getDataSourceAvailability();
     const interval = setInterval(() => {
       getDataSourceAvailability();
-    }, CHECK_DATA_SOURCE_INTERVAL); // This implementation makes a data source health check every 10 seconds. This interval is arbitrary.
+    }, CHECK_DATA_SOURCE_INTERVAL);
 
     return () => clearInterval(interval);
   }, [governanceType, dataSource, chain]);
 
   if (!daoId) return <>{children}</>;
-  if (!governanceType || !governanceType?.dataSource) return <LoadingPage />;
+  if (isDaoBytecodeLoading) return loadingIndicator;
+
+  if (!governanceType || isDaoBytecodeError) return matchErrorIndicator;
+
+  if (!governanceType?.dataSource || targetDataSource !== dataSource)
+    return loadingIndicator;
 
   return (
-    <HookStoreContext.Provider value={{ ...governanceType, isLoading, daoId }}>
+    <HookStoreContext.Provider value={{ ...governanceType, daoId }}>
       {children}
     </HookStoreContext.Provider>
   );

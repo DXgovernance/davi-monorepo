@@ -67,5 +67,5 @@ typings/
 .next
 
 
-networks.json
+/networks.json
 src/mappings/Create2Deployer/local.ts

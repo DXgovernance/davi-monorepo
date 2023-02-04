@@ -13,6 +13,8 @@
   "proposals_other": "{{count}} proposals",
   "allProposals": "All proposals",
   "allDiscussions": "All discussions",
+  "treasury": "Treasury",
+  "errorLoadingTreasuries": "Error loading treasuries",
   "actions_one": "Action",
   "actions_other": "Actions",
   "save": "Save",
@@ -33,6 +35,7 @@
   "spender": "Spender",
   "in": "in",
   "asset": "Asset",
+  "tokenAmount": "Token Amount",
   "approve": "Approve",
   "notConnected": "Not Connected",
   "decode": "Decode",
@@ -340,5 +343,6 @@
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },
+  "noTreasuryAssets": "No treasury assets available",
   "loading": "Loading..."
 }

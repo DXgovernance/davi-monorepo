@@ -96,10 +96,10 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
   };
   useGuildProposalIds: (daoId: `0x${string}`) => {
-    data: readonly `0x${string}`[];
+    data: `0x${string}`[];
     isError: boolean;
     isLoading: boolean;
-    error: Error;
+    errorMessage: string;
   };
 }
 

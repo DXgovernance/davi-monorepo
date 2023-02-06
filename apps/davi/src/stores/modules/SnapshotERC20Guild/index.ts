@@ -11,6 +11,7 @@ import {
   useGuildConfig as useGuildConfigFromSubgraph,
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useGuildProposalIds as useGuildProposalIdsFromSubgraph,
 } from '../subgraph/common';
 
 import {
@@ -70,7 +71,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetMemberList: useGetMemberListFromSubgraph,
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
-          useGuildProposalIds,
+          useGuildProposalIds: useGuildProposalIdsFromSubgraph,
         },
         fallback: {
           useProposal,

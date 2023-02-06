@@ -24,11 +24,10 @@ const Governance = ({ guildId }) => {
   } = useHookStoreProvider();
 
   const { isLoading } = useContext(GuildAvailabilityContext);
-  const { data: proposalIds, error } = useGuildProposalIds(guildId);
+  const { data: proposalIds, errorMessage } = useGuildProposalIds(guildId);
   const { t } = useTranslation();
   const { data: activeProposals } = useGetNumberOfActiveProposals(guildId);
   const { chainName } = useTypedParams();
-
   /*
   Since filters are a global state, we need to reset all of them
   who were set in the "All proposals" view. If we don't do this,
@@ -70,12 +69,12 @@ const Governance = ({ guildId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [proposalIds]);
 
-  if (!isLoading && !proposalIds && error) {
+  if (!isLoading && !proposalIds && errorMessage) {
     return (
       <Result
         state={ResultState.ERROR}
         title={t('proposal.errors.genericProposalError')}
-        subtitle={error.message}
+        subtitle={errorMessage}
       />
     );
   }

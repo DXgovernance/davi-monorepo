@@ -1587,6 +1587,7 @@ type Vote {
   id: ID!
   proposalId: String!
   option: BigInt!
+  optionLabel: String
   voter: String!
   votingPower: BigInt!
   transactionHash: String!
@@ -1629,6 +1630,26 @@ input Vote_filter {
   option_lte: BigInt
   option_in: [BigInt!]
   option_not_in: [BigInt!]
+  optionLabel: String
+  optionLabel_not: String
+  optionLabel_gt: String
+  optionLabel_lt: String
+  optionLabel_gte: String
+  optionLabel_lte: String
+  optionLabel_in: [String!]
+  optionLabel_not_in: [String!]
+  optionLabel_contains: String
+  optionLabel_contains_nocase: String
+  optionLabel_not_contains: String
+  optionLabel_not_contains_nocase: String
+  optionLabel_starts_with: String
+  optionLabel_starts_with_nocase: String
+  optionLabel_not_starts_with: String
+  optionLabel_not_starts_with_nocase: String
+  optionLabel_ends_with: String
+  optionLabel_ends_with_nocase: String
+  optionLabel_not_ends_with: String
+  optionLabel_not_ends_with_nocase: String
   voter: String
   voter_not: String
   voter_gt: String
@@ -1685,6 +1706,7 @@ enum Vote_orderBy {
   id
   proposalId
   option
+  optionLabel
   voter
   votingPower
   transactionHash

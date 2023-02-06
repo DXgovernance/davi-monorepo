@@ -1548,6 +1548,7 @@ export type Vote = {
   id: Scalars['ID'];
   proposalId: Scalars['String'];
   option: Scalars['BigInt'];
+  optionLabel?: Maybe<Scalars['String']>;
   voter: Scalars['String'];
   votingPower: Scalars['BigInt'];
   transactionHash: Scalars['String'];
@@ -1590,6 +1591,26 @@ export type Vote_filter = {
   option_lte?: InputMaybe<Scalars['BigInt']>;
   option_in?: InputMaybe<Array<Scalars['BigInt']>>;
   option_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  optionLabel?: InputMaybe<Scalars['String']>;
+  optionLabel_not?: InputMaybe<Scalars['String']>;
+  optionLabel_gt?: InputMaybe<Scalars['String']>;
+  optionLabel_lt?: InputMaybe<Scalars['String']>;
+  optionLabel_gte?: InputMaybe<Scalars['String']>;
+  optionLabel_lte?: InputMaybe<Scalars['String']>;
+  optionLabel_in?: InputMaybe<Array<Scalars['String']>>;
+  optionLabel_not_in?: InputMaybe<Array<Scalars['String']>>;
+  optionLabel_contains?: InputMaybe<Scalars['String']>;
+  optionLabel_contains_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_contains?: InputMaybe<Scalars['String']>;
+  optionLabel_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_starts_with?: InputMaybe<Scalars['String']>;
+  optionLabel_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_starts_with?: InputMaybe<Scalars['String']>;
+  optionLabel_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_ends_with?: InputMaybe<Scalars['String']>;
+  optionLabel_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_ends_with?: InputMaybe<Scalars['String']>;
+  optionLabel_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
   voter?: InputMaybe<Scalars['String']>;
   voter_not?: InputMaybe<Scalars['String']>;
   voter_gt?: InputMaybe<Scalars['String']>;
@@ -1646,6 +1667,7 @@ export type Vote_orderBy =
   | 'id'
   | 'proposalId'
   | 'option'
+  | 'optionLabel'
   | 'voter'
   | 'votingPower'
   | 'transactionHash';
@@ -2456,6 +2478,11 @@ export type VoteResolvers<
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   proposalId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   option?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  optionLabel?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   voter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   votingPower?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   transactionHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2628,6 +2655,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           },
           location: 'GetGuildConfigDocument.graphql',
         },
+        {
+          document: GetGuildProposalIdsDocument,
+          get rawSDL() {
+            return printWithCache(GetGuildProposalIdsDocument);
+          },
+          location: 'GetGuildProposalIdsDocument.graphql',
+        },
       ];
     },
     fetchFn,
@@ -2721,6 +2755,14 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export type getGuildProposalIdsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getGuildProposalIdsQuery = {
+  guild?: Maybe<{ proposals?: Maybe<Array<Pick<Proposal, 'id'>>> }>;
+};
+
 export const getMemberListDocument = gql`
   query getMemberList($id: ID!) {
     guild(id: $id) {
@@ -2768,6 +2810,18 @@ export const getGuildConfigDocument = gql`
     }
   }
 ` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
+export const getGuildProposalIdsDocument = gql`
+  query getGuildProposalIds($id: ID!) {
+    guild(id: $id) {
+      proposals {
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getGuildProposalIdsQuery,
+  getGuildProposalIdsQueryVariables
+>;
 
 export type Requester<C = {}, E = unknown> = <R, V>(
   doc: DocumentNode,
@@ -2808,6 +2862,19 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getGuildConfigQuery>;
+    },
+    getGuildProposalIds(
+      variables: getGuildProposalIdsQueryVariables,
+      options?: C
+    ): Promise<getGuildProposalIdsQuery> {
+      return requester<
+        getGuildProposalIdsQuery,
+        getGuildProposalIdsQueryVariables
+      >(
+        getGuildProposalIdsDocument,
+        variables,
+        options
+      ) as Promise<getGuildProposalIdsQuery>;
     },
   };
 }

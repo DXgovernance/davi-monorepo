@@ -19,7 +19,11 @@ const AllProposals = ({ guildId }) => {
       fetchers: { useGuildProposalIds },
     },
   } = useHookStoreProvider();
-  const { data: proposalIds, isError, error } = useGuildProposalIds(guildId);
+  const {
+    data: proposalIds,
+    isError,
+    errorMessage,
+  } = useGuildProposalIds(guildId);
 
   const [openSearchBar, setOpenSearchBar] = useState(false);
 
@@ -68,7 +72,7 @@ const AllProposals = ({ guildId }) => {
       <Result
         state={ResultState.ERROR}
         title={t('proposal.errors.genericProposalError')}
-        subtitle={error.message}
+        subtitle={errorMessage}
       />
     );
   }

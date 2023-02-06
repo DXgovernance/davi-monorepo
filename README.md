@@ -93,9 +93,9 @@ Running all at once:
 ##### Option 2
 Running in separate terminals:
 1. Run hardhat node locally: ```pnpm run devScript``` 
-2. Build DAVI graph-client & run dApp:  ```pnpm run davi:build-graph-client && pnpm run davi:dev``` 
-3. Start docker containers: ```pnpm run subgraph:compose-up``` (Will require hardhat to be running and docker to be installed and open)
-4. Create and deploy local subgraph: ```pnpm run subgraph:start-local``` (graph-node container should be running. Verify with `docker ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {} ` before execute start-local)
+2. Start docker containers: ```pnpm run subgraph:compose-up``` (Will require hardhat to be running and docker to be installed and open)
+3. Create and deploy local subgraph: ```pnpm run subgraph:start-local``` (graph-node container should be running. Verify with `docker ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {} ` before execute start-local)
+4. Build DAVI graph-client & run dApp:  ```pnpm run davi:build-graph-client && pnpm run davi:dev``` 
 
 
 ### Issues:

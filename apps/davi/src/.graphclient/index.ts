@@ -2608,6 +2608,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
     get documents() {
       return [
         {
+          document: GetNumberOfActiveProposalsDocument,
+          get rawSDL() {
+            return printWithCache(GetNumberOfActiveProposalsDocument);
+          },
+          location: 'GetNumberOfActiveProposalsDocument.graphql',
+        },
+        {
           document: GetGuildConfigDocument,
           get rawSDL() {
             return printWithCache(GetGuildConfigDocument);
@@ -2660,6 +2667,18 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
     sdkRequester$.then(sdkRequester => sdkRequester(...args))
   );
 }
+export type getNumberOfActiveProposalsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getNumberOfActiveProposalsQuery = {
+  guild?: Maybe<
+    Pick<Guild, 'id' | 'name'> & {
+      proposals?: Maybe<Array<Pick<Proposal, 'id'>>>;
+    }
+  >;
+};
+
 export type getGuildConfigQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2685,6 +2704,20 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export const getNumberOfActiveProposalsDocument = gql`
+  query getNumberOfActiveProposals($id: ID!) {
+    guild(id: $id) {
+      id
+      name
+      proposals {
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getNumberOfActiveProposalsQuery,
+  getNumberOfActiveProposalsQueryVariables
+>;
 export const getGuildConfigDocument = gql`
   query getGuildConfig($id: ID!) {
     guild(id: $id) {
@@ -2715,6 +2748,19 @@ export type Requester<C = {}, E = unknown> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
+    getNumberOfActiveProposals(
+      variables: getNumberOfActiveProposalsQueryVariables,
+      options?: C
+    ): Promise<getNumberOfActiveProposalsQuery> {
+      return requester<
+        getNumberOfActiveProposalsQuery,
+        getNumberOfActiveProposalsQueryVariables
+      >(
+        getNumberOfActiveProposalsDocument,
+        variables,
+        options
+      ) as Promise<getNumberOfActiveProposalsQuery>;
+    },
     getGuildConfig(
       variables: getGuildConfigQueryVariables,
       options?: C

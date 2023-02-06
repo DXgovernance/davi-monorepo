@@ -7,4 +7,4 @@ export { useProposalCalls } from './useProposalCalls';
 export { useVotingResults } from './useVotingResults';
 export { useGetPermissions } from './useGetPermissions';
 export { useGuildConfig } from './useGuildConfig';
-export { useGetActiveProposals } from './useGetActiveProposals';
+export { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';

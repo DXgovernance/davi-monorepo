@@ -23,32 +23,13 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-export const useGuildConfig = (
-  guildAddress: string,
-  proposalId?: `0x${string}`
-) => {
+export const useGuildConfig = (guildAddress: string) => {
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
       variables: { id: guildAddress?.toLowerCase() },
     }
   );
-
-  // const { data, ...rest } = useContractReads({
-  //   contracts: GETTER_FUNCTIONS.map(functionName => ({
-  //     address: guildAddress,
-  //     abi: BaseERC20Guild.abi,
-  //     functionName,
-  //   })),
-  // });
-
-  // const { data: token } = useGuildToken(guildAddress);
-  // const { data: votingPowerForProposalExecution } =
-  //   useVotingPowerForProposalExecution({
-  //     contractAddress: guildAddress,
-  //     proposalId,
-  //   });
-
   const transformedData: GuildConfigProps = useMemo(() => {
     if (!data?.guild) return undefined;
     const guild = data.guild;
@@ -70,13 +51,6 @@ export const useGuildConfig = (
       minimumMembersForProposalCreation,
       minimumTokensLockedForProposalCreation,
     } = guild;
-
-    // Made to prevent
-    // "Type '{} & readonly unknown[]' is not assignable to type '`0x${string}`'"
-    // doesn't accept ternary operator
-    // let safeTokenVault;
-    // if (!tokenVault) safeTokenVault = undefined;
-    // else safeTokenVault = tokenVault;
 
     return {
       token: token?.id as `0x${string}`,

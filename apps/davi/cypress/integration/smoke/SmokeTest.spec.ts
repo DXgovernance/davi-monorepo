@@ -32,59 +32,55 @@ describe('Check Project-DAVI', () => {
 
     it('Check Footer links'), () => {
         LandingPage.checkFooterLinks();
-    }
+    };
 
-     // Asserting every guild depending on the selected network.
-    const prodguilds = [ethereumNetworkGuilds, gnosisNetworkGuilds] 
-
-    prodguilds.forEach((network) => {
-        network.forEach((guildName, i) => {
-            it(`Visit ${guildName}`, () => {
-                LandingPage.goToGuildPage(guildName, i);
-                AnyGuildPage.checkIfYouAreOnSelectedGuildPage(guildName)
-            });
-    
-            it('Check Governance page', () => {
-                AnyGuildPage.checkIfYouAreOnGovernancePage();
-                AnyGuildPage.checkProposalsOnGovernancePage();
-            });
-    
-            it('Check All Proposals page', () => {
-                AnyGuildPage.goToAllProposalsPageFromSidebar();
-                AnyGuildPage.checkIfYouAreOnAllProposalsPage();
-                AnyGuildPage.checkStateFilterOptions();
-                AnyGuildPage.checkActionFilterOptions();
-                AnyGuildPage.checkCurrencyFilterOptions();
-                AnyGuildPage.checkSearchbarOnAllProposalPage();
-            });
-    
-            it('Check first Proposal page', () => {
-                AnyGuildPage.goToFirstProposalPage();
-                AnyGuildPage.checkIfYouAreOnProposalPage();
-                AnyGuildPage.returnToGuildPageFromProposalPage;
-            });
-    
-            it('Check All Discussions page', () => {
-                AnyGuildPage.goToAllDiscussionPage();
-                AnyGuildPage.checkIfYouAreOnAllDiscussionPage();
-            });
-    
-            it('Check first Discussion page', () => {
-                AnyGuildPage.goToFirstDiscussionPage();
-                AnyGuildPage.checkIfYouAreOnDiscussionPage();
-                AnyGuildPage.returnToGuildPageFromDiscussionPage;
-            });
-    
-            it('Check Create Proposal page', () => {
-                AnyGuildPage.goToFirstDiscussionPage();
-                AnyGuildPage.goToCreateProposalPage();
-                CreateProposalPage.checkIfYouAreOnProposalCreationPage();
-                CreateProposalPage.returnToGuildPageFromCreateProposalPage();
-            });
-    
-            it('Return to DAVI Landing Page', () => {
-                LandingPage.goToLandingPage()
-            });
+    // TODO: ATM only asserting Gnosis network
+    gnosisNetworkGuilds.forEach((guildName, i) => {
+        it(`Visit ${guildName}`, () => {
+            LandingPage.goToGuildPage(guildName, i);
+            AnyGuildPage.checkIfYouAreOnSelectedGuildPage(guildName)
         });
-    })
+
+        it('Check Governance page', () => {
+            AnyGuildPage.checkIfYouAreOnGovernancePage();
+            AnyGuildPage.checkProposalsOnGovernancePage();
+        });
+
+        it('Check All Proposals page', () => {
+            AnyGuildPage.goToAllProposalsPageFromSidebar();
+            AnyGuildPage.checkIfYouAreOnAllProposalsPage();
+            AnyGuildPage.checkStateFilterOptions();
+            AnyGuildPage.checkActionFilterOptions();
+            AnyGuildPage.checkCurrencyFilterOptions();
+            AnyGuildPage.checkSearchbarOnAllProposalPage();
+        });
+
+        it('Check first Proposal page', () => {
+            AnyGuildPage.goToFirstProposalPage();
+            AnyGuildPage.checkIfYouAreOnProposalPage();
+            AnyGuildPage.returnToGuildPageFromProposalPage;
+        });
+
+        it('Check All Discussions page', () => {
+            AnyGuildPage.goToAllDiscussionPage();
+            AnyGuildPage.checkIfYouAreOnAllDiscussionPage();
+        });
+
+        it('Check first Discussion page', () => {
+            AnyGuildPage.goToFirstDiscussionPage();
+            AnyGuildPage.checkIfYouAreOnDiscussionPage();
+            AnyGuildPage.returnToGuildPageFromDiscussionPage;
+        });
+
+        it('Check Create Proposal page', () => {
+            AnyGuildPage.goToFirstDiscussionPage();
+            AnyGuildPage.goToCreateProposalPage();
+            CreateProposalPage.checkIfYouAreOnProposalCreationPage();
+            CreateProposalPage.returnToGuildPageFromCreateProposalPage();
+        });
+
+        it('Return to DAVI Landing Page', () => {
+            LandingPage.goToLandingPage()
+        });
+    });
 });

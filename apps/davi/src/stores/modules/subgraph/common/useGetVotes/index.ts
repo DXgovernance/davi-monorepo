@@ -35,7 +35,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
     return data?.proposal?.votes?.map((vote, index) => {
       return {
         voter: vote.voter as `0x${string}`,
-        optionLabel: proposalMetadata.voteOptions[vote.option]
+        optionLabel: proposalMetadata?.voteOptions[vote.option]
           ? proposalMetadata.voteOptions[vote.option]
           : t('against'),
         votingPower: getBigNumberPercentage(
@@ -45,7 +45,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
         ),
       };
     });
-  }, [data?.proposal?.votes, proposalMetadata.voteOptions, t, totalLocked]);
+  }, [data?.proposal?.votes, proposalMetadata?.voteOptions, t, totalLocked]);
 
   useListenToVoteAdded(guildId, refetch, proposal.id);
 

@@ -16,7 +16,7 @@ const AllDiscussions = ({ guildId }) => {
         <StyledLink to={`/${chainName}/${guildId}/create`}>
           <Button
             variant="primaryWithBorder"
-            data-testid="create-discussion-button"
+            data-testid="create-discussion-btn"
           >
             {t('forum.createDiscussion')}
           </Button>

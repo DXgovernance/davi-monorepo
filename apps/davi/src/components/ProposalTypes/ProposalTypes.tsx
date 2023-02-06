@@ -51,7 +51,10 @@ const ProposalTypes: React.FC<ProposalTypesProps> = ({ data }) => {
     <Backdrop>
       <Wrapper>
         {isMobile ? (
-          <Header onClick={() => navigate(`/${chain}/${guildId}`)}>
+          <Header
+            data-testid="back-to-overview-btn"
+            onClick={() => navigate(`/${chain}/${guildId}`)}
+          >
             <HeaderWrap>
               <StyledIcon src={FiArrowLeft} />
               {t('backToOverview')}

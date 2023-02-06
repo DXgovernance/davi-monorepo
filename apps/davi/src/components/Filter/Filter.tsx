@@ -68,7 +68,7 @@ export const Filter: React.FC<FilterProps> = ({
               <StyledLink to={`/${chainName}/${guildId}/create-proposal`}>
                 <Button
                   variant="primaryWithBorder"
-                  data-testid="create-proposal-button"
+                  data-testid="create-proposal-btn"
                 >
                   {t('createProposal')}
                 </Button>

@@ -268,7 +268,7 @@ const CreateProposalPage: React.FC = () => {
             <>
               <Label>{t('title')}</Label>
               <Input
-                data-testid="create-proposal-title"
+                data-testid="proposal-title-input"
                 placeholder="Proposal Title"
                 value={title}
                 onChange={e => setTitle(e.target.value)}

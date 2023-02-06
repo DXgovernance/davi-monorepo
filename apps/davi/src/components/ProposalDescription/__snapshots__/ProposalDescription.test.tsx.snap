@@ -35,6 +35,7 @@ exports[`ProposalDescription Should render loading if it has no metadata 1`] = `
    
   <div
     class="c0"
+    data-testid="discussion-page-description"
   >
     <div
       class=""
@@ -71,6 +72,7 @@ exports[`ProposalDescription Should render with description 1`] = `
    
   <div
     class="c0"
+    data-testid="discussion-page-description"
   >
     <span>
       This is the description of the proposal

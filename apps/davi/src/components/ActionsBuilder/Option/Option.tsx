@@ -97,7 +97,10 @@ export const OptionRow: React.FC<OptionRowProps> = ({
         </div>
         {isEditable && (
           <div>
-            <EditButton onClick={() => editOption(option)}>
+            <EditButton
+              data-testid="edit-action-btn"
+              onClick={() => editOption(option)}
+            >
               {t('edit')}
             </EditButton>
           </div>
@@ -142,6 +145,7 @@ export const OptionRow: React.FC<OptionRowProps> = ({
 
         {isEditable && (
           <AddButton
+            data-testid="add-action-btn"
             label={t('addAction')}
             onClick={() => setIsActionsModalOpen(true)}
           />

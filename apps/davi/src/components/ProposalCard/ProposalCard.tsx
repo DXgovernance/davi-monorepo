@@ -21,7 +21,6 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
   ensAvatar,
   href,
   statusProps,
-  options,
   address,
 }) => {
   return (
@@ -50,7 +49,7 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
           </CardTitle>
         </CardContent>
         <CardFooter>
-          <ProposalCardWinningOption options={options} />
+          <ProposalCardWinningOption options={proposal?.options} />
           <ProposalCardActions
             votesOfVoter={proposal?.votesOfVoter}
             proposalCreator={proposal?.creator}

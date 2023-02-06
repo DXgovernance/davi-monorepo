@@ -14,6 +14,7 @@ export interface Proposal {
   to: string[];
   data?: string[];
   value: BigNumber[];
+  options: Option[];
   totalOptions: BigNumber; // Not used in the codebase but in the deploy scripts
   title: string;
   contentHash: string;

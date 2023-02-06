@@ -22,8 +22,8 @@ const ProposalVoteCardWrapper = () => {
   const { guildId, proposalId } = useTypedParams();
   const { address: userAddress } = useAccount();
   const { data: proposal } = useProposal(guildId, proposalId);
-  const { data: proposalMetadata } = useProposalMetadata(guildId, proposalId);
-  const voteData = useVotingResults();
+  const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
+  const voteData = useVotingResults(guildId, proposalId, proposal);
   const { data: userVote } = useProposalVotesOfVoter(
     guildId,
     proposalId,

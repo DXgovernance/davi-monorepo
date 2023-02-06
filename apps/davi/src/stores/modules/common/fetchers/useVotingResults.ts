@@ -2,39 +2,27 @@ import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useHookStoreProvider } from 'stores';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { FetcherHooksInterface } from 'stores/types';
+import { Proposal } from 'types/types.guilds.d';
 
 type IUseVotingResults = FetcherHooksInterface['useVotingResults'];
 
 export const useVotingResults: IUseVotingResults = (
-  optionalDaoId?: string,
-  optionalProposalId?: `0x${string}`
+  daoId: string,
+  proposalId: `0x${string}`,
+  proposal: Proposal
 ): VoteData => {
   const {
     hooks: {
-      fetchers: { useProposal, useTotalLocked, useGuildConfig },
+      fetchers: { useTotalLocked, useGuildConfig },
     },
   } = useHookStoreProvider();
-  const { guildId, proposalId } = useTypedParams();
 
-  // swr hooks
-  const { data: proposal } = useProposal(
-    optionalDaoId || guildId,
-    optionalProposalId || proposalId
-  );
-
-  const { data } = useGuildConfig(
-    optionalDaoId || guildId,
-    optionalProposalId || proposalId
-  );
+  const { data } = useGuildConfig(daoId, proposalId);
 
   const { data: tokenInfo } = useERC20Info(data?.token);
 
-  const { data: totalLocked } = useTotalLocked(
-    guildId,
-    optionalProposalId || proposalId
-  );
+  const { data: totalLocked } = useTotalLocked(daoId, proposalId);
 
   const voteData = useMemo(() => {
     if (!proposal || !data || !tokenInfo) return undefined;

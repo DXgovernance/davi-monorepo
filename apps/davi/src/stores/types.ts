@@ -62,9 +62,14 @@ export interface FetcherHooksInterface {
   };
   useProposalCalls: (
     daoId: string,
-    proposalId: `0x${string}`
+    proposalId: `0x${string}`,
+    proposal: Proposal
   ) => { options: Option[] };
-  useVotingResults: (daoId?: string, proposalId?: `0x${string}`) => VoteData;
+  useVotingResults: (
+    daoId: string,
+    proposalId: `0x${string}`,
+    proposal: Proposal
+  ) => VoteData;
   useVotingPowerOf: (useVotingPowerOfProps: {
     contractAddress: string;
     userAddress: `0x${string}`;

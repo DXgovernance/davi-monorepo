@@ -4,6 +4,7 @@ import { useContractEvent, useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { FetcherHooksInterface } from 'stores/types';
+import { useProposalCalls } from '.';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -50,6 +51,7 @@ const formatterMiddleware = (
     data: proposalData.data as `0x${string}`[], // needed to bypass readonly
     value: proposalData.value as BigNumber[], // needed to bypass readonly
     totalOptions: null, // Not used in the codebase but in the deploy scripts
+    options: null,
     title: proposalData.title,
     contentHash: proposalData.contentHash,
     contractState,
@@ -88,6 +90,9 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
   });
 
   const formattedData = formatterMiddleware(proposalData, proposalId);
+  const { options } = useProposalCalls(daoId, proposalId, formattedData);
+
+  if (formattedData && options) formattedData.options = options;
 
   return {
     data: formattedData,

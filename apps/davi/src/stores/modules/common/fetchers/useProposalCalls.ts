@@ -12,8 +12,10 @@ import { useNetwork } from 'wagmi';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
 import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
-import { useProposal, useVotingResults } from './';
+import { useVotingResults } from './useVotingResults';
+
 import { FetcherHooksInterface } from 'stores/types';
+import { Proposal } from 'types/types.guilds.d';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
@@ -24,13 +26,13 @@ type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
 export const useProposalCalls: IUseProposalCalls = (
   daoId: string,
-  proposalId: `0x${string}`
+  proposalId: `0x${string}`,
+  proposal?: Proposal
 ) => {
   // Decode calls from existing proposal
 
-  const { data: metadata } = useProposalMetadata(daoId, proposalId);
-  const { data: proposal } = useProposal(daoId, proposalId);
-  const votingResults = useVotingResults(daoId, proposalId);
+  const { data: metadata } = useProposalMetadata(proposal?.contentHash);
+  const votingResults = useVotingResults(daoId, proposalId, proposal);
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
   const { t } = useTranslation();
@@ -39,12 +41,10 @@ export const useProposalCalls: IUseProposalCalls = (
   const theme = useTheme();
   const [options, setOptions] = useState<Option[]>([]);
 
-  const {
-    totalVotes,
-    to: toArray,
-    data: dataArray,
-    value: valuesArray,
-  } = proposal || {};
+  const totalVotes = proposal?.totalVotes;
+  const toArray = proposal?.to;
+  const dataArray = proposal?.data;
+  const valuesArray = proposal?.value;
 
   const totalOptionsNum = totalVotes?.length || 0;
   const displayableOptionsNum = totalOptionsNum - 1; // Not counting AGAINST (index 0) option

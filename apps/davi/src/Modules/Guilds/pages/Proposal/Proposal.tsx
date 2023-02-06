@@ -45,12 +45,7 @@ const ProposalPage: React.FC = () => {
   const {
     hooks: {
       writers: { useExecuteProposal },
-      fetchers: {
-        useProposal,
-        useTotalLocked,
-        useProposalCalls,
-        useGuildConfig,
-      },
+      fetchers: { useProposal, useTotalLocked, useGuildConfig },
     },
   } = useHookStoreProvider();
   const { t } = useTranslation();
@@ -62,14 +57,12 @@ const ProposalPage: React.FC = () => {
   );
   const { data: proposalIds } = useGuildProposalIds(guildId);
   const { data: proposal, error } = useProposal(guildId, proposalId);
-  const { options } = useProposalCalls(guildId, proposalId);
   const { data: guildConfig } = useGuildConfig(guildId);
   const { loaded } = useGuildImplementationTypeConfig(guildId);
   const { context } = useDiscussionContext(`${guildId}-${proposalId}`);
 
   const { data: metadata, error: metadataError } = useProposalMetadata(
-    guildId,
-    proposalId
+    proposal?.contentHash
   );
 
   const { data: totalLocked } = useTotalLocked(guildId, proposalId);
@@ -162,7 +155,7 @@ const ProposalPage: React.FC = () => {
           </PageHeader>
           <ProposalDescription metadata={metadata} error={metadataError} />
           <ProposalActionsWrapper>
-            <ActionsBuilder options={options} editable={false} />
+            <ActionsBuilder options={proposal?.options} editable={false} />
           </ProposalActionsWrapper>
           <SidebarCard
             header={

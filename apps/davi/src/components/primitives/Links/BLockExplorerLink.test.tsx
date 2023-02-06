@@ -43,13 +43,20 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   }),
 }));
 
+const mockUseERC20InfoReturn = jest.fn().mockReturnValue({
+  name: 'Test ERC20',
+  symbol: 'TEST',
+  decimals: 18,
+  totalSupply: mockBigNumber,
+});
+
 jest.mock('hooks/Guilds/erc20/useERC20Info', () => ({
-  useERC20Info: () => ({
-    name: 'Test ERC20',
-    symbol: 'TEST',
-    decimals: 18,
-    totalSupply: mockBigNumber,
-  }),
+  useERC20Info: (address: string) =>
+    address
+      ? {
+          data: mockUseERC20InfoReturn(),
+        }
+      : { data: null },
 }));
 
 describe('BlockExplorerLink', () => {
@@ -114,6 +121,27 @@ describe('BlockExplorerLink', () => {
       );
       queryByTestId = componentWithAvatar.queryByTestId;
       expect(queryByTestId('avatar')).toBeNull();
+    });
+  });
+
+  describe('BlockExplorerLink fetch token data', () => {
+    it('should fetch token data by default', async () => {
+      render(
+        <BlockExplorerLink
+          address={'0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6'}
+        />
+      );
+      expect(mockUseERC20InfoReturn).toHaveBeenCalled();
+    });
+
+    it('should not fetch token data if fetchTokenData is false', async () => {
+      render(
+        <BlockExplorerLink
+          address={'0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6'}
+          fetchTokenData={false}
+        />
+      );
+      expect(mockUseERC20InfoReturn).not.toHaveBeenCalled();
     });
   });
 });

@@ -2771,6 +2771,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
     get documents() {
       return [
         {
+          document: GetMemberListDocument,
+          get rawSDL() {
+            return printWithCache(GetMemberListDocument);
+          },
+          location: 'GetMemberListDocument.graphql',
+        },
+        {
           document: GetNumberOfActiveProposalsDocument,
           get rawSDL() {
             return printWithCache(GetNumberOfActiveProposalsDocument);
@@ -2837,6 +2844,16 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
     sdkRequester$.then(sdkRequester => sdkRequester(...args))
   );
 }
+export type getMemberListQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getMemberListQuery = {
+  guild?: Maybe<{
+    members?: Maybe<Array<Pick<Member, 'id' | 'address' | 'tokensLocked'>>>;
+  }>;
+};
+
 export type getNumberOfActiveProposalsQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2886,6 +2903,17 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export const getMemberListDocument = gql`
+  query getMemberList($id: ID!) {
+    guild(id: $id) {
+      members {
+        id
+        address
+        tokensLocked
+      }
+    }
+  }
+` as unknown as DocumentNode<getMemberListQuery, getMemberListQueryVariables>;
 export const getNumberOfActiveProposalsDocument = gql`
   query getNumberOfActiveProposals($id: ID!) {
     guild(id: $id) {
@@ -2942,6 +2970,16 @@ export type Requester<C = {}, E = unknown> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
+    getMemberList(
+      variables: getMemberListQueryVariables,
+      options?: C
+    ): Promise<getMemberListQuery> {
+      return requester<getMemberListQuery, getMemberListQueryVariables>(
+        getMemberListDocument,
+        variables,
+        options
+      ) as Promise<getMemberListQuery>;
+    },
     getNumberOfActiveProposals(
       variables: getNumberOfActiveProposalsQueryVariables,
       options?: C

@@ -7,9 +7,12 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetVotes as useGetVotesFromSubgraph } from '../subgraph/common';
-import { useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph } from '../subgraph/common/useGetNumberOfActiveProposals';
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+  useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useGetVotes as useGetVotesFromSubgraph,
+} from '../subgraph/common';
 
 import {
   useProposal,
@@ -22,6 +25,7 @@ import {
   useGetPermissions,
   useGuildConfig,
   useGetVotes,
+  useGetMemberList,
   useGetNumberOfActiveProposals,
 } from '../common/fetchers';
 import {
@@ -37,10 +41,6 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-/*
-  I left this case purposefully with just one data source (default),
-  to show that a governance implementation doesn't need two sources.
-*/
 
 export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementation> =
   {
@@ -69,6 +69,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetVotes: useGetVotesFromSubgraph,
+          useGetMemberList: useGetMemberListFromSubgraph,
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
         },
@@ -87,6 +88,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetPermissions,
           useGuildConfig,
           useGetVotes,
+          useGetMemberList,
           useGetNumberOfActiveProposals,
         },
       },

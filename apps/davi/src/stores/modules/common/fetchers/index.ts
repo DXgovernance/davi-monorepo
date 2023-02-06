@@ -8,4 +8,5 @@ export { useVotingResults } from './useVotingResults';
 export { useGetPermissions } from './useGetPermissions';
 export { useGuildConfig } from './useGuildConfig';
 export { useGetVotes } from './useGetVotes';
+export { useGetMemberList } from './useGetMemberList';
 export { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';

@@ -38,6 +38,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
     governance: `/${chainName}/${guildId}`,
     allProposals: `/${chainName}/${guildId}/all-proposals`,
     allDiscussions: `/${chainName}/${guildId}/all-discussions`,
+    members: `/${chainName}/${guildId}/members`,
     treasury: `/${chainName}/${guildId}/treasury`,
   };
 
@@ -82,6 +83,11 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
         <StyledLink to={locations.allDiscussions}>
           <SidebarMenuItem current={pathname === locations.allDiscussions}>
             {t('allDiscussions')}
+          </SidebarMenuItem>
+        </StyledLink>
+        <StyledLink to={locations.members}>
+          <SidebarMenuItem current={pathname === locations.members}>
+            {t('members')}
           </SidebarMenuItem>
         </StyledLink>
         <StyledLink to={locations.treasury}>

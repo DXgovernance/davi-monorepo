@@ -42,12 +42,9 @@ export const useGuildConfig = (guildAddress: string) => {
       maxActiveProposals,
       votingPowerForProposalCreation,
       votingPowerForProposalExecution,
-      // tokenVault,
       lockTime,
       voteGas,
       maxGasPrice,
-      // votingPowerPercentageForProposalExecution,
-      // votingPowerPercentageForProposalCreation,
       minimumMembersForProposalCreation,
       minimumTokensLockedForProposalCreation,
     } = guild;
@@ -74,13 +71,7 @@ export const useGuildConfig = (guildAddress: string) => {
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
       maxGasPrice: maxGasPrice ? BigNumber?.from(maxGasPrice) : undefined,
       votingPowerPercentageForProposalExecution: BigNumber.from(0),
-      //   votingPowerPercentageForProposalExecution
-      //     ? BigNumber?.from(votingPowerPercentageForProposalExecution)
-      //     : undefined,
       votingPowerPercentageForProposalCreation: BigNumber.from(0),
-      //   votingPowerPercentageForProposalCreation
-      //     ? BigNumber?.from(votingPowerPercentageForProposalCreation)
-      //     : undefined,
       minimumMembersForProposalCreation: minimumMembersForProposalCreation
         ? BigNumber?.from(minimumMembersForProposalCreation)
         : undefined,

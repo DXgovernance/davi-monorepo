@@ -22,6 +22,11 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useGetMemberList: (daoId: string) => {
+    data: { id: string; address: `0x${string}`; tokensLocked: BigNumber }[];
+    isLoading: boolean;
+    isError: boolean;
+  };
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`

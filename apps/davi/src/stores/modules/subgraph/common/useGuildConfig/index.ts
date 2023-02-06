@@ -23,17 +23,13 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-export const useGuildConfig = (
-  guildAddress: string,
-  proposalId?: `0x${string}`
-) => {
+export const useGuildConfig = (guildAddress: string) => {
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
       variables: { id: guildAddress?.toLowerCase() },
     }
   );
-
   const transformedData: GuildConfigProps = useMemo(() => {
     if (!data?.guild) return undefined;
     const guild = data.guild;

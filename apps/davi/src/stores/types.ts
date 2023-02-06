@@ -95,6 +95,12 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useGuildProposalIds: (daoId: `0x${string}`) => {
+    data: readonly `0x${string}`[];
+    isError: boolean;
+    isLoading: boolean;
+    error: Error;
+  };
 }
 
 export interface WriterHooksInteface {

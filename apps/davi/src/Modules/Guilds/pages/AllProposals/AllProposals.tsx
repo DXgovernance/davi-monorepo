@@ -1,4 +1,3 @@
-import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
 import { Filter } from 'components/Filter';
 import ProposalCardWrapper from 'Modules/Guilds/Wrappers/ProposalCardWrapper';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
@@ -8,13 +7,20 @@ import { Virtuoso } from 'react-virtuoso';
 import { useFilter } from 'contexts/Guilds';
 import { ProposalListWrapper, ProposalsList } from './AllProposals.styled';
 import { useTranslation } from 'react-i18next';
+import { useHookStoreProvider } from 'stores';
 
 const PROPOSALS_TO_LOAD = 10;
 
 const AllProposals = ({ guildId }) => {
   const { t } = useTranslation();
   const { isLoading } = useContext(GuildAvailabilityContext);
+  const {
+    hooks: {
+      fetchers: { useGuildProposalIds },
+    },
+  } = useHookStoreProvider();
   const { data: proposalIds, isError, error } = useGuildProposalIds(guildId);
+
   const [openSearchBar, setOpenSearchBar] = useState(false);
 
   /*

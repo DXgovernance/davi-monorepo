@@ -4,7 +4,6 @@ import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { Result, ResultState } from 'components/Result';
 import { Flex } from 'components/primitives/Layout';
 import ProposalCardWrapper from '../../Wrappers/ProposalCardWrapper';
-import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
 import { useFilter } from 'contexts/Guilds';
 import { Input } from 'components/primitives/Forms/Input';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -20,7 +19,7 @@ import { Button } from 'components/primitives/Button';
 const Governance = ({ guildId }) => {
   const {
     hooks: {
-      fetchers: { useGetNumberOfActiveProposals },
+      fetchers: { useGetNumberOfActiveProposals, useGuildProposalIds },
     },
   } = useHookStoreProvider();
 

@@ -25,6 +25,7 @@ import {
   useGuildConfig,
   useGetMemberList,
   useGetNumberOfActiveProposals,
+  useGuildProposalIds,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -69,6 +70,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetMemberList: useGetMemberListFromSubgraph,
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
+          useGuildProposalIds,
         },
         fallback: {
           useProposal,
@@ -86,6 +88,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGuildConfig,
           useGetMemberList,
           useGetNumberOfActiveProposals,
+          useGuildProposalIds,
         },
       },
       writers: {

@@ -7,10 +7,12 @@ import { useHookStoreProvider } from 'stores';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { BigNumber } from 'ethers';
 import { useListenToVoteAdded } from 'stores/modules/common/events';
+import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
+import { useTranslation } from 'react-i18next';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 
-export const useGetVotes: IUseGetVotes = (guildId, proposalId) => {
+export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const {
     hooks: {
       fetchers: { useTotalLocked },
@@ -20,17 +22,22 @@ export const useGetVotes: IUseGetVotes = (guildId, proposalId) => {
   const { data, refetch, loading, error } = useQuery<getVotesQuery>(
     getVotesDocument,
     {
-      variables: { id: proposalId },
+      variables: { id: proposal.id },
     }
   );
 
-  const { data: totalLocked } = useTotalLocked(guildId, proposalId);
+  const { data: totalLocked } = useTotalLocked(guildId, proposal.id);
+  // TODO: proposal metadata could be removed from this hook if we get the optionLabel from subgraph in the votes.
+  const { data: proposalMetadata } = useProposalMetadata(guildId, proposal.id);
+  const { t } = useTranslation();
 
   const parsedData = useMemo(() => {
-    return data?.proposal?.votes?.map(vote => {
+    return data?.proposal?.votes?.map((vote, index) => {
       return {
         voter: vote.voter as `0x${string}`,
-        optionLabel: vote.optionLabel,
+        optionLabel: proposalMetadata.voteOptions[vote.option]
+          ? proposalMetadata.voteOptions[vote.option]
+          : t('against'),
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
           totalLocked,
@@ -38,9 +45,9 @@ export const useGetVotes: IUseGetVotes = (guildId, proposalId) => {
         ),
       };
     });
-  }, [data?.proposal?.votes, totalLocked]);
+  }, [data?.proposal?.votes, proposalMetadata.voteOptions, t, totalLocked]);
 
-  useListenToVoteAdded(guildId, refetch, proposalId);
+  useListenToVoteAdded(guildId, refetch, proposal.id);
 
   return {
     data: parsedData,

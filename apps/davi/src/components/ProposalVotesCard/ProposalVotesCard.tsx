@@ -12,7 +12,7 @@ import { ProposalVotesCardProps } from './types';
 
 const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
   guildId,
-  proposalId,
+  proposal,
 }) => {
   const { t } = useTranslation();
   const {
@@ -21,7 +21,7 @@ const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
     },
   } = useHookStoreProvider();
 
-  const votes = useGetVotes(guildId, proposalId);
+  const votes = useGetVotes(guildId, proposal);
 
   if (!votes.data) return null;
 

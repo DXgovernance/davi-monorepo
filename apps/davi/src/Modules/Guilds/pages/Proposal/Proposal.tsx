@@ -177,7 +177,7 @@ const ProposalPage: React.FC = () => {
         </PageContent>
         <SidebarContent>
           <ProposalVoteCardWrapper />
-          <ProposalVotesCard proposalId={proposal.id} guildId={guildId} />
+          <ProposalVotesCard proposal={proposal} guildId={guildId} />
           <ProposalInfoCard
             proposal={proposal}
             guildConfig={guildConfig}

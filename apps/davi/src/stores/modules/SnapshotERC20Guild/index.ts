@@ -9,6 +9,7 @@ import {
 } from './writers';
 import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
 import { useGetVotes as useGetVotesFromSubgraph } from '../subgraph/common';
+import { useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph } from '../subgraph/common/useGetNumberOfActiveProposals';
 
 import {
   useProposal,
@@ -20,8 +21,8 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
-  useGetActiveProposals,
   useGetVotes,
+  useGetNumberOfActiveProposals,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -67,8 +68,9 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
-          useGetActiveProposals,
           useGetVotes: useGetVotesFromSubgraph,
+          useGetNumberOfActiveProposals:
+            useGetNumberOfActiveProposalsFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -84,8 +86,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
-          useGetActiveProposals,
           useGetVotes,
+          useGetNumberOfActiveProposals,
         },
       },
       writers: {

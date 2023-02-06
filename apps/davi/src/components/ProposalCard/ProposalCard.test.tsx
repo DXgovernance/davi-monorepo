@@ -53,6 +53,10 @@ jest.mock('wagmi', () => ({
   useNetwork: () => ({ chain: mockChain, chains: [mockChain] }),
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 const validProps: ProposalCardProps = {
   proposal: proposalMock,
   ensAvatar: ensAvatarMock,

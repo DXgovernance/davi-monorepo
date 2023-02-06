@@ -2771,6 +2771,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
     get documents() {
       return [
         {
+          document: GetNumberOfActiveProposalsDocument,
+          get rawSDL() {
+            return printWithCache(GetNumberOfActiveProposalsDocument);
+          },
+          location: 'GetNumberOfActiveProposalsDocument.graphql',
+        },
+        {
           document: GetVotesDocument,
           get rawSDL() {
             return printWithCache(GetVotesDocument);
@@ -2830,6 +2837,18 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
     sdkRequester$.then(sdkRequester => sdkRequester(...args))
   );
 }
+export type getNumberOfActiveProposalsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getNumberOfActiveProposalsQuery = {
+  guild?: Maybe<
+    Pick<Guild, 'id' | 'name'> & {
+      proposals?: Maybe<Array<Pick<Proposal, 'id'>>>;
+    }
+  >;
+};
+
 export type getVotesQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2867,6 +2886,20 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export const getNumberOfActiveProposalsDocument = gql`
+  query getNumberOfActiveProposals($id: ID!) {
+    guild(id: $id) {
+      id
+      name
+      proposals {
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getNumberOfActiveProposalsQuery,
+  getNumberOfActiveProposalsQueryVariables
+>;
 export const getVotesDocument = gql`
   query getVotes($id: ID!) {
     proposal(id: $id) {
@@ -2909,6 +2942,19 @@ export type Requester<C = {}, E = unknown> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
+    getNumberOfActiveProposals(
+      variables: getNumberOfActiveProposalsQueryVariables,
+      options?: C
+    ): Promise<getNumberOfActiveProposalsQuery> {
+      return requester<
+        getNumberOfActiveProposalsQuery,
+        getNumberOfActiveProposalsQueryVariables
+      >(
+        getNumberOfActiveProposalsDocument,
+        variables,
+        options
+      ) as Promise<getNumberOfActiveProposalsQuery>;
+    },
     getVotes(
       variables: getVotesQueryVariables,
       options?: C

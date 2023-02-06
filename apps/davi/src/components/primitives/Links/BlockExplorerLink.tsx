@@ -6,20 +6,11 @@ import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useMemo } from 'react';
 import { MAINNET_ID, shortenAddress } from 'utils';
 import { resolveUri } from 'utils/url';
-import { Chain, useNetwork } from 'wagmi';
+import { useNetwork } from 'wagmi';
 import { Flex } from '../Layout';
 import { ExternalLink } from './ExternalLink';
 import { BlockExplorerLinkProps } from './types';
-
-const getBlockExplorerUrl = (
-  chain: Chain,
-  address: string,
-  type: 'address' | 'tx'
-) => {
-  if (!chain || !chain?.blockExplorers?.default) return null;
-
-  return `${chain.blockExplorers.default.url}/${type}/${address}`;
-};
+import { getBlockExplorerUrl } from 'provider';
 
 export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
   address,

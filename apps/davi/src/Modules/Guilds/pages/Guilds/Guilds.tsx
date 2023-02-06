@@ -3,10 +3,11 @@ import GuildSidebarWrapper from 'Modules/Guilds/Wrappers/GuildSidebarWrapper';
 import { AllDiscussions } from '../AllDiscussions';
 import { AllProposals } from '../AllProposals';
 import { Governance } from '../Governance';
+import { Treasury } from '../Treasury';
 import { PageContainer, PageContent, SidebarContent } from './Guilds.styled';
 
 interface GuildsPageProps {
-  pageContent?: 'governance' | 'allProposals' | 'allDiscussions';
+  pageContent?: 'governance' | 'allProposals' | 'allDiscussions' | 'treasury';
 }
 
 const GuildsPage: React.FC<GuildsPageProps> = ({
@@ -25,6 +26,7 @@ const GuildsPage: React.FC<GuildsPageProps> = ({
         {pageContent === 'allDiscussions' && (
           <AllDiscussions guildId={guildId} />
         )}
+        {pageContent === 'treasury' && <Treasury />}
       </PageContent>
     </PageContainer>
   );

@@ -17,10 +17,14 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
+  useGetMemberList,
   useGetNumberOfActiveProposals,
 } from '../common/fetchers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph } from '../subgraph/common/useGetNumberOfActiveProposals';
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+  useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+} from '../subgraph/common';
 import {
   useTotalLocked,
   useVoterLockTimestamp,
@@ -61,6 +65,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
+          useGetMemberList: useGetMemberListFromSubgraph,
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
         },
@@ -78,6 +83,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
+          useGetMemberList,
           useGetNumberOfActiveProposals,
         },
       },

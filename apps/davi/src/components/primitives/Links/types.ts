@@ -6,6 +6,7 @@ export interface BlockExplorerLinkProps {
   avatarSize?: number;
   shortAddress?: boolean;
   disableLink?: boolean;
+  fetchTokenData?: boolean;
 }
 
 export interface ExternalLinkProps {

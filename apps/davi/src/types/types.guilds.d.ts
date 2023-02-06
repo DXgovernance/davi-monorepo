@@ -22,10 +22,6 @@ export interface Proposal {
   votesOfVoter?: UseProposalVotesOfVoterReturn;
 }
 
-export type InitialProposal = Partial<Proposal> & {
-  state: number;
-};
-
 export enum ProposalState {
   Active = 'Active',
   Executable = 'Executable',

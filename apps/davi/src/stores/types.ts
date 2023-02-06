@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
-import { useProposal } from './modules/common/fetchers/useProposal';
 import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
+import { Proposal } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -23,7 +23,11 @@ export interface FetcherHooksInterface {
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
-  ) => ReturnType<typeof useProposal>;
+  ) => {
+    data: Proposal;
+    refetch: () => void;
+    error: Error;
+  };
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;

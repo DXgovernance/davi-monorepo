@@ -59,7 +59,7 @@ isHardhatRunning() {
             echo "Hardhat is running"
             return 0
         else
-            echo "Hardhat running but not deployment info yet"
+            echo "Hardhat running but no deployment info found yet"
             return 1
         fi
     else
@@ -86,7 +86,7 @@ waitForGraphContainer(){
     while true; do
         graph_container_status=$(docker ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
         if [ "$graph_container_status" == "running" ]; then
-            echo "Graph node container is running: $graph_container_status"
+            echo "Graph node container is running"
             sleep 10
             break
         else

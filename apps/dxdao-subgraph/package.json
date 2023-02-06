@@ -13,7 +13,7 @@
     "deploy-local": "graph deploy mprasanjith/dxdao --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020 -l v0.0.1",
     "deploy": "pnpm run generate-networks && graph deploy mprasanjith/dxdao --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
     "clean": "rm -rf ./data build && docker compose down",
-    "generate-networks": "node ./scripts/generate-networks.js",
+    "generate-networks": "node ./scripts/generate-prod-networks.js",
     "dev": "./scripts/dev.sh",
     "start-docker": "pnpm run clean && docker compose up"
   },

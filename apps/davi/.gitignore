@@ -54,4 +54,7 @@ storybook-static
 # turbo
 .turbo
 
+# Graph
+.graphclient
+
 /src/bytecodes/local.json

@@ -28,3 +28,4 @@ fi
 start_hardhat_node
 node ./src/buildConfig.js
 node ./src/updateProjectsConfig.js
+echo "Hardhat node running locally"

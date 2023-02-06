@@ -15,7 +15,7 @@
     "clean": "rm -rf ./data build && docker compose down",
     "generate-networks": "node ./scripts/generate-prod-networks.js",
     "dev": "./scripts/dev.sh",
-    "start-docker": "pnpm run clean && docker compose up"
+    "compose-up": "docker compose up"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.30.2",

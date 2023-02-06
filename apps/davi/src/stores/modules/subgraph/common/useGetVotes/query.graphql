@@ -4,6 +4,7 @@ query getVotes($id: ID!) {
       voter
       votingPower
       optionLabel
+      option
     }
   }
 }

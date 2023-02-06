@@ -58,7 +58,7 @@ describe('Check Project-DAVI', () => {
         it('Check first Proposal page', () => {
             AnyGuildPage.goToFirstProposalPage();
             AnyGuildPage.checkIfYouAreOnProposalPage();
-            AnyGuildPage.returnToGuildPageFromProposalPage;
+            AnyGuildPage.returnToGuildPageFromProposalPage();
         });
 
         it('Check All Discussions page', () => {
@@ -69,7 +69,7 @@ describe('Check Project-DAVI', () => {
         it('Check first Discussion page', () => {
             AnyGuildPage.goToFirstDiscussionPage();
             AnyGuildPage.checkIfYouAreOnDiscussionPage();
-            AnyGuildPage.returnToGuildPageFromDiscussionPage;
+            AnyGuildPage.returnToGuildPageFromDiscussionPage();
         });
 
         it('Check Create Proposal page', () => {

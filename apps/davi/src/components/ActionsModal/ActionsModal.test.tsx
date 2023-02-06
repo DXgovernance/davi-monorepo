@@ -46,6 +46,10 @@ jest.mock('wagmi', () => ({
   },
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('ActionsModal', () => {
   let props;
   beforeEach(() => {

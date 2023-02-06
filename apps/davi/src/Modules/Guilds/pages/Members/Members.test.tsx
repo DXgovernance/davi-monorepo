@@ -5,7 +5,14 @@ import { MembersPage } from '.';
 
 // General mocks
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 jest.mock('wagmi', () => ({
+  chain: {
+    mainnet: {},
+  },
   useNetwork: () => ({
     chain: {
       id: 1,

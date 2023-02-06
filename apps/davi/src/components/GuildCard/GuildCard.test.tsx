@@ -9,6 +9,10 @@ jest.mock('wagmi', () => ({
   }),
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('GuildCard', () => {
   it(`Should render with full parameters`, async () => {
     const { container } = render(<GuildCard {...fullParameters} />);

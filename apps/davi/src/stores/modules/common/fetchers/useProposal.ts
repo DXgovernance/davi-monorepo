@@ -1,10 +1,14 @@
 import { unix } from 'moment';
 import { Proposal, ContractState } from 'types/types.guilds.d';
-import { useContractEvent, useContractRead } from 'wagmi';
+import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from '.';
+import {
+  useListenToVoteAdded,
+  useListenToProposalStateChanged,
+} from '../events';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -70,24 +74,8 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
   });
   const proposalData: IDataFromGetProposal = data;
 
-  useContractEvent({
-    address: daoId,
-    abi: SnapshotERC20Guild.abi,
-    eventName: 'ProposalStateChanged',
-    listener(node, label, eventDetails) {
-      const eventProposalId = eventDetails.args[0];
-      if (eventProposalId === proposalId) refetch();
-    },
-  });
-
-  useContractEvent({
-    address: daoId,
-    abi: SnapshotERC20Guild.abi,
-    eventName: 'VoteAdded',
-    listener(node, label, eventDetails) {
-      if (node === proposalId) refetch();
-    },
-  });
+  useListenToProposalStateChanged(daoId, refetch, proposalId);
+  useListenToVoteAdded(daoId, refetch, proposalId);
 
   const formattedData = formatterMiddleware(proposalData, proposalId);
   const { options } = useProposalCalls(daoId, proposalId, formattedData);

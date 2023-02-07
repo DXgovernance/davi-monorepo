@@ -1,25 +1,21 @@
-import { useQuery } from '@apollo/client';
-import { getProposalDocument, getProposalQuery } from '.graphclient';
-import { FetcherHooksInterface } from 'stores/types';
-import { ContractState, Proposal } from 'types/types.guilds.d';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { unix } from 'moment';
+import { useQuery } from '@apollo/client';
+import { getProposalDocument, getProposalQuery } from '.graphclient';
+import { ContractState, Proposal } from 'types/types.guilds.d';
+import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/common/fetchers';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
-  const daoIdLowercase = daoId.toLowerCase();
-  const proposalIdLowercase = proposalId.toLowerCase();
-
   const { data, refetch, error } = useQuery<getProposalQuery>(
     getProposalDocument,
     {
       variables: {
-        guildId: daoIdLowercase,
-        id: daoIdLowercase,
-        proposalId: proposalIdLowercase,
+        guildId: daoId.toLowerCase(),
+        proposalId: proposalId.toLowerCase(),
       },
     }
   );
@@ -53,7 +49,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     const totalVotesBN = totalVotes.map((vote: string) => BigNumber.from(vote));
 
     return {
-      id: id as `0x${string}`,
+      id: id as `0x${string}`, // typecast to comply with template literal type
       creator,
       startTime: unix(startTime),
       endTime: unix(endTime),

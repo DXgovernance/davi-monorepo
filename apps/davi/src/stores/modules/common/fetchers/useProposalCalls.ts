@@ -11,7 +11,6 @@ import { ERC20_APPROVE_SIGNATURE } from 'utils';
 import { useNetwork } from 'wagmi';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
-import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import { useVotingResults } from './useVotingResults';
 
 import { FetcherHooksInterface } from 'stores/types';
@@ -36,8 +35,6 @@ export const useProposalCalls: IUseProposalCalls = (
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
   const { t } = useTranslation();
-  // Used to wait for the bytecode to be fetched
-  const { loaded } = useGuildImplementationTypeConfig(daoId);
   const theme = useTheme();
   const [options, setOptions] = useState<Option[]>([]);
 
@@ -95,7 +92,7 @@ export const useProposalCalls: IUseProposalCalls = (
   useEffect(() => {
     let cancelled = false;
 
-    if (!daoId || !proposalId || !splitCalls || !loaded) {
+    if (!daoId || !proposalId || !splitCalls) {
       setOptions([]);
       return () => {};
     }
@@ -185,7 +182,6 @@ export const useProposalCalls: IUseProposalCalls = (
     optionLabels,
     totalOptionsNum,
     votingResults?.totalLocked,
-    loaded,
   ]);
 
   return {

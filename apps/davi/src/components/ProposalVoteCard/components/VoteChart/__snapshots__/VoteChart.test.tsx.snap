@@ -26,8 +26,9 @@ exports[`VoteChart matches the snapshot 1`] = `
   -ms-flex: 1;
   flex: 1;
   height: 0.75rem;
+  margin-top: 1%;
   overflow: hidden;
-  margin-top: 0.1rem;
+  background-color: #303338;
   border-radius: 32px;
 }
 
@@ -39,7 +40,7 @@ exports[`VoteChart matches the snapshot 1`] = `
   overflow: hidden;
 }
 
-.c4 {
+.c5 {
   width: 10%;
   border-radius: 32px;
   background: #295FF4;
@@ -47,7 +48,11 @@ exports[`VoteChart matches the snapshot 1`] = `
   overflow: hidden;
 }
 
-.c6 {
+.c4 {
+  margin-left: 1rem;
+}
+
+.c7 {
   height: 18px;
   margin-top: 20px;
   width: 1px;
@@ -55,11 +60,17 @@ exports[`VoteChart matches the snapshot 1`] = `
 }
 
 .c1 {
-  background-color: #303338;
-  border-radius: 32px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
-.c7 {
+.c8 {
   padding: 4px 8px;
   border: 1px solid #303338;
   border-radius: 0px 32px 32px;
@@ -75,11 +86,11 @@ exports[`VoteChart matches the snapshot 1`] = `
   display: flex;
 }
 
-.c7 span {
+.c8 span {
   margin-left: 2px;
 }
 
-.c5 {
+.c6 {
   width: 65px;
   position: absolute;
   display: -webkit-box;
@@ -99,7 +110,7 @@ exports[`VoteChart matches the snapshot 1`] = `
   left: 0%;
 }
 
-.c8 {
+.c9 {
   margin-right: 0.4rem;
 }
 
@@ -119,26 +130,40 @@ exports[`VoteChart matches the snapshot 1`] = `
           color="#E75C5C"
         />
       </div>
+      <span
+        class="c4"
+      >
+        10%
+      </span>
+    </div>
+    <div
+      class="c1"
+    >
       <div
         class="c2"
       >
         <div
-          class="c4"
+          class="c5"
           color="#295FF4"
         />
       </div>
+      <span
+        class="c4"
+      >
+        10%
+      </span>
     </div>
     <div
-      class="c5"
+      class="c6"
     >
       <div
-        class="c6"
+        class="c7"
       />
       <div
-        class="c7"
+        class="c8"
       >
         <svg
-          class="c8"
+          class="c9"
           fill="currentColor"
           height="1em"
           stroke="currentColor"

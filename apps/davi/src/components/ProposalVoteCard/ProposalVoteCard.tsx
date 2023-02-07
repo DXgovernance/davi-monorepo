@@ -6,19 +6,19 @@ import {
 import VotesChart from './components/VoteChart/VoteChart';
 import { VoteConfirmationModal } from './components/VoteConfirmationModal';
 import { UserVote } from './components/UserVote';
-import VoteResults from './components/VoteResults/VoteResults';
+import VoteOptions from './components/VoteOptions/VoteOptions';
 import { BigNumber } from 'ethers';
 import moment from 'moment';
 import { Loading } from 'components/primitives/Loading';
 import { useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import {
-  SmallButton,
   VotesContainer,
   ButtonsContainer,
   VoteActionButton,
   VoteOptionButton,
   VoteOptionsLabel,
+  ToggleLabel,
 } from './ProposalVoteCard.styled';
 import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
@@ -27,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 import { getOptionLabel } from 'components/ProposalVoteCard/utils';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useHookStoreProvider } from 'stores';
+import { Toggle } from 'components/primitives/Forms/Toggle';
 
 const ProposalVoteCard = ({
   voteData,
@@ -106,29 +107,23 @@ const ProposalVoteCard = ({
           ) : (
             t('voteResults')
           )}
-          <SmallButton
-            variant="secondary"
-            onClick={() => setIsPercent(!isPercent)}
-          >
-            {!voteData ? (
-              <Loading loading text skeletonProps={{ width: 40 }} />
-            ) : isPercent ? (
-              '%'
-            ) : (
-              voteData?.token?.symbol
-            )}
-          </SmallButton>
+          <ToggleLabel selected={true}>{t('token')}</ToggleLabel>
+          <Toggle
+            name="toggle-max-value"
+            aria-label="toggle max value"
+            value={false}
+            onChange={() => setIsPercent(!isPercent)}
+          />
         </SidebarCardHeaderSpaced>
       }
     >
       <SidebarCardContent>
         <VotesContainer>
-          <VoteResults
-            isPercent={isPercent}
-            voteData={voteData}
+          <VotesChart isPercent={isPercent} voteData={voteData} />
+          <VoteOptions
+            options={voteData?.options}
             proposalMetadata={proposal?.metadata}
           />
-          <VotesChart isPercent={isPercent} voteData={voteData} />
         </VotesContainer>
 
         <UserVote

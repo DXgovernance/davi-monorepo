@@ -12,8 +12,10 @@ import {
   VoteQuorumLabel,
   PaddedFlagCheckered,
   VoteChartRowsContainer,
+  VoteResult,
 } from './VoteChart.styled';
 import { VoteChartProps } from '../../types';
+import { formatUnits } from 'ethers/lib/utils';
 
 //TODO: rewrite css dynamics types
 const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
@@ -31,11 +33,10 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
   const voteOptionswithVotingPower = Object.entries(voteData.options).filter(
     ([idx, item]) => !BigNumber.from(item).isZero()
   ).length;
-
   return (
     <VotesChartContainer>
       {voteData?.options ? (
-        <VoteChartRowsContainer>
+        <>
           {Object.entries(voteData.options).map(([idx, item]) => {
             const percentBN = BigNumber.from(
               voteData?.totalLocked || 0
@@ -45,18 +46,27 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
             const percent = Math.round(percentBN.toNumber()) / Math.pow(10, 2);
 
             return percent > 0 ? (
-              <VotesChartRow>
-                <ChartBar
-                  key={idx}
-                  percent={percent}
-                  color={theme?.colors?.votes?.[idx]}
-                />
-              </VotesChartRow>
+              <VoteChartRowsContainer>
+                <VotesChartRow>
+                  <ChartBar
+                    key={idx}
+                    percent={percent}
+                    color={theme?.colors?.votes?.[idx]}
+                  />
+                </VotesChartRow>
+                <VoteResult>
+                  {isPercent
+                    ? `${percent}%`
+                    : `${formatUnits(voteData?.options?.[idx] || 0)} ${
+                        voteData?.token?.symbol
+                      }`}
+                </VoteResult>
+              </VoteChartRowsContainer>
             ) : (
               <></>
             );
           })}
-        </VoteChartRowsContainer>
+        </>
       ) : (
         <Loading loading text skeletonProps={{ height: 24, count: 2 }} />
       )}

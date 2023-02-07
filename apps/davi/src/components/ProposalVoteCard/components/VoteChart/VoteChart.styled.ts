@@ -14,8 +14,9 @@ export const VotesChartRow = styled.div`
   display: flex;
   flex: 1;
   height: 0.75rem;
+  margin-top: 1%;
   overflow: hidden;
-  margin-top: 0.1rem;
+  background-color: ${({ theme }) => theme.colors.border1};
   border-radius: ${({ theme }) => theme.radii.pill};
 `;
 
@@ -26,6 +27,10 @@ export const ChartBar = styled.div<{ percent?: number; color: string }>`
   background: ${({ color }) => color};
   height: 0.75rem;
   overflow: hidden;
+`;
+
+export const VoteResult = styled.span<{}>`
+  margin-left: 1rem;
 `;
 
 // The margin top and height are different when quorum 0 or 100,
@@ -45,8 +50,8 @@ export const VoteQuorumMarker = styled.div<{
 
 // todo: change to theme.
 export const VoteChartRowsContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.border1};
-  border-radius: ${({ theme }) => theme.radii.pill};
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const VoteQuorumLabel = styled.div<{ quorum: number }>`

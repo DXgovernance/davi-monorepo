@@ -1,14 +1,14 @@
-// import { BigNumber } from 'ethers';
-import { useQuery } from '@apollo/client';
-import { getVotesDocument, getVotesQuery } from '.graphclient';
-import { FetcherHooksInterface } from 'stores/types';
 import { useMemo } from 'react';
-import { useHookStoreProvider } from 'stores';
-import { getBigNumberPercentage } from 'utils/bnPercentage';
+import { useQuery } from '@apollo/client';
 import { BigNumber } from 'ethers';
+import { useTranslation } from 'react-i18next';
+import { getVotesDocument, getVotesQuery } from '.graphclient';
+
+import { useHookStoreProvider } from 'stores';
+import { FetcherHooksInterface } from 'stores/types';
+import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { useListenToVoteAdded } from 'stores/modules/common/events';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
-import { useTranslation } from 'react-i18next';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 

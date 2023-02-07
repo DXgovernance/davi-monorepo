@@ -1,14 +1,15 @@
+import { useTranslation } from 'react-i18next';
+import { useHookStoreProvider } from 'stores';
 import {
   SidebarCard,
   SidebarCardContent,
   SidebarCardHeaderSpaced,
 } from 'components/SidebarCard';
 import { SidebarCardContentWrapper } from 'components/SidebarCard/SidebarCard.styled';
-import { useTranslation } from 'react-i18next';
-import { useHookStoreProvider } from 'stores';
+
 import { VoteRow } from './components';
-import { VotesAmount, VotesAmountWrapper } from './ProposalVotesCard.styled';
 import { ProposalVotesCardProps } from './types';
+import { VotesAmount, VotesAmountWrapper } from './ProposalVotesCard.styled';
 
 const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
   guildId,

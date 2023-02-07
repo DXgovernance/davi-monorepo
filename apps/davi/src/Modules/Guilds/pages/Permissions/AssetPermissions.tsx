@@ -11,7 +11,6 @@ import {
   getChainIcon,
   getNetworkById,
   resolveUri,
-  tokenList,
   ZERO_ADDRESS,
 } from 'utils';
 import { FetcherHooksInterface } from 'stores/types';
@@ -29,6 +28,7 @@ import {
   TableRow,
   TokenNameAndSymbol,
 } from './Permissions.styled';
+import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 
 interface IAssetPermissions {
   tokenPermissions: ReturnType<FetcherHooksInterface['useGetAllPermissions']>;
@@ -45,23 +45,28 @@ interface IAssetPermissionRow {
   token: ITokenPermission;
 }
 
+interface IParsedPermissions {
+  [key: string]: ITokenPermission;
+}
+
 const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
   const { t } = useTranslation();
   const { chain } = useNetwork();
   const { tokenAddress } = token;
   const { data: tokenInfo } = useERC20Info(tokenAddress);
+  const { tokens: tokenList } = useTokenList(chain?.id);
 
   const tokenUri = useMemo(() => {
     if (tokenAddress === ZERO_ADDRESS) {
       return `${window.location.origin}${getChainIcon(chain?.id)}`;
     } else {
-      const tokenData = tokenList?.tokens?.find(token => {
+      const tokenData = tokenList?.find(token => {
         if (token?.address === tokenAddress) return true;
         return false;
       });
       return tokenData?.logoURI;
     }
-  }, [chain?.id, tokenAddress]);
+  }, [chain?.id, tokenAddress, tokenList]);
 
   const tokenSymbol = useMemo(() => {
     return tokenInfo?.symbol ?? getNetworkById(chain?.id).nativeAsset.symbol;
@@ -126,11 +131,7 @@ const AssetPermissions = ({ tokenPermissions }: IAssetPermissions) => {
   const { t } = useTranslation();
 
   const parsedPermissions = useMemo(() => {
-    interface IPermissions {
-      [key: string]: ITokenPermission;
-    }
-
-    const result: IPermissions = {};
+    const result: IParsedPermissions = {};
 
     tokenPermissions?.data?.forEach(token => {
       const tokenAddress = token.to;

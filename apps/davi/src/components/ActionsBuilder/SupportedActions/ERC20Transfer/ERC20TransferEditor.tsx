@@ -8,6 +8,7 @@ import { TokenAmountInput } from 'components/primitives/Forms/TokenAmountInput';
 import { Box } from 'components/primitives/Layout/Box';
 import { BigNumber, utils } from 'ethers';
 import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
+import { TokenInfoWithType } from 'types/types';
 import { useMemo, useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import styled from 'styled-components';
@@ -25,7 +26,6 @@ import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { SupportedAction } from 'components/ActionsBuilder/types';
 import ERC20 from 'contracts/ERC20.json';
 import { AddressInput } from 'components/primitives/Forms/AddressInput';
-import { TokenInfoWithType } from 'types/types';
 
 const Error = styled(ErrorLabel)`
   margin-top: 0.5rem;

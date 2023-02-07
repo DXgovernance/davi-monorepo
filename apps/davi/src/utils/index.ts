@@ -19,4 +19,3 @@ export * from './validations';
 export * from './strings';
 export * from './object';
 export * from './url';
-export * from './tokenList';

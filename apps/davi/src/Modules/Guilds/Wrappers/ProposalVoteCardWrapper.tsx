@@ -1,4 +1,3 @@
-import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import useTimedRerender from 'hooks/Guilds/time/useTimedRerender';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
@@ -6,12 +5,20 @@ import { ProposalVoteCard } from 'components/ProposalVoteCard';
 import { useAccount } from 'wagmi';
 import useGuildImplementationTypeConfig from '../Hooks/useGuildImplementationType';
 import { useHookStoreProvider } from 'stores';
+import { Proposal, ProposalMetadata } from 'types/types.guilds.d';
 
-const ProposalVoteCardWrapper = () => {
+interface IProposalVoteCardWrapper {
+  proposal: Proposal;
+  proposalMetadata: ProposalMetadata;
+}
+
+const ProposalVoteCardWrapper = ({
+  proposal,
+  proposalMetadata,
+}: IProposalVoteCardWrapper) => {
   const {
     hooks: {
       fetchers: {
-        useProposal,
         useSnapshotId,
         useVotingResults,
         useVotingPowerOf,
@@ -21,8 +28,6 @@ const ProposalVoteCardWrapper = () => {
   } = useHookStoreProvider();
   const { guildId, proposalId } = useTypedParams();
   const { address: userAddress } = useAccount();
-  const { data: proposal } = useProposal(guildId, proposalId);
-  const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
   const voteData = useVotingResults(guildId, proposalId, proposal);
   const { data: userVote } = useProposalVotesOfVoter(
     guildId,

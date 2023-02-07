@@ -18,10 +18,11 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
   shortAddress = false,
   avatarSize = 24,
   disableLink = false,
+  fetchTokenData = true,
 }) => {
   const { chain } = useNetwork();
   const { ensName, imageUrl } = useENSAvatar(address, MAINNET_ID);
-  const { data: erc20Info } = useERC20Info(address);
+  const { data: erc20Info } = useERC20Info(fetchTokenData ? address : null);
   const { tokens } = useTokenList(chain.id);
 
   const detailedTokenData = useMemo(() => {

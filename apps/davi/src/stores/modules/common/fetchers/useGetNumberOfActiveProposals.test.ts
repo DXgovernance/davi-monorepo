@@ -1,4 +1,4 @@
-import { useGetActiveProposals } from './useGetActiveProposals';
+import { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';
 import {
   MOCK_BIG_NUMBER,
   MOCK_GUILD_ADDRESS,
@@ -45,7 +45,7 @@ jest.mock('contexts/Guilds/orbis', () => ({}));
 
 describe('useGuildActiveProposals', () => {
   it('should return active Guild proposals', () => {
-    const { data } = useGetActiveProposals(MOCK_GUILD_ADDRESS);
+    const { data } = useGetNumberOfActiveProposals(MOCK_GUILD_ADDRESS);
     expect(data).toBe(MOCK_BIG_NUMBER);
   });
 });

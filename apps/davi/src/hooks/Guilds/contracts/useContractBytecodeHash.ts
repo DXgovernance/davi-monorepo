@@ -57,8 +57,6 @@ export default function useContractBytecodeHash(
     };
   }, [contractId, provider, chainIdToUse]);
 
-  console.log({ contractId, chainId, isError });
-
   return {
     bytecodeHash: bytecodeHash,
     isLoading: !bytecodeHash && !isError,

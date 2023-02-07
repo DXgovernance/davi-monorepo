@@ -13,7 +13,7 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   proposalId: `0x${string}`,
   userAddress: `0x${string}`
 ) => {
-  const { data, refetch, ...rest } = useContractRead({
+  const { data, refetch, isLoading, isError } = useContractRead({
     enabled: !!daoAddress && !!proposalId && !!userAddress,
     address: daoAddress,
     abi: BaseERC20Guild.abi,
@@ -41,7 +41,7 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
 
   return {
     data: parsedData,
-    refetch,
-    ...rest,
+    isLoading,
+    isError,
   };
 };

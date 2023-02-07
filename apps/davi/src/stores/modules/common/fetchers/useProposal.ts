@@ -84,7 +84,6 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
 
   return {
     data: formattedData,
-    refetch,
     error,
   };
 };

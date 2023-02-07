@@ -17,7 +17,6 @@ type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 export interface FetcherHooksInterface {
   useGetNumberOfActiveProposals: (daoId: string) => {
     data: BigNumber;
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };
@@ -31,7 +30,6 @@ export interface FetcherHooksInterface {
     proposalId: `0x${string}`
   ) => {
     data: Proposal;
-    refetch: () => void;
     error: Error;
   };
   useSnapshotId: (useSnapshotIdProps: {
@@ -55,7 +53,6 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: { option: string; votingPower: BigNumber };
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };
@@ -64,7 +61,6 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: moment.Moment;
-    refetch: () => void;
   };
   useProposalCalls: (
     daoId: string,

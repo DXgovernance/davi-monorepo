@@ -10,15 +10,12 @@ import { useProposalCalls } from 'stores/modules/common/fetchers';
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
-  const { data, refetch, error } = useQuery<getProposalQuery>(
-    getProposalDocument,
-    {
-      variables: {
-        guildId: daoId.toLowerCase(),
-        proposalId: proposalId.toLowerCase(),
-      },
-    }
-  );
+  const { data, error } = useQuery<getProposalQuery>(getProposalDocument, {
+    variables: {
+      guildId: daoId.toLowerCase(),
+      proposalId: proposalId.toLowerCase(),
+    },
+  });
   const proposal = data?.guild?.proposals[0];
 
   const parsedData: Proposal = useMemo(() => {
@@ -71,7 +68,6 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
 
   return {
     data: parsedData,
-    refetch,
     error,
   };
 };

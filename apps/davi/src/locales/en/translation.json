@@ -342,5 +342,6 @@
   },
   "loading": "Loading...",
   "unknownDAO": "Unknown DAO",
-  "unknownDAODetail": "You seem to be visiting an unknown address"
+  "unknownDAODetail": "You seem to be visiting an unknown address",
+  "errorLoadingDAOsList": "Error while loading DAOs list"
 }

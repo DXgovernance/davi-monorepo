@@ -5,6 +5,7 @@ import { GuildCard } from 'components/GuildCard/GuildCard';
 import useENSNameFromAddress from 'hooks/Guilds/ens/useENSNameFromAddress';
 import { CardsContainer } from './LandingPage.styled';
 import { HookStoreProvider, useHookStoreProvider } from 'stores';
+import { Result, ResultState } from 'components/Result';
 
 const GuildCardLoader = () => {
   return (
@@ -68,11 +69,17 @@ const LandingPage: React.FC = () => {
     return <h1>{t('noGuildsRegistered')}</h1>;
   };
 
-  if (!allGuilds || allGuilds.length === 0) {
-    return <EmptyGuilds />;
+  if (error) {
+    return (
+      <Result
+        state={ResultState.ERROR}
+        title={t('errorLoadingDAOsList')}
+        subtitle={error?.message}
+      />
+    );
   }
 
-  if (isLoading) {
+  if (isLoading || !allGuilds) {
     return (
       <CardsContainer>
         <GuildCardLoader />
@@ -80,6 +87,10 @@ const LandingPage: React.FC = () => {
         <GuildCardLoader />
       </CardsContainer>
     );
+  }
+
+  if (allGuilds.length === 0) {
+    return <EmptyGuilds />;
   }
 
   return (
@@ -90,15 +101,12 @@ const LandingPage: React.FC = () => {
         ) : (
           allGuilds.map(guildAddress => (
             <HookStoreProvider
+              key={guildAddress}
               daoId={guildAddress}
               loadingIndicator={<GuildCardLoader />}
               matchErrorIndicator={<GuildCardUnmatched />}
             >
-              <GuildCardWithContent
-                key={guildAddress}
-                guildAddress={guildAddress}
-                t={t}
-              />
+              <GuildCardWithContent guildAddress={guildAddress} t={t} />
             </HookStoreProvider>
           ))
         )}

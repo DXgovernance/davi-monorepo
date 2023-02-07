@@ -5,6 +5,7 @@ export const VoteOption = styled.div`
   background-color: ${({ theme }) => theme.colors.darkGreen1};
   border-radius: 8px;
   padding: 2px 6px;
+  color: ${({ theme }) => theme.colors.grey};
 `;
 
 export const VoteOptionWrapper = styled.div`

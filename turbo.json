@@ -18,10 +18,12 @@
       "dependsOn": ["^dxdao-contracts#compile"]
     },
     "dev-scripts#dev": {
-      "dependsOn": ["dev-scripts#compile"]
+      "dependsOn": ["dev-scripts#compile"],
+      "outputs": ["build/**", "artifacts/**"]
     },
     "dxdao-subgraph#dev": {
       "dependsOn": ["^dev-scripts#compile"]
+     
     },
     "dev": {
       "dependsOn": ["setup", "^dxdao-contracts#compile", "^dev-scripts#compile"]

@@ -2628,6 +2628,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           },
           location: 'GetGuildConfigDocument.graphql',
         },
+        {
+          document: GetProposalDocument,
+          get rawSDL() {
+            return printWithCache(GetProposalDocument);
+          },
+          location: 'GetProposalDocument.graphql',
+        },
       ];
     },
     fetchFn,
@@ -2721,6 +2728,41 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export type getProposalQueryVariables = Exact<{
+  id: Scalars['ID'];
+  proposalId: Scalars['ID'];
+}>;
+
+export type getProposalQuery = {
+  guild?: Maybe<{
+    proposals?: Maybe<
+      Array<
+        Pick<
+          Proposal,
+          | 'contentHash'
+          | 'contractState'
+          | 'creator'
+          | 'data'
+          | 'description'
+          | 'endTime'
+          | 'executionTransactionHash'
+          | 'id'
+          | 'metadata'
+          | 'startTime'
+          | 'title'
+          | 'to'
+          | 'totalVotes'
+          | 'value'
+        > & {
+          options?: Maybe<
+            Array<Pick<Option, 'voteAmount' | 'proposalId' | 'label' | 'id'>>
+          >;
+        }
+      >
+    >;
+  }>;
+};
+
 export const getMemberListDocument = gql`
   query getMemberList($id: ID!) {
     guild(id: $id) {
@@ -2768,6 +2810,34 @@ export const getGuildConfigDocument = gql`
     }
   }
 ` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
+export const getProposalDocument = gql`
+  query getProposal($id: ID!, $proposalId: ID!) {
+    guild(id: $id) {
+      proposals(where: { id: $proposalId }) {
+        contentHash
+        contractState
+        creator
+        data
+        description
+        endTime
+        executionTransactionHash
+        id
+        metadata
+        options {
+          voteAmount
+          proposalId
+          label
+          id
+        }
+        startTime
+        title
+        to
+        totalVotes
+        value
+      }
+    }
+  }
+` as unknown as DocumentNode<getProposalQuery, getProposalQueryVariables>;
 
 export type Requester<C = {}, E = unknown> = <R, V>(
   doc: DocumentNode,
@@ -2808,6 +2878,16 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getGuildConfigQuery>;
+    },
+    getProposal(
+      variables: getProposalQueryVariables,
+      options?: C
+    ): Promise<getProposalQuery> {
+      return requester<getProposalQuery, getProposalQueryVariables>(
+        getProposalDocument,
+        variables,
+        options
+      ) as Promise<getProposalQuery>;
     },
   };
 }

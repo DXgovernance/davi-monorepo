@@ -24,6 +24,7 @@ import {
   useGuildConfig as useGuildConfigFromSubgraph,
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useProposal as useProposalFromSubgraph,
 } from '../subgraph/common';
 import {
   useTotalLocked,
@@ -52,7 +53,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
     hooks: {
       fetchers: {
         default: {
-          useProposal,
+          useProposal: useProposalFromSubgraph,
           useSnapshotId,
           useTotalLocked,
           useDAOToken,

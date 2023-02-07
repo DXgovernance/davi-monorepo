@@ -1,0 +1,27 @@
+query getProposal($id: ID!, $proposalId: ID!) {
+  guild(id: $id) {
+    proposals(where: { id: $proposalId }) {
+      contentHash
+      contractState
+      creator
+      data
+      description
+      endTime
+      executionTransactionHash
+      id
+      metadata
+      options {
+        voteAmount
+        proposalId
+        label
+        id
+      }
+      startTime
+      title
+      to
+      totalVotes
+      value
+    }
+  }
+}
+

@@ -18,7 +18,7 @@
     "updateContracts": "pnpm hardhat compile && node scripts/updateContracts.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "build-graph-client": "graphclient build",
+    "build-graph-client": "graphclient build && rm -r src/.graphclient && mv .graphclient src",
     "pre-commit": "lint-staged"
   },
   "engines": {
@@ -76,7 +76,7 @@
     "cids": "^1.1.9",
     "copy-to-clipboard": "^3.3.1",
     "diff": "^5.1.0",
-    "dxdao-contracts": "*",
+    "dxdao-contracts": "workspace:*",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-cypress": "^2.12.1",
     "ethers": "^5.7.2",
@@ -219,3 +219,4 @@
     ]
   }
 }
+

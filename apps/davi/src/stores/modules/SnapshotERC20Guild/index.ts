@@ -7,9 +7,12 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
-import { useGetAllPermissions as useGetAllPermissionsFromSubgraph } from '../common/fetchers';
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+  useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useGetAllPermissions as useGetAllPermissionsFromSubgraph,
+} from '../subgraph/common';
 
 import {
   useProposal,
@@ -21,9 +24,9 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
-  useGetActiveProposals,
   useGetMemberList,
   useGetAllPermissions,
+  useGetNumberOfActiveProposals,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -65,9 +68,10 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
-          useGetActiveProposals,
           useGetMemberList: useGetMemberListFromSubgraph,
           useGetAllPermissions: useGetAllPermissionsFromSubgraph,
+          useGetNumberOfActiveProposals:
+            useGetNumberOfActiveProposalsFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -83,9 +87,9 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
-          useGetActiveProposals,
           useGetMemberList,
           useGetAllPermissions,
+          useGetNumberOfActiveProposals,
         },
       },
       writers: {

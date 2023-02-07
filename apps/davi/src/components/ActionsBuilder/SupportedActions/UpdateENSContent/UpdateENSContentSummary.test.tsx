@@ -45,6 +45,10 @@ jest.mock('wagmi', () => ({
   },
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 const mockBigNumber = BigNumber.from(100000000);
 
 jest.mock('hooks/Guilds/erc20/useERC20Info', () => ({

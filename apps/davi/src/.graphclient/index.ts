@@ -2643,6 +2643,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           location: 'GetMemberListDocument.graphql',
         },
         {
+          document: GetNumberOfActiveProposalsDocument,
+          get rawSDL() {
+            return printWithCache(GetNumberOfActiveProposalsDocument);
+          },
+          location: 'GetNumberOfActiveProposalsDocument.graphql',
+        },
+        {
           document: GetGuildConfigDocument,
           get rawSDL() {
             return printWithCache(GetGuildConfigDocument);
@@ -2777,6 +2784,18 @@ export type getMemberListQuery = {
   }>;
 };
 
+export type getNumberOfActiveProposalsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getNumberOfActiveProposalsQuery = {
+  guild?: Maybe<
+    Pick<Guild, 'id' | 'name'> & {
+      proposals?: Maybe<Array<Pick<Proposal, 'id'>>>;
+    }
+  >;
+};
+
 export type getGuildConfigQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2873,6 +2892,20 @@ export const getMemberListDocument = gql`
     }
   }
 ` as unknown as DocumentNode<getMemberListQuery, getMemberListQueryVariables>;
+export const getNumberOfActiveProposalsDocument = gql`
+  query getNumberOfActiveProposals($id: ID!) {
+    guild(id: $id) {
+      id
+      name
+      proposals {
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getNumberOfActiveProposalsQuery,
+  getNumberOfActiveProposalsQueryVariables
+>;
 export const getGuildConfigDocument = gql`
   query getGuildConfig($id: ID!) {
     guild(id: $id) {
@@ -2948,6 +2981,19 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getMemberListQuery>;
+    },
+    getNumberOfActiveProposals(
+      variables: getNumberOfActiveProposalsQueryVariables,
+      options?: C
+    ): Promise<getNumberOfActiveProposalsQuery> {
+      return requester<
+        getNumberOfActiveProposalsQuery,
+        getNumberOfActiveProposalsQueryVariables
+      >(
+        getNumberOfActiveProposalsDocument,
+        variables,
+        options
+      ) as Promise<getNumberOfActiveProposalsQuery>;
     },
     getGuildConfig(
       variables: getGuildConfigQueryVariables,

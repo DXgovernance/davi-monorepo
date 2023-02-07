@@ -17,14 +17,16 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
-  useGetActiveProposals,
   useGetMemberList,
   useGetAllPermissions,
+  useGetNumberOfActiveProposals,
 } from '../common/fetchers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
-import { useGetMemberList as useGetMemberListFromSubgraph } from '../subgraph/common/useGetMemberList';
-import { useGetAllPermissions as useGetAllPermissionsFromSubgraph } from '../subgraph/common/useGetAllPermissions';
-
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+  useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useGetAllPermissions as useGetAllPermissionsFromSubgraph,
+} from '../subgraph/common';
 import {
   useTotalLocked,
   useVoterLockTimestamp,
@@ -38,7 +40,6 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotRepERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-
 export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementation> =
   {
     name: 'SnapshotRepGuild',
@@ -66,9 +67,10 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
-          useGetActiveProposals,
           useGetMemberList: useGetMemberListFromSubgraph,
           useGetAllPermissions: useGetAllPermissionsFromSubgraph,
+          useGetNumberOfActiveProposals:
+            useGetNumberOfActiveProposalsFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -84,9 +86,9 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
-          useGetActiveProposals,
           useGetMemberList,
           useGetAllPermissions,
+          useGetNumberOfActiveProposals,
         },
       },
       writers: {

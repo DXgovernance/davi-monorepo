@@ -5,6 +5,7 @@ import { AllProposals } from '../AllProposals';
 import { Governance } from '../Governance';
 import { MembersPage } from '../Members';
 import { PermissionsPage } from '../Permissions';
+import { Treasury } from '../Treasury';
 import { PageContainer, PageContent, SidebarContent } from './Guilds.styled';
 
 interface GuildsPageProps {
@@ -13,7 +14,8 @@ interface GuildsPageProps {
     | 'allProposals'
     | 'allDiscussions'
     | 'members'
-    | 'permissions';
+    | 'permissions'
+    | 'treasury';
 }
 
 const GuildsPage: React.FC<GuildsPageProps> = ({
@@ -34,6 +36,7 @@ const GuildsPage: React.FC<GuildsPageProps> = ({
         )}
         {pageContent === 'members' && <MembersPage />}
         {pageContent === 'permissions' && <PermissionsPage />}
+        {pageContent === 'treasury' && <Treasury />}
       </PageContent>
     </PageContainer>
   );

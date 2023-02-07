@@ -2,13 +2,10 @@ name: Davi Build
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
       - master
-      - develop
-      - release/*
-  pull_request:
-    types: [opened, synchronize, reopened]
+
 
 jobs:
   build:

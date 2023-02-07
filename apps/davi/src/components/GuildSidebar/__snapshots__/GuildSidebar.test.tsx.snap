@@ -317,6 +317,16 @@ exports[`GuildSidebar Should render with data 1`] = `
           permissions.permissions
         </div>
       </a>
+      <a
+        class="c13"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/treasury"
+      >
+        <div
+          class="c14"
+        >
+          treasury
+        </div>
+      </a>
     </div>
   </div>
    
@@ -617,6 +627,16 @@ exports[`GuildSidebar Should render without data 1`] = `
           class="c12"
         >
           permissions.permissions
+        </div>
+      </a>
+      <a
+        class="c11"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/treasury"
+      >
+        <div
+          class="c12"
+        >
+          treasury
         </div>
       </a>
     </div>

@@ -13,12 +13,13 @@ interface GovernanceCapabilities {
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
-
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
-  useGetActiveProposals: (daoId: string) => {
+  useGetNumberOfActiveProposals: (daoId: string) => {
     data: BigNumber;
     refetch: () => void;
+    isError: boolean;
+    isLoading: boolean;
   };
   useGetMemberList: (daoId: string) => {
     data: { id: string; address: `0x${string}`; tokensLocked: BigNumber }[];
@@ -183,6 +184,7 @@ export interface FullGovernanceImplementation {
 export interface GovernanceTypeInterface
   extends Omit<FullGovernanceImplementation, 'hooks'> {
   hooks: HooksInterfaceWithoutFallback;
+  dataSource: 'primary' | 'secondary' | null;
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {

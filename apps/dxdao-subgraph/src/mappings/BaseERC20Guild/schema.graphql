@@ -13,6 +13,7 @@ type Proposal @entity {
   totalVotes: [BigInt!]
   votes: [Vote!]
   options: [Option!]
+  snapshotId: BigInt
   # TODO: use correct metadata type (ProposalMetadata)
   metadata: String
   description: String

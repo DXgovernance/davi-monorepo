@@ -27,7 +27,9 @@ const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
   return (
     <SidebarCard
       header={
-        <SidebarCardHeaderSpaced>{t('proposal.information')}</SidebarCardHeaderSpaced>
+        <SidebarCardHeaderSpaced>
+          {t('proposal.information')}
+        </SidebarCardHeaderSpaced>
       }
     >
       <SidebarCardContent>

@@ -14,8 +14,11 @@
       "dependsOn": ["clean"],
       "outputs": ["artifacts/**"]
     },
+    "dxdao-contracts#setup": {
+      "outputs": ["types/**"]
+    },
     "dev-scripts#compile": {
-      "dependsOn": ["^dxdao-contracts#compile"]
+      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"]
     },
     "dev-scripts#dev": {
       "dependsOn": ["dev-scripts#compile"],

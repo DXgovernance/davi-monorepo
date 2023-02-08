@@ -14,7 +14,7 @@ export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
   if (error) {
     return (
       <ProposalDescriptionWrapper>
-        {t('errorMessage.proposalDescriptionError')}
+        {t('proposal.errors.proposalDescriptionError')}
       </ProposalDescriptionWrapper>
     );
   }

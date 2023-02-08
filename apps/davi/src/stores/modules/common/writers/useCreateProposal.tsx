@@ -70,7 +70,7 @@ export const useCreateProposal: IUseCreateProposal = (
         const results = await Promise.all([pinataPin, web3storagePin]);
         // TODO: Loop through array looking for at least two matching hashes when we have >2 pinning services
         if (results[0] !== results[1]) {
-          console.warn(t('ipfs.hashNotTheSame'), results);
+          console.warn(t('actionBuilder.ens.ipfs.hashNotTheSame'), results);
         }
         return `ipfs://${results[0]}`;
       };
@@ -92,7 +92,7 @@ export const useCreateProposal: IUseCreateProposal = (
       }
 
       createTransaction(
-        `${t('createProposal')} ${title}`,
+        `${t('createProposal.createProposal')} ${title}`,
         async () => {
           return daoContract.createProposal(
             toArray,

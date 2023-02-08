@@ -54,7 +54,7 @@ const ProposalTypes: React.FC<ProposalTypesProps> = ({ data }) => {
           <Header onClick={() => navigate(`/${chain}/${guildId}`)}>
             <HeaderWrap>
               <StyledIcon src={FiArrowLeft} />
-              {t('backToOverview')}
+              {t('proposal.backToOverview')}
             </HeaderWrap>
             <StyledIcon src={CloseIcon} />
           </Header>
@@ -65,13 +65,13 @@ const ProposalTypes: React.FC<ProposalTypesProps> = ({ data }) => {
               onClick={() => navigate(`/${chain}/${guildId}`)}
             >
               <StyledIcon margin="0 10px 0 0" src={AiOutlineArrowLeft} />
-              {t('backToOverview')}
+              {t('proposal.backToOverview')}
             </Button>
           </Header>
         )}
         <ContentWrapper>
           <TitleWrapper>
-            <Heading size={2}>{t('createProposal')}</Heading>
+            <Heading size={2}>{t('createPropsoal.createProposal')}</Heading>
           </TitleWrapper>
           <Container>
             <PaddingWrapper data-testid="proposal-types-list">

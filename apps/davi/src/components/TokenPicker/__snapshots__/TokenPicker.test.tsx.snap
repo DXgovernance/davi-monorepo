@@ -294,7 +294,7 @@ exports[`TokenPicker Should match snapshot 1`] = `
               class="c4 c5"
               data-testid="modal-title"
             >
-              selectAToken
+              tokenPicker.selectAToken
             </h2>
             <svg
               class="c6"
@@ -363,7 +363,7 @@ exports[`TokenPicker Should match snapshot 1`] = `
                   </div>
                   <input
                     class="c12"
-                    placeholder="searchToken"
+                    placeholder="tokenPicker.searchToken"
                     value=""
                   />
                   <div

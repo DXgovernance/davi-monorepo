@@ -169,14 +169,14 @@ export const ActionRow: React.FC<ActionViewProps> = ({
             <EditButtonWithMargin
               onClick={() => setIsEditActionModalOpen(true)}
             >
-              {t('edit')}
+              {t('actionBuilder.action.edit')}
             </EditButtonWithMargin>
           )}
           {onRemove && (
             <EditButtonWithMargin
               onClick={() => setConfirmRemoveActionModalIsOpen(v => !v)}
             >
-              {t('remove')}
+              {t('ractionBuilder.action.remove')}
             </EditButtonWithMargin>
           )}
           <ChevronIcon onClick={() => setExpanded(!expanded)}>

@@ -91,14 +91,16 @@ export const OptionRow: React.FC<OptionRowProps> = ({
           </Detail>
           <Detail>
             <DataTag>
-              {t('onChainActions', { count: option?.decodedActions?.length })}
+              {t('actionBuilder.action.onChainActions', {
+                count: option?.decodedActions?.length,
+              })}
             </DataTag>
           </Detail>
         </div>
         {isEditable && (
           <div>
             <EditButton onClick={() => editOption(option)}>
-              {t('edit')}
+              {t('actionBuilder.action.edit')}
             </EditButton>
           </div>
         )}
@@ -142,7 +144,7 @@ export const OptionRow: React.FC<OptionRowProps> = ({
 
         {isEditable && (
           <AddButton
-            label={t('addAction')}
+            label={t('actionBuilder.action.addAction')}
             onClick={() => setIsActionsModalOpen(true)}
           />
         )}

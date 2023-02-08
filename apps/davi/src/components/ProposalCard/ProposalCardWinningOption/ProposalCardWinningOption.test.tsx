@@ -89,7 +89,9 @@ describe('ProposalCardWinningOption', () => {
     );
 
     const numberOfActions = await findByText('2');
-    const actionsString = await findByText('actions_other');
+    const actionsString = await findByText(
+      'actionBuilder.action.actions_other'
+    );
 
     expect(numberOfActions).toBeInTheDocument();
     expect(actionsString).toBeInTheDocument();

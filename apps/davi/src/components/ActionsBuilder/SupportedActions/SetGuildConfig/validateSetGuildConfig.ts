@@ -36,35 +36,45 @@ const validateSetGuildConfig = (
     minimumTokensLockedForProposalCreation: null,
   };
   if (bn(proposalTime).toNumber() <= 0) {
-    errors.proposalTime = t('proposalTimeHasToBeMoreThanZero');
+    errors.proposalTime = t(
+      'actionBuilder.config.proposalTimeHasToBeMoreThanZero'
+    );
   }
 
   if (bn(lockTime).lt(bn(proposalTime))) {
     if (!bn(lockTime).eq(currentGuildConfig.lockTime)) {
-      errors.lockTime = t('lockTimeHasToBeHigherOrEqualToProposalTime');
+      errors.lockTime = t(
+        'actionBuilder.config.lockTimeHasToBeHigherOrEqualToProposalTime'
+      );
     }
     if (!bn(proposalTime).eq(currentGuildConfig.proposalTime)) {
-      errors.proposalTime = t('proposalTimeHasToBeLowerOrEqualToLockTime');
+      errors.proposalTime = t(
+        'actionBuilder.config.proposalTimeHasToBeLowerOrEqualToLockTime'
+      );
     }
   }
 
   if (bn(votingPowerPercentageForProposalExecution).lte(bn(0))) {
     errors.votingPowerPercentageForProposalExecution = t(
-      'votingPowerPercentageForProposalExecutionHasToBeMoreThanZero'
+      'actionBuilder.config.votingPowerPercentageForProposalExecutionHasToBeMoreThanZero'
     );
   }
 
   if (bn(voteGas).gte(117001)) {
-    errors.voteGas = t('voteGasHasToBeEqualOrLowerThan117000');
+    errors.voteGas = t(
+      'actionBuilder.config.voteGasHasToBeEqualOrLowerThan117000'
+    );
   }
 
   if (bn(votingPowerPercentageForProposalExecution).gt(100)) {
     errors.votingPowerPercentageForProposalExecution = t(
-      'cantBeGreaterThan100'
+      'inputValidation.cantBeGreaterThan100'
     );
   }
   if (bn(votingPowerPercentageForProposalCreation).gt(100)) {
-    errors.votingPowerPercentageForProposalCreation = t('cantBeGreaterThan100');
+    errors.votingPowerPercentageForProposalCreation = t(
+      'inputValidation.cantBeGreaterThan100'
+    );
   }
 
   return {

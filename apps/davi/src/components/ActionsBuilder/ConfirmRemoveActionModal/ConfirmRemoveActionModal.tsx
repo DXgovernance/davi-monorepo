@@ -27,19 +27,27 @@ const ConfirmRemoveActionModal: React.FC<ConfirmRemoveActionModalProps> = ({
     <Modal
       isOpen={isOpen}
       onDismiss={onDismiss}
-      header={t('confirmRemoval')}
+      header={t('actionBuilder.action.confirmRemoval')}
       leftIcon={false}
       maxWidth={380}
     >
       <Container>
         <TextContainer>
-          <Title>{t('areYuoSureYouWantToRemoveAction')}</Title>
-          <InfoItem>{t('theRemovalCannotBeReverted')}</InfoItem>
+          <Title>
+            {t('actionBuilder.action.areYuoSureYouWantToRemoveAction')}
+          </Title>
+          <InfoItem>
+            {t('actionBuilder.action.theRemovalCannotBeReverted')}
+          </InfoItem>
         </TextContainer>
 
         <ActionWrapper>
-          <CancelButton onClick={onDismiss}>{t('cancel')}</CancelButton>
-          <ConfirmButton onClick={onConfirm}>{t('removeAction')}</ConfirmButton>
+          <CancelButton onClick={onDismiss}>
+            {t('actionBuilder.modal.cancel')}
+          </CancelButton>
+          <ConfirmButton onClick={onConfirm}>
+            {t('actionBuilder.action.removeAction')}
+          </ConfirmButton>
         </ActionWrapper>
       </Container>
     </Modal>

@@ -136,7 +136,7 @@ exports[`StakeTokensModal StakeTokensModal renders properly 1`] = `
               class="c4 c5"
               data-testid="modal-title"
             >
-              stakeTokens
+              members.locking.stakeTokens
             </h2>
             <svg
               class="c6"

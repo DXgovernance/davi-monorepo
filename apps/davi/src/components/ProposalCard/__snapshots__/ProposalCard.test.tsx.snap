@@ -1371,7 +1371,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
                 2
               </div>
                
-              actions_other
+              actionBuilder.action.actions_other
             </div>
           </button>
         </div>

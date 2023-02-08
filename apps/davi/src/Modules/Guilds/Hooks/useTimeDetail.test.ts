@@ -28,7 +28,7 @@ describe('useTimeDetail', () => {
       ProposalState.Executable,
       dateAfterCurrent
     );
-    expect(endTime.detail).toBe('expiresInTimeDetail');
+    expect(endTime.detail).toBe('proposal.time.expiresInTimeDetail');
   });
 
   it('should return expiredTimeAgo ago when state is Executable and end time is before current moment', () => {
@@ -39,7 +39,7 @@ describe('useTimeDetail', () => {
       ProposalState.Executable,
       dateBeforeCurrent
     );
-    expect(endTime.detail).toBe('expiredTimeAgo');
+    expect(endTime.detail).toBe('proposal.time.expiredTimeAgo');
   });
 
   it('should return expiresInTimeDetail when state is Failed and end time is after current moment', () => {
@@ -50,7 +50,7 @@ describe('useTimeDetail', () => {
       ProposalState.Failed,
       dateAfterCurrent
     );
-    expect(endTime.detail).toBe('expiresInTimeDetail');
+    expect(endTime.detail).toBe('proposal.time.expiresInTimeDetail');
   });
 
   it('should return expiredTimeAgo when state is Failed and end time is before current moment', () => {
@@ -61,7 +61,7 @@ describe('useTimeDetail', () => {
       ProposalState.Failed,
       dateBeforeCurrent
     );
-    expect(endTime.detail).toBe('expiredTimeAgo');
+    expect(endTime.detail).toBe('proposal.time.expiredTimeAgo');
   });
 
   it('should return endingTimeLeft left when state is not Executable nor Failed and end time is after current moment', () => {
@@ -72,7 +72,7 @@ describe('useTimeDetail', () => {
       ProposalState.Active,
       dateAfterCurrent
     );
-    expect(endTime.detail).toBe('endingTimeLeft');
+    expect(endTime.detail).toBe('proposal.time.endingTimeLeft');
   });
 
   it('should return endedTimeAgo when state is not Executable nor Failed and end time is before current moment', () => {
@@ -83,6 +83,6 @@ describe('useTimeDetail', () => {
       ProposalState.Executed,
       dateBeforeCurrent
     );
-    expect(endTime.detail).toBe('endedTimeAgo');
+    expect(endTime.detail).toBe('proposal.time.endedTimeAgo');
   });
 });

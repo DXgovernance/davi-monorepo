@@ -572,7 +572,7 @@ exports[`SetGuildConfigEditor Should match snapshot 1`] = `
       class="c10"
       type="submit"
     >
-      saveAction
+      actionBuilder.action.saveAction
     </button>
   </form>
    

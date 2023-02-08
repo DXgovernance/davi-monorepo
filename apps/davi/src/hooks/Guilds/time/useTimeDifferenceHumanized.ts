@@ -25,7 +25,7 @@ const useTimeDifferenceHumanized = (
   const levels: { value: number; name: string }[] = [
     {
       value: Math.floor(timeDifferenceInMilliSecs / YEAR_IN_MILLIS),
-      name: t('duration.years_other'),
+      name: t('duration.duration.years_other'),
     },
     {
       value: Math.floor(

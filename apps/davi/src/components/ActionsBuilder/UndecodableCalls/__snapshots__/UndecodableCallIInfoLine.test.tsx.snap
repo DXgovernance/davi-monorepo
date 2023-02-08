@@ -76,7 +76,7 @@ exports[`UndecodableCallInfoLine Should match snapshot 1`] = `
       <span
         class="c0"
       >
-        unknownAction
+        actionBuilder.action.unknownAction
       </span>
        + 
       1.0

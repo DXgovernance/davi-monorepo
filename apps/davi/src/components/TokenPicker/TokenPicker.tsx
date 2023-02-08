@@ -66,7 +66,7 @@ const TokenPicker: React.FC<TokenPickerProps> = ({
 
   return (
     <Modal
-      header={t('selectAToken')}
+      header={t('tokenPicker.selectAToken')}
       isOpen={isOpen}
       onDismiss={onClose}
       maxWidth={390}
@@ -75,7 +75,7 @@ const TokenPicker: React.FC<TokenPickerProps> = ({
         <SearchWrapper>
           <Input
             icon={<FiSearch />}
-            placeholder={t('searchToken')}
+            placeholder={t('tokenPicker.searchToken')}
             value={searchQuery}
             onChange={e => setSearchQuery(e?.target?.value)}
           />

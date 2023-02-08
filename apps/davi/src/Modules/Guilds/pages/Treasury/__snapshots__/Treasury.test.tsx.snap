@@ -78,7 +78,7 @@ exports[`Treasury Page Should render without data 1`] = `
       class="c2 c3"
       size="1"
     >
-      treasury
+      treasury.treasury
     </h2>
     <div
       class="c4 c5"
@@ -93,12 +93,12 @@ exports[`Treasury Page Should render without data 1`] = `
           <th
             class="c8"
           >
-            asset
+            treasury.asset
           </th>
           <th
             class="c9"
           >
-             tokenAmount
+             treasury.tokenAmount
           </th>
         </tr>
       </thead>

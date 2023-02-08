@@ -49,7 +49,7 @@ const LandingPage: React.FC = () => {
   const { data: allGuilds, error, isLoading } = useGuildRegistry();
 
   const EmptyGuilds = () => {
-    return <h1>{t('noGuildsRegistered')}</h1>;
+    return <h1>{t('daoErrors.noDAOsRegistered')}</h1>;
   };
 
   if (!allGuilds || allGuilds.length === 0) {

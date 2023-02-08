@@ -122,7 +122,6 @@
     "react-switch": "^7.0.0",
     "react-toastify": "^8.1.0",
     "react-virtuoso": "^2.16.5",
-    "sanitize-html": "^2.6.1",
     "styled-components": "^5.3.5",
     "swr": "^1.1.2",
     "ts-generator": "^0.1.1",

@@ -130,7 +130,7 @@ const Members = () => {
         <Box margin={'0px 0px 20px 0px'}>
           <Input
             icon={<FiSearch />}
-            placeholder={t('searchMemberOrAddress')}
+            placeholder={t('members.searchMemberOrAddress')}
             value={searchQuery}
             onChange={e => setSearchQuery(e?.target?.value)}
             data-testid={'search'}
@@ -138,12 +138,12 @@ const Members = () => {
         </Box>
       )}
       <MainContainer>
-        <Heading size={2}>{t('members')}</Heading>
+        <Heading size={2}>{t('members.members')}</Heading>
         <StyledDivider />
 
         {dataState === 'error' && (
           <Box margin={'20px 0px'} data-testid={'error-message'}>
-            {t('membersNotAvailable')}.
+            {t('members.membersNotAvailable')}.
           </Box>
         )}
 
@@ -155,7 +155,7 @@ const Members = () => {
 
         {dataState === 'noMembers' && (
           <Box margin={'20px 0px'} data-testid={'no-members-message'}>
-            {t('noMembers')}.
+            {t('members.noMembers')}.
           </Box>
         )}
 
@@ -163,13 +163,15 @@ const Members = () => {
           <Table data-testid={'members-table'}>
             <TableHead>
               <tr>
-                <TableHeader alignment={'left'}>{t('member')}</TableHeader>
-                <TableHeader alignment={'right'}>
-                  {guildToken?.symbol ?? ''}
-                  {` ${t('amount')}`}
+                <TableHeader alignment={'left'}>
+                  {t('members.member')}
                 </TableHeader>
                 <TableHeader alignment={'right'}>
-                  {t('votingPower')}
+                  {guildToken?.symbol ?? ''}
+                  {` ${t('actionBuilder.inputs.amount')}`}
+                </TableHeader>
+                <TableHeader alignment={'right'}>
+                  {t('voting.votingPower')}
                 </TableHeader>
               </tr>
             </TableHead>

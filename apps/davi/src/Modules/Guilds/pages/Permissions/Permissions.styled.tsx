@@ -62,6 +62,9 @@ export const TableHeader = styled.th<{
   padding-bottom: 12px;
   font-weight: 400;
   text-align: ${({ alignment }) => (alignment ? alignment : 'center')};
+  text-align: ${({ alignment }) =>
+    `-webkit-${alignment}` ?? '-webkit-center'}; // fix for safari
+
   font-size: ${({ theme }) => theme.fontSizes.label};
   color: ${({ theme }) => theme.colors.grey};
 `;
@@ -74,6 +77,8 @@ export const TableCell = styled.td<{
   padding: 12px 0px;
   font-weight: 400;
   text-align: ${({ alignment }) => alignment ?? 'center'};
+  text-align: ${({ alignment }) =>
+    `-webkit-${alignment}` ?? '-webkit-center'}; // fix for safari
   width: ${({ width }) => width ?? 'auto'};
 `;
 

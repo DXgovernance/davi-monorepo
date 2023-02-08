@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
 import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
-import { Proposal } from 'types/types.guilds.d';
+import { Proposal, Vote } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -101,14 +101,10 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
   };
   useGetVotes: (
-    guildId: `0x${string}`,
+    daoId: string,
     proposal: Proposal
   ) => {
-    data: {
-      optionLabel: string;
-      voter: string;
-      votingPower: number;
-    }[];
+    data: Vote[];
     isError: boolean;
     isLoading: boolean;
   };

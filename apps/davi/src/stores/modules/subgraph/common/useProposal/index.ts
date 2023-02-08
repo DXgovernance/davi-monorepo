@@ -6,13 +6,14 @@ import { getProposalDocument, getProposalQuery } from '.graphclient';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/common/fetchers';
+import { useGetVotes } from '../useGetVotes';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
   const { data, error } = useQuery<getProposalQuery>(getProposalDocument, {
     variables: {
-      guildId: daoId.toLowerCase(),
+      id: daoId.toLowerCase(),
       proposalId: proposalId.toLowerCase(),
     },
   });
@@ -58,13 +59,18 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       contractState: mappedContractState,
       totalVotes: totalVotesBN,
       options: null,
+      votes: null,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
     };
   }, [proposal]);
 
   const { options } = useProposalCalls(daoId, proposalId, parsedData);
+  const { data: votes } = useGetVotes(daoId, parsedData);
 
-  if (parsedData && options) parsedData.options = options;
+  if (parsedData) {
+    if (options) parsedData.options = options;
+    if (votes) parsedData.votes = votes;
+  }
 
   return {
     data: parsedData,

@@ -22,13 +22,13 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { data, refetch, loading, error } = useQuery<getVotesQuery>(
     getVotesDocument,
     {
-      variables: { id: proposal.id },
+      variables: { id: proposal?.id },
     }
   );
 
-  const { data: totalLocked } = useTotalLocked(guildId, proposal.id);
+  const { data: totalLocked } = useTotalLocked(guildId, proposal?.id);
   // TODO: proposal metadata could be removed from this hook if we get the optionLabel from subgraph in the votes.
-  const { data: proposalMetadata } = useProposalMetadata(guildId, proposal.id);
+  const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
   const { t } = useTranslation();
 
   const parsedData = useMemo(() => {
@@ -47,7 +47,9 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
     });
   }, [data?.proposal?.votes, proposalMetadata?.voteOptions, t, totalLocked]);
 
-  useListenToVoteAdded(guildId, refetch, proposal.id);
+  useListenToVoteAdded(guildId, refetch, proposal?.id);
+
+  console.log(parsedData);
 
   return {
     data: parsedData,

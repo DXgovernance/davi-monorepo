@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { useHookStoreProvider } from 'stores';
 import {
   SidebarCard,
   SidebarCardContent,
@@ -11,20 +10,12 @@ import { VoteRow } from './components';
 import { ProposalVotesCardProps } from './types';
 import { VotesAmount, VotesAmountWrapper } from './ProposalVotesCard.styled';
 
-const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
-  guildId,
-  proposal,
-}) => {
+const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({ proposal }) => {
   const { t } = useTranslation();
-  const {
-    hooks: {
-      fetchers: { useGetVotes },
-    },
-  } = useHookStoreProvider();
 
-  const votes = useGetVotes(guildId, proposal);
+  const votes = proposal?.votes;
 
-  if (!votes.data) return null;
+  if (!votes) return null;
 
   return (
     <SidebarCard
@@ -33,7 +24,7 @@ const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
           <SidebarCardHeaderSpaced>
             {t('votes')}
             <VotesAmountWrapper>
-              <VotesAmount>{votes?.data?.length}</VotesAmount>
+              <VotesAmount>{votes?.length}</VotesAmount>
             </VotesAmountWrapper>
           </SidebarCardHeaderSpaced>
         </>
@@ -41,7 +32,7 @@ const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({
     >
       <SidebarCardContentWrapper>
         <SidebarCardContent>
-          {votes?.data?.map(vote => (
+          {votes?.map(vote => (
             <VoteRow {...vote} />
           ))}
         </SidebarCardContent>

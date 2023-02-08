@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BigNumber } from 'ethers';
 import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
 import { getProposalDocument, getProposalQuery } from '.graphclient';
+import { useHookStoreProvider } from 'stores';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/common/fetchers';
-import { useHookStoreProvider } from 'stores';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
-import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
-import { useTranslation } from 'react-i18next';
 import { getOptionLabel } from 'utils/guildsProposals';
+import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 

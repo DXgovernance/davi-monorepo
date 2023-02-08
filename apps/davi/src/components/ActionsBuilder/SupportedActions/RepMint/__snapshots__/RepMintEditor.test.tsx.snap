@@ -246,7 +246,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
       <div
         class="c0 c2"
       >
-        repMint.recipient
+        actionBuilder.repMint.recipient
         <span
           class="c3"
         >
@@ -275,7 +275,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
             class="c8"
             data-testid="address input"
             name="recipient-address"
-            placeholder="ethereumAddress"
+            placeholder="actionBuilder.inputs.ethereumAddress"
             value=""
           />
           <div
@@ -293,7 +293,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
         <div
           class="c0 c2"
         >
-          repMint.repPercent
+          actionBuilder.repMint.repPercent
           <span
             class="c3"
           >
@@ -396,7 +396,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
       class="c12"
       type="submit"
     >
-      saveAction
+      actionBuilder.action.saveAction
     </button>
   </form>
    

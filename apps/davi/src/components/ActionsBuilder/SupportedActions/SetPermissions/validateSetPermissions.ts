@@ -31,9 +31,9 @@ const validateAssetTransferPermission = (
   };
   if (activeTab === TABS.ASSET_TRANSFER) {
     if (!tokenAddress || tokenAddress === ZERO_ADDRESS) {
-      errors.tokenAddress = t('tokenAddressIsRequired');
+      errors.tokenAddress = t('inputValidation.tokenAddressIsRequired');
     } else if (!utils.isAddress(tokenAddress)) {
-      errors.tokenAddress = t('invalidTokenAddress');
+      errors.tokenAddress = t('inputValidation.invalidTokenAddress');
     }
   }
 
@@ -44,9 +44,9 @@ const validateAssetTransferPermission = (
           functionName.substring(0, 2) !== '0x' &&
           functionName.length !== 10
         ) {
-          errors.functionName = t('invalidFunctionName');
+          errors.functionName = t('inputValidation.invalidFunctionName');
         } else {
-          errors.functionName = t('encodedSignatureIsInvalid');
+          errors.functionName = t('inputValidation.encodedSignatureIsInvalid');
         }
       }
     }
@@ -54,16 +54,16 @@ const validateAssetTransferPermission = (
 
   if (activeTab === TABS.FUNCTION_CALL) {
     if (!utils.isAddress(toAddress)) {
-      errors.toAddress = t('invalidAddress');
+      errors.toAddress = t('inputValidation.invalidAddress');
     }
     if (!toAddress) {
-      errors.toAddress = t('addressIsRequired');
+      errors.toAddress = t('inputValidation.addressIsRequired');
     }
   }
 
   if (activeTab === TABS.FUNCTION_CALL) {
     if (!amount || !BigNumber.isBigNumber(amount)) {
-      errors.amount = t('amountIsRequired');
+      errors.amount = t('inputValidation.amountIsRequired');
     }
   }
 

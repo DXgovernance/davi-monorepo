@@ -17,8 +17,10 @@ export const OnlineStatus: React.FunctionComponent<{
     <OnlineStatusWrapper data-testid="offline-wrapper">
       <Flex>
         <RiWifiOffLine size={60} />
-        <Title>{t('youAreNotOnline')}</Title>
-        <SubTitle>{t('pleaseCheckYourInternetConnection')}</SubTitle>
+        <Title>{t('offlinePage.youAreNotOnline')}</Title>
+        <SubTitle>
+          {t('offlinePage.pleaseCheckYourInternetConnection')}
+        </SubTitle>
       </Flex>
     </OnlineStatusWrapper>
   );

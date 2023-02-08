@@ -20,7 +20,7 @@ const BalanceWidgetWrapper = ({
   return (
     <BalanceWidget>
       <InfoRow>
-        <InfoLabel>{t('balance')}:</InfoLabel>
+        <InfoLabel>{t('voting.locking.balance')}:</InfoLabel>
         <InfoValue>
           {token?.balance && token?.info ? (
             roundedBalance
@@ -43,7 +43,7 @@ const BalanceWidgetWrapper = ({
           data-testid="stake-amount-max-button"
           onClick={() => setStakeAmount(token?.balance)}
         >
-          {t('max')}
+          {t('voting.locking.max')}
         </Button>
       </InfoRow>
     </BalanceWidget>

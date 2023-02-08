@@ -27,7 +27,7 @@ const NetworkModal: React.FC<NetworkModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <Modal
-      header={<div>{t('switchNetwork')}</div>}
+      header={<div>{t('connections.switchNetwork')}</div>}
       isOpen={isOpen}
       onDismiss={onClose}
       maxWidth={380}

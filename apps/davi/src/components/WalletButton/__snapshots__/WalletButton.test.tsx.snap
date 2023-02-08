@@ -50,7 +50,7 @@ exports[`WalletButton Should match snapshot and display connect wallet 1`] = `
     class="c0"
     data-testid="connect-wallet-btn"
   >
-    connectWallet
+    connections.connectWallet
   </button>
    
 </div>

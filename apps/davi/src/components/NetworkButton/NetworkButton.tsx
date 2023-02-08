@@ -18,7 +18,9 @@ const NetworkButton = () => {
   function getNetworkStatus() {
     if (isConnected && chain?.unsupported) {
       return (
-        <Button onClick={toggleNetworkModal}>{t('unsupportedNetwork')}</Button>
+        <Button onClick={toggleNetworkModal}>
+          {t('connections.unsupportedNetwork')}
+        </Button>
       );
     } else if (isConnected) {
       return (
@@ -32,7 +34,11 @@ const NetworkButton = () => {
         </IconButton>
       );
     } else {
-      return <Button onClick={toggleNetworkModal}>{t('notConnected')}</Button>;
+      return (
+        <Button onClick={toggleNetworkModal}>
+          {t('connections.notConnected')}
+        </Button>
+      );
     }
   }
 

@@ -16,6 +16,6 @@ export const getOptionLabel = ({ metadata, optionKey, t }) => {
   return metadataLabel
     ? metadataLabel
     : Number(optionKey) === 0
-    ? t('against', { defaultValue: 'Against' })
-    : t('option', { optionKey });
+    ? t('actionBuilder.options.against', { defaultValue: 'Against' })
+    : t('actionBuilder.options.option', { optionKey });
 };

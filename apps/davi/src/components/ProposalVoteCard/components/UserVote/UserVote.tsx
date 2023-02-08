@@ -24,8 +24,10 @@ const UserVote: React.FC<UserVoteProps> = ({
 
   return userVote.option ? (
     <Container>
-      {t('youVotedForOption', { optionLabel: votedOptionLabel })} {t('with')}{' '}
-      {isPercent ? `${votingPowerPercent}%` : voting}
+      {t('voting.youVotedForOption', {
+        optionLabel: votedOptionLabel,
+        amount: isPercent ? `${votingPowerPercent}%` : voting,
+      })}
     </Container>
   ) : null;
 };

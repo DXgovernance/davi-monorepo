@@ -38,14 +38,18 @@ describe('ENS update validations', () => {
         const name = 'test..eth';
         const { isValid, validationError } = isEnsName(name);
         expect(isValid).toEqual(false);
-        expect(validationError).toBe('ens.validation.domainNameInvalidLength');
+        expect(validationError).toBe(
+          'actionBuilder.ens.validation.domainNameInvalidLength'
+        );
       });
 
       it(`should return an error if the domain starts with a dot`, () => {
         const name = '.test.eth';
         const { isValid, validationError } = isEnsName(name);
         expect(isValid).toEqual(false);
-        expect(validationError).toBe('ens.validation.domainNameInvalidLength');
+        expect(validationError).toBe(
+          'actionBuilder.ens.validation.domainNameInvalidLength'
+        );
       });
 
       it(`should return an error if the domain has spaces`, () => {
@@ -53,7 +57,7 @@ describe('ENS update validations', () => {
         const { isValid, validationError } = isEnsName(name);
         expect(isValid).toEqual(false);
         expect(validationError).toBe(
-          'ens.validation.domainNameCannotIncludeSpaces'
+          'actionBuilder.ens.validation.domainNameCannotIncludeSpaces'
         );
       });
 
@@ -62,7 +66,7 @@ describe('ENS update validations', () => {
         const { isValid, validationError } = isEnsName(name);
         expect(isValid).toEqual(false);
         expect(validationError).toBe(
-          'ens.validation.domainCannotBeMoreThanThreeLevels'
+          'actionBuilder.ens.validation.domainCannotBeMoreThanThreeLevels'
         );
       });
     });

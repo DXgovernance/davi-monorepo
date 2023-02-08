@@ -90,14 +90,18 @@ export const AddEditOptionModal: React.FC<AddEditOptionModalProps> = ({
     <Modal
       isOpen
       onDismiss={onDismiss}
-      header={!!editableOption ? t('editOption') : t('addOption')}
+      header={
+        !!editableOption
+          ? t('actionBuilder.options.editOption')
+          : t('actionBuilder.options.addOption')
+      }
       maxWidth={300}
     >
       <Box padding="1rem 2rem">
         <Box padding="0 0 1rem 0">
           <Input
             value={label}
-            placeholder={t('optionLabel')}
+            placeholder={t('actionBuilder.options.optionLabel')}
             icon={
               <Dot
                 color={
@@ -120,7 +124,7 @@ export const AddEditOptionModal: React.FC<AddEditOptionModalProps> = ({
         {!!editableOption && (
           <Box padding="0 0 1rem 0">
             <DeleteButton onClick={deleteOption} fullWidth variant="secondary">
-              {t('deleteOption')}
+              {t('actionBuilder.options.deleteOption')}
             </DeleteButton>
           </Box>
         )}
@@ -131,7 +135,7 @@ export const AddEditOptionModal: React.FC<AddEditOptionModalProps> = ({
             fullWidth
             onClick={handleConfirmSave}
           >
-            {t('save')}
+            {t('actionBuilder.save')}
           </Button>
         </Box>
       </Box>

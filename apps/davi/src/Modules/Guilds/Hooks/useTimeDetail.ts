@@ -32,12 +32,12 @@ const useTimeDetail = (
   // with states Executable and Failed we show the time difference with execution time. Otherwise, with ending time
   if (status === ProposalState.Executable || status === ProposalState.Failed) {
     endTimeDetail = isBeforeCurrentTime(endTimeMoment)
-      ? t('expiredTimeAgo', { timeDifferenceHumanized })
-      : t('expiresInTimeDetail', { timeDifferenceHumanized });
+      ? t('proposal.time.expiredTimeAgo', { timeDifferenceHumanized })
+      : t('proposal.time.expiresInTimeDetail', { timeDifferenceHumanized });
   } else {
     endTimeDetail = isBeforeCurrentTime(endTimeMoment)
-      ? t('endedTimeAgo', { timeDifferenceHumanized })
-      : t('endingTimeLeft', { timeDifferenceHumanized });
+      ? t('proposal.time.endedTimeAgo', { timeDifferenceHumanized })
+      : t('proposal.time.endingTimeLeft', { timeDifferenceHumanized });
   }
 
   return { detail: endTimeDetail, moment: endTimeMoment };

@@ -39,41 +39,41 @@ const validateRawTransaction = (
   // Data validations
   if (isValueEmpty) {
     if (!data) {
-      errors.data = t('eitherDataOrValueRequired');
+      errors.data = t('inputValidation.eitherDataOrValueRequired');
     } else if (!isHexString(data)) {
-      errors.data = t('dataIsNotAHexString');
+      errors.data = t('inputValidation.dataIsNotAHexString');
     } else if (hexStripZeros(data) === '0x') {
-      errors.data = t('eitherDataOrValueRequired');
+      errors.data = t('inputValidation.eitherDataOrValueRequired');
     } else if (data.length % 2 !== 0) {
-      errors.data = t('dataIsOddLength');
+      errors.data = t('inputValidation.dataIsOddLength');
     }
   } else if (data) {
     if (!isHexString(data)) {
-      errors.data = t('dataIsNotAHexString');
+      errors.data = t('inputValidation.dataIsNotAHexString');
     } else if (data.length % 2 !== 0) {
-      errors.data = t('dataIsOddLength');
+      errors.data = t('inputValidation.dataIsOddLength');
     }
   }
 
   // Value validations
   if (isDataEmpty) {
     if (!value) {
-      errors.value = t('eitherDataOrValueRequired');
+      errors.value = t('inputValidation.eitherDataOrValueRequired');
     } else if (!BigNumber.isBigNumber(value)) {
-      errors.value = t('invalidValue');
+      errors.value = t('inputValidation.invalidValue');
     } else if (value.toString() === '0') {
-      errors.value = t('eitherDataOrValueRequired');
+      errors.value = t('inputValidation.eitherDataOrValueRequired');
     }
   } else if (value) {
     if (!BigNumber.isBigNumber(value)) {
-      errors.value = t('invalidValue');
+      errors.value = t('inputValidation.invalidValue');
     }
   }
 
   if (!to) {
-    errors.to = t('addressIsRequired');
+    errors.to = t('inputValidation.addressIsRequired');
   } else if (!isAddress(to)) {
-    errors.to = t('invalidAddress');
+    errors.to = t('inputValidation.invalidAddress');
   }
 
   return {

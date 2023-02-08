@@ -30,8 +30,8 @@ describe('guildsProposals', () => {
           optionKey: index,
           t: mockT,
         });
-        if (index === 0) expect(result).toBe('against');
-        else expect(result).toBe('option');
+        if (index === 0) expect(result).toContain('against');
+        else expect(result).toContain('option');
       });
     });
   });

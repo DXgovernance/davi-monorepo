@@ -74,7 +74,7 @@ const GenericCallInfoLine: React.FC<ActionViewProps> = ({
               <Segment>
                 {!!tokenInfo
                   ? approvalAmount + tokenInfo?.symbol
-                  : t('unknownToken')}
+                  : t('actionBuilder.transfer.unknownToken')}
               </Segment>
               <Segment>
                 <FiArrowRight />
@@ -93,7 +93,7 @@ const GenericCallInfoLine: React.FC<ActionViewProps> = ({
               <Segment>
                 {!!tokenInfo
                   ? `${approvalAmount} ${tokenInfo?.symbol}` ?? ''
-                  : 'Unknown token'}
+                  : t('actionBuilder.transfer.unknownToken')}
               </Segment>
               <Segment>
                 <FiArrowRight />

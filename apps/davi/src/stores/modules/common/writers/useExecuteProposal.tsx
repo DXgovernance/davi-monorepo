@@ -14,7 +14,7 @@ export const useExecuteProposal: IExecuteProposal = daoAddress => {
 
   const handleExecuteProposal: IHandleExecuteProposal = useCallback(
     async proposalId => {
-      createTransaction(t('executeProposal'), async () => {
+      createTransaction(t('proposal.actions.executeProposal'), async () => {
         return daoContract.endProposal(proposalId);
       });
     },

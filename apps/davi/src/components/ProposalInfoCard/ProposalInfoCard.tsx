@@ -27,16 +27,18 @@ const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
   return (
     <SidebarCard
       header={
-        <SidebarCardHeaderSpaced>{t('information')}</SidebarCardHeaderSpaced>
+        <SidebarCardHeaderSpaced>
+          {t('proposal.information')}
+        </SidebarCardHeaderSpaced>
       }
     >
       <SidebarCardContent>
         <InfoDetail>
-          <span>{t('proposalInfoCard.consensusSystem')}</span>
-          <InfoDetailMuted>{t('guilds.guild')}</InfoDetailMuted>
+          <span>{t('proposal.proposalInfoCard.consensusSystem')}</span>
+          <InfoDetailMuted>{t('dao.guild')}</InfoDetailMuted>
         </InfoDetail>
         <InfoDetail>
-          <span>{t('proposalInfoCard.proposalDuration')}</span>
+          <span>{t('proposal.proposalInfoCard.proposalDuration')}</span>
           <InfoDetailMuted>
             {guildConfig?.proposalTime ? (
               duration(
@@ -49,7 +51,7 @@ const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
           </InfoDetailMuted>
         </InfoDetail>
         <InfoDetail>
-          <span>{t('quorum')}</span>
+          <span>{t('proposal.quorum')}</span>
           <InfoDetailMuted>
             {quorum != null ? (
               `${quorum}%`
@@ -60,7 +62,7 @@ const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
         </InfoDetail>
 
         <InfoDetail>
-          <span>{t('proposalInfoCard.proposalHistory')}</span>
+          <span>{t('proposal.proposalInfoCard.proposalHistory')}</span>
           <ProposalHistoryIcon
             active={isHistoryExpanded}
             onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}

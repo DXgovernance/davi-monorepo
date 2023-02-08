@@ -6,7 +6,10 @@ import { getProposalDocument, getProposalQuery } from '.graphclient';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/common/fetchers';
-import { useGetVotes } from '../useGetVotes';
+import { useHookStoreProvider } from 'stores';
+import { getBigNumberPercentage } from 'utils/bnPercentage';
+import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
+import { useTranslation } from 'react-i18next';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -18,6 +21,16 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     },
   });
   const proposal = data?.guild?.proposals[0];
+
+  const {
+    hooks: {
+      fetchers: { useTotalLocked },
+    },
+  } = useHookStoreProvider();
+
+  const { t } = useTranslation();
+  const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
+  const { data: totalLocked } = useTotalLocked(daoId, proposalId);
 
   const parsedData: Proposal = useMemo(() => {
     if (!proposal) return null;
@@ -34,6 +47,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       contentHash,
       contractState,
       totalVotes,
+      votes,
     } = proposal;
 
     const contractStatesMapping = {
@@ -45,6 +59,20 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     const mappedContractState = contractStatesMapping[parseInt(contractState)];
 
     const totalVotesBN = totalVotes.map((vote: string) => BigNumber.from(vote));
+
+    const parsedVotes = votes?.map(vote => {
+      return {
+        voter: vote.voter as `0x${string}`,
+        optionLabel: proposalMetadata?.voteOptions[vote.option]
+          ? proposalMetadata.voteOptions[vote.option]
+          : t('against'),
+        votingPower: getBigNumberPercentage(
+          BigNumber.from(vote?.votingPower),
+          totalLocked,
+          2
+        ),
+      };
+    });
 
     return {
       id: id as `0x${string}`, // typecast to comply with template literal type
@@ -59,17 +87,15 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       contractState: mappedContractState,
       totalVotes: totalVotesBN,
       options: null,
-      votes: null,
+      votes: parsedVotes,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
     };
-  }, [proposal]);
+  }, [proposal, proposalMetadata?.voteOptions, t, totalLocked]);
 
   const { options } = useProposalCalls(daoId, proposalId, parsedData);
-  const { data: votes } = useGetVotes(daoId, parsedData);
 
   if (parsedData) {
     if (options) parsedData.options = options;
-    if (votes) parsedData.votes = votes;
   }
 
   return {

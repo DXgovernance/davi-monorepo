@@ -10,17 +10,17 @@ query getProposal($id: ID!, $proposalId: ID!) {
       executionTransactionHash
       id
       metadata
-      options {
-        voteAmount
-        proposalId
-        label
-        id
-      }
       startTime
       title
       to
       totalVotes
       value
+      votes {
+        voter
+        votingPower
+        optionLabel
+        option
+      }
     }
   }
 }

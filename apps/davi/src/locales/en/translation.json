@@ -349,5 +349,7 @@
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },
   "noTreasuryAssets": "No treasury assets available",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "showMore": "Show More",
+  "showLess": "Show Less"
 }

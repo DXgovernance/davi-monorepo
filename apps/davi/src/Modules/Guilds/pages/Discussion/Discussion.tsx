@@ -122,7 +122,9 @@ const DiscussionPage: React.FC = () => {
         <SidebarCard
           header={
             <SidebarCardHeaderSpaced>
-              <CardHeader>{t('discussions.discussionTitle')}</CardHeader>
+              <CardHeader>
+                {t('discussions.activity.discussionTitle')}
+              </CardHeader>
             </SidebarCardHeaderSpaced>
           }
         >

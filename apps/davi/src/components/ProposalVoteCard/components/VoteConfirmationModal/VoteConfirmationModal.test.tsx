@@ -12,6 +12,6 @@ describe('VoteConfirmationModal', () => {
     expect(screen.getByText(/votingPower/i)).toBeInTheDocument();
     expect(screen.getByText(/voteImpact/i)).toBeInTheDocument();
     expect(screen.getByText(/cancel/i)).toBeInTheDocument();
-    expect(screen.getByText('vote')).toBeInTheDocument();
+    expect(screen.getByText('voting.vote')).toBeInTheDocument();
   });
 });

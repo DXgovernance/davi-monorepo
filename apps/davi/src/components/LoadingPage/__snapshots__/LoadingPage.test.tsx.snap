@@ -175,13 +175,13 @@ exports[`LoadingPage should match snapshot 1`] = `
         <button
           class="c8"
         >
-          notConnected
+          connections.notConnected
         </button>
         <button
           class="c8"
           data-testid="connect-wallet-btn"
         >
-          connectWallet
+          connections.connectWallet
         </button>
       </div>
     </div>

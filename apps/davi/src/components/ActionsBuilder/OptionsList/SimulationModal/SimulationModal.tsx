@@ -34,7 +34,7 @@ export const SimulationModal: React.FC<SimulationModalProps> = ({
     <Modal
       isOpen={isOpen}
       onDismiss={onDismiss}
-      header={t('simulations.verifyingActions')}
+      header={t('actionBuilder.simulations.verifyingActions')}
       maxWidth={390}
       zIndex={1000}
     >
@@ -42,7 +42,8 @@ export const SimulationModal: React.FC<SimulationModalProps> = ({
         <StatusWrapper>
           <SimulationStatusWrapper status={status} />
           <Flex direction="row">
-            <Muted>{t('poweredBy')}</Muted> <TenderlyLogo src={tenderlyLogo} />
+            <Muted>{t('actionBuilder.poweredBy')}</Muted>{' '}
+            <TenderlyLogo src={tenderlyLogo} />
           </Flex>
         </StatusWrapper>
         <Button
@@ -50,7 +51,7 @@ export const SimulationModal: React.FC<SimulationModalProps> = ({
           fullWidth
           onClick={onDismiss}
         >
-          {t('dismiss')}
+          {t('modals.dismiss')}
         </Button>
       </Flex>
     </Modal>
@@ -65,7 +66,7 @@ const SimulationStatusWrapper = ({ status }) => {
       return (
         <Flex>
           <PendingCircle height="86px" width="86px" color="white" />
-          <Message>{t('simulations.verifyingActions')}</Message>
+          <Message>{t('actionBuilder.simulations.verifyingActions')}</Message>
         </Flex>
       );
     case SimulationState.allPassed:
@@ -74,7 +75,7 @@ const SimulationStatusWrapper = ({ status }) => {
           <SuccessCircle>
             <FiCheck size={40} />
           </SuccessCircle>
-          <Message>{t('simulations.actionsVerified')}</Message>
+          <Message>{t('actionBuilder.simulations.actionsVerified')}</Message>
         </Flex>
       );
     case SimulationState.someFailed:
@@ -83,7 +84,7 @@ const SimulationStatusWrapper = ({ status }) => {
           <WarningCircle>
             <FiX size={40} />
           </WarningCircle>
-          <Message>{t('simulations.actionsFailed')}</Message>
+          <Message>{t('actionBuilder.simulations.actionsFailed')}</Message>
         </Flex>
       );
     default:
@@ -92,7 +93,7 @@ const SimulationStatusWrapper = ({ status }) => {
           <WarningCircle>
             <FiX size={40} />
           </WarningCircle>
-          <Message>{t('simulations.error')}</Message>
+          <Message>{t('actionBuilder.simulations.error')}</Message>
         </Flex>
       );
   }

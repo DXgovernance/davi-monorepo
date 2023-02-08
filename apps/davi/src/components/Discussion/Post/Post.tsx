@@ -91,7 +91,9 @@ const Post = ({
           <PostBody>
             {formatMessage(postClone?.content)}
             {postClone?.count_commits > 1 && (
-              <PostEditedBadge>({t('postEdited')})</PostEditedBadge>
+              <PostEditedBadge>
+                ({t('discussions.activity.postEdited')})
+              </PostEditedBadge>
             )}
           </PostBody>
           {postClone?.indexing_metadata?.urlMetadata && (

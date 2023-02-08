@@ -66,7 +66,7 @@ const CreateDiscussionPage: React.FC = () => {
   } = useTextEditor(
     `${guildId}/create-discussion`,
     345600000,
-    t('forum.discussionPlaceholder')
+    t('discussions.discussionPlaceholder')
   );
 
   const handleToggleEditMode = () => {
@@ -115,7 +115,7 @@ const CreateDiscussionPage: React.FC = () => {
               marginTop={'5px;'}
             >
               <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
-              {t('backToOverview')}{' '}
+              {t('proposal.backToOverview')}{' '}
             </IconButton>
           </StyledLink>
 
@@ -134,7 +134,7 @@ const CreateDiscussionPage: React.FC = () => {
         <Box margin="0px 0px 24px">
           {editMode ? (
             <>
-              <Label>{t('title')}</Label>
+              <Label>{t('discussions.title')}</Label>
               <Input
                 data-testid="create-discussion-title"
                 placeholder="Discussion Title"
@@ -172,7 +172,7 @@ const CreateDiscussionPage: React.FC = () => {
             disabled={!isValid}
             data-testid="create-proposal-action-button"
           >
-            {t('forum.createDiscussion')}
+            {t('discussions.createDiscussion')}
           </StyledButton>
         </Box>
       </PageContent>

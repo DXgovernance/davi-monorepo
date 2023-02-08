@@ -105,7 +105,7 @@ const ActionModal: React.FC<ActionModalProps> = ({
       return supportedActions[selectedAction].title;
     }
 
-    return t('addAction');
+    return t('actionBuilder.action.addAction');
   }
 
   function getContent() {

@@ -25,24 +25,24 @@ const validateERC20Transfer = (
   };
 
   if (!token) {
-    errors.token = t('tokenIsRequired');
+    errors.token = t('inputValidation.tokenIsRequired');
   } else if (token.type === 'ERC20' && !utils.isAddress(token.address)) {
-    errors.token = t('invalidTokenAddress');
+    errors.token = t('inputValidation.invalidTokenAddress');
   }
   if (!BigNumber.isBigNumber(amount)) {
-    errors.amount = t('invalidAmount');
+    errors.amount = t('inputValidation.invalidAmount');
   }
   if (BigNumber.isBigNumber(amount) && amount.lte(0)) {
-    errors.amount = t('amountCannotBeZero');
+    errors.amount = t('inputValidation.amountCannotBeZero');
   }
   if (!utils.isAddress(recipientAddress)) {
-    errors.recipientAddress = t('invalidRecipientAddress');
+    errors.recipientAddress = t('inputValidation.invalidRecipientAddress');
   }
   if (!recipientAddress) {
-    errors.recipientAddress = t('recipientAddressIsRequired');
+    errors.recipientAddress = t('inputValidation.recipientAddressIsRequired');
   }
   if (!amount) {
-    errors.amount = t('amountIsRequired');
+    errors.amount = t('inputValidation.amountIsRequired');
   }
 
   return {

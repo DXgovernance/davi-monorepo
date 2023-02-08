@@ -86,11 +86,11 @@ const GuildAvailabilityProvider = ({ children }) => {
     return (
       <Result
         state={ResultState.ERROR}
-        title={t('guildNotAvailable')}
+        title={t('daoErrors.daoNotAvailable')}
         subtitle={
           Object.values(availability).includes(true)
-            ? t('guildNotAvailableOnThisNetwork')
-            : t('noGuildInThisAddress')
+            ? t('daoErrors.daoNotAvailableOnThisNetwork')
+            : t('daoErrors.noDAOInThisAddress')
         }
         extra={
           Object.values(availability).includes(true) ? (
@@ -122,7 +122,7 @@ const GuildAvailabilityProvider = ({ children }) => {
           ) : (
             <StyledLink to={`/${chainName}`}>
               <IconButton iconLeft>
-                <FiArrowLeft /> {t('takeMeHome')}
+                <FiArrowLeft /> {t('404.takeMeHome')}
               </IconButton>
             </StyledLink>
           )

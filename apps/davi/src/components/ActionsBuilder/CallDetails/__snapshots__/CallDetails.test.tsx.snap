@@ -185,7 +185,7 @@ exports[`CallDetails Should match 1`] = `
     <div
       class="c1 c2 c3"
     >
-      interactWith
+      actionBuilder.interactWith
        
       <span>
         0.0
@@ -488,7 +488,7 @@ exports[`CallDetails Should match with empty data 1`] = `
     <div
       class="c1 c2 c3"
     >
-      interactWith
+      actionBuilder.interactWith
        
       <span>
         0.0
@@ -563,7 +563,7 @@ exports[`CallDetails Should match with empty data 1`] = `
       <button
         class="c12 c13"
       >
-        approve
+        actionbuilder.approval.approve
          (
          
         <span
@@ -593,7 +593,7 @@ exports[`CallDetails Should match with empty data 1`] = `
     <div
       class="c1 c2 c3"
     >
-      interactWith
+      actionBuilder.interactWith
        
       <span>
         0.0

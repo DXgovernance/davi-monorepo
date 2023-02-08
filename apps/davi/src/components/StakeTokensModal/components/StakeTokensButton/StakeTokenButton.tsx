@@ -66,16 +66,16 @@ const StakeTokensButton = ({
             onClick={handleApproveTokenSpending}
             data-testid="approve-token-spending"
           >
-            {t('approve')}{' '}
+            {t('actionBuilder.approval.approve')}{' '}
             {token?.info?.symbol || (
               <Loading loading text skeletonProps={{ width: 10 }} />
             )}{' '}
-            {t('spending')}
+            {t('actionBuilder.approval.spending')}
           </ActionButton>
         )
       ) : (
         <ActionButton onClick={() => navigate('create')}>
-          {t('mintRep')}
+          {t('actionBuilder.mintRep.mintRep')}
         </ActionButton>
       )}
     </>

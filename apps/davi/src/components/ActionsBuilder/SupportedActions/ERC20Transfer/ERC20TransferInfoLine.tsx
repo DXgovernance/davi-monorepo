@@ -64,7 +64,7 @@ const ERC20TransferInfoLine: React.FC<ActionViewProps> = ({
         <BiSend size={16} />
       </Segment>
       <Segment>
-        {!compact ? t('transfer') : ''} {roundedBalance}{' '}
+        {!compact ? t('actionBuilder.transfer.transfer') : ''} {roundedBalance}{' '}
         {parsedData?.token?.symbol}
       </Segment>
       <Segment>

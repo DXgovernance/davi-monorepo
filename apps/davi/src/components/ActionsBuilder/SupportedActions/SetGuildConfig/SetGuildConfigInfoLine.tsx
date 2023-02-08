@@ -35,7 +35,9 @@ const SetGuildConfigInfoLine: React.FC<ActionViewProps> = ({
     <InfoLineWrapper>
       <Flex direction="row" justifyContent="flex-start">
         <AiFillSetting size={16} />
-        <InfoLineTitle>{t('setGuildConfig')}</InfoLineTitle>
+        <InfoLineTitle>
+          {t('actionBuilder.config.setGuildConfig')}
+        </InfoLineTitle>
       </Flex>
       {!compact && (
         <>

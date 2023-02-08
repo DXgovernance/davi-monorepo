@@ -20,18 +20,18 @@ const validateRepMint = (values: validateRepMintValues, { t }: Context) => {
   };
 
   if (repPercent > 100) {
-    errors.repPercent = t('reputationPercentageTooHigh');
+    errors.repPercent = t('inputValidation.reputationPercentageTooHigh');
   }
 
   if (repPercent === 0) {
-    errors.repPercent = t('reputationPercentIsRequired');
+    errors.repPercent = t('inputValidation.reputationPercentIsRequired');
   }
 
   if (!utils.isAddress(recipient)) {
-    errors.recipient = t('invalidRecipientAddress');
+    errors.recipient = t('inputValidation.invalidRecipientAddress');
   }
   if (!recipient) {
-    errors.recipient = t('recipientAddressIsRequired');
+    errors.recipient = t('inputValidation.recipientAddressIsRequired');
   }
 
   return {

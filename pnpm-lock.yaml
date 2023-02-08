@@ -473,7 +473,7 @@ importers:
       '@typescript-eslint/parser': ^5.38.0
       babel-polyfill: ^6.26.0
       babel-register: ^6.26.0
-      dxdao-contracts: '*'
+      dxdao-contracts: workspace:*
       eslint: ^8.23.1
       eslint-config-prettier: ^8.5.0
       glob: ^8.0.3

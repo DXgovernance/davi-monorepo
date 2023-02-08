@@ -52,7 +52,7 @@ describe('WalletButton', () => {
 
     const { container, getByText } = render(<WalletButton />);
     expect(container).toMatchSnapshot();
-    expect(getByText('connectWallet')).toBeInTheDocument();
+    expect(getByText('connections.connectWallet')).toBeInTheDocument();
   });
   it('Should match snapshot and display connected address', () => {
     jest.spyOn(wagmi, 'useAccount').mockImplementation(

@@ -136,7 +136,9 @@ const Thread = ({
 
   const handleDeletion = async (post: IOrbisPost) => {
     const confirmed = window.confirm(
-      `${t('deletionMessage1')}'\r\n${t('deletionMessage2')}`
+      `${t('discussions.activity.deletionMessage1')}'\r\n${t(
+        'discussions.activity.deletionMessage2'
+      )}`
     );
     if (confirmed) {
       const res = await orbis.deletePost(post.stream_id);

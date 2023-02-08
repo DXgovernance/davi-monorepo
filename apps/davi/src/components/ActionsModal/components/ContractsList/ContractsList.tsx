@@ -45,7 +45,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
   return (
     <Wrapper data-testid="actions-modal-contract-list">
       <SectionWrapper>
-        <SectionTitle>{t('core')}</SectionTitle>
+        <SectionTitle>{t('actionBuilder.core')}</SectionTitle>
         <ActionsButton
           data-testid="supported-action-erc20transfer"
           onClick={() =>
@@ -54,7 +54,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
         >
           <ButtonLabel>
             <StyledIcon src={Vector} />
-            {t('transfer')}
+            {t('actionBuilder.transfer.transfer')}
           </ButtonLabel>
         </ActionsButton>
         <ActionsButton
@@ -64,7 +64,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
         >
           <ButtonLabel>
             <StyledIcon src={Vector} />
-            {t('permissions.setPermissions')}
+            {t('actionBuilder.permissions.setPermissions')}
           </ButtonLabel>
         </ActionsButton>
         {!!isRepGuild ? (
@@ -73,7 +73,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
           >
             <ButtonLabel>
               <StyledIcon src={Mint} />
-              {t('mintRep')}
+              {t('actionBuilder.mintRep.mintRep')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}
@@ -85,7 +85,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
           >
             <ButtonLabel>
               <StyledIcon src={ENSIcon} />
-              {t('ens.updateContentCoreAction')}
+              {t('actionBuilder.ens.updateContentCoreAction')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}
@@ -96,12 +96,12 @@ const ContractsList: React.FC<ContractsListProps> = ({
         >
           <ButtonLabel>
             <StyledIcon src={() => <AiFillSetting size={20} />} />
-            {t('setGuildConfig')}
+            {t('actionBuilder.config.setGuildConfig')}
           </ButtonLabel>
         </ActionsButton>
       </SectionWrapper>
       <SectionWrapper>
-        <SectionTitle>{t('externalContracts')}</SectionTitle>
+        <SectionTitle>{t('actionBuilder.externalContracts')}</SectionTitle>
         {contracts?.map(contract => (
           <ActionsButton
             key={contract.title}
@@ -110,7 +110,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
             <ButtonLabel>{contract.title}</ButtonLabel>
             <ButtonDetail>
               {contract.functions?.length}{' '}
-              {t('actions', {
+              {t('actionBuilder.action.actions', {
                 count: contract.functions.length,
               })}
             </ButtonDetail>
@@ -125,7 +125,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
             setIsAdvancedOptionsExpanded(!isAdvancedOptionsExpanded)
           }
         >
-          {t('advancedOptions')}
+          {t('actionBuilder.advanced.advancedOptions')}
           <ExpandButton expanded={isAdvancedOptionsExpanded} />
         </SectionTitle>
         {isAdvancedOptionsExpanded && (
@@ -134,7 +134,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
               onSupportedActionSelect(SupportedAction.RAW_TRANSACTION)
             }
           >
-            {t('rawTransaction')}
+            {t('actionBuilder.advanced.rawTransaction')}
           </ActionsButton>
         )}
       </SectionWrapper>

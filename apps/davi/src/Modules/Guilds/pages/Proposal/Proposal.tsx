@@ -38,6 +38,7 @@ import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { useHookStoreProvider } from 'stores';
+import { ProposalVotesCard } from 'components/ProposalVotesCard';
 import { Flex } from 'components/primitives/Layout';
 import { IconButton } from 'components/primitives/Button';
 
@@ -172,6 +173,7 @@ const ProposalPage: React.FC = () => {
             proposal={proposal}
             proposalMetadata={metadata}
           />
+          <ProposalVotesCard proposal={proposal} guildId={guildId} />
           <ProposalInfoCard
             proposal={proposal}
             guildConfig={guildConfig}

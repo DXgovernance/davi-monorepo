@@ -250,6 +250,7 @@ export function handleVoting(event: VoteAdded): void {
         option.voteAmount = newVoteAmount;
         option.votes = optionVotesCopy;
         option.save();
+        vote.optionLabel = option.label;
       }
 
       proposal.save();

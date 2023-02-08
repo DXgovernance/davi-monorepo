@@ -100,6 +100,18 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useGetVotes: (
+    guildId: `0x${string}`,
+    proposal: Proposal
+  ) => {
+    data: {
+      optionLabel: string;
+      voter: string;
+      votingPower: number;
+    }[];
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 
 export interface WriterHooksInteface {

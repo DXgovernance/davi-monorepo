@@ -733,7 +733,7 @@ export namespace DxgovGuildSubgraphTypes {
     totalVotes?: Maybe<Array<Scalars['BigInt']>>;
     votes?: Maybe<Array<Vote>>;
     options?: Maybe<Array<Option>>;
-    metadata?: Maybe<Scalars['String']>;
+    metadata?: Maybe<ProposalMetadata>;
     description?: Maybe<Scalars['String']>;
     executionTransactionHash?: Maybe<Scalars['String']>;
     statesLog?: Maybe<Array<ProposalStateLog>>;
@@ -762,6 +762,78 @@ export namespace DxgovGuildSubgraphTypes {
     orderDirection?: InputMaybe<OrderDirection>;
     where?: InputMaybe<ProposalStateLog_filter>;
   };
+
+  export type ProposalMetadata = {
+    id: Scalars['ID'];
+    description: Scalars['String'];
+    voteOptions?: Maybe<Array<Scalars['String']>>;
+    discussionRef: Scalars['String'];
+  };
+
+  export type ProposalMetadata_filter = {
+    id?: InputMaybe<Scalars['ID']>;
+    id_not?: InputMaybe<Scalars['ID']>;
+    id_gt?: InputMaybe<Scalars['ID']>;
+    id_lt?: InputMaybe<Scalars['ID']>;
+    id_gte?: InputMaybe<Scalars['ID']>;
+    id_lte?: InputMaybe<Scalars['ID']>;
+    id_in?: InputMaybe<Array<Scalars['ID']>>;
+    id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+    description?: InputMaybe<Scalars['String']>;
+    description_not?: InputMaybe<Scalars['String']>;
+    description_gt?: InputMaybe<Scalars['String']>;
+    description_lt?: InputMaybe<Scalars['String']>;
+    description_gte?: InputMaybe<Scalars['String']>;
+    description_lte?: InputMaybe<Scalars['String']>;
+    description_in?: InputMaybe<Array<Scalars['String']>>;
+    description_not_in?: InputMaybe<Array<Scalars['String']>>;
+    description_contains?: InputMaybe<Scalars['String']>;
+    description_contains_nocase?: InputMaybe<Scalars['String']>;
+    description_not_contains?: InputMaybe<Scalars['String']>;
+    description_not_contains_nocase?: InputMaybe<Scalars['String']>;
+    description_starts_with?: InputMaybe<Scalars['String']>;
+    description_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    description_not_starts_with?: InputMaybe<Scalars['String']>;
+    description_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    description_ends_with?: InputMaybe<Scalars['String']>;
+    description_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    description_not_ends_with?: InputMaybe<Scalars['String']>;
+    description_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    voteOptions?: InputMaybe<Array<Scalars['String']>>;
+    voteOptions_not?: InputMaybe<Array<Scalars['String']>>;
+    voteOptions_contains?: InputMaybe<Array<Scalars['String']>>;
+    voteOptions_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
+    voteOptions_not_contains?: InputMaybe<Array<Scalars['String']>>;
+    voteOptions_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
+    discussionRef?: InputMaybe<Scalars['String']>;
+    discussionRef_not?: InputMaybe<Scalars['String']>;
+    discussionRef_gt?: InputMaybe<Scalars['String']>;
+    discussionRef_lt?: InputMaybe<Scalars['String']>;
+    discussionRef_gte?: InputMaybe<Scalars['String']>;
+    discussionRef_lte?: InputMaybe<Scalars['String']>;
+    discussionRef_in?: InputMaybe<Array<Scalars['String']>>;
+    discussionRef_not_in?: InputMaybe<Array<Scalars['String']>>;
+    discussionRef_contains?: InputMaybe<Scalars['String']>;
+    discussionRef_contains_nocase?: InputMaybe<Scalars['String']>;
+    discussionRef_not_contains?: InputMaybe<Scalars['String']>;
+    discussionRef_not_contains_nocase?: InputMaybe<Scalars['String']>;
+    discussionRef_starts_with?: InputMaybe<Scalars['String']>;
+    discussionRef_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    discussionRef_not_starts_with?: InputMaybe<Scalars['String']>;
+    discussionRef_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    discussionRef_ends_with?: InputMaybe<Scalars['String']>;
+    discussionRef_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    discussionRef_not_ends_with?: InputMaybe<Scalars['String']>;
+    discussionRef_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    /** Filter for the block changed event. */
+    _change_block?: InputMaybe<BlockChangedFilter>;
+  };
+
+  export type ProposalMetadata_orderBy =
+    | 'id'
+    | 'description'
+    | 'voteOptions'
+    | 'discussionRef';
 
   export type ProposalStateLog = {
     id: Scalars['ID'];
@@ -996,6 +1068,7 @@ export namespace DxgovGuildSubgraphTypes {
     metadata_ends_with_nocase?: InputMaybe<Scalars['String']>;
     metadata_not_ends_with?: InputMaybe<Scalars['String']>;
     metadata_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    metadata_?: InputMaybe<ProposalMetadata_filter>;
     description?: InputMaybe<Scalars['String']>;
     description_not?: InputMaybe<Scalars['String']>;
     description_gt?: InputMaybe<Scalars['String']>;
@@ -1082,6 +1155,7 @@ export namespace DxgovGuildSubgraphTypes {
     options: Array<Option>;
     action?: Maybe<Action>;
     actions: Array<Action>;
+    proposalMetadata: Array<ProposalMetadata>;
     vote?: Maybe<Vote>;
     votes: Array<Vote>;
     member?: Maybe<Member>;
@@ -1156,6 +1230,16 @@ export namespace DxgovGuildSubgraphTypes {
     orderBy?: InputMaybe<Action_orderBy>;
     orderDirection?: InputMaybe<OrderDirection>;
     where?: InputMaybe<Action_filter>;
+    block?: InputMaybe<Block_height>;
+    subgraphError?: _SubgraphErrorPolicy_;
+  };
+
+  export type QueryproposalMetadataArgs = {
+    skip?: InputMaybe<Scalars['Int']>;
+    first?: InputMaybe<Scalars['Int']>;
+    orderBy?: InputMaybe<ProposalMetadata_orderBy>;
+    orderDirection?: InputMaybe<OrderDirection>;
+    where?: InputMaybe<ProposalMetadata_filter>;
     block?: InputMaybe<Block_height>;
     subgraphError?: _SubgraphErrorPolicy_;
   };
@@ -1253,6 +1337,7 @@ export namespace DxgovGuildSubgraphTypes {
     options: Array<Option>;
     action?: Maybe<Action>;
     actions: Array<Action>;
+    proposalMetadata: Array<ProposalMetadata>;
     vote?: Maybe<Vote>;
     votes: Array<Vote>;
     member?: Maybe<Member>;
@@ -1327,6 +1412,16 @@ export namespace DxgovGuildSubgraphTypes {
     orderBy?: InputMaybe<Action_orderBy>;
     orderDirection?: InputMaybe<OrderDirection>;
     where?: InputMaybe<Action_filter>;
+    block?: InputMaybe<Block_height>;
+    subgraphError?: _SubgraphErrorPolicy_;
+  };
+
+  export type SubscriptionproposalMetadataArgs = {
+    skip?: InputMaybe<Scalars['Int']>;
+    first?: InputMaybe<Scalars['Int']>;
+    orderBy?: InputMaybe<ProposalMetadata_orderBy>;
+    orderDirection?: InputMaybe<OrderDirection>;
+    where?: InputMaybe<ProposalMetadata_filter>;
     block?: InputMaybe<Block_height>;
     subgraphError?: _SubgraphErrorPolicy_;
   };
@@ -1523,6 +1618,7 @@ export namespace DxgovGuildSubgraphTypes {
     id: Scalars['ID'];
     proposalId: Scalars['String'];
     option: Scalars['BigInt'];
+    optionLabel?: Maybe<Scalars['String']>;
     voter: Scalars['String'];
     votingPower: Scalars['BigInt'];
     transactionHash: Scalars['String'];
@@ -1565,6 +1661,26 @@ export namespace DxgovGuildSubgraphTypes {
     option_lte?: InputMaybe<Scalars['BigInt']>;
     option_in?: InputMaybe<Array<Scalars['BigInt']>>;
     option_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+    optionLabel?: InputMaybe<Scalars['String']>;
+    optionLabel_not?: InputMaybe<Scalars['String']>;
+    optionLabel_gt?: InputMaybe<Scalars['String']>;
+    optionLabel_lt?: InputMaybe<Scalars['String']>;
+    optionLabel_gte?: InputMaybe<Scalars['String']>;
+    optionLabel_lte?: InputMaybe<Scalars['String']>;
+    optionLabel_in?: InputMaybe<Array<Scalars['String']>>;
+    optionLabel_not_in?: InputMaybe<Array<Scalars['String']>>;
+    optionLabel_contains?: InputMaybe<Scalars['String']>;
+    optionLabel_contains_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_not_contains?: InputMaybe<Scalars['String']>;
+    optionLabel_not_contains_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_starts_with?: InputMaybe<Scalars['String']>;
+    optionLabel_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_not_starts_with?: InputMaybe<Scalars['String']>;
+    optionLabel_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_ends_with?: InputMaybe<Scalars['String']>;
+    optionLabel_ends_with_nocase?: InputMaybe<Scalars['String']>;
+    optionLabel_not_ends_with?: InputMaybe<Scalars['String']>;
+    optionLabel_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
     voter?: InputMaybe<Scalars['String']>;
     voter_not?: InputMaybe<Scalars['String']>;
     voter_gt?: InputMaybe<Scalars['String']>;
@@ -1621,6 +1737,7 @@ export namespace DxgovGuildSubgraphTypes {
     | 'id'
     | 'proposalId'
     | 'option'
+    | 'optionLabel'
     | 'voter'
     | 'votingPower'
     | 'transactionHash';
@@ -1695,6 +1812,12 @@ export namespace DxgovGuildSubgraphTypes {
     actions: InContextSdkMethod<
       Query['actions'],
       QueryactionsArgs,
+      MeshContext
+    >;
+    /** null **/
+    proposalMetadata: InContextSdkMethod<
+      Query['proposalMetadata'],
+      QueryproposalMetadataArgs,
       MeshContext
     >;
     /** null **/
@@ -1782,6 +1905,12 @@ export namespace DxgovGuildSubgraphTypes {
     actions: InContextSdkMethod<
       Subscription['actions'],
       SubscriptionactionsArgs,
+      MeshContext
+    >;
+    /** null **/
+    proposalMetadata: InContextSdkMethod<
+      Subscription['proposalMetadata'],
+      SubscriptionproposalMetadataArgs,
       MeshContext
     >;
     /** null **/

@@ -3,24 +3,12 @@
 # Exit script as soon as a command fails.
 set -o errexit
 
-# Executes cleanup function at script exit.
-trap cleanup EXIT
-
-cleanup() {
-  # Kill the hardhat instance that we started (if we started one and if it's still running).
-  if [ -n "$hardhat_pid" ] && ps -p $hardhat_pid > /dev/null; then
-    kill -9 $hardhat_pid
-  fi
-}
-
 hardhat_running() {
   nc -z localhost 8545
 }
 
 start_hardhat_node() {
-  pnpm hardhat node --hostname 0.0.0.0
-
-  hardhat_pid=$!
+  pnpm hardhat node --hostname 0.0.0.0 --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
 
   echo "Waiting for hardhat to launch..."
 
@@ -36,5 +24,8 @@ if hardhat_running; then
   kill $(lsof -t -i:8545) 
 fi
 
-echo "Starting our own hardhat node instance"
+
 start_hardhat_node
+node ./src/buildConfig.js
+node ./src/updateProjectsConfig.js
+echo "Hardhat node running locally"

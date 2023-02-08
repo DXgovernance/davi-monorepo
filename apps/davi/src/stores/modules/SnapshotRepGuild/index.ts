@@ -17,6 +17,7 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
+  useGetVotes,
   useGetMemberList,
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
@@ -26,6 +27,7 @@ import {
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
+  useGetVotes as useGetVotesFromSubgraph,
 } from '../subgraph/common';
 import {
   useTotalLocked,
@@ -67,6 +69,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
+          useGetVotes: useGetVotesFromSubgraph,
           useGetMemberList: useGetMemberListFromSubgraph,
           useGetAllPermissions: useGetAllPermissionsFromSubgraph,
           useGetNumberOfActiveProposals:
@@ -86,6 +89,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
+          useGetVotes,
           useGetMemberList,
           useGetAllPermissions,
           useGetNumberOfActiveProposals,

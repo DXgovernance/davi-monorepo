@@ -354,6 +354,8 @@
     "edit": "Edit",
     "delete": "Delete"
   },
+  "loadingDao": "Loading DAO",
+  "votes": "Votes",
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },

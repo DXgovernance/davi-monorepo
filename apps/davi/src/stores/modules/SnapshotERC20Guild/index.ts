@@ -12,6 +12,7 @@ import {
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
+  useGetVotes as useGetVotesFromSubgraph,
 } from '../subgraph/common';
 
 import {
@@ -24,6 +25,7 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
+  useGetVotes,
   useGetMemberList,
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
@@ -68,6 +70,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
+          useGetVotes: useGetVotesFromSubgraph,
           useGetMemberList: useGetMemberListFromSubgraph,
           useGetAllPermissions: useGetAllPermissionsFromSubgraph,
           useGetNumberOfActiveProposals:
@@ -87,6 +90,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
+          useGetVotes,
           useGetMemberList,
           useGetAllPermissions,
           useGetNumberOfActiveProposals,

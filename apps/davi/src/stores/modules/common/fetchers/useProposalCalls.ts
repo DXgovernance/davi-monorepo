@@ -14,7 +14,6 @@ import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
 import { useVotingResults } from './useVotingResults';
 
 import { FetcherHooksInterface } from 'stores/types';
-import { Proposal } from 'types/types.guilds.d';
 import { getOptionLabel } from 'utils/guildsProposals';
 
 const isApprovalData = (data: string) =>
@@ -24,12 +23,9 @@ const isZeroHash = (data: string) => data === ZERO_HASH;
 
 type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
-export const useProposalCalls: IUseProposalCalls = (
-  daoId: string,
-  proposalId: `0x${string}`,
-  proposal?: Proposal
-) => {
+export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   // Decode calls from existing proposal
+  const proposalId = proposal?.id;
 
   const { data: metadata } = useProposalMetadata(proposal?.contentHash);
   const votingResults = useVotingResults(

@@ -5,22 +5,29 @@ import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
 import { getProposalDocument, getProposalQuery } from '.graphclient';
 import { useHookStoreProvider } from 'stores';
-import { ContractState, Proposal } from 'types/types.guilds.d';
 import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/common/fetchers';
+import { ContractState, Proposal } from 'types/types.guilds.d';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { getOptionLabel } from 'utils/guildsProposals';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
+import {
+  useListenToProposalStateChanged,
+  useListenToVoteAdded,
+} from 'stores/modules/common/events';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
-  const { data, error } = useQuery<getProposalQuery>(getProposalDocument, {
-    variables: {
-      id: daoId.toLowerCase(),
-      proposalId: proposalId.toLowerCase(),
-    },
-  });
+  const { data, refetch, error } = useQuery<getProposalQuery>(
+    getProposalDocument,
+    {
+      variables: {
+        id: daoId.toLowerCase(),
+        proposalId: proposalId.toLowerCase(),
+      },
+    }
+  );
   const proposal = data?.guild?.proposals[0];
 
   const {
@@ -33,7 +40,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
   const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
   const { data: totalLocked } = useTotalLocked(daoId, proposalId);
 
-  const parsedData: Proposal = useMemo(() => {
+  const parsedProposalData: Proposal = useMemo(() => {
     if (!proposal) return null;
 
     const {
@@ -97,14 +104,15 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     };
   }, [proposal, proposalMetadata, t, totalLocked]);
 
-  const { options } = useProposalCalls(daoId, proposalId, parsedData);
+  const { options } = useProposalCalls(daoId, parsedProposalData);
 
-  if (parsedData) {
-    if (options) parsedData.options = options;
-  }
+  if (parsedProposalData && options) parsedProposalData.options = options;
+
+  useListenToProposalStateChanged(daoId, refetch, proposalId);
+  useListenToVoteAdded(daoId, refetch, proposalId);
 
   return {
-    data: parsedData,
+    data: parsedProposalData,
     error,
   };
 };

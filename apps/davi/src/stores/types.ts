@@ -64,7 +64,6 @@ export interface FetcherHooksInterface {
   };
   useProposalCalls: (
     daoId: string,
-    proposalId: `0x${string}`,
     proposal: Proposal
   ) => { options: Option[] };
   useVotingResults: (

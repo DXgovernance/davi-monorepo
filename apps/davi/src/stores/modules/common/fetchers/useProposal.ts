@@ -46,7 +46,7 @@ const formatterMiddleware = (
     ? unix(proposalData.endTime.toNumber())
     : null;
 
-  const returnedClone: Proposal = {
+  const formattedProposal: Proposal = {
     id: proposalId,
     creator: proposalData.creator,
     startTime,
@@ -62,28 +62,31 @@ const formatterMiddleware = (
     totalVotes: proposalData.totalVotes as BigNumber[], // needed to bypass readonly
   };
 
-  return returnedClone;
+  return formattedProposal;
 };
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
-  const { data, refetch, error } = useContractRead({
+  const {
+    data: proposalData,
+    refetch,
+    error,
+  } = useContractRead({
     address: daoId,
     abi: SnapshotERC20Guild.abi,
     functionName: 'getProposal',
     args: [proposalId],
   });
-  const proposalData: IDataFromGetProposal = data;
 
   useListenToProposalStateChanged(daoId, refetch, proposalId);
   useListenToVoteAdded(daoId, refetch, proposalId);
 
-  const formattedData = formatterMiddleware(proposalData, proposalId);
-  const { options } = useProposalCalls(daoId, proposalId, formattedData);
+  const formattedProposalData = formatterMiddleware(proposalData, proposalId);
+  const { options } = useProposalCalls(daoId, formattedProposalData);
 
-  if (formattedData && options) formattedData.options = options;
+  if (formattedProposalData && options) formattedProposalData.options = options;
 
   return {
-    data: formattedData,
+    data: formattedProposalData,
     error,
   };
 };

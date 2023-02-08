@@ -284,7 +284,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          allProposals
+          proposals.allProposals
         </div>
       </a>
       <a
@@ -294,7 +294,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          allDiscussions
+          discussions.allDiscussions
         </div>
       </a>
       <a
@@ -314,7 +314,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          treasury
+          treasury.treasury
         </div>
       </a>
     </div>
@@ -586,7 +586,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          allProposals
+          proposals.allProposals
         </div>
       </a>
       <a
@@ -596,7 +596,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          allDiscussions
+          discussions.allDiscussions
         </div>
       </a>
       <a
@@ -616,7 +616,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          treasury
+          treasury.treasury
         </div>
       </a>
     </div>

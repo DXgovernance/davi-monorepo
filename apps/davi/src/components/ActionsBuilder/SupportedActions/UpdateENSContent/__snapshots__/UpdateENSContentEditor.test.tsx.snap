@@ -183,7 +183,7 @@ exports[`UpdateENSContentEditor Should match snapshot 1`] = `
         <div
           class="c0 c2"
         >
-          ens.name
+          actionBuilder.ens.name
           <span
             class="c3"
           >
@@ -228,7 +228,7 @@ exports[`UpdateENSContentEditor Should match snapshot 1`] = `
           <div
             class="c0 c2"
           >
-            ens.ipfsHash
+            actionBuilder.ens.ipfsHash
             <span
               class="c3"
             >
@@ -267,7 +267,7 @@ exports[`UpdateENSContentEditor Should match snapshot 1`] = `
         data-testid="submit-enscontent"
         type="submit"
       >
-        saveAction
+        actionBuilder.action.saveAction
       </button>
     </form>
   </div>

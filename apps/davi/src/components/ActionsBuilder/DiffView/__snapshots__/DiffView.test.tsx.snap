@@ -419,7 +419,7 @@ exports[`DiffView Should match snapshot 1`] = `
             <span
               class="c1"
             >
-              expandLinesOfCode
+              actionBuilder.ens.expandLinesOfCode
             </span>
           </a>
         </td>

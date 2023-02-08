@@ -50,7 +50,9 @@ export const isEnsName = (
   let validationError = null;
 
   if (!name) {
-    validationError = i18next.t('ens.validation.nameCannotBeEmpty');
+    validationError = i18next.t(
+      'actionBuilder.ens.validation.nameCannotBeEmpty'
+    );
     isValid = false;
     return { isValid, validationError };
   }
@@ -61,18 +63,22 @@ export const isEnsName = (
     element => element.length === 0
   );
   if (numberOfInvalidLabels.length > 0) {
-    validationError = i18next.t('ens.validation.domainNameInvalidLength');
+    validationError = i18next.t(
+      'actionBuilder.ens.validation.domainNameInvalidLength'
+    );
     isValid = false;
   }
 
   if (name.includes(' ')) {
-    validationError = i18next.t('ens.validation.domainNameCannotIncludeSpaces');
+    validationError = i18next.t(
+      'actionBuilder.ens.validation.domainNameCannotIncludeSpaces'
+    );
     isValid = false;
   }
 
   if (labelArray.length > 3) {
     validationError = i18next.t(
-      'ens.validation.domainCannotBeMoreThanThreeLevels'
+      'actionBuilder.ens.validation.domainCannotBeMoreThanThreeLevels'
     );
     isValid = false;
   }

@@ -129,14 +129,16 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
 
             return (
               <Control>
-                <ControlLabel>{t('recipient')}</ControlLabel>
+                <ControlLabel>
+                  {t('actionBuilder.inputs.recipient')}
+                </ControlLabel>
                 <ControlRow>
                   <AddressInput
                     {...field}
                     isInvalid={!!error}
                     name="recipient-address"
                     aria-label="recipient address input"
-                    placeholder={t('ethereumAddress')}
+                    placeholder={t('actionBuilder.inputs.ethereumAddress')}
                   />
                 </ControlRow>
                 {!!error && <Error>{error.message}</Error>}
@@ -154,7 +156,9 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
 
               return (
                 <Control>
-                  <ControlLabel>{t('amount')}</ControlLabel>
+                  <ControlLabel>
+                    {t('actionBuilder.inputs.amount')}
+                  </ControlLabel>
                   <ControlRow>
                     <TokenAmountInput
                       {...field}
@@ -179,12 +183,14 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
               return (
                 <>
                   <Control>
-                    <ControlLabel>{t('asset')}</ControlLabel>
+                    <ControlLabel>
+                      {t('actionBuilder.inputs.asset')}
+                    </ControlLabel>
                     <ControlRow onClick={() => setIsTokenPickerOpen(true)}>
                       <Input
                         {...field}
                         value={field.value?.symbol}
-                        placeholder={t('token')}
+                        placeholder={t('actionBuilder.inputs.token')}
                         isInvalid={!!error}
                         icon={
                           <div>
@@ -227,7 +233,7 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
           data-testid="submit-erc20transfer"
           type="submit"
         >
-          {t('saveAction')}
+          {t('actionBuilder.action.saveAction')}
         </Button>
       </form>
     </div>

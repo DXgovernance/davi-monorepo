@@ -52,7 +52,7 @@ const DurationInput: React.FC<DurationInputProps> = ({
       <Modal
         isOpen={isOpen}
         onDismiss={() => setIsOpen(false)}
-        header={t('selectDuration')}
+        header={t('duration.selectDuration')}
       >
         <MainWrapper>
           <Container>
@@ -94,7 +94,7 @@ const DurationInput: React.FC<DurationInputProps> = ({
             })}
           </Container>
           <StyledButton onClick={() => setIsOpen(false)} aria-label="Save">
-            {t('save')}
+            {t('actionBuilder.save')}
           </StyledButton>
         </MainWrapper>
       </Modal>

@@ -24,14 +24,14 @@ export const GuestActions: React.FC<GuestActionsProps> = ({
           backgroundColor={theme.colors.darkGreen1}
           onClick={onShowStakeModal}
         >
-          {t('join')}
+          {t('members.join')}
         </StyledButton>
       ) : (
         <Button
           onClick={onShowWalletModal}
           data-testid={'guest-action-connect-wallet'}
         >
-          {t('connectWallet')}
+          {t('connections.connectWallet')}
         </Button>
       )}
     </>

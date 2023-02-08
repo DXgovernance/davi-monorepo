@@ -330,7 +330,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
               class="c4 c5"
               data-testid="modal-title"
             >
-              addAction
+              actionBuilder.action.addAction
             </h2>
             <svg
               class="c6"
@@ -371,7 +371,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 <div
                   class="c10 c11 c12"
                 >
-                  core
+                  actionBuilder.core
                 </div>
                 <button
                   class="c13 c14"
@@ -387,7 +387,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         vector.svg
                       </svg>
                     </div>
-                    transfer
+                    actionBuilder.transfer.transfer
                   </div>
                 </button>
                 <button
@@ -403,7 +403,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         vector.svg
                       </svg>
                     </div>
-                    permissions.setPermissions
+                    actionBuilder.permissions.setPermissions
                   </div>
                 </button>
                 <button
@@ -419,7 +419,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         mint.svg
                       </svg>
                     </div>
-                    mintRep
+                    actionBuilder.mintRep.mintRep
                   </div>
                 </button>
                 <button
@@ -445,7 +445,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         />
                       </svg>
                     </div>
-                    setGuildConfig
+                    actionBuilder.config.setGuildConfig
                   </div>
                 </button>
               </div>
@@ -455,7 +455,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 <div
                   class="c10 c11 c12"
                 >
-                  externalContracts
+                  actionBuilder.externalContracts
                 </div>
               </div>
               <div
@@ -465,7 +465,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                   class="c17 c11 c12"
                   direction="row"
                 >
-                  advancedOptions
+                  actionBuilder.advanced.advancedOptions
                   <span
                     class="c18"
                     height="1.25rem"

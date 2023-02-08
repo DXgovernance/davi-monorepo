@@ -30,7 +30,7 @@ const RepMintInfoLine: React.FC<ActionViewProps> = ({ decodedCall }) => {
         <StyledMintIcon src={Mint} />
       </Segment>
       <Segment>
-        {t('mint')} {roundedRepPercent} %
+        {t('actionBuilder.repMint.mint')} {roundedRepPercent} %
       </Segment>
       <Segment>
         <FiArrowRight />

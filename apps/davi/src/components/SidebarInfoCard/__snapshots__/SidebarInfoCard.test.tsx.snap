@@ -103,7 +103,7 @@ Object {
           <h2
             class="c3 c4"
           >
-            information
+            proposal.information
           </h2>
         </div>
         <div
@@ -118,12 +118,12 @@ Object {
               <span
                 class="c8"
               >
-                consensusSystem
+                proposal.consensusSystem
               </span>
               <span
                 class="c8 c9"
               >
-                guilds.guild
+                dao.guild
               </span>
             </div>
             <div
@@ -132,7 +132,7 @@ Object {
               <span
                 class="c8"
               >
-                proposalDuration
+                proposal.proposalDuration
               </span>
               <span
                 class="c8 c9"
@@ -146,7 +146,7 @@ Object {
               <span
                 class="c8"
               >
-                quorum
+                proposal.quorum
               </span>
               <span
                 class="c8 c9"
@@ -259,7 +259,7 @@ Object {
         <h2
           class="c3 c4"
         >
-          information
+          proposal.information
         </h2>
       </div>
       <div
@@ -274,12 +274,12 @@ Object {
             <span
               class="c8"
             >
-              consensusSystem
+              proposal.consensusSystem
             </span>
             <span
               class="c8 c9"
             >
-              guilds.guild
+              dao.guild
             </span>
           </div>
           <div
@@ -288,7 +288,7 @@ Object {
             <span
               class="c8"
             >
-              proposalDuration
+              proposal.proposalDuration
             </span>
             <span
               class="c8 c9"
@@ -302,7 +302,7 @@ Object {
             <span
               class="c8"
             >
-              quorum
+              proposal.quorum
             </span>
             <span
               class="c8 c9"

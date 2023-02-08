@@ -332,7 +332,7 @@ exports[`ProposalTypes Should match snapshot 1`] = `
               />
             </svg>
           </div>
-          backToOverview
+          proposal.backToOverview
         </button>
       </div>
       <div
@@ -345,7 +345,7 @@ exports[`ProposalTypes Should match snapshot 1`] = `
             class="c7"
             size="2"
           >
-            createProposal
+            createPropsoal.createProposal
           </h2>
         </div>
         <div

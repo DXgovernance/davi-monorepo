@@ -108,7 +108,7 @@ const ProposalPage: React.FC = () => {
                   marginTop={'5px;'}
                 >
                   <FiArrowLeft style={{ marginRight: '15px' }} />{' '}
-                  {t('seeAllProposals')}
+                  {t('proposal.seeAllProposals')}
                 </IconButton>
               </StyledLink>
             }
@@ -157,7 +157,7 @@ const ProposalPage: React.FC = () => {
               )}
             </PageTitle>
             <Flex direction="row" justifyContent="left">
-              {t('createdBy')}
+              {t('proposal.createdBy')}
               <AddressButton address={proposal?.creator} />
             </Flex>
           </PageHeader>
@@ -168,7 +168,7 @@ const ProposalPage: React.FC = () => {
           <SidebarCard
             header={
               <SidebarCardHeaderSpaced>
-                <CardHeader>{t('discussionTitle')}</CardHeader>
+                <CardHeader>{t('discussions.discussionTitle')}</CardHeader>
               </SidebarCardHeaderSpaced>
             }
           >

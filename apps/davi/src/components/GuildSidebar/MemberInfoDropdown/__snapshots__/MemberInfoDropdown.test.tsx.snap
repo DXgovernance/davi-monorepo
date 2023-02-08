@@ -128,7 +128,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
         <div
           class="c5"
         >
-          votingPower
+          voting.votingPower
            
           <span>
             50%
@@ -137,7 +137,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
         <div
           class="c5"
         >
-          locked
+          members.locking.locked
            
           <span>
             0 GT
@@ -146,7 +146,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
         <div
           class="c5"
         >
-          unlockedIn
+          members.locking.unlockedIn
            
           <span>
             a day
@@ -156,7 +156,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
           class="c6 c7"
           data-testid="increase-voting-power-btn"
         >
-          increaseVotingPower
+          members.increaseVotingPower
         </button>
       </div>
     </div>
@@ -293,7 +293,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
         <div
           class="c5"
         >
-          votingPower
+          voting.votingPower
            
           <span>
             <div
@@ -317,7 +317,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
         <div
           class="c5"
         >
-          locked
+          members.locking.locked
            
           <span>
             <div
@@ -341,7 +341,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
         <div
           class="c5"
         >
-          unlockedIn
+          members.locking.unlockedIn
            
           <span>
             <div
@@ -366,7 +366,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
           class="c6 c7"
           data-testid="increase-voting-power-btn"
         >
-          increaseVotingPower
+          members.increaseVotingPower
         </button>
       </div>
     </div>
@@ -503,7 +503,7 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
         <div
           class="c5"
         >
-          votingPower
+          voting.votingPower
            
           <span>
             50%
@@ -512,7 +512,7 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
         <div
           class="c5"
         >
-          locked
+          members.locking.locked
            
           <span>
             0 GT
@@ -521,7 +521,7 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
         <div
           class="c5"
         >
-          unlockedIn
+          members.locking.unlockedIn
            
           <span>
             a day
@@ -531,7 +531,7 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
           class="c6 c7"
           data-testid="increase-voting-power-btn"
         >
-          increaseVotingPower
+          members.increaseVotingPower
         </button>
       </div>
     </div>
@@ -668,7 +668,7 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
         <div
           class="c5"
         >
-          votingPower
+          voting.votingPower
            
           <span>
             <div
@@ -692,7 +692,7 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
         <div
           class="c5"
         >
-          locked
+          members.locking.locked
            
           <span>
             <div
@@ -716,7 +716,7 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
         <div
           class="c5"
         >
-          unlockedIn
+          members.locking.unlockedIn
            
           <span>
             <div
@@ -741,7 +741,7 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
           class="c6 c7"
           data-testid="increase-voting-power-btn"
         >
-          increaseVotingPower
+          members.increaseVotingPower
         </button>
       </div>
     </div>

@@ -39,7 +39,7 @@ export const BalanceInfoLine = ({
   const { t } = useTranslation();
   return (
     <InfoRow>
-      <InfoLabel>{t('balance')}</InfoLabel>
+      <InfoLabel>{t('members.locking.balance')}</InfoLabel>
       <InfoValue>
         {token?.balance && token?.info ? (
           roundedBalance
@@ -74,7 +74,7 @@ export const VotingPowerInfoLine = ({
 
   return (
     <InfoRow>
-      <InfoLabel>{t('yourVotingPower')}</InfoLabel>
+      <InfoLabel>{t('members.yourVotingPower')}</InfoLabel>
       <InfoValue>
         {isStakeAmountValid ? (
           <>
@@ -112,7 +112,7 @@ export const UnlockDateInfoLine = ({
     <>
       {!isRepGuild && (
         <InfoRow>
-          <InfoLabel>{t('unlockDate')}</InfoLabel>
+          <InfoLabel>{t('members.locking.unlockDate')}</InfoLabel>
           <InfoValue>
             {isStakeAmountValid ? (
               <>

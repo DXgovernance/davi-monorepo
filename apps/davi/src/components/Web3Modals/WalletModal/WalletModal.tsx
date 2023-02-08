@@ -58,7 +58,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
 
   function getModalContent() {
     if (isConnected && chain?.unsupported) {
-      return <Container>{t('pleaseSwitchNetwork')}</Container>;
+      return <Container>{t('connections.pleaseSwitchNetwork')}</Container>;
     }
 
     if (!isConnected || isWalletListActive || isReadOnly(activeConnector)) {
@@ -85,12 +85,12 @@ export const WalletModal: React.FC<WalletModalProps> = ({
         <TransactionsList>
           {recentTransactions?.length === 0 ? (
             <TransactionsListHeading>
-              {t('yourTransactionsWillAppearHere')}
+              {t('transactions.yourTransactionsWillAppearHere')}
             </TransactionsListHeading>
           ) : (
             <>
               <TransactionsListHeading>
-                {t('recentTransactions')}
+                {t('transactions.recentTransactions')}
               </TransactionsListHeading>
               <Divider />
               {recentTransactions?.map(transaction => (
@@ -99,7 +99,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
               {recentTransactions?.length > 0 && (
                 <ButtonContainer>
                   <Button onClick={clearAllTransactions}>
-                    {t('clearAll')}
+                    {t('transactions.clearAll')}
                   </Button>
                 </ButtonContainer>
               )}
@@ -112,7 +112,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
 
   const getHeader = () => {
     if (isConnected && chain?.unsupported) {
-      return t('unsupportedNetwork');
+      return t('connections.unsupportedNetwork');
     }
 
     if (isConnected && isWalletListActive && !isReadOnly(activeConnector)) {
@@ -126,8 +126,8 @@ export const WalletModal: React.FC<WalletModalProps> = ({
     }
 
     return isConnected && !isReadOnly(activeConnector)
-      ? t('account')
-      : t('connectToAWallet');
+      ? t('connections.account')
+      : t('connections.connectToAWallet');
   };
 
   const getPrimaryAction = () => {
@@ -144,12 +144,14 @@ export const WalletModal: React.FC<WalletModalProps> = ({
 
   const getPrimaryActionLabel = () => {
     if (isConnected && isWalletListActive && !isReadOnly(activeConnector))
-      return t('disconnect');
+      return t('connections.disconnect');
 
     if (isConnected && chain?.unsupported) {
       const firstSupported = chains && chains?.length > 0 ? chains[0] : null;
 
-      return t('switchNetworkTo', { chainName: firstSupported?.name });
+      return t('connections.switchNetworkTo', {
+        chainName: firstSupported?.name,
+      });
     }
 
     return null;

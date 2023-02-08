@@ -126,7 +126,7 @@ exports[`NetworkButton Should match snapshot and display not connected status 1`
   <button
     class="c0"
   >
-    notConnected
+    connections.notConnected
   </button>
    
 </div>

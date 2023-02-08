@@ -26,7 +26,7 @@ const ContractActionsList: React.FC<ContractActionsListProps> = ({
       <SectionWrapper>
         <SectionTitle>
           {contract.functions.length}{' '}
-          {t('actions', {
+          {t('actionBuilder.action.actions', {
             count: contract.functions.length,
           })}
         </SectionTitle>

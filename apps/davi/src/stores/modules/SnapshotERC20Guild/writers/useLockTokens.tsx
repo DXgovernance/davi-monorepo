@@ -20,7 +20,10 @@ export const useLockTokens: IUseLockTokens = daoAddress => {
         : '';
 
       createTransaction(
-        t('lockingTokens', { amount: formattedAmount, symbol: symbol ?? '' }),
+        t('members.locking.lockingTokens', {
+          amount: formattedAmount,
+          symbol: symbol ?? '',
+        }),
         async () => guildContract?.lockTokens(amount)
       );
     },

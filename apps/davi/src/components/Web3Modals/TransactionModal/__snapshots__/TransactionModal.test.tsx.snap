@@ -356,7 +356,7 @@ exports[`TransactionModal Should match snapshot 1`] = `
               <div
                 class="c7 c13"
               >
-                transactionSubmitted
+                transactions.transactionSubmitted
               </div>
               <div
                 class="c14"
@@ -366,7 +366,7 @@ exports[`TransactionModal Should match snapshot 1`] = `
                   color="grey"
                   target="_blank"
                 >
-                  viewOnBlockExplorer
+                  transactions.viewOnBlockExplorer
                 </a>
               </div>
             </div>
@@ -377,7 +377,7 @@ exports[`TransactionModal Should match snapshot 1`] = `
             <button
               class="c17 c18"
             >
-              close
+              modals.close
             </button>
           </div>
         </div>

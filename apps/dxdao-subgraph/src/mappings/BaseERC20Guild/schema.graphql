@@ -55,6 +55,7 @@ type Vote @entity {
   id: ID!
   proposalId: String!
   option: BigInt!
+  optionLabel: String
   voter: String!
   votingPower: BigInt!
   transactionHash: String!

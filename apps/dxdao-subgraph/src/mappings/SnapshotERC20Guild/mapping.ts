@@ -1,17 +1,27 @@
 import { GuildInitialized } from '../../types/templates/SnapshotRepERC20Guild/SnapshotRepERC20Guild';
-import { ProposalStateChanged, VoteAdded } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
+import {
+  ProposalStateChanged,
+  VoteAdded,
+} from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
 import { BaseERC20Guild } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
 import { ERC20 } from '../../types/GuildRegistry/ERC20';
-import {   Guild,
+import {
+  Guild,
   Proposal,
   Vote,
   Option,
   Action,
-  ProposalStateLog,  
-  Token
+  ProposalStateLog,
+  Token,
 } from '../../types/schema';
-import { log, json, JSONValueKind, ipfs, BigInt } from '@graphprotocol/graph-ts';
-import { SnapshotERC20Guild } from "../../types/templates/SnapshotERC20Guild/SnapshotERC20Guild";
+import {
+  log,
+  json,
+  JSONValueKind,
+  ipfs,
+  BigInt,
+} from '@graphprotocol/graph-ts';
+import { SnapshotERC20Guild } from '../../types/templates/SnapshotERC20Guild/SnapshotERC20Guild';
 
 export function handleGuildInitialized(event: GuildInitialized): void {
   const guildAddress = event.address;
@@ -60,9 +70,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.save();
 }
 
-export function handleProposalStateChange(
-  event: ProposalStateChanged,
-): void {
+export function handleProposalStateChange(event: ProposalStateChanged): void {
   let address = event.address;
   let contract = SnapshotERC20Guild.bind(address);
 
@@ -240,6 +248,7 @@ export function handleVoting(event: VoteAdded): void {
         option.voteAmount = newVoteAmount;
         option.votes = optionVotesCopy;
         option.save();
+        vote.optionLabel = option.label;
       }
 
       proposal.save();
@@ -252,7 +261,7 @@ export function handleVoting(event: VoteAdded): void {
   vote.save();
 }
 
-
 function isIPFS(contentHash: string): boolean {
   return contentHash.substring(0, 7) == 'ipfs://';
 }
+

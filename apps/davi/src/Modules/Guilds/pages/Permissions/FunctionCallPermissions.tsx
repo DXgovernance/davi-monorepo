@@ -147,7 +147,9 @@ const FunctionCallPermissions = ({
   return (
     <>
       {dataState === 'error' && (
-        <Box margin={'24px 0 0 0'}>{t('permissions.dataNotAvailable')}.</Box>
+        <Box margin={'24px 0 0 0'}>
+          {t('actionBuilder.permissions.dataNotAvailable')}.
+        </Box>
       )}
 
       {dataState === 'loading' && (
@@ -158,7 +160,7 @@ const FunctionCallPermissions = ({
 
       {dataState === 'noPermissions' && (
         <Box margin={'24px 0 0 0'} data-testid={'no-permissions-message'}>
-          {t('permissions.noPermissionsSet')}.
+          {t('actionBuilder.permissions.noPermissionsSet')}.
         </Box>
       )}
 
@@ -167,10 +169,14 @@ const FunctionCallPermissions = ({
           <Table>
             <TableHead>
               <tr>
-                <TableHeader alignment={'left'}>{t('contract')}</TableHeader>
-                <TableHeader alignment={'left'}>{t('function')}</TableHeader>
+                <TableHeader alignment={'left'}>
+                  {t('actionBuilder.inputs.contract')}
+                </TableHeader>
+                <TableHeader alignment={'left'}>
+                  {t('actionBuilder.permissions.function')}
+                </TableHeader>
                 <TableHeader alignment={'right'}>
-                  {t('allowedAmount')}
+                  {t('actionBuilder.permissions.allowedAmount')}
                 </TableHeader>
               </tr>
             </TableHead>
@@ -187,7 +193,9 @@ const FunctionCallPermissions = ({
             </tbody>
           </Table>
           <ToggleContainer>
-            <ToggleLabel>{t('advancedView')}</ToggleLabel>
+            <ToggleLabel>
+              {t('actionBuilder.advanced.advancedView')}
+            </ToggleLabel>
             <Toggle
               value={showAdvancedView}
               onChange={() => setShowAdvancedView(!showAdvancedView)}

@@ -314,7 +314,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          permissions.permissions
+          actionBuilder.permissions.permissions
         </div>
       </a>
       <a
@@ -626,7 +626,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          permissions.permissions
+          actionBuilder.permissions.permissions
         </div>
       </a>
       <a

@@ -98,7 +98,7 @@ const Governance = ({ guildId }) => {
             variant="primaryWithBorder"
             data-testid="create-discussion-button"
           >
-            {t('forum.createDiscussion')}
+            {t('discussions.createDiscussion')}
           </Button>
         </StyledLink>
       </Flex>

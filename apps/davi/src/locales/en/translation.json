@@ -95,9 +95,12 @@
       "tokenAmount": "Token Amount",
       "recipient": "Recipient",
       "ethereumAddress": "Ethereum Address",
-      "toAddress": "To Address"
+      "toAddress": "To Address",
+      "address": "Address",
+      "contract": "Contract"
     },
     "permissions": {
+      "permissions": "Permissions",
       "anyAddress": "Any Address",
       "maxValue": "Max Value",
       "setPermissions": "Set Permissions",
@@ -108,11 +111,15 @@
       "permissionDeniedMessage": "The DAO does not have permission to perform this action",
       "warningMessage": "Warning",
       "proposalNotExecuted": "This proposal can't be executed. Are you sure you want to continue?",
+      "function": "Function",
       "functionName": "Function Name",
       "functionSignature": "Function Signature",
       "assetTransfer": "Asset Transfer",
       "functionCall": "Function Call",
-      "functionCalls": "Function Calls"
+      "functionCalls": "Function Calls",
+      "noPermissionsSet": "No permissions set",
+      "dataNotAvailable": "Permissions data not available",
+      "allowedAmount": "Allowed amount"
     },
     "transfer": {
       "transfer": "Transfer",
@@ -170,7 +177,8 @@
       "advancedOptions": "Advanced options",
       "rawTransaction": "Raw transaction",
       "value": "Value",
-      "data": "Data"
+      "data": "Data",
+      "advancedView": "Advanced view"
     },
     "simulations": {
       "simulateTransactions": "Simulate transactions",

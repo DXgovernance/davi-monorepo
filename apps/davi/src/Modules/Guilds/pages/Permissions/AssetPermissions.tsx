@@ -95,9 +95,12 @@ const AssetPermissionRow = ({ token }: IAssetPermissionRow) => {
     const canTransfer =
       fromTime === '0' || fromTime === undefined ? false : true;
 
-    if (hasApproval && canTransfer) return `${t('approve')} & ${t('transfer')}`;
-    else if (hasApproval) return t('approve');
-    else if (canTransfer) return t('transfer');
+    if (hasApproval && canTransfer)
+      return `${t('actionBuilder.approval.approve')} & ${t(
+        'actionBuilder.transfer.transfer'
+      )}`;
+    else if (hasApproval) return t('actionBuilder.approval.approve');
+    else if (canTransfer) return t('actionBuilder.transfer.transfer');
     return null;
   }, [t, token?.fromTime, token?.hasApproval]);
 
@@ -182,7 +185,9 @@ const AssetPermissions = ({ tokenPermissions }: IAssetPermissions) => {
   return (
     <>
       {dataState === 'error' && (
-        <Box margin={'24px 0 0 0'}>{t('permissions.dataNotAvailable')}.</Box>
+        <Box margin={'24px 0 0 0'}>
+          {t('actionBuilder.permissions.dataNotAvailable')}.
+        </Box>
       )}
 
       {dataState === 'loading' && (
@@ -193,7 +198,7 @@ const AssetPermissions = ({ tokenPermissions }: IAssetPermissions) => {
 
       {dataState === 'noPermissions' && (
         <Box margin={'24px 0 0 0'} data-testid={'no-permissions-message'}>
-          {t('permissions.noPermissionsSet')}.
+          {t('actionBuilder.permissions.noPermissionsSet')}.
         </Box>
       )}
 
@@ -201,13 +206,17 @@ const AssetPermissions = ({ tokenPermissions }: IAssetPermissions) => {
         <Table>
           <TableHead>
             <tr>
-              <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
-              <TableHeader alignment={'left'}>{t('assetAddress')}</TableHeader>
-              <TableHeader alignment={'right'}>
-                {t('allowedAmount')}
+              <TableHeader alignment={'left'}>
+                {t('actionBuilder.inputs.asset')}
+              </TableHeader>
+              <TableHeader alignment={'left'}>
+                {t('actionBuilder.inputs.address')}
               </TableHeader>
               <TableHeader alignment={'right'}>
-                {t('permissions.permissions')}
+                {t('actionBuilder.permissions.allowedAmount')}
+              </TableHeader>
+              <TableHeader alignment={'right'}>
+                {t('actionBuilder.permissions.permissions')}
               </TableHeader>
             </tr>
           </TableHead>

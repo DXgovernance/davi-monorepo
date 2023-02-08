@@ -34,14 +34,18 @@ const Permissions = () => {
           position="left"
           onClick={() => setActiveTab('assets')}
         >
-          <Heading size={2}>{t('assetPermissions')}</Heading>
+          <Heading size={2}>
+            {t('actionBuilder.permissions.assetTransfer')}
+          </Heading>
         </TabContent>
         <TabContent
           active={activeTab === 'functionCalls'}
           position="right"
           onClick={() => setActiveTab('functionCalls')}
         >
-          <Heading size={2}>{t('functionCallPermissions')}</Heading>
+          <Heading size={2}>
+            {t('actionBuilder.permissions.functionCalls')}
+          </Heading>
         </TabContent>
       </TabContainer>
 

@@ -93,7 +93,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
         </StyledLink>
         <StyledLink to={locations.permissions}>
           <SidebarMenuItem current={pathname === locations.permissions}>
-            {t('permissions.permissions')}
+            {t('actionBuilder.permissions.permissions')}
           </SidebarMenuItem>
         </StyledLink>
         <StyledLink to={locations.treasury}>

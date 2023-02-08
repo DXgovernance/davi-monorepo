@@ -175,7 +175,7 @@ const ProposalPage: React.FC = () => {
             proposal={proposal}
             proposalMetadata={metadata}
           />
-          <ProposalVotesCard proposal={proposal} />
+          <ProposalVotesCard votes={proposal?.votes} />
           <ProposalInfoCard
             proposal={proposal}
             guildConfig={guildConfig}

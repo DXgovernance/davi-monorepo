@@ -1,7 +1,7 @@
 import { Proposal } from 'types/types.guilds.d';
 
 export interface ProposalVotesCardProps {
-  proposal: Proposal;
+  votes: Proposal['votes'];
 }
 
 export interface Vote {

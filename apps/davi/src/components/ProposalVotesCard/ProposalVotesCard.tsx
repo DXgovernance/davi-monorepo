@@ -10,10 +10,8 @@ import { VoteRow } from './components';
 import { ProposalVotesCardProps } from './types';
 import { VotesAmount, VotesAmountWrapper } from './ProposalVotesCard.styled';
 
-const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({ proposal }) => {
+const ProposalVotesCard: React.FC<ProposalVotesCardProps> = ({ votes }) => {
   const { t } = useTranslation();
-
-  const votes = proposal?.votes;
 
   if (!votes) return null;
 

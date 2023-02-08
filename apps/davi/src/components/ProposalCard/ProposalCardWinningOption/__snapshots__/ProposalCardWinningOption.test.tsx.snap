@@ -63,7 +63,11 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c2 {
@@ -450,7 +454,11 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c2 {
@@ -654,7 +662,11 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c2 {
@@ -872,7 +884,11 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c2 {
@@ -1074,7 +1090,11 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c2 {

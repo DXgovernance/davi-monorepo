@@ -134,7 +134,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
           <div
             class="c0 c6"
           >
-            name.eth
+            wagmi.eth
           </div>
           <svg
             fill="none"
@@ -293,7 +293,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
             class="c8 c9"
             data-testid="avatar"
             size="24"
-            src="https://metadata.ens.domains/mainnet/avatar/name.eth"
+            src="https://example.com/image.png"
           />
         </span>
         <a
@@ -304,7 +304,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
           <div
             class="c0 c6"
           >
-            name.eth
+            wagmi.eth
           </div>
           <svg
             fill="none"

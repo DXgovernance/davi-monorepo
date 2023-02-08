@@ -11,6 +11,7 @@ export const SidebarCardHeader = styled(Heading)`
 export const SidebarCardHeaderSpaced = styled(SidebarCardHeader)`
   display: flex;
   justify-content: space-between;
+  color: ${({ theme }) => theme.colors.yellow};
 `;
 
 export const SidebarCardContent = styled(Box)`
@@ -22,4 +23,10 @@ export const cardWrapperStyles = css`
   margin-bottom: 1rem;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   background-color: ${({ theme }) => theme.colors.bg1};
+`;
+
+export const SidebarCardContentWrapper = styled(Box)`
+  overflow: auto;
+  max-height: 10rem;
+  margin-bottom: 1rem;
 `;

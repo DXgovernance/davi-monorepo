@@ -266,6 +266,10 @@
     "members_zero": "No Members",
     "members_one": "{{count}} Member",
     "members_other": "{{count}} Members",
+    "member": "Member",
+    "searchMemberOrAddress": "Search member or address",
+    "noMembers": "This DAO has no members",
+    "membersNotAvailable": "Member data is not available",
     "join": "Join",
     "yourVotingPower": "Your Voting Power",
     "increaseVotingPower": "Increase Voting Power",
@@ -393,6 +397,8 @@
     "youAreNotOnline": "You are not Online",
     "pleaseCheckYourInternetConnection": "Please check your internet connection"
   },
+  "loadingDao": "Loading DAO",
+  "votes": "Votes",
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },

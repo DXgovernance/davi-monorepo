@@ -20,14 +20,14 @@ import { Button } from 'components/primitives/Button';
 const Governance = ({ guildId }) => {
   const {
     hooks: {
-      fetchers: { useGetActiveProposals },
+      fetchers: { useGetNumberOfActiveProposals },
     },
   } = useHookStoreProvider();
 
   const { isLoading } = useContext(GuildAvailabilityContext);
   const { data: proposalIds, error } = useGuildProposalIds(guildId);
   const { t } = useTranslation();
-  const { data: activeProposals } = useGetActiveProposals(guildId);
+  const { data: activeProposals } = useGetNumberOfActiveProposals(guildId);
   const { chainName } = useTypedParams();
 
   /*

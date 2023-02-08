@@ -23,13 +23,18 @@ const GuildCardLoader = () => {
 const GuildCardWithContent = ({ guildAddress, t }) => {
   const {
     hooks: {
-      fetchers: { useGuildConfig, useGetActiveProposals, useMemberCount },
+      fetchers: {
+        useGuildConfig,
+        useGetNumberOfActiveProposals,
+        useMemberCount,
+      },
     },
   } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildAddress);
 
   const { data: numberOfMembers } = useMemberCount(guildAddress);
-  const { data: numberOfActiveProposals } = useGetActiveProposals(guildAddress);
+  const { data: numberOfActiveProposals } =
+    useGetNumberOfActiveProposals(guildAddress);
   const ensName = useENSNameFromAddress(guildAddress)?.ensName?.split('.')[0];
 
   return (

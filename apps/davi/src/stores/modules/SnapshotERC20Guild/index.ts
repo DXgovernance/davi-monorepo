@@ -7,7 +7,12 @@ import {
   useVoteOnProposal,
   useWithdrawTokens,
 } from './writers';
-import { useGuildConfig as useGuildConfigFromSubgraph } from '../subgraph/common/useGuildConfig';
+import {
+  useGuildConfig as useGuildConfigFromSubgraph,
+  useGetMemberList as useGetMemberListFromSubgraph,
+  useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useGetVotes as useGetVotesFromSubgraph,
+} from '../subgraph/common';
 
 import {
   useProposal,
@@ -19,7 +24,9 @@ import {
   useVotingResults,
   useGetPermissions,
   useGuildConfig,
-  useGetActiveProposals,
+  useGetVotes,
+  useGetMemberList,
+  useGetNumberOfActiveProposals,
 } from '../common/fetchers';
 import {
   useTotalLocked,
@@ -34,10 +41,6 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-/*
-  I left this case purposefully with just one data source (default),
-  to show that a governance implementation doesn't need two sources.
-*/
 
 export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementation> =
   {
@@ -65,7 +68,10 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig: useGuildConfigFromSubgraph,
-          useGetActiveProposals,
+          useGetVotes: useGetVotesFromSubgraph,
+          useGetMemberList: useGetMemberListFromSubgraph,
+          useGetNumberOfActiveProposals:
+            useGetNumberOfActiveProposalsFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -81,7 +87,9 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useMemberCount,
           useGetPermissions,
           useGuildConfig,
-          useGetActiveProposals,
+          useGetVotes,
+          useGetMemberList,
+          useGetNumberOfActiveProposals,
         },
       },
       writers: {

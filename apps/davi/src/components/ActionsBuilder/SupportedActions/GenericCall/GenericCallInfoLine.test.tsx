@@ -69,6 +69,10 @@ jest.mock('wagmi', () => ({
   },
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('GenericCallInfoLine', () => {
   it('Should match snapshot', () => {
     const { container } = render(

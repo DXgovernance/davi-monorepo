@@ -299,6 +299,16 @@ exports[`GuildSidebar Should render with data 1`] = `
       </a>
       <a
         class="c13"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/members"
+      >
+        <div
+          class="c14"
+        >
+          members
+        </div>
+      </a>
+      <a
+        class="c13"
         href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/treasury"
       >
         <div
@@ -587,6 +597,16 @@ exports[`GuildSidebar Should render without data 1`] = `
           class="c12"
         >
           discussions.allDiscussions
+        </div>
+      </a>
+      <a
+        class="c11"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/members"
+      >
+        <div
+          class="c12"
+        >
+          members
         </div>
       </a>
       <a

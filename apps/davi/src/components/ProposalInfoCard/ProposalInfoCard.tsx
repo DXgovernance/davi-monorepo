@@ -4,7 +4,11 @@ import {
   InfoDetailMuted,
   ProposalHistoryIcon,
 } from './ProposalInfoCard.styled';
-import { SidebarCard, SidebarCardContent } from 'components/SidebarCard';
+import {
+  SidebarCard,
+  SidebarCardContent,
+  SidebarCardHeaderSpaced,
+} from 'components/SidebarCard';
 import { Loading } from 'components/primitives/Loading';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { duration } from 'moment';
@@ -21,7 +25,11 @@ const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
   const { t } = useTranslation();
 
   return (
-    <SidebarCard header={t('proposal.information')}>
+    <SidebarCard
+      header={
+        <SidebarCardHeaderSpaced>{t('proposal.information')}</SidebarCardHeaderSpaced>
+      }
+    >
       <SidebarCardContent>
         <InfoDetail>
           <span>{t('proposal.proposalInfoCard.consensusSystem')}</span>

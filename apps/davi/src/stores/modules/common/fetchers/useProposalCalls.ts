@@ -15,6 +15,7 @@ import { useVotingResults } from './useVotingResults';
 
 import { FetcherHooksInterface } from 'stores/types';
 import { Proposal } from 'types/types.guilds.d';
+import { getOptionLabel } from 'utils/guildsProposals';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
@@ -133,11 +134,7 @@ export const useProposalCalls: IUseProposalCalls = (
               return call;
             })
           );
-          const optionLabel = optionLabels?.[index]
-            ? optionLabels?.[index]
-            : index === 0
-            ? t('against', { defaultValue: 'Against' })
-            : null;
+          const optionLabel = getOptionLabel({ metadata, optionKey: index, t });
 
           return {
             id: `option-${index}`,

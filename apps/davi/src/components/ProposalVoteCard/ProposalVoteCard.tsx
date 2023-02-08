@@ -24,7 +24,7 @@ import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
 import { hasVotingPowerProps, ProposalVoteCardProps } from './types';
 import { useTranslation } from 'react-i18next';
-import { getOptionLabel } from 'components/ProposalVoteCard/utils';
+import { getOptionLabel } from 'utils/guildsProposals';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useHookStoreProvider } from 'stores';
 

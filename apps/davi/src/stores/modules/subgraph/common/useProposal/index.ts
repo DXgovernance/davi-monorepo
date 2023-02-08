@@ -10,6 +10,7 @@ import { useHookStoreProvider } from 'stores';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import { useTranslation } from 'react-i18next';
+import { getOptionLabel } from 'utils/guildsProposals';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -61,11 +62,15 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     const totalVotesBN = totalVotes.map((vote: string) => BigNumber.from(vote));
 
     const parsedVotes = votes?.map(vote => {
+      const optionLabel = getOptionLabel({
+        metadata: proposalMetadata,
+        optionKey: vote.option,
+        t,
+      });
+
       return {
         voter: vote.voter as `0x${string}`,
-        optionLabel: proposalMetadata?.voteOptions[vote.option]
-          ? proposalMetadata.voteOptions[vote.option]
-          : t('against'),
+        optionLabel,
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
           totalLocked,
@@ -90,7 +95,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       votes: parsedVotes,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
     };
-  }, [proposal, proposalMetadata?.voteOptions, t, totalLocked]);
+  }, [proposal, proposalMetadata, t, totalLocked]);
 
   const { options } = useProposalCalls(daoId, proposalId, parsedData);
 

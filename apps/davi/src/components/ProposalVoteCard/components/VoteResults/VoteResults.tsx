@@ -5,7 +5,7 @@ import { Loading } from 'components/primitives/Loading';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { getOptionLabel } from 'components/ProposalVoteCard/utils';
+import { getOptionLabel } from 'utils/guildsProposals';
 import {
   ResultRowProps,
   VoteResultsProps,

@@ -3,14 +3,13 @@ import { BigNumber } from 'ethers';
 import { useHookStoreProvider } from 'stores';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { FetcherHooksInterface } from 'stores/types';
-import { Proposal } from 'types/types.guilds.d';
 
 type IUseVotingResults = FetcherHooksInterface['useVotingResults'];
 
 export const useVotingResults: IUseVotingResults = (
-  daoId: string,
-  proposalId: `0x${string}`,
-  proposal: Proposal
+  daoId,
+  proposalId,
+  totalVotes
 ): VoteData => {
   const {
     hooks: {
@@ -25,8 +24,8 @@ export const useVotingResults: IUseVotingResults = (
   const { data: totalLocked } = useTotalLocked(daoId, proposalId);
 
   const voteData = useMemo(() => {
-    if (!proposal || !data || !tokenInfo) return undefined;
-    const options = proposal?.totalVotes.reduce<Record<string, BigNumber>>(
+    if (!totalVotes || !data || !tokenInfo) return undefined;
+    const options = totalVotes.reduce<Record<string, BigNumber>>(
       (acc, result, i) => {
         acc[i] = result;
         return acc;
@@ -40,7 +39,7 @@ export const useVotingResults: IUseVotingResults = (
       totalLocked,
       token: tokenInfo,
     };
-  }, [data, proposal, tokenInfo, totalLocked]);
+  }, [data, tokenInfo, totalLocked, totalVotes]);
 
   return voteData;
 };

@@ -32,7 +32,11 @@ export const useProposalCalls: IUseProposalCalls = (
   // Decode calls from existing proposal
 
   const { data: metadata } = useProposalMetadata(proposal?.contentHash);
-  const votingResults = useVotingResults(daoId, proposalId, proposal);
+  const votingResults = useVotingResults(
+    daoId,
+    proposalId,
+    proposal?.totalVotes
+  );
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
   const { t } = useTranslation();

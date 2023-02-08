@@ -1,0 +1,11 @@
+query getVotes($id: ID!) {
+  proposal(id: $id) {
+    votes {
+      voter
+      votingPower
+      optionLabel
+      option
+    }
+  }
+}
+

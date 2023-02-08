@@ -59,7 +59,6 @@ export const ActionWrapper = styled.div`
 export const ConfirmButton = styled(CommonButton)`
   height: 40px;
   margin: 0 8px;
-  border: 0;
   flex: 1;
   margin-right: 0;
 `;

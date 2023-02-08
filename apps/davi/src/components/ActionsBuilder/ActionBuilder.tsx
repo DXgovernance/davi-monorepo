@@ -36,7 +36,7 @@ export const ActionsBuilder: React.FC<ActionsBuilderProps> = ({
     <SidebarCard
       header={
         <SidebarCardHeaderSpaced>
-          <CardHeader>{t('actionBuidler.action.actions_other')}</CardHeader>
+          <CardHeader>{t('actionBuilder.action.actions_other')}</CardHeader>
           {editable && (
             <EditButton
               variant="secondary"

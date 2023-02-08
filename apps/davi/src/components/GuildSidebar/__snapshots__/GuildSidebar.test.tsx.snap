@@ -304,7 +304,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          members
+          members.members
         </div>
       </a>
       <a
@@ -606,7 +606,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          members
+          members.members
         </div>
       </a>
       <a

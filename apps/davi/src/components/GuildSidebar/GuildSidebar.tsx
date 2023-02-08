@@ -87,7 +87,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
         </StyledLink>
         <StyledLink to={locations.members}>
           <SidebarMenuItem current={pathname === locations.members}>
-            {t('members')}
+            {t('members.members')}
           </SidebarMenuItem>
         </StyledLink>
         <StyledLink to={locations.treasury}>

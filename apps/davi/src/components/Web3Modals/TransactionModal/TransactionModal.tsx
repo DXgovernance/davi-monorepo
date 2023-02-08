@@ -43,12 +43,12 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
           <Flex>
             <Container>
               <ContainerText variant="bold">
-                {t('waitingForConfirmation')}
+                {t('transactions.waitingForConfirmation')}
               </ContainerText>
               <ContainerText variant="medium">{message}</ContainerText>
             </Container>
             <ContainerText variant="medium" color="grey">
-              {t('confirmThisTransactionInYourWallet')}
+              {t('transactions.confirmThisTransactionInYourWallet')}
             </ContainerText>
           </Flex>
         );
@@ -65,7 +65,7 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
         children = (
           <Flex>
             <ContainerText variant="bold">
-              {t('transactionSubmitted')}
+              {t('transactions.transactionSubmitted')}
             </ContainerText>
             <Container>
               <ContainerText
@@ -75,12 +75,12 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
                 href={getBlockExplorerUrl(chain, transactionHash, 'tx')}
                 target="_blank"
               >
-                {t('viewOnBlockExplorer')}
+                {t('transactions.viewOnBlockExplorer')}
               </ContainerText>
             </Container>
           </Flex>
         );
-        footerText = t('close');
+        footerText = t('modals.close');
         break;
       case TransactionModalView.Reject:
         header = (
@@ -93,11 +93,11 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
         children = (
           <Flex>
             <ContainerText variant="bold">
-              {t('transactionRejected')}
+              {t('transactions.transactionRejected')}
             </ContainerText>
           </Flex>
         );
-        footerText = t('dismiss');
+        footerText = t('modals.dismiss');
         break;
     }
 

@@ -50,9 +50,7 @@ export function handleConfigChange(call: SetConfigCall): void {
   guild.save();
 }
 
-export function handleProposalStateChange(
-  event: ProposalStateChanged,
-): void {
+export function handleProposalStateChange(event: ProposalStateChanged): void {
   let address = event.address;
   let contract = BaseERC20Guild.bind(address);
 
@@ -230,6 +228,8 @@ export function handleVoting(event: VoteAdded): void {
         option.voteAmount = newVoteAmount;
         option.votes = optionVotesCopy;
         option.save();
+
+        vote.optionLabel = option.label;
       }
 
       proposal.save();

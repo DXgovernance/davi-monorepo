@@ -13,7 +13,7 @@ describe('NetworkButton', () => {
   it('Should match snapshot and display not connected status', () => {
     const { container, getByText } = render(<NetworkButton />);
     expect(container).toMatchSnapshot();
-    expect(getByText('notConnected')).toBeInTheDocument();
+    expect(getByText('connections.notConnected')).toBeInTheDocument();
   });
 
   it('Should match snapshot and display network', () => {

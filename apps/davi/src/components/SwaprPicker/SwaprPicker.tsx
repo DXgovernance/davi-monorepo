@@ -106,7 +106,7 @@ const SwaprPicker: React.FC<SwaprPickerProps> = ({ value, onChange }) => {
       )}
       <Picker
         data={parsedPairs}
-        header={t('pickSwaprPair')}
+        header={t('actionBuilder.pickSwaprPair')}
         isOpen={isModalOpen}
         onSelect={onSelect}
         onClose={() => setIsModalOpen(false)}

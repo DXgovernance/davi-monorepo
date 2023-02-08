@@ -81,7 +81,9 @@ function Discussion({
 
   const handleDeletion = async (post: IOrbisPost) => {
     const confirmed = window.confirm(
-      `${t('deletionMessage1')}'\r\n${t('deletionMessage2')}`
+      `${t('discussions.activity.deletionMessage1')}'\r\n${t(
+        'discussions.activity.deletionMessage2'
+      )}`
     );
     if (confirmed) {
       const res = await orbis.deletePost(post.stream_id);
@@ -126,7 +128,7 @@ function Discussion({
         ) : (
           <DiscussionEmpty>
             <VscCommentDiscussion size={56} />
-            <Box>{t('discussionEmpty')}</Box>
+            <Box>{t('discussions.activity.discussionEmpty')}</Box>
           </DiscussionEmpty>
         )}
       </DiscussionMasterPosts>
@@ -134,7 +136,7 @@ function Discussion({
       {hasMore && (
         <DiscussionLoadMore>
           <LoadMoreButton onClick={() => getPosts({})}>
-            {t('discussionLoadMore')}
+            {t('discussions.activity.discussionLoadMore')}
           </LoadMoreButton>
         </DiscussionLoadMore>
       )}

@@ -75,14 +75,14 @@ const FilterMenu = () => {
             setShowState(!showState);
           }}
         >
-          {t('state')} <FiChevronDown />
+          {t('filter.state')} <FiChevronDown />
         </FilterButton>
         <DropdownContent fullScreenMobile={true} show={showState}>
           {isMobile && (
             <DropdownHeader onClick={() => setShowState(false)}>
-              <FiArrowLeft /> <span>{t('state')}</span>{' '}
+              <FiArrowLeft /> <span>{t('filter.state')}</span>{' '}
               <FilterResetMobile onClick={onResetState}>
-                {t('reset')}
+                {t('filter.reset')}
               </FilterResetMobile>
             </DropdownHeader>
           )}
@@ -101,7 +101,7 @@ const FilterMenu = () => {
           </Menu>
           {isDesktop && countStateSelected > 0 && (
             <FilterResetDesktop onClick={onResetState}>
-              {t('reset')}
+              {t('filter.reset')}
             </FilterResetDesktop>
           )}
         </DropdownContent>
@@ -113,14 +113,14 @@ const FilterMenu = () => {
           iconRight
           onClick={() => setShowType(!showType)}
         >
-          {t('actions_one')} <FiChevronDown />
+          {t('filter.actions_one')} <FiChevronDown />
         </FilterButton>
         <DropdownContent fullScreenMobile={true} show={showType}>
           {isMobile && (
             <DropdownHeader onClick={() => setShowType(false)}>
-              <FiArrowLeft /> <span> {t('type')}</span>{' '}
+              <FiArrowLeft /> <span> {t('filter.type')}</span>{' '}
               <FilterResetMobile onClick={onResetActionType}>
-                {t('reset')}
+                {t('filter.reset')}
               </FilterResetMobile>
             </DropdownHeader>
           )}
@@ -138,7 +138,7 @@ const FilterMenu = () => {
           </Menu>
           {isDesktop && countActionTypeSelected > 0 && (
             <FilterResetDesktop onClick={onResetActionType}>
-              {t('reset')}
+              {t('filter.reset')}
             </FilterResetDesktop>
           )}
         </DropdownContent>
@@ -151,14 +151,14 @@ const FilterMenu = () => {
             iconRight
             onClick={() => setShowCurrency(!showCurrency)}
           >
-            {t('currency')} <FiChevronDown />
+            {t('filter.currency')} <FiChevronDown />
           </FilterButton>
           <DropdownContent fullScreenMobile={true} show={showCurrency}>
             {isMobile && (
               <DropdownHeader onClick={() => setShowCurrency(false)}>
-                <FiArrowLeft /> <span>{t('currency')}</span>
+                <FiArrowLeft /> <span>{t('filter.currency')}</span>
                 <FilterResetMobile onClick={onResetCurrency}>
-                  {t('reset')}
+                  {t('filter.reset')}
                 </FilterResetMobile>
               </DropdownHeader>
             )}
@@ -178,7 +178,7 @@ const FilterMenu = () => {
             </Menu>
             {isDesktop && countCurrencySelected > 0 && (
               <FilterResetDesktop onClick={onResetCurrency}>
-                {t('reset')}
+                {t('filter.reset')}
               </FilterResetDesktop>
             )}
           </DropdownContent>

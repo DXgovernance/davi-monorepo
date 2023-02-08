@@ -113,7 +113,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.domain
+    actionBuilder.ens.domain
   </div>
   <div
     class="c0 c1"
@@ -167,7 +167,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.currentContent
+    actionBuilder.ens.currentContent
   </div>
   <div
     class="c0 c1"
@@ -216,7 +216,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.newContent
+    actionBuilder.ens.newContent
   </div>
   <div
     class="c0 c1"
@@ -265,7 +265,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    interactWith
+    actionBuilder.interactWith
      
     <span>
       0.0

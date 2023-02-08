@@ -90,7 +90,7 @@ const Governance = ({ guildId }) => {
             setSearchQuery(e.target.value);
           }}
           icon={<AiOutlineSearch size={24} />}
-          placeholder={t('searchTitleEnsAddress')}
+          placeholder={t('filter.searchTitleEnsAddress')}
           marginRight={'1rem'}
         />
         <StyledLink to={`/${chainName}/${guildId}/create`}>
@@ -103,15 +103,15 @@ const Governance = ({ guildId }) => {
         </StyledLink>
       </Flex>
       <ProposalsList data-testid="proposals-list">
-        <StyledHeading size={2}>{t('proposals')}</StyledHeading>
+        <StyledHeading size={2}>{t('proposals.proposals')}</StyledHeading>
         {activeProposals && activeProposals._hex === '0x00' && (
           <div data-testid="no-active-proposals-message">
-            {t('noActiveProposalsMessage')}.{' '}
+            {t('proposals.noActiveProposalsMessage')}.{' '}
             <StyledLink
               data-testid="all-proposals-hyperlink"
               to={`/${chainName}/${guildId}/all-proposals`}
             >
-              {t('goToAllProposalsPage')}.
+              {t('proposals.goToAllProposalsPage')}.
             </StyledLink>
           </div>
         )}
@@ -132,7 +132,9 @@ const Governance = ({ guildId }) => {
         )}
       </ProposalsList>
       <ProposalsList>
-        <StyledHeading size={2}>{t('forum.discussions_other')}</StyledHeading>
+        <StyledHeading size={2}>
+          {t('discussions.discussions_other')}
+        </StyledHeading>
         <Discussions />
       </ProposalsList>
     </>

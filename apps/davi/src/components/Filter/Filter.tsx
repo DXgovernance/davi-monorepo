@@ -48,7 +48,7 @@ export const Filter: React.FC<FilterProps> = ({
       <FilterRow>
         {isMobile && !isProposalCreationAllowed && (
           <FilterButton onClick={() => setViewFilter(!viewFilter)}>
-            {t('filter')}
+            {t('filter.filter')}
             {totalFilters > 0 && <FilterBadge>{totalFilters}</FilterBadge>}
           </FilterButton>
         )}
@@ -70,7 +70,7 @@ export const Filter: React.FC<FilterProps> = ({
                   variant="primaryWithBorder"
                   data-testid="create-proposal-button"
                 >
-                  {t('createProposal')}
+                  {t('createProposal.createProposal')}
                 </Button>
               </StyledLink>
             </>
@@ -87,7 +87,7 @@ export const Filter: React.FC<FilterProps> = ({
               setSearchQuery(e.target.value);
             }}
             icon={<AiOutlineSearch size={24} />}
-            placeholder={t('searchTitleEnsAddress')}
+            placeholder={t('filter.searchTitleEnsAddress')}
           />
         </StyledInputWrapper>
       ) : null}

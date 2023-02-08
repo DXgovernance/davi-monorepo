@@ -38,6 +38,7 @@ import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
 import { useHookStoreProvider } from 'stores';
+import { ProposalVotesCard } from 'components/ProposalVotesCard';
 import { Flex } from 'components/primitives/Layout';
 import { IconButton } from 'components/primitives/Button';
 
@@ -107,7 +108,7 @@ const ProposalPage: React.FC = () => {
                   marginTop={'5px;'}
                 >
                   <FiArrowLeft style={{ marginRight: '15px' }} />{' '}
-                  {t('seeAllProposals')}
+                  {t('proposal.seeAllProposals')}
                 </IconButton>
               </StyledLink>
             }
@@ -156,7 +157,7 @@ const ProposalPage: React.FC = () => {
               )}
             </PageTitle>
             <Flex direction="row" justifyContent="left">
-              {t('createdBy')}
+              {t('proposal.createdBy')}
               <AddressButton address={proposal?.creator} />
             </Flex>
           </PageHeader>
@@ -167,7 +168,9 @@ const ProposalPage: React.FC = () => {
           <SidebarCard
             header={
               <SidebarCardHeaderSpaced>
-                <CardHeader>{t('discussionTitle')}</CardHeader>
+                <CardHeader>
+                  {t('discussions.activity.discussionTitle')}
+                </CardHeader>
               </SidebarCardHeaderSpaced>
             }
           >
@@ -176,6 +179,7 @@ const ProposalPage: React.FC = () => {
         </PageContent>
         <SidebarContent>
           <ProposalVoteCardWrapper />
+          <ProposalVotesCard proposal={proposal} guildId={guildId} />
           <ProposalInfoCard
             proposal={proposal}
             guildConfig={guildConfig}

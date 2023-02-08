@@ -200,11 +200,11 @@ const Permissions: React.FC<ActionEditorProps> = ({
 
   const tabArray = [
     {
-      title: t('assetTransfer'),
+      title: t('actionBuilder.permissions.assetTransfer'),
       id: 'asset-transfer-tab',
     },
     {
-      title: t('functionCall'),
+      title: t('actionBuilder.permissions.functionCall'),
       id: 'functions-call-tab',
     },
   ];
@@ -251,12 +251,12 @@ const Permissions: React.FC<ActionEditorProps> = ({
               const { invalid, error } = fieldState;
               return (
                 <Control>
-                  <ControlLabel>{t('asset')}</ControlLabel>
+                  <ControlLabel>{t('actionBuilder.inputs.asset')}</ControlLabel>
                   <ControlRow onClick={() => setIsTokenPickerOpen(true)}>
                     <Input
                       {...field}
                       value={token?.symbol}
-                      placeholder={t('token')}
+                      placeholder={t('actionBuilder.inputs.token')}
                       aria-label="asset picker"
                       isInvalid={invalid && !!error}
                       icon={
@@ -299,14 +299,16 @@ const Permissions: React.FC<ActionEditorProps> = ({
               return (
                 <>
                   <Control>
-                    <ControlLabel>{t('toAddress')}</ControlLabel>
+                    <ControlLabel>
+                      {t('actionBuilder.inputs.toAddress')}
+                    </ControlLabel>
                     <ControlRow>
                       <AddressInput
                         {...field}
                         isInvalid={invalid && !!error}
                         name="to-address"
                         ariaLabel="to address input"
-                        placeholder={t('ethereumAddress')}
+                        placeholder={t('actionBuilder.inputs.ethereumAddress')}
                       />
                     </ControlRow>
                   </Control>
@@ -326,21 +328,26 @@ const Permissions: React.FC<ActionEditorProps> = ({
               return (
                 <>
                   <Control>
-                    <ControlLabel>{t('functionName')}</ControlLabel>
+                    <ControlLabel>
+                      {t('actionBuilder.permissions.functionName')}
+                    </ControlLabel>
                     <ControlRow>
                       <Input
                         {...field}
                         isInvalid={invalid && !!error}
                         name="function-signature"
                         aria-label="function signature input"
-                        placeholder={t('functionName')}
+                        placeholder={t(
+                          'actionBuilder.permissions.functionName'
+                        )}
                         onChange={e => handleFunctionNameChange(e.target.value)}
                       />
                     </ControlRow>
                     <ControlRow>
                       {!!functionSignature && (
                         <FunctionSignatureWrapper>
-                          {t('functionSignature')}: {functionSignature}
+                          {t('actionBuilder.permissions.functionSignature')}:{' '}
+                          {functionSignature}
                         </FunctionSignatureWrapper>
                       )}
                     </ControlRow>
@@ -360,7 +367,9 @@ const Permissions: React.FC<ActionEditorProps> = ({
             return (
               <>
                 <Control>
-                  <ControlLabel>{t('amount')}</ControlLabel>
+                  <ControlLabel>
+                    {t('actionBuilder.inputs.amount')}
+                  </ControlLabel>
                   <ControlRow>
                     <StyledTokenAmount
                       {...field}
@@ -387,7 +396,7 @@ const Permissions: React.FC<ActionEditorProps> = ({
                           disabled
                         />
                         <ToggleLabel selected={true}>
-                          {t('maxValue')}
+                          {t('actionBuilder.permissions.maxValue')}
                         </ToggleLabel>
                       </ToggleWrapper>
                     )}
@@ -400,7 +409,7 @@ const Permissions: React.FC<ActionEditorProps> = ({
         />
 
         <Button m="1rem 0 0" fullWidth type="submit">
-          {t('saveAction')}
+          {t('actionBuilder.action.saveAction')}
         </Button>
       </form>
     </div>

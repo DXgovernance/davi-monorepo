@@ -2815,8 +2815,10 @@ export type getProposalQuery = {
           | 'totalVotes'
           | 'value'
         > & {
-          options?: Maybe<
-            Array<Pick<Option, 'voteAmount' | 'proposalId' | 'label' | 'id'>>
+          votes?: Maybe<
+            Array<
+              Pick<Vote, 'voter' | 'votingPower' | 'optionLabel' | 'option'>
+            >
           >;
         }
       >
@@ -2896,17 +2898,17 @@ export const getProposalDocument = gql`
         executionTransactionHash
         id
         metadata
-        options {
-          voteAmount
-          proposalId
-          label
-          id
-        }
         startTime
         title
         to
         totalVotes
         value
+        votes {
+          voter
+          votingPower
+          optionLabel
+          option
+        }
       }
     }
   }

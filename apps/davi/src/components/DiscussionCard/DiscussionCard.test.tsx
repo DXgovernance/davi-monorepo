@@ -27,6 +27,10 @@ jest.mock('contexts/Guilds/orbis', () => ({
   }),
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('DiscussionCard', () => {
   it('should render with full parameters', async () => {
     const { container } = render(<DiscussionCard {...fullParameters} />);

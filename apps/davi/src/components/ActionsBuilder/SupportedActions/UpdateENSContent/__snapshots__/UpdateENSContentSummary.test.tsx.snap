@@ -128,7 +128,6 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
       >
         <a
           class="c5"
-          href="https://etherscan.io/address/0x0000000000000000000000000000000000000000"
           rel="noopener"
           target="_blank"
         >
@@ -299,7 +298,6 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
         </span>
         <a
           class="c5"
-          href="https://etherscan.io/address/0x3f943f38b2fbe1ee5daf0516cecfe4e0f8734351"
           rel="noopener"
           target="_blank"
         >

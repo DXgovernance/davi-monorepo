@@ -15,7 +15,7 @@ export const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
   return (
     <TransactionContainer>
       <Link
-        href={getBlockExplorerUrl(chain, transaction.hash, 'address')}
+        href={getBlockExplorerUrl(chain, transaction.hash, 'tx')}
         target="_blank"
       >
         {transaction.summary} <FiArrowUpRight />

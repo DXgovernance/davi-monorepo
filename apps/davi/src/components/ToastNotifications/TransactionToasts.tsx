@@ -1,8 +1,8 @@
-import { chains } from 'provider';
 import React from 'react';
+import { Chain, useNetwork } from 'wagmi';
+import { getBlockExplorerUrl } from 'provider';
 import { NotificationDetail } from './NotificationDetail';
 import { NotificationHeading } from './NotificationHeading';
-import { getBlockchainLink } from 'utils';
 
 export const TransactionPending: React.FC<{ summary: string }> = ({
   summary,
@@ -13,15 +13,15 @@ export const TransactionPending: React.FC<{ summary: string }> = ({
 export const TransactionOutcome: React.FC<{
   summary: string;
   transactionHash: string;
-  chainId: number;
-}> = ({ summary, chainId, transactionHash }) => {
-  const networkName = chains.find(chain => chain.id === chainId).name;
+  chain: Chain;
+}> = ({ summary, transactionHash }) => {
+  const { chain } = useNetwork();
   return (
     <div>
       <NotificationHeading>{summary}</NotificationHeading>
       <NotificationDetail>
         <a
-          href={getBlockchainLink(transactionHash, networkName)}
+          href={getBlockExplorerUrl(chain, transactionHash, 'tx')}
           target="_blank"
           rel="noreferrer"
         >

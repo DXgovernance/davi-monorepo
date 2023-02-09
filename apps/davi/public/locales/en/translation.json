@@ -11,8 +11,8 @@
   },
   "governance": "Governance",
   "language": {
-    "lamguage": "Language",
-    "Languages": "Languages"
+    "language": "Language",
+    "languages": "Languages"
   },
   "connections": {
     "switchWalletTo": "Switch Wallet to {{chainName}}",

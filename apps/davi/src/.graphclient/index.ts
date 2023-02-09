@@ -2706,6 +2706,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           location: 'GetGuildConfigDocument.graphql',
         },
         {
+          document: GetGuildProposalIdsDocument,
+          get rawSDL() {
+            return printWithCache(GetGuildProposalIdsDocument);
+          },
+          location: 'GetGuildProposalIdsDocument.graphql',
+        },
+        {
           document: GetProposalDocument,
           get rawSDL() {
             return printWithCache(GetProposalDocument);
@@ -2890,6 +2897,14 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export type getGuildProposalIdsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getGuildProposalIdsQuery = {
+  guild?: Maybe<{ proposals?: Maybe<Array<Pick<Proposal, 'id'>>> }>;
+};
+
 export type getProposalQueryVariables = Exact<{
   id: Scalars['ID'];
   proposalId: Scalars['ID'];
@@ -3054,6 +3069,18 @@ export const getGuildConfigDocument = gql`
     }
   }
 ` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
+export const getGuildProposalIdsDocument = gql`
+  query getGuildProposalIds($id: ID!) {
+    guild(id: $id) {
+      proposals {
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getGuildProposalIdsQuery,
+  getGuildProposalIdsQueryVariables
+>;
 export const getProposalDocument = gql`
   query getProposal($id: ID!, $proposalId: ID!) {
     guild(id: $id) {
@@ -3181,6 +3208,19 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getGuildConfigQuery>;
+    },
+    getGuildProposalIds(
+      variables: getGuildProposalIdsQueryVariables,
+      options?: C
+    ): Promise<getGuildProposalIdsQuery> {
+      return requester<
+        getGuildProposalIdsQuery,
+        getGuildProposalIdsQueryVariables
+      >(
+        getGuildProposalIdsDocument,
+        variables,
+        options
+      ) as Promise<getGuildProposalIdsQuery>;
     },
     getProposal(
       variables: getProposalQueryVariables,

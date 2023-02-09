@@ -115,6 +115,12 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useGuildProposalIds: (daoId: `0x${string}`) => {
+    data: `0x${string}`[];
+    isError: boolean;
+    isLoading: boolean;
+    errorMessage: string;
+  };
   useGetVotes: (
     daoId: string,
     proposal: Proposal

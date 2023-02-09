@@ -23,8 +23,8 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     getProposalDocument,
     {
       variables: {
-        id: daoId.toLowerCase(),
-        proposalId: proposalId.toLowerCase(),
+        id: daoId?.toLowerCase(),
+        proposalId: proposalId?.toLowerCase(),
       },
     }
   );

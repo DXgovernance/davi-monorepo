@@ -41,7 +41,6 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
 
   return {
     data: parsedData,
-    refetch,
     ...rest,
   };
 };

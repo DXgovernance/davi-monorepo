@@ -1,0 +1,9 @@
+query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
+  proposal(id: $proposalId) {
+    votes(where: { voter: $userAddress }) {
+      option
+      votingPower
+    }
+  }
+}
+

@@ -12,6 +12,7 @@ import {
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
+  useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
 } from '../subgraph/common';
 
 import {
@@ -60,7 +61,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useTotalLocked,
           useDAOToken,
           useIsProposalCreationAllowed,
-          useProposalVotesOfVoter,
+          useProposalVotesOfVoter: useProposalVotesOfVoterFromSubgraph,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,

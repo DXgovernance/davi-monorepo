@@ -10,6 +10,10 @@
     "projectDavi": "Project-DAVI"
   },
   "governance": "Governance",
+  "language": {
+    "lamguage": "Language",
+    "Languages": "Languages"
+  },
   "connections": {
     "switchWalletTo": "Switch Wallet to {{chainName}}",
     "connectWallet": "Connect Wallet",

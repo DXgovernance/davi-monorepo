@@ -6,6 +6,11 @@ import {
   ButtonContainer,
   ConnectionError,
   Container,
+  Language,
+  LanguageBar,
+  LanguageList,
+  LanguageTitle,
+  LanguageValue,
   TransactionsList,
   TransactionsListHeading,
 } from './WalletModal.styled';
@@ -18,13 +23,18 @@ import { Divider } from 'components/Divider';
 import { Button } from 'components/primitives/Button';
 import { READ_ONLY_CONNECTOR_ID } from 'provider/ReadOnlyConnector';
 import useSwitchNetwork from 'hooks/Guilds/web3/useSwitchNetwork';
+import { BiWorld } from 'react-icons/bi';
+import { FiChevronRight } from 'react-icons/fi';
+import { TiTick } from 'react-icons/ti';
+import { supportedLanguages } from 'configs';
 
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isWalletListActive, setIsWalletsListActive] = useState(false);
+  const [isLanguagesOpen, setIsLanguagesOpen] = useState(false);
   const { chain } = useNetwork();
   const { chains, switchNetwork } = useSwitchNetwork();
   const { transactions, clearAllTransactions } = useTransactions();
@@ -56,6 +66,16 @@ export const WalletModal: React.FC<WalletModalProps> = ({
       });
   }
 
+  function getLanguageName(languageCode) {
+    // console.log({ languageCode });
+    if (languageCode === 'en-US') return 'English';
+    const nameGenerator = new Intl.DisplayNames(languageCode, {
+      type: 'language',
+    });
+    const displayName = nameGenerator.of(languageCode);
+    return displayName;
+  }
+
   function getModalContent() {
     if (isConnected && chain?.unsupported) {
       return <Container>{t('connections.pleaseSwitchNetwork')}</Container>;
@@ -78,8 +98,36 @@ export const WalletModal: React.FC<WalletModalProps> = ({
       transactions
         .sort((tx1, tx2) => tx2.addedTime - tx1.addedTime)
         .slice(0, 5);
-    return (
+    return isLanguagesOpen ? (
+      <LanguageList>
+        {supportedLanguages.map(languageCode => {
+          const currentLanguage = getLanguageName(i18n.language);
+          const language = getLanguageName(languageCode);
+          return (
+            <Language
+              onClick={() => {
+                i18n.changeLanguage(languageCode);
+                setIsLanguagesOpen(false);
+              }}
+            >
+              {language}
+              {currentLanguage === language ? <TiTick></TiTick> : <></>}
+            </Language>
+          );
+        })}
+      </LanguageList>
+    ) : (
       <>
+        <LanguageBar onClick={() => setIsLanguagesOpen(true)}>
+          <LanguageTitle>
+            <BiWorld size={24} />
+            {t('language.language')}
+          </LanguageTitle>
+          <LanguageValue>
+            {getLanguageName(i18n.language)}
+            <FiChevronRight size={24} />
+          </LanguageValue>
+        </LanguageBar>
         <WalletInfoBox openOptions={() => setIsWalletsListActive(true)} />
         <Divider />
         <TransactionsList>
@@ -111,6 +159,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
   }
 
   const getHeader = () => {
+    if (isLanguagesOpen) return t('language.languages');
     if (isConnected && chain?.unsupported) {
       return t('connections.unsupportedNetwork');
     }
@@ -162,7 +211,9 @@ export const WalletModal: React.FC<WalletModalProps> = ({
       dataTestId="wallet-modal"
       header={getHeader()}
       isOpen={isOpen}
-      onDismiss={onClose}
+      onDismiss={() => {
+        isLanguagesOpen ? setIsLanguagesOpen(false) : onClose();
+      }}
       onConfirm={getPrimaryAction()}
       confirmText={getPrimaryActionLabel()}
       maxWidth={450}

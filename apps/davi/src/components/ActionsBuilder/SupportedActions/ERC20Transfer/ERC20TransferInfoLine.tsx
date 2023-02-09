@@ -9,7 +9,7 @@ import { BiSend } from 'react-icons/bi';
 import { MAINNET_ID, shortenAddress } from 'utils';
 import { useTranslation } from 'react-i18next';
 import { SupportedAction } from 'components/ActionsBuilder/types';
-import { TokenType, useTokenList } from 'hooks/Guilds/tokens/useTokenList';
+import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useNetwork } from 'wagmi';
 
 const ERC20TransferInfoLine: React.FC<ActionViewProps> = ({
@@ -36,7 +36,7 @@ const ERC20TransferInfoLine: React.FC<ActionViewProps> = ({
         recipientAddress: decodedCall.args._to,
       };
     } else if (decodedCall.callType === SupportedAction.NATIVE_TRANSFER) {
-      const token = tokens.find(token => token.type === TokenType.NATIVE);
+      const token = tokens.find(token => token.type === 'NATIVE');
       return {
         source: decodedCall.from,
         token,

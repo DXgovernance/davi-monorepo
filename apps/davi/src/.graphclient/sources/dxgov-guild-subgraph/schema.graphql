@@ -175,6 +175,7 @@ type GuildPermission {
   from: String!
   to: String!
   functionSignature: Bytes!
+  isToken: Boolean!
   valueAllowed: BigInt!
   fromTime: BigInt!
   allowed: Boolean!
@@ -236,6 +237,10 @@ input GuildPermission_filter {
   functionSignature_not_in: [Bytes!]
   functionSignature_contains: Bytes
   functionSignature_not_contains: Bytes
+  isToken: Boolean
+  isToken_not: Boolean
+  isToken_in: [Boolean!]
+  isToken_not_in: [Boolean!]
   valueAllowed: BigInt
   valueAllowed_not: BigInt
   valueAllowed_gt: BigInt
@@ -286,6 +291,7 @@ enum GuildPermission_orderBy {
   from
   to
   functionSignature
+  isToken
   valueAllowed
   fromTime
   allowed

@@ -16,7 +16,7 @@ const appConfig: AppConfig = {
   localhost,
 };
 
-export function shortenAddress(address, digits = 4) {
+export function shortenAddress(address: string, digits = 4) {
   if (!isAddress(address)) {
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }

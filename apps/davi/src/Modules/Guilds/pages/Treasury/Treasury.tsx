@@ -18,7 +18,6 @@ import {
 } from './Treasury.styled';
 import { useAllERC20Balances } from 'hooks/Guilds/erc20/useAllERC20Balances';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { TokenType } from 'hooks/Guilds/tokens/useTokenList';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import { Result, ResultState } from 'components/Result';
 
@@ -77,7 +76,7 @@ const Treasury = () => {
       .map(token => {
         return {
           ...token,
-          id: token.type === TokenType.NATIVE ? 'NATIVE' : token?.address,
+          id: token.type === 'NATIVE' ? 'NATIVE' : token?.address,
         };
       })
       .filter(token => !token?.balance?.isZero());

@@ -30,6 +30,7 @@ export interface GuildsTheme extends ThemeBase {
     bg4: string;
 
     darkGreen1: string;
+    darkGreen2: string;
 
     border1: string;
     border2: string;

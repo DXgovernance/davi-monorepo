@@ -2655,6 +2655,25 @@ const schemaAST = {
           kind: 'FieldDefinition',
           name: {
             kind: 'Name',
+            value: 'isToken',
+          },
+          arguments: [],
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: {
+                kind: 'Name',
+                value: 'Boolean',
+              },
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: 'FieldDefinition',
+          name: {
+            kind: 'Name',
             value: 'valueAllowed',
           },
           arguments: [],
@@ -3597,6 +3616,78 @@ const schemaAST = {
           kind: 'InputValueDefinition',
           name: {
             kind: 'Name',
+            value: 'isToken',
+          },
+          type: {
+            kind: 'NamedType',
+            name: {
+              kind: 'Name',
+              value: 'Boolean',
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: 'InputValueDefinition',
+          name: {
+            kind: 'Name',
+            value: 'isToken_not',
+          },
+          type: {
+            kind: 'NamedType',
+            name: {
+              kind: 'Name',
+              value: 'Boolean',
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: 'InputValueDefinition',
+          name: {
+            kind: 'Name',
+            value: 'isToken_in',
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: {
+                  kind: 'Name',
+                  value: 'Boolean',
+                },
+              },
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: 'InputValueDefinition',
+          name: {
+            kind: 'Name',
+            value: 'isToken_not_in',
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: {
+                  kind: 'Name',
+                  value: 'Boolean',
+                },
+              },
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: 'InputValueDefinition',
+          name: {
+            kind: 'Name',
             value: 'valueAllowed',
           },
           type: {
@@ -4315,6 +4406,14 @@ const schemaAST = {
           name: {
             kind: 'Name',
             value: 'functionSignature',
+          },
+          directives: [],
+        },
+        {
+          kind: 'EnumValueDefinition',
+          name: {
+            kind: 'Name',
+            value: 'isToken',
           },
           directives: [],
         },

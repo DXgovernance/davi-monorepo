@@ -207,6 +207,7 @@ export namespace DxgovGuildSubgraphTypes {
     from: Scalars['String'];
     to: Scalars['String'];
     functionSignature: Scalars['Bytes'];
+    isToken: Scalars['Boolean'];
     valueAllowed: Scalars['BigInt'];
     fromTime: Scalars['BigInt'];
     allowed: Scalars['Boolean'];
@@ -268,6 +269,10 @@ export namespace DxgovGuildSubgraphTypes {
     functionSignature_not_in?: InputMaybe<Array<Scalars['Bytes']>>;
     functionSignature_contains?: InputMaybe<Scalars['Bytes']>;
     functionSignature_not_contains?: InputMaybe<Scalars['Bytes']>;
+    isToken?: InputMaybe<Scalars['Boolean']>;
+    isToken_not?: InputMaybe<Scalars['Boolean']>;
+    isToken_in?: InputMaybe<Array<Scalars['Boolean']>>;
+    isToken_not_in?: InputMaybe<Array<Scalars['Boolean']>>;
     valueAllowed?: InputMaybe<Scalars['BigInt']>;
     valueAllowed_not?: InputMaybe<Scalars['BigInt']>;
     valueAllowed_gt?: InputMaybe<Scalars['BigInt']>;
@@ -318,6 +323,7 @@ export namespace DxgovGuildSubgraphTypes {
     | 'from'
     | 'to'
     | 'functionSignature'
+    | 'isToken'
     | 'valueAllowed'
     | 'fromTime'
     | 'allowed'

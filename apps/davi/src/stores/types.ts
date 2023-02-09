@@ -68,7 +68,6 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: { option: string; votingPower: BigNumber };
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };

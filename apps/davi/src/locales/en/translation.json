@@ -410,5 +410,7 @@
   "hookStoreErrors": {
     "methodNotSupported": "This method isn't supported in this governance implementation"
   },
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "showMore": "Show More",
+  "showLess": "Show Less"
 }

@@ -55,6 +55,7 @@
   "treasury": {
     "treasury": "Treasury",
     "assets": "assets",
+    "asset": "asset",
     "tokenAmount": "Token Amount",
     "errorLoadingTreasuries": "Error loading treasuries",
     "noTreasuryAssets": "No treasury assets available"
@@ -68,6 +69,7 @@
       "onChainActions_zero": "No on-chain action",
       "onChainActions_one": "{{count}} on-chain action",
       "onChainActions_other": "{{count}} on-chain actions",
+      "unknownAction": "Unknown Action",
       "onchainAction": "On-chain Action",
       "noOnchainAction": "No on-chain action",
       "confirmRemoval": "Confirm Removal",
@@ -194,7 +196,6 @@
     "externalContracts": "External Contracts",
     "decode": "Decode",
     "interactWith": "Interact with",
-    "unknownAction": "Unknown Action",
     "default": "Default",
     "pickSwaprPair": "Pick Swapr pair",
     "displayRawData": "Display Raw Data",

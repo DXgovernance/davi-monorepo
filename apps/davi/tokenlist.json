@@ -795,7 +795,7 @@
       "name": "Uniswap on xDai",
       "decimals": 18,
       "symbol": "UNI",
-      "logoURI": "https://cloudflare-ipfs.com/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
+      "logoURI": "https://ipfs.io/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
     },
     {
       "chainId": 100,

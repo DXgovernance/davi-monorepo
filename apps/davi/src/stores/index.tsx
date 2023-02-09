@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useProvider } from 'wagmi';
+import { useNetwork, useProvider } from 'wagmi';
 import { useMatch } from 'react-router-dom';
 import { GovernanceTypeInterface, HookStoreContextInterface } from './types';
 import { governanceInterfaces } from './governanceInterfaces';
@@ -23,18 +23,28 @@ export const HookStoreProvider: React.FC<
   PropsWithChildren<HookStoreProviderProps>
 > = ({ children, daoId: daoIdFromProps }) => {
   const urlParams = useMatch('/:chainName/:daoId/*');
+  const { chain } = useNetwork();
 
-  const [daoIdFromUrl, setDaoIdFromUrl] = useState(
-    urlParams ? urlParams.params.daoId : ''
+  const daoIdFromUrl = useMemo(
+    () => (urlParams ? urlParams.params.daoId : ''),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [urlParams?.params?.daoId]
   );
+
   const daoId = useMemo(
     () => daoIdFromProps || daoIdFromUrl,
     [daoIdFromProps, daoIdFromUrl]
   );
 
-  const [daoBytecode, setDaoBytecode] = useState<string>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [useDefaultDataSource, setUseDefaultDataSource] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+  }, [daoId]);
+
+  const [daoBytecode, setDaoBytecode] = useState<string>(null);
+  const [dataSource, setDataSource] = useState<'primary' | 'secondary' | null>(
+    null
+  );
   const [shouldSwitchDataSource, setShouldSwitchDataSource] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
   const provider = useProvider();
@@ -49,31 +59,28 @@ export const HookStoreProvider: React.FC<
   }, []);
 
   useEffect(() => {
-    if (urlParams?.params?.daoId) {
-      setIsLoading(true);
-      setDaoIdFromUrl(urlParams?.params?.daoId);
-    }
-  }, [urlParams?.params?.daoId]);
-
-  useEffect(() => {
     if (isMatched) setIsLoading(false);
   }, [isMatched]);
 
   useEffect(() => {
     let cancelled = false;
 
-    const getBytecode = async () => {
-      let bytecodeHash = localStorage.getItem(`hashed-bytecode-${daoId}`);
-      if (!bytecodeHash) {
-        const bytecode = await provider.getCode(daoId);
-        bytecodeHash = Web3.utils.keccak256(bytecode);
-
-        localStorage.setItem(`hashed-bytecode-${daoId}`, bytecodeHash);
+    const getBytecodeHash = async () => {
+      const localBytecodeHash = localStorage.getItem(
+        `hashed-bytecode-${daoId}`
+      );
+      if (!localBytecodeHash) {
+        const fetchedBytecode = await provider.getCode(daoId);
+        if (fetchedBytecode) {
+          const fetchedBytecodeHash = Web3.utils.keccak256(fetchedBytecode);
+          localStorage.setItem(`hashed-bytecode-${daoId}`, fetchedBytecodeHash);
+          return fetchedBytecodeHash;
+        }
       }
-      return bytecodeHash;
+      return localBytecodeHash;
     };
 
-    getBytecode().then(bytecodeHash => {
+    getBytecodeHash().then(bytecodeHash => {
       if (!cancelled) {
         setDaoBytecode(bytecodeHash);
         setIsLoading(false);
@@ -91,22 +98,29 @@ export const HookStoreProvider: React.FC<
     });
 
     // TODO: throw an error instead of falling back to a default if the store can't match the governance implementation
-    if (!match) match = governanceInterfaces[0];
+    if (!match) {
+      setIsMatched(false);
+      return null;
+    }
 
     setIsMatched(true);
     return {
       name: match.name,
       bytecodes: match.bytecodes,
       capabilities: match.capabilities,
+      dataSource: dataSource,
       hooks: {
-        fetchers: useDefaultDataSource
-          ? match.hooks.fetchers.default
-          : match.hooks.fetchers.fallback,
+        fetchers:
+          dataSource === 'primary'
+            ? match.hooks.fetchers.default
+            : dataSource === 'secondary'
+            ? match.hooks.fetchers.fallback
+            : null,
         writers: match.hooks.writers,
       },
       checkDataSourceAvailability: match.checkDataSourceAvailability,
     };
-  }, [daoBytecode, useDefaultDataSource]);
+  }, [daoBytecode, dataSource]);
 
   useEffect(() => {
     if (shouldSwitchDataSource) {
@@ -116,24 +130,34 @@ export const HookStoreProvider: React.FC<
   }, [shouldSwitchDataSource]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const getDataSourceAvailability = () => {
       if (governanceType) {
         const isDefaultSourceAvailable =
-          governanceType.checkDataSourceAvailability();
-        if (useDefaultDataSource !== isDefaultSourceAvailable) {
+          governanceType.checkDataSourceAvailability(chain?.id);
+        if (isDefaultSourceAvailable && dataSource !== 'primary') {
           setIsLoading(true);
           setShouldSwitchDataSource(true);
-          setUseDefaultDataSource(isDefaultSourceAvailable);
+          setDataSource('primary');
+        }
+        if (!isDefaultSourceAvailable && dataSource !== 'secondary') {
+          setIsLoading(true);
+          setShouldSwitchDataSource(true);
+          setDataSource('secondary');
         }
       }
+    };
+    getDataSourceAvailability();
+    const interval = setInterval(() => {
+      getDataSourceAvailability();
     }, CHECK_DATA_SOURCE_INTERVAL); // This implementation makes a data source health check every 10 seconds. This interval is arbitrary.
 
     return () => clearInterval(interval);
-  }, [governanceType, useDefaultDataSource]);
+  }, [governanceType, dataSource, chain]);
 
-  return isLoading ? (
-    <LoadingPage />
-  ) : (
+  if (!daoId) return <>{children}</>;
+  if (!governanceType || !governanceType?.dataSource) return <LoadingPage />;
+
+  return (
     <HookStoreContext.Provider value={{ ...governanceType, isLoading, daoId }}>
       {children}
     </HookStoreContext.Provider>

@@ -18,7 +18,7 @@
     "updateContracts": "pnpm hardhat compile && node scripts/updateContracts.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "build-graph-client": "graphclient build",
+    "build-graph-client": "graphclient build && rm -r src/.graphclient && mv .graphclient src",
     "pre-commit": "lint-staged"
   },
   "engines": {
@@ -62,6 +62,7 @@
     "@tiptap/starter-kit": "^2.0.0-beta.171",
     "@types/node": "^16.11.7",
     "@types/react": "^18.0.17",
+    "@types/react-datepicker": "^4.8.0",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
     "@uiw/react-md-editor": "1.14.0",
@@ -75,7 +76,7 @@
     "cids": "^1.1.9",
     "copy-to-clipboard": "^3.3.1",
     "diff": "^5.1.0",
-    "dxdao-contracts": "*",
+    "dxdao-contracts": "workspace:*",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-cypress": "^2.12.1",
     "ethers": "^5.7.2",
@@ -218,3 +219,4 @@
     ]
   }
 }
+

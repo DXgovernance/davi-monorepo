@@ -102,9 +102,9 @@ const ProposalVoteCard = ({
           {!voteData ? (
             <Loading loading text />
           ) : isOpen ? (
-            t('castVote')
+            t('voting.castVote')
           ) : (
-            t('voteResults')
+            t('voting.voteResults')
           )}
           <SmallButton
             variant="secondary"
@@ -140,7 +140,9 @@ const ProposalVoteCard = ({
         {/* Hide voting options if user has already voted */}
         {isOpen && !userVote?.option && voteData?.options && (
           <ButtonsContainer>
-            <VoteOptionsLabel>{t('options')}</VoteOptionsLabel>
+            <VoteOptionsLabel>
+              {t('actionBuilder.options.options')}
+            </VoteOptionsLabel>
 
             {/* Getting the full option keys list but displaying default 0 index option at the bottom */}
             {[...Object.keys(voteData?.options).slice(1), '0'].map(
@@ -180,7 +182,7 @@ const ProposalVoteCard = ({
                 })
               }
             >
-              {t('vote')}
+              {t('voting.vote')}
             </VoteActionButton>
           </ButtonsContainer>
         )}

@@ -38,7 +38,11 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
     governance: `/${chainName}/${guildId}`,
     allProposals: `/${chainName}/${guildId}/all-proposals`,
     allDiscussions: `/${chainName}/${guildId}/all-discussions`,
+    members: `/${chainName}/${guildId}/members`,
+    permissions: `/${chainName}/${guildId}/permissions`,
+    treasury: `/${chainName}/${guildId}/treasury`,
   };
+
   return (
     <SidebarWrapper data-testid="sidebar">
       <DaoInfoPanel>
@@ -76,7 +80,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
           to={locations.allProposals}
         >
           <SidebarMenuItem current={pathname === locations.allProposals}>
-            {t('allProposals')}
+            {t('proposals.allProposals')}
           </SidebarMenuItem>
         </StyledLink>
         <StyledLink
@@ -84,7 +88,22 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
           to={locations.allDiscussions}
         >
           <SidebarMenuItem current={pathname === locations.allDiscussions}>
-            {t('allDiscussions')}
+            {t('discussions.allDiscussions')}
+          </SidebarMenuItem>
+        </StyledLink>
+        <StyledLink to={locations.members}>
+          <SidebarMenuItem current={pathname === locations.members}>
+            {t('members.members')}
+          </SidebarMenuItem>
+        </StyledLink>
+        <StyledLink to={locations.permissions}>
+          <SidebarMenuItem current={pathname === locations.permissions}>
+            {t('actionBuilder.permissions.permissions')}
+          </SidebarMenuItem>
+        </StyledLink>
+        <StyledLink to={locations.treasury}>
+          <SidebarMenuItem current={pathname === locations.treasury}>
+            {t('treasury.treasury')}
           </SidebarMenuItem>
         </StyledLink>
       </SidebarMenu>

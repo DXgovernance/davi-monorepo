@@ -14,9 +14,14 @@ const StyledSwitch = styled(Switch)<ReactSwitchProps>`
   }
 `;
 
-export const Toggle: React.FC<FormElementProps<boolean>> = ({
+interface IToggle extends FormElementProps<boolean> {
+  small?: boolean;
+}
+
+export const Toggle: React.FC<IToggle> = ({
   value,
   onChange,
+  small = false,
   ...rest
 }) => {
   const theme = useTheme();
@@ -27,13 +32,14 @@ export const Toggle: React.FC<FormElementProps<boolean>> = ({
       onChange={(checked: boolean) => onChange(checked)}
       uncheckedIcon={false}
       checkedIcon={false}
-      height={32}
-      width={64}
-      borderRadius={32}
-      offColor={theme.colors.bg3}
-      onColor={theme.colors.border1}
-      handleDiameter={24}
-      activeBoxShadow={`0 0 2px 3px ${theme.colors.border1}`}
+      height={small ? 14 : 32}
+      width={small ? 29 : 64}
+      borderRadius={small ? 11 : 32}
+      offColor={theme.colors.grey}
+      onColor={theme.colors.yellow}
+      onHandleColor={theme.colors.bg4}
+      offHandleColor={theme.colors.bg4}
+      handleDiameter={small ? 12 : 24}
       {...rest}
     />
   );

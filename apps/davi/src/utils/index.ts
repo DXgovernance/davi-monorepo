@@ -18,3 +18,4 @@ export * from './img';
 export * from './validations';
 export * from './strings';
 export * from './object';
+export * from './url';

@@ -4,6 +4,7 @@ import {
   VotingMachineProposalState,
 } from './utils';
 import * as IPFS from 'ipfs-core';
+import { TokenInfo } from '@uniswap/token-lists';
 
 declare global {
   // Window ethereum type
@@ -373,3 +374,12 @@ export type ProposalsExtended = Proposal &
   Pick<Scheme, 'maxSecondsForExecution' | 'type'> & {
     autoBoost: Boolean;
   };
+
+export type TokenInfoWithType = TokenInfo & { type: 'NATIVE' | 'ERC20' };
+
+export interface TokenWithPermission extends TokenInfoWithType {
+  permission: {
+    fromTime: BigNumber;
+    valueAllowed: BigNumber;
+  };
+}

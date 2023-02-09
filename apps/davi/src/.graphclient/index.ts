@@ -240,6 +240,7 @@ export type GuildPermission = {
   from: Scalars['String'];
   to: Scalars['String'];
   functionSignature: Scalars['Bytes'];
+  isToken: Scalars['Boolean'];
   valueAllowed: Scalars['BigInt'];
   fromTime: Scalars['BigInt'];
   allowed: Scalars['Boolean'];
@@ -301,6 +302,10 @@ export type GuildPermission_filter = {
   functionSignature_not_in?: InputMaybe<Array<Scalars['Bytes']>>;
   functionSignature_contains?: InputMaybe<Scalars['Bytes']>;
   functionSignature_not_contains?: InputMaybe<Scalars['Bytes']>;
+  isToken?: InputMaybe<Scalars['Boolean']>;
+  isToken_not?: InputMaybe<Scalars['Boolean']>;
+  isToken_in?: InputMaybe<Array<Scalars['Boolean']>>;
+  isToken_not_in?: InputMaybe<Array<Scalars['Boolean']>>;
   valueAllowed?: InputMaybe<Scalars['BigInt']>;
   valueAllowed_not?: InputMaybe<Scalars['BigInt']>;
   valueAllowed_gt?: InputMaybe<Scalars['BigInt']>;
@@ -351,6 +356,7 @@ export type GuildPermission_orderBy =
   | 'from'
   | 'to'
   | 'functionSignature'
+  | 'isToken'
   | 'valueAllowed'
   | 'fromTime'
   | 'allowed'
@@ -1548,6 +1554,7 @@ export type Vote = {
   id: Scalars['ID'];
   proposalId: Scalars['String'];
   option: Scalars['BigInt'];
+  optionLabel?: Maybe<Scalars['String']>;
   voter: Scalars['String'];
   votingPower: Scalars['BigInt'];
   transactionHash: Scalars['String'];
@@ -1590,6 +1597,26 @@ export type Vote_filter = {
   option_lte?: InputMaybe<Scalars['BigInt']>;
   option_in?: InputMaybe<Array<Scalars['BigInt']>>;
   option_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  optionLabel?: InputMaybe<Scalars['String']>;
+  optionLabel_not?: InputMaybe<Scalars['String']>;
+  optionLabel_gt?: InputMaybe<Scalars['String']>;
+  optionLabel_lt?: InputMaybe<Scalars['String']>;
+  optionLabel_gte?: InputMaybe<Scalars['String']>;
+  optionLabel_lte?: InputMaybe<Scalars['String']>;
+  optionLabel_in?: InputMaybe<Array<Scalars['String']>>;
+  optionLabel_not_in?: InputMaybe<Array<Scalars['String']>>;
+  optionLabel_contains?: InputMaybe<Scalars['String']>;
+  optionLabel_contains_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_contains?: InputMaybe<Scalars['String']>;
+  optionLabel_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_starts_with?: InputMaybe<Scalars['String']>;
+  optionLabel_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_starts_with?: InputMaybe<Scalars['String']>;
+  optionLabel_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_ends_with?: InputMaybe<Scalars['String']>;
+  optionLabel_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  optionLabel_not_ends_with?: InputMaybe<Scalars['String']>;
+  optionLabel_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
   voter?: InputMaybe<Scalars['String']>;
   voter_not?: InputMaybe<Scalars['String']>;
   voter_gt?: InputMaybe<Scalars['String']>;
@@ -1646,6 +1673,7 @@ export type Vote_orderBy =
   | 'id'
   | 'proposalId'
   | 'option'
+  | 'optionLabel'
   | 'voter'
   | 'votingPower'
   | 'transactionHash';
@@ -2045,6 +2073,7 @@ export type GuildPermissionResolvers<
     ParentType,
     ContextType
   >;
+  isToken?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   valueAllowed?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   fromTime?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   allowed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -2456,6 +2485,11 @@ export type VoteResolvers<
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   proposalId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   option?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  optionLabel?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   voter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   votingPower?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   transactionHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2608,11 +2642,60 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
     get documents() {
       return [
         {
+          document: GetAllPermissionsDocument,
+          get rawSDL() {
+            return printWithCache(GetAllPermissionsDocument);
+          },
+          location: 'GetAllPermissionsDocument.graphql',
+        },
+        {
+          document: GetAllTokenPermissionsDocument,
+          get rawSDL() {
+            return printWithCache(GetAllTokenPermissionsDocument);
+          },
+          location: 'GetAllTokenPermissionsDocument.graphql',
+        },
+        {
+          document: GetAllFunctionCallPermissionsDocument,
+          get rawSDL() {
+            return printWithCache(GetAllFunctionCallPermissionsDocument);
+          },
+          location: 'GetAllFunctionCallPermissionsDocument.graphql',
+        },
+        {
+          document: GetMemberListDocument,
+          get rawSDL() {
+            return printWithCache(GetMemberListDocument);
+          },
+          location: 'GetMemberListDocument.graphql',
+        },
+        {
+          document: GetNumberOfActiveProposalsDocument,
+          get rawSDL() {
+            return printWithCache(GetNumberOfActiveProposalsDocument);
+          },
+          location: 'GetNumberOfActiveProposalsDocument.graphql',
+        },
+        {
+          document: GetVotesDocument,
+          get rawSDL() {
+            return printWithCache(GetVotesDocument);
+          },
+          location: 'GetVotesDocument.graphql',
+        },
+        {
           document: GetGuildConfigDocument,
           get rawSDL() {
             return printWithCache(GetGuildConfigDocument);
           },
           location: 'GetGuildConfigDocument.graphql',
+        },
+        {
+          document: GetProposalVotesOfVoterDocument,
+          get rawSDL() {
+            return printWithCache(GetProposalVotesOfVoterDocument);
+          },
+          location: 'GetProposalVotesOfVoterDocument.graphql',
         },
       ];
     },
@@ -2660,6 +2743,106 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
     sdkRequester$.then(sdkRequester => sdkRequester(...args))
   );
 }
+export type getAllPermissionsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getAllPermissionsQuery = {
+  guild?: Maybe<{
+    permissions: Array<
+      Pick<
+        GuildPermission,
+        | 'id'
+        | 'isToken'
+        | 'to'
+        | 'valueAllowed'
+        | 'from'
+        | 'fromTime'
+        | 'functionSignature'
+        | 'allowed'
+      >
+    >;
+  }>;
+};
+
+export type getAllTokenPermissionsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getAllTokenPermissionsQuery = {
+  guild?: Maybe<{
+    permissions: Array<
+      Pick<
+        GuildPermission,
+        | 'id'
+        | 'isToken'
+        | 'to'
+        | 'valueAllowed'
+        | 'from'
+        | 'fromTime'
+        | 'functionSignature'
+        | 'allowed'
+      >
+    >;
+  }>;
+};
+
+export type getAllFunctionCallPermissionsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getAllFunctionCallPermissionsQuery = {
+  guild?: Maybe<{
+    permissions: Array<
+      Pick<
+        GuildPermission,
+        | 'id'
+        | 'isToken'
+        | 'to'
+        | 'valueAllowed'
+        | 'from'
+        | 'fromTime'
+        | 'functionSignature'
+        | 'allowed'
+      >
+    >;
+  }>;
+};
+
+export type getMemberListQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getMemberListQuery = {
+  guild?: Maybe<{
+    members?: Maybe<Array<Pick<Member, 'id' | 'address' | 'tokensLocked'>>>;
+  }>;
+};
+
+export type getNumberOfActiveProposalsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getNumberOfActiveProposalsQuery = {
+  guild?: Maybe<
+    Pick<Guild, 'id' | 'name'> & {
+      proposals?: Maybe<Array<Pick<Proposal, 'id'>>>;
+    }
+  >;
+};
+
+export type getVotesQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getVotesQuery = {
+  proposal?: Maybe<{
+    votes?: Maybe<
+      Array<Pick<Vote, 'voter' | 'votingPower' | 'optionLabel' | 'option'>>
+    >;
+  }>;
+};
+
 export type getGuildConfigQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2685,6 +2868,111 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export type getProposalVotesOfVoterQueryVariables = Exact<{
+  proposalId: Scalars['ID'];
+  userAddress: Scalars['String'];
+}>;
+
+export type getProposalVotesOfVoterQuery = {
+  proposal?: Maybe<{
+    votes?: Maybe<Array<Pick<Vote, 'option' | 'votingPower'>>>;
+  }>;
+};
+
+export const getAllPermissionsDocument = gql`
+  query getAllPermissions($id: ID!) {
+    guild(id: $id) {
+      permissions {
+        id
+        isToken
+        to
+        valueAllowed
+        from
+        fromTime
+        functionSignature
+        allowed
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getAllPermissionsQuery,
+  getAllPermissionsQueryVariables
+>;
+export const getAllTokenPermissionsDocument = gql`
+  query getAllTokenPermissions($id: ID!) {
+    guild(id: $id) {
+      permissions(where: { isToken: true }) {
+        id
+        isToken
+        to
+        valueAllowed
+        from
+        fromTime
+        functionSignature
+        allowed
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getAllTokenPermissionsQuery,
+  getAllTokenPermissionsQueryVariables
+>;
+export const getAllFunctionCallPermissionsDocument = gql`
+  query getAllFunctionCallPermissions($id: ID!) {
+    guild(id: $id) {
+      permissions(where: { isToken: false }) {
+        id
+        isToken
+        to
+        valueAllowed
+        from
+        fromTime
+        functionSignature
+        allowed
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getAllFunctionCallPermissionsQuery,
+  getAllFunctionCallPermissionsQueryVariables
+>;
+export const getMemberListDocument = gql`
+  query getMemberList($id: ID!) {
+    guild(id: $id) {
+      members {
+        id
+        address
+        tokensLocked
+      }
+    }
+  }
+` as unknown as DocumentNode<getMemberListQuery, getMemberListQueryVariables>;
+export const getNumberOfActiveProposalsDocument = gql`
+  query getNumberOfActiveProposals($id: ID!) {
+    guild(id: $id) {
+      id
+      name
+      proposals {
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getNumberOfActiveProposalsQuery,
+  getNumberOfActiveProposalsQueryVariables
+>;
+export const getVotesDocument = gql`
+  query getVotes($id: ID!) {
+    proposal(id: $id) {
+      votes {
+        voter
+        votingPower
+        optionLabel
+        option
+      }
+    }
+  }
+` as unknown as DocumentNode<getVotesQuery, getVotesQueryVariables>;
 export const getGuildConfigDocument = gql`
   query getGuildConfig($id: ID!) {
     guild(id: $id) {
@@ -2707,6 +2995,19 @@ export const getGuildConfigDocument = gql`
     }
   }
 ` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
+export const getProposalVotesOfVoterDocument = gql`
+  query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
+    proposal(id: $proposalId) {
+      votes(where: { voter: $userAddress }) {
+        option
+        votingPower
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getProposalVotesOfVoterQuery,
+  getProposalVotesOfVoterQueryVariables
+>;
 
 export type Requester<C = {}, E = unknown> = <R, V>(
   doc: DocumentNode,
@@ -2715,6 +3016,75 @@ export type Requester<C = {}, E = unknown> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
+    getAllPermissions(
+      variables: getAllPermissionsQueryVariables,
+      options?: C
+    ): Promise<getAllPermissionsQuery> {
+      return requester<getAllPermissionsQuery, getAllPermissionsQueryVariables>(
+        getAllPermissionsDocument,
+        variables,
+        options
+      ) as Promise<getAllPermissionsQuery>;
+    },
+    getAllTokenPermissions(
+      variables: getAllTokenPermissionsQueryVariables,
+      options?: C
+    ): Promise<getAllTokenPermissionsQuery> {
+      return requester<
+        getAllTokenPermissionsQuery,
+        getAllTokenPermissionsQueryVariables
+      >(
+        getAllTokenPermissionsDocument,
+        variables,
+        options
+      ) as Promise<getAllTokenPermissionsQuery>;
+    },
+    getAllFunctionCallPermissions(
+      variables: getAllFunctionCallPermissionsQueryVariables,
+      options?: C
+    ): Promise<getAllFunctionCallPermissionsQuery> {
+      return requester<
+        getAllFunctionCallPermissionsQuery,
+        getAllFunctionCallPermissionsQueryVariables
+      >(
+        getAllFunctionCallPermissionsDocument,
+        variables,
+        options
+      ) as Promise<getAllFunctionCallPermissionsQuery>;
+    },
+    getMemberList(
+      variables: getMemberListQueryVariables,
+      options?: C
+    ): Promise<getMemberListQuery> {
+      return requester<getMemberListQuery, getMemberListQueryVariables>(
+        getMemberListDocument,
+        variables,
+        options
+      ) as Promise<getMemberListQuery>;
+    },
+    getNumberOfActiveProposals(
+      variables: getNumberOfActiveProposalsQueryVariables,
+      options?: C
+    ): Promise<getNumberOfActiveProposalsQuery> {
+      return requester<
+        getNumberOfActiveProposalsQuery,
+        getNumberOfActiveProposalsQueryVariables
+      >(
+        getNumberOfActiveProposalsDocument,
+        variables,
+        options
+      ) as Promise<getNumberOfActiveProposalsQuery>;
+    },
+    getVotes(
+      variables: getVotesQueryVariables,
+      options?: C
+    ): Promise<getVotesQuery> {
+      return requester<getVotesQuery, getVotesQueryVariables>(
+        getVotesDocument,
+        variables,
+        options
+      ) as Promise<getVotesQuery>;
+    },
     getGuildConfig(
       variables: getGuildConfigQueryVariables,
       options?: C
@@ -2724,6 +3094,19 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getGuildConfigQuery>;
+    },
+    getProposalVotesOfVoter(
+      variables: getProposalVotesOfVoterQueryVariables,
+      options?: C
+    ): Promise<getProposalVotesOfVoterQuery> {
+      return requester<
+        getProposalVotesOfVoterQuery,
+        getProposalVotesOfVoterQueryVariables
+      >(
+        getProposalVotesOfVoterDocument,
+        variables,
+        options
+      ) as Promise<getProposalVotesOfVoterQuery>;
     },
   };
 }

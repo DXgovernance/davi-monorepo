@@ -306,7 +306,7 @@ exports[`NetworkModal Should match snapshot 1`] = `
               data-testid="modal-title"
             >
               <div>
-                switchNetwork
+                connections.switchNetwork
               </div>
             </h2>
             <svg

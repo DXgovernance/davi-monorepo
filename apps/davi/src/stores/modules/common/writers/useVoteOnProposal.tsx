@@ -15,7 +15,7 @@ export const useVoteOnProposal: IUseVoteOnProposal = daoAddress => {
   const handleVoteOnProposal: IHandleVoteOnProposal = useCallback(
     async (proposalId, option, votingPower, title = '', cb = null) => {
       createTransaction(
-        `${t('voteOnProposal')}${` ${title}` ?? ''}`,
+        `${t('voting.voteOnProposal')}${` ${title}` ?? ''}`,
         async () => daoContract.setVote(proposalId, option, votingPower),
         true,
         cb

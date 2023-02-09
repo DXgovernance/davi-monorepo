@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf artifacts cache contracts deployments",
+    "clean": "rm -rf artifacts cache contracts deployments build",
     "compile": "cp -r node_modules/dxdao-contracts/contracts ./ && hardhat compile",
     "dev": "./src/dev.sh"
   },

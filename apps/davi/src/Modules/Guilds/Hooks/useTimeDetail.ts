@@ -2,10 +2,8 @@ import moment, { Moment } from 'moment';
 import { useTranslation } from 'react-i18next';
 import { useHookStoreProvider } from 'stores';
 import { ProposalState } from 'types/types.guilds.d';
-import {
-  getTimeDifferenceHumanized,
-  isBeforeCurrentTime,
-} from 'utils/time/time';
+import { isBeforeCurrentTime } from 'utils/time/time';
+import useTimeDifferenceHumanized from 'hooks/Guilds/time/useTimeDifferenceHumanized';
 
 const useTimeDetail = (
   guildId: string,
@@ -19,29 +17,27 @@ const useTimeDetail = (
     },
   } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildId);
+  const endTimeMoment =
+    status === ProposalState.Executable || status === ProposalState.Failed
+      ? moment(endTime).add(
+          guildConfig?.timeForExecution?.toNumber(),
+          t('duration.seconds_other')
+        )
+      : endTime;
+
+  const timeDifferenceHumanized = useTimeDifferenceHumanized(endTimeMoment);
 
   let endTimeDetail: string = null;
-  let endTimeMoment: Moment = null;
 
   // with states Executable and Failed we show the time difference with execution time. Otherwise, with ending time
   if (status === ProposalState.Executable || status === ProposalState.Failed) {
-    endTimeMoment = moment(endTime).add(
-      guildConfig?.timeForExecution?.toNumber(),
-      'seconds'
-    );
-
-    const timeDifferenceHumanized = getTimeDifferenceHumanized(endTimeMoment);
-
     endTimeDetail = isBeforeCurrentTime(endTimeMoment)
-      ? t('expiredTimeAgo', { timeDifferenceHumanized })
-      : t('expiresInTimeDetail', { timeDifferenceHumanized });
+      ? t('proposal.time.expiredTimeAgo', { timeDifferenceHumanized })
+      : t('proposal.time.expiresInTimeDetail', { timeDifferenceHumanized });
   } else {
-    const timeDifferenceHumanized = getTimeDifferenceHumanized(endTime);
-
-    endTimeDetail = isBeforeCurrentTime(endTime)
-      ? t('endedTimeAgo', { timeDifferenceHumanized })
-      : t('endingTimeLeft', { timeDifferenceHumanized });
-    endTimeMoment = endTime;
+    endTimeDetail = isBeforeCurrentTime(endTimeMoment)
+      ? t('proposal.time.endedTimeAgo', { timeDifferenceHumanized })
+      : t('proposal.time.endingTimeLeft', { timeDifferenceHumanized });
   }
 
   return { detail: endTimeDetail, moment: endTimeMoment };

@@ -55,7 +55,9 @@ const DiscussionPage: React.FC = () => {
 
   const handleDelete = () => {
     const confirmed = window.confirm(
-      `${t('deletionMessage1')}'\r\n${t('deletionMessage2')}`
+      `${t('discussions.activity.deletionMessage1')}'\r\n${t(
+        'discussions.activity.deletionMessage2'
+      )}`
     );
     if (confirmed) {
       orbis.deletePost(discussionId);
@@ -90,7 +92,7 @@ const DiscussionPage: React.FC = () => {
                 variant="primaryWithBorder"
                 data-testid="create-proposal-button"
               >
-                {t('createProposal')}
+                {t('createProposal.createProposal')}
               </Button>
             </StyledLink>
           </HeaderTopRow>
@@ -121,7 +123,9 @@ const DiscussionPage: React.FC = () => {
         <SidebarCard
           header={
             <SidebarCardHeaderSpaced>
-              <CardHeader>{t('discussionTitle')}</CardHeader>
+              <CardHeader>
+                {t('discussions.activity.discussionTitle')}
+              </CardHeader>
             </SidebarCardHeaderSpaced>
           }
         >

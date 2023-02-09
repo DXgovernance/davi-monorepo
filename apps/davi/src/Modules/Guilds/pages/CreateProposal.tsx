@@ -75,7 +75,7 @@ const CreateProposalPage: React.FC = () => {
   const [options, setOptions] = useState<Option[]>([
     {
       id: `option-1-For`,
-      label: t('for', { defaultValue: 'For' }),
+      label: t('actionBuilder.options.for', { defaultValue: 'For' }),
       color: theme?.colors?.votes?.[1],
       decodedActions: [],
       permissions: [],
@@ -92,7 +92,7 @@ const CreateProposalPage: React.FC = () => {
   } = useTextEditor(
     `${guildId}/create-proposal`,
     345600000,
-    t('enterProposalDescription')
+    t('createProposal.enterProposalDescription')
   );
 
   const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
@@ -247,7 +247,7 @@ const CreateProposalPage: React.FC = () => {
               marginTop={'5px;'}
             >
               <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
-              {t('backToOverview')}{' '}
+              {t('proposal.backToOverview')}{' '}
             </IconButton>
           </StyledLink>
 
@@ -266,7 +266,7 @@ const CreateProposalPage: React.FC = () => {
         <Box margin="0px 0px 24px">
           {editMode ? (
             <>
-              <Label>{t('title')}</Label>
+              <Label>{t('createProposal.title')}</Label>
               <Input
                 data-testid="proposal-title-input"
                 placeholder="Proposal Title"
@@ -306,7 +306,7 @@ const CreateProposalPage: React.FC = () => {
             backgroundColor={isValid ? 'none' : '#1B1D1F'}
             outline={'1px solid #A1A6B0'}
           >
-            {t('createProposal')}
+            {t('createProposal.createProposal')}
           </StyledButton>
         </Box>
       </PageContent>
@@ -328,13 +328,13 @@ const CreateProposalPage: React.FC = () => {
           </Flex>
           <Flex direction="row" style={{ columnGap: '1rem' }}>
             <StyledButton onClick={handleRetryMetadataUpload}>
-              {t('retry')}
+              {t('createProposal.retry')}
             </StyledButton>
             <StyledButton
               onClick={handleSkipMetadataUpload}
               variant="secondary"
             >
-              {t('createAnyway')}
+              {t('createProposal.createAnyway')}
             </StyledButton>
             <StyledButton
               onClick={() => {
@@ -343,7 +343,7 @@ const CreateProposalPage: React.FC = () => {
               }}
               variant="secondary"
             >
-              {t('close')}
+              {t('modals.close')}
             </StyledButton>
           </Flex>
         </Flex>
@@ -351,7 +351,7 @@ const CreateProposalPage: React.FC = () => {
       <Modal
         isOpen={isPermissionWarningModalOpen}
         onDismiss={() => setIsPermissionWarningModalOpen(false)}
-        header={t('permissions.warningMessage')}
+        header={t('actionBuilder.permissions.warningMessage')}
         maxWidth={390}
       >
         <Flex padding={'1.5rem'}>
@@ -360,7 +360,7 @@ const CreateProposalPage: React.FC = () => {
               <FiX size={40} />
             </WarningCircle>
             <Flex padding={'1.5rem 0'}>
-              {t('permissions.proposalNotExecuted')}
+              {t('actionBuilder.permissions.proposalNotExecuted')}
             </Flex>
           </Flex>
           <Flex direction="row" style={{ columnGap: '1rem' }}>
@@ -370,13 +370,13 @@ const CreateProposalPage: React.FC = () => {
               }}
               variant="secondary"
             >
-              {t('createAnyway')}
+              {t('createProposal.createAnyway')}
             </StyledButton>
             <StyledButton
               onClick={() => setIsPermissionWarningModalOpen(false)}
               variant="secondary"
             >
-              {t('close')}
+              {t('modals.close')}
             </StyledButton>
           </Flex>
         </Flex>

@@ -85,10 +85,6 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -113,7 +109,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.domain
+    actionBuilder.ens.domain
   </div>
   <div
     class="c0 c1"
@@ -128,7 +124,6 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
       >
         <a
           class="c5"
-          href="https://etherscan.io/address/0x0000000000000000000000000000000000000000"
           rel="noopener"
           target="_blank"
         >
@@ -168,7 +163,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.currentContent
+    actionBuilder.ens.currentContent
   </div>
   <div
     class="c0 c1"
@@ -217,7 +212,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.newContent
+    actionBuilder.ens.newContent
   </div>
   <div
     class="c0 c1"
@@ -266,7 +261,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    interactWith
+    actionBuilder.interactWith
      
     <span>
       0.0
@@ -299,7 +294,6 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
         </span>
         <a
           class="c5"
-          href="https://etherscan.io/address/0x3f943f38b2fbe1ee5daf0516cecfe4e0f8734351"
           rel="noopener"
           target="_blank"
         >

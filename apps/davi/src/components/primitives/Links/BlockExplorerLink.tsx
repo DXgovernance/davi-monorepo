@@ -6,20 +6,11 @@ import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useMemo } from 'react';
 import { MAINNET_ID, shortenAddress } from 'utils';
 import { resolveUri } from 'utils/url';
-import { Chain, useNetwork } from 'wagmi';
+import { useNetwork } from 'wagmi';
 import { Flex } from '../Layout';
 import { ExternalLink } from './ExternalLink';
 import { BlockExplorerLinkProps } from './types';
-
-const getBlockExplorerUrl = (
-  chain: Chain,
-  address: string,
-  type: 'address' | 'tx'
-) => {
-  if (!chain || !chain?.blockExplorers?.default) return null;
-
-  return `${chain.blockExplorers.default.url}/${type}/${address}`;
-};
+import { getBlockExplorerUrl } from 'provider';
 
 export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
   address,
@@ -27,10 +18,12 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
   shortAddress = false,
   avatarSize = 24,
   disableLink = false,
+  forceShowAddress = false,
+  fetchTokenData = true,
 }) => {
   const { chain } = useNetwork();
   const { ensName, imageUrl } = useENSAvatar(address, MAINNET_ID);
-  const { data: erc20Info } = useERC20Info(address);
+  const { data: erc20Info } = useERC20Info(fetchTokenData ? address : null);
   const { tokens } = useTokenList(chain.id);
 
   const detailedTokenData = useMemo(() => {
@@ -44,6 +37,11 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
   if (!address) return null;
 
   const blockExplorerUrl = getBlockExplorerUrl(chain, address, 'address');
+
+  const displayAddress = shortAddress ? shortenAddress(address) : address;
+  const displayLinkText = forceShowAddress
+    ? displayAddress
+    : erc20Info?.symbol || ensName || displayAddress;
 
   return (
     <Flex
@@ -62,16 +60,10 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
         </Segment>
       )}
       {disableLink ? (
-        <div>
-          {erc20Info?.symbol ||
-            ensName ||
-            (shortAddress ? shortenAddress(address) : address)}
-        </div>
+        <div> {displayLinkText} </div>
       ) : (
         <ExternalLink href={blockExplorerUrl} data-testid="external-link">
-          {erc20Info?.symbol ||
-            ensName ||
-            (shortAddress ? shortenAddress(address) : address)}
+          {displayLinkText}
         </ExternalLink>
       )}
     </Flex>

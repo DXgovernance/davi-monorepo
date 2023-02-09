@@ -34,8 +34,10 @@ const WalletButton = () => {
           }
         >
           {switchNetwork
-            ? t('switchWalletTo', { chainName: firstSupported?.name })
-            : t('unsupportedNetwork')}
+            ? t('connections.switchWalletTo', {
+                chainName: firstSupported?.name,
+              })
+            : t('connections.unsupportedNetwork')}
         </Button>
       );
     }
@@ -54,7 +56,7 @@ const WalletButton = () => {
     } else {
       return (
         <Button data-testid="connect-wallet-btn" onClick={toggleWalletModal}>
-          {t('connectWallet')}
+          {t('connections.connectWallet')}
         </Button>
       );
     }

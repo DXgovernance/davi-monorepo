@@ -37,12 +37,12 @@ export const WalletInfoBox = ({ openOptions }: WalletInfoBoxProps) => {
       <ConnectionStatusRow>
         <ConnectionStatusText>
           <LiveIndicator />
-          {t('connectedTo', { walletName: connector.name })}
+          {t('connections.connectedTo', { walletName: connector.name })}
         </ConnectionStatusText>
         {isDesktop && (
           <div>
             <Button variant="secondary" onClick={openOptions}>
-              {t('change')}
+              {t('connections.change')}
             </Button>
           </div>
         )}
@@ -58,7 +58,9 @@ export const WalletInfoBox = ({ openOptions }: WalletInfoBoxProps) => {
       <Row>
         <ConnectionActionButton onClick={copyAddress}>
           {isCopied ? <FiCheckCircle /> : <FiCopy />}
-          {isCopied ? t('copiedAddress') : t('copyAddress')}
+          {isCopied
+            ? t('connections.copiedAddress')
+            : t('connections.copyAddress')}
         </ConnectionActionButton>
 
         <ExternalLink
@@ -67,13 +69,13 @@ export const WalletInfoBox = ({ openOptions }: WalletInfoBoxProps) => {
         >
           <ConnectionActionButton>
             <FiExternalLink />
-            {t('viewOnBlockExplorer')}
+            {t('transactions.viewOnBlockExplorer')}
           </ConnectionActionButton>
         </ExternalLink>
       </Row>
       {isMobile && (
         <CenteredButton onClick={openOptions}>
-          {t('changeConnection')}
+          {t('connections.changeConnection')}
         </CenteredButton>
       )}
     </Wrapper>

@@ -23,13 +23,18 @@ const GuildCardLoader = () => {
 const GuildCardWithContent = ({ guildAddress, t }) => {
   const {
     hooks: {
-      fetchers: { useGuildConfig, useGetActiveProposals, useMemberCount },
+      fetchers: {
+        useGuildConfig,
+        useGetNumberOfActiveProposals,
+        useMemberCount,
+      },
     },
   } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildAddress);
 
   const { data: numberOfMembers } = useMemberCount(guildAddress);
-  const { data: numberOfActiveProposals } = useGetActiveProposals(guildAddress);
+  const { data: numberOfActiveProposals } =
+    useGetNumberOfActiveProposals(guildAddress);
   const ensName = useENSNameFromAddress(guildAddress)?.ensName?.split('.')[0];
 
   return (
@@ -49,7 +54,7 @@ const LandingPage: React.FC = () => {
   const { data: allGuilds, error, isLoading } = useGuildRegistry();
 
   const EmptyGuilds = () => {
-    return <h1>{t('noGuildsRegistered')}</h1>;
+    return <h1>{t('daoErrors.noDAOsRegistered')}</h1>;
   };
 
   if (!allGuilds || allGuilds.length === 0) {

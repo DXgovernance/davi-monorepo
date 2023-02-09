@@ -7,6 +7,10 @@ jest.mock('wagmi', () => ({
   useNetwork: () => ({ chain: { id: mockChainId } }),
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('ProposalTypes', () => {
   const props = testProps;
 

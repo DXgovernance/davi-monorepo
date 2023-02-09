@@ -139,7 +139,7 @@ export const useProposalCalls: IUseProposalCalls = (
           const optionLabel = optionLabels?.[index]
             ? optionLabels?.[index]
             : index === 0
-            ? t('against', { defaultValue: 'Against' })
+            ? t('actionBuilder.options.against', { defaultValue: 'Against' })
             : null;
 
           return {

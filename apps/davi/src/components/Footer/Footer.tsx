@@ -26,16 +26,17 @@ const Footer = () => {
           target="_blank"
           rel="noopener"
         >
-          <Label>{t('reportABug')}</Label>
+          <Label>{t('footer.reportABug')}</Label>
         </Link>
         <Dot />
-        <Link
+        <Link 
           data-testid="footer-suggest-feature"
-          href="https://davi.canny.io/"
-          target="_blank"
+          href="https://davi.canny.io/" 
+          target="_blank" 
           rel="noopener"
         >
-          <Label>{t('suggestAFeature')}</Label>
+          <Label>{t('footer.suggestAFeature')}</Label>
+
         </Link>
         <Dot />
         <Link

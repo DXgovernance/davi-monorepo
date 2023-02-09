@@ -7,11 +7,8 @@ import { Input } from 'components/primitives/Forms/Input';
 import { TokenAmountInput } from 'components/primitives/Forms/TokenAmountInput';
 import { Box } from 'components/primitives/Layout/Box';
 import { BigNumber, utils } from 'ethers';
-import {
-  TokenInfoWithType,
-  TokenType,
-  useTokenList,
-} from 'hooks/Guilds/tokens/useTokenList';
+import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
+import { TokenInfoWithType } from 'types/types';
 import { useMemo, useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import styled from 'styled-components';
@@ -67,7 +64,7 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
         recipientAddress: decodedCall.args._to,
       };
     } else if (decodedCall.callType === SupportedAction.NATIVE_TRANSFER) {
-      const token = tokens.find(token => token.type === TokenType.NATIVE);
+      const token = tokens.find(token => token.type === 'NATIVE');
       return {
         source: decodedCall.from,
         token,
@@ -88,7 +85,7 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
   const [isTokenPickerOpen, setIsTokenPickerOpen] = useState(false);
 
   const submitAction = (values: TransferValues) => {
-    if (values.token.type === TokenType.ERC20) {
+    if (values.token.type === 'ERC20') {
       const ERC20Contract = new utils.Interface(ERC20.abi);
 
       onSubmit([
@@ -129,14 +126,16 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
 
             return (
               <Control>
-                <ControlLabel>{t('recipient')}</ControlLabel>
+                <ControlLabel>
+                  {t('actionBuilder.inputs.recipient')}
+                </ControlLabel>
                 <ControlRow>
                   <AddressInput
                     {...field}
                     isInvalid={!!error}
                     name="recipient-address"
                     aria-label="recipient address input"
-                    placeholder={t('ethereumAddress')}
+                    placeholder={t('actionBuilder.inputs.ethereumAddress')}
                   />
                 </ControlRow>
                 {!!error && <Error>{error.message}</Error>}
@@ -154,7 +153,9 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
 
               return (
                 <Control>
-                  <ControlLabel>{t('amount')}</ControlLabel>
+                  <ControlLabel>
+                    {t('actionBuilder.inputs.amount')}
+                  </ControlLabel>
                   <ControlRow>
                     <TokenAmountInput
                       {...field}
@@ -179,12 +180,14 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
               return (
                 <>
                   <Control>
-                    <ControlLabel>{t('asset')}</ControlLabel>
+                    <ControlLabel>
+                      {t('actionBuilder.inputs.asset')}
+                    </ControlLabel>
                     <ControlRow onClick={() => setIsTokenPickerOpen(true)}>
                       <Input
                         {...field}
                         value={field.value?.symbol}
-                        placeholder={t('token')}
+                        placeholder={t('actionBuilder.inputs.token')}
                         isInvalid={!!error}
                         icon={
                           <div>
@@ -227,7 +230,7 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
           data-testid="submit-erc20transfer"
           type="submit"
         >
-          {t('saveAction')}
+          {t('actionBuilder.action.saveAction')}
         </Button>
       </form>
     </div>

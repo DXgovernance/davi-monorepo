@@ -1,0 +1,45 @@
+query getAllPermissions($id: ID!) {
+  guild(id: $id) {
+    permissions {
+      id
+      isToken
+      to
+      valueAllowed
+      from
+      fromTime
+      functionSignature
+      allowed
+    }
+  }
+}
+
+query getAllTokenPermissions($id: ID!) {
+  guild(id: $id) {
+    permissions(where: { isToken: true }) {
+      id
+      isToken
+      to
+      valueAllowed
+      from
+      fromTime
+      functionSignature
+      allowed
+    }
+  }
+}
+
+query getAllFunctionCallPermissions($id: ID!) {
+  guild(id: $id) {
+    permissions(where: { isToken: false }) {
+      id
+      isToken
+      to
+      valueAllowed
+      from
+      fromTime
+      functionSignature
+      allowed
+    }
+  }
+}
+

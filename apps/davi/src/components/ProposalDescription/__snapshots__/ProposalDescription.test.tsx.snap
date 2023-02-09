@@ -67,14 +67,23 @@ exports[`ProposalDescription Should render with description 1`] = `
   color: #BDC0C7;
 }
 
+.c1 {
+  position: relative;
+  overflow: visible;
+}
+
 <div>
    
   <div
     class="c0"
   >
-    <span>
-      This is the description of the proposal
-    </span>
+    <div
+      class="c1"
+    >
+      <span>
+        This is the description of the proposal
+      </span>
+    </div>
   </div>
    
 </div>

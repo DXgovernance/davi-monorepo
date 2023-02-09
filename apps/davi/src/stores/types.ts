@@ -25,6 +25,22 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
     isError: boolean;
   };
+  useGetAllPermissions: (
+    daoId: string,
+    filter?: 'tokens' | 'functionCalls'
+  ) => {
+    data: {
+      id: string;
+      to: string;
+      from: string;
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+      functionSignature: string;
+      allowed: boolean;
+    }[];
+    isLoading: boolean;
+    isError: boolean;
+  };
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`

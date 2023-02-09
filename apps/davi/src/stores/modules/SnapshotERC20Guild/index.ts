@@ -12,7 +12,9 @@ import {
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
   useProposal as useProposalFromSubgraph,
+  useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
+  useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
 } from '../subgraph/common';
 
 import {
@@ -27,6 +29,7 @@ import {
   useGuildConfig,
   useGetVotes,
   useGetMemberList,
+  useGetAllPermissions,
   useGetNumberOfActiveProposals,
 } from '../common/fetchers';
 import {
@@ -61,7 +64,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useTotalLocked,
           useDAOToken,
           useIsProposalCreationAllowed,
-          useProposalVotesOfVoter,
+          useProposalVotesOfVoter: useProposalVotesOfVoterFromSubgraph,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,
@@ -71,6 +74,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGuildConfig: useGuildConfigFromSubgraph,
           useGetVotes: useGetVotesFromSubgraph,
           useGetMemberList: useGetMemberListFromSubgraph,
+          useGetAllPermissions: useGetAllPermissionsFromSubgraph,
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
         },
@@ -90,6 +94,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGuildConfig,
           useGetVotes,
           useGetMemberList,
+          useGetAllPermissions,
           useGetNumberOfActiveProposals,
         },
       },

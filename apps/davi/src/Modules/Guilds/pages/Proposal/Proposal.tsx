@@ -5,7 +5,6 @@ import { ProposalStatus } from 'components/ProposalStatus';
 import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
-import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
 import { Loading } from 'components/primitives/Loading';
 import { Result, ResultState } from 'components/Result';
 import React, { useContext } from 'react';
@@ -51,6 +50,7 @@ const ProposalPage: React.FC = () => {
         useTotalLocked,
         useProposalCalls,
         useGuildConfig,
+        useGuildProposalIds,
       },
     },
   } = useHookStoreProvider();

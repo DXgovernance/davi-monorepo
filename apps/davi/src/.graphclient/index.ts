@@ -2691,6 +2691,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           location: 'GetGuildConfigDocument.graphql',
         },
         {
+          document: GetGuildProposalIdsDocument,
+          get rawSDL() {
+            return printWithCache(GetGuildProposalIdsDocument);
+          },
+          location: 'GetGuildProposalIdsDocument.graphql',
+        },
+        {
           document: GetProposalVotesOfVoterDocument,
           get rawSDL() {
             return printWithCache(GetProposalVotesOfVoterDocument);
@@ -2868,6 +2875,14 @@ export type getGuildConfigQuery = {
   >;
 };
 
+export type getGuildProposalIdsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getGuildProposalIdsQuery = {
+  guild?: Maybe<{ proposals?: Maybe<Array<Pick<Proposal, 'id'>>> }>;
+};
+
 export type getProposalVotesOfVoterQueryVariables = Exact<{
   proposalId: Scalars['ID'];
   userAddress: Scalars['String'];
@@ -2995,6 +3010,11 @@ export const getGuildConfigDocument = gql`
     }
   }
 ` as unknown as DocumentNode<getGuildConfigQuery, getGuildConfigQueryVariables>;
+export const getGuildProposalIdsDocument = gql`
+  query getGuildProposalIds($id: ID!) {
+    guild(id: $id) {
+      proposals {
+        id}`;
 export const getProposalVotesOfVoterDocument = gql`
   query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
     proposal(id: $proposalId) {
@@ -3005,8 +3025,8 @@ export const getProposalVotesOfVoterDocument = gql`
     }
   }
 ` as unknown as DocumentNode<
-  getProposalVotesOfVoterQuery,
-  getProposalVotesOfVoterQueryVariables
+  getGuildProposalIdsQuery,
+  getGuildProposalIdsQueryVariables
 >;
 
 export type Requester<C = {}, E = unknown> = <R, V>(
@@ -3094,6 +3114,19 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getGuildConfigQuery>;
+    },
+    getGuildProposalIds(
+      variables: getGuildProposalIdsQueryVariables,
+      options?: C
+    ): Promise<getGuildProposalIdsQuery> {
+      return requester<
+        getGuildProposalIdsQuery,
+        getGuildProposalIdsQueryVariables
+      >(
+        getGuildProposalIdsDocument,
+        variables,
+        options
+      ) as Promise<getGuildProposalIdsQuery>;
     },
     getProposalVotesOfVoter(
       variables: getProposalVotesOfVoterQueryVariables,

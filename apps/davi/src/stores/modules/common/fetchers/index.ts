@@ -11,3 +11,4 @@ export { useGetVotes } from './useGetVotes';
 export { useGetMemberList } from './useGetMemberList';
 export { useGetAllPermissions } from './useGetAllPermissions';
 export { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';
+export { useGuildProposalIds } from './useGuildProposalIds';

@@ -55,6 +55,7 @@
   "treasury": {
     "treasury": "Treasury",
     "assets": "assets",
+    "asset": "asset",
     "tokenAmount": "Token Amount",
     "errorLoadingTreasuries": "Error loading treasuries",
     "noTreasuryAssets": "No treasury assets available"

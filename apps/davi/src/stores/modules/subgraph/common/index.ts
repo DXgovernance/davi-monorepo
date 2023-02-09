@@ -3,3 +3,4 @@ export { useGetMemberList } from './useGetMemberList';
 export { useGuildConfig } from './useGuildConfig';
 export { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';
 export { useGuildProposalIds } from './useGuildProposalIds';
+export { useProposalVotesOfVoter } from './useProposalVotesOfVoter';

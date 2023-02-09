@@ -28,6 +28,7 @@ import {
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
   useGuildProposalIds as useGuildProposalIdsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
+  useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
 } from '../subgraph/common';
 import {
   useTotalLocked,
@@ -61,7 +62,7 @@ export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementati
           useTotalLocked,
           useDAOToken,
           useIsProposalCreationAllowed,
-          useProposalVotesOfVoter,
+          useProposalVotesOfVoter: useProposalVotesOfVoterFromSubgraph,
           useVoterLockTimestamp,
           useProposalCalls,
           useVotingResults,

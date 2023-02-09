@@ -20,7 +20,6 @@ async function ipfsFileMetadataFetcher(hash: string) {
     fetcher('https://gateway.pinata.cloud/ipfs/' + hash),
     fetcher('https://dweb.link/ipfs/' + hash),
     fetcher('https://infura-ipfs.io/ipfs/' + hash),
-    fetcher('https://cloudflare-ipfs.com/ipfs/' + hash),
   ]);
 
   return response;

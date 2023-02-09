@@ -91,8 +91,11 @@ const UpdateENSContentEditor: React.FC<ActionEditorProps> = ({
             return (
               <Control>
                 <ControlLabel>
-                  {t('ens.name')}
-                  <Tooltip text={t('ens.nameTooltip')} placement="bottom">
+                  {t('actionBuilder.ens.name')}
+                  <Tooltip
+                    text={t('actionBuilder.ens.nameTooltip')}
+                    placement="bottom"
+                  >
                     <StyledIcon src={Info} />
                   </Tooltip>
                 </ControlLabel>
@@ -120,8 +123,8 @@ const UpdateENSContentEditor: React.FC<ActionEditorProps> = ({
               return (
                 <Control>
                   <ControlLabel>
-                    {t('ens.ipfsHash')}
-                    <Tooltip text={t('ens.ipfsHashToolTip')}>
+                    {t('actionBuilder.ens.ipfsHash')}
+                    <Tooltip text={t('actionBuilder.ens.ipfsHashToolTip')}>
                       <StyledIcon src={Info} />
                     </Tooltip>
                   </ControlLabel>
@@ -139,7 +142,7 @@ const UpdateENSContentEditor: React.FC<ActionEditorProps> = ({
           />
         </ControlRow>
         <Button fullWidth data-testid="submit-enscontent" type="submit">
-          {t('saveAction')}
+          {t('actionBuilder.action.saveAction')}
         </Button>
       </form>
     </div>

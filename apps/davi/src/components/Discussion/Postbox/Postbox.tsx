@@ -315,7 +315,9 @@ const Postbox = ({
     return (
       <PostboxWrapper>
         <PostboxInputWrapper>
-          <PostboxInput data-placeholder={t('postboxConnectWallet')} />
+          <PostboxInput
+            data-placeholder={t('discussions.activity.postboxConnectWallet')}
+          />
         </PostboxInputWrapper>
       </PostboxWrapper>
     );
@@ -323,9 +325,11 @@ const Postbox = ({
     return (
       <PostboxWrapper>
         <PostboxInputWrapper>
-          <PostboxInput data-placeholder={t('postboxConnectCeramic')} />
+          <PostboxInput
+            data-placeholder={t('discussions.activity.postboxConnectCeramic')}
+          />
           <PostboxButton onClick={connectOrbis}>
-            {t('postboxConnectCeramicButton')}
+            {t('discussions.activity.postboxConnectCeramicButton')}
           </PostboxButton>
         </PostboxInputWrapper>
       </PostboxWrapper>
@@ -337,7 +341,7 @@ const Postbox = ({
       {searchText && (
         <PostboxMentions>
           {isSearching ? (
-            <Box>{t('mentionsSearchLoading')}</Box>
+            <Box>{t('discussions.activity.mentionsSearchLoading')}</Box>
           ) : (
             searchResults.map(p => (
               <PostboxUserMention key={p.did} onClick={() => addMention(p)}>
@@ -352,7 +356,7 @@ const Postbox = ({
       {replyTo && (
         <ReplyTo>
           <ReplyToDetails>
-            {t('replyingTo')}{' '}
+            {t('discussions.activity.replyingTo')}{' '}
             <strong>
               {replyTo?.creator_details?.profile?.username ||
                 replyTo?.creator_details?.metadata?.ensName ||
@@ -378,16 +382,21 @@ const Postbox = ({
         />
 
         {!enterToShare && !hideShareButton && (
-          <PostboxButton onClick={share}>{t('postboxShare')}</PostboxButton>
+          <PostboxButton onClick={share}>
+            {t('discussions.activity.postboxShare')}
+          </PostboxButton>
         )}
       </PostboxInputWrapper>
 
       {editPost && (
         <PostboxEditMenu>
           <button onClick={() => cancelEdit && cancelEdit()}>
-            {t('postboxEditCancel')}
+            {t('discussions.activity.postboxEditCancel')}
           </button>{' '}
-          &bull; <button onClick={share}>{t('postboxEditSave')}</button>
+          &bull;{' '}
+          <button onClick={share}>
+            {t('discussions.activity.postboxEditSave')}
+          </button>
         </PostboxEditMenu>
       )}
     </PostboxWrapper>

@@ -63,7 +63,7 @@ exports[`GuestActions Should match snapshot with data 1`] = `
     class="c0 c1 c2"
     data-testid="open-stake-tokens-modal-btn"
   >
-    join
+    members.join
   </button>
    
 </div>
@@ -119,7 +119,7 @@ exports[`GuestActions Should match snapshot without data 1`] = `
     class="c0"
     data-testid="guest-action-connect-wallet"
   >
-    connectWallet
+    connections.connectWallet
   </button>
    
 </div>

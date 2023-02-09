@@ -34,7 +34,7 @@ const RepMintInfoLine: React.FC<ActionViewProps> = ({
         <StyledMintIcon src={Mint} />
       </Segment>
       <Segment>
-        {!compact ? t('mint') : ''} {roundedRepPercent} %
+        {!compact ? t('actionBuilder.repMint.mint') : ''} {roundedRepPercent} %
       </Segment>
       <Segment>
         <FiArrowRight />

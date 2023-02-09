@@ -291,10 +291,14 @@ const SetGuildConfigEditor: FC<ActionEditorProps> = ({
         );
       })}
       {noValueUpdatedError && (
-        <Error>{t('noValueHasBeenUpdatedFromCurrentGuildConfig')}</Error>
+        <Error>
+          {t(
+            'actionBuilder.config.noValueHasBeenUpdatedFromCurrentGuildConfig'
+          )}
+        </Error>
       )}
       <Button m="1rem 0 0" fullWidth type="submit">
-        {t('saveAction')}
+        {t('actionBuilder.action.saveAction')}
       </Button>
     </form>
   );

@@ -75,13 +75,13 @@ const UpdateENSContentSummary: React.FC<ActionViewProps> = ({
 
   return (
     <>
-      <DetailHeader>{t('ens.domain')}</DetailHeader>
+      <DetailHeader>{t('actionBuilder.ens.domain')}</DetailHeader>
       <DetailRow>
         <DetailBody>
           <BlockExplorerLink address={parsedData?.from} />
         </DetailBody>
       </DetailRow>
-      <DetailHeader>{t('ens.currentContent')}</DetailHeader>
+      <DetailHeader>{t('actionBuilder.ens.currentContent')}</DetailHeader>
       <DetailRow>
         <DetailBody>
           {currentIpfsUrl ? (
@@ -89,11 +89,11 @@ const UpdateENSContentSummary: React.FC<ActionViewProps> = ({
               {currentIpfsUrl || ''}
             </ExternalLink>
           ) : (
-            t('none')
+            t('actionBuilder.ens.none')
           )}
         </DetailBody>
       </DetailRow>
-      <DetailHeader>{t('ens.newContent')}</DetailHeader>
+      <DetailHeader>{t('actionBuilder.ens.newContent')}</DetailHeader>
       <DetailRow>
         <DetailBody>
           {newFile ? (

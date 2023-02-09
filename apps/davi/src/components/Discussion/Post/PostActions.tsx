@@ -94,7 +94,9 @@ const PostActions = ({
 
   const handleModeratorRemove = () => {
     const confirmed = window.confirm(
-      `${t('removalMessage1')}'\r\n${t('removalMessage2')}`
+      `${t('discussions.activity.removalMessage1')}'\r\n${t(
+        'discussions.activity.removalMessage2'
+      )}`
     );
     if (confirmed) {
       react('downvote');
@@ -120,7 +122,7 @@ const PostActions = ({
       {/* Reply to post button */}
       {toggleReply && (
         <PostActionButton
-          title={t('postActions.reply')}
+          title={t('discussions.postActions.reply')}
           onClick={handleClickReply}
           disabled={isConnected && isReadOnly(connector)}
         >
@@ -131,7 +133,7 @@ const PostActions = ({
       {/* Toggle Thread */}
       {showThreadButton && (
         <PostActionButton
-          title={t('postActions.toggleThread')}
+          title={t('discussions.postActions.toggleThread')}
           onClick={toggleThread}
         >
           <IoChatboxOutline size={18} />
@@ -141,7 +143,7 @@ const PostActions = ({
 
       {/* Reaction: Like */}
       <PostActionButton
-        title={t('postActions.like')}
+        title={t('discussions.postActions.like')}
         active={reacted === 'like'}
         onClick={() => react('like')}
         disabled={isConnected && isReadOnly(connector)}
@@ -156,7 +158,7 @@ const PostActions = ({
 
       {/* Reaction: Haha */}
       <PostActionButton
-        title={t('postActions.haha')}
+        title={t('discussions.postActions.haha')}
         active={reacted === 'haha'}
         onClick={() => react('haha')}
         disabled={isConnected && isReadOnly(connector)}
@@ -171,7 +173,7 @@ const PostActions = ({
 
       {/* Reaction: Downvote */}
       <PostActionButton
-        title={t('postActions.downvote')}
+        title={t('discussions.postActions.downvote')}
         active={reacted === 'downvote'}
         onClick={() => react('downvote')}
         disabled={
@@ -187,7 +189,7 @@ const PostActions = ({
       </PostActionButton>
       {moderators.includes(address) && (
         <PostActionButton
-          title={t('postActions.downvote')}
+          title={t('discussions.postActions.downvote')}
           active={reacted === 'downvote'}
           onClick={() => handleModeratorRemove()}
         >
@@ -209,7 +211,7 @@ const PostActions = ({
                     setShowPopover(false);
                   }}
                 >
-                  {t('postOptions.edit')}
+                  {t('discussions.postOptions.edit')}
                 </PostOptionsButton>
               )}
               {onClickDelete && (
@@ -220,7 +222,7 @@ const PostActions = ({
                     setShowPopover(false);
                   }}
                 >
-                  {t('postOptions.delete')}
+                  {t('discussions.postOptions.delete')}
                 </PostOptionsButton>
               )}
             </PostPopover>

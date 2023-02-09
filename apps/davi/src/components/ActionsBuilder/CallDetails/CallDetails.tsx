@@ -104,7 +104,7 @@ export const CallDetails: React.FC<ActionViewProps> = ({
             {param.name} <em>({param.type})</em>
           </ParamTitleTag>
           {param.type === 'bytes' && (
-            <Button variant="secondary">{t('decode')}</Button>
+            <Button variant="secondary">{t('actionBuilder.decode')}</Button>
           )}
         </ParamTitleRow>
 
@@ -155,7 +155,9 @@ export const CallDetails: React.FC<ActionViewProps> = ({
             variant={'secondary'}
             onClick={() => setDisplayRichData(v => !v)}
           >
-            {displayRichData ? t('displayRawData') : t('displayFormattedData')}
+            {displayRichData
+              ? t('actionBuilder.displayRawData')
+              : t('actionBuilder.displayFormattedData')}
           </DetailsButton>
         </Flex>
       )}
@@ -173,10 +175,10 @@ export const CallDetails: React.FC<ActionViewProps> = ({
                 variant={'secondary'}
               >
                 {isGenericCall && genericParams && displayRichData ? (
-                  t('approveSpendingCall')
+                  t('actionBuilder.approval.approveSpendingCall')
                 ) : (
                   <>
-                    {t('approve').toLowerCase()} ({' '}
+                    {t('actionBuilder.approval.approve').toLowerCase()} ({' '}
                     <ParamTag
                       color={
                         isApprovalExpanded
@@ -205,7 +207,9 @@ export const CallDetails: React.FC<ActionViewProps> = ({
                   <>
                     <ActionParamRow>
                       <ParamTitleRow>
-                        {t('addressToWhichTheExpenseIsBeingAuthorized')}
+                        {t(
+                          'actionBuilder.approval.addressToWhichTheExpenseIsBeingAuthorized'
+                        )}
                       </ParamTitleRow>
 
                       <ParamDetail>
@@ -216,7 +220,10 @@ export const CallDetails: React.FC<ActionViewProps> = ({
                       </ParamDetail>
                     </ActionParamRow>
                     <ActionParamRow>
-                      <ParamTitleRow> {t('amountBeingApproved')}</ParamTitleRow>
+                      <ParamTitleRow>
+                        {' '}
+                        {t('actionBuilder.approval.amountBeingApproved')}
+                      </ParamTitleRow>
                       <ParamDetail>
                         {renderGenericCallParamValue({
                           component: 'tokenAmount',
@@ -230,7 +237,8 @@ export const CallDetails: React.FC<ActionViewProps> = ({
                     <ActionParamRow>
                       <ParamTitleRow>
                         <ParamTitleTag color={theme?.colors?.params?.[0]}>
-                          {t('spender').toLowerCase()} <em>(address)</em>
+                          {t('actionBuilder.approval.spender').toLowerCase()}{' '}
+                          <em>(address)</em>
                         </ParamTitleTag>
                       </ParamTitleRow>
 
@@ -242,7 +250,8 @@ export const CallDetails: React.FC<ActionViewProps> = ({
                     <ActionParamRow>
                       <ParamTitleRow>
                         <ParamTitleTag color={theme?.colors?.params?.[1]}>
-                          {t('amount').toLowerCase()} <em>(uint256)</em>
+                          {t('actionBuilder.inputs.amount').toLowerCase()}{' '}
+                          <em>(uint256)</em>
                         </ParamTitleTag>
                       </ParamTitleRow>
                       {renderDefaultParamValue({

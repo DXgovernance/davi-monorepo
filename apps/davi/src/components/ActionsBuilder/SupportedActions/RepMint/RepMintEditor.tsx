@@ -92,9 +92,9 @@ export const Mint: React.FC<ActionEditorProps> = ({
             return (
               <Control>
                 <ControlLabel>
-                  {t('repMint.recipient')}
+                  {t('actionBuilder.repMint.recipient')}
                   <Tooltip
-                    text={t('repMint.recipientTooltip')}
+                    text={t('actionBuilder.repMint.recipientTooltip')}
                     placement="bottom"
                   >
                     <StyledIcon src={Info} />
@@ -106,7 +106,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
                     isInvalid={!!error}
                     name="recipient-address"
                     aria-label="recipient address input"
-                    placeholder={t('ethereumAddress')}
+                    placeholder={t('actionBuilder.inputs.ethereumAddress')}
                   />
                 </ControlRow>
                 {!!error && <Error>{error.message}</Error>}
@@ -125,8 +125,10 @@ export const Mint: React.FC<ActionEditorProps> = ({
               return (
                 <Control>
                   <ControlLabel>
-                    {t('repMint.repPercent')}
-                    <Tooltip text={t('repMint.repPercentTooltip')}>
+                    {t('actionBuilder.repMint.repPercent')}
+                    <Tooltip
+                      text={t('actionBuilder.repMint.repPercentTooltip')}
+                    >
                       <StyledIcon src={Info} />
                     </Tooltip>
                   </ControlLabel>
@@ -150,7 +152,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
           <Control>
             <ControlLabel>
               {t('repMint.repAmount')}
-              <Tooltip text={t('repMint.repAmountTooltip')}>
+              <Tooltip text={t('actionBuilder.repMint.repAmountTooltip')}>
                 <StyledIcon src={Info} />
               </Tooltip>
             </ControlLabel>
@@ -160,7 +162,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
           </Control>
         </ControlRow>
         <Button m="1rem 0 0" fullWidth type="submit">
-          {t('saveAction')}
+          {t('actionBuilder.action.saveAction')}
         </Button>
       </form>
     </React.Fragment>

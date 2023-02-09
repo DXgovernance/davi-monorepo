@@ -14,7 +14,7 @@ const StakeTokensModal: React.FC<StakeTokensModalProps> = ({
     <Modal
       header={
         token ? (
-          t('stakeTokens', { token: token.symbol })
+          t('members.locking.stakeTokens', { token: token.symbol })
         ) : (
           <Loading loading text skeletonProps={{ width: '100px' }} />
         )

@@ -70,12 +70,12 @@ exports[`OnlineStatus Should match snapshot offline 1`] = `
       <h3
         class="c2"
       >
-        youAreNotOnline
+        offlinePage.youAreNotOnline
       </h3>
       <p
         class="c3"
       >
-        pleaseCheckYourInternetConnection
+        offlinePage.pleaseCheckYourInternetConnection
       </p>
     </div>
   </div>

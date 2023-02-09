@@ -60,7 +60,7 @@ const Picker: React.FC<PickerProps> = ({
         <SearchWrapper>
           <Input
             icon={<FiSearch />}
-            placeholder={t('search')}
+            placeholder={t('filter.search')}
             value={searchQuery}
             onChange={e => setSearchQuery(e?.target?.value)}
           />

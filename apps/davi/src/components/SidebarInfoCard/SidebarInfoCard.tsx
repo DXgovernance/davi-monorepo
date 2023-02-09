@@ -17,15 +17,17 @@ const SidebarInfoCard: React.FC<SidebarInfoCardProps> = ({
 
   return (
     <SidebarCard
-      header={<SidebarCardHeader>{t('information')}</SidebarCardHeader>}
+      header={
+        <SidebarCardHeader>{t('proposal.information')}</SidebarCardHeader>
+      }
     >
       <SidebarCardContent>
         <Row>
-          <Label>{t('consensusSystem')}</Label>
-          <ColoredLabel>{t('guilds.guild')}</ColoredLabel>
+          <Label>{t('proposal.consensusSystem')}</Label>
+          <ColoredLabel>{t('dao.guild')}</ColoredLabel>
         </Row>
         <Row>
-          <Label>{t('proposalDuration')}</Label>
+          <Label>{t('proposal.proposalDuration')}</Label>
           <ColoredLabel>
             {proposalTime ? (
               duration(proposalTime?.toNumber(), 'seconds').humanize()
@@ -35,7 +37,7 @@ const SidebarInfoCard: React.FC<SidebarInfoCardProps> = ({
           </ColoredLabel>
         </Row>
         <Row>
-          <Label>{t('quorum')}</Label>
+          <Label>{t('proposal.quorum')}</Label>
           <ColoredLabel>
             {quorum != null ? (
               `${quorum}%`

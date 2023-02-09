@@ -48,6 +48,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  color: #DEFF4E;
 }
 
 .c8 {
@@ -280,7 +281,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
       <h2
         class="c3 c4 c5"
       >
-        castVote
+        voting.castVote
         <button
           class="c6 c7"
         >
@@ -390,11 +391,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
         <div
           class="c0 c23"
         >
-          youVotedForOption
-           
-          with
-           
-          0%
+          voting.youVotedForOption
         </div>
       </div>
     </div>

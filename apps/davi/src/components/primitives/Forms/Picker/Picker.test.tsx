@@ -22,7 +22,7 @@ describe('Picker', () => {
     });
 
     it('should render the component', () => {
-      const searchbar = getByPlaceholderText('search');
+      const searchbar = getByPlaceholderText('filter.search');
       const firstOptionTitle = getByText(fullProps.data[0].title);
       const firstOptionSubtitle = getByText(fullProps.data[0].subtitle);
       const firstOptionRightData = getByText(fullProps.data[0].rightData);
@@ -41,7 +41,7 @@ describe('Picker', () => {
     });
 
     it('should filter options when searching', () => {
-      const searchbar = getByPlaceholderText('search');
+      const searchbar = getByPlaceholderText('filter.search');
       fireEvent.input(searchbar, {
         target: { value: 'lorem' },
       });

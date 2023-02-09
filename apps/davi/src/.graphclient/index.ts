@@ -762,7 +762,7 @@ export type Proposal = {
   totalVotes?: Maybe<Array<Scalars['BigInt']>>;
   votes?: Maybe<Array<Vote>>;
   options?: Maybe<Array<Option>>;
-  metadata?: Maybe<Scalars['String']>;
+  metadata?: Maybe<ProposalMetadata>;
   description?: Maybe<Scalars['String']>;
   executionTransactionHash?: Maybe<Scalars['String']>;
   statesLog?: Maybe<Array<ProposalStateLog>>;
@@ -791,6 +791,78 @@ export type ProposalstatesLogArgs = {
   orderDirection?: InputMaybe<OrderDirection>;
   where?: InputMaybe<ProposalStateLog_filter>;
 };
+
+export type ProposalMetadata = {
+  id: Scalars['ID'];
+  description: Scalars['String'];
+  voteOptions?: Maybe<Array<Scalars['String']>>;
+  discussionRef: Scalars['String'];
+};
+
+export type ProposalMetadata_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  description?: InputMaybe<Scalars['String']>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_gt?: InputMaybe<Scalars['String']>;
+  description_lt?: InputMaybe<Scalars['String']>;
+  description_gte?: InputMaybe<Scalars['String']>;
+  description_lte?: InputMaybe<Scalars['String']>;
+  description_in?: InputMaybe<Array<Scalars['String']>>;
+  description_not_in?: InputMaybe<Array<Scalars['String']>>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_contains_nocase?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  description_starts_with?: InputMaybe<Scalars['String']>;
+  description_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  description_not_starts_with?: InputMaybe<Scalars['String']>;
+  description_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  description_ends_with?: InputMaybe<Scalars['String']>;
+  description_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  description_not_ends_with?: InputMaybe<Scalars['String']>;
+  description_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  voteOptions?: InputMaybe<Array<Scalars['String']>>;
+  voteOptions_not?: InputMaybe<Array<Scalars['String']>>;
+  voteOptions_contains?: InputMaybe<Array<Scalars['String']>>;
+  voteOptions_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
+  voteOptions_not_contains?: InputMaybe<Array<Scalars['String']>>;
+  voteOptions_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
+  discussionRef?: InputMaybe<Scalars['String']>;
+  discussionRef_not?: InputMaybe<Scalars['String']>;
+  discussionRef_gt?: InputMaybe<Scalars['String']>;
+  discussionRef_lt?: InputMaybe<Scalars['String']>;
+  discussionRef_gte?: InputMaybe<Scalars['String']>;
+  discussionRef_lte?: InputMaybe<Scalars['String']>;
+  discussionRef_in?: InputMaybe<Array<Scalars['String']>>;
+  discussionRef_not_in?: InputMaybe<Array<Scalars['String']>>;
+  discussionRef_contains?: InputMaybe<Scalars['String']>;
+  discussionRef_contains_nocase?: InputMaybe<Scalars['String']>;
+  discussionRef_not_contains?: InputMaybe<Scalars['String']>;
+  discussionRef_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  discussionRef_starts_with?: InputMaybe<Scalars['String']>;
+  discussionRef_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  discussionRef_not_starts_with?: InputMaybe<Scalars['String']>;
+  discussionRef_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  discussionRef_ends_with?: InputMaybe<Scalars['String']>;
+  discussionRef_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  discussionRef_not_ends_with?: InputMaybe<Scalars['String']>;
+  discussionRef_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<BlockChangedFilter>;
+};
+
+export type ProposalMetadata_orderBy =
+  | 'id'
+  | 'description'
+  | 'voteOptions'
+  | 'discussionRef';
 
 export type ProposalStateLog = {
   id: Scalars['ID'];
@@ -1025,6 +1097,7 @@ export type Proposal_filter = {
   metadata_ends_with_nocase?: InputMaybe<Scalars['String']>;
   metadata_not_ends_with?: InputMaybe<Scalars['String']>;
   metadata_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  metadata_?: InputMaybe<ProposalMetadata_filter>;
   description?: InputMaybe<Scalars['String']>;
   description_not?: InputMaybe<Scalars['String']>;
   description_gt?: InputMaybe<Scalars['String']>;
@@ -1107,6 +1180,7 @@ export type Query = {
   options: Array<Option>;
   action?: Maybe<Action>;
   actions: Array<Action>;
+  proposalMetadata: Array<ProposalMetadata>;
   vote?: Maybe<Vote>;
   votes: Array<Vote>;
   member?: Maybe<Member>;
@@ -1181,6 +1255,16 @@ export type QueryactionsArgs = {
   orderBy?: InputMaybe<Action_orderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
   where?: InputMaybe<Action_filter>;
+  block?: InputMaybe<Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+export type QueryproposalMetadataArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ProposalMetadata_orderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  where?: InputMaybe<ProposalMetadata_filter>;
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
@@ -1278,6 +1362,7 @@ export type Subscription = {
   options: Array<Option>;
   action?: Maybe<Action>;
   actions: Array<Action>;
+  proposalMetadata: Array<ProposalMetadata>;
   vote?: Maybe<Vote>;
   votes: Array<Vote>;
   member?: Maybe<Member>;
@@ -1352,6 +1437,16 @@ export type SubscriptionactionsArgs = {
   orderBy?: InputMaybe<Action_orderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
   where?: InputMaybe<Action_filter>;
+  block?: InputMaybe<Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+export type SubscriptionproposalMetadataArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ProposalMetadata_orderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  where?: InputMaybe<ProposalMetadata_filter>;
   block?: InputMaybe<Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
@@ -1854,6 +1949,9 @@ export type ResolversTypes = ResolversObject<{
   Option_orderBy: Option_orderBy;
   OrderDirection: OrderDirection;
   Proposal: ResolverTypeWrapper<Proposal>;
+  ProposalMetadata: ResolverTypeWrapper<ProposalMetadata>;
+  ProposalMetadata_filter: ProposalMetadata_filter;
+  ProposalMetadata_orderBy: ProposalMetadata_orderBy;
   ProposalStateLog: ResolverTypeWrapper<ProposalStateLog>;
   ProposalStateLog_filter: ProposalStateLog_filter;
   ProposalStateLog_orderBy: ProposalStateLog_orderBy;
@@ -1896,6 +1994,8 @@ export type ResolversParentTypes = ResolversObject<{
   Option: Option;
   Option_filter: Option_filter;
   Proposal: Proposal;
+  ProposalMetadata: ProposalMetadata;
+  ProposalMetadata_filter: ProposalMetadata_filter;
   ProposalStateLog: ProposalStateLog;
   ProposalStateLog_filter: ProposalStateLog_filter;
   Proposal_filter: Proposal_filter;
@@ -2159,7 +2259,11 @@ export type ProposalResolvers<
     ContextType,
     RequireFields<ProposaloptionsArgs, 'skip' | 'first'>
   >;
-  metadata?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<
+    Maybe<ResolversTypes['ProposalMetadata']>,
+    ParentType,
+    ContextType
+  >;
   description?: Resolver<
     Maybe<ResolversTypes['String']>,
     ParentType,
@@ -2176,6 +2280,21 @@ export type ProposalResolvers<
     ContextType,
     RequireFields<ProposalstatesLogArgs, 'skip' | 'first'>
   >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ProposalMetadataResolvers<
+  ContextType = MeshContext,
+  ParentType extends ResolversParentTypes['ProposalMetadata'] = ResolversParentTypes['ProposalMetadata']
+> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  voteOptions?: Resolver<
+    Maybe<Array<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
+  discussionRef?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2244,6 +2363,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QueryactionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  proposalMetadata?: Resolver<
+    Array<ResolversTypes['ProposalMetadata']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryproposalMetadataArgs, 'skip' | 'first' | 'subgraphError'>
   >;
   vote?: Resolver<
     Maybe<ResolversTypes['Vote']>,
@@ -2375,6 +2500,16 @@ export type SubscriptionResolvers<
     ParentType,
     ContextType,
     RequireFields<SubscriptionactionsArgs, 'skip' | 'first' | 'subgraphError'>
+  >;
+  proposalMetadata?: SubscriptionResolver<
+    Array<ResolversTypes['ProposalMetadata']>,
+    'proposalMetadata',
+    ParentType,
+    ContextType,
+    RequireFields<
+      SubscriptionproposalMetadataArgs,
+      'skip' | 'first' | 'subgraphError'
+    >
   >;
   vote?: SubscriptionResolver<
     Maybe<ResolversTypes['Vote']>,
@@ -2523,6 +2658,7 @@ export type Resolvers<ContextType = MeshContext> = ResolversObject<{
   Member?: MemberResolvers<ContextType>;
   Option?: OptionResolvers<ContextType>;
   Proposal?: ProposalResolvers<ContextType>;
+  ProposalMetadata?: ProposalMetadataResolvers<ContextType>;
   ProposalStateLog?: ProposalStateLogResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
@@ -2649,6 +2785,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           location: 'GetNumberOfActiveProposalsDocument.graphql',
         },
         {
+          document: GetVotesDocument,
+          get rawSDL() {
+            return printWithCache(GetVotesDocument);
+          },
+          location: 'GetVotesDocument.graphql',
+        },
+        {
           document: GetGuildConfigDocument,
           get rawSDL() {
             return printWithCache(GetGuildConfigDocument);
@@ -2730,6 +2873,18 @@ export type getNumberOfActiveProposalsQuery = {
   >;
 };
 
+export type getVotesQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type getVotesQuery = {
+  proposal?: Maybe<{
+    votes?: Maybe<
+      Array<Pick<Vote, 'voter' | 'votingPower' | 'optionLabel' | 'option'>>
+    >;
+  }>;
+};
+
 export type getGuildConfigQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2788,6 +2943,18 @@ export const getNumberOfActiveProposalsDocument = gql`
   getNumberOfActiveProposalsQuery,
   getNumberOfActiveProposalsQueryVariables
 >;
+export const getVotesDocument = gql`
+  query getVotes($id: ID!) {
+    proposal(id: $id) {
+      votes {
+        voter
+        votingPower
+        optionLabel
+        option
+      }
+    }
+  }
+` as unknown as DocumentNode<getVotesQuery, getVotesQueryVariables>;
 export const getGuildConfigDocument = gql`
   query getGuildConfig($id: ID!) {
     guild(id: $id) {
@@ -2852,6 +3019,16 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getNumberOfActiveProposalsQuery>;
+    },
+    getVotes(
+      variables: getVotesQueryVariables,
+      options?: C
+    ): Promise<getVotesQuery> {
+      return requester<getVotesQuery, getVotesQueryVariables>(
+        getVotesDocument,
+        variables,
+        options
+      ) as Promise<getVotesQuery>;
     },
     getGuildConfig(
       variables: getGuildConfigQueryVariables,

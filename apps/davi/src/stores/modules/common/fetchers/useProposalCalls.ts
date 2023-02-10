@@ -25,12 +25,11 @@ type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
 export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   // Decode calls from existing proposal
-  const proposalId = proposal?.id;
 
   const { data: metadata } = useProposalMetadata(proposal?.contentHash);
   const votingResults = useVotingResults(
     daoId,
-    proposalId,
+    proposal?.id,
     proposal?.totalVotes
   );
   const { contracts } = useRichContractRegistry();
@@ -93,7 +92,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   useEffect(() => {
     let cancelled = false;
 
-    if (!daoId || !proposalId || !splitCalls) {
+    if (!daoId || !proposal?.id || !splitCalls) {
       setOptions([]);
       return () => {};
     }
@@ -171,7 +170,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     daoId,
-    proposalId,
+    proposal?.id,
     contracts,
     chain,
     splitCalls,

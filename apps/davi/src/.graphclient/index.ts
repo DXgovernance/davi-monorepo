@@ -3014,7 +3014,14 @@ export const getGuildProposalIdsDocument = gql`
   query getGuildProposalIds($id: ID!) {
     guild(id: $id) {
       proposals {
-        id}`;
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getGuildProposalIdsQuery,
+  getGuildProposalIdsQueryVariables
+>;
 export const getProposalVotesOfVoterDocument = gql`
   query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
     proposal(id: $proposalId) {
@@ -3025,8 +3032,8 @@ export const getProposalVotesOfVoterDocument = gql`
     }
   }
 ` as unknown as DocumentNode<
-  getGuildProposalIdsQuery,
-  getGuildProposalIdsQueryVariables
+  getProposalVotesOfVoterQuery,
+  getProposalVotesOfVoterQueryVariables
 >;
 
 export type Requester<C = {}, E = unknown> = <R, V>(

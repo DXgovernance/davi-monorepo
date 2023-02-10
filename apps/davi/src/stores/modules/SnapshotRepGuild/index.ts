@@ -31,7 +31,7 @@ import {
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
   useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
-} from '../subgraph/common';
+} from '../common/fetchers/subgraph';
 import {
   useTotalLocked,
   useVoterLockTimestamp,

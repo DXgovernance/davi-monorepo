@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
-import { useListenToVoteAdded } from '../events';
+import { useListenToVoteAdded } from '../../events';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseProposalVotesOfVoter =

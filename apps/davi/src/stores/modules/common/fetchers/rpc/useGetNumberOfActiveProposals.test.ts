@@ -9,7 +9,7 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   useTokenList: () => [],
 }));
 
-jest.mock('stores/modules/common/fetchers', () => ({
+jest.mock('stores/modules/common/fetchers/rpc', () => ({
   useProposalCalls: () => ({ options: [] }),
 }));
 

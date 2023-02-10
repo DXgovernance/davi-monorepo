@@ -2,7 +2,7 @@ import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
-import { useSnapshotId } from 'stores/modules/common/fetchers';
+import { useSnapshotId } from 'stores/modules/common/fetchers/rpc';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseTotalLocked = FetcherHooksInterface['useTotalLocked'];

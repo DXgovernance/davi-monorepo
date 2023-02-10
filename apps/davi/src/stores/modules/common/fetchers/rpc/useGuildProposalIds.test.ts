@@ -3,7 +3,7 @@ import {
   MOCK_CONTRACT_ADDRESSES,
 } from 'Modules/Guilds/Hooks/fixtures';
 import { useGuildProposalIds } from './useGuildProposalIds';
-jest.mock('stores/modules/common/fetchers/useGuildProposalIds', () => ({
+jest.mock('stores/modules/common/fetchers/rpc/useGuildProposalIds', () => ({
   useGuildProposalIds: () => ({
     data: MOCK_CONTRACT_ADDRESSES,
     isError: false,

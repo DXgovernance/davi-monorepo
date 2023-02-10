@@ -32,7 +32,7 @@ import {
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
   useGuildProposalIds,
-} from '../common/fetchers';
+} from '../common/fetchers/rpc';
 import {
   useTotalLocked,
   useVoterLockTimestamp,

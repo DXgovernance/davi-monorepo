@@ -9,7 +9,7 @@ import {
 
 const mockBigNumber = BigNumber.from(0);
 
-jest.mock('stores/modules/common/fetchers', () => ({
+jest.mock('stores/modules/common/fetchers/rpc', () => ({
   useProposalCalls: () => ({ options: [] }),
 }));
 

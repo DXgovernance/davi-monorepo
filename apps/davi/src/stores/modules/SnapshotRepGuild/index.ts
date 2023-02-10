@@ -22,7 +22,7 @@ import {
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
   useGuildProposalIds,
-} from '../common/fetchers';
+} from '../common/fetchers/rpc';
 import {
   useGuildConfig as useGuildConfigFromSubgraph,
   useGetMemberList as useGetMemberListFromSubgraph,

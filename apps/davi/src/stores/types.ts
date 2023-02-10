@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
-import { useProposal } from './modules/common/fetchers/useProposal';
+import { useProposal } from './modules/common/fetchers/rpc/useProposal';
 import { Option, Permission } from 'components/ActionsBuilder/types';
-import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
+import { GuildConfigProps } from './modules/common/fetchers/rpc/useGuildConfig';
 import { Proposal } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {

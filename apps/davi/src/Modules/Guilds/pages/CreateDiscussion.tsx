@@ -99,7 +99,7 @@ const CreateDiscussionPage: React.FC = () => {
   const handleCreateDiscussion = async (post: DiscussionContent) => {
     if (!hasWalletConnection) {
       setIsWalletModalOpen(true);
-      return "";
+      return '';
     }
 
     if (postTemplate(post)) {
@@ -205,7 +205,11 @@ const CreateDiscussionPage: React.FC = () => {
           <SidebarInfoCardWrapper />
         </SidebarContent>
       </PageContainer>
-      <WalletModal isOpen={isWalletModalOpen} onClose={toggleWalletModal} />
+      <WalletModal
+        isOpen={isWalletModalOpen}
+        onClose={toggleWalletModal}
+        title={t('connections.connectTheWalletToProceed')}
+      />
     </>
   );
 };

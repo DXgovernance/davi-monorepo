@@ -177,7 +177,11 @@ const Governance = ({ guildId }) => {
         </StyledHeading>
         <Discussions />
       </ProposalsList>
-      <WalletModal isOpen={isWalletModalOpen} onClose={toggleWalletModal} />
+      <WalletModal
+        isOpen={isWalletModalOpen}
+        onClose={toggleWalletModal}
+        title={t('connections.connectTheWalletToProceed')}
+      />
     </>
   );
 };

@@ -18,6 +18,7 @@ import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useAccount, useNetwork, useProvider } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
+import { useTranslation } from 'react-i18next';
 
 export interface TransactionState {
   [chainId: number]: {
@@ -56,6 +57,8 @@ export const TransactionsProvider = ({ children }) => {
   } = useAccount();
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
 
+  const { t } = useTranslation();
+
   const [transactions, setTransactions] = useLocalStorage<TransactionState>(
     `transactions/${address}`,
     {}
@@ -91,7 +94,6 @@ export const TransactionsProvider = ({ children }) => {
       },
     }));
   };
-  console.log(addTransaction)
 
   const clearAllTransactions = () => {
     setTransactions(prevState => ({
@@ -207,7 +209,6 @@ export const TransactionsProvider = ({ children }) => {
     cb: (error?: any, txtHash?: any) => void = null,
     runOnFinality?: (receipt: providers.TransactionReceipt) => void
   ) => {
-
     if (!hasWalletConnection) {
       setIsWalletModalOpen(true);
       return;
@@ -262,7 +263,11 @@ export const TransactionsProvider = ({ children }) => {
         onCancel={() => setPendingTransaction(null)}
         txCancelled={pendingTransaction?.cancelled}
       />
-      <WalletModal isOpen={isWalletModalOpen} onClose={toggleWalletModal} />
+      <WalletModal
+        isOpen={isWalletModalOpen}
+        onClose={toggleWalletModal}
+        title={t('connections.connectTheWalletToProceed')}
+      />
     </TransactionsContext.Provider>
   );
 };

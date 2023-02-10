@@ -7,6 +7,9 @@ jest.mock('react-i18next', () => {
     __esModule: true,
     useTranslation: () => ({
       t: (key: string) => key,
+      i18n: {
+        language: 'en',
+      },
     }),
     withTranslation: () => (key: string) => key,
   };

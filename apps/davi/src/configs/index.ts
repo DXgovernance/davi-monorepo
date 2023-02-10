@@ -9,4 +9,5 @@ export const moderators = [
   '0x08eec580ad41e9994599bad7d2a74a9874a2852c',
   '0x1861974f32eaCDCceD0F81b0f8eCcFeD58153a9D',
 ];
+export const supportedLanguages = ['en', 'es', 'ja'];
 

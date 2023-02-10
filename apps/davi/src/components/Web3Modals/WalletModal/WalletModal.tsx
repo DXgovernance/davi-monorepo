@@ -22,6 +22,7 @@ import useSwitchNetwork from 'hooks/Guilds/web3/useSwitchNetwork';
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
   onClose,
+  title
 }) => {
   const { t } = useTranslation();
   const [isWalletListActive, setIsWalletsListActive] = useState(false);
@@ -127,7 +128,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
 
     return isConnected && !isReadOnly(activeConnector)
       ? t('connections.account')
-      : t('connections.connectToAWallet');
+      : title ?? t('connections.connectToAWallet');
   };
 
   const getPrimaryAction = () => {

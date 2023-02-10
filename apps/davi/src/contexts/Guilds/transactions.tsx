@@ -3,7 +3,7 @@ import {
   TransactionOutcome,
   TransactionPending,
 } from 'components/ToastNotifications/TransactionToasts';
-import { TransactionModal } from 'components/Web3Modals';
+import { TransactionModal, WalletModal } from 'components/Web3Modals';
 import { Transaction } from '../../types/types.guilds';
 import { providers } from 'ethers';
 import {
@@ -17,6 +17,7 @@ import {
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useAccount, useNetwork, useProvider } from 'wagmi';
+import { isReadOnly } from 'provider/wallets';
 
 export interface TransactionState {
   [chainId: number]: {
@@ -47,7 +48,13 @@ const TransactionsContext = createContext<TransactionsContextInterface>(null);
 export const TransactionsProvider = ({ children }) => {
   const { chain } = useNetwork();
   const chainId = useMemo(() => chain?.id, [chain]);
-  const { address } = useAccount();
+  const {
+    address,
+    connector,
+    isConnecting: isWalletConnecting,
+    isConnected: isWalletConnected,
+  } = useAccount();
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
 
   const [transactions, setTransactions] = useLocalStorage<TransactionState>(
     `transactions/${address}`,
@@ -84,6 +91,7 @@ export const TransactionsProvider = ({ children }) => {
       },
     }));
   };
+  console.log(addTransaction)
 
   const clearAllTransactions = () => {
     setTransactions(prevState => ({
@@ -183,6 +191,14 @@ export const TransactionsProvider = ({ children }) => {
     });
   }, [allTransactions, chain]);
 
+  const hasWalletConnection = useMemo(() => {
+    return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;
+  }, [connector, isWalletConnected, isWalletConnecting]);
+
+  const toggleWalletModal = () => {
+    setIsWalletModalOpen(!isWalletModalOpen);
+  };
+
   // Trigger a new transaction request to the user wallet and track its progress
   const createTransaction = async (
     summary: string,
@@ -191,6 +207,12 @@ export const TransactionsProvider = ({ children }) => {
     cb: (error?: any, txtHash?: any) => void = null,
     runOnFinality?: (receipt: providers.TransactionReceipt) => void
   ) => {
+
+    if (!hasWalletConnection) {
+      setIsWalletModalOpen(true);
+      return;
+    }
+
     setPendingTransaction({
       summary,
       showModal,
@@ -198,6 +220,7 @@ export const TransactionsProvider = ({ children }) => {
       transactionHash: null,
     });
     let transactionHash = null;
+
     try {
       const txResponse = await txFunction();
       transactionHash = txResponse.hash;
@@ -239,6 +262,7 @@ export const TransactionsProvider = ({ children }) => {
         onCancel={() => setPendingTransaction(null)}
         txCancelled={pendingTransaction?.cancelled}
       />
+      <WalletModal isOpen={isWalletModalOpen} onClose={toggleWalletModal} />
     </TransactionsContext.Provider>
   );
 };

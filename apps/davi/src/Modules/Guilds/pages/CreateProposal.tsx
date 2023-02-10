@@ -216,6 +216,8 @@ const CreateProposalPage: React.FC = () => {
     ).catch((err: Error) => {
       setIsCreatingProposal(false);
       toast.error(err.message);
+    }).finally(() => {
+      setIsCreatingProposal(false);
     });
   };
   useEffect(() => {

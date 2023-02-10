@@ -45,9 +45,9 @@ import prodBytecodes from 'bytecodes/prod.json';
 const GUILD_TYPE = 'SnapshotRepERC20Guild';
 const localConfig = localBytecodes.find(({ type }) => type === GUILD_TYPE);
 const prodConfig = prodBytecodes.find(({ type }) => type === GUILD_TYPE);
-export const snapshotRepGuildImplementation: Readonly<FullGovernanceImplementation> =
+export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImplementation> =
   {
-    name: 'SnapshotRepGuild',
+    name: 'SnapshotRepERC20Guild',
     bytecodes: [
       '0x56735be1df2293bbbc687502a3673244d05fac86940394cb2222ea884f304daf',
       '0xec75e00a4daa1f5d4636a962298f55e322161e54b292f04a928c91f4f5333aed',

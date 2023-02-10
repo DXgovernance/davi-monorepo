@@ -50,6 +50,10 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   }),
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('UndecodableCallDetails', () => {
   it('Should match snapshot', () => {
     const { container } = render(<UndecodableCallDetails call={callMock} />);

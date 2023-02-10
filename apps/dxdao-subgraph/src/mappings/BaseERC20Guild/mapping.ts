@@ -1,4 +1,10 @@
-import { ipfs, json, JSONValueKind, BigInt } from '@graphprotocol/graph-ts';
+import {
+  ipfs,
+  json,
+  JSONValueKind,
+  BigInt,
+  log,
+} from '@graphprotocol/graph-ts';
 import {
   Guild,
   Proposal,
@@ -47,8 +53,8 @@ export function handleConfigChange(call: SetConfigCall): void {
 export function handleProposalStateChange(event: ProposalStateChanged): void {
   let address = event.address;
   let contract = BaseERC20Guild.bind(address);
-  const proposalId = event.params.proposalId.toHexString();
 
+  const proposalId = event.params.proposalId.toHexString();
   let proposal = Proposal.load(proposalId);
 
   const proposalData = contract.getProposal(event.params.proposalId);
@@ -222,6 +228,8 @@ export function handleVoting(event: VoteAdded): void {
         option.voteAmount = newVoteAmount;
         option.votes = optionVotesCopy;
         option.save();
+
+        vote.optionLabel = option.label;
       }
 
       proposal.save();

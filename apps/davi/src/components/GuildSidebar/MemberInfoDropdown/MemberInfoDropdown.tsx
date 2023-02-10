@@ -74,12 +74,12 @@ export const MemberInfoDropdown: React.FC<MemberInfoDropdownProps> = ({
       <DropdownContent fullScreenMobile={true} show={isOpen}>
         {isMobile && (
           <DropdownHeader onClick={onClose}>
-            <FiArrowLeft /> <span>{t('membership')}</span>
+            <FiArrowLeft /> <span>{t('members.membership')}</span>
           </DropdownHeader>
         )}
         <MemberContainer>
           <ContentItem>
-            {t('votingPower')}{' '}
+            {t('voting.votingPower')}{' '}
             <span>
               {userVotingPowerPercent != null ? (
                 `${userVotingPowerPercent}%`
@@ -89,7 +89,9 @@ export const MemberInfoDropdown: React.FC<MemberInfoDropdownProps> = ({
             </span>
           </ContentItem>
           <ContentItem>
-            {!isUnlockable ? t('locked') : t('staked')}{' '}
+            {!isUnlockable
+              ? t('members.locking.locked')
+              : t('members.locking.staked')}{' '}
             <span>
               {userVotingPower && guildToken ? (
                 `${roundedBalance} ${guildToken.symbol}`
@@ -102,7 +104,9 @@ export const MemberInfoDropdown: React.FC<MemberInfoDropdownProps> = ({
             <></>
           ) : (
             <ContentItem>
-              {isUnlockable ? t('unlocked') : t('unlockedIn')}{' '}
+              {isUnlockable
+                ? t('members.locking.unlocked')
+                : t('members.locking.unlockedIn')}{' '}
               <span>
                 {unlockedAt ? (
                   isUnlockable ? (
@@ -121,11 +125,13 @@ export const MemberInfoDropdown: React.FC<MemberInfoDropdownProps> = ({
             data-testid="increase-voting-power-btn"
             onClick={showStakeModal}
           >
-            {t('increaseVotingPower')}
+            {t('members.increaseVotingPower')}
           </LockButton>
 
           {isUnlockable && !isRepGuild && (
-            <LockButton onClick={withdrawTokens}>{t('withdraw')}</LockButton>
+            <LockButton onClick={withdrawTokens}>
+              {t('members.locking.withdraw')}
+            </LockButton>
           )}
         </MemberContainer>
       </DropdownContent>

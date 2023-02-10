@@ -4,7 +4,6 @@ import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { Result, ResultState } from 'components/Result';
 import { Flex } from 'components/primitives/Layout';
 import ProposalCardWrapper from '../../Wrappers/ProposalCardWrapper';
-import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
 import { useFilter } from 'contexts/Guilds';
 import { Input } from 'components/primitives/Forms/Input';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -20,16 +19,15 @@ import { Button } from 'components/primitives/Button';
 const Governance = ({ guildId }) => {
   const {
     hooks: {
-      fetchers: { useGetActiveProposals },
+      fetchers: { useGetNumberOfActiveProposals, useGuildProposalIds },
     },
   } = useHookStoreProvider();
 
   const { isLoading } = useContext(GuildAvailabilityContext);
-  const { data: proposalIds, error } = useGuildProposalIds(guildId);
+  const { data: proposalIds, errorMessage } = useGuildProposalIds(guildId);
   const { t } = useTranslation();
-  const { data: activeProposals } = useGetActiveProposals(guildId);
+  const { data: activeProposals } = useGetNumberOfActiveProposals(guildId);
   const { chainName } = useTypedParams();
-
   /*
   Since filters are a global state, we need to reset all of them
   who were set in the "All proposals" view. If we don't do this,
@@ -71,12 +69,12 @@ const Governance = ({ guildId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [proposalIds]);
 
-  if (!isLoading && !proposalIds && error) {
+  if (!isLoading && !proposalIds && errorMessage) {
     return (
       <Result
         state={ResultState.ERROR}
         title={t('proposal.errors.genericProposalError')}
-        subtitle={error.message}
+        subtitle={errorMessage}
       />
     );
   }
@@ -90,7 +88,7 @@ const Governance = ({ guildId }) => {
             setSearchQuery(e.target.value);
           }}
           icon={<AiOutlineSearch size={24} />}
-          placeholder={t('searchTitleEnsAddress')}
+          placeholder={t('filter.searchTitleEnsAddress')}
           marginRight={'1rem'}
         />
         <StyledLink to={`/${chainName}/${guildId}/create`}>
@@ -98,20 +96,20 @@ const Governance = ({ guildId }) => {
             variant="primaryWithBorder"
             data-testid="create-discussion-button"
           >
-            {t('forum.createDiscussion')}
+            {t('discussions.createDiscussion')}
           </Button>
         </StyledLink>
       </Flex>
       <ProposalsList data-testid="proposals-list">
-        <StyledHeading size={2}>{t('proposals')}</StyledHeading>
+        <StyledHeading size={2}>{t('proposals.proposals')}</StyledHeading>
         {activeProposals && activeProposals._hex === '0x00' && (
           <div data-testid="no-active-proposals-message">
-            {t('noActiveProposalsMessage')}.{' '}
+            {t('proposals.noActiveProposalsMessage')}.{' '}
             <StyledLink
               data-testid="all-proposals-hyperlink"
               to={`/${chainName}/${guildId}/all-proposals`}
             >
-              {t('goToAllProposalsPage')}.
+              {t('proposals.goToAllProposalsPage')}.
             </StyledLink>
           </div>
         )}
@@ -132,7 +130,9 @@ const Governance = ({ guildId }) => {
         )}
       </ProposalsList>
       <ProposalsList>
-        <StyledHeading size={2}>{t('forum.discussions_other')}</StyledHeading>
+        <StyledHeading size={2}>
+          {t('discussions.discussions_other')}
+        </StyledHeading>
         <Discussions />
       </ProposalsList>
     </>

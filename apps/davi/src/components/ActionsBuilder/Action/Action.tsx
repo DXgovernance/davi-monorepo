@@ -1,14 +1,25 @@
+import { useMemo, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BigNumber } from 'ethers';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+
+import { useHookStoreProvider } from 'stores';
+import { preventEmptyString } from 'utils';
+
+import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
+import { ActionModal } from 'components/ActionsModal';
+import { Permission } from 'components/ActionsBuilder/types';
+import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+
 import { CallDetails } from '../CallDetails';
 import { getInfoLineView } from '../SupportedActions';
 import UndecodableCallDetails from '../UndecodableCalls/UndecodableCallDetails';
 import UndecodableCallInfoLine from '../UndecodableCalls/UndecodableCallInfoLine';
 import { Call, DecodedAction } from '../types';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
-import { useMemo, useState, useEffect } from 'react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { ConfirmRemoveActionModal } from '../ConfirmRemoveActionModal';
+
 import {
   CardActions,
   CardHeader,
@@ -22,11 +33,7 @@ import {
   SectionHeader,
   Separator,
 } from './Action.styled';
-import { ConfirmRemoveActionModal } from '../ConfirmRemoveActionModal';
-import { ActionModal } from 'components/ActionsModal';
-import { Permission } from 'components/ActionsBuilder/types';
-import { preventEmptyString } from 'utils';
-import { useETHPermissions } from 'Modules/Guilds/Hooks/useETHPermissions';
+
 interface ActionViewProps {
   call?: Call;
   decodedAction?: DecodedAction;
@@ -52,6 +59,12 @@ export const ActionRow: React.FC<ActionViewProps> = ({
   onEdit,
   onRemove,
 }) => {
+  const {
+    hooks: {
+      fetchers: { useGetPermissions },
+    },
+  } = useHookStoreProvider();
+  const { guildId } = useTypedParams();
   const { t } = useTranslation();
   const {
     attributes,
@@ -64,7 +77,7 @@ export const ActionRow: React.FC<ActionViewProps> = ({
   const action = useDecodedCall(call);
   const decodedCall = action.decodedCall || decodedAction?.decodedCall;
   const approval = action.approval || decodedAction?.approval;
-  const permissions = useETHPermissions(permissionArgs);
+  const permissions = useGetPermissions(guildId, permissionArgs);
 
   const [expanded, setExpanded] = useState(false);
   const [confirmRemoveActionModalIsOpen, setConfirmRemoveActionModalIsOpen] =
@@ -85,7 +98,16 @@ export const ActionRow: React.FC<ActionViewProps> = ({
     let hasValueTransferOnContractCall: boolean =
       decodedCall?.args && preventEmptyString(decodedCall?.value).gt(0);
 
-    if (permissions?.data === '0') {
+    if (permissions?.data?.fromTime.toString() === '0') {
+      return CardStatus.permissionDenied;
+    }
+
+    if (
+      decodedCall?.value &&
+      permissions?.data?.valueAllowed &&
+      BigNumber.isBigNumber(decodedCall?.value) &&
+      decodedCall?.value?.gt(permissions?.data?.valueAllowed)
+    ) {
       return CardStatus.permissionDenied;
     }
 
@@ -147,14 +169,14 @@ export const ActionRow: React.FC<ActionViewProps> = ({
             <EditButtonWithMargin
               onClick={() => setIsEditActionModalOpen(true)}
             >
-              {t('edit')}
+              {t('actionBuilder.action.edit')}
             </EditButtonWithMargin>
           )}
           {onRemove && (
             <EditButtonWithMargin
               onClick={() => setConfirmRemoveActionModalIsOpen(v => !v)}
             >
-              {t('remove')}
+              {t('ractionBuilder.action.remove')}
             </EditButtonWithMargin>
           )}
           <ChevronIcon onClick={() => setExpanded(!expanded)}>

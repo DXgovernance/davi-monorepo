@@ -4,18 +4,25 @@ import { isValidGuildProposal } from 'utils';
 import { WriterHooksInteface } from 'stores/types';
 import { useTransactions } from 'contexts/Guilds';
 import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
-import useIPFSNode from 'hooks/Guilds/ipfs/useIPFSNode';
 import usePinataIPFS from 'hooks/Guilds/ipfs/usePinataIPFS';
+import useWeb3Storage from 'hooks/Guilds/ipfs/useWeb3Storage';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { createPost } from 'components/Forum';
+import { providers } from 'ethers';
 
 type IUseCreateProposal = WriterHooksInteface['useCreateProposal'];
 type IHandleCreateProposal = ReturnType<IUseCreateProposal>;
 
-export const useCreateProposal: IUseCreateProposal = daoAddress => {
+export const useCreateProposal: IUseCreateProposal = (
+  daoAddress: string,
+  discussionRef?: string
+) => {
   const { t } = useTranslation();
   const daoContract = useERC20Guild(daoAddress);
   const { createTransaction } = useTransactions();
-  const ipfs = useIPFSNode();
   const { pinToPinata } = usePinataIPFS();
+  const { pinToStorage } = useWeb3Storage();
+  const { orbis } = useOrbisContext();
 
   const handleCreateProposal: IHandleCreateProposal = useCallback(
     async (
@@ -39,21 +46,34 @@ export const useCreateProposal: IUseCreateProposal = daoAddress => {
         title,
       });
 
+      const linkToOrbis = (receipt: providers.TransactionReceipt) => {
+        const link = {
+          title,
+          body: `Created Proposal: ${title}`,
+          context: `DAVI-${daoAddress}-${discussionRef}-proposal`,
+          master: receipt.logs[0].topics[1],
+          replyTo: null,
+          mentions: [],
+          data: {},
+        };
+        createPost(orbis, link);
+      };
+
       const uploadToIPFS = async () => {
         const content = {
           description: description,
           voteOptions: ['', ...options.map(({ label }) => label)],
+          discussionRef: discussionRef,
         };
-        const cid = await ipfs.add(JSON.stringify(content));
-        await ipfs.pin(cid);
-        const pinataPinResult = await pinToPinata(cid, content);
-
-        if (pinataPinResult.IpfsHash !== `${cid}`) {
-          throw new Error(t('ipfs.hashNotTheSame'));
+        const pinataPin = pinToPinata(content).then(result => result?.IpfsHash);
+        const web3storagePin = pinToStorage(content);
+        const results = await Promise.all([pinataPin, web3storagePin]);
+        // TODO: Loop through array looking for at least two matching hashes when we have >2 pinning services
+        if (results[0] !== results[1]) {
+          console.warn(t('actionBuilder.ens.ipfs.hashNotTheSame'), results);
         }
-        return `ipfs://${pinataPinResult.IpfsHash}`;
+        return `ipfs://${results[0]}`;
       };
-
       if (!isValid) throw new Error(error);
 
       if (options.length === 0) {
@@ -72,7 +92,7 @@ export const useCreateProposal: IUseCreateProposal = daoAddress => {
       }
 
       createTransaction(
-        `${t('createProposal')} ${title}`,
+        `${t('createProposal.createProposal')} ${title}`,
         async () => {
           return daoContract.createProposal(
             toArray,
@@ -84,10 +104,20 @@ export const useCreateProposal: IUseCreateProposal = daoAddress => {
           );
         },
         true,
-        cb
+        cb,
+        linkToOrbis
       );
     },
-    [daoContract, createTransaction, t, ipfs, pinToPinata]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      daoContract,
+      createTransaction,
+      t,
+      pinToPinata,
+      discussionRef,
+      daoAddress,
+      orbis,
+    ]
   );
 
   return handleCreateProposal;

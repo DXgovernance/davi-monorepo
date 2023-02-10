@@ -19,7 +19,7 @@ describe('usePinataIPFS', () => {
     );
     const { pinToPinata } = usePinataIPFS();
     const data = { description: 'some proposal' };
-    let pinResult = await pinToPinata('someHash', data);
+    let pinResult = await pinToPinata(data);
 
     expect(pinResult.success).toBeTruthy();
   });
@@ -54,7 +54,7 @@ describe('usePinataIPFS', () => {
     const data = { description: 'some proposal' };
 
     try {
-      await pinToPinata('someHash', data);
+      await pinToPinata(data);
     } catch (e) {
       expect(e).toBeDefined();
     }

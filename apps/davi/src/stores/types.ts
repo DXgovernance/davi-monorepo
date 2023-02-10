@@ -1,7 +1,8 @@
 import { BigNumber } from 'ethers';
 import { useProposal } from './modules/common/fetchers/useProposal';
-import { Option } from 'components/ActionsBuilder/types';
+import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
+import { Proposal } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -13,11 +14,34 @@ interface GovernanceCapabilities {
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
 type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
-
+// TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
-  useGetActiveProposals: (daoId: string) => {
+  useGetNumberOfActiveProposals: (daoId: string) => {
     data: BigNumber;
     refetch: () => void;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useGetMemberList: (daoId: string) => {
+    data: { id: string; address: `0x${string}`; tokensLocked: BigNumber }[];
+    isLoading: boolean;
+    isError: boolean;
+  };
+  useGetAllPermissions: (
+    daoId: string,
+    filter?: 'tokens' | 'functionCalls'
+  ) => {
+    data: {
+      id: string;
+      to: string;
+      from: string;
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+      functionSignature: string;
+      allowed: boolean;
+    }[];
+    isLoading: boolean;
+    isError: boolean;
   };
   useProposal: (
     daoId: string,
@@ -33,6 +57,7 @@ export interface FetcherHooksInterface {
   ) => {
     data: BigNumber;
   };
+  useDAOToken: (daoId: string) => { data: `0x${string}` };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`
@@ -43,7 +68,6 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: { option: string; votingPower: BigNumber };
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };
@@ -69,11 +93,39 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useMemberCount: (daoId: `0x${string}`) => { data: number };
+  useGetPermissions: (
+    daoAddress: `0x${string}`,
+    permissionArgs: Permission
+  ) => {
+    data: {
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+    };
+  };
   useGuildConfig: (
     guildAddress: string,
     proposalId?: `0x${string}`
   ) => {
     data: GuildConfigProps;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useGuildProposalIds: (daoId: `0x${string}`) => {
+    data: `0x${string}`[];
+    isError: boolean;
+    isLoading: boolean;
+    errorMessage: string;
+  };
+  useGetVotes: (
+    guildId: `0x${string}`,
+    proposal: Proposal
+  ) => {
+    data: {
+      optionLabel: string;
+      voter: string;
+      votingPower: number;
+    }[];
     isError: boolean;
     isLoading: boolean;
   };
@@ -84,7 +136,8 @@ export interface WriterHooksInteface {
     tokenAddress: `0x${string}`
   ) => (daoTokenVault: string, amount?: string) => Promise<void>;
   useCreateProposal: (
-    daoAddress: string
+    daoAddress: string,
+    linkRef?: string
   ) => (
     title: string,
     description: string,
@@ -143,12 +196,13 @@ export interface FullGovernanceImplementation {
   bytecodes: `0x${string}`[];
   hooks: HooksInterfaceWithFallback;
   capabilities: GovernanceCapabilities;
-  checkDataSourceAvailability: () => boolean;
+  checkDataSourceAvailability: (chainId: number) => boolean;
 }
 
 export interface GovernanceTypeInterface
   extends Omit<FullGovernanceImplementation, 'hooks'> {
   hooks: HooksInterfaceWithoutFallback;
+  dataSource: 'primary' | 'secondary' | null;
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {

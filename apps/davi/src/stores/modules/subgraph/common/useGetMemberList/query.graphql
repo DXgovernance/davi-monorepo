@@ -1,0 +1,10 @@
+query getMemberList($id: ID!) {
+  guild(id: $id) {
+    members {
+      id
+      address
+      tokensLocked
+    }
+  }
+}
+

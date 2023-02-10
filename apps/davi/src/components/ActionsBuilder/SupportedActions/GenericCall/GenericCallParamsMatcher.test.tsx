@@ -36,6 +36,10 @@ jest.mock('wagmi', () => ({
   },
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('GenericCallParamsMatcher', () => {
   const paramDefaults: Omit<
     FunctionParamWithValue,

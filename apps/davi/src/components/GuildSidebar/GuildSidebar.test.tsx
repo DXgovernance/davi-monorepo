@@ -16,6 +16,10 @@ jest.mock('wagmi', () => ({
   }),
 }));
 
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('GuildSidebar', () => {
   it(`Should render without data`, async () => {
     const { container } = render(<GuildSidebar />);

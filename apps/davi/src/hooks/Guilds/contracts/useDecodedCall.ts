@@ -70,15 +70,18 @@ const decodeCallUsingEthersInterface = (
   if (!functionFragment) return null;
 
   // Decode the function parameters.
-  const params = contractInterface.decodeFunctionData(
-    functionFragment,
-    call.data
-  );
-
-  const paramsJson = functionFragment.inputs.reduce((acc, input) => {
-    acc[input.name] = params[input.name];
-    return acc;
-  }, {} as Record<string, any>);
+  let params;
+  let paramsJson;
+  try {
+    params = contractInterface.decodeFunctionData(functionFragment, call.data);
+    paramsJson = functionFragment.inputs.reduce((acc, input) => {
+      acc[input.name] = params[input.name];
+      return acc;
+    }, {} as Record<string, any>);
+  } catch {
+    params = null;
+    paramsJson = null;
+  }
 
   return {
     callType: callType || SupportedAction.GENERIC_CALL,

@@ -9,7 +9,7 @@ import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
 import { FiChevronLeft, FiX } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
@@ -51,6 +51,8 @@ export const EMPTY_CALL: Call = {
 
 const CreateProposalPage: React.FC = () => {
   const { guildId, chainName: chain } = useTypedParams();
+  const [searchParams] = useSearchParams();
+  const discussionId = searchParams.get('ref');
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
@@ -62,7 +64,7 @@ const CreateProposalPage: React.FC = () => {
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
-  const createProposal = useCreateProposal(guildId);
+  const createProposal = useCreateProposal(guildId, discussionId);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
@@ -73,7 +75,7 @@ const CreateProposalPage: React.FC = () => {
   const [options, setOptions] = useState<Option[]>([
     {
       id: `option-1-For`,
-      label: t('for', { defaultValue: 'For' }),
+      label: t('actionBuilder.options.for', { defaultValue: 'For' }),
       color: theme?.colors?.votes?.[1],
       decodedActions: [],
       permissions: [],
@@ -90,7 +92,7 @@ const CreateProposalPage: React.FC = () => {
   } = useTextEditor(
     `${guildId}/create-proposal`,
     345600000,
-    t('enterProposalDescription')
+    t('createProposal.enterProposalDescription')
   );
 
   const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
@@ -245,7 +247,7 @@ const CreateProposalPage: React.FC = () => {
               marginTop={'5px;'}
             >
               <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
-              {t('backToOverview')}{' '}
+              {t('proposal.backToOverview')}{' '}
             </IconButton>
           </StyledLink>
 
@@ -264,7 +266,7 @@ const CreateProposalPage: React.FC = () => {
         <Box margin="0px 0px 24px">
           {editMode ? (
             <>
-              <Label>{t('title')}</Label>
+              <Label>{t('createProposal.title')}</Label>
               <Input
                 data-testid="create-proposal-title"
                 placeholder="Proposal Title"
@@ -304,7 +306,7 @@ const CreateProposalPage: React.FC = () => {
             backgroundColor={isValid ? 'none' : '#1B1D1F'}
             outline={'1px solid #A1A6B0'}
           >
-            {t('createProposal')}
+            {t('createProposal.createProposal')}
           </StyledButton>
         </Box>
       </PageContent>
@@ -326,13 +328,13 @@ const CreateProposalPage: React.FC = () => {
           </Flex>
           <Flex direction="row" style={{ columnGap: '1rem' }}>
             <StyledButton onClick={handleRetryMetadataUpload}>
-              {t('retry')}
+              {t('createProposal.retry')}
             </StyledButton>
             <StyledButton
               onClick={handleSkipMetadataUpload}
               variant="secondary"
             >
-              {t('createAnyway')}
+              {t('createProposal.createAnyway')}
             </StyledButton>
             <StyledButton
               onClick={() => {
@@ -341,7 +343,7 @@ const CreateProposalPage: React.FC = () => {
               }}
               variant="secondary"
             >
-              {t('close')}
+              {t('modals.close')}
             </StyledButton>
           </Flex>
         </Flex>
@@ -349,7 +351,7 @@ const CreateProposalPage: React.FC = () => {
       <Modal
         isOpen={isPermissionWarningModalOpen}
         onDismiss={() => setIsPermissionWarningModalOpen(false)}
-        header={t('permissions.warningMessage')}
+        header={t('actionBuilder.permissions.warningMessage')}
         maxWidth={390}
       >
         <Flex padding={'1.5rem'}>
@@ -358,7 +360,7 @@ const CreateProposalPage: React.FC = () => {
               <FiX size={40} />
             </WarningCircle>
             <Flex padding={'1.5rem 0'}>
-              {t('permissions.proposalNotExecuted')}
+              {t('actionBuilder.permissions.proposalNotExecuted')}
             </Flex>
           </Flex>
           <Flex direction="row" style={{ columnGap: '1rem' }}>
@@ -368,13 +370,13 @@ const CreateProposalPage: React.FC = () => {
               }}
               variant="secondary"
             >
-              {t('createAnyway')}
+              {t('createProposal.createAnyway')}
             </StyledButton>
             <StyledButton
               onClick={() => setIsPermissionWarningModalOpen(false)}
               variant="secondary"
             >
-              {t('close')}
+              {t('modals.close')}
             </StyledButton>
           </Flex>
         </Flex>

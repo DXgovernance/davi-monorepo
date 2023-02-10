@@ -9,4 +9,8 @@ entities:
 eventHandlers:
   - event: GuildInitialized()
     handler: handleGuildInitialized
+  - event: ProposalStateChanged(indexed bytes32,uint256)
+    handler: handleProposalStateChange
+  - event: VoteAdded(indexed bytes32,indexed uint256,address,uint256)
+    handler: handleVoting
 

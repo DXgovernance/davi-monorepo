@@ -11,19 +11,27 @@ interface DataInterface {
       type: string;
     };
   };
+  pinataOptions: {
+    cidVersion: number;
+    wrapWithDirectory: boolean;
+  };
   pinataContent?: any;
   hashToPin?: string;
 }
 
 const usePinataIPFS = () => {
   const { t } = useTranslation();
-  const { chainName } = useTypedParams();
+  const { chainName, guildId } = useTypedParams();
 
-  const pinToPinata = async (hash: string, jsonData?: any) => {
+  const pinToPinata = async (jsonData?: any) => {
     let data: DataInterface = {
       pinataMetadata: {
-        name: `DXdao ${chainName} DescriptionHash ${hash}`,
+        name: `DAVI ${chainName} Guild ${guildId}`,
         keyValues: { type: 'proposal' },
+      },
+      pinataOptions: {
+        cidVersion: 1,
+        wrapWithDirectory: false,
       },
     };
 
@@ -37,9 +45,6 @@ const usePinataIPFS = () => {
     if (jsonData) {
       url = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
       data.pinataContent = jsonData;
-    } else {
-      url = 'https://api.pinata.cloud/pinning/pinByHash';
-      data.hashToPin = hash;
     }
 
     const result = await fetch(url, {

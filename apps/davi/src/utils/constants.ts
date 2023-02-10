@@ -6,6 +6,7 @@ export const ZERO_HASH =
   '0x0000000000000000000000000000000000000000000000000000000000000000';
 export const ZERO_ADDRESS: `0x${string}` =
   '0x0000000000000000000000000000000000000000';
+export const ZERO_FUNC_SIGNATURE = '0x00000000';
 export const ANY_ADDRESS = '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa';
 export const ANY_FUNC_SIGNATURE = '0x00000000';
 export const ERC20_TRANSFER_SIGNATURE = '0xa9059cbb';
@@ -27,6 +28,7 @@ const defaultAlchemyKey = 'FvNKXPCxtzFYrtP4r45pmtxOR0AMCtQv';
 export const DISCOURSE_URL_ROOT = 'https://daotalk.org';
 
 export const MAINNET_ID = 1;
+export const GNOSIS_ID = 100;
 export const LOCALHOST_ID = 1337;
 export const GOERLI_ID = 5;
 export const ARBITRUM_ID = 42161;
@@ -34,6 +36,15 @@ export const ARBITRUM_TESTNET_ID = 421611;
 
 export const DEFAULT_CHAIN_ID =
   process.env.NODE_ENV === 'development' ? LOCALHOST_ID : MAINNET_ID;
+
+export enum SUPPORTED_DAVI_NETWORKS {
+  MAINNET_ID = 1,
+  GOERLI_ID = 5,
+  ARBITRUM_ID = 42161,
+  ARBITRUM_TESTNET_ID = 421611,
+  LOCALHOST_ID = 1337,
+  GNOSIS_ID = 100,
+}
 
 export const POKT_NETWORK_URLS = {
   '1': 'https://eth-archival.gateway.pokt.network/v1/lb/dda01e253305bbeac6507a80',

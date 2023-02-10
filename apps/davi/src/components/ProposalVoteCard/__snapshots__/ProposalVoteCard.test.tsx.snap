@@ -48,6 +48,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  color: #DEFF4E;
 }
 
 .c8 {
@@ -267,7 +268,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
       <h2
         class="c3 c4 c5"
       >
-        castVote
+        voting.castVote
         <div
           class="c6"
         >
@@ -279,11 +280,11 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
         >
           <div
             class="react-switch-bg"
-            style="height: 32px; width: 64px; margin: 0px; position: relative; background: rgb(38, 40, 45); border-radius: 32px; cursor: pointer; transition: background 0.25s;"
+            style="height: 32px; width: 64px; margin: 0px; position: relative; background: rgb(161, 166, 176); border-radius: 32px; cursor: pointer; transition: background 0.25s;"
           />
           <div
             class="react-switch-handle"
-            style="height: 24px; width: 24px; background: rgb(255, 255, 255); display: inline-block; cursor: pointer; border-radius: 31px; position: absolute; transform: translateX(4px); top: 4px; outline: 0; border: 0px; transition: background-color 0.25s, transform 0.25s, box-shadow 0.15s;"
+            style="height: 24px; width: 24px; background: rgb(24, 27, 27); display: inline-block; cursor: pointer; border-radius: 31px; position: absolute; transform: translateX(4px); top: 4px; outline: 0; border: 0px; transition: background-color 0.25s, transform 0.25s, box-shadow 0.15s;"
           />
           <input
             aria-checked="false"
@@ -414,11 +415,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
         <div
           class="c0 c25"
         >
-          youVotedForOption
-           
-          with
-           
-          0%
+          voting.youVotedForOption
         </div>
       </div>
     </div>

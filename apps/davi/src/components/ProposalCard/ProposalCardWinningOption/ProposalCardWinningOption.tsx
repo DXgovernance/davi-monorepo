@@ -92,7 +92,8 @@ const ProposalCardWinningOption: React.FC<ProposalCardWinningOptionProps> = ({
           )
         ) : (
           <ActionCountWrapper>
-            <ActionCount>{numberOfActions}</ActionCount> {t('actions_other')}
+            <ActionCount>{numberOfActions}</ActionCount>{' '}
+            {t('actionBuilder.action.actions_other')}
           </ActionCountWrapper>
         )}
 

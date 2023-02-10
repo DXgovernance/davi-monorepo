@@ -58,7 +58,9 @@ export const DiffView: React.FC<DiffViewProps> = ({ oldCode, newCode }) => {
       }}
       codeFoldMessageRenderer={totalFoldedLines => (
         <DiffViewCodeFoldMessage>
-          {t('expandLinesOfCode', { numLines: totalFoldedLines })}
+          {t('actionBuilder.ens.expandLinesOfCode', {
+            numLines: totalFoldedLines,
+          })}
         </DiffViewCodeFoldMessage>
       )}
       renderContent={highlightSyntax}

@@ -58,7 +58,7 @@ exports[`RepMintSummary Should match snapshot 1`] = `
   <span
     class="c0"
   >
-    mint
+    actionBuilder.repMint.mint
      
     NaN
      %
@@ -166,7 +166,7 @@ exports[`RepMintSummary Should match snapshot in compact mode 1`] = `
   <span
     class="c0"
   >
-    mint
+    actionBuilder.repMint.mint
      
     NaN
      %
@@ -274,7 +274,7 @@ exports[`RepMintSummary Should match snapshot with default values 1`] = `
   <span
     class="c0"
   >
-    mint
+    actionBuilder.repMint.mint
      
     NaN
      %
@@ -382,7 +382,7 @@ exports[`RepMintSummary Should match snapshot with default values in compact mod
   <span
     class="c0"
   >
-    mint
+    actionBuilder.repMint.mint
      
     NaN
      %
@@ -490,7 +490,7 @@ exports[`RepMintSummary Should match snapshot without data 1`] = `
   <span
     class="c0"
   >
-    mint
+    actionBuilder.repMint.mint
      
     NaN
      %
@@ -598,7 +598,7 @@ exports[`RepMintSummary Should match snapshot without data in compact mode 1`] =
   <span
     class="c0"
   >
-    mint
+    actionBuilder.repMint.mint
      
     NaN
      %

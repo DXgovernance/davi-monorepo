@@ -99,6 +99,8 @@ importers:
       hardhat-ethernal: ^1.0.0
       highlight.js: ^11.6.0
       i18next: ^21.6.16
+      i18next-browser-languagedetector: ^7.0.1
+      i18next-http-backend: ^2.1.1
       interweave: ^13.0.0
       ipfs: 0.62.3
       ipfs-core: ^0.18.0
@@ -207,6 +209,8 @@ importers:
       hardhat-dependency-compiler: 1.1.3_hardhat@2.12.3
       highlight.js: 11.6.0
       i18next: 21.10.0
+      i18next-browser-languagedetector: 7.0.1
+      i18next-http-backend: 2.1.1
       interweave: 13.0.0_react@18.2.0
       ipfs: 0.62.3
       ipfs-core: 0.18.0
@@ -785,7 +789,7 @@ packages:
     resolution: {integrity: sha512-xhlTqH0m31mnsG0tIP4ETgfSB6gXDaYYsUWTrlUV93fFQPI9dd8hE0Ot6MHLCtqgB32hwJAC3YZMWlXZw7AleA==}
     engines: {node: '>=14'}
     dependencies:
-      node-fetch: 2.6.7
+      node-fetch: 2.6.8
     transitivePeerDependencies:
       - encoding
 
@@ -9105,7 +9109,7 @@ packages:
       fast-stable-stringify: 1.0.0
       jayson: 3.7.0
       js-sha3: 0.8.0
-      node-fetch: 2.6.7
+      node-fetch: 2.6.8
       react-native-url-polyfill: 1.3.0
       rpc-websockets: 7.5.0
       secp256k1: 4.0.3
@@ -13413,7 +13417,7 @@ packages:
       busboy: 1.6.0
       form-data-encoder: 1.7.1
       formdata-node: 4.4.1
-      node-fetch: 2.6.7
+      node-fetch: 2.6.8
       undici: 5.12.0
       urlpattern-polyfill: 6.0.2
       web-streams-polyfill: 3.2.1
@@ -17923,7 +17927,7 @@ packages:
   /cross-fetch/2.2.6:
     resolution: {integrity: sha512-9JZz+vXCmfKUZ68zAptS7k4Nu8e2qcibe7WVZYps7sAgk5R8GYTc+T1WR0v1rlP9HxgARmOX1UTIJZFytajpNA==}
     dependencies:
-      node-fetch: 2.6.7
+      node-fetch: 2.6.8
       whatwg-fetch: 2.0.4
     transitivePeerDependencies:
       - encoding
@@ -24474,6 +24478,20 @@ packages:
     hasBin: true
     dev: true
 
+  /i18next-browser-languagedetector/7.0.1:
+    resolution: {integrity: sha512-Pa5kFwaczXJAeHE56CHG2aWzFBMJNUNghf0Pm4SwSrEMps/PTKqW90EYWlIvhuYStf3Sn1K0vw+gH3+TLdkH1g==}
+    dependencies:
+      '@babel/runtime': 7.20.1
+    dev: false
+
+  /i18next-http-backend/2.1.1:
+    resolution: {integrity: sha512-jByfUCDVgQ8+/Wens7queQhYYvMcGTW/lR4IJJNEDDXnmqjLrwi8ubXKpmp76/JIWEZHffNdWqnxFJcTVGeaOw==}
+    dependencies:
+      cross-fetch: 3.1.5
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /i18next/21.10.0:
     resolution: {integrity: sha512-YeuIBmFsGjUfO3qBmMOc0rQaun4mIpGKET5WDwvu8lU7gvwpcariZLNtL0Fzj+zazcHUrlXHiptcFhBMFaxzfg==}
     dependencies:
@@ -30809,7 +30827,7 @@ packages:
       http-errors: 1.8.1
       js-sha256: 0.9.0
       mustache: 4.2.0
-      node-fetch: 2.6.7
+      node-fetch: 2.6.8
       text-encoding-utf-8: 1.0.2
       tweetnacl: 1.0.3
     transitivePeerDependencies:
@@ -34194,7 +34212,7 @@ packages:
       bl: 5.1.0
       debug: 4.3.4
       minimist: 1.2.7
-      node-fetch: 2.6.7
+      node-fetch: 2.6.8
       readable-stream: 3.6.0
     transitivePeerDependencies:
       - encoding

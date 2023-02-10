@@ -3,7 +3,10 @@ import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { ERC20SnapshotRep } from 'contracts/ts-files/ERC20SnapshotRep';
 import { useListenToTokenTransfer } from '../../events/useListenToTokenTransfer';
-import { useDAOToken, useSnapshotId } from 'stores/modules/common/fetchers/rpc';
+import {
+  useDAOToken,
+  useSnapshotId,
+} from 'stores/modules/guilds/common/fetchers/rpc';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseTotalLocked = FetcherHooksInterface['useTotalLocked'];

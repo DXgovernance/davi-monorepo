@@ -2,7 +2,7 @@ import { unix } from 'moment';
 import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
-import { useListenToVoteAdded } from 'stores/modules/common/events';
+import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseVoterLockTimestamp = FetcherHooksInterface['useVoterLockTimestamp'];

@@ -4,7 +4,7 @@ import {
   getProposalVotesOfVoterDocument,
   getProposalVotesOfVoterQuery,
 } from '.graphclient';
-import { useListenToVoteAdded } from 'stores/modules/common/events';
+import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 

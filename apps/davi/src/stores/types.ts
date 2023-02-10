@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers';
-import { useProposal } from './modules/common/fetchers/rpc/useProposal/useProposal';
+import { useProposal } from './modules/guilds/common/fetchers/rpc/useProposal/useProposal';
 import { Option, Permission } from 'components/ActionsBuilder/types';
 import { Proposal, GuildConfigProps } from 'types/types.guilds.d';
 

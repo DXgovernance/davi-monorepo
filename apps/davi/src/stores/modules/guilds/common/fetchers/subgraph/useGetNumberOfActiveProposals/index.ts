@@ -5,7 +5,7 @@ import {
   getNumberOfActiveProposalsQuery,
 } from '.graphclient';
 import { BigNumber } from 'ethers';
-import { useListenToProposalStateChanged } from 'stores/modules/common/events/useListenToProposalStateChanged';
+import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events/useListenToProposalStateChanged';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   const { data, refetch, loading, error, ...rest } =

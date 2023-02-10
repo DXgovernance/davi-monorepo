@@ -1,5 +1,5 @@
 import { ERC20SnapshotRep } from 'contracts/ts-files/ERC20SnapshotRep';
-import { useDAOToken } from 'stores/modules/common/fetchers/rpc';
+import { useDAOToken } from 'stores/modules/guilds/common/fetchers/rpc';
 import { useContractRead } from 'wagmi';
 
 export const useMemberCount = (daoId: `0x${string}`) => {

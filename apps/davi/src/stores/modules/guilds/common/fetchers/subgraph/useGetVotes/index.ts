@@ -7,7 +7,7 @@ import { getVotesDocument, getVotesQuery } from '.graphclient';
 import { useHookStoreProvider } from 'stores';
 import { FetcherHooksInterface } from 'stores/types';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
-import { useListenToVoteAdded } from 'stores/modules/common/events';
+import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];

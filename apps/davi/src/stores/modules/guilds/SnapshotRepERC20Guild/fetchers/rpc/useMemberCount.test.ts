@@ -14,7 +14,7 @@ jest.mock('wagmi', () => ({
   }),
 }));
 
-jest.mock('stores/modules/common/fetchers/rpc', () => ({
+jest.mock('stores/modules/guilds/common/fetchers/rpc', () => ({
   useDAOToken: () => ({
     data: MOCK_TOKEN,
   }),

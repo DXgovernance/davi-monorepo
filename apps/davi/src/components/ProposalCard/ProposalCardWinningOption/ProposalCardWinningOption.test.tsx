@@ -16,7 +16,7 @@ optionWithoutVotes.votePercentage = null;
 
 const mockBigNumber = BigNumber.from(100000000);
 
-jest.mock('stores/modules/common/fetchers/rpc', () => ({
+jest.mock('stores/modules/guilds/common/fetchers/rpc', () => ({
   useProposalCalls: () => ({ options: [] }),
 }));
 

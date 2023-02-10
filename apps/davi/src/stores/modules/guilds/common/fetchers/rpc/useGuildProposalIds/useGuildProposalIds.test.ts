@@ -12,10 +12,6 @@ jest.mock('./useGuildProposalIds', () => ({
   }),
 }));
 
-jest.mock('wagmi', () => ({
-  useContractRead: () => ({ data: '' }),
-}));
-
 describe('useGuildProposalIds', () => {
   it('should return guild proposal ids', () => {
     const { data, isError, isLoading } =

@@ -1,8 +1,8 @@
 import useVotingPowerOfAt from 'Modules/Guilds/Hooks/useVotingPowerOfAt';
 import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
-import { useListenToLockAndWithdrawTokens } from '../../events/useListenToLockAndWithdrawTokens';
-import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
+import { SnapshotRepERC20Guild } from 'contracts/ts-files/SnapshotRepERC20Guild';
+import { useListenToTokenTransfer } from '../../../events/useListenToTokenTransfer';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
@@ -11,7 +11,7 @@ type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
  * Get the voting power of an account
  */
 export const useVotingPowerOf: IUseVotingPowerOf = ({
-  contractAddress: guildAddress,
+  contractAddress,
   userAddress,
   snapshotId,
   fallbackSnapshotId = true,
@@ -22,18 +22,18 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
     isError,
     isLoading,
   } = useContractRead({
-    address: guildAddress,
-    abi: SnapshotERC20Guild.abi,
+    address: contractAddress,
+    abi: SnapshotRepERC20Guild.abi,
     functionName: 'votingPowerOf',
     args: [userAddress],
   });
 
-  useListenToLockAndWithdrawTokens(guildAddress, () => {
+  useListenToTokenTransfer(contractAddress, () => {
     refetchVotingPowerOf();
   });
 
   const votingPowerAtSnapshotResponse = useVotingPowerOfAt({
-    contractAddress: guildAddress,
+    contractAddress: contractAddress,
     userAddress,
     snapshotId,
     fallbackSnapshotId,

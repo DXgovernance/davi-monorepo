@@ -9,7 +9,7 @@ import { FetcherHooksInterface } from 'stores/types';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { useListenToVoteAdded } from 'stores/modules/common/events';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
-import { getOptionLabel } from 'utils/guildsProposals';
+import { getGuildOptionLabel } from 'utils/proposals';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 
@@ -34,7 +34,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
 
   const parsedData = useMemo(() => {
     return data?.proposal?.votes?.map(vote => {
-      const optionLabel = getOptionLabel({
+      const optionLabel = getGuildOptionLabel({
         metadata: proposalMetadata,
         optionKey: vote.option,
         t,

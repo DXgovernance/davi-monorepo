@@ -14,7 +14,7 @@ import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
 import { useVotingResults } from './useVotingResults';
 
 import { FetcherHooksInterface } from 'stores/types';
-import { getOptionLabel } from 'utils/guildsProposals';
+import { getGuildOptionLabel } from 'utils/proposals';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
@@ -133,7 +133,11 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
               return call;
             })
           );
-          const optionLabel = getOptionLabel({ metadata, optionKey: index, t });
+          const optionLabel = getGuildOptionLabel({
+            metadata,
+            optionKey: index,
+            t,
+          });
 
           return {
             id: `option-${index}`,

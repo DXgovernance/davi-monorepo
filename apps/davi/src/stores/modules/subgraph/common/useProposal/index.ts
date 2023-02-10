@@ -9,7 +9,7 @@ import { FetcherHooksInterface } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/common/fetchers';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
-import { getOptionLabel } from 'utils/guildsProposals';
+import { getGuildOptionLabel } from 'utils/proposals';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import {
   useListenToProposalStateChanged,
@@ -69,7 +69,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     const totalVotesBN = totalVotes.map((vote: string) => BigNumber.from(vote));
 
     const parsedVotes = votes?.map(vote => {
-      const optionLabel = getOptionLabel({
+      const optionLabel = getGuildOptionLabel({
         metadata: proposalMetadata,
         optionKey: vote.option,
         t,

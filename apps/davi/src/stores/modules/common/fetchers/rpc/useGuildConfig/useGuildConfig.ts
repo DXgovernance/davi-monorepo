@@ -4,25 +4,9 @@ import { useHookStoreProvider } from 'stores';
 import { useContractReads } from 'wagmi';
 import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
+import { FetcherHooksInterface } from 'stores/types';
 
-export type GuildConfigProps = {
-  name: string;
-  token: `0x${string}`;
-  permissionRegistry: string;
-  proposalTime: BigNumber;
-  timeForExecution: BigNumber;
-  maxActiveProposals: BigNumber;
-  votingPowerForProposalCreation: BigNumber;
-  votingPowerForProposalExecution: BigNumber;
-  tokenVault: `0x${string}`;
-  lockTime: BigNumber;
-  voteGas: BigNumber;
-  maxGasPrice: BigNumber;
-  votingPowerPercentageForProposalExecution: BigNumber;
-  votingPowerPercentageForProposalCreation: BigNumber;
-  minimumMembersForProposalCreation: BigNumber;
-  minimumTokensLockedForProposalCreation: BigNumber;
-};
+type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
 
 const GETTER_FUNCTIONS = [
   'getPermissionRegistry',
@@ -41,7 +25,7 @@ const GETTER_FUNCTIONS = [
   'getMinimumTokensLockedForProposalCreation',
 ];
 
-export const useGuildConfig = (
+export const useGuildConfig: IUseGuildConfig = (
   guildAddress: string,
   proposalId?: `0x${string}`
 ) => {

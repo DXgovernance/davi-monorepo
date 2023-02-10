@@ -7,7 +7,7 @@ import {
 } from 'Modules/Guilds/Hooks/fixtures';
 import { useGuildConfig } from './useGuildConfig';
 
-jest.mock('stores/modules/common/fetchers/rpc/useGuildConfig', () => ({
+jest.mock('./useGuildConfig', () => ({
   useGuildConfig: () => ({
     data: {
       name: MOCK_NAME,

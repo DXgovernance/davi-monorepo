@@ -1,5 +1,5 @@
 import { useDAOToken } from './useDAOToken';
-import { MOCK_CONTRACT_ADDRESS, MOCK_GUILD_ADDRESS } from './fixtures';
+import { MOCK_CONTRACT_ADDRESS, MOCK_GUILD_ADDRESS } from '../fixtures';
 
 jest.mock('./useDAOToken', () => ({
   __esModule: true,

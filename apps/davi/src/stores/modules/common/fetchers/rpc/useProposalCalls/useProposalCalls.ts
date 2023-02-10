@@ -12,7 +12,7 @@ import { useNetwork } from 'wagmi';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
 import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
-import { useProposal, useVotingResults } from './';
+import { useProposal, useVotingResults } from '..';
 import { FetcherHooksInterface } from 'stores/types';
 
 const isApprovalData = (data: string) =>

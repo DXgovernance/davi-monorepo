@@ -77,3 +77,21 @@ export interface ENSAvatar {
   ensName?: string;
 }
 
+export interface GuildConfigProps {
+  name: string;
+  token: `0x${string}`;
+  permissionRegistry: string;
+  proposalTime: BigNumber;
+  timeForExecution: BigNumber;
+  maxActiveProposals: BigNumber;
+  votingPowerForProposalCreation: BigNumber;
+  votingPowerForProposalExecution: BigNumber;
+  tokenVault: `0x${string}`;
+  lockTime: BigNumber;
+  voteGas: BigNumber;
+  maxGasPrice: BigNumber;
+  votingPowerPercentageForProposalExecution: BigNumber;
+  votingPowerPercentageForProposalCreation: BigNumber;
+  minimumMembersForProposalCreation: BigNumber;
+  minimumTokensLockedForProposalCreation: BigNumber;
+}

@@ -1,0 +1,1 @@
+export { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';

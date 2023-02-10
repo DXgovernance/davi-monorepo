@@ -10,7 +10,7 @@ import {
   Option,
   SupportedAction,
 } from 'components/ActionsBuilder/types';
-import { GuildConfigProps } from 'stores/modules/common/fetchers/rpc/useGuildConfig';
+import { GuildConfigProps } from 'types/types.guilds.d';
 
 export const proposalMock: Proposal = {
   id: '0x1234567890123456789012345678901234567890',

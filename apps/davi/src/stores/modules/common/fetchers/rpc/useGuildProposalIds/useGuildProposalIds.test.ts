@@ -3,12 +3,17 @@ import {
   MOCK_CONTRACT_ADDRESSES,
 } from 'Modules/Guilds/Hooks/fixtures';
 import { useGuildProposalIds } from './useGuildProposalIds';
-jest.mock('stores/modules/common/fetchers/rpc/useGuildProposalIds', () => ({
+jest.mock('./useGuildProposalIds', () => ({
   useGuildProposalIds: () => ({
     data: MOCK_CONTRACT_ADDRESSES,
     isError: false,
     isLoading: false,
+    errorMessage: null,
   }),
+}));
+
+jest.mock('wagmi', () => ({
+  useContractRead: () => ({ data: '' }),
 }));
 
 describe('useGuildProposalIds', () => {

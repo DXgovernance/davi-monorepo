@@ -75,7 +75,7 @@ const StakeTokensButton = ({
         )
       ) : (
         <ActionButton onClick={() => navigate('create')}>
-          {t('actionBuilder.mintRep.mintRep')}
+          {t('actionBuilder.repMint.mintRep')}
         </ActionButton>
       )}
     </>

@@ -209,10 +209,10 @@ export const ActionRow: React.FC<ActionViewProps> = ({
             <>
               <DetailWrapper>
                 <SectionHeader>
-                  {t('permissions.permissionDenied')}
+                  {t('actionBuilder.permissions.permissionDenied')}
                 </SectionHeader>
                 <SectionBody>
-                  {t('permissions.permissionDeniedMessage')}
+                  {t('actionBuilder.permissions.permissionDeniedMessage')}
                 </SectionBody>
               </DetailWrapper>
               <Separator />

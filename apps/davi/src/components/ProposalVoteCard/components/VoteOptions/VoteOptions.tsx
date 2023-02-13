@@ -3,7 +3,7 @@ import { Loading } from 'components/primitives/Loading';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { getOptionLabel } from 'components/ProposalVoteCard/utils';
+import { getGuildOptionLabel } from 'utils/proposals';
 import {
   ResultRowProps,
   VoteResultsProps,
@@ -23,7 +23,11 @@ const VoteOptionsRow: React.FC<ResultRowProps> = ({
 
   const isReady = optionKey !== undefined;
 
-  const label = getOptionLabel({ metadata: proposalMetadata, optionKey, t });
+  const label = getGuildOptionLabel({
+    metadata: proposalMetadata,
+    optionKey,
+    t,
+  });
   return (
     <VotesRowWrapper>
       <VoteOption>

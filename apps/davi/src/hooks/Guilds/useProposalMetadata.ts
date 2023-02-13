@@ -1,26 +1,18 @@
 import useIPFSFile from 'hooks/Guilds/ipfs/useIPFSFile';
 import { useEffect, useState } from 'react';
 import { ProposalMetadata } from 'types/types.guilds';
-// import contentHash from '@ensdomains/content-hash';
-import { useHookStoreProvider } from 'stores';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
 
-function useProposalMetadata(guildId: string, proposalId: `0x${string}`) {
-  const {
-    hooks: {
-      fetchers: { useProposal },
-    },
-  } = useHookStoreProvider();
-  const { data: proposal, error } = useProposal(guildId, proposalId);
+function useProposalMetadata(contentHash: string) {
   const { orbis } = useOrbisContext();
   const [orbisData, setOrbisData] = useState<any>();
 
   // Get orbis data
   useEffect(() => {
     let data;
-    if (proposal?.contentHash?.startsWith('streamId://')) {
+    if (contentHash?.startsWith('streamId://')) {
       const fetchData = async () => {
-        data = await orbis.getPost(proposal?.contentHash.slice(11));
+        data = await orbis.getPost(contentHash.slice(11));
         if (data.status === 200) setOrbisData(data);
         else setOrbisData(data.error);
       };
@@ -28,11 +20,11 @@ function useProposalMetadata(guildId: string, proposalId: `0x${string}`) {
       return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [proposal?.contentHash]);
+  }, [contentHash]);
 
   const { data: metadata, error: metadataError } =
     useIPFSFile<ProposalMetadata>(
-      proposal?.contentHash?.substring(7, proposal?.contentHash?.length + 1)
+      contentHash?.substring(7, contentHash?.length + 1)
     );
 
   if (orbisData) {
@@ -47,9 +39,9 @@ function useProposalMetadata(guildId: string, proposalId: `0x${string}`) {
       },
       error: undefined,
     };
-  } else if (error || metadataError) {
-    return { error: error || metadataError };
-  } else if (!proposal || !metadata) {
+  } else if (metadataError) {
+    return { error: metadataError };
+  } else if (!contentHash || !metadata) {
     return { error: undefined, data: undefined };
   }
 

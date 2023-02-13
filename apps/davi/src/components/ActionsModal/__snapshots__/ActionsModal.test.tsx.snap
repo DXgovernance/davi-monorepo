@@ -375,7 +375,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 </div>
                 <button
                   class="c13 c14"
-                  data-testid="supported-action-erc20transfer"
+                  data-testid="erc20transfer-action"
                 >
                   <div
                     class="c15"
@@ -392,6 +392,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="set-permission-action"
                 >
                   <div
                     class="c15"
@@ -408,6 +409,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="rep-mint-action"
                 >
                   <div
                     class="c15"
@@ -424,6 +426,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="set-guild-config-action"
                 >
                   <div
                     class="c15"
@@ -468,6 +471,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                   actionBuilder.advanced.advancedOptions
                   <span
                     class="c18"
+                    data-testid="advanced-option-arrow-btn"
                     height="1.25rem"
                     width="1.25rem"
                   >

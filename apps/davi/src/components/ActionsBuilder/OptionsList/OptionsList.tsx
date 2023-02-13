@@ -383,6 +383,7 @@ export const OptionsList: React.FC<OptionsListProps> = ({
           <Divider />
           <AddOptionWrapper>
             <AddButton
+              data-testid="add-option-btn"
               disabled={options.length >= 9} // Disable button when we have 10 options ("against" + 9)
               label={t('actionBuilder.options.addOption')}
               onClick={addOption}

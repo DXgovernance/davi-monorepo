@@ -396,7 +396,9 @@
     "noDAOsRegistered": "No DAOs registered on this network",
     "daoNotAvailable": "DAO not available",
     "daoNotAvailableOnThisNetwork": "This guild is not available on this network",
-    "noDAOInThisAddress": "No guild exists on this address"
+    "noDAOInThisAddress": "No guild exists on this address",
+    "unknownDAO": "Unknown DAO",
+    "errorLoadingDAOsList": "Error while loading DAOs list"
   },
   "404": {
     "pageNotExist": "That page doesn't exist",

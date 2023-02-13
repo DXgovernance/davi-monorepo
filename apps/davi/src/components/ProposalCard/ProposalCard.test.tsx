@@ -62,7 +62,6 @@ const validProps: ProposalCardProps = {
   ensAvatar: ensAvatarMock,
   href: 'testUrl',
   statusProps: proposalStatusPropsMock,
-  options: [optionsMock],
 };
 
 const invalidProps: ProposalCardProps = {
@@ -73,7 +72,6 @@ const invalidProps: ProposalCardProps = {
     status: null,
     endTime: null,
   },
-  options: null,
 };
 describe('ProposalCard', () => {
   it('ProposalCard Renders properly with data', () => {
@@ -84,7 +82,7 @@ describe('ProposalCard', () => {
   it('ProposalCard Renders properly with more than one option ', () => {
     const propsWithMoreThanOneOption = {
       ...validProps,
-      options: [optionsMock, optionsMock],
+      proposal: { ...validProps.proposal, options: [optionsMock, optionsMock] },
     };
 
     const { container } = render(
@@ -96,7 +94,10 @@ describe('ProposalCard', () => {
   it('ProposalCard Renders properly with more than one option containing more than one action', () => {
     let optionWithSeveralActions = {
       ...validProps,
-      options: [optionsWithSeveralActionsMock],
+      proposal: {
+        ...validProps.proposal,
+        options: [optionsWithSeveralActionsMock],
+      },
     };
 
     const { container } = render(

@@ -7,7 +7,10 @@ const Editor = ({ EditorConfig }) => {
       <div>
         <EditorWrap>
           {EditorConfig && <MenuBar editor={EditorConfig} />}
-          <Content editor={EditorConfig} data-testid="editor-content" />
+          <Content
+            editor={EditorConfig}
+            data-testid="proposal-description-input"
+          />
         </EditorWrap>
       </div>
     );

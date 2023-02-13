@@ -188,12 +188,14 @@ exports[`DiscussionCard should render with full parameters 1`] = `
         </div>
         <h2
           class="c5 c6"
+          data-testid="discussion-creator"
         >
           test.eth
         </h2>
       </div>
       <h2
         class="c5 c7"
+        data-testid="discussion-title"
       >
         Title of the discussion
       </h2>

@@ -2,7 +2,11 @@ import { rawDataCallMock } from './fixtures';
 import RawTransactionInfoLine from './RawTransactionInfoLine';
 import { render } from 'utils/tests';
 import { BigNumber } from 'ethers';
-import { MOCK_ADDRESS, MOCK_ENS_NAME } from 'hooks/Guilds/ens/fixtures';
+import {
+  MOCK_ADDRESS,
+  MOCK_ENS_NAME,
+  MOCK_IMAGE_URL,
+} from 'hooks/Guilds/ens/fixtures';
 
 jest.mock('wagmi', () => ({
   __esModule: true,
@@ -43,6 +47,14 @@ jest.mock('wagmi', () => ({
   chainId: {
     localhost: 1337,
   },
+}));
+
+jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
+  __esModule: true,
+  default: () => ({
+    ensName: MOCK_ENS_NAME,
+    imageUrl: MOCK_IMAGE_URL,
+  }),
 }));
 
 describe('RawTransactionInfoLine', () => {

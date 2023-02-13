@@ -16,7 +16,7 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
 }) => {
   const {
     hooks: {
-      fetchers: { useProposal, useProposalCalls, useProposalVotesOfVoter },
+      fetchers: { useProposal, useProposalVotesOfVoter },
     },
   } = useHookStoreProvider();
   const { guildId, chainName } = useTypedParams();
@@ -24,7 +24,7 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
   const ensAvatar = useENSAvatar(proposal?.creator, MAINNET_ID);
   const status = useProposalState(proposal);
   const { withFilters } = useFilter();
-  const { options } = useProposalCalls(guildId, proposalId);
+  const options = proposal?.options;
   const { address } = useAccount();
   const { data: proposalVotesOfVoter } = useProposalVotesOfVoter(
     guildId,
@@ -48,7 +48,6 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
         status,
         endTime: endTime,
       }}
-      options={options}
       address={address}
     />
   )(proposal, status, options);

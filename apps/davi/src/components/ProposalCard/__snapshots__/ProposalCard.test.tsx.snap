@@ -227,7 +227,11 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c7 {
@@ -335,6 +339,22 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
         <div
           class="c1 c5"
         >
+          <div
+            class=""
+          >
+            <span
+              aria-busy="true"
+              aria-live="polite"
+            >
+              <span
+                class="react-loading-skeleton"
+                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
+              >
+                ‌
+              </span>
+              <br />
+            </span>
+          </div>
           <h2
             class="c6 c7"
           >
@@ -688,7 +708,11 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c7 {
@@ -796,6 +820,22 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
         <div
           class="c1 c5"
         >
+          <div
+            class=""
+          >
+            <span
+              aria-busy="true"
+              aria-live="polite"
+            >
+              <span
+                class="react-loading-skeleton"
+                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
+              >
+                ‌
+              </span>
+              <br />
+            </span>
+          </div>
           <h2
             class="c6 c7"
           >
@@ -1133,7 +1173,11 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c7 {
@@ -1273,6 +1317,22 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
         <div
           class="c1 c5"
         >
+          <div
+            class=""
+          >
+            <span
+              aria-busy="true"
+              aria-live="polite"
+            >
+              <span
+                class="react-loading-skeleton"
+                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
+              >
+                ‌
+              </span>
+              <br />
+            </span>
+          </div>
           <h2
             class="c6 c7"
           >
@@ -1503,7 +1563,11 @@ exports[`ProposalCard ProposalCard loading 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 0  flex:1;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c7 {
@@ -1565,6 +1629,22 @@ exports[`ProposalCard ProposalCard loading 1`] = `
         <div
           class="c1 c5"
         >
+          <div
+            class=""
+          >
+            <span
+              aria-busy="true"
+              aria-live="polite"
+            >
+              <span
+                class="react-loading-skeleton"
+                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
+              >
+                ‌
+              </span>
+              <br />
+            </span>
+          </div>
           <h2
             class="c6 c7"
           >

@@ -53,7 +53,7 @@ const AllDiscussions = ({ guildId }) => {
         <ActionButtonContainer onClick={handleCreateDiscussion}>
           <Button
             variant="primaryWithBorder"
-            data-testid="create-discussion-button"
+            data-testid="create-discussion-btn"
           >
             {t('discussions.createDiscussion')}
           </Button>

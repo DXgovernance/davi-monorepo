@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { resolveUri } from 'utils/url';
 import useENS from './useENS';
 import { useENSAvatarUri } from './useENSPublicResolverContract';
@@ -10,19 +10,38 @@ const useENSAvatar = (nameOrAddress: string, chainId?: number) => {
   const { name: ENSName, address: ethAddress } = useENS(nameOrAddress, chainId);
   const { avatarUri } = useENSAvatarUri(ENSName, chainId);
   const { imageUrl } = useENSAvatarNFT(avatarUri, ethAddress, chainId);
+  const { url: imageUrlFallback } = useENSMetadataServiceAvatar(ENSName);
 
   const imageUrlToUse = useMemo(() => {
     if (avatarUri) {
-      // TODO: Consider chainId when generating ENS metadata service fallback URL
-      return (
-        imageUrl || `https://metadata.ens.domains/mainnet/avatar/${ENSName}`
-      );
+      return imageUrl || imageUrlFallback;
     } else {
       return null;
     }
-  }, [imageUrl, ENSName, avatarUri]);
+  }, [imageUrl, avatarUri, imageUrlFallback]);
 
   return { ensName: ENSName, imageUrl: imageUrlToUse };
+};
+
+const useENSMetadataServiceAvatar = (ensName: string) => {
+  const [url, setUrl] = useState(null);
+
+  useEffect(() => {
+    setUrl(null);
+
+    const imageUrl = `https://metadata.ens.domains/mainnet/avatar/${ensName}`;
+    fetch(imageUrl)
+      .then(res => {
+        if (res.ok) {
+          setUrl(imageUrl);
+        } else {
+          setUrl(null);
+        }
+      })
+      .catch(() => setUrl(null));
+  }, [ensName]);
+
+  return { url };
 };
 
 const useENSAvatarNFT = (

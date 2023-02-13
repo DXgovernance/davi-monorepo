@@ -68,7 +68,7 @@ exports[`BlockExplorerLink BlockExplorerLink render Should match snapshot 1`] = 
       <div
         class="c2 c3"
       >
-        name.eth
+        wagmi.eth
       </div>
       <svg
         fill="none"

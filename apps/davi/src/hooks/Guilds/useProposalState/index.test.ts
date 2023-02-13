@@ -2,6 +2,7 @@ import useProposalState from '.';
 import { Proposal, ContractState } from 'types/types.guilds.d';
 import { BigNumber } from 'ethers';
 import { renderHook } from '@testing-library/react-hooks';
+import { optionsMock } from 'utils/fixtures';
 
 jest.mock('moment', () => {
   return () =>
@@ -20,6 +21,7 @@ const proposal: Proposal = {
   data: ['0x0', '0x0'],
   value: [BigNumber.from(0), BigNumber.from(0)],
   totalOptions: BigNumber.from(0),
+  options: [optionsMock],
   title: 'Proposal Title',
   contentHash: '0x0',
   contractState: ContractState.Active,

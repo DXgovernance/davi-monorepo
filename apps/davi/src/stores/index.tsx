@@ -155,7 +155,13 @@ export const HookStoreProvider: React.FC<
   }, [governanceType, dataSource, chain]);
 
   if (!daoId) return <>{children}</>;
-  if (!governanceType || !governanceType?.dataSource) return <LoadingPage />;
+  if (
+    !governanceType ||
+    !governanceType?.dataSource ||
+    shouldSwitchDataSource
+  ) {
+    return <LoadingPage />;
+  }
 
   return (
     <HookStoreContext.Provider value={{ ...governanceType, isLoading, daoId }}>

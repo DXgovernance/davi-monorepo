@@ -50,7 +50,9 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
           {numberOfMembers != null ? (
             <MemberIconWrapper>
               <MdOutlinePeopleAlt size={26} />
-              <Label>{numberOfMembers.toString()}</Label>
+              <Label data-testid="members-count">
+                {numberOfMembers.toString()}
+              </Label>
             </MemberIconWrapper>
           ) : (
             <Loading loading text />
@@ -60,7 +62,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
           <DaoBrand>
             <DaoIcon src={dxIcon} alt={guildName} />
 
-            <DaoTitle size={2} as="h1">
+            <DaoTitle data-testid="guild-name-sidebar" size={2} as="h1">
               {guildName || <Loading loading text />}
             </DaoTitle>
           </DaoBrand>
@@ -81,7 +83,10 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
             {t('proposals.allProposals')}
           </SidebarMenuItem>
         </StyledLink>
-        <StyledLink to={locations.allDiscussions}>
+        <StyledLink
+          data-testid="all-discussions-page"
+          to={locations.allDiscussions}
+        >
           <SidebarMenuItem current={pathname === locations.allDiscussions}>
             {t('discussions.allDiscussions')}
           </SidebarMenuItem>

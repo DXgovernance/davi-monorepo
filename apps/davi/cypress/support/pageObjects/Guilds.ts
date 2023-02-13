@@ -25,9 +25,9 @@ class Guilds {
   constructor() {
     this.proposalsListId = 'proposals-list';
     this.sidebarId = 'sidebar';
-    this.createProposalTitleId = 'create-proposal-title';
+    this.createProposalTitleId = 'proposal-title-input';
     this.createProposalLinkId = 'create-proposal-link';
-    this.createProposalEditorId = 'editor-content';
+    this.createProposalEditorId = 'proposal-description-input';
     this.connectWalletId = 'connect-wallet-btn';
     this.guildCardId = 'guildCard';
     this.proposalCard = 'proposal-card';

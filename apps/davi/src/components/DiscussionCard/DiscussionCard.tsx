@@ -49,9 +49,13 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
             defaultSeed={discussion?.creator_details?.metadata?.address}
             size={24}
           />
-          <Detail>{ensName || shortenAddress(creatorAddress)}</Detail>
+          <Detail data-testid="discussion-creator">
+            {ensName || shortenAddress(creatorAddress)}
+          </Detail>
         </Flex>
-        <CardTitle>{discussion.content?.title}</CardTitle>
+        <CardTitle data-testid="discussion-title">
+          {discussion.content?.title}
+        </CardTitle>
         <Flex direction="row" justifyContent="flex-start">
           <FooterElement>
             <IoHeartOutline size="20px" /> {discussion?.count_likes}

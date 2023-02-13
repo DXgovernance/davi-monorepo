@@ -2,9 +2,9 @@ import { useContractEvent } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 
 export const useListenToVoteAdded = (
-  daoAddress: `0x${string}`,
+  daoAddress: string,
   refetch: () => void,
-  proposalId?: `0x${string}`
+  proposalId?: string
 ) => {
   useContractEvent({
     address: daoAddress ?? null,

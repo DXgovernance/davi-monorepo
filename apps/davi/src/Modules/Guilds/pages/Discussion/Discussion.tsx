@@ -74,6 +74,7 @@ const DiscussionPage: React.FC = () => {
               customStyles={linkStyles}
             >
               <IconButton
+                data-testid="discussion-back-btn"
                 variant="secondary"
                 iconLeft
                 padding={'0.6rem 0.8rem'}
@@ -95,7 +96,7 @@ const DiscussionPage: React.FC = () => {
               </Button>
             </StyledLink>
           </HeaderTopRow>
-          <PageTitle>
+          <PageTitle data-testid="discussion-page-title">
             {op?.content?.title || (
               <Loading loading text skeletonProps={{ width: '800px' }} />
             )}

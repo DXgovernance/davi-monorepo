@@ -92,10 +92,12 @@
     "ipfs": "0.62.3",
     "ipfs-core": "^0.18.0",
     "ipfs-only-hash": "^4.0.0",
+    "is-html": "^2.0.0",
     "is-ipfs": "^6.0.2",
     "jsonexport": "^3.2.0",
     "jszip": "^3.7.1",
     "lodash": "^4.17.21",
+    "markdown-to-jsx": "^7.1.9",
     "mini-css-extract-plugin": "2.4.5",
     "minisearch": "^3.1.0",
     "moment": "^2.24.0",
@@ -122,7 +124,6 @@
     "react-switch": "^7.0.0",
     "react-toastify": "^8.1.0",
     "react-virtuoso": "^2.16.5",
-    "sanitize-html": "^2.6.1",
     "styled-components": "^5.3.5",
     "swr": "^1.1.2",
     "ts-generator": "^0.1.1",
@@ -221,4 +222,3 @@
     ]
   }
 }
-

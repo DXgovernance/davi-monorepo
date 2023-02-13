@@ -31,7 +31,8 @@
     "change": "Change",
     "copiedAddress": "Copied Address",
     "copyAddress": "Copy Address",
-    "changeConnection": "Change Connection"
+    "changeConnection": "Change Connection",
+    "connectTheWalletToProceed": "Connect the wallet to proceed"
   },
   "transactions": {
     "waitingForConfirmation": "Waiting For Confirmation",

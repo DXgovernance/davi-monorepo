@@ -11,6 +11,7 @@ import {
   useGuildConfig as useGuildConfigFromSubgraph,
   useGetMemberList as useGetMemberListFromSubgraph,
   useGetNumberOfActiveProposals as useGetNumberOfActiveProposalsFromSubgraph,
+  useProposal as useProposalFromSubgraph,
   useGuildProposalIds as useGuildProposalIdsFromSubgraph,
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
@@ -60,7 +61,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
     hooks: {
       fetchers: {
         default: {
-          useProposal,
+          useProposal: useProposalFromSubgraph,
           useSnapshotId,
           useTotalLocked,
           useDAOToken,

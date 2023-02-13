@@ -1,4 +1,5 @@
 import { mockBigNumber } from 'components/ActionsBuilder/SupportedActions/SetGuildConfig/fixtures';
+import { MOCK_ENS_NAME, MOCK_IMAGE_URL } from 'hooks/Guilds/ens/fixtures';
 import { render } from 'utils/tests';
 import { BlockExplorerLink } from './BlockExplorerLink';
 
@@ -40,6 +41,14 @@ jest.mock('wagmi', () => ({
 jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   useTokenList: () => ({
     tokens: [],
+  }),
+}));
+
+jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
+  __esModule: true,
+  default: () => ({
+    ensName: MOCK_ENS_NAME,
+    imageUrl: MOCK_IMAGE_URL,
   }),
 }));
 

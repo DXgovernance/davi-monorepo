@@ -16,12 +16,3 @@ export const checkVotingPower = ({
     hasVotingPowerAtCurrentSnapshot,
   };
 };
-
-export const getOptionLabel = ({ metadata, optionKey, t }) => {
-  const metadataLabel = metadata?.voteOptions?.[optionKey];
-  return metadataLabel
-    ? metadataLabel
-    : Number(optionKey) === 0
-    ? t('actionBuilder.options.against', { defaultValue: 'Against' })
-    : t('actionBuilder.options.option', { optionKey });
-};

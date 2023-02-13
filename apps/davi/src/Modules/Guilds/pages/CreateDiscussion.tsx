@@ -9,7 +9,6 @@ import { useContext, useMemo, useState, useEffect } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import sanitizeHtml from 'sanitize-html';
 import { useTranslation } from 'react-i18next';
 import {
   PageContainer,
@@ -30,6 +29,7 @@ import { IconButton } from 'components/primitives/Button';
 import { StyledLink } from 'components/primitives/Links';
 import { linkStyles } from './Proposal/Proposal.styled';
 import { useTheme } from 'styled-components';
+import { ProposalDescription } from 'components/ProposalDescription';
 
 const CreateDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
@@ -149,11 +149,7 @@ const CreateDiscussionPage: React.FC = () => {
         {editMode ? (
           <Editor EditorConfig={EditorConfig} />
         ) : (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: sanitizeHtml(discussionBodyHtml),
-            }}
-          />
+          <ProposalDescription metadata={{ description: discussionBodyMd }} />
         )}
         <Box margin="16px 0px">
           <StyledButton

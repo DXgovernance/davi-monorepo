@@ -21,6 +21,7 @@ const Footer = () => {
           </>
         )}
         <Link
+          data-testid="footer-bug-report"
           href="https://github.com/DXgovernance/DAVI-monorepo/issues/new?labels=app:Frontend,User%20Submitted"
           target="_blank"
           rel="noopener"
@@ -28,11 +29,17 @@ const Footer = () => {
           <Label>{t('footer.reportABug')}</Label>
         </Link>
         <Dot />
-        <Link href="https://davi.canny.io/" target="_blank" rel="noopener">
+        <Link
+          data-testid="footer-suggest-feature"
+          href="https://davi.canny.io/"
+          target="_blank"
+          rel="noopener"
+        >
           <Label>{t('footer.suggestAFeature')}</Label>
         </Link>
         <Dot />
         <Link
+          data-testid="footer-davi-repo"
           href="https://github.com/DXgovernance/DAVI"
           target="_blank"
           rel="noopener"

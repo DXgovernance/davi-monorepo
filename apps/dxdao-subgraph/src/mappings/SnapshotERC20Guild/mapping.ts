@@ -78,6 +78,7 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
   let proposal = Proposal.load(proposalId);
 
   const proposalData = contract.getProposal(event.params.proposalId);
+  const snapshotId = contract.getProposalSnapshotId(event.params.proposalId);
 
   if (!proposal) {
     const to = proposalData.to.map<string>(d => d.toHexString());
@@ -93,6 +94,7 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
     proposal.title = proposalData.title;
     proposal.contentHash = proposalData.contentHash;
     proposal.totalVotes = proposalData.totalVotes;
+    proposal.snapshotId = snapshotId;
     proposal.votes = [];
     proposal.options = [];
     proposal.statesLog = [];

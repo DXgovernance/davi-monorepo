@@ -1,7 +1,6 @@
 import { BigNumber } from 'ethers';
-import { useProposal } from './modules/guilds/common/fetchers/rpc/useProposal/useProposal';
 import { Option, Permission } from 'components/ActionsBuilder/types';
-import { Proposal, GuildConfigProps } from 'types/types.guilds.d';
+import { Proposal, GuildConfigProps, Vote } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -17,7 +16,6 @@ type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepERC20Guild';
 export interface FetcherHooksInterface {
   useGetNumberOfActiveProposals: (daoId: string) => {
     data: BigNumber;
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };
@@ -45,7 +43,10 @@ export interface FetcherHooksInterface {
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
-  ) => ReturnType<typeof useProposal>;
+  ) => {
+    data: Proposal;
+    error: Error;
+  };
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;
@@ -75,13 +76,16 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: moment.Moment;
-    refetch: () => void;
   };
   useProposalCalls: (
     daoId: string,
-    proposalId: `0x${string}`
+    proposal: Proposal
   ) => { options: Option[] };
-  useVotingResults: (daoId?: string, proposalId?: `0x${string}`) => VoteData;
+  useVotingResults: (
+    daoId: string,
+    proposalId: `0x${string}`,
+    proposal: Proposal['totalVotes']
+  ) => VoteData;
   useVotingPowerOf: (useVotingPowerOfProps: {
     contractAddress: string;
     userAddress: `0x${string}`;
@@ -117,14 +121,10 @@ export interface FetcherHooksInterface {
     errorMessage: string;
   };
   useGetVotes: (
-    guildId: `0x${string}`,
+    daoId: string,
     proposal: Proposal
   ) => {
-    data: {
-      optionLabel: string;
-      voter: string;
-      votingPower: number;
-    }[];
+    data: Vote[];
     isError: boolean;
     isLoading: boolean;
   };

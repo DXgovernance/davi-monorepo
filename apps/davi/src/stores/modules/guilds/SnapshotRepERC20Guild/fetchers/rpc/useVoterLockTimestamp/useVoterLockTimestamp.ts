@@ -9,7 +9,7 @@ export const useVoterLockTimestamp: IUseVoterLockTimestamp = (
   userAddress: `0x${string}`
 ) => {
   // This method isn't supported in REP guilds
-  const { data, refetch, ...rest } = useContractRead({
+  const { data, ...rest } = useContractRead({
     address: null,
     abi: BaseERC20Guild.abi,
     functionName: 'getVoterLockTimestamp',
@@ -18,7 +18,6 @@ export const useVoterLockTimestamp: IUseVoterLockTimestamp = (
 
   return {
     data: null,
-    refetch,
     ...rest,
   };
 };

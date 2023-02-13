@@ -8,7 +8,7 @@ import { BigNumber } from 'ethers';
 import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events/useListenToProposalStateChanged';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
-  const { data, refetch, loading, error, ...rest } =
+  const { data, refetch, loading, error } =
     useQuery<getNumberOfActiveProposalsQuery>(
       getNumberOfActiveProposalsDocument,
       {
@@ -22,9 +22,7 @@ export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   useListenToProposalStateChanged(guildAddress, refetch);
   return {
     data: transformedData,
-    refetch,
     isLoading: loading,
     isError: !!error,
-    ...rest,
   };
 };

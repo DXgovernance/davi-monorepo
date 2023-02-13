@@ -48,7 +48,6 @@ const ProposalPage: React.FC = () => {
       fetchers: {
         useProposal,
         useTotalLocked,
-        useProposalCalls,
         useGuildConfig,
         useGuildProposalIds,
       },
@@ -63,14 +62,12 @@ const ProposalPage: React.FC = () => {
   );
   const { data: proposalIds } = useGuildProposalIds(guildId);
   const { data: proposal, error } = useProposal(guildId, proposalId);
-  const { options } = useProposalCalls(guildId, proposalId);
   const { data: guildConfig } = useGuildConfig(guildId);
   const { loaded } = useGuildImplementationTypeConfig(guildId);
   const { context } = useDiscussionContext(`${guildId}-${proposalId}`);
 
   const { data: metadata, error: metadataError } = useProposalMetadata(
-    guildId,
-    proposalId
+    proposal?.contentHash
   );
 
   const { data: totalLocked } = useTotalLocked(guildId, proposalId);
@@ -135,6 +132,7 @@ const ProposalPage: React.FC = () => {
                 customStyles={linkStyles}
               >
                 <IconButton
+                  data-testid="proposal-back-btn"
                   variant="secondary"
                   iconLeft
                   padding={'0.6rem 0.8rem'}
@@ -163,7 +161,7 @@ const ProposalPage: React.FC = () => {
           </PageHeader>
           <ProposalDescription metadata={metadata} error={metadataError} />
           <ProposalActionsWrapper>
-            <ActionsBuilder options={options} editable={false} />
+            <ActionsBuilder options={proposal?.options} editable={false} />
           </ProposalActionsWrapper>
           <SidebarCard
             header={
@@ -178,8 +176,11 @@ const ProposalPage: React.FC = () => {
           </SidebarCard>
         </PageContent>
         <SidebarContent>
-          <ProposalVoteCardWrapper />
-          <ProposalVotesCard proposal={proposal} guildId={guildId} />
+          <ProposalVoteCardWrapper
+            proposal={proposal}
+            proposalMetadata={metadata}
+          />
+          <ProposalVotesCard votes={proposal?.votes} />
           <ProposalInfoCard
             proposal={proposal}
             guildConfig={guildConfig}

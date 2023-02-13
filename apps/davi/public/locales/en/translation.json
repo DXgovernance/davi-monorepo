@@ -45,7 +45,8 @@
   },
   "modals": {
     "cancel": "Cancel",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "close": "Close"
   },
   "proposals": {
     "proposals": "Proposals",

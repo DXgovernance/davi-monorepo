@@ -117,10 +117,6 @@ exports[`CallDetails Should match 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -189,7 +185,7 @@ exports[`CallDetails Should match 1`] = `
     <div
       class="c1 c2 c3"
     >
-      interactWith
+      actionBuilder.interactWith
        
       <span>
         0.0
@@ -424,10 +420,6 @@ exports[`CallDetails Should match with empty data 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -496,7 +488,7 @@ exports[`CallDetails Should match with empty data 1`] = `
     <div
       class="c1 c2 c3"
     >
-      interactWith
+      actionBuilder.interactWith
        
       <span>
         0.0
@@ -571,7 +563,7 @@ exports[`CallDetails Should match with empty data 1`] = `
       <button
         class="c12 c13"
       >
-        approve
+        actionbuilder.approval.approve
          (
          
         <span
@@ -601,7 +593,7 @@ exports[`CallDetails Should match with empty data 1`] = `
     <div
       class="c1 c2 c3"
     >
-      interactWith
+      actionBuilder.interactWith
        
       <span>
         0.0

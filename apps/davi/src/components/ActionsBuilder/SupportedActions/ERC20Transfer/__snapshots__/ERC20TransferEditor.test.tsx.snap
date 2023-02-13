@@ -197,7 +197,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
         <div
           class="c0 c2"
         >
-          recipient
+          actionBuilder.inputs.recipient
         </div>
         <div
           class="c0 c3"
@@ -223,7 +223,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
               class="c8"
               data-testid="address input"
               name="recipient-address"
-              placeholder="ethereumAddress"
+              placeholder="actionBuilder.inputs.ethereumAddress"
               value="wagmi.eth"
             />
             <div
@@ -272,7 +272,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
           <div
             class="c0 c2"
           >
-            amount
+            actionBuilder.inputs.amount
           </div>
           <div
             class="c0 c3"
@@ -344,7 +344,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
           <div
             class="c0 c2"
           >
-            asset
+            actionBuilder.inputs.asset
           </div>
           <div
             class="c0 c3"
@@ -360,7 +360,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
               <input
                 class="c8"
                 name="token"
-                placeholder="token"
+                placeholder="actionBuilder.inputs.token"
                 readonly=""
                 value=""
               />
@@ -392,7 +392,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
         data-testid="submit-erc20transfer"
         type="submit"
       >
-        saveAction
+        actionBuilder.action.saveAction
       </button>
     </form>
   </div>
@@ -597,7 +597,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
         <div
           class="c0 c2"
         >
-          recipient
+          actionBuilder.inputs.recipient
         </div>
         <div
           class="c0 c3"
@@ -623,7 +623,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
               class="c8"
               data-testid="address input"
               name="recipient-address"
-              placeholder="ethereumAddress"
+              placeholder="actionBuilder.inputs.ethereumAddress"
               value="wagmi.eth"
             />
             <div
@@ -672,7 +672,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
           <div
             class="c0 c2"
           >
-            amount
+            actionBuilder.inputs.amount
           </div>
           <div
             class="c0 c3"
@@ -744,7 +744,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
           <div
             class="c0 c2"
           >
-            asset
+            actionBuilder.inputs.asset
           </div>
           <div
             class="c0 c3"
@@ -760,7 +760,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
               <input
                 class="c8"
                 name="token"
-                placeholder="token"
+                placeholder="actionBuilder.inputs.token"
                 readonly=""
                 value=""
               />
@@ -792,7 +792,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
         data-testid="submit-erc20transfer"
         type="submit"
       >
-        saveAction
+        actionBuilder.action.saveAction
       </button>
     </form>
   </div>
@@ -986,7 +986,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
         <div
           class="c0 c2"
         >
-          recipient
+          actionBuilder.inputs.recipient
         </div>
         <div
           class="c0 c3"
@@ -1004,7 +1004,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
               class="c6"
               data-testid="address input"
               name="recipient-address"
-              placeholder="ethereumAddress"
+              placeholder="actionBuilder.inputs.ethereumAddress"
               value=""
             />
             <div
@@ -1022,7 +1022,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
           <div
             class="c0 c2"
           >
-            amount
+            actionBuilder.inputs.amount
           </div>
           <div
             class="c0 c3"
@@ -1094,7 +1094,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
           <div
             class="c0 c2"
           >
-            asset
+            actionBuilder.inputs.asset
           </div>
           <div
             class="c0 c3"
@@ -1110,7 +1110,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
               <input
                 class="c6"
                 name="token"
-                placeholder="token"
+                placeholder="actionBuilder.inputs.token"
                 readonly=""
                 value=""
               />
@@ -1142,7 +1142,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
         data-testid="submit-erc20transfer"
         type="submit"
       >
-        saveAction
+        actionBuilder.action.saveAction
       </button>
     </form>
   </div>

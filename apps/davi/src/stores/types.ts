@@ -27,6 +27,22 @@ export interface FetcherHooksInterface {
     isLoading: boolean;
     isError: boolean;
   };
+  useGetAllPermissions: (
+    daoId: string,
+    filter?: 'tokens' | 'functionCalls'
+  ) => {
+    data: {
+      id: string;
+      to: string;
+      from: string;
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+      functionSignature: string;
+      allowed: boolean;
+    }[];
+    isLoading: boolean;
+    isError: boolean;
+  };
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
@@ -52,7 +68,6 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: { option: string; votingPower: BigNumber };
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };
@@ -95,6 +110,12 @@ export interface FetcherHooksInterface {
     data: GuildConfigProps;
     isError: boolean;
     isLoading: boolean;
+  };
+  useGuildProposalIds: (daoId: `0x${string}`) => {
+    data: `0x${string}`[];
+    isError: boolean;
+    isLoading: boolean;
+    errorMessage: string;
   };
   useGetVotes: (
     guildId: `0x${string}`,

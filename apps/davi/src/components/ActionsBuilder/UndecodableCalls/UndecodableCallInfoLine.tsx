@@ -53,7 +53,9 @@ const UndecodableCallInfoLine = ({
       )}
 
       <Segment>
-        {hasData && <Segment>{t('unknownAction')}</Segment>}
+        {hasData && (
+          <Segment>{t('actionBuilder.action.unknownAction')}</Segment>
+        )}
         {hasData && hasValue && <> + </>}
         {hasValue && (
           <>

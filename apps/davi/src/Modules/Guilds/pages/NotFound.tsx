@@ -13,12 +13,12 @@ const NotFound: React.FC = () => {
   return (
     <Result
       state={ResultState.ERROR}
-      title={t('pageNotExist')}
-      subtitle={t('makeSureCorrectAddress')}
+      title={t('404.pageNotExist')}
+      subtitle={t('404.makeSureCorrectAddress')}
       extra={
         <StyledLink to={chainName ? `/${chainName}` : '/'}>
           <IconButton iconLeft>
-            <FiArrowLeft /> {t('takeMeHome')}
+            <FiArrowLeft /> {t('404.takeMeHome')}
           </IconButton>
         </StyledLink>
       }

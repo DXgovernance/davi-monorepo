@@ -38,3 +38,38 @@ export const TransactionsListHeading = styled(Heading)`
   font-size: ${({ theme }) => theme.fontSizes.body};
   color: ${({ theme }) => theme.colors.grey};
 `;
+
+export const Language = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 24px;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+`;
+
+export const LanguageBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 24px;
+  padding-top: 1.5rem;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+`;
+
+export const LanguageTitle = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+export const LanguageValue = styled(LanguageTitle)`
+  cursor: pointer;
+`;
+
+export const LanguageList = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 1.5rem;
+`;

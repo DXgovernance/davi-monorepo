@@ -101,7 +101,11 @@ const Discussions = () => {
   const Footer = () => {
     return (
       <Box padding={'24px'}>
-        {isLoading ? <Loading loading text /> : t('forum.noMoreDiscussions')}
+        {isLoading ? (
+          <Loading loading text />
+        ) : (
+          t('discussions.noMoreDiscussions')
+        )}
       </Box>
     );
   };
@@ -110,7 +114,7 @@ const Discussions = () => {
     return (
       <>
         <Button variant="secondary" onClick={() => getDiscussions(0)}>
-          {t('reload')}
+          {t('discussions.activity.reload')}
         </Button>
         <br />
         <ErrorLabel>{error}</ErrorLabel>
@@ -122,9 +126,9 @@ const Discussions = () => {
     <>
       {discussions?.length === 0 && !isLoading && (
         <>
-          {t('forum.thereAreNoDiscussions')}.{' '}
+          {t('discussions.thereAreNoDiscussions')}.{' '}
           <StyledLink to={`/${chainName}/${guildId}/create`}>
-            {t('forum.createDiscussionWordy')}.
+            {t('discussions.createDiscussionWordy')}.
           </StyledLink>
         </>
       )}

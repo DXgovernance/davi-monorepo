@@ -16,7 +16,6 @@ import {
   TokenList,
 } from './TokenPicker.styled';
 import { useAccount } from 'wagmi';
-import { TokenType } from 'hooks/Guilds/tokens/useTokenList';
 
 const TokenPicker: React.FC<TokenPickerProps> = ({
   walletAddress,
@@ -47,7 +46,7 @@ const TokenPicker: React.FC<TokenPickerProps> = ({
     return data.map(token => {
       return {
         ...token,
-        id: token.type === TokenType.NATIVE ? 'NATIVE' : token?.address,
+        id: token.type === 'NATIVE' ? 'NATIVE' : token?.address,
       };
     });
   }, [data]);
@@ -66,7 +65,7 @@ const TokenPicker: React.FC<TokenPickerProps> = ({
 
   return (
     <Modal
-      header={t('selectAToken')}
+      header={t('tokenPicker.selectAToken')}
       isOpen={isOpen}
       onDismiss={onClose}
       maxWidth={390}
@@ -75,7 +74,7 @@ const TokenPicker: React.FC<TokenPickerProps> = ({
         <SearchWrapper>
           <Input
             icon={<FiSearch />}
-            placeholder={t('searchToken')}
+            placeholder={t('tokenPicker.searchToken')}
             value={searchQuery}
             onChange={e => setSearchQuery(e?.target?.value)}
           />

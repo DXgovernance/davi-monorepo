@@ -284,7 +284,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          allProposals
+          proposals.allProposals
         </div>
       </a>
       <a
@@ -294,7 +294,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          allDiscussions
+          discussions.allDiscussions
         </div>
       </a>
       <a
@@ -304,7 +304,17 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          members
+          members.members
+        </div>
+      </a>
+      <a
+        class="c13"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/permissions"
+      >
+        <div
+          class="c14"
+        >
+          actionBuilder.permissions.permissions
         </div>
       </a>
       <a
@@ -314,7 +324,7 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          treasury
+          treasury.treasury
         </div>
       </a>
     </div>
@@ -586,7 +596,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          allProposals
+          proposals.allProposals
         </div>
       </a>
       <a
@@ -596,7 +606,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          allDiscussions
+          discussions.allDiscussions
         </div>
       </a>
       <a
@@ -606,7 +616,17 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          members
+          members.members
+        </div>
+      </a>
+      <a
+        class="c11"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/permissions"
+      >
+        <div
+          class="c12"
+        >
+          actionBuilder.permissions.permissions
         </div>
       </a>
       <a
@@ -616,7 +636,7 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          treasury
+          treasury.treasury
         </div>
       </a>
     </div>

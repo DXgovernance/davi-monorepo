@@ -34,20 +34,22 @@ const VoteConfirmationModal: React.FC<VoteConfirmationModalProps> = ({
       maxWidth={380}
     >
       <Container>
-        <Title>{t('voteQuestion', { action: selectedOption })}</Title>
-        <InfoItem>{t('noRevertAction')}</InfoItem>
+        <Title>{t('voting.voteQuestion', { action: selectedOption })}</Title>
+        <InfoItem>{t('voting.noRevertAction')}</InfoItem>
 
         <Widget>
           <InfoRow>
-            <InfoLabel>{t('option', { optionKey: '' })}</InfoLabel>
+            <InfoLabel>
+              {t('actionBuilder.options.option', { optionKey: '' })}
+            </InfoLabel>
             <InfoValue>{selectedOption}</InfoValue>
           </InfoRow>
           <InfoRow>
-            <InfoLabel>{t('votingPower')}</InfoLabel>
+            <InfoLabel>{t('voting.votingPower')}</InfoLabel>
             <InfoValue>{votingPower}%</InfoValue>
           </InfoRow>
           <InfoRow>
-            <InfoLabel>{t('voteImpact')}</InfoLabel>
+            <InfoLabel>{t('voting.voteImpact')}</InfoLabel>
             <InfoValue>
               <InfoValue grey> {currentVoteAmount}% </InfoValue>
               {`-->  ${votingPower + currentVoteAmount}%`}
@@ -55,9 +57,9 @@ const VoteConfirmationModal: React.FC<VoteConfirmationModalProps> = ({
           </InfoRow>
         </Widget>
         <ActionWrapper>
-          <CancelButton onClick={onDismiss}>{t('cancel')}</CancelButton>
+          <CancelButton onClick={onDismiss}>{t('modals.cancel')}</CancelButton>
           <ConfirmButton variant="primaryWithBorder" onClick={onConfirm}>
-            {t('vote')}
+            {t('voting.vote')}
           </ConfirmButton>
         </ActionWrapper>
       </Container>

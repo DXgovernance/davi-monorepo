@@ -85,10 +85,6 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -113,7 +109,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.domain
+    actionBuilder.ens.domain
   </div>
   <div
     class="c0 c1"
@@ -167,7 +163,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.currentContent
+    actionBuilder.ens.currentContent
   </div>
   <div
     class="c0 c1"
@@ -216,7 +212,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    ens.newContent
+    actionBuilder.ens.newContent
   </div>
   <div
     class="c0 c1"
@@ -265,7 +261,7 @@ exports[`UpdateENSNameSummary Should match snapshot 1`] = `
   <div
     class="c0 c1 c2"
   >
-    interactWith
+    actionBuilder.interactWith
      
     <span>
       0.0

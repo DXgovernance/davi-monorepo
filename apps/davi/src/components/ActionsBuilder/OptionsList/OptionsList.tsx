@@ -363,7 +363,9 @@ export const OptionsList: React.FC<OptionsListProps> = ({
             option={{
               id: 'option-Against',
               color: theme.colors.votes[0],
-              label: t('against', { defaultValue: 'Against' }),
+              label: t('actionBuilder.options.against', {
+                defaultValue: 'Against',
+              }),
               actions: [],
               decodedActions: [],
               totalVotes: BigNumber.from(0),
@@ -382,7 +384,7 @@ export const OptionsList: React.FC<OptionsListProps> = ({
           <AddOptionWrapper>
             <AddButton
               disabled={options.length >= 9} // Disable button when we have 10 options ("against" + 9)
-              label={t('addOption')}
+              label={t('actionBuilder.option.addOption')}
               onClick={addOption}
             />
             <SimulationButton
@@ -391,7 +393,7 @@ export const OptionsList: React.FC<OptionsListProps> = ({
               onClick={handleTransactionSimulation}
               disabled={isSimulationButtonDisabled}
             >
-              {t('simulations.simulateTransactions')}
+              {t('actionBuilder.simulations.simulateTransactions')}
             </SimulationButton>
           </AddOptionWrapper>
         </>

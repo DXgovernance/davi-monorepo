@@ -19,7 +19,7 @@ export const GuildCard: React.FC<GuildCardProps> = ({
   if (isUnmatched) {
     return (
       <Card customStyles={cardWrapperStyles}>
-        <Result state={ResultState.ERROR} title={t('unknownDAO')} />
+        <Result state={ResultState.ERROR} title={t('daoErrors.unknownDAO')} />
       </Card>
     );
   }

@@ -18,7 +18,6 @@ import {
 } from './Treasury.styled';
 import { useAllERC20Balances } from 'hooks/Guilds/erc20/useAllERC20Balances';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { TokenType } from 'hooks/Guilds/tokens/useTokenList';
 import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import { Result, ResultState } from 'components/Result';
 
@@ -77,7 +76,7 @@ const Treasury = () => {
       .map(token => {
         return {
           ...token,
-          id: token.type === TokenType.NATIVE ? 'NATIVE' : token?.address,
+          id: token.type === 'NATIVE' ? 'NATIVE' : token?.address,
         };
       })
       .filter(token => !token?.balance?.isZero());
@@ -85,7 +84,7 @@ const Treasury = () => {
 
   const PageContainer = ({ children }) => (
     <Container>
-      <StyledHeading size={1}>{t('treasury')}</StyledHeading>
+      <StyledHeading size={1}>{t('treasury.treasury')}</StyledHeading>
       <StyledDivider />
       {children}
     </Container>
@@ -105,7 +104,7 @@ const Treasury = () => {
     return (
       <PageContainer>
         <Result
-          title={t('errorLoadingTreasuries')}
+          title={t('treasury.errorLoadingTreasuries')}
           subtitle={error?.message}
           state={ResultState.ERROR}
         />
@@ -116,7 +115,9 @@ const Treasury = () => {
   if (!tokens || tokens?.length === 0) {
     return (
       <PageContainer>
-        <NoRecordsContainer>{t('noTreasuryAssets')}</NoRecordsContainer>
+        <NoRecordsContainer>
+          {t('treasury.noTreasuryAssets')}
+        </NoRecordsContainer>
       </PageContainer>
     );
   }
@@ -126,9 +127,9 @@ const Treasury = () => {
       <Table>
         <TableHead>
           <tr>
-            <TableHeader alignment={'left'}>{t('asset')}</TableHeader>
+            <TableHeader alignment={'left'}>{t('treasury.asset')}</TableHeader>
             <TableHeader alignment={'right'}>
-              {` ${t('tokenAmount')}`}
+              {` ${t('treasury.tokenAmount')}`}
             </TableHeader>
           </tr>
         </TableHead>

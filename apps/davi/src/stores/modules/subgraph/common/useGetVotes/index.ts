@@ -32,7 +32,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { t } = useTranslation();
 
   const parsedData = useMemo(() => {
-    return data?.proposal?.votes?.map((vote, index) => {
+    return data?.proposal?.votes?.map(vote => {
       return {
         voter: vote.voter as `0x${string}`,
         optionLabel: proposalMetadata?.voteOptions[vote.option]

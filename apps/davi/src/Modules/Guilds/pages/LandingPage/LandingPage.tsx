@@ -71,14 +71,14 @@ const LandingPage: React.FC = () => {
   const { data: allGuilds, error, isLoading } = useGuildRegistry();
 
   const EmptyGuilds = () => {
-    return <h1>{t('noGuildsRegistered')}</h1>;
+    return <h1>{t('daoErrors.noDAOsRegistered')}</h1>;
   };
 
   if (error) {
     return (
       <Result
         state={ResultState.ERROR}
-        title={t('errorLoadingDAOsList')}
+        title={t('daoErrors.errorLoadingDAOsList')}
         subtitle={error?.message}
       />
     );

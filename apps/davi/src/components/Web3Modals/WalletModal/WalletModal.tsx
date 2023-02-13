@@ -31,7 +31,7 @@ import { supportedLanguages } from 'configs';
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
   onClose,
-  title
+  title,
 }) => {
   const { t, i18n } = useTranslation();
   const [isWalletListActive, setIsWalletsListActive] = useState(false);

@@ -113,7 +113,7 @@ const FilterMenu = () => {
           iconRight
           onClick={() => setShowType(!showType)}
         >
-          {t('filter.actions_one')} <FiChevronDown />
+          {t('actionBuilder.action.actions_one')} <FiChevronDown />
         </FilterButton>
         <DropdownContent fullScreenMobile={true} show={showType}>
           {isMobile && (

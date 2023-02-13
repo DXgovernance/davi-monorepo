@@ -12,12 +12,12 @@ async function ipfsContentFetcher<T>(hash: string) {
 
   const response = await Promise.any([
     fetcher('https://davi.mypinata.cloud/ipfs/' + hash),
-    fetcher('https://gateway.pinata.cloud/ipfs/' + hash),
+    fetcher('https://w3s.link/ipfs/' + hash),
     fetcher('https://ipfs.io/ipfs/' + hash),
     fetcher('https://gateway.ipfs.io/ipfs/' + hash),
-    fetcher('https://cloudflare-ipfs.com/ipfs/' + hash),
     fetcher('https://dweb.link/ipfs/' + hash),
-    fetcher('https://ipfs.fleek.co/ipfs/' + hash),
+    fetcher('https://cf-ipfs.com/ipfs/' + hash),
+    fetcher('https://ipfs.jpu.jp/ipfs/' + hash),
   ]);
 
   return response;

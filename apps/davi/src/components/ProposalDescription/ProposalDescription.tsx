@@ -9,6 +9,9 @@ import { Loading } from 'components/primitives/Loading';
 import { useTranslation } from 'react-i18next';
 import { Interweave } from 'interweave';
 import { GlobalErrorBoundary } from 'components/ErrorBoundary';
+
+import isHtml from 'is-html';
+import Markdown from 'markdown-to-jsx';
 import { useCallback, useMemo, useState } from 'react';
 import { Button } from 'components/primitives/Button';
 
@@ -17,6 +20,10 @@ export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
   error,
 }) => {
   const { t } = useTranslation();
+  const isDescriptionHtml = useMemo(
+    () => isHtml(metadata?.description || ''),
+    [metadata]
+  );
   const [descriptionHeight, setDescriptionHeight] = useState<number>();
   const [windowHeight, setWindowHeight] = useState<number>();
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -63,7 +70,24 @@ export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
               showHandler={showMoreVisibility}
               disabled={isExpanded}
             >
-              <Interweave content={metadata.description} />
+              {isDescriptionHtml ? (
+                <Interweave content={metadata.description} />
+              ) : (
+                <Markdown
+                  children={metadata?.description}
+                  options={{
+                    disableParsingRawHTML: true,
+                    overrides: {
+                      a: {
+                        props: {
+                          target: '_blank',
+                          rel: 'noopener noreferrer',
+                        },
+                      },
+                    },
+                  }}
+                />
+              )}
 
               {showMoreVisibility && (
                 <>

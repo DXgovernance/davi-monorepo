@@ -15,6 +15,7 @@ import {
 } from './ProposalCard.styled';
 import ProposalCardWinningOption from './ProposalCardWinningOption/ProposalCardWinningOption';
 import ProposalCardActions from './ProposalCardActions/ProposalCardActions';
+import { Avatar } from 'components/Avatar';
 
 export const ProposalCard: React.FC<ProposalCardProps> = ({
   proposal,
@@ -29,6 +30,7 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
       <ProposalCardWrapper disabled={!href}>
         <CardHeader>
           <IconDetailWrapper>
+            <Avatar src={ensAvatar?.imageUrl} defaultSeed={address} size={24} />
             <Detail>
               {ensAvatar?.ensName ||
                 (proposal?.creator ? (

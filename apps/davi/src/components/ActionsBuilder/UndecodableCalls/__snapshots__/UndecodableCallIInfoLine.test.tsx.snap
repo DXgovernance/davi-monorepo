@@ -116,13 +116,13 @@ exports[`UndecodableCallInfoLine Should match snapshot 1`] = `
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/0x0000000000000000000000000000000000000000"
+        src="https://example.com/image.png"
       />
     </span>
     <span
       class="c0"
     >
-      0x0000000000000000000000000000000000000000
+      wagmi.eth
     </span>
   </span>
    

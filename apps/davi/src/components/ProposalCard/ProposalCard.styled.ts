@@ -53,8 +53,9 @@ export const IconDetailWrapper = styled(Box)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: 0
-  
+  border: 0;
+  gap: 0.5rem;
+
   flex: 1;
 `;
 

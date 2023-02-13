@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import sanitizeHtml from 'sanitize-html';
 import { FiChevronLeft, FiX } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
 
@@ -41,6 +40,7 @@ import {
 import { StyledLink } from 'components/primitives/Links';
 import { IconButton } from 'components/primitives/Button';
 import { linkStyles } from './Proposal/Proposal.styled';
+import { ProposalDescription } from 'components/ProposalDescription';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -198,7 +198,7 @@ const CreateProposalPage: React.FC = () => {
 
     createProposal(
       title,
-      proposalBodyHTML,
+      proposalBodyMd,
       toArray,
       dataArray,
       valueArray,
@@ -225,9 +225,10 @@ const CreateProposalPage: React.FC = () => {
   const isValid = useMemo(() => {
     if (!title) return false;
     if (!proposalBodyHTML) return false;
+    if (!proposalBodyMd || !proposalBodyMd.length) return false;
 
     return true;
-  }, [title, proposalBodyHTML]);
+  }, [title, proposalBodyHTML, proposalBodyMd]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
 
@@ -281,9 +282,7 @@ const CreateProposalPage: React.FC = () => {
         {editMode ? (
           <Editor EditorConfig={EditorConfig} />
         ) : (
-          <div
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(proposalBodyHTML) }}
-          />
+          <ProposalDescription metadata={{ description: proposalBodyMd }} />
         )}
         <Box margin="16px 0px 24px">
           <ActionsBuilder

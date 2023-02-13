@@ -1,10 +1,6 @@
 import { Button } from 'components/primitives/Button';
 import styled, { css } from 'styled-components';
 
-interface ToggleLabelProps {
-  selected: boolean;
-}
-
 export const ButtonsContainer = styled.div`
   flex-direction: column;
   display: flex;
@@ -31,17 +27,6 @@ export const VoteActionButton = styled(Button)`
     color: ${({ theme }) => theme.colors.grey};
     opacity: 1;
   }
-`;
-
-export const ToggleLabel = styled.div<ToggleLabelProps>`
-  white-space: nowrap;
-  margin-left: 1rem;
-  font-size: 0.7rem;
-  ${({ selected }) =>
-    !selected &&
-    css`
-      color: ${({ theme }) => theme.colors.grey} !important;
-    `}
 `;
 
 export const VoteOptionButton = styled(VoteActionButton)<{

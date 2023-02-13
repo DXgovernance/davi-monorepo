@@ -18,7 +18,6 @@ import {
   VoteActionButton,
   VoteOptionButton,
   VoteOptionsLabel,
-  ToggleLabel,
 } from './ProposalVoteCard.styled';
 import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
@@ -27,7 +26,11 @@ import { useTranslation } from 'react-i18next';
 import { getOptionLabel } from 'components/ProposalVoteCard/utils';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useHookStoreProvider } from 'stores';
-import { Toggle } from 'components/primitives/Forms/Toggle';
+import {
+  Toggle,
+  ToggleContainer,
+  ToggleLabel,
+} from 'components/primitives/Forms/Toggle';
 
 const ProposalVoteCard = ({
   voteData,
@@ -107,13 +110,15 @@ const ProposalVoteCard = ({
           ) : (
             t('voting.voteResults')
           )}
-          <ToggleLabel selected={true}>{t('token')}</ToggleLabel>
-          <Toggle
-            name="toggle-max-value"
-            aria-label="toggle max value"
-            value={false}
-            onChange={() => setIsPercent(!isPercent)}
-          />
+          <ToggleContainer>
+            <ToggleLabel>{t('actionBuilder.inputs.token')}</ToggleLabel>
+            <Toggle
+              value={!isPercent}
+              onChange={() => setIsPercent(!isPercent)}
+              small
+              name="toggle-is-percent"
+            />
+          </ToggleContainer>
         </SidebarCardHeaderSpaced>
       }
     >

@@ -1,6 +1,7 @@
 import styled, { useTheme } from 'styled-components';
 import Switch, { ReactSwitchProps } from 'react-switch';
 import { FormElementProps } from 'components/primitives/Forms/types';
+import { Flex } from '../Layout';
 
 const StyledSwitch = styled(Switch)<ReactSwitchProps>`
   border: 1px solid ${({ theme }) => theme.colors.border1};
@@ -14,9 +15,27 @@ const StyledSwitch = styled(Switch)<ReactSwitchProps>`
   }
 `;
 
+interface ToggleContainerProps {
+  width?: string;
+  marginTop?: string;
+}
+
 interface IToggle extends FormElementProps<boolean> {
   small?: boolean;
 }
+export const ToggleContainer = styled(Flex)<ToggleContainerProps>`
+  width: ${({ width }) => width ?? 'auto'};
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: ${({ marginTop }) => marginTop ?? '0px'};
+  gap: 10px;
+`;
+
+export const ToggleLabel = styled.span`
+  font-size: 12px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.grey};
+`;
 
 export const Toggle: React.FC<IToggle> = ({
   value,

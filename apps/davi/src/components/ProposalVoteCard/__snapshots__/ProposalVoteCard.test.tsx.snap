@@ -51,12 +51,12 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   color: #DEFF4E;
 }
 
-.c8 {
+.c10 {
   padding: 1rem;
   color: #fff;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -72,7 +72,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   width: 100%;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -87,7 +87,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   border-radius: 32px;
 }
 
-.c13 {
+.c15 {
   width: 10%;
   border-radius: 32px;
   background: #E75C5C;
@@ -95,7 +95,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   overflow: hidden;
 }
 
-.c15 {
+.c17 {
   width: 10%;
   border-radius: 32px;
   background: #295FF4;
@@ -103,18 +103,18 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   overflow: hidden;
 }
 
-.c14 {
+.c16 {
   margin-left: 1rem;
 }
 
-.c17 {
+.c19 {
   height: 18px;
   margin-top: 20px;
   width: 1px;
   background: #303338;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -125,7 +125,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c18 {
+.c20 {
   padding: 4px 8px;
   border: 1px solid #303338;
   border-radius: 0px 32px 32px;
@@ -141,11 +141,11 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   display: flex;
 }
 
-.c18 span {
+.c20 span {
   margin-left: 2px;
 }
 
-.c16 {
+.c18 {
   width: 65px;
   position: absolute;
   display: -webkit-box;
@@ -165,11 +165,30 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   left: 0%;
 }
 
-.c19 {
+.c21 {
   margin-right: 0.4rem;
 }
 
-.c25 {
+.c6 {
+  display: Flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.c27 {
   margin: 1rem 0 0;
   border-radius: 0.375rem;
   padding: 8px;
@@ -177,7 +196,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   background: #303338;
 }
 
-.c23 {
+.c25 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -188,7 +207,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c24 {
+.c26 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -199,7 +218,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c20 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -213,7 +232,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   margin: 5px 0px 5px 0px;
 }
 
-.c21 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -224,11 +243,11 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   align-items: center;
 }
 
-.c22 {
+.c24 {
   margin-right: 0.5rem;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -239,22 +258,35 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   color: #fff;
 }
 
-.c6 {
-  white-space: nowrap;
-  margin-left: 1rem;
-  font-size: 0.7rem;
-}
-
-.c7 {
+.c9 {
   border: 1px solid #303338;
 }
 
-.c7:hover {
+.c9:hover {
   border: 1px solid #fff;
 }
 
-.c7 .react-switch-bg {
+.c9 .react-switch-bg {
   box-sizing: border-box;
+}
+
+.c7 {
+  width: auto;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-top: 0px;
+  gap: 10px;
+}
+
+.c8 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #A1A6B0;
 }
 
 <div>
@@ -270,30 +302,33 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
       >
         voting.castVote
         <div
-          class="c6"
+          class="c6 c7"
         >
-          token
-        </div>
-        <div
-          class="c7"
-          style="position: relative; display: inline-block; text-align: left; opacity: 1; direction: ltr; border-radius: 16px; transition: opacity 0.25s; user-select: none;"
-        >
+          <span
+            class="c8"
+          >
+            actionBuilder.inputs.token
+          </span>
           <div
-            class="react-switch-bg"
-            style="height: 32px; width: 64px; margin: 0px; position: relative; background: rgb(161, 166, 176); border-radius: 32px; cursor: pointer; transition: background 0.25s;"
-          />
-          <div
-            class="react-switch-handle"
-            style="height: 24px; width: 24px; background: rgb(24, 27, 27); display: inline-block; cursor: pointer; border-radius: 31px; position: absolute; transform: translateX(4px); top: 4px; outline: 0; border: 0px; transition: background-color 0.25s, transform 0.25s, box-shadow 0.15s;"
-          />
-          <input
-            aria-checked="false"
-            aria-label="toggle max value"
-            name="toggle-max-value"
-            role="switch"
-            style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px;"
-            type="checkbox"
-          />
+            class="c9"
+            style="position: relative; display: inline-block; text-align: left; opacity: 1; direction: ltr; border-radius: 7px; transition: opacity 0.25s; user-select: none;"
+          >
+            <div
+              class="react-switch-bg"
+              style="height: 14px; width: 29px; margin: 0px; position: relative; background: rgb(161, 166, 176); border-radius: 11px; cursor: pointer; transition: background 0.25s;"
+            />
+            <div
+              class="react-switch-handle"
+              style="height: 12px; width: 12px; background: rgb(24, 27, 27); display: inline-block; cursor: pointer; border-radius: 10px; position: absolute; transform: translateX(1px); top: 1px; outline: 0; border: 0px; transition: background-color 0.25s, transform 0.25s, box-shadow 0.15s;"
+            />
+            <input
+              aria-checked="false"
+              name="toggle-is-percent"
+              role="switch"
+              style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px;"
+              type="checkbox"
+            />
+          </div>
         </div>
       </h2>
     </div>
@@ -301,59 +336,59 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
       class="c0"
     >
       <div
-        class="c0 c8"
+        class="c0 c10"
       >
         <div
-          class="c9"
+          class="c11"
         >
           <div
-            class="c10"
+            class="c12"
           >
             <div
-              class="c11"
+              class="c13"
             >
               <div
-                class="c12"
+                class="c14"
               >
                 <div
-                  class="c13"
+                  class="c15"
                   color="#E75C5C"
                 />
               </div>
               <span
-                class="c14"
+                class="c16"
               >
                 10%
               </span>
             </div>
             <div
-              class="c11"
+              class="c13"
             >
               <div
-                class="c12"
+                class="c14"
               >
                 <div
-                  class="c15"
+                  class="c17"
                   color="#295FF4"
                 />
               </div>
               <span
-                class="c14"
+                class="c16"
               >
                 10%
               </span>
             </div>
             <div
-              class="c16"
+              class="c18"
             >
               <div
-                class="c17"
+                class="c19"
               />
               <div
-                class="c18"
+                class="c20"
               >
                 <svg
-                  class="c19"
+                  class="c21"
                   fill="currentColor"
                   height="1em"
                   stroke="currentColor"
@@ -376,16 +411,16 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c20"
+            class="c22"
           >
             <div
-              class="c21"
+              class="c23"
             >
               <span
-                class="c22"
+                class="c24"
               >
                 <span
-                  class="c23"
+                  class="c25"
                   color="#295FF4"
                   size="8"
                 />
@@ -394,16 +429,16 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c20"
+            class="c22"
           >
             <div
-              class="c21"
+              class="c23"
             >
               <span
-                class="c22"
+                class="c24"
               >
                 <span
-                  class="c24"
+                  class="c26"
                   color="#E75C5C"
                   size="8"
                 />
@@ -413,7 +448,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c0 c25"
+          class="c0 c27"
         >
           voting.youVotedForOption
         </div>

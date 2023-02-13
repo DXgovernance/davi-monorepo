@@ -8,12 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { WagmiConfig, useNetwork } from 'wagmi';
 import EnsureReadOnlyConnection from 'components/Web3Modals/EnsureReadOnlyConnection';
 import SyncRouterWithWagmi from 'components/Web3Modals/SyncRouterWithWagmi';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { loadFathom } from 'analytics/fathom';
 import { SITE_ID } from 'configs';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from 'clients/apollo';
 import { wagmiClient } from 'clients/wagmi';
+import { DEFAULT_CHAIN_ID } from 'utils';
 
 initializeI18Next();
 
@@ -27,9 +28,9 @@ moment.updateLocale('en', {
 });
 
 const Root = () => {
-  const {
-    chain: { id: chainId },
-  } = useNetwork();
+  const { chain } = useNetwork();
+
+  const chainId = useMemo(() => chain?.id || DEFAULT_CHAIN_ID, [chain]);
 
   useEffect(() => {
     loadFathom(SITE_ID)

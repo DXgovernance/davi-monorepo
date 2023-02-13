@@ -5,6 +5,7 @@ import { GuildCard } from 'components/GuildCard/GuildCard';
 import useENSNameFromAddress from 'hooks/Guilds/ens/useENSNameFromAddress';
 import { CardsContainer } from './LandingPage.styled';
 import { HookStoreProvider, useHookStoreProvider } from 'stores';
+import { Result, ResultState } from 'components/Result';
 
 const GuildCardLoader = () => {
   return (
@@ -13,6 +14,22 @@ const GuildCardLoader = () => {
       guildAddress={null}
       numberOfMembers={null}
       t={null}
+      numberOfActiveProposals={null}
+      ensName={null}
+      data={null}
+    />
+  );
+};
+
+const GuildCardUnmatched = () => {
+  const { t } = useTranslation();
+  return (
+    <GuildCard
+      isUnmatched={true}
+      isLoading={false}
+      guildAddress={null}
+      numberOfMembers={null}
+      t={t}
       numberOfActiveProposals={null}
       ensName={null}
       data={null}
@@ -57,11 +74,17 @@ const LandingPage: React.FC = () => {
     return <h1>{t('daoErrors.noDAOsRegistered')}</h1>;
   };
 
-  if (!allGuilds || allGuilds.length === 0) {
-    return <EmptyGuilds />;
+  if (error) {
+    return (
+      <Result
+        state={ResultState.ERROR}
+        title={t('daoErrors.errorLoadingDAOsList')}
+        subtitle={error?.message}
+      />
+    );
   }
 
-  if (isLoading) {
+  if (isLoading || !allGuilds) {
     return (
       <CardsContainer>
         <GuildCardLoader />
@@ -71,6 +94,10 @@ const LandingPage: React.FC = () => {
     );
   }
 
+  if (allGuilds.length === 0) {
+    return <EmptyGuilds />;
+  }
+
   return (
     <>
       <CardsContainer>
@@ -78,12 +105,13 @@ const LandingPage: React.FC = () => {
           <>{/* Render error state */}</>
         ) : (
           allGuilds.map(guildAddress => (
-            <HookStoreProvider daoId={guildAddress}>
-              <GuildCardWithContent
-                key={guildAddress}
-                guildAddress={guildAddress}
-                t={t}
-              />
+            <HookStoreProvider
+              key={guildAddress}
+              daoId={guildAddress}
+              loadingIndicator={<GuildCardLoader />}
+              matchErrorIndicator={<GuildCardUnmatched />}
+            >
+              <GuildCardWithContent guildAddress={guildAddress} t={t} />
             </HookStoreProvider>
           ))
         )}

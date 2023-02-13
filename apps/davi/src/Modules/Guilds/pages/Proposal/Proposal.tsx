@@ -135,6 +135,7 @@ const ProposalPage: React.FC = () => {
                 customStyles={linkStyles}
               >
                 <IconButton
+                  data-testid="proposal-back-btn"
                   variant="secondary"
                   iconLeft
                   padding={'0.6rem 0.8rem'}

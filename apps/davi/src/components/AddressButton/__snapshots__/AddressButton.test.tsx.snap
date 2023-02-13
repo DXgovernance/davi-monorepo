@@ -137,6 +137,7 @@ exports[`AddressButton Should render properly with full props 1`] = `
    
   <button
     class="c0 c1 c2"
+    data-testid="creator-address-name"
     type="submit"
   >
     <span
@@ -276,6 +277,7 @@ exports[`AddressButton Should render properly with partial props 1`] = `
    
   <button
     class="c0 c1 c2"
+    data-testid="creator-address-name"
     type="submit"
   >
     <span

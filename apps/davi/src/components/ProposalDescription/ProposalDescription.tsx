@@ -54,7 +54,7 @@ export const ProposalDescription: React.FC<ProposalDescriptionProps> = ({
   };
 
   return (
-    <ProposalDescriptionWrapper>
+    <ProposalDescriptionWrapper data-testid="discussion-page-description">
       <GlobalErrorBoundary>
         <>
           {metadata?.description ? (

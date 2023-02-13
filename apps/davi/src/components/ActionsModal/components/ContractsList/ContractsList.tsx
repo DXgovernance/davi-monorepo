@@ -47,7 +47,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
       <SectionWrapper>
         <SectionTitle>{t('actionBuilder.core')}</SectionTitle>
         <ActionsButton
-          data-testid="supported-action-erc20transfer"
+          data-testid="erc20transfer-action"
           onClick={() =>
             onSupportedActionSelect(SupportedAction.ERC20_TRANSFER)
           }
@@ -58,6 +58,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
           </ButtonLabel>
         </ActionsButton>
         <ActionsButton
+          data-testid="set-permission-action"
           onClick={() => {
             onSupportedActionSelect(SupportedAction.SET_PERMISSIONS);
           }}
@@ -69,6 +70,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
         </ActionsButton>
         {!!isRepGuild ? (
           <ActionsButton
+            data-testid="rep-mint-action"
             onClick={() => onSupportedActionSelect(SupportedAction.REP_MINT)}
           >
             <ButtonLabel>
@@ -79,6 +81,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
         ) : null}
         {isAvailableOnENS(chain.id) ? (
           <ActionsButton
+            data-testid="ens-update-content-action"
             onClick={() =>
               onSupportedActionSelect(SupportedAction.ENS_UPDATE_CONTENT)
             }
@@ -90,6 +93,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
           </ActionsButton>
         ) : null}
         <ActionsButton
+          data-testid="set-guild-config-action"
           onClick={() =>
             onSupportedActionSelect(SupportedAction.SET_GUILD_CONFIG)
           }
@@ -104,6 +108,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
         <SectionTitle>{t('actionBuilder.externalContracts')}</SectionTitle>
         {contracts?.map(contract => (
           <ActionsButton
+            data-testid="external-contracts-action"
             key={contract.title}
             onClick={() => onSelect(contract)}
           >
@@ -126,10 +131,14 @@ const ContractsList: React.FC<ContractsListProps> = ({
           }
         >
           {t('actionBuilder.advanced.advancedOptions')}
-          <ExpandButton expanded={isAdvancedOptionsExpanded} />
+          <ExpandButton 
+            data-testid="advanced-option-arrow-btn" 
+            expanded={isAdvancedOptionsExpanded} 
+          />
         </SectionTitle>
         {isAdvancedOptionsExpanded && (
           <ActionsButton
+            data-testid="raw-transaction-action"
             onClick={() =>
               onSupportedActionSelect(SupportedAction.RAW_TRANSACTION)
             }

@@ -9,11 +9,11 @@ type IUseGetNumberOfActiveProposals =
 export const useGetNumberOfActiveProposals: IUseGetNumberOfActiveProposals = (
   daoId: string
 ) => {
-  const { data, refetch, ...rest } = useContractRead({
+  const { data, refetch, isLoading, isError } = useContractRead({
     address: daoId,
     abi: BaseERC20Guild.abi,
     functionName: 'getActiveProposalsNow',
   });
   useListenToProposalStateChanged(daoId, refetch);
-  return { data, refetch, ...rest };
+  return { data, isLoading, isError };
 };

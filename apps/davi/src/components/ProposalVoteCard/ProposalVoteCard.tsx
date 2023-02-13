@@ -24,7 +24,7 @@ import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
 import { hasVotingPowerProps, ProposalVoteCardProps } from './types';
 import { useTranslation } from 'react-i18next';
-import { getOptionLabel } from 'components/ProposalVoteCard/utils';
+import { getGuildOptionLabel } from 'utils/proposals';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useHookStoreProvider } from 'stores';
 
@@ -57,7 +57,7 @@ const ProposalVoteCard = ({
 
   const votedOptionLabel = useMemo(() => {
     if (!userVote?.option) return null;
-    return getOptionLabel({
+    return getGuildOptionLabel({
       metadata: proposal?.metadata,
       optionKey: userVote?.option,
       t,
@@ -148,7 +148,7 @@ const ProposalVoteCard = ({
             {[...Object.keys(voteData?.options).slice(1), '0'].map(
               optionKey => {
                 const bItem = BigNumber.from(optionKey);
-                const label = getOptionLabel({
+                const label = getGuildOptionLabel({
                   metadata: proposal?.metadata,
                   optionKey: optionKey,
                   t,
@@ -202,7 +202,7 @@ const ProposalVoteCard = ({
           setModalOpen(false);
           setSelectedOption(null);
         }}
-        selectedOption={getOptionLabel({
+        selectedOption={getGuildOptionLabel({
           metadata: proposal?.metadata,
           optionKey: selectedOption?.toNumber(),
           t,

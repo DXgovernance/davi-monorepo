@@ -31,6 +31,7 @@ export const encodeApprovalCall = (
 };
 
 export const bulkEncodeCallsFromOptions = (options: Option[]): Option[] => {
+  if (!options) return null;
   return options.map(option => {
     const { decodedActions } = option;
     const encodedCalls: Call[] = decodedActions?.reduce(

@@ -16,7 +16,6 @@ import {
 } from './VoteChart.styled';
 import { VoteChartProps } from '../../types';
 import { formatUnits } from 'ethers/lib/utils';
-// import { useState } from 'react';
 
 //TODO: rewrite css dynamics types
 const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {

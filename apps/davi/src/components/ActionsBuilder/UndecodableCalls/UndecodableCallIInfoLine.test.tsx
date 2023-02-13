@@ -1,4 +1,8 @@
-import { MOCK_ADDRESS } from 'hooks/Guilds/ens/fixtures';
+import {
+  MOCK_ADDRESS,
+  MOCK_ENS_NAME,
+  MOCK_IMAGE_URL,
+} from 'hooks/Guilds/ens/fixtures';
 import { render } from 'utils/tests';
 import { callMock } from './fixtures';
 import UndecodableCallInfoLine from './UndecodableCallInfoLine';
@@ -36,6 +40,14 @@ jest.mock('wagmi', () => ({
         },
       },
     },
+  }),
+}));
+
+jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
+  __esModule: true,
+  default: () => ({
+    ensName: MOCK_ENS_NAME,
+    imageUrl: MOCK_IMAGE_URL,
   }),
 }));
 

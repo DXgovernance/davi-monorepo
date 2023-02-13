@@ -27,6 +27,7 @@ export const ActionsBuilder: React.FC<ActionsBuilderProps> = ({
   const onSave = () => setIsEditable(false);
 
   useEffect(() => {
+    if (!options) return;
     const encodedOptions = bulkEncodeCallsFromOptions(options);
     setEncodedOptions(encodedOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps

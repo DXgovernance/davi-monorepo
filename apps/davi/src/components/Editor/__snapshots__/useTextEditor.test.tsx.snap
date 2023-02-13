@@ -560,7 +560,7 @@ exports[`Editor Should match snapshot 1`] = `
       </div>
       <div
         class="c5"
-        data-testid="editor-content"
+        data-testid="proposal-description-input"
       >
         <div
           class="ProseMirror"

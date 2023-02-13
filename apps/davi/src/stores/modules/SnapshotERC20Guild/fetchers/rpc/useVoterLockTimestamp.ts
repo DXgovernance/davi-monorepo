@@ -23,7 +23,6 @@ export const useVoterLockTimestamp: IUseVoterLockTimestamp = (
 
   return {
     data: data ? unix(Number(data)) : undefined,
-    refetch,
     ...rest,
   };
 };

@@ -768,6 +768,7 @@ export type Proposal = {
   totalVotes?: Maybe<Array<Scalars['BigInt']>>;
   votes?: Maybe<Array<Vote>>;
   options?: Maybe<Array<Option>>;
+  snapshotId?: Maybe<Scalars['BigInt']>;
   metadata?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   executionTransactionHash?: Maybe<Scalars['String']>;
@@ -1011,6 +1012,14 @@ export type Proposal_filter = {
   options_not_contains?: InputMaybe<Array<Scalars['String']>>;
   options_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   options_?: InputMaybe<Option_filter>;
+  snapshotId?: InputMaybe<Scalars['BigInt']>;
+  snapshotId_not?: InputMaybe<Scalars['BigInt']>;
+  snapshotId_gt?: InputMaybe<Scalars['BigInt']>;
+  snapshotId_lt?: InputMaybe<Scalars['BigInt']>;
+  snapshotId_gte?: InputMaybe<Scalars['BigInt']>;
+  snapshotId_lte?: InputMaybe<Scalars['BigInt']>;
+  snapshotId_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  snapshotId_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
   metadata?: InputMaybe<Scalars['String']>;
   metadata_not?: InputMaybe<Scalars['String']>;
   metadata_gt?: InputMaybe<Scalars['String']>;
@@ -1099,6 +1108,7 @@ export type Proposal_orderBy =
   | 'totalVotes'
   | 'votes'
   | 'options'
+  | 'snapshotId'
   | 'metadata'
   | 'description'
   | 'executionTransactionHash'
@@ -2166,6 +2176,11 @@ export type ProposalResolvers<
     ContextType,
     RequireFields<ProposaloptionsArgs, 'skip' | 'first'>
   >;
+  snapshotId?: Resolver<
+    Maybe<ResolversTypes['BigInt']>,
+    ParentType,
+    ContextType
+  >;
   metadata?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<
     Maybe<ResolversTypes['String']>,
@@ -2698,6 +2713,13 @@ export async function getMeshOptions(): Promise<GetMeshOptions> {
           location: 'GetGuildProposalIdsDocument.graphql',
         },
         {
+          document: GetProposalDocument,
+          get rawSDL() {
+            return printWithCache(GetProposalDocument);
+          },
+          location: 'GetProposalDocument.graphql',
+        },
+        {
           document: GetProposalVotesOfVoterDocument,
           get rawSDL() {
             return printWithCache(GetProposalVotesOfVoterDocument);
@@ -2883,6 +2905,43 @@ export type getGuildProposalIdsQuery = {
   guild?: Maybe<{ proposals?: Maybe<Array<Pick<Proposal, 'id'>>> }>;
 };
 
+export type getProposalQueryVariables = Exact<{
+  id: Scalars['ID'];
+  proposalId: Scalars['ID'];
+}>;
+
+export type getProposalQuery = {
+  guild?: Maybe<{
+    proposals?: Maybe<
+      Array<
+        Pick<
+          Proposal,
+          | 'contentHash'
+          | 'contractState'
+          | 'creator'
+          | 'data'
+          | 'description'
+          | 'endTime'
+          | 'executionTransactionHash'
+          | 'id'
+          | 'metadata'
+          | 'startTime'
+          | 'title'
+          | 'to'
+          | 'totalVotes'
+          | 'value'
+        > & {
+          votes?: Maybe<
+            Array<
+              Pick<Vote, 'voter' | 'votingPower' | 'optionLabel' | 'option'>
+            >
+          >;
+        }
+      >
+    >;
+  }>;
+};
+
 export type getProposalVotesOfVoterQueryVariables = Exact<{
   proposalId: Scalars['ID'];
   userAddress: Scalars['String'];
@@ -3014,7 +3073,42 @@ export const getGuildProposalIdsDocument = gql`
   query getGuildProposalIds($id: ID!) {
     guild(id: $id) {
       proposals {
-        id}`;
+        id
+      }
+    }
+  }
+` as unknown as DocumentNode<
+  getGuildProposalIdsQuery,
+  getGuildProposalIdsQueryVariables
+>;
+export const getProposalDocument = gql`
+  query getProposal($id: ID!, $proposalId: ID!) {
+    guild(id: $id) {
+      proposals(where: { id: $proposalId }) {
+        contentHash
+        contractState
+        creator
+        data
+        description
+        endTime
+        executionTransactionHash
+        id
+        metadata
+        startTime
+        title
+        to
+        totalVotes
+        value
+        votes {
+          voter
+          votingPower
+          optionLabel
+          option
+        }
+      }
+    }
+  }
+` as unknown as DocumentNode<getProposalQuery, getProposalQueryVariables>;
 export const getProposalVotesOfVoterDocument = gql`
   query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
     proposal(id: $proposalId) {
@@ -3025,8 +3119,8 @@ export const getProposalVotesOfVoterDocument = gql`
     }
   }
 ` as unknown as DocumentNode<
-  getGuildProposalIdsQuery,
-  getGuildProposalIdsQueryVariables
+  getProposalVotesOfVoterQuery,
+  getProposalVotesOfVoterQueryVariables
 >;
 
 export type Requester<C = {}, E = unknown> = <R, V>(
@@ -3127,6 +3221,16 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
         variables,
         options
       ) as Promise<getGuildProposalIdsQuery>;
+    },
+    getProposal(
+      variables: getProposalQueryVariables,
+      options?: C
+    ): Promise<getProposalQuery> {
+      return requester<getProposalQuery, getProposalQueryVariables>(
+        getProposalDocument,
+        variables,
+        options
+      ) as Promise<getProposalQuery>;
     },
     getProposalVotesOfVoter(
       variables: getProposalVotesOfVoterQueryVariables,

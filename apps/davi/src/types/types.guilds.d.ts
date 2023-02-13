@@ -20,11 +20,9 @@ export interface Proposal {
   contractState: ContractState;
   totalVotes: BigNumber[];
   votesOfVoter?: UseProposalVotesOfVoterReturn;
+  options: Option[];
+  votes?: Vote[];
 }
-
-export type InitialProposal = Partial<Proposal> & {
-  state: number;
-};
 
 export enum ProposalState {
   Active = 'Active',
@@ -75,5 +73,11 @@ export enum GuildImplementationType {
 export interface ENSAvatar {
   imageUrl?: string;
   ensName?: string;
+}
+
+export interface Vote {
+  optionLabel: string;
+  voter: string;
+  votingPower: number;
 }
 

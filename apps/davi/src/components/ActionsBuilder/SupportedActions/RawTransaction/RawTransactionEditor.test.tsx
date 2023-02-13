@@ -1,6 +1,10 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { BigNumber } from 'ethers';
-import { MOCK_ADDRESS, MOCK_ENS_NAME } from 'hooks/Guilds/ens/fixtures';
+import {
+  MOCK_ADDRESS,
+  MOCK_ENS_NAME,
+  MOCK_IMAGE_URL,
+} from 'hooks/Guilds/ens/fixtures';
 import { act } from 'react-dom/test-utils';
 import { render } from 'utils/tests';
 import { rawDataCallMock } from './fixtures';
@@ -72,6 +76,14 @@ jest.mock('wagmi', () => ({
   chainId: {
     localhost: 1337,
   },
+}));
+
+jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
+  __esModule: true,
+  default: () => ({
+    ensName: MOCK_ENS_NAME,
+    imageUrl: MOCK_IMAGE_URL,
+  }),
 }));
 
 describe('RawTransactionEditor', () => {

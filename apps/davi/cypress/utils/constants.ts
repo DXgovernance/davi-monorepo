@@ -1,9 +1,3 @@
-export const DEPLOYED_GUILDS_NAMES = {
-  DXDGuild: 'DXDGuild',
-  REPGuild: 'REPGuild',
-  SwaprGuild: 'SWPRGuild',
-};
-
 export const ACCOUNTS = [
   { name: 'Account 1', address: '0x9578e973bba0cc33bdbc93c7f77bb3fe6d47d68a' },
   {
@@ -35,43 +29,67 @@ export const ACCOUNTS = [
 
 export const DXDGuildAddress = '0x140d68e4E3f80cdCf7036De007b3bCEC54D38b1f';
 
-export const NETWORK_OPTIONS = {
-  ethereum: 'Ethereum',
-  REPGuild: 'Goerli',
-  arbitrumOne: 'Arbitrum One',
-  arbitrumRinkeby: 'Arbitrum Goerli',
-  gnosis: 'Gnosis',
-  localhost: 'Localhost',
-};
+export const ethereumNetworkGuilds = [
+  'DXgov Guild',
+];
 
-export const WALLET_OPTIONS = {
-  metamask: 'MetaMask',
-  walletConnect: 'WalletConnect',
-  coinbaseWallet: 'Coinbase Wallet',
-};
+export const gnosisNetworkGuilds = [
+  'DXgov Guild',
+  'Voice Guild',
+  'Carrot Guild',
+  'Swapr Guild',
+  'Operations Guild'
+];
 
-export const STATE_FILTER_OPTIONS = {
-  active: 'Active',
-  executable: 'Executable',
-  executed: 'Executed',
-  rejected: 'Rejected',
-  failed: 'Failed',
-  finished: 'Finished',
-};
+export const localhostGuilds = [
+  'Carrot Guild',
+  'DXD Guild',
+  'DXdao DevOps Guild',
+  'DXdao Treasury Guild',
+  'DXgov Guild',
+  'Operations Guild',
+  'Swapr Guild',
+  'Voice Guild'
+];
 
-export const ACTION_FILTER_OPTIONS = {
-  nativeTransfer: 'Native Transfer',
-  erc20Transfer: 'Erc20 Transfer',
-  repMint: 'Rep Mint',
-  genericCall: 'Generic Call',
-  setPermission: 'Set Permissions',
-  ensUpdateContent: 'Ens Update Content',
-  rawTransaction: 'Raw Transaction',
-  setGuildConfig: 'Set Guild Config',
-};
+export const prodNetworkOptions = [
+  'Ethereum',
+  'Gnosis',
+];
 
-export const CURRENCY_FILTER_OPTION = {
-  dxd: 'DXD',
-  rgt: 'RGT',
-  swpr: 'SWPR',
-};
+export const networkOptions = [
+  'Ethereum',
+  'Goerli',
+  'Arbitrum One',
+  'Arbitrum Goerli',
+  'Gnosis',
+  'Localhost',
+];
+
+export const walletOptions = [
+  'MetaMask',
+  'WalletConnect',
+  'Coinbase Wallet'
+];
+
+export const stateFilterOptions = [
+  'Active',
+  'Executable',
+  'Executed',
+  'Rejected',
+  'Failed',
+  'Finished',
+];
+
+export const actionFilterOptions = [
+  'Native Transfer',
+  'Erc20 Transfer',
+  'Rep Mint',
+  'Generic Call',
+  'Set Permissions',
+  'Ens Update Content',
+  'Raw Transaction',
+  'Set Guild Config',
+];
+
+export const currencyFilterOptions = ['DXD', 'SWPR', '1INCH'];

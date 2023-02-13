@@ -1,8 +1,7 @@
 import { BigNumber } from 'ethers';
-import { useProposal } from './modules/common/fetchers/useProposal';
 import { Option, Permission } from 'components/ActionsBuilder/types';
 import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
-import { Proposal } from 'types/types.guilds.d';
+import { Proposal, Vote } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -18,7 +17,6 @@ type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
 export interface FetcherHooksInterface {
   useGetNumberOfActiveProposals: (daoId: string) => {
     data: BigNumber;
-    refetch: () => void;
     isError: boolean;
     isLoading: boolean;
   };
@@ -46,7 +44,10 @@ export interface FetcherHooksInterface {
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
-  ) => ReturnType<typeof useProposal>;
+  ) => {
+    data: Proposal;
+    error: Error;
+  };
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;
@@ -76,13 +77,16 @@ export interface FetcherHooksInterface {
     userAddress: `0x${string}`
   ) => {
     data: moment.Moment;
-    refetch: () => void;
   };
   useProposalCalls: (
     daoId: string,
-    proposalId: `0x${string}`
+    proposal: Proposal
   ) => { options: Option[] };
-  useVotingResults: (daoId?: string, proposalId?: `0x${string}`) => VoteData;
+  useVotingResults: (
+    daoId: string,
+    proposalId: `0x${string}`,
+    proposal: Proposal['totalVotes']
+  ) => VoteData;
   useVotingPowerOf: (useVotingPowerOfProps: {
     contractAddress: string;
     userAddress: `0x${string}`;
@@ -118,14 +122,10 @@ export interface FetcherHooksInterface {
     errorMessage: string;
   };
   useGetVotes: (
-    guildId: `0x${string}`,
+    daoId: string,
     proposal: Proposal
   ) => {
-    data: {
-      optionLabel: string;
-      voter: string;
-      votingPower: number;
-    }[];
+    data: Vote[];
     isError: boolean;
     isLoading: boolean;
   };

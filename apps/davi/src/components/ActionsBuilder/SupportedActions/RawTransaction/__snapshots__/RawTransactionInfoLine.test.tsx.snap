@@ -116,7 +116,7 @@ exports[`RawTransactionInfoLine should match snapshot in compact mode 1`] = `
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/wagmi.eth"
+        src="https://example.com/image.png"
       />
     </span>
     <span
@@ -245,7 +245,7 @@ exports[`RawTransactionInfoLine should match snapshot in noAvatar and compact mo
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/wagmi.eth"
+        src="https://example.com/image.png"
       />
     </span>
     <span
@@ -374,7 +374,7 @@ exports[`RawTransactionInfoLine should match snapshot in noAvatar mode 1`] = `
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/wagmi.eth"
+        src="https://example.com/image.png"
       />
     </span>
     <span
@@ -503,7 +503,7 @@ exports[`RawTransactionInfoLine should match snapshot with full data 1`] = `
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/wagmi.eth"
+        src="https://example.com/image.png"
       />
     </span>
     <span
@@ -593,7 +593,7 @@ exports[`RawTransactionInfoLine should match snapshot with no data 1`] = `
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/wagmi.eth"
+        src="https://example.com/image.png"
       />
     </span>
     <span
@@ -718,7 +718,7 @@ exports[`RawTransactionInfoLine should match snapshot with no value 1`] = `
         class="c2 c3"
         data-testid="avatar"
         size="24"
-        src="https://metadata.ens.domains/mainnet/avatar/wagmi.eth"
+        src="https://example.com/image.png"
       />
     </span>
     <span

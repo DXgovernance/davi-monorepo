@@ -11,9 +11,10 @@ import { ERC20_APPROVE_SIGNATURE } from 'utils';
 import { useNetwork } from 'wagmi';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
-import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
-import { useProposal, useVotingResults } from './';
+import { useVotingResults } from './useVotingResults';
+
 import { FetcherHooksInterface } from 'stores/types';
+import { getGuildOptionLabel } from 'utils/proposals';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
@@ -22,29 +23,25 @@ const isZeroHash = (data: string) => data === ZERO_HASH;
 
 type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
-export const useProposalCalls: IUseProposalCalls = (
-  daoId: string,
-  proposalId: `0x${string}`
-) => {
+export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   // Decode calls from existing proposal
 
-  const { data: metadata } = useProposalMetadata(daoId, proposalId);
-  const { data: proposal } = useProposal(daoId, proposalId);
-  const votingResults = useVotingResults(daoId, proposalId);
+  const { data: metadata } = useProposalMetadata(proposal?.contentHash);
+  const votingResults = useVotingResults(
+    daoId,
+    proposal?.id,
+    proposal?.totalVotes
+  );
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
   const { t } = useTranslation();
-  // Used to wait for the bytecode to be fetched
-  const { loaded } = useGuildImplementationTypeConfig(daoId);
   const theme = useTheme();
   const [options, setOptions] = useState<Option[]>([]);
 
-  const {
-    totalVotes,
-    to: toArray,
-    data: dataArray,
-    value: valuesArray,
-  } = proposal || {};
+  const totalVotes = proposal?.totalVotes;
+  const toArray = proposal?.to;
+  const dataArray = proposal?.data;
+  const valuesArray = proposal?.value;
 
   const totalOptionsNum = totalVotes?.length || 0;
   const displayableOptionsNum = totalOptionsNum - 1; // Not counting AGAINST (index 0) option
@@ -95,7 +92,7 @@ export const useProposalCalls: IUseProposalCalls = (
   useEffect(() => {
     let cancelled = false;
 
-    if (!daoId || !proposalId || !splitCalls || !loaded) {
+    if (!daoId || !proposal?.id || !splitCalls) {
       setOptions([]);
       return () => {};
     }
@@ -136,11 +133,11 @@ export const useProposalCalls: IUseProposalCalls = (
               return call;
             })
           );
-          const optionLabel = optionLabels?.[index]
-            ? optionLabels?.[index]
-            : index === 0
-            ? t('actionBuilder.options.against', { defaultValue: 'Against' })
-            : null;
+          const optionLabel = getGuildOptionLabel({
+            metadata,
+            optionKey: index,
+            t,
+          });
 
           return {
             id: `option-${index}`,
@@ -177,7 +174,7 @@ export const useProposalCalls: IUseProposalCalls = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     daoId,
-    proposalId,
+    proposal?.id,
     contracts,
     chain,
     splitCalls,
@@ -185,7 +182,6 @@ export const useProposalCalls: IUseProposalCalls = (
     optionLabels,
     totalOptionsNum,
     votingResults?.totalLocked,
-    loaded,
   ]);
 
   return {

@@ -16,6 +16,7 @@ import {
 } from './VoteChart.styled';
 import { VoteChartProps } from '../../types';
 import { formatUnits } from 'ethers/lib/utils';
+// import { useState } from 'react';
 
 //TODO: rewrite css dynamics types
 const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
@@ -33,6 +34,7 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
   const voteOptionswithVotingPower = Object.entries(voteData.options).filter(
     ([idx, item]) => !BigNumber.from(item).isZero()
   ).length;
+
   return (
     <VotesChartContainer>
       {voteData?.options ? (
@@ -70,11 +72,20 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
       ) : (
         <Loading loading text skeletonProps={{ height: 24, count: 2 }} />
       )}
+      {voteOptionswithVotingPower === 0 && (
+        <VoteChartRowsContainer>
+          <VotesChartRow>
+            <ChartBar />
+          </VotesChartRow>
+        </VoteChartRowsContainer>
+      )}
       {voteData && (
         <VoteQuorumContainer quorum={flagCheckered}>
           <VoteQuorumMarker
             quorum={flagCheckered}
-            optionsAmount={voteOptionswithVotingPower}
+            optionsAmount={
+              voteOptionswithVotingPower === 0 ? 1 : voteOptionswithVotingPower
+            }
           />
           <VoteQuorumLabel quorum={flagCheckered}>
             <PaddedFlagCheckered />

@@ -80,8 +80,8 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  height: 0.75rem;
-  margin-top: 1%;
+  height: 0.5rem;
+  margin-top: 2%;
   overflow: hidden;
   background-color: #303338;
   border-radius: 32px;
@@ -91,7 +91,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   width: 10%;
   border-radius: 32px;
   background: #E75C5C;
-  height: 0.75rem;
+  height: 0.5rem;
   overflow: hidden;
 }
 
@@ -99,7 +99,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   width: 10%;
   border-radius: 32px;
   background: #295FF4;
-  height: 0.75rem;
+  height: 0.5rem;
   overflow: hidden;
 }
 
@@ -108,10 +108,10 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
 }
 
 .c19 {
-  height: 18px;
-  margin-top: 20px;
+  height: 2.4rem;
+  margin-top: 5px;
   width: 1px;
-  background: #303338;
+  background: #1B1D1F;
 }
 
 .c13 {
@@ -162,7 +162,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  left: 0%;
+  left: 0px;
 }
 
 .c21 {

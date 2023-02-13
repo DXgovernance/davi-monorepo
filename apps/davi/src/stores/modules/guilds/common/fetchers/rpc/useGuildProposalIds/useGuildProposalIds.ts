@@ -2,7 +2,7 @@ import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { useMemo } from 'react';
 import { FetcherHooksInterface } from 'stores/types';
 import { useContractRead } from 'wagmi';
-import { useListenToProposalStateChanged } from '../../../events/useListenToProposalStateChanged';
+import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events';
 
 type IUseGuildProposalIds = FetcherHooksInterface['useGuildProposalIds'];
 

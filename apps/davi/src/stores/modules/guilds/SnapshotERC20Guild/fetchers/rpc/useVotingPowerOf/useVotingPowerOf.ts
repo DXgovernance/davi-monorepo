@@ -1,7 +1,7 @@
 import useVotingPowerOfAt from 'Modules/Guilds/Hooks/useVotingPowerOfAt';
 import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
-import { useListenToLockAndWithdrawTokens } from '../../../events/useListenToLockAndWithdrawTokens';
+import { useListenToLockAndWithdrawTokens } from 'stores/modules/guilds/SnapshotERC20Guild/events';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { FetcherHooksInterface } from 'stores/types';
 

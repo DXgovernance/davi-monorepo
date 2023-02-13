@@ -8,7 +8,7 @@ import { useProposalCalls } from '..';
 import {
   useListenToVoteAdded,
   useListenToProposalStateChanged,
-} from '../../../events';
+} from 'stores/modules/guilds/common/events';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 

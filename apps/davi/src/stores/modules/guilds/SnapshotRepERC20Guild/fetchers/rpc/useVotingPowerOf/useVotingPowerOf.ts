@@ -2,7 +2,7 @@ import useVotingPowerOfAt from 'Modules/Guilds/Hooks/useVotingPowerOfAt';
 import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { SnapshotRepERC20Guild } from 'contracts/ts-files/SnapshotRepERC20Guild';
-import { useListenToTokenTransfer } from '../../../events/useListenToTokenTransfer';
+import { useListenToTokenTransfer } from 'stores/modules/guilds/SnapshotRepERC20Guild/events';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];

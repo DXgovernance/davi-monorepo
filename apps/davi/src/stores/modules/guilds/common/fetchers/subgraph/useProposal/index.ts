@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import { getProposalDocument, getProposalQuery } from '.graphclient';
 import { useHookStoreProvider } from 'stores';
 import { FetcherHooksInterface } from 'stores/types';
-import { useProposalCalls } from '../../../fetchers/rpc';
+import { useProposalCalls } from 'stores/modules/guilds/common/fetchers/rpc';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { getGuildOptionLabel } from 'utils/proposals';
@@ -14,7 +14,7 @@ import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import {
   useListenToProposalStateChanged,
   useListenToVoteAdded,
-} from '../../../events';
+} from 'stores/modules/guilds/common/events';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 

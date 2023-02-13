@@ -1,6 +1,6 @@
 import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
-import { useListenToProposalStateChanged } from '../../../events/useListenToProposalStateChanged';
+import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events';
 import { FetcherHooksInterface } from 'stores/types';
 
 type IUseGetNumberOfActiveProposals =

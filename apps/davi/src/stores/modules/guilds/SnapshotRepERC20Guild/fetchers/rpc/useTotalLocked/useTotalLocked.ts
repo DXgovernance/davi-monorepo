@@ -2,7 +2,7 @@ import { BigNumber } from 'ethers';
 import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { ERC20SnapshotRep } from 'contracts/ts-files/ERC20SnapshotRep';
-import { useListenToTokenTransfer } from '../../../events/useListenToTokenTransfer';
+import { useListenToTokenTransfer } from 'stores/modules/guilds/SnapshotRepERC20Guild/events';
 import {
   useDAOToken,
   useSnapshotId,

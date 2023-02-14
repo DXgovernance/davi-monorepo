@@ -2,7 +2,7 @@ import { BigNumber } from 'ethers';
 import { ERC20 } from 'dxdao-contracts/types';
 import { ERC20Guild } from 'dxdao-contracts/types/ERC20Guild';
 import { StakeTokensModalProps } from './types';
-import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
+import { GuildConfigProps } from 'types/types.guilds.d';
 
 const mockERC20Info = {
   decimals: 18,

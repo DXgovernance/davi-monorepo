@@ -131,9 +131,9 @@ const ContractsList: React.FC<ContractsListProps> = ({
           }
         >
           {t('actionBuilder.advanced.advancedOptions')}
-          <ExpandButton 
-            data-testid="advanced-option-arrow-btn" 
-            expanded={isAdvancedOptionsExpanded} 
+          <ExpandButton
+            data-testid="advanced-option-arrow-btn"
+            expanded={isAdvancedOptionsExpanded}
           />
         </SectionTitle>
         {isAdvancedOptionsExpanded && (

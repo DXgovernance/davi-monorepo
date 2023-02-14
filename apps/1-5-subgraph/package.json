@@ -10,12 +10,11 @@
     "build": "graph build",
     "start-local": "pnpm run codegen && pnpm run create-local && pnpm run deploy-local",
     "create-local": "graph create dxdao/dxgov-1-5 --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy dxdao/dxgov-1-5 --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy dxdao/dxgov-1-5 --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020 -l v0.0.1",
     "deploy": "pnpm run generate-networks && graph deploy dxdao/dxgov-1-5 --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "clean": "rm -rf ./data build && docker compose down",
+    "clean": "rm -rf ./data build",
     "generate-networks": "node ./scripts/generate-prod-networks.js",
-    "dev": "./scripts/dev.sh",
-    "compose-up": "docker compose up"
+    "dev": "./scripts/dev.sh"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.30.2",

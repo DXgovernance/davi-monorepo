@@ -6,8 +6,8 @@ type Guild @entity {
   proposalTime: BigInt
   lockTime: BigInt
   timeForExecution: BigInt
-  votingPowerForProposalCreation: BigInt
-  votingPowerForProposalExecution: BigInt
+  votingPowerPercentageForProposalCreation: BigInt
+  votingPowerPercentageForProposalExecution: BigInt
   voteGas: BigInt
   maxGasPrice: BigInt
   maxActiveProposals: BigInt

@@ -1,0 +1,13 @@
+type Permission @entity {
+  id: ID!
+  from: String!
+  to: String!
+  functionSignature: String!
+  valueAllowed: BigInt!
+  fromTime: BigInt!
+
+  # TODO: Makes sense to compute these?
+  # valueTransferred: BigInt
+  # valueTransferredOnBlock: BigInt
+}
+

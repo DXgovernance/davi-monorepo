@@ -1,0 +1,13 @@
+abis:
+  - DXDVotingMachine
+  - DAOController
+  - Scheme
+entities:
+  - Scheme
+  - VotingMachine
+eventHandlers:
+  - event: RegisterScheme(indexed address,indexed address)
+    handler: handleRegisterScheme
+  - event: UnregisterScheme(indexed address,indexed address)
+    handler: handleunRegisterScheme
+

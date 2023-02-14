@@ -84,7 +84,7 @@ waitForHardhat(){
 waitForGraphContainer(){
     retry_count=0
     while true; do
-        graph_container_status=$(docker ps --filter "name=dxdao-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
+        graph_container_status=$(docker ps --filter "name=guilds-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {})
         if [ "$graph_container_status" == "running" ]; then
             echo "Graph node container is running"
             sleep 10
@@ -104,13 +104,13 @@ waitForGraphContainer(){
 startGraphQlPlayground(){
     retry_count=0
     while true; do
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao/graphql)
+        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5/graphql)
         if [[ $status_code -eq 200 ]]; then
             echo "Subgraph::: Local deployment ready!. Opening graphql playground in Browser"
             if [[ "$(uname -s)" == "Darwin" ]]; then
-                open http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao
+                open http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5
             elif [[ "$(uname -s)" == "Linux" ]]; then
-                xdg-open http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao
+                xdg-open http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5
             fi
             break
         else
@@ -145,16 +145,16 @@ tryStartLocal(){
 
 # <<<<<---------- Start ---------->>>>>
 echo "Subgraph::: Starting Docker"
-safeDockerStart
+# safeDockerStart
 
 echo "Subgraph::: Waiting for hardhat"
-waitForHardhat
+# waitForHardhat
 
 echo "Subgraph::: Starting docker compose"
-docker compose up --detach &
+# docker compose up --detach &
 
 echo "Subgraph::: Watching docker logs"
-docker compose logs -f &
+# docker compose logs -f &
 
 echo "Subgraph::: Waiting for graph node"
 waitForGraphContainer

@@ -7,10 +7,10 @@ const CONTRACTS = {
   SnapshotERC20Guild: 'SnapshotERC20Guild',
   SnapshotRepERC20Guild: 'SnapshotRepERC20Guild',
   DXDGuild: 'DXDGuild',
-  DxAvatar: 'DxAvatar',
-  DxController: 'DxController',
-  DXDVotingMachine: 'DXDVotingMachine',
-  DxReputation: 'DxReputation',
+  DAOAvatar: 'DAOAvatar',
+  DAOController: 'DAOController',
+  VotingMachine: 'VotingMachine',
+  DAOReputation: 'DAOReputation',
 };
 
 const artifactsPath = {
@@ -24,14 +24,14 @@ const artifactsPath = {
     'dxdao-contracts/artifacts/contracts/erc20guild/implementations/SnapshotRepERC20Guild.sol/SnapshotRepERC20Guild.json',
   [CONTRACTS.DXDGuild]:
     'dxdao-contracts/artifacts/contracts/erc20guild/implementations/DXDGuild.sol/DXDGuild.json',
-  [CONTRACTS.DxAvatar]:
-    'dxdao-contracts/artifacts/contracts/dxdao/DxAvatar.sol/DxAvatar.json',
-  [CONTRACTS.DxController]:
-    'dxdao-contracts/artifacts/contracts/dxdao/DxController.sol/DxController.json',
-  [CONTRACTS.DXDVotingMachine]:
-    'dxdao-contracts/artifacts/contracts/dxvote/DXDVotingMachine.sol/DXDVotingMachine.json',
-  [CONTRACTS.DxReputation]:
-    'dxdao-contracts/artifacts/contracts/dxdao/DxReputation.sol/DxReputation.json',
+  [CONTRACTS.DAOAvatar]:
+    'dxdao-contracts/artifacts/contracts/dao/DAOAvatar.sol/DAOAvatar.json',
+  [CONTRACTS.DAOController]:
+    'dxdao-contracts/artifacts/contracts/dao/DAOController.sol/DAOController.json',
+  [CONTRACTS.VotingMachine]:
+    'dxdao-contracts/artifacts/contracts/dao/votingMachine/VotingMachine.sol/VotingMachine.json',
+  [CONTRACTS.DAOReputation]:
+    'dxdao-contracts/artifacts/contracts/dao/DAOReputation.sol/DAOReputation.json',
 };
 
 const contractsPath = {
@@ -42,10 +42,10 @@ const contractsPath = {
   [CONTRACTS.SnapshotRepERC20Guild]:
     '../src/contracts/SnapshotRepERC20Guild.json',
   [CONTRACTS.DXDGuild]: '../src/contracts/DXDGuild.json',
-  [CONTRACTS.DxAvatar]: '../src/contracts/DxAvatar.json',
-  [CONTRACTS.DxController]: '../src/contracts/DxController.json',
-  [CONTRACTS.DXDVotingMachine]: '../src/contracts/DXDVotingMachine.json',
-  [CONTRACTS.DxReputation]: '../src/contracts/DxReputation.json',
+  [CONTRACTS.DAOAvatar]: '../src/contracts/DAOAvatar.json',
+  [CONTRACTS.DAOController]: '../src/contracts/DAOController.json',
+  [CONTRACTS.VotingMachine]: '../src/contracts/VotingMachine.json',
+  [CONTRACTS.DAOReputation]: '../src/contracts/DAOReputation.json',
 };
 
 (function () {

@@ -1,4 +1,4 @@
 [submodule "dxdao-contracts"]
 	path = apps/dxdao-contracts
 	url = https://github.com/DXgovernance/dxdao-contracts.git
-    branch = feature/monorepo-setup-w-create2
+	branch = v2.0

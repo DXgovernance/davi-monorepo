@@ -22,7 +22,7 @@ type Guild @entity {
 }
 
 enum TokenType {
-  ERC20
+  ERC20Token
 }
 
 enum GuildType {

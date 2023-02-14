@@ -28,4 +28,5 @@ fi
 start_hardhat_node
 node ./src/buildConfig.js
 node ./src/updateProjectsConfig.js
+pnpm hardhat run ./src/updateAbis.js
 echo "Hardhat node running locally"

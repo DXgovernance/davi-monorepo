@@ -24,7 +24,8 @@
     "test": "turbo run test --filter=!dxdao-contracts",
     "prepare": "husky install",
     "pre-commit": "turbo run pre-commit",
-    "format-check": "turbo run format-check --filter=!dxdao-contracts"
+    "format-check": "turbo run format-check --filter=!dxdao-contracts", 
+    "hardhat": "pnpm run hardhat"
   },
   "pnpm": {
     "overrides": {

@@ -7,7 +7,7 @@ import {
   VoteAdded,
 } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
 import { BaseERC20Guild } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
-import { ERC20 } from '../../types/GuildRegistry/ERC20';
+import { ERC20Token } from '../../types/GuildRegistry/ERC20Token';
 import {
   Guild,
   Proposal,
@@ -35,7 +35,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   //   Get token config
   let tokenAddress = contract.getToken();
 
-  let tokenContract = ERC20.bind(tokenAddress);
+  let tokenContract = ERC20Token.bind(tokenAddress);
   ERC20SnapshotRepTemplate.create(tokenAddress);
 
   let token = Token.load(tokenAddress.toHexString());

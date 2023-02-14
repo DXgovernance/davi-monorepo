@@ -103,6 +103,5 @@ Running in separate terminals:
 
 ### Submodules: 
 We are using dxdao-contracts as submodule. Currently it is working under `feature/monorepo-setup-w-create2` branch. 
-After [this pr](https://github.com/DXgovernance/dxdao-contracts/pull/294) is merged we can change .gitmodules config to use dxdao-contracts with main/develop branch
 To update dxdao-contracts submodule to latest commit use `git submodule update --remote --merge`
 To update dxdao-contracts submodule branch use `git submodule set-branch --branch [branch] dxdao-contracts`

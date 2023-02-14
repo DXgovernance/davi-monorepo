@@ -1,4 +1,4 @@
-import { GuildRegistry } from 'contracts/ts-files/GuildsRegistry';
+import { GuildRegistry } from 'contracts/ts-files/GuildRegistry';
 import useNetworkConfig from 'hooks/Guilds/useNetworkConfig';
 import { useContractRead } from 'wagmi';
 

@@ -75,7 +75,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
           >
             <ButtonLabel>
               <StyledIcon src={Mint} />
-              {t('actionBuilder.mintRep.mintRep')}
+              {t('actionBuilder.repMint.mintRep')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}

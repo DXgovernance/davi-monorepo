@@ -55,10 +55,10 @@ const SetPermissionsInfoLine: React.FC<ActionViewProps> = ({
       <Segment>
         {t(
           parsedData?.functionSignature === ERC20_APPROVE_SIGNATURE
-            ? 'permissions.setApprovalPermissionsFor'
+            ? 'actionBuilder.permissions.setApprovalPermissionsFor'
             : parsedData?.functionSignature === ERC20_TRANSFER_SIGNATURE
-            ? 'permissions.setTransferPermissionsFor'
-            : 'permissions.setPermissionsFor'
+            ? 'actionBuilder.permissions.setTransferPermissionsFor'
+            : 'actionBuilder.permissions.setPermissionsFor'
         )}
       </Segment>
       <Segment>

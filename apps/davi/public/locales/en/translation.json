@@ -46,7 +46,8 @@
   },
   "modals": {
     "cancel": "Cancel",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "close": "Close"
   },
   "proposals": {
     "proposals": "Proposals",
@@ -166,6 +167,7 @@
     "approval": {
       "approve": "Approve",
       "spender": "spender",
+      "selectTokensToSpend": "Select tokens to spend",
       "approveSpendingCall": "Approve spending call",
       "addressToWhichTheExpenseIsBeingAuthorized": "Address to which the expense is being authorized",
       "amountBeingApproved": "Amount being approved",
@@ -288,7 +290,6 @@
     "yourVotingPower": "Your Voting Power",
     "increaseVotingPower": "Increase Voting Power",
     "locking": {
-      "selectTokensToSpend": "Select tokens to spend",
       "locked": "Locked",
       "unlocked": "Unlocked",
       "unlockedIn": "Unlocked in",

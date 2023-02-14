@@ -6,7 +6,7 @@ import {
 
 import { Scheme, VotingMachine } from '../../types/schema';
 import { Scheme as SchemeContract } from '../../types/DAOController/Scheme';
-import { DXDVotingMachine as DXDVotingMachineContract } from '../../types/DAOController/DXDVotingMachine';
+import { VotingMachine as VotingMachineContract } from '../../types/DAOController/VotingMachine';
 
 import { Scheme as SchemeTemplate } from '../../types/templates';
 
@@ -56,7 +56,7 @@ export function handleRegisterScheme(event: RegisterScheme): void {
   // Voting Machine
 
   // const votingMachineContract =
-  //   DXDVotingMachineContract.bind(votingMachineAddress);
+  //   VotingMachineContract.bind(votingMachineAddress);
 
   // const votingParams = votingMachineContract.parameters(paramsHash);
 

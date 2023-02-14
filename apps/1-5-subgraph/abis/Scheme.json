@@ -65,13 +65,13 @@
         {
           "indexed": true,
           "internalType": "bytes32",
-          "name": "_proposalId",
+          "name": "proposalId",
           "type": "bytes32"
         },
         {
           "indexed": true,
           "internalType": "uint256",
-          "name": "_state",
+          "name": "state",
           "type": "uint256"
         }
       ],
@@ -108,12 +108,12 @@
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "_proposalId",
+          "name": "proposalId",
           "type": "bytes32"
         },
         {
           "internalType": "uint256",
-          "name": "_winningOption",
+          "name": "winningOption",
           "type": "uint256"
         }
       ],
@@ -121,7 +121,7 @@
       "outputs": [
         {
           "internalType": "bool",
-          "name": "",
+          "name": "success",
           "type": "bool"
         }
       ],
@@ -132,12 +132,12 @@
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "_proposalId",
+          "name": "proposalId",
           "type": "bytes32"
         },
         {
           "internalType": "uint256",
-          "name": "_winningOption",
+          "name": "winningOption",
           "type": "uint256"
         }
       ],
@@ -145,7 +145,7 @@
       "outputs": [
         {
           "internalType": "bool",
-          "name": "",
+          "name": "success",
           "type": "bool"
         }
       ],
@@ -164,7 +164,7 @@
       "outputs": [
         {
           "internalType": "bytes4",
-          "name": "",
+          "name": "functionSignature",
           "type": "bytes4"
         }
       ],
@@ -190,7 +190,7 @@
       "outputs": [
         {
           "internalType": "bytes32[]",
-          "name": "",
+          "name": "proposalsIds",
           "type": "bytes32[]"
         }
       ],
@@ -203,7 +203,7 @@
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "proposalsLength",
           "type": "uint256"
         }
       ],
@@ -264,7 +264,7 @@
             }
           ],
           "internalType": "struct Scheme.Proposal",
-          "name": "",
+          "name": "proposal",
           "type": "tuple"
         }
       ],
@@ -325,7 +325,7 @@
             }
           ],
           "internalType": "struct Scheme.Proposal",
-          "name": "",
+          "name": "proposal",
           "type": "tuple"
         }
       ],
@@ -381,22 +381,22 @@
       "inputs": [
         {
           "internalType": "address payable",
-          "name": "_avatar",
+          "name": "avatarAddress",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_votingMachine",
+          "name": "votingMachineAddress",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_controller",
+          "name": "controllerAddress",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_permissionRegistry",
+          "name": "permissionRegistryAddress",
           "type": "address"
         },
         {
@@ -522,32 +522,32 @@
       "inputs": [
         {
           "internalType": "address[]",
-          "name": "_to",
+          "name": "to",
           "type": "address[]"
         },
         {
           "internalType": "bytes[]",
-          "name": "_callData",
+          "name": "callData",
           "type": "bytes[]"
         },
         {
           "internalType": "uint256[]",
-          "name": "_value",
+          "name": "value",
           "type": "uint256[]"
         },
         {
           "internalType": "uint256",
-          "name": "_totalOptions",
+          "name": "totalOptions",
           "type": "uint256"
         },
         {
           "internalType": "string",
-          "name": "_title",
+          "name": "title",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "_descriptionHash",
+          "name": "descriptionHash",
           "type": "string"
         }
       ],
@@ -604,7 +604,7 @@
       "name": "votingMachine",
       "outputs": [
         {
-          "internalType": "contract IDXDVotingMachine",
+          "internalType": "contract IVotingMachine",
           "name": "",
           "type": "address"
         }

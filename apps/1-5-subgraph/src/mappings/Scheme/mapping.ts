@@ -6,7 +6,7 @@ import {
   VotingMachineProposalStateLog,
 } from '../../types/schema';
 import { Scheme as SchemeContract } from '../../types/templates/Scheme/Scheme';
-import { DXDVotingMachine as DXDVotingMachineContract } from '../../types/templates/Scheme/DXDVotingMachine';
+import { VotingMachine as VotingMachineContract } from '../../types/templates/Scheme/VotingMachine';
 
 const proposalStateArray = ['None', 'Submitted', 'Rejected', 'Passed'];
 
@@ -39,7 +39,7 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
 
   const votingMachineAddress = schemeContract.votingMachine();
   const votingMachineContract =
-    DXDVotingMachineContract.bind(votingMachineAddress);
+    VotingMachineContract.bind(votingMachineAddress);
 
   const proposalDataFromScheme = schemeContract.getProposal(proposalId);
   const proposalDataFromVotingMachine =

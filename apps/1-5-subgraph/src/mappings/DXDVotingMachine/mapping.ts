@@ -11,8 +11,8 @@ import {
   VoteProposal,
   Stake as StakeEvent,
   Redeem as RedeemEvent,
-} from '../../types/templates/DXDVotingMachine/DXDVotingMachine';
-import { StateChange } from '../../types/templates/Scheme/DXDVotingMachine';
+} from '../../types/templates/VotingMachine/VotingMachine';
+import { StateChange } from '../../types/templates/Scheme/VotingMachine';
 
 const votingMachineProposalStateArray = [
   'None',

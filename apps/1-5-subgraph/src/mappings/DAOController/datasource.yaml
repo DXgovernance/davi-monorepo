@@ -1,5 +1,5 @@
 abis:
-  - DXDVotingMachine
+  - VotingMachine
   - DAOController
   - Scheme
 entities:

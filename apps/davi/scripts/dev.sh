@@ -42,7 +42,7 @@ isHardhatRunning() {
     nc -z localhost 8545 2>&1
 }
 isSubgraphRunning(){
-    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/mprasanjith/dxdao/graphql)
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/guilds/graphql)
     if [[ $status_code -eq 200 ]]; then
         return 0
         break

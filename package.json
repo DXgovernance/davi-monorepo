@@ -19,7 +19,7 @@
     "davi:build": "turbo run build --filter=davi",
     "subgraph:dev": "turbo run dev --filter=\"*-subgraph\"",
     "subgraph:compose-up": "cd apps/guilds-subgraph && pnpm run compose-up",
-    "subgraph:start-local": "cd apps/guilds-subgraph && pnpm run start-local",
+    "guilds-subgraph:start-local": "cd apps/guilds-subgraph && pnpm run start-local",
     "1-5-subgraph:start-local": "cd apps/1-5-subgraph && pnpm run start-local",
     "dev": "turbo run dev",
     "test": "turbo run test --filter=!dxdao-contracts",

@@ -83,7 +83,9 @@ async function createArtifacts() {
           }
           const filePath = dir + "/" + name + ".json";
           try {
-            console.log("Creating", filePath);
+            console.log(
+              `Creating ${name} ABI for ${project.name} project -->> ${filePath}`
+            );
 
             fs.writeFileSync(
               path.join(filePath),

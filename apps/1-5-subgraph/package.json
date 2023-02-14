@@ -23,7 +23,8 @@
     "@typescript-eslint/parser": "^5.38.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "glob": "^8.0.3"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

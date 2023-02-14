@@ -176,7 +176,7 @@ export const ActionRow: React.FC<ActionViewProps> = ({
             <EditButtonWithMargin
               onClick={() => setConfirmRemoveActionModalIsOpen(v => !v)}
             >
-              {t('ractionBuilder.action.remove')}
+              {t('actionBuilder.action.remove')}
             </EditButtonWithMargin>
           )}
           <ChevronIcon onClick={() => setExpanded(!expanded)}>
@@ -209,10 +209,10 @@ export const ActionRow: React.FC<ActionViewProps> = ({
             <>
               <DetailWrapper>
                 <SectionHeader>
-                  {t('permissions.permissionDenied')}
+                  {t('actionBuilder.permissions.permissionDenied')}
                 </SectionHeader>
                 <SectionBody>
-                  {t('permissions.permissionDeniedMessage')}
+                  {t('actionBuilder.permissions.permissionDeniedMessage')}
                 </SectionBody>
               </DetailWrapper>
               <Separator />

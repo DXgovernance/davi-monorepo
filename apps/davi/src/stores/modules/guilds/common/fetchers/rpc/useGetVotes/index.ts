@@ -1,0 +1,1 @@
+export { useGetVotes } from './useGetVotes';

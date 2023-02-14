@@ -4,7 +4,7 @@ import { mockChain } from 'components/Web3Modals/fixtures';
 
 jest.mock('contexts/Guilds/orbis', () => ({}));
 
-jest.mock('stores/modules/common/fetchers', () => ({
+jest.mock('stores/modules/guilds/common/fetchers/rpc', () => ({
   useProposalCalls: () => ({ options: [] }),
 }));
 

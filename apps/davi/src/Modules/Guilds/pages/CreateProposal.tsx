@@ -213,10 +213,14 @@ const CreateProposalPage: React.FC = () => {
           navigate(`/${chain}/${guildId}`);
         }
       }
-    ).catch((err: Error) => {
-      setIsCreatingProposal(false);
-      toast.error(err.message);
-    });
+    )
+      .catch((err: Error) => {
+        setIsCreatingProposal(false);
+        toast.error(err.message);
+      })
+      .finally(() => {
+        setIsCreatingProposal(false);
+      });
   };
   useEffect(() => {
     if (ignoreWarning) checkIfWarningIgnored();

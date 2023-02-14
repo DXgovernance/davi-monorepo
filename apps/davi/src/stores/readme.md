@@ -15,7 +15,10 @@ An example of this could be: a subgraph in TheGraph as the main source, RPC call
 ## Main folder
 
 - **modules**: folder containing different governance implementations
-  - **common**: folder containing common files, like hook implementations, that can be imported by multiple governance modules, to avoid code duplication
+  - **guilds**: folder containing the governance implementations of Guilds
+    - **common**: folder containing common files, like hook implementations, that can be imported by multiple governance modules, to avoid code duplication
+    - **variation1**: folder containing some variation-specific hooks
+    - **variation2**: folder containing some variation-specific hooks
 - **governanceInterfaces.ts**: file that exports an array of every governance interface supported. That array is made of all the governance interface objects of each governance module
 - **index.tsx**:
   - Contains the logic to switch between governance implementations and data sources
@@ -42,31 +45,6 @@ An example of this could be: a subgraph in TheGraph as the main source, RPC call
 
 ## Governance implementation module folder
 
-### Structure
-
-Each governance module has this structure:
-
-```
-+ GovernanceImplmentationName
-|-+ events
-|-+ fetchers
-| |-+ defaultDataSource
-| | | |- useFetchHook1.ts
-| | | |- useFetchHook2.ts
-| | | |- useFetchHook3.ts
-| | + fallbackDataSource
-| | | |- useFetchHook1.ts
-| | | |- useFetchHook2.ts
-| | | |- useFetchHook3.ts
-|-+ writers
-| | |- useWriteHook.ts
-|-- checkDataSourceAvailability.ts
-|-- index.ts
-
-```
-
-### Content
-
 - **events**: folder containing hooks for event listeners. The events aren't exposed in the store, but used internally by the implementation' fetcher hooks
 - **fetchers**: folder containing the fetcher hooks. The governance implementation must have a default data source and an optional fallback. The folders can have any name
   - **defaultDataSource**: folder containing fetchers for the default data source
@@ -74,6 +52,10 @@ Each governance module has this structure:
 - **writers**: folder containing writing hooks
 - **checkDataSourceAvailability.ts**: this file exports a function to check if the default data source is available or not, and returns a boolean. If the default data source isn't available it'll use the fallback source until the next check. If the governance implementation doesn't have a fallback data source, it should always return `true`
 - **index.ts**: this file exports all the information needed for that governance type: the name, bytecode, available hooks, and all capabilities (features) this governance system has
+
+Governance implementations can have different variations. For example: in Guilds, there can be transferrable ERC20 token governance and soulbound ERC20 token governance. Those two share common logic but also have different variations in some places. To accommodate that use case, the governance implementation folder has a `common` folder with shared hooks and individual folders for each variation. All folders have the structure outlined in the previous paragraph.
+
+That variation isn't necessary, and a different folder structure can be used for other governance implementations as long as the resulting object fits the `FullGovernanceImplementation` typings.
 
 ---
 

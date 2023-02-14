@@ -1,8 +1,8 @@
-import { snapshotERC20GuildImplementation } from './modules/SnapshotERC20Guild';
-import { snapshotRepGuildImplementation } from './modules/SnapshotRepGuild';
+import { snapshotERC20GuildImplementation } from './modules/guilds/SnapshotERC20Guild';
+import { snapshotRepERC20GuildImplementation } from './modules/guilds/SnapshotRepERC20Guild';
 import { FullGovernanceImplementation } from './types';
 
 export const governanceInterfaces: FullGovernanceImplementation[] = [
   snapshotERC20GuildImplementation,
-  snapshotRepGuildImplementation,
+  snapshotRepERC20GuildImplementation,
 ];

@@ -421,7 +421,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         mint.svg
                       </svg>
                     </div>
-                    actionBuilder.mintRep.mintRep
+                    actionBuilder.repMint.mintRep
                   </div>
                 </button>
                 <button

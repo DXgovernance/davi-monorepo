@@ -1,7 +1,6 @@
 import { BigNumber } from 'ethers';
 import { Option, Permission } from 'components/ActionsBuilder/types';
-import { GuildConfigProps } from './modules/common/fetchers/useGuildConfig';
-import { Proposal, Vote } from 'types/types.guilds.d';
+import { Proposal, GuildConfigProps, Vote } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -12,7 +11,7 @@ interface GovernanceCapabilities {
 }
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
-type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
+type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepERC20Guild';
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
   useGetNumberOfActiveProposals: (daoId: string) => {
@@ -206,6 +205,5 @@ export interface GovernanceTypeInterface
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {
-  isLoading: boolean;
   daoId: string;
 }

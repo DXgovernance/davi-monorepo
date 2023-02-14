@@ -99,10 +99,10 @@ export const OptionRow: React.FC<OptionRowProps> = ({
         </div>
         {isEditable && (
           <div>
-            <EditButton 
-               data-testid="edit-action-btn" 
-               onClick={() => editOption(option)}
-             >
+            <EditButton
+              data-testid="edit-action-btn"
+              onClick={() => editOption(option)}
+            >
               {t('actionBuilder.action.edit')}
             </EditButton>
           </div>

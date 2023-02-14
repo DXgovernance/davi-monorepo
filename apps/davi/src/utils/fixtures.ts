@@ -10,7 +10,7 @@ import {
   Option,
   SupportedAction,
 } from 'components/ActionsBuilder/types';
-import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
+import { GuildConfigProps } from 'types/types.guilds.d';
 
 export const decodedCallMock: DecodedCall = {
   from: '0x140d68e4E3f80cdCf7036De007b3bCEC54D38b1f',

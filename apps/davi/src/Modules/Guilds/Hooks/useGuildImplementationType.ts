@@ -33,7 +33,7 @@ export default function useGuildImplementationTypeConfig(
     case 'SnapshotERC20Guild':
       type = GuildImplementationType.SnapshotERC20Guild;
       break;
-    case 'SnapshotRepGuild':
+    case 'SnapshotRepERC20Guild':
       type = GuildImplementationType.SnapshotRepERC20Guild;
       break;
     default:

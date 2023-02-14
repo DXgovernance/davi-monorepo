@@ -76,7 +76,7 @@ const ApproveSpendTokens: React.FC<ApproveSpendTokensProps> = ({
     <Wrapper>
       <SectionWrapper>
         <SectionTitle>
-          {t('actionBuilder.locking.selectTokensToSpend')}
+          {t('actionBuilder.approval.selectTokensToSpend')}
         </SectionTitle>
         <ControlRow>
           <Control>
@@ -131,7 +131,7 @@ const ApproveSpendTokens: React.FC<ApproveSpendTokensProps> = ({
           onClick={confirm}
           disabled={!amount || !token}
         >
-          {t('approve')}
+          {t('actionBuilder.approval.approve')}
         </Button>
       </SectionWrapper>
     </Wrapper>

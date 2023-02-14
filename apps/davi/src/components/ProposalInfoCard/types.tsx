@@ -1,4 +1,4 @@
-import { GuildConfigProps } from 'stores/modules/common/fetchers/useGuildConfig';
+import { GuildConfigProps } from 'types/types.guilds.d';
 import { Proposal } from 'types/types.guilds.d';
 
 export interface ProposalInfoCardProps {

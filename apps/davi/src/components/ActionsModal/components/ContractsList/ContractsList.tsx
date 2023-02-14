@@ -75,7 +75,7 @@ const ContractsList: React.FC<ContractsListProps> = ({
           >
             <ButtonLabel>
               <StyledIcon src={Mint} />
-              {t('actionBuilder.mintRep.mintRep')}
+              {t('actionBuilder.repMint.mintRep')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}
@@ -131,9 +131,9 @@ const ContractsList: React.FC<ContractsListProps> = ({
           }
         >
           {t('actionBuilder.advanced.advancedOptions')}
-          <ExpandButton 
-            data-testid="advanced-option-arrow-btn" 
-            expanded={isAdvancedOptionsExpanded} 
+          <ExpandButton
+            data-testid="advanced-option-arrow-btn"
+            expanded={isAdvancedOptionsExpanded}
           />
         </SectionTitle>
         {isAdvancedOptionsExpanded && (

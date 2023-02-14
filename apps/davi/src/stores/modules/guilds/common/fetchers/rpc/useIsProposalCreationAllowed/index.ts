@@ -1,0 +1,1 @@
+export { useIsProposalCreationAllowed } from './useIsProposalCreationAllowed';

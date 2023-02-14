@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { Result, ResultState } from 'components/Result';
 import { Flex } from 'components/primitives/Layout';
@@ -10,11 +10,19 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useTypedParams } from '../../Hooks/useTypedParams';
 import { StyledLink } from 'components/primitives/Links';
-import { ProposalsList, StyledHeading } from './Governance.styled';
+import {
+  ActionButtonContainer,
+  ProposalsList,
+  StyledHeading,
+} from './Governance.styled';
 import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
 import { useHookStoreProvider } from 'stores';
 import { Button } from 'components/primitives/Button';
+import { useNavigate } from 'react-router-dom';
+import { useAccount } from 'wagmi';
+import { isReadOnly } from 'provider/wallets';
+import { WalletModal } from 'components/Web3Modals';
 
 const Governance = ({ guildId }) => {
   const {
@@ -28,6 +36,21 @@ const Governance = ({ guildId }) => {
   const { t } = useTranslation();
   const { data: activeProposals } = useGetNumberOfActiveProposals(guildId);
   const { chainName } = useTypedParams();
+
+  const {
+    connector,
+    isConnecting: isWalletConnecting,
+    isConnected: isWalletConnected,
+  } = useAccount();
+
+  const navigate = useNavigate();
+
+  const hasWalletConnection = useMemo(() => {
+    return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;
+  }, [connector, isWalletConnected, isWalletConnecting]);
+
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+
   /*
   Since filters are a global state, we need to reset all of them
   who were set in the "All proposals" view. If we don't do this,
@@ -69,6 +92,25 @@ const Governance = ({ guildId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [proposalIds]);
 
+  const toggleWalletModal = () => {
+    /**
+     * Route to the create discussion page, despite of the wallet connectivity status
+     */
+    if (isWalletModalOpen) {
+      navigate(`/${chainName}/${guildId}/create`);
+    }
+
+    setIsWalletModalOpen(!isWalletModalOpen);
+  };
+
+  const handleCreateDiscussion = () => {
+    if (hasWalletConnection) {
+      navigate(`/${chainName}/${guildId}/create`);
+    } else {
+      toggleWalletModal();
+    }
+  };
+
   if (!isLoading && !proposalIds && errorMessage) {
     return (
       <Result
@@ -91,14 +133,14 @@ const Governance = ({ guildId }) => {
           placeholder={t('filter.searchTitleEnsAddress')}
           marginRight={'1rem'}
         />
-        <StyledLink to={`/${chainName}/${guildId}/create`}>
+        <ActionButtonContainer onClick={handleCreateDiscussion}>
           <Button
             variant="primaryWithBorder"
             data-testid="create-discussion-btn"
           >
             {t('discussions.createDiscussion')}
           </Button>
-        </StyledLink>
+        </ActionButtonContainer>
       </Flex>
       <ProposalsList data-testid="proposals-list">
         <StyledHeading size={2}>{t('proposals.proposals')}</StyledHeading>
@@ -135,6 +177,11 @@ const Governance = ({ guildId }) => {
         </StyledHeading>
         <Discussions />
       </ProposalsList>
+      <WalletModal
+        isOpen={isWalletModalOpen}
+        onClose={toggleWalletModal}
+        title={t('connections.connectTheWalletToProceed')}
+      />
     </>
   );
 };

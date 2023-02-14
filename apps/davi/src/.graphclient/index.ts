@@ -768,7 +768,6 @@ export type Proposal = {
   totalVotes?: Maybe<Array<Scalars['BigInt']>>;
   votes?: Maybe<Array<Vote>>;
   options?: Maybe<Array<Option>>;
-  snapshotId?: Maybe<Scalars['BigInt']>;
   metadata?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   executionTransactionHash?: Maybe<Scalars['String']>;
@@ -1012,14 +1011,6 @@ export type Proposal_filter = {
   options_not_contains?: InputMaybe<Array<Scalars['String']>>;
   options_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   options_?: InputMaybe<Option_filter>;
-  snapshotId?: InputMaybe<Scalars['BigInt']>;
-  snapshotId_not?: InputMaybe<Scalars['BigInt']>;
-  snapshotId_gt?: InputMaybe<Scalars['BigInt']>;
-  snapshotId_lt?: InputMaybe<Scalars['BigInt']>;
-  snapshotId_gte?: InputMaybe<Scalars['BigInt']>;
-  snapshotId_lte?: InputMaybe<Scalars['BigInt']>;
-  snapshotId_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  snapshotId_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
   metadata?: InputMaybe<Scalars['String']>;
   metadata_not?: InputMaybe<Scalars['String']>;
   metadata_gt?: InputMaybe<Scalars['String']>;
@@ -1108,7 +1099,6 @@ export type Proposal_orderBy =
   | 'totalVotes'
   | 'votes'
   | 'options'
-  | 'snapshotId'
   | 'metadata'
   | 'description'
   | 'executionTransactionHash'
@@ -2176,11 +2166,6 @@ export type ProposalResolvers<
     ContextType,
     RequireFields<ProposaloptionsArgs, 'skip' | 'first'>
   >;
-  snapshotId?: Resolver<
-    Maybe<ResolversTypes['BigInt']>,
-    ParentType,
-    ContextType
-  >;
   metadata?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<
     Maybe<ResolversTypes['String']>,
@@ -3026,7 +3011,7 @@ export const getNumberOfActiveProposalsDocument = gql`
     guild(id: $id) {
       id
       name
-      proposals {
+      proposals(where: { contractState: 1 }) {
         id
       }
     }

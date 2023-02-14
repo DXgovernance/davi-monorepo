@@ -2,7 +2,7 @@ query getNumberOfActiveProposals($id: ID!) {
   guild(id: $id) {
     id
     name
-    proposals {
+    proposals(where: { contractState: 1 }) {
       id
     }
   }

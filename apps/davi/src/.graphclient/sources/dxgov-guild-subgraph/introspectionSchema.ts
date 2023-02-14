@@ -10603,22 +10603,6 @@ const schemaAST = {
           kind: 'FieldDefinition',
           name: {
             kind: 'Name',
-            value: 'snapshotId',
-          },
-          arguments: [],
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'FieldDefinition',
-          name: {
-            kind: 'Name',
             value: 'metadata',
           },
           arguments: [],
@@ -14213,138 +14197,6 @@ const schemaAST = {
           kind: 'InputValueDefinition',
           name: {
             kind: 'Name',
-            value: 'snapshotId',
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_not',
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_gt',
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_lt',
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_gte',
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_lte',
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'BigInt',
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_in',
-          },
-          type: {
-            kind: 'ListType',
-            type: {
-              kind: 'NonNullType',
-              type: {
-                kind: 'NamedType',
-                name: {
-                  kind: 'Name',
-                  value: 'BigInt',
-                },
-              },
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId_not_in',
-          },
-          type: {
-            kind: 'ListType',
-            type: {
-              kind: 'NonNullType',
-              type: {
-                kind: 'NamedType',
-                name: {
-                  kind: 'Name',
-                  value: 'BigInt',
-                },
-              },
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: 'InputValueDefinition',
-          name: {
-            kind: 'Name',
             value: 'metadata',
           },
           type: {
@@ -15557,14 +15409,6 @@ const schemaAST = {
           name: {
             kind: 'Name',
             value: 'options',
-          },
-          directives: [],
-        },
-        {
-          kind: 'EnumValueDefinition',
-          name: {
-            kind: 'Name',
-            value: 'snapshotId',
           },
           directives: [],
         },

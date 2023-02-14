@@ -9,7 +9,8 @@ import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 export const subgraphClientsUris = {
   [SUPPORTED_DAVI_NETWORKS.MAINNET_ID]: '',
   [SUPPORTED_DAVI_NETWORKS.ARBITRUM_ID]: '',
-  [SUPPORTED_DAVI_NETWORKS.GNOSIS_ID]: '',
+  [SUPPORTED_DAVI_NETWORKS.GNOSIS_ID]:
+    'https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis',
   // testnets
   [SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID]: '',
   [SUPPORTED_DAVI_NETWORKS.GOERLI_ID]: '',

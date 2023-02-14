@@ -1,0 +1,8 @@
+abis:
+  - DXDVotingMachine
+entities:
+  - Proposal
+eventHandlers:
+  - event: ProposalStateChange(indexed bytes32,indexed uint256)
+    handler: handleProposalStateChange
+

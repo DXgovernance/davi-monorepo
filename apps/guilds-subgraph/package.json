@@ -1,6 +1,6 @@
 {
-  "name": "dxdao-subgraph",
-  "description": "Subgraph for DXdao Governance",
+  "name": "guilds-subgraph",
+  "description": "Subgraph for DXgov Guilds Governance",
   "repository": {
     "url": "https://github.com/DXgovernance/dxdao-subgraph"
   },
@@ -9,9 +9,9 @@
     "codegen": "node scripts/generate-schema.js && node scripts/generate-subgraph.js && graph codegen --output-dir src/types",
     "build": "graph build",
     "start-local": "pnpm run codegen && pnpm run create-local && pnpm run deploy-local",
-    "create-local": "graph create mprasanjith/dxdao --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy mprasanjith/dxdao --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020 -l v0.0.1",
-    "deploy": "pnpm run generate-networks && graph deploy mprasanjith/dxdao --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "create-local": "graph create dxdao/guilds --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy dxdao/guilds --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020 -l v0.0.1",
+    "deploy": "pnpm run generate-networks && graph deploy dxdao/guilds --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
     "clean": "rm -rf ./data build && docker compose down",
     "generate-networks": "node ./scripts/generate-prod-networks.js",
     "dev": "./scripts/dev.sh",

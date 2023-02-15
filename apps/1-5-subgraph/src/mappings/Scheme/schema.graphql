@@ -20,14 +20,14 @@ type Proposal @entity {
   proposer: String
   currentBoostedVotePeriodLimit: BigInt
   paramsHash: String
-  daoBountyRemain: BigInt
+  # daoBountyRemain: BigInt
   daoBounty: BigInt
   totalStakes: BigInt
-  confidenceThreshold: BigInt
+  # confidenceThreshold: BigInt
   secondsFromTimeOutTillExecuteBoosted: BigInt
   boostedPhaseTime: BigInt
   preBoostedPhaseTime: BigInt
-  daoRedeemItsWinnings: Boolean
+  # daoRedeemItsWinnings: Boolean
 
   # Related entities
   votes: [Vote!] @derivedFrom(field: "proposal")

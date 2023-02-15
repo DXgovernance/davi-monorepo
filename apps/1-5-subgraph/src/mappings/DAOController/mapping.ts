@@ -14,7 +14,7 @@ export function handleRegisterScheme(event: RegisterScheme): void {
   const controllerAddress = event.address;
   const controllerContract = DAOController.bind(controllerAddress);
 
-  const schemeAddress = event.params._scheme;
+  const schemeAddress = event.params.scheme;
   const schemeContract = SchemeContract.bind(schemeAddress);
 
   // Scheme
@@ -55,39 +55,38 @@ export function handleRegisterScheme(event: RegisterScheme): void {
 
   // Voting Machine
 
-  // const votingMachineContract =
-  //   VotingMachineContract.bind(votingMachineAddress);
+  const votingMachineContract =
+    VotingMachineContract.bind(votingMachineAddress);
 
-  // const votingParams = votingMachineContract.parameters(paramsHash);
+  const votingParams = votingMachineContract.parameters(paramsHash);
 
-  // let votingMachine = VotingMachine.load(votingMachineAddress.toHexString());
+  let votingMachine = VotingMachine.load(votingMachineAddress.toHexString());
 
-  // if (!votingMachine) {
-  //   votingMachine = new VotingMachine(votingMachineAddress.toHexString());
-  // }
+  if (!votingMachine) {
+    votingMachine = new VotingMachine(votingMachineAddress.toHexString());
+  }
 
-  // votingMachine.queuedVoteRequiredPercentage =
-  //   votingParams.getQueuedVoteRequiredPercentage();
-  // votingMachine.queuedVotePeriodLimit = votingParams.getQueuedVotePeriodLimit();
-  // votingMachine.boostedVotePeriodLimit =
-  //   votingParams.getBoostedVotePeriodLimit();
-  // votingMachine.preBoostedVotePeriodLimit =
-  //   votingParams.getPreBoostedVotePeriodLimit();
-  // votingMachine.thresholdConst = votingParams.getThresholdConst();
-  // votingMachine.quietEndingPeriod = votingParams.getQuietEndingPeriod();
-  // votingMachine.proposingRepReward = votingParams.getProposingRepReward();
-  // votingMachine.minimumDaoBounty = votingParams.getMinimumDaoBounty();
-  // votingMachine.daoBountyConst = votingParams.getDaoBountyConst();
-  // votingMachine.boostedVoteRequiredPercentage =
-  //   votingParams.getBoostedVoteRequiredPercentage();
+  votingMachine.queuedVoteRequiredPercentage =
+    votingParams.getQueuedVoteRequiredPercentage();
+  votingMachine.queuedVotePeriodLimit = votingParams.getQueuedVotePeriodLimit();
+  votingMachine.boostedVotePeriodLimit =
+    votingParams.getBoostedVotePeriodLimit();
+  votingMachine.preBoostedVotePeriodLimit =
+    votingParams.getPreBoostedVotePeriodLimit();
+  votingMachine.thresholdConst = votingParams.getThresholdConst();
+  votingMachine.limitExponentValue = votingParams.getLimitExponentValue();
+  votingMachine.quietEndingPeriod = votingParams.getQuietEndingPeriod();
+  votingMachine.daoBounty = votingParams.getDaoBounty();
+  votingMachine.boostedVoteRequiredPercentage =
+    votingParams.getBoostedVoteRequiredPercentage();
 
-  // votingMachine.save();
+  votingMachine.save();
 
-  // SchemeTemplate.create(schemeAddress);
+  SchemeTemplate.create(schemeAddress);
 }
 
 export function handleUnregisterScheme(event: UnregisterScheme): void {
-  const schemeAddress = event.params._scheme.toHexString();
+  const schemeAddress = event.params.scheme.toHexString();
   const scheme = Scheme.load(schemeAddress);
   if (!scheme) return;
   scheme.isRegistered = false;

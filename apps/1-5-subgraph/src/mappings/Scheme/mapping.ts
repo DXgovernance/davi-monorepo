@@ -32,7 +32,7 @@ const votingMachineExecutionStateArray = [
 ];
 
 export function handleProposalStateChange(event: ProposalStateChange): void {
-  const proposalId = event.params._proposalId;
+  const proposalId = event.params.proposalId;
 
   const schemeAddress = event.address;
   const schemeContract = SchemeContract.bind(schemeAddress);
@@ -44,6 +44,7 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
   const proposalDataFromScheme = schemeContract.getProposal(proposalId);
   const proposalDataFromVotingMachine =
     votingMachineContract.proposals(proposalId);
+
   const proposalTimes = votingMachineContract.getProposalTimes(proposalId);
 
   let proposal = Proposal.load(proposalId.toHexString());
@@ -91,17 +92,12 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
   proposal.paramsHash = proposalDataFromVotingMachine
     .getParamsHash()
     .toHexString();
-  proposal.daoBountyRemain = proposalDataFromVotingMachine.getDaoBountyRemain();
   proposal.daoBounty = proposalDataFromVotingMachine.getDaoBounty();
   proposal.totalStakes = proposalDataFromVotingMachine.getTotalStakes();
-  proposal.confidenceThreshold =
-    proposalDataFromVotingMachine.getConfidenceThreshold();
   proposal.secondsFromTimeOutTillExecuteBoosted =
     proposalDataFromVotingMachine.getSecondsFromTimeOutTillExecuteBoosted();
   proposal.boostedPhaseTime = proposalTimes[1];
   proposal.preBoostedPhaseTime = proposalTimes[2];
-  proposal.daoRedeemItsWinnings =
-    proposalDataFromVotingMachine.getDaoRedeemItsWinnings();
 
   proposal.save();
 

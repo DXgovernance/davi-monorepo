@@ -36,9 +36,7 @@ type VotingMachine @entity {
   thresholdConst: BigInt
   limitExponentValue: BigInt
   quietEndingPeriod: BigInt
-  proposingRepReward: BigInt
-  minimumDaoBounty: BigInt
-  daoBountyConst: BigInt
+  daoBounty: BigInt
   boostedVoteRequiredPercentage: BigInt
 }
 

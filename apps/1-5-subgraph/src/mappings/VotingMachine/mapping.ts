@@ -26,11 +26,11 @@ const votingMachineProposalStateArray = [
 ];
 
 export function handleVoteProposal(event: VoteProposal): void {
-  const proposalId = event.params._proposalId.toHexString();
-  const voterAddress = event.params._voter.toHexString();
+  const proposalId = event.params.proposalId.toHexString();
+  const voterAddress = event.params.voter.toHexString();
   const voteId = `${proposalId}-${voterAddress}`;
 
-  const avatarAddress = event.params._avatar;
+  const avatarAddress = event.params.avatar;
   const avatar = DAO.load(avatarAddress.toHexString());
   if (!avatar) return;
 
@@ -44,8 +44,8 @@ export function handleVoteProposal(event: VoteProposal): void {
   vote.proposal = proposalId;
   vote.voterAddress = voterAddress;
   vote.member = `${avatar.reputationToken}-${voterAddress}`;
-  vote.vote = event.params._vote;
-  vote.reputation = event.params._reputation;
+  vote.option = event.params.option;
+  vote.reputation = event.params.reputation;
   vote.save();
 
   // Write vote logs
@@ -56,7 +56,7 @@ export function handleVoteProposal(event: VoteProposal): void {
     voteLog = new VoteLog(voteLogId);
   }
 
-  voteLog.reputation = event.params._reputation;
+  voteLog.reputation = event.params.reputation;
   voteLog.timestamp = event.block.timestamp;
   voteLog.txId = event.transaction.hash.toHexString();
   voteLog.vote = voteId;
@@ -64,7 +64,7 @@ export function handleVoteProposal(event: VoteProposal): void {
 }
 
 export function handleStake(event: StakeEvent): void {
-  const stakeId = `${event.params._proposalId.toHexString()}-${event.params._staker.toHexString()}-${
+  const stakeId = `${event.params.proposalId.toHexString()}-${event.params.staker.toHexString()}-${
     event.block.timestamp
   }-stake`;
 
@@ -76,11 +76,11 @@ export function handleStake(event: StakeEvent): void {
     stake.amount = new BigInt(0);
   }
 
-  stake.proposal = event.params._proposalId.toHexString();
-  stake.avatar = event.params._avatar.toHexString();
-  stake.staker = event.params._staker.toHexString();
-  stake.vote = event.params._vote;
-  stake.amount = event.params._amount;
+  stake.proposal = event.params.proposalId.toHexString();
+  stake.avatar = event.params.avatar.toHexString();
+  stake.staker = event.params.staker.toHexString();
+  stake.option = event.params.option;
+  stake.amount = event.params.amount;
   stake.timestamp = event.block.timestamp;
   stake.txId = event.transaction.hash.toHexString();
 
@@ -89,8 +89,8 @@ export function handleStake(event: StakeEvent): void {
 
 export function handleRedeem(event: RedeemEvent): void {
   const redeemId = `${
-    event.params._proposalId
-  }-${event.params._beneficiary.toHexString()}-${event.block.timestamp}-redeem`;
+    event.params.proposalId
+  }-${event.params.beneficiary.toHexString()}-${event.block.timestamp}-redeem`;
 
   // In the most common case, each redeem is unique
   // We load to handle the edge case of someone redeeming twice on the same block
@@ -99,10 +99,10 @@ export function handleRedeem(event: RedeemEvent): void {
     redeem = new Redeem(redeemId);
   }
 
-  redeem.proposal = event.params._proposalId.toHexString();
-  redeem.avatar = event.params._avatar.toHexString();
-  redeem.redeemer = event.params._beneficiary.toHexString();
-  redeem.amount = event.params._amount;
+  redeem.proposal = event.params.proposalId.toHexString();
+  redeem.avatar = event.params.avatar.toHexString();
+  redeem.redeemer = event.params.beneficiary.toHexString();
+  redeem.amount = event.params.amount;
   redeem.timestamp = event.block.timestamp;
   redeem.txId = event.transaction.hash.toHexString();
 
@@ -111,9 +111,9 @@ export function handleRedeem(event: RedeemEvent): void {
 
 export function handleStateChange(event: StateChange): void {
   // Proposal state
-  const proposalId = event.params._proposalId;
+  const proposalId = event.params.proposalId;
   const votingMachineProposalStateLogId = `${proposalId.toHexString()}-${
-    votingMachineProposalStateArray[event.params._proposalState]
+    votingMachineProposalStateArray[event.params.proposalState]
   }-${event.block.timestamp}`;
   const votingMachineProposalStateLog = new VotingMachineProposalStateLog(
     votingMachineProposalStateLogId
@@ -121,7 +121,7 @@ export function handleStateChange(event: StateChange): void {
   votingMachineProposalStateLog.timestamp = event.block.timestamp;
   votingMachineProposalStateLog.txId = event.transaction.hash.toHexString();
   votingMachineProposalStateLog.state =
-    votingMachineProposalStateArray[event.params._proposalState];
+    votingMachineProposalStateArray[event.params.proposalState];
   votingMachineProposalStateLog.proposal = proposalId.toHexString();
   votingMachineProposalStateLog.save();
 }

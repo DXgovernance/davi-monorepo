@@ -18,6 +18,7 @@ import {
   VoteActionButton,
   VoteOptionButton,
   VoteOptionsLabel,
+  StyledRadioInput,
 } from './ProposalVoteCard.styled';
 import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
@@ -31,6 +32,7 @@ import {
   ToggleContainer,
   ToggleLabel,
 } from 'components/primitives/Forms/Toggle';
+import { ContainerText, Flex } from 'components/primitives/Layout';
 
 const ProposalVoteCard = ({
   voteData,
@@ -125,10 +127,12 @@ const ProposalVoteCard = ({
       <SidebarCardContent>
         <VotesContainer>
           <VotesChart isPercent={isPercent} voteData={voteData} />
-          <VoteOptions
-            options={voteData?.options}
-            proposalMetadata={proposal?.metadata}
-          />
+          {(userVote?.option || !isOpen) && (
+            <VoteOptions
+              options={voteData?.options}
+              proposalMetadata={proposal?.metadata}
+            />
+          )}
         </VotesContainer>
 
         <UserVote
@@ -155,20 +159,37 @@ const ProposalVoteCard = ({
                 });
 
                 return (
-                  <VoteOptionButton
-                    key={optionKey}
-                    optionKey={Number(optionKey)}
-                    active={selectedOption && selectedOption.eq(bItem)}
-                    onClick={() => {
-                      setSelectedOption(
-                        selectedOption && selectedOption.eq(bItem)
-                          ? null
-                          : bItem
-                      );
-                    }}
-                  >
-                    {label}
-                  </VoteOptionButton>
+                  <>
+                    <Flex direction="row" justifyContent="left">
+                      <StyledRadioInput
+                        value={selectedOption}
+                        type={'radio'}
+                        checked={selectedOption && selectedOption.eq(bItem)}
+                        onChange={() => {
+                          setSelectedOption(
+                            selectedOption && selectedOption.eq(bItem)
+                              ? null
+                              : bItem
+                          );
+                        }}
+                      />
+                      <ContainerText variant="medium">{label}</ContainerText>
+                    </Flex>
+                    <VoteOptionButton
+                      key={optionKey}
+                      optionKey={Number(optionKey)}
+                      active={selectedOption && selectedOption.eq(bItem)}
+                      onClick={() => {
+                        setSelectedOption(
+                          selectedOption && selectedOption.eq(bItem)
+                            ? null
+                            : bItem
+                        );
+                      }}
+                    >
+                      {label}
+                    </VoteOptionButton>
+                  </>
                 );
               }
             )}

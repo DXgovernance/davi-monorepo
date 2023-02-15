@@ -35,7 +35,7 @@ exports[`VoteChart matches the snapshot 1`] = `
 .c3 {
   width: 10%;
   border-radius: 32px;
-  background: #E75C5C;
+  background: #FD568C;
   height: 0.5rem;
   overflow: hidden;
 }
@@ -43,7 +43,7 @@ exports[`VoteChart matches the snapshot 1`] = `
 .c5 {
   width: 10%;
   border-radius: 32px;
-  background: #295FF4;
+  background: #00F5F5;
   height: 0.5rem;
   overflow: hidden;
 }
@@ -127,7 +127,7 @@ exports[`VoteChart matches the snapshot 1`] = `
       >
         <div
           class="c3"
-          color="#E75C5C"
+          color="#FD568C"
         />
       </div>
       <span
@@ -144,7 +144,7 @@ exports[`VoteChart matches the snapshot 1`] = `
       >
         <div
           class="c5"
-          color="#295FF4"
+          color="#00F5F5"
         />
       </div>
       <span

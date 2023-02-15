@@ -8,7 +8,7 @@ exports[`VoteResults matches the snapshot 1`] = `
   display: inline-flex;
   height: 8px;
   width: 8px;
-  background-color: #295FF4;
+  background-color: #00F5F5;
   border-radius: 50%;
 }
 
@@ -19,7 +19,7 @@ exports[`VoteResults matches the snapshot 1`] = `
   display: inline-flex;
   height: 8px;
   width: 8px;
-  background-color: #E75C5C;
+  background-color: #FD568C;
   border-radius: 50%;
 }
 
@@ -65,7 +65,7 @@ exports[`VoteResults matches the snapshot 1`] = `
       >
         <span
           class="c3"
-          color="#295FF4"
+          color="#00F5F5"
           size="8"
         />
       </span>
@@ -83,7 +83,7 @@ exports[`VoteResults matches the snapshot 1`] = `
       >
         <span
           class="c4"
-          color="#E75C5C"
+          color="#FD568C"
           size="8"
         />
       </span>

@@ -90,7 +90,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
 .c15 {
   width: 10%;
   border-radius: 32px;
-  background: #E75C5C;
+  background: #FD568C;
   height: 0.5rem;
   overflow: hidden;
 }
@@ -98,7 +98,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
 .c17 {
   width: 10%;
   border-radius: 32px;
-  background: #295FF4;
+  background: #00F5F5;
   height: 0.5rem;
   overflow: hidden;
 }
@@ -203,7 +203,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   display: inline-flex;
   height: 8px;
   width: 8px;
-  background-color: #295FF4;
+  background-color: #00F5F5;
   border-radius: 50%;
 }
 
@@ -214,7 +214,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   display: inline-flex;
   height: 8px;
   width: 8px;
-  background-color: #E75C5C;
+  background-color: #FD568C;
   border-radius: 50%;
 }
 
@@ -352,7 +352,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
               >
                 <div
                   class="c15"
-                  color="#E75C5C"
+                  color="#FD568C"
                 />
               </div>
               <span
@@ -369,7 +369,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
               >
                 <div
                   class="c17"
-                  color="#295FF4"
+                  color="#00F5F5"
                 />
               </div>
               <span
@@ -421,7 +421,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
               >
                 <span
                   class="c25"
-                  color="#295FF4"
+                  color="#00F5F5"
                   size="8"
                 />
               </span>
@@ -439,7 +439,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
               >
                 <span
                   class="c26"
-                  color="#E75C5C"
+                  color="#FD568C"
                   size="8"
                 />
               </span>

@@ -1,4 +1,5 @@
 import { Button } from 'components/primitives/Button';
+import { RadioInput } from 'components/primitives/Forms/Input';
 import styled, { css } from 'styled-components';
 
 export const ButtonsContainer = styled.div`
@@ -56,4 +57,10 @@ export const VoteOptionButton = styled(VoteActionButton)<{
       border-color: ${({ theme }) => theme.colors.white};
       opacity: 1;
     `}
+`;
+
+export const StyledRadioInput = styled(RadioInput)<{
+  optionKey?: number;
+}>`
+  accent-color: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
 `;

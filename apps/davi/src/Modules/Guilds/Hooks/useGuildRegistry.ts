@@ -4,9 +4,11 @@ import { useContractRead } from 'wagmi';
 
 export const useGuildRegistry = (contractAddress?: string) => {
   const config = useNetworkConfig();
-  return useContractRead({
+  const { data, isLoading, error } = useContractRead({
     address: contractAddress || config?.contracts?.utils.guildRegistry,
     abi: GuildRegistry.abi,
     functionName: 'getGuildsAddresses',
   });
+
+  return { data, isLoading, error };
 };

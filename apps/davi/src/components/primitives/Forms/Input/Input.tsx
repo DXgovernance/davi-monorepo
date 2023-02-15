@@ -12,17 +12,6 @@ const UnstyledInput = styled.input<InputHTMLAttributes<HTMLInputElement>>`
   outline: none;
 `;
 
-const UnstyledRadioInput = styled.input<{
-  accentColor?: string;
-}>`
-  border: none;
-  background: none;
-  accent-color: ${({ accentColor }) => accentColor};
-  box-shadow: none;
-  box-sizing: border-box;
-  outline: none;
-`;
-
 const InputWrapper = styled.div<{
   isInvalid?: boolean;
   textAlign?: string;
@@ -135,49 +124,5 @@ export const Input: React.FC<InputProps<any>> = ({
       <UnstyledInput ref={inputRef} type={type} disabled={disabled} {...rest} />
       <IconContainer right>{iconRight}</IconContainer>
     </InputWrapper>
-  );
-};
-
-export const RadioInput: React.FC<InputProps<any>> = ({
-  icon = null,
-  iconRight = null,
-  isInvalid,
-  textAlign,
-  muted,
-  disabled,
-  marginRight,
-  ...rest
-}) => {
-  const inputRef = useRef(null);
-
-  // const handleClick = () => {
-  //   inputRef.current.focus();
-  // };
-
-  // const handleDoubleClick = () => {
-  //   inputRef.current.select();
-  // };
-
-  return (
-    // <InputWrapper
-    //   disabled={disabled}
-    //   textAlign={textAlign}
-    //   isInvalid={isInvalid}
-    //   muted={muted}
-    //   onClick={handleClick}
-    //   onDoubleClick={handleDoubleClick}
-    //   marginRight={marginRight}
-    // >
-    //   <IconContainer>{icon}</IconContainer>
-    <UnstyledRadioInput
-      ref={inputRef}
-      width={'auto'}
-      disabled={disabled}
-      type={'radio'}
-      {...rest}
-    />
-    // {/* <label>hola</label> */}
-    // <IconContainer right>{iconRight}</IconContainer>
-    // </InputWrapper>
   );
 };

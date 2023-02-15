@@ -16,9 +16,10 @@ import {
   VotesContainer,
   ButtonsContainer,
   VoteActionButton,
-  VoteOptionButton,
-  VoteOptionsLabel,
   StyledRadioInput,
+  OptionContainer,
+  OptionText,
+  VoteActionButtonContainer,
 } from './ProposalVoteCard.styled';
 import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
@@ -32,7 +33,7 @@ import {
   ToggleContainer,
   ToggleLabel,
 } from 'components/primitives/Forms/Toggle';
-import { ContainerText, Flex } from 'components/primitives/Layout';
+import { Divider } from 'components/Divider';
 
 const ProposalVoteCard = ({
   voteData,
@@ -144,10 +145,6 @@ const ProposalVoteCard = ({
         {/* Hide voting options if user has already voted */}
         {isOpen && !userVote?.option && voteData?.options && (
           <ButtonsContainer>
-            <VoteOptionsLabel>
-              {t('actionBuilder.options.options')}
-            </VoteOptionsLabel>
-
             {/* Getting the full option keys list but displaying default 0 index option at the bottom */}
             {[...Object.keys(voteData?.options).slice(1), '0'].map(
               optionKey => {
@@ -160,25 +157,9 @@ const ProposalVoteCard = ({
 
                 return (
                   <>
-                    <Flex direction="row" justifyContent="left">
-                      <StyledRadioInput
-                        value={selectedOption}
-                        type={'radio'}
-                        checked={selectedOption && selectedOption.eq(bItem)}
-                        onChange={() => {
-                          setSelectedOption(
-                            selectedOption && selectedOption.eq(bItem)
-                              ? null
-                              : bItem
-                          );
-                        }}
-                      />
-                      <ContainerText variant="medium">{label}</ContainerText>
-                    </Flex>
-                    <VoteOptionButton
-                      key={optionKey}
-                      optionKey={Number(optionKey)}
-                      active={selectedOption && selectedOption.eq(bItem)}
+                    <OptionContainer
+                      direction="row"
+                      justifyContent="left"
                       onClick={() => {
                         setSelectedOption(
                           selectedOption && selectedOption.eq(bItem)
@@ -187,13 +168,30 @@ const ProposalVoteCard = ({
                         );
                       }}
                     >
-                      {label}
-                    </VoteOptionButton>
+                      <StyledRadioInput
+                        value={selectedOption}
+                        optionKey={Number(optionKey)}
+                        checked={selectedOption && selectedOption.eq(bItem)}
+                      />
+                      <OptionText
+                        optionKey={Number(optionKey)}
+                        variant="medium"
+                      >
+                        {label}
+                      </OptionText>
+                    </OptionContainer>
                   </>
                 );
               }
             )}
+          </ButtonsContainer>
+        )}
+      </SidebarCardContent>
 
+      {isOpen && !userVote?.option && voteData?.options && (
+        <>
+          <Divider />
+          <VoteActionButtonContainer>
             <VoteActionButton
               disabled={!selectedOption}
               onClick={() =>
@@ -205,9 +203,9 @@ const ProposalVoteCard = ({
             >
               {t('voting.vote')}
             </VoteActionButton>
-          </ButtonsContainer>
-        )}
-      </SidebarCardContent>
+          </VoteActionButtonContainer>
+        </>
+      )}
 
       <VoteConfirmationModal
         isOpen={modalOpen}

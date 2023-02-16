@@ -739,7 +739,6 @@ export namespace DxgovGuildSubgraphTypes {
     totalVotes?: Maybe<Array<Scalars['BigInt']>>;
     votes?: Maybe<Array<Vote>>;
     options?: Maybe<Array<Option>>;
-    snapshotId?: Maybe<Scalars['BigInt']>;
     metadata?: Maybe<Scalars['String']>;
     description?: Maybe<Scalars['String']>;
     executionTransactionHash?: Maybe<Scalars['String']>;
@@ -983,14 +982,6 @@ export namespace DxgovGuildSubgraphTypes {
     options_not_contains?: InputMaybe<Array<Scalars['String']>>;
     options_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
     options_?: InputMaybe<Option_filter>;
-    snapshotId?: InputMaybe<Scalars['BigInt']>;
-    snapshotId_not?: InputMaybe<Scalars['BigInt']>;
-    snapshotId_gt?: InputMaybe<Scalars['BigInt']>;
-    snapshotId_lt?: InputMaybe<Scalars['BigInt']>;
-    snapshotId_gte?: InputMaybe<Scalars['BigInt']>;
-    snapshotId_lte?: InputMaybe<Scalars['BigInt']>;
-    snapshotId_in?: InputMaybe<Array<Scalars['BigInt']>>;
-    snapshotId_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
     metadata?: InputMaybe<Scalars['String']>;
     metadata_not?: InputMaybe<Scalars['String']>;
     metadata_gt?: InputMaybe<Scalars['String']>;
@@ -1083,7 +1074,6 @@ export namespace DxgovGuildSubgraphTypes {
     | 'totalVotes'
     | 'votes'
     | 'options'
-    | 'snapshotId'
     | 'metadata'
     | 'description'
     | 'executionTransactionHash'

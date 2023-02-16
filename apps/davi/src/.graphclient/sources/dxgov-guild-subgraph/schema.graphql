@@ -692,7 +692,6 @@ type Proposal {
   totalVotes: [BigInt!]
   votes(skip: Int = 0, first: Int = 100, orderBy: Vote_orderBy, orderDirection: OrderDirection, where: Vote_filter): [Vote!]
   options(skip: Int = 0, first: Int = 100, orderBy: Option_orderBy, orderDirection: OrderDirection, where: Option_filter): [Option!]
-  snapshotId: BigInt
   metadata: String
   description: String
   executionTransactionHash: String
@@ -913,14 +912,6 @@ input Proposal_filter {
   options_not_contains: [String!]
   options_not_contains_nocase: [String!]
   options_: Option_filter
-  snapshotId: BigInt
-  snapshotId_not: BigInt
-  snapshotId_gt: BigInt
-  snapshotId_lt: BigInt
-  snapshotId_gte: BigInt
-  snapshotId_lte: BigInt
-  snapshotId_in: [BigInt!]
-  snapshotId_not_in: [BigInt!]
   metadata: String
   metadata_not: String
   metadata_gt: String
@@ -1007,7 +998,6 @@ enum Proposal_orderBy {
   totalVotes
   votes
   options
-  snapshotId
   metadata
   description
   executionTransactionHash

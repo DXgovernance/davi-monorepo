@@ -14,7 +14,13 @@ interface GovernanceCapabilities {
 type SupportedGovernanceSystem =
   | 'SnapshotERC20Guild'
   | 'SnapshotRepERC20Guild'
-  | 'Governance1-5';
+  | 'Governance1_5';
+
+export enum SUPPORTED_SUBGRAPHS {
+  Guilds,
+  Governance1_5,
+}
+
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
   useGetNumberOfActiveProposals: (daoId: string) => {

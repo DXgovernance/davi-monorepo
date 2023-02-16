@@ -1,9 +1,9 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 
-export const Governance15Implementation: Readonly<FullGovernanceImplementation> =
+export const Governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
-    name: 'Governance1-5',
+    name: 'Governance1_5',
     bytecodes: [],
     hooks: {
       fetchers: {

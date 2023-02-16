@@ -1,4 +1,5 @@
-import { FetcherHooksInterface } from 'stores/types';
+import { useNetwork } from 'wagmi';
+import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
 import { useQuery } from '@apollo/client';
 import {
   getProposalVotesOfVoterDocument,
@@ -7,6 +8,7 @@ import {
 import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
+import { apolloClient } from 'clients/apollo';
 
 type IUseProposalVotesOfVoter =
   FetcherHooksInterface['useProposalVotesOfVoter'];
@@ -16,10 +18,13 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   proposalId: `0x${string}`,
   userAddress: `0x${string}`
 ) => {
+  const { chain } = useNetwork();
+  const chainId = useMemo(() => chain?.id, [chain]);
   const userAddressToLower = userAddress.toLowerCase();
 
   const { data, refetch, loading, error } =
     useQuery<getProposalVotesOfVoterQuery>(getProposalVotesOfVoterDocument, {
+      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
       variables: {
         proposalId: proposalId,
         userAddress: userAddressToLower,

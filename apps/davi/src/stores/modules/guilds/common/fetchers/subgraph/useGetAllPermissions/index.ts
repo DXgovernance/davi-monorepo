@@ -1,17 +1,22 @@
+import { useNetwork } from 'wagmi';
+import { useMemo } from 'react';
+import { BigNumber } from 'ethers';
+import { useQuery } from '@apollo/client';
 import {
   getAllPermissionsQuery,
   getAllPermissionsDocument,
   getAllFunctionCallPermissionsDocument,
   getAllTokenPermissionsDocument,
 } from '.graphclient';
-import { useQuery } from '@apollo/client';
-import { BigNumber } from 'ethers';
-import { useMemo } from 'react';
-import { FetcherHooksInterface } from 'stores/types';
+import { apolloClient } from 'clients/apollo';
+import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
 
 type IUseGetAllPermissions = FetcherHooksInterface['useGetAllPermissions'];
 
 export const useGetAllPermissions: IUseGetAllPermissions = (daoId, filter) => {
+  const { chain } = useNetwork();
+  const chainId = useMemo(() => chain?.id, [chain]);
+
   const queryToExecute = useMemo(() => {
     if (!filter) {
       return getAllPermissionsDocument;
@@ -29,6 +34,7 @@ export const useGetAllPermissions: IUseGetAllPermissions = (daoId, filter) => {
   const { data, loading, error } = useQuery<getAllPermissionsQuery>(
     queryToExecute,
     {
+      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
       variables: { id: daoId?.toLocaleLowerCase() },
     }
   );

@@ -1,17 +1,23 @@
+import { useNetwork } from 'wagmi';
 import { useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import {
   getGuildProposalIdsQuery,
   getGuildProposalIdsDocument,
 } from '.graphclient';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
+import { apolloClient } from 'clients/apollo';
 
 type IUseGuildProposalIds = FetcherHooksInterface['useGuildProposalIds'];
 
 export const useGuildProposalIds: IUseGuildProposalIds = daoId => {
+  const { chain } = useNetwork();
+  const chainId = useMemo(() => chain?.id, [chain]);
+
   const { data, loading, error } = useQuery<getGuildProposalIdsQuery>(
     getGuildProposalIdsDocument,
     {
+      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
       variables: { id: daoId?.toLowerCase() },
     }
   );

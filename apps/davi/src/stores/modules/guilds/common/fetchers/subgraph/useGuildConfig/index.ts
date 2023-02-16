@@ -1,8 +1,11 @@
+import { useNetwork } from 'wagmi';
+import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
-import { useMemo } from 'react';
 import { ZERO_ADDRESS } from 'utils';
+import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_SUBGRAPHS } from 'stores/types';
 
 export type GuildConfigProps = {
   name: string;
@@ -24,9 +27,13 @@ export type GuildConfigProps = {
 };
 
 export const useGuildConfig = (guildAddress: string) => {
+  const { chain } = useNetwork();
+  const chainId = useMemo(() => chain?.id, [chain]);
+
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
+      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

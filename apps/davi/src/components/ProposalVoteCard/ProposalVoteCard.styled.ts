@@ -46,9 +46,6 @@ export const StyledRadioInput = styled(RadioInput)<{
   optionKey?: number;
 }>`
   accent-color: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
-  width: 20px;
-  height: 20px;
-  type: 'radio';
 `;
 
 export const OptionContainer = styled(Flex)<{

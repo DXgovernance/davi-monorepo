@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
 import { useMemo } from 'react';
 import { ZERO_ADDRESS } from 'utils';
+import { FetcherHooksInterface } from 'stores/types';
 
 export type GuildConfigProps = {
   name: string;
@@ -23,7 +24,9 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-export const useGuildConfig = (guildAddress: string) => {
+type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
+
+export const useGuildConfig: IUseGuildConfig = (guildAddress: string) => {
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
@@ -40,8 +43,8 @@ export const useGuildConfig = (guildAddress: string) => {
       proposalTime,
       timeForExecution,
       maxActiveProposals,
-      votingPowerForProposalCreation,
-      votingPowerForProposalExecution,
+      votingPowerPercentageForProposalCreation,
+      votingPowerPercentageForProposalExecution,
       lockTime,
       voteGas,
       maxGasPrice,
@@ -60,11 +63,11 @@ export const useGuildConfig = (guildAddress: string) => {
       maxActiveProposals: maxActiveProposals
         ? BigNumber.from(maxActiveProposals)
         : undefined,
-      votingPowerForProposalCreation: votingPowerForProposalCreation
-        ? BigNumber.from(votingPowerForProposalCreation)
+      votingPowerForProposalCreation: votingPowerPercentageForProposalCreation
+        ? BigNumber.from(votingPowerPercentageForProposalCreation)
         : undefined,
-      votingPowerForProposalExecution: votingPowerForProposalExecution
-        ? BigNumber.from(votingPowerForProposalExecution)
+      votingPowerForProposalExecution: votingPowerPercentageForProposalExecution
+        ? BigNumber.from(votingPowerPercentageForProposalExecution)
         : undefined,
       tokenVault: ZERO_ADDRESS,
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,

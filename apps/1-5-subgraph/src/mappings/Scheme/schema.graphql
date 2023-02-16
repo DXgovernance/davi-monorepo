@@ -1,7 +1,8 @@
 type Proposal @entity {
   id: ID!
 
-  # Schema properties
+  # Scheme properties
+  scheme: Scheme! # Scheme adddress
   to: [String!]
   callData: [String!]
   value: [BigInt!]
@@ -20,14 +21,11 @@ type Proposal @entity {
   proposer: String
   currentBoostedVotePeriodLimit: BigInt
   paramsHash: String
-  # daoBountyRemain: BigInt
   daoBounty: BigInt
   totalStakes: BigInt
-  # confidenceThreshold: BigInt
   secondsFromTimeOutTillExecuteBoosted: BigInt
   boostedPhaseTime: BigInt
   preBoostedPhaseTime: BigInt
-  # daoRedeemItsWinnings: Boolean
 
   # Related entities
   votes: [Vote!] @derivedFrom(field: "proposal")

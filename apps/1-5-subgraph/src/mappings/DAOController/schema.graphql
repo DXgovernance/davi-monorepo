@@ -24,7 +24,7 @@ type Scheme @entity {
   orgBoostedProposalsCnt: BigInt
 
   # Related entities
-  proposals: [Proposal!]
+  proposals: [Proposal!] @derivedFrom(field: "scheme")
 }
 
 type VotingMachine @entity {

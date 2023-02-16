@@ -54,6 +54,8 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
 
   // Scheme data
 
+  proposal.scheme = schemeAddress.toHexString();
+
   proposal.to = proposalDataFromScheme.to.map<string>(
     (address: Address): string => {
       return address.toHexString();

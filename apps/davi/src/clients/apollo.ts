@@ -39,10 +39,7 @@ export const subgraphClientsUris: {
   },
 };
 
-const setupApolloClient = (
-  network: SUPPORTED_DAVI_NETWORKS
-  // subgraph: SupportedSubgraphs
-) => {
+const setupApolloClient = (network: SUPPORTED_DAVI_NETWORKS) => {
   return {
     Guilds: new ApolloClient({
       uri: subgraphClientsUris[network]['Guilds'],

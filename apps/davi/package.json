@@ -1,6 +1,6 @@
 {
   "name": "davi",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Decentralized Autonomous Voting Interface",
   "scripts": {
     "dev": "./scripts/dev.sh",
@@ -18,7 +18,7 @@
     "updateContracts": "pnpm hardhat compile && node scripts/updateContracts.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "build-graph-client": "graphclient build && rm -r src/.graphclient && mv .graphclient src",
+    "build-graph-client": "graphclient build && rm -rf src/.graphclient && mv .graphclient src",
     "pre-commit": "lint-staged"
   },
   "engines": {

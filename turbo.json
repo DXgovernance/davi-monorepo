@@ -24,9 +24,11 @@
       "dependsOn": ["dev-scripts#compile"],
       "outputs": ["build/**", "artifacts/**"]
     },
-    "dxdao-subgraph#dev": {
+    "guilds-subgraph#dev": {
       "dependsOn": ["^dev-scripts#compile"]
-     
+    },
+    "1-5-subgraph#dev": {
+      "dependsOn": ["^dev-scripts#compile"]
     },
     "dev": {
       "dependsOn": ["setup", "^dxdao-contracts#compile", "^dev-scripts#compile"]

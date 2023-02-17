@@ -31,6 +31,7 @@ import { supportedLanguages } from 'configs';
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
   onClose,
+  title,
 }) => {
   const { t, i18n } = useTranslation();
   const [isWalletListActive, setIsWalletsListActive] = useState(false);
@@ -176,7 +177,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
 
     return isConnected && !isReadOnly(activeConnector)
       ? t('connections.account')
-      : t('connections.connectToAWallet');
+      : title ?? t('connections.connectToAWallet');
   };
 
   const getPrimaryAction = () => {

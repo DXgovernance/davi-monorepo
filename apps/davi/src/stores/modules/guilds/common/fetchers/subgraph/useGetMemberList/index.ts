@@ -3,7 +3,7 @@ import { useNetwork } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getMemberListDocument, getMemberListQuery } from '.graphclient';
-import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
+import { FetcherHooksInterface } from 'stores/types';
 import { apolloClient } from 'clients/apollo';
 
 type IUseGetMemberList = FetcherHooksInterface['useGetMemberList'];
@@ -15,7 +15,7 @@ export const useGetMemberList: IUseGetMemberList = guildAddress => {
   const { data, loading, error } = useQuery<getMemberListQuery>(
     getMemberListDocument,
     {
-      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

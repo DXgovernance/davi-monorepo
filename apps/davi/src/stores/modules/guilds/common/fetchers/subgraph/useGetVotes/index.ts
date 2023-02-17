@@ -5,7 +5,7 @@ import { useNetwork } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { getVotesDocument, getVotesQuery } from '.graphclient';
 import { useHookStoreProvider } from 'stores';
-import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
+import { FetcherHooksInterface } from 'stores/types';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
@@ -28,7 +28,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { data, refetch, loading, error } = useQuery<getVotesQuery>(
     getVotesDocument,
     {
-      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: proposal?.id },
     }
   );

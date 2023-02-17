@@ -1,5 +1,5 @@
 import { useNetwork } from 'wagmi';
-import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
+import { FetcherHooksInterface } from 'stores/types';
 import { useQuery } from '@apollo/client';
 import {
   getProposalVotesOfVoterDocument,
@@ -24,7 +24,7 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
 
   const { data, refetch, loading, error } =
     useQuery<getProposalVotesOfVoterQuery>(getProposalVotesOfVoterDocument, {
-      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+      client: apolloClient[chainId]['Guilds'],
       variables: {
         proposalId: proposalId,
         userAddress: userAddressToLower,

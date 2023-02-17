@@ -8,7 +8,6 @@ import {
 } from '.graphclient';
 import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events/useListenToProposalStateChanged';
 import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_SUBGRAPHS } from 'stores/types';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   const { chain } = useNetwork();
@@ -18,7 +17,7 @@ export const useGetNumberOfActiveProposals = (guildAddress: string) => {
     useQuery<getNumberOfActiveProposalsQuery>(
       getNumberOfActiveProposalsDocument,
       {
-        client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+        client: apolloClient[chainId]['Guilds'],
         variables: { id: guildAddress?.toLowerCase() },
       }
     );

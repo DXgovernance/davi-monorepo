@@ -15,7 +15,6 @@ import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from 'clients/apollo';
 import { wagmiClient } from 'clients/wagmi';
 import { DEFAULT_CHAIN_ID } from 'utils';
-import { SUPPORTED_SUBGRAPHS } from 'stores/types';
 
 initializeI18Next();
 
@@ -44,7 +43,7 @@ const Root = () => {
   }, []);
 
   return (
-    <ApolloProvider client={apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds]}>
+    <ApolloProvider client={apolloClient[chainId]['Guilds']}>
       <WagmiConfig client={wagmiClient}>
         <HashRouter>
           <SyncRouterWithWagmi>

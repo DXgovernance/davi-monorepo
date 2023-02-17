@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
 import { ZERO_ADDRESS } from 'utils';
 import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_SUBGRAPHS } from 'stores/types';
 
 export type GuildConfigProps = {
   name: string;
@@ -33,7 +32,7 @@ export const useGuildConfig = (guildAddress: string) => {
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
-      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

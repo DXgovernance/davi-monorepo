@@ -5,7 +5,7 @@ import {
   getGuildProposalIdsQuery,
   getGuildProposalIdsDocument,
 } from '.graphclient';
-import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
+import { FetcherHooksInterface } from 'stores/types';
 import { apolloClient } from 'clients/apollo';
 
 type IUseGuildProposalIds = FetcherHooksInterface['useGuildProposalIds'];
@@ -17,7 +17,7 @@ export const useGuildProposalIds: IUseGuildProposalIds = daoId => {
   const { data, loading, error } = useQuery<getGuildProposalIdsQuery>(
     getGuildProposalIdsDocument,
     {
-      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: daoId?.toLowerCase() },
     }
   );

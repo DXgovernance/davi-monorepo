@@ -9,7 +9,7 @@ import {
   getAllTokenPermissionsDocument,
 } from '.graphclient';
 import { apolloClient } from 'clients/apollo';
-import { FetcherHooksInterface, SUPPORTED_SUBGRAPHS } from 'stores/types';
+import { FetcherHooksInterface } from 'stores/types';
 
 type IUseGetAllPermissions = FetcherHooksInterface['useGetAllPermissions'];
 
@@ -34,7 +34,7 @@ export const useGetAllPermissions: IUseGetAllPermissions = (daoId, filter) => {
   const { data, loading, error } = useQuery<getAllPermissionsQuery>(
     queryToExecute,
     {
-      client: apolloClient[chainId][SUPPORTED_SUBGRAPHS.Guilds],
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: daoId?.toLocaleLowerCase() },
     }
   );

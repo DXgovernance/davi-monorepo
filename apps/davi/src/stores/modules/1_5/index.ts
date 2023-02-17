@@ -1,7 +1,7 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 
-export const Governance1_5Implementation: Readonly<FullGovernanceImplementation> =
+export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
     name: 'Governance1_5',
     bytecodes: [],

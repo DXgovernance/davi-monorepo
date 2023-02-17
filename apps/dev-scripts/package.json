@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf artifacts cache contracts deployments build",
-    "compile": "cp -r node_modules/dxdao-contracts/contracts ./ && hardhat compile",
+    "clean": "rm -rf artifacts cache contracts deployments deploy build",
+    "copy-contracts": "cp -r node_modules/dxdao-contracts/contracts ./",
+    "compile": "pnpm run copy-contracts && hardhat compile",
     "dev": "./src/dev.sh"
   },
   "keywords": [],

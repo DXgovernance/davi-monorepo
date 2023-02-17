@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 /**
- * This script pull the latest deployment info and feed both davi and subgraph with necesary
+ * This script pull the latest deployment info and feed both davi, guild subgraph and 1.5 subgraph with necesary
  * development bytecodes and addresses created by the latest hardhat deployment
  */
 
@@ -42,8 +42,8 @@ if (fs.existsSync(addressesFilePath)) {
   const addresses = require(addressesFilePath);
   console.log("Using deployed addresses:", addresses);
 
-  // Write addresses to subgraph
-  console.log("Writing subgraph local networks.json");
+  // Write addresses to guild subgraph
+  console.log("Writing guild subgraph local networks.json");
   fs.writeFileSync(
     path.resolve(__dirname, "../../guilds-subgraph/networks.json"),
     JSON.stringify(
@@ -59,6 +59,36 @@ if (fs.existsSync(addressesFilePath)) {
           },
           Create2Deployer: {
             address: addresses.Create2Deployer,
+            startBlock: 1,
+          },
+        },
+      },
+      null,
+      2
+    )
+  );
+
+  // Write addresses to 1.5 subgraph
+  console.log("Writing 1.5 subgraph local networks.json");
+  fs.writeFileSync(
+    path.resolve(__dirname, "../../1-5-subgraph/networks.json"),
+    JSON.stringify(
+      {
+        private: {
+          PermissionRegistry: {
+            address: addresses.PermissionRegistry,
+            startBlock: 1,
+          },
+          DAOController: {
+            address: addresses.DAOController,
+            startBlock: 1,
+          },
+          DAOAvatar: {
+            address: addresses.DAOAvatar,
+            startBlock: 1,
+          },
+          DAOReputation: {
+            address: addresses.DAOReputation,
             startBlock: 1,
           },
         },

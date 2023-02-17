@@ -2,27 +2,56 @@ const path = require("path");
 const fs = require("fs");
 const Web3 = require("web3");
 
-console.log("Executing apps/dev-scripts/src/buildConfig.js");
-const deploymentInfo = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../build/deployment-info.json"))
-);
+/**
+ * This script create the following files
+ * /build/abis.json
+ * /build/bytecodes.json
+ * /build/addresses.json
+ *
+ * After hardhat runs with output deployment-info.json file
+ */
 
-const config = Object.entries(deploymentInfo.contracts).reduce(
-  (acc, [contractName, { address, abi }]) => {
-    return {
-      ...acc,
-      addresses: {
-        ...acc.addresses,
-        [contractName]: address,
-      },
-      abis: {
-        ...acc.abis,
-        [contractName]: abi,
-      },
-    };
-  },
-  {}
+console.log("Executing apps/dev-scripts/src/buildConfig.js");
+
+// create build dir
+if (!fs.existsSync(path.resolve(__dirname, "../build"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../build"));
+}
+
+const deploymentInfoPath = path.join(
+  __dirname,
+  "../build/deployment-info.json"
 );
+if (fs.existsSync(deploymentInfoPath)) {
+  const deploymentInfo = JSON.parse(fs.readFileSync(deploymentInfoPath));
+
+  const config = Object.entries(deploymentInfo.contracts).reduce(
+    (acc, [contractName, { address, abi }]) => {
+      return {
+        ...acc,
+        addresses: {
+          ...acc.addresses,
+          [contractName]: address,
+        },
+        abis: {
+          ...acc.abis,
+          [contractName]: abi,
+        },
+      };
+    },
+    {}
+  );
+  // Create ./build/addresses.json file
+  fs.writeFileSync(
+    path.resolve(__dirname, "../build/addresses.json"),
+    JSON.stringify(config.addresses)
+  );
+  // Create ./build/abis.json file
+  fs.writeFileSync(
+    path.resolve(__dirname, "../build/abis.json"),
+    JSON.stringify(config.abis)
+  );
+}
 
 const GUILD_TYPES = {
   SnapshotRepERC20Guild: "SnapshotRepERC20Guild",
@@ -88,20 +117,5 @@ function createBytecodes() {
     JSON.stringify(data, null, 2)
   );
 }
-
-// create build dir
-if (!fs.existsSync(path.resolve(__dirname, "../build"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../build"));
-}
-// Create ./build/addresses.json file
-fs.writeFileSync(
-  path.resolve(__dirname, "../build/addresses.json"),
-  JSON.stringify(config.addresses)
-);
-// Create ./build/abis.json file
-fs.writeFileSync(
-  path.resolve(__dirname, "../build/abis.json"),
-  JSON.stringify(config.abis)
-);
 
 createBytecodes();

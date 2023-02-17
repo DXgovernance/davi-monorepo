@@ -8,9 +8,9 @@ hardhat_running() {
 }
 
 start_hardhat_node() {
-  # pnpm hardhat node --hostname 0.0.0.0 --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash' &
+  # pnpm hardhat node --hostname 0.0.0.0 --no-deploy --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
+  # pnpm hardhat node --hostname 0.0.0.0 --tags LocalhostGuild --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
   pnpm hardhat node --hostname 0.0.0.0 --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
-  # pnpm hardhat node --hostname 0.0.0.0 --export "build/deployment-info.json" | grep -vE 'Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call' &
 
   echo "Waiting for hardhat to launch..."
 
@@ -31,4 +31,5 @@ start_hardhat_node
 node ./src/buildConfig.js
 node ./src/updateProjectsConfig.js
 pnpm hardhat run ./src/updateAbis.js
+# pnpm hardhat run ./src/actions/addDaoToGuildRegistry.js
 echo "Hardhat node running locally"

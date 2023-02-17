@@ -34,7 +34,6 @@ export const VoteResult = styled.span<{}>`
 `;
 
 export const VoteQuorumMarker = styled.div<{
-  quorum: number;
   optionsAmount: number;
 }>`
   height: ${({ optionsAmount }) => `${1.2 * optionsAmount}rem`};

@@ -46,6 +46,14 @@ export const StyledRadioInput = styled(RadioInput)<{
   optionKey?: number;
 }>`
   accent-color: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
+  :hover {
+    border-color: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
+  }
+
+  :checked {
+    background-color: ${({ theme, optionKey }) =>
+      theme.colors.votes[optionKey]};
+  }
 `;
 
 export const OptionContainer = styled(Flex)<{

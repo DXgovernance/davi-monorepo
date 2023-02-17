@@ -81,7 +81,6 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
       {voteData && (
         <VoteQuorumContainer quorum={flagCheckered}>
           <VoteQuorumMarker
-            quorum={flagCheckered}
             optionsAmount={
               voteOptionswithVotingPower === 0 ? 1 : voteOptionswithVotingPower
             }

@@ -1,6 +1,7 @@
 version: '3'
 services:
   graph-node:
+    container_name: local-graph-node
     image: graphprotocol/graph-node
     ports:
       - '8000:8000'

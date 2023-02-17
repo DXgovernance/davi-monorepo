@@ -18,7 +18,7 @@ if (fs.existsSync(bytecodesFilePath)) {
   // Write bytecodes to davi
   console.log("Writing davi local bytecodes");
   fs.writeFileSync(
-    path.resolve(__dirname, "../../davi/src/bytecodes/local.json"),
+    path.resolve(__dirname, "../../../apps/davi/src/bytecodes/local.json"),
     JSON.stringify(bytecodes, null, 2)
   );
 
@@ -27,7 +27,7 @@ if (fs.existsSync(bytecodesFilePath)) {
   fs.writeFileSync(
     path.resolve(
       __dirname,
-      "../../guilds-subgraph/src/mappings/Create2Deployer/local.ts"
+      "../../../apps/guilds-subgraph/src/mappings/Create2Deployer/local.ts"
     ),
     `export const local = ${JSON.stringify(stringBytecodes)};`
   );
@@ -45,7 +45,7 @@ if (fs.existsSync(addressesFilePath)) {
   // Write addresses to guild subgraph
   console.log("Writing guild subgraph local networks.json");
   fs.writeFileSync(
-    path.resolve(__dirname, "../../guilds-subgraph/networks.json"),
+    path.resolve(__dirname, "../../../apps/guilds-subgraph/networks.json"),
     JSON.stringify(
       {
         private: {
@@ -71,7 +71,7 @@ if (fs.existsSync(addressesFilePath)) {
   // Write addresses to 1.5 subgraph
   console.log("Writing 1.5 subgraph local networks.json");
   fs.writeFileSync(
-    path.resolve(__dirname, "../../1-5-subgraph/networks.json"),
+    path.resolve(__dirname, "../../../apps/1-5-subgraph/networks.json"),
     JSON.stringify(
       {
         private: {
@@ -101,7 +101,10 @@ if (fs.existsSync(addressesFilePath)) {
   // Write addresses to davi
   console.log("Writing davi localhost config.json");
   fs.writeFileSync(
-    path.resolve(__dirname, "../../davi/src/configs/localhost/config.json"),
+    path.resolve(
+      __dirname,
+      "../../../apps/davi/src/configs/localhost/config.json"
+    ),
     JSON.stringify(
       {
         contracts: {

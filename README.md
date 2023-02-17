@@ -93,10 +93,9 @@ Running all at once:
 ##### Option 2
 Running in separate terminals:
 1. Run hardhat node locally: ```pnpm run devScript``` 
-2. Start docker containers: ```pnpm run subgraph:compose-up``` (Will require hardhat to be running and docker to be installed and open)
-3. Create and deploy local guilds subgraph: ```pnpm run guilds-subgraph:start-local``` (graph-node container should be running. Verify with `docker ps --filter "name=guilds-subgraph-graph-node*" -q | xargs -I {} docker inspect --format '{{.State.Status}}' {} ` before execute start-local)
-4. Create and deploy 1.5 subgraph ```pnpm run 1-5-subgraph:start-local```
-5. Build DAVI graph-client & run dApp:  ```pnpm run davi:build-graph-client && pnpm run davi:dev``` 
+2. Start docker containers: ```pnpm run graphNode:dev``` (Will require hardhat to be running and docker to be installed and open)
+3. Create and deploy local subgraphs(1.5 & guilds): ```pnpm run subgraph:dev``` (graph-node container should be running. Verify before execute start-local)
+4. Build DAVI graph-client & run dApp:  ```pnpm run davi:dev```. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
 
 
 ### Issues:

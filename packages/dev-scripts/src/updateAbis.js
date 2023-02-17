@@ -5,7 +5,7 @@ const hre = require("hardhat");
 const projects = [
   {
     name: "1-5-subgraph",
-    targetABIDir: "../../1-5-subgraph/abis",
+    targetABIDir: "../../../apps/1-5-subgraph/abis",
     targetContracts: [
       "DAOAvatar",
       "DAOController",
@@ -17,7 +17,7 @@ const projects = [
   },
   {
     name: "guilds-subgraph",
-    targetABIDir: "../../guilds-subgraph/abis",
+    targetABIDir: "../../../apps/guilds-subgraph/abis",
     targetContracts: [
       "BaseERC20Guild",
       "Create2Deployer",
@@ -31,7 +31,7 @@ const projects = [
   },
   {
     name: "davi",
-    targetABIDir: "../../davi/src/contracts",
+    targetABIDir: "../../../apps/davi/src/contracts",
     targetContracts: [
       "BaseERC20Guild",
       "DXDGuild",

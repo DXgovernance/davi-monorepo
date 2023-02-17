@@ -31,5 +31,4 @@ start_hardhat_node
 node ./src/buildConfig.js
 node ./src/updateProjectsConfig.js
 pnpm hardhat run ./src/updateAbis.js
-# pnpm hardhat run ./src/actions/addDaoToGuildRegistry.js
 echo "Hardhat node running locally"

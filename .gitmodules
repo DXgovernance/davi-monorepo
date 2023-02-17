@@ -1,4 +1,4 @@
 [submodule "dxdao-contracts"]
-	path = apps/dxdao-contracts
+	path = packages/dxdao-contracts
 	url = https://github.com/DXgovernance/dxdao-contracts.git
 	branch = v2.0

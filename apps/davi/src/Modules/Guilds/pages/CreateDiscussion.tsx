@@ -36,12 +36,10 @@ import { isReadOnly } from 'provider/wallets';
 
 const CreateDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
-
   const { guildId, chainName: chain } = useTypedParams();
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
   );
-
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [user, setUser] = useState('');
@@ -75,11 +73,10 @@ const CreateDiscussionPage: React.FC = () => {
     md: discussionBodyMd,
     html: discussionBodyHtml,
   } = useTextEditor(
-    `${guildId}/create-discussion`,
+    `${guildId}/create`,
     345600000,
     t('discussions.discussionPlaceholder')
   );
-
   const hasWalletConnection = useMemo(() => {
     return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;
   }, [connector, isWalletConnected, isWalletConnecting]);
@@ -101,14 +98,10 @@ const CreateDiscussionPage: React.FC = () => {
       setIsWalletModalOpen(true);
       return '';
     }
-
     if (postTemplate(post)) {
       const res = await createPost(orbis, post);
       handleBack();
-      return {
-        res,
-        postTemplate,
-      };
+      return res;
     } else {
       return 'Something went wrong when trying to create a discussion';
     }

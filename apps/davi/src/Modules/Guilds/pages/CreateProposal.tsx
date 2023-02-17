@@ -63,7 +63,6 @@ const CreateProposalPage: React.FC = () => {
     },
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
-
   const createProposal = useCreateProposal(guildId, discussionId);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -90,7 +89,7 @@ const CreateProposalPage: React.FC = () => {
     html: proposalBodyHTML,
     clear,
   } = useTextEditor(
-    `${guildId}/create-proposal`,
+    `${guildId}/create`,
     345600000,
     t('createProposal.enterProposalDescription')
   );
@@ -131,6 +130,20 @@ const CreateProposalPage: React.FC = () => {
     setIsMetadataErrorModalOpen(true);
   };
 
+  useEffect(() => {
+    const handleGetProposal = async () => {
+      const { data } = await orbis.getPost(discussionId);
+      setTitle(data.content.title);
+    };
+    if (discussionId) {
+      console.log({ proposalBodyHTML });
+      console.log({
+        proposalBodyMd,
+      });
+      handleGetProposal();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [discussionId, orbis]);
   useEffect(() => {
     if (skipMetadataUpload && !isMetadataErrorModalOpen) handleCreateProposal();
     // eslint-disable-next-line react-hooks/exhaustive-deps

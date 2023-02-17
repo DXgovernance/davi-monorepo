@@ -45,8 +45,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
         optionLabel,
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
-          totalLocked,
-          2
+          totalLocked
         ),
       };
     });

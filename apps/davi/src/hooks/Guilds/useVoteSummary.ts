@@ -22,7 +22,7 @@ export default function useVoteSummary(
       const newVotes = [];
       for (var i = 0; i <= totalVotes?.length - 1; i++) {
         if (totalVotes[i]?.gt(0)) {
-          newVotes.push(getBigNumberPercentage(totalVotes[i], totalLocked, 2));
+          newVotes.push(getBigNumberPercentage(totalVotes[i], totalLocked));
         } else {
           newVotes.push(0);
         }

@@ -87,7 +87,7 @@ const ProposalPage: React.FC = () => {
     return <></>;
   } else {
     if (!isGuildAvailabilityLoading) {
-      if (!proposalIds?.includes(proposalId)) {
+      if (proposalIds && proposalIds.includes(proposalId) === false) {
         return (
           <Result
             state={ResultState.ERROR}
@@ -121,7 +121,6 @@ const ProposalPage: React.FC = () => {
         );
       }
     }
-
     return (
       <PageContainer>
         <PageContent>

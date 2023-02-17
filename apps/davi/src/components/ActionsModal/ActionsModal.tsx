@@ -28,7 +28,7 @@ import {
 import { EditorWrapper } from './ActionsModal.styled';
 import { ActionModalProps, SelectedFunction } from './types';
 import { TokenSpendApproval } from './components/ApproveSpendTokens/ApproveSpendTokens';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
+import { useHookStoreProvider } from 'stores';
 
 const ActionModal: React.FC<ActionModalProps> = ({
   action,
@@ -40,6 +40,11 @@ const ActionModal: React.FC<ActionModalProps> = ({
 }) => {
   const { t } = useTranslation();
   const { guildId } = useTypedParams();
+  const {
+    hooks: {
+      fetchers: { useGuildConfig },
+    },
+  } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildId);
   // Supported Actions
   const [selectedAction, setSelectedAction] =
@@ -100,7 +105,7 @@ const ActionModal: React.FC<ActionModalProps> = ({
       return supportedActions[selectedAction].title;
     }
 
-    return t('addAction');
+    return t('actionBuilder.action.addAction');
   }
 
   function getContent() {

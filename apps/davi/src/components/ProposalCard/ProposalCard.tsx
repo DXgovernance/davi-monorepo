@@ -1,8 +1,7 @@
 import { ProposalCardProps } from 'components/ProposalCard/types';
-import { Avatar } from 'components/Avatar';
 import { ProposalStatus } from 'components/ProposalStatus';
 import { Loading } from 'components/primitives/Loading';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { shortenAddress } from 'utils';
 import {
@@ -16,25 +15,21 @@ import {
 } from './ProposalCard.styled';
 import ProposalCardWinningOption from './ProposalCardWinningOption/ProposalCardWinningOption';
 import ProposalCardActions from './ProposalCardActions/ProposalCardActions';
+import { Avatar } from 'components/Avatar';
 
 export const ProposalCard: React.FC<ProposalCardProps> = ({
   proposal,
   ensAvatar,
   href,
   statusProps,
-  options,
   address,
 }) => {
   return (
-    <UnstyledLink to={href || '#'} data-testid="proposal-card">
+    <StyledLink to={href || '#'} data-testid="proposal-card">
       <ProposalCardWrapper disabled={!href}>
         <CardHeader>
           <IconDetailWrapper>
-            <Avatar
-              src={ensAvatar?.imageUrl}
-              defaultSeed={proposal?.creator}
-              size={24}
-            />
+            <Avatar src={ensAvatar?.imageUrl} defaultSeed={address} size={24} />
             <Detail>
               {ensAvatar?.ensName ||
                 (proposal?.creator ? (
@@ -56,7 +51,7 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
           </CardTitle>
         </CardContent>
         <CardFooter>
-          <ProposalCardWinningOption options={options} />
+          <ProposalCardWinningOption options={proposal?.options} />
           <ProposalCardActions
             votesOfVoter={proposal?.votesOfVoter}
             proposalCreator={proposal?.creator}
@@ -64,6 +59,6 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
           />
         </CardFooter>
       </ProposalCardWrapper>
-    </UnstyledLink>
+    </StyledLink>
   );
 };

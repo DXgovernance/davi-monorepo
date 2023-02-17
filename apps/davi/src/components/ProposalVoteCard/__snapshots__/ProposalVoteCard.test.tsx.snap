@@ -13,6 +13,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   border-radius: 10px;
   margin-bottom: 1rem;
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  background-color: #1B1D1F;
 }
 
 .c2 {
@@ -47,6 +48,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  color: #DEFF4E;
 }
 
 .c8 {
@@ -279,7 +281,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
       <h2
         class="c3 c4 c5"
       >
-        castVote
+        voting.castVote
         <button
           class="c6 c7"
         >
@@ -389,11 +391,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
         <div
           class="c0 c23"
         >
-          youVotedForOption
-           
-          with
-           
-          0%
+          voting.youVotedForOption
         </div>
       </div>
     </div>

@@ -23,10 +23,13 @@ const AddressButton: React.FC<AddressButtonProps> = ({
 
   return (
     <StyledAddressButton
+      data-testid="creator-address-name"
       variant="secondary"
       onClick={onClick}
       iconLeft
       type={type}
+      backgroundColor={'none'}
+      outline={'none'}
     >
       <IconHolder>
         <Avatar src={imageUrl} defaultSeed={address} size={24} />

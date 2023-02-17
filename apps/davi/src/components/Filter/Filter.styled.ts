@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IconButton } from 'components/primitives/Button';
+import { Button, IconButton } from 'components/primitives/Button';
 import { Flex, Box } from 'components/primitives/Layout';
 import { Badge } from 'components/Badge';
 
@@ -42,4 +42,10 @@ export const StyledInputWrapper = styled(Box)`
 
 export const FilterBadge = styled(Badge)`
   margin-left: 5px;
+`;
+
+export const StyledButton = styled(Button)`
+  white-space: nowrap;
+  height: 45px;
+  border-color: ${({ theme }) => theme.colors.grey3};
 `;

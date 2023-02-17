@@ -25,7 +25,7 @@ interface ImplementationTypeConfigReturn extends ImplementationTypeConfig {
 export default function useGuildImplementationTypeConfig(
   guildAddress: string
 ): ImplementationTypeConfigReturn {
-  const { isLoading, capabilities, name } = useHookStoreProvider();
+  const { capabilities, name } = useHookStoreProvider();
 
   let type: GuildImplementationType;
 
@@ -33,7 +33,7 @@ export default function useGuildImplementationTypeConfig(
     case 'SnapshotERC20Guild':
       type = GuildImplementationType.SnapshotERC20Guild;
       break;
-    case 'SnapshotRepGuild':
+    case 'SnapshotRepERC20Guild':
       type = GuildImplementationType.SnapshotRepERC20Guild;
       break;
     default:
@@ -47,6 +47,6 @@ export default function useGuildImplementationTypeConfig(
     isRepGuild: capabilities.votingPower === 'soulbound' ? true : false,
     isSnapshotGuild:
       capabilities.votingPowerTally === 'snapshot' ? true : false,
-    loaded: !isLoading,
+    loaded: true,
   };
 }

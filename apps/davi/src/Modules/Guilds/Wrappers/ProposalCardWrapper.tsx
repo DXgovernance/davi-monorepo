@@ -4,9 +4,7 @@ import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
 import { MAINNET_ID } from 'utils/constants';
 import useProposalState from 'hooks/Guilds/useProposalState';
 import { useFilter } from 'contexts/Guilds/filters';
-import useProposalCalls from 'Modules/Guilds/Hooks/useProposalCalls';
 import { useAccount } from 'wagmi';
-import useProposalVotesOfVoter from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
 import useTimeDetail from 'Modules/Guilds/Hooks/useTimeDetail';
 import { useHookStoreProvider } from 'stores';
 
@@ -18,7 +16,7 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
 }) => {
   const {
     hooks: {
-      fetchers: { useProposal },
+      fetchers: { useProposal, useProposalVotesOfVoter },
     },
   } = useHookStoreProvider();
   const { guildId, chainName } = useTypedParams();
@@ -26,7 +24,7 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
   const ensAvatar = useENSAvatar(proposal?.creator, MAINNET_ID);
   const status = useProposalState(proposal);
   const { withFilters } = useFilter();
-  const { options } = useProposalCalls(guildId, proposalId);
+  const options = proposal?.options;
   const { address } = useAccount();
   const { data: proposalVotesOfVoter } = useProposalVotesOfVoter(
     guildId,
@@ -50,7 +48,6 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
         status,
         endTime: endTime,
       }}
-      options={options}
       address={address}
     />
   )(proposal, status, options);

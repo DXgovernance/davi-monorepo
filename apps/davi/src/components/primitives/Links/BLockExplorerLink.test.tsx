@@ -1,6 +1,11 @@
 import { mockBigNumber } from 'components/ActionsBuilder/SupportedActions/SetGuildConfig/fixtures';
+import { MOCK_ENS_NAME, MOCK_IMAGE_URL } from 'hooks/Guilds/ens/fixtures';
 import { render } from 'utils/tests';
 import { BlockExplorerLink } from './BlockExplorerLink';
+
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
 
 jest.mock('wagmi', () => ({
   useNetwork: () => ({
@@ -39,13 +44,28 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   }),
 }));
 
-jest.mock('hooks/Guilds/erc20/useERC20Info', () => ({
-  useERC20Info: () => ({
-    name: 'Test ERC20',
-    symbol: 'TEST',
-    decimals: 18,
-    totalSupply: mockBigNumber,
+jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
+  __esModule: true,
+  default: () => ({
+    ensName: MOCK_ENS_NAME,
+    imageUrl: MOCK_IMAGE_URL,
   }),
+}));
+
+const mockUseERC20InfoReturn = jest.fn().mockReturnValue({
+  name: 'Test ERC20',
+  symbol: 'TEST',
+  decimals: 18,
+  totalSupply: mockBigNumber,
+});
+
+jest.mock('hooks/Guilds/erc20/useERC20Info', () => ({
+  useERC20Info: (address: string) =>
+    address
+      ? {
+          data: mockUseERC20InfoReturn(),
+        }
+      : { data: null },
 }));
 
 describe('BlockExplorerLink', () => {
@@ -110,6 +130,27 @@ describe('BlockExplorerLink', () => {
       );
       queryByTestId = componentWithAvatar.queryByTestId;
       expect(queryByTestId('avatar')).toBeNull();
+    });
+  });
+
+  describe('BlockExplorerLink fetch token data', () => {
+    it('should fetch token data by default', async () => {
+      render(
+        <BlockExplorerLink
+          address={'0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6'}
+        />
+      );
+      expect(mockUseERC20InfoReturn).toHaveBeenCalled();
+    });
+
+    it('should not fetch token data if fetchTokenData is false', async () => {
+      render(
+        <BlockExplorerLink
+          address={'0x4e91c9F086DB2Fd8aDb1888e9b18e17F70B7BdB6'}
+          fetchTokenData={false}
+        />
+      );
+      expect(mockUseERC20InfoReturn).not.toHaveBeenCalled();
     });
   });
 });

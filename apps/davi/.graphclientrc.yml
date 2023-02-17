@@ -1,0 +1,7 @@
+sources:
+  - name: dxgov-guild-subgraph
+    handler:
+      graphql:
+        endpoint: https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis
+documents:
+  - './src/**/*.graphql'

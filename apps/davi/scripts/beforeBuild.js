@@ -1,77 +1,63 @@
 const fs = require('fs');
+const path = require('path');
 
-if (!fs.existsSync('./src/configs/localhost')) {
-  fs.mkdirSync('./src/configs/localhost');
+if (!fs.existsSync(path.resolve(__dirname, '../src/configs/localhost'))) {
+  fs.mkdirSync(path.resolve(__dirname, '../src/configs/localhost'));
 }
 
 fs.writeFileSync(
-  './src/configs/localhost/config.json',
+  path.resolve(__dirname, '../src/configs/localhost/config.json'),
   JSON.stringify(
     {
-      cache: {
-        fromBlock: 0,
-        toBlock: 1,
-        ipfsHash:
-          '0x0000000000000000000000000000000000000000000000000000000000000000',
-      },
       contracts: {
-        fromBlock: 1,
-        avatar: '0x0000000000000000000000000000000000000000',
-        reputation: '0x0000000000000000000000000000000000000000',
-        token: '0x0000000000000000000000000000000000000000',
-        controller: '0x0000000000000000000000000000000000000000',
-        permissionRegistry: '0x0000000000000000000000000000000000000000',
-        schemes: {},
         utils: {
-          multicall: '0x0000000000000000000000000000000000000000',
-          dxDaoNFT: '0x0000000000000000000000000000000000000000',
-          dxdVestingFactory: '0x0000000000000000000000000000000000000000',
           guildRegistry: '0xc2dd7F6caA0f23F7e30F3cae1206da253373A923',
         },
         votingMachines: {},
       },
-      recommendedCalls: [],
-      proposalTemplates: [],
-      proposalTypes: [
-        {
-          id: 'custom',
-          title: 'Custom',
-        },
-      ],
-      contributionLevels: [
-        {
-          id: '1',
-          dxd: 2000,
-          stable: 4000,
-          rep: 0.1667,
-        },
-        {
-          id: '2',
-          dxd: 3000,
-          stable: 5000,
-          rep: 0.1667,
-        },
-        {
-          id: '3',
-          dxd: 4000,
-          stable: 6000,
-          rep: 0.1667,
-        },
-        {
-          id: '4',
-          dxd: 5000,
-          stable: 7000,
-          rep: 0.1667,
-        },
-        {
-          id: '5',
-          dxd: 6000,
-          stable: 8000,
-          rep: 0.1667,
-        },
-      ],
-      tokens: [],
     },
+    null,
+    2
+  )
+);
+
+fs.writeFileSync(
+  path.resolve(__dirname, '../src/bytecodes/local.json'),
+  JSON.stringify(
+    [
+      {
+        type: 'ERC20Guild',
+        bytecodeHash:
+          '0x946cda015525e920957e6d1f72d350ba9cdadf2461dacb479cf13d8ccc8f47c5',
+        deployedBytecodeHash:
+          '0x73b3bbf79394482b90246b47a2b2968521c3f4e01230fb2ae4a33ca9975c9166',
+        features: [],
+      },
+      {
+        type: 'SnapshotRepERC20Guild',
+        bytecodeHash:
+          '0x345f0ee269c46278f442db8cfdf18954092025caa8b7d30196b00469727dc066',
+        deployedBytecodeHash:
+          '0x3e69834ec324d588d1e334dc8660bf3d10b070c3e7a7b5364f79c03b5ee1e1ff',
+        features: ['REP', 'SNAPSHOT'],
+      },
+      {
+        type: 'SnapshotERC20Guild',
+        bytecodeHash:
+          '0x81681150afcdabc59e66998de1dbf6eb392c50e902a3ae0e4ec79191618eb36b',
+        deployedBytecodeHash:
+          '0xb79ad1521611a2035347a8e1bfdee11bb52eab831f4070dec76730e69674d36a',
+        features: ['SNAPSHOT'],
+      },
+      {
+        type: 'DXDGuild',
+        bytecodeHash:
+          '0x7f341343b9c604c60837d3687fec3232d2a1955d69dd4e3794db77fa326c60dc',
+        deployedBytecodeHash:
+          '0xa68a425e0b36d3be6b0305f8a5e596ca8b4446ea9fff5bddb906b36ecb3d7797',
+        features: [],
+      },
+    ],
     null,
     2
   )

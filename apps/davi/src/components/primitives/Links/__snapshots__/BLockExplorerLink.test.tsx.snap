@@ -34,10 +34,6 @@ exports[`BlockExplorerLink BlockExplorerLink render Should match snapshot 1`] = 
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -72,7 +68,7 @@ exports[`BlockExplorerLink BlockExplorerLink render Should match snapshot 1`] = 
       <div
         class="c2 c3"
       >
-        name.eth
+        wagmi.eth
       </div>
       <svg
         fill="none"

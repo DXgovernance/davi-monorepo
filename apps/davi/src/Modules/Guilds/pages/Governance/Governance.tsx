@@ -1,30 +1,55 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
-import { useContext, useEffect, useMemo } from 'react';
 import { Result, ResultState } from 'components/Result';
 import { Flex } from 'components/primitives/Layout';
 import ProposalCardWrapper from '../../Wrappers/ProposalCardWrapper';
-import { useGuildProposalIds } from 'Modules/Guilds/Hooks/useGuildProposalIds';
 import { useFilter } from 'contexts/Guilds';
 import { Input } from 'components/primitives/Forms/Input';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
-import useActiveProposalsNow from 'Modules/Guilds/Hooks/useGuildActiveProposals';
 import { useTypedParams } from '../../Hooks/useTypedParams';
-import { UnstyledLink } from 'components/primitives/Links';
-import { Button } from 'components/primitives/Button';
-import { ProposalsList, StyledHeading, StyledLink } from './Governance.styled';
+import { StyledLink } from 'components/primitives/Links';
+import {
+  ActionButtonContainer,
+  ProposalsList,
+  StyledHeading,
+} from './Governance.styled';
 import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
-import useIsProposalCreationAllowed from 'Modules/Guilds/Hooks/useIsProposalCreationAllowed';
+import { useHookStoreProvider } from 'stores';
+import { Button } from 'components/primitives/Button';
+import { useNavigate } from 'react-router-dom';
+import { useAccount } from 'wagmi';
+import { isReadOnly } from 'provider/wallets';
+import { WalletModal } from 'components/Web3Modals';
 
 const Governance = ({ guildId }) => {
+  const {
+    hooks: {
+      fetchers: { useGetNumberOfActiveProposals, useGuildProposalIds },
+    },
+  } = useHookStoreProvider();
+
   const { isLoading } = useContext(GuildAvailabilityContext);
-  const { data: proposalIds, error } = useGuildProposalIds(guildId);
+  const { data: proposalIds, errorMessage } = useGuildProposalIds(guildId);
   const { t } = useTranslation();
-  const { data: activeProposals } = useActiveProposalsNow(guildId);
+  const { data: activeProposals } = useGetNumberOfActiveProposals(guildId);
   const { chainName } = useTypedParams();
-  const isProposalCreationAllowed = useIsProposalCreationAllowed();
+
+  const {
+    connector,
+    isConnecting: isWalletConnecting,
+    isConnected: isWalletConnected,
+  } = useAccount();
+
+  const navigate = useNavigate();
+
+  const hasWalletConnection = useMemo(() => {
+    return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;
+  }, [connector, isWalletConnected, isWalletConnecting]);
+
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
 
   /*
   Since filters are a global state, we need to reset all of them
@@ -67,12 +92,31 @@ const Governance = ({ guildId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [proposalIds]);
 
-  if (!isLoading && !proposalIds && error) {
+  const toggleWalletModal = () => {
+    /**
+     * Route to the create discussion page, despite of the wallet connectivity status
+     */
+    if (isWalletModalOpen) {
+      navigate(`/${chainName}/${guildId}/create`);
+    }
+
+    setIsWalletModalOpen(!isWalletModalOpen);
+  };
+
+  const handleCreateDiscussion = () => {
+    if (hasWalletConnection) {
+      navigate(`/${chainName}/${guildId}/create`);
+    } else {
+      toggleWalletModal();
+    }
+  };
+
+  if (!isLoading && !proposalIds && errorMessage) {
     return (
       <Result
         state={ResultState.ERROR}
-        title={t('errorMessage.genericProposalError')}
-        subtitle={error.message}
+        title={t('proposal.errors.genericProposalError')}
+        subtitle={errorMessage}
       />
     );
   }
@@ -86,26 +130,28 @@ const Governance = ({ guildId }) => {
             setSearchQuery(e.target.value);
           }}
           icon={<AiOutlineSearch size={24} />}
-          placeholder={t('searchTitleEnsAddress')}
+          placeholder={t('filter.searchTitleEnsAddress')}
+          marginRight={'1rem'}
         />
-        {isProposalCreationAllowed && (
-          <UnstyledLink to={`/${chainName}/${guildId}/create`}>
-            <Button variant="secondary" data-testid="create-discussion-button">
-              {t('forum.createDiscussion')}
-            </Button>
-          </UnstyledLink>
-        )}
+        <ActionButtonContainer onClick={handleCreateDiscussion}>
+          <Button
+            variant="primaryWithBorder"
+            data-testid="create-discussion-btn"
+          >
+            {t('discussions.createDiscussion')}
+          </Button>
+        </ActionButtonContainer>
       </Flex>
       <ProposalsList data-testid="proposals-list">
-        <StyledHeading size={2}>{t('proposals')}</StyledHeading>
+        <StyledHeading size={2}>{t('proposals.proposals')}</StyledHeading>
         {activeProposals && activeProposals._hex === '0x00' && (
           <div data-testid="no-active-proposals-message">
-            {t('noActiveProposalsMessage')}.{' '}
+            {t('proposals.noActiveProposalsMessage')}.{' '}
             <StyledLink
               data-testid="all-proposals-hyperlink"
               to={`/${chainName}/${guildId}/all-proposals`}
             >
-              {t('goToAllProposalsPage')}.
+              {t('proposals.goToAllProposalsPage')}.
             </StyledLink>
           </div>
         )}
@@ -126,9 +172,16 @@ const Governance = ({ guildId }) => {
         )}
       </ProposalsList>
       <ProposalsList>
-        <StyledHeading size={2}>{t('forum.discussions_other')}</StyledHeading>
+        <StyledHeading size={2}>
+          {t('discussions.discussions_other')}
+        </StyledHeading>
         <Discussions />
       </ProposalsList>
+      <WalletModal
+        isOpen={isWalletModalOpen}
+        onClose={toggleWalletModal}
+        title={t('connections.connectTheWalletToProceed')}
+      />
     </>
   );
 };

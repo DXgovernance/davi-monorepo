@@ -27,6 +27,7 @@ export const ActionsBuilder: React.FC<ActionsBuilderProps> = ({
   const onSave = () => setIsEditable(false);
 
   useEffect(() => {
+    if (!options) return;
     const encodedOptions = bulkEncodeCallsFromOptions(options);
     setEncodedOptions(encodedOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,13 +37,15 @@ export const ActionsBuilder: React.FC<ActionsBuilderProps> = ({
     <SidebarCard
       header={
         <SidebarCardHeaderSpaced>
-          <CardHeader>{t('actions_other')}</CardHeader>
+          <CardHeader>{t('actionBuilder.action.actions_other')}</CardHeader>
           {editable && (
             <EditButton
               variant="secondary"
               onClick={() => (isEditable ? onSave() : onEdit())}
             >
-              {isEditable ? t('save') : t('edit')}
+              {isEditable
+                ? t('actionBuilder.save')
+                : t('actionBuilder.action.edit')}
             </EditButton>
           )}
         </SidebarCardHeaderSpaced>

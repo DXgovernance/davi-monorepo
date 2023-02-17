@@ -2,14 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGuildRegistry } from 'Modules/Guilds/Hooks/useGuildRegistry';
 import { GuildCard } from 'components/GuildCard/GuildCard';
-
-import useGuildMemberTotal from 'Modules/Guilds/Hooks/useGuildMemberTotal';
-import useActiveProposalsNow from 'Modules/Guilds/Hooks/useGuildActiveProposals';
 import useENSNameFromAddress from 'hooks/Guilds/ens/useENSNameFromAddress';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
-
 import { CardsContainer } from './LandingPage.styled';
-import useGuildImplementationType from 'Modules/Guilds/Hooks/useGuildImplementationType';
+import { HookStoreProvider, useHookStoreProvider } from 'stores';
+import { Result, ResultState } from 'components/Result';
 
 const GuildCardLoader = () => {
   return (
@@ -25,17 +21,38 @@ const GuildCardLoader = () => {
   );
 };
 
-const GuildCardWithContent = ({ guildAddress, t }) => {
-  const { data: guildConfig } = useGuildConfig(guildAddress);
-  const { isRepGuild } = useGuildImplementationType(guildAddress);
-  const { data: numberOfMembers } = useGuildMemberTotal(
-    guildAddress,
-    guildConfig?.token,
-    isRepGuild
+const GuildCardUnmatched = () => {
+  const { t } = useTranslation();
+  return (
+    <GuildCard
+      isUnmatched={true}
+      isLoading={false}
+      guildAddress={null}
+      numberOfMembers={null}
+      t={t}
+      numberOfActiveProposals={null}
+      ensName={null}
+      data={null}
+    />
   );
-  const { data: numberOfActiveProposals } = useActiveProposalsNow(guildAddress);
+};
+
+const GuildCardWithContent = ({ guildAddress, t }) => {
+  const {
+    hooks: {
+      fetchers: {
+        useGuildConfig,
+        useGetNumberOfActiveProposals,
+        useMemberCount,
+      },
+    },
+  } = useHookStoreProvider();
+  const { data: guildConfig } = useGuildConfig(guildAddress);
+
+  const { data: numberOfMembers } = useMemberCount(guildAddress);
+  const { data: numberOfActiveProposals } =
+    useGetNumberOfActiveProposals(guildAddress);
   const ensName = useENSNameFromAddress(guildAddress)?.ensName?.split('.')[0];
-  const { data } = useGuildConfig(guildAddress);
 
   return (
     <GuildCard
@@ -44,7 +61,7 @@ const GuildCardWithContent = ({ guildAddress, t }) => {
       t={t}
       numberOfActiveProposals={numberOfActiveProposals}
       ensName={ensName}
-      data={data}
+      data={guildConfig}
     />
   );
 };
@@ -54,14 +71,20 @@ const LandingPage: React.FC = () => {
   const { data: allGuilds, error, isLoading } = useGuildRegistry();
 
   const EmptyGuilds = () => {
-    return <h1>{t('noGuildsRegistered')}</h1>;
+    return <h1>{t('daoErrors.noDAOsRegistered')}</h1>;
   };
 
-  if (!allGuilds || allGuilds.length === 0) {
-    return <EmptyGuilds />;
+  if (error) {
+    return (
+      <Result
+        state={ResultState.ERROR}
+        title={t('daoErrors.errorLoadingDAOsList')}
+        subtitle={error?.message}
+      />
+    );
   }
 
-  if (isLoading) {
+  if (isLoading || !allGuilds) {
     return (
       <CardsContainer>
         <GuildCardLoader />
@@ -71,6 +94,10 @@ const LandingPage: React.FC = () => {
     );
   }
 
+  if (allGuilds.length === 0) {
+    return <EmptyGuilds />;
+  }
+
   return (
     <>
       <CardsContainer>
@@ -78,11 +105,14 @@ const LandingPage: React.FC = () => {
           <>{/* Render error state */}</>
         ) : (
           allGuilds.map(guildAddress => (
-            <GuildCardWithContent
+            <HookStoreProvider
               key={guildAddress}
-              guildAddress={guildAddress}
-              t={t}
-            />
+              daoId={guildAddress}
+              loadingIndicator={<GuildCardLoader />}
+              matchErrorIndicator={<GuildCardUnmatched />}
+            >
+              <GuildCardWithContent guildAddress={guildAddress} t={t} />
+            </HookStoreProvider>
           ))
         )}
       </CardsContainer>

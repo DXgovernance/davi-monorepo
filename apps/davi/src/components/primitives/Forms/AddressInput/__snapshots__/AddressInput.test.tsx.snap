@@ -22,10 +22,12 @@ exports[`AddressInput Snapshots should match snapshot isInvalid 1`] = `
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-right: 0;
   border: 1px solid #E75C5C;
   border-radius: 1.5rem;
   padding: 0.5rem 0.8rem;
   background-color: transparent;
+  outline: 1px solid #E75C5C;
 }
 
 .c0 input {
@@ -62,10 +64,12 @@ exports[`AddressInput Snapshots should match snapshot isInvalid 1`] = `
 
 .c1 {
   margin-right: 0.3rem;
+  color: #737977;
 }
 
 .c3 {
   margin-left: 0.3rem;
+  color: #737977;
 }
 
 .c4 {
@@ -164,10 +168,12 @@ exports[`AddressInput Snapshots should match snapshot with ENS disabled 1`] = `
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-right: 0;
   border: 1px solid #303338;
   border-radius: 1.5rem;
   padding: 0.5rem 0.8rem;
   background-color: transparent;
+  outline: 1px solid #737977;
 }
 
 .c0 input {
@@ -204,10 +210,12 @@ exports[`AddressInput Snapshots should match snapshot with ENS disabled 1`] = `
 
 .c1 {
   margin-right: 0.3rem;
+  color: #737977;
 }
 
 .c5 {
   margin-left: 0.3rem;
+  color: #737977;
 }
 
 .c2 {
@@ -325,10 +333,12 @@ exports[`AddressInput Snapshots should match snapshot with address 1`] = `
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-right: 0;
   border: 1px solid #303338;
   border-radius: 1.5rem;
   padding: 0.5rem 0.8rem;
   background-color: transparent;
+  outline: 1px solid #737977;
 }
 
 .c0 input {
@@ -365,10 +375,12 @@ exports[`AddressInput Snapshots should match snapshot with address 1`] = `
 
 .c1 {
   margin-right: 0.3rem;
+  color: #737977;
 }
 
 .c5 {
   margin-left: 0.3rem;
+  color: #737977;
 }
 
 .c2 {

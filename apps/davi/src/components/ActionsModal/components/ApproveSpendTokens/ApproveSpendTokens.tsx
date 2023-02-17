@@ -75,10 +75,12 @@ const ApproveSpendTokens: React.FC<ApproveSpendTokensProps> = ({
   return (
     <Wrapper>
       <SectionWrapper>
-        <SectionTitle>{t('selectTokensToSpend')}</SectionTitle>
+        <SectionTitle>
+          {t('actionBuilder.approval.selectTokensToSpend')}
+        </SectionTitle>
         <ControlRow>
           <Control>
-            <ControlLabel>{t('amount')}</ControlLabel>
+            <ControlLabel>{t('actionBuilder.inputs.amount')}</ControlLabel>
             <ControlRow>
               <TokenAmountInput
                 decimals={tokenInfo?.decimals}
@@ -91,7 +93,7 @@ const ApproveSpendTokens: React.FC<ApproveSpendTokensProps> = ({
           <Spacer />
 
           <Control>
-            <ControlLabel>{t('asset')}</ControlLabel>
+            <ControlLabel>{t('actionBuilder.inputs.asset')}</ControlLabel>
             <ControlRow onClick={() => setIsTokenPickerOpen(true)}>
               <Input
                 value={tokenInfo?.symbol || ''}
@@ -129,7 +131,7 @@ const ApproveSpendTokens: React.FC<ApproveSpendTokensProps> = ({
           onClick={confirm}
           disabled={!amount || !token}
         >
-          {t('approve')}
+          {t('actionBuilder.approval.approve')}
         </Button>
       </SectionWrapper>
     </Wrapper>

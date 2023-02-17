@@ -4,6 +4,10 @@ import { mockChain } from 'components/Web3Modals/fixtures';
 
 jest.mock('contexts/Guilds/orbis', () => ({}));
 
+jest.mock('stores/modules/guilds/common/fetchers/rpc', () => ({
+  useProposalCalls: () => ({ options: [] }),
+}));
+
 jest.mock('wagmi', () => ({
   chain: {},
   useAccount: () => ({ isConnected: false }),
@@ -27,6 +31,12 @@ jest.mock('provider', () => ({
 
 jest.mock('provider/wallets', () => ({
   isReadOnly: () => true,
+}));
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
 }));
 
 describe('Header', () => {

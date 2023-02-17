@@ -45,72 +45,77 @@ const ContractsList: React.FC<ContractsListProps> = ({
   return (
     <Wrapper data-testid="actions-modal-contract-list">
       <SectionWrapper>
-        <SectionTitle>{t('core')}</SectionTitle>
+        <SectionTitle>{t('actionBuilder.core')}</SectionTitle>
         <ActionsButton
-          data-testid="supported-action-erc20transfer"
+          data-testid="erc20transfer-action"
           onClick={() =>
             onSupportedActionSelect(SupportedAction.ERC20_TRANSFER)
           }
         >
           <ButtonLabel>
             <StyledIcon src={Vector} />
-            {t('transfer')}
+            {t('actionBuilder.transfer.transfer')}
           </ButtonLabel>
         </ActionsButton>
         <ActionsButton
+          data-testid="set-permission-action"
           onClick={() => {
             onSupportedActionSelect(SupportedAction.SET_PERMISSIONS);
           }}
         >
           <ButtonLabel>
             <StyledIcon src={Vector} />
-            {t('permissions.setPermissions')}
+            {t('actionBuilder.permissions.setPermissions')}
           </ButtonLabel>
         </ActionsButton>
         {!!isRepGuild ? (
           <ActionsButton
+            data-testid="rep-mint-action"
             onClick={() => onSupportedActionSelect(SupportedAction.REP_MINT)}
           >
             <ButtonLabel>
               <StyledIcon src={Mint} />
-              {t('mintRep')}
+              {t('actionBuilder.repMint.mintRep')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}
         {isAvailableOnENS(chain.id) ? (
           <ActionsButton
+            data-testid="ens-update-content-action"
             onClick={() =>
               onSupportedActionSelect(SupportedAction.ENS_UPDATE_CONTENT)
             }
           >
             <ButtonLabel>
               <StyledIcon src={ENSIcon} />
-              {t('ens.updateContentCoreAction')}
+              {t('actionBuilder.ens.updateContentCoreAction')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}
         <ActionsButton
+          data-testid="set-guild-config-action"
           onClick={() =>
             onSupportedActionSelect(SupportedAction.SET_GUILD_CONFIG)
           }
         >
           <ButtonLabel>
             <StyledIcon src={() => <AiFillSetting size={20} />} />
-            {t('setGuildConfig')}
+            {t('actionBuilder.config.setGuildConfig')}
           </ButtonLabel>
         </ActionsButton>
       </SectionWrapper>
       <SectionWrapper>
-        <SectionTitle>{t('externalContracts')}</SectionTitle>
+        <SectionTitle>{t('actionBuilder.externalContracts')}</SectionTitle>
         {contracts?.map(contract => (
           <ActionsButton
+            data-testid="external-contracts-action"
             key={contract.title}
             onClick={() => onSelect(contract)}
           >
             <ButtonLabel>{contract.title}</ButtonLabel>
             <ButtonDetail>
               {contract.functions?.length}{' '}
-              {t('actions', {
+              {t('actionBuilder.action.actions', {
                 count: contract.functions.length,
               })}
             </ButtonDetail>
@@ -125,16 +130,20 @@ const ContractsList: React.FC<ContractsListProps> = ({
             setIsAdvancedOptionsExpanded(!isAdvancedOptionsExpanded)
           }
         >
-          {t('advancedOptions')}
-          <ExpandButton expanded={isAdvancedOptionsExpanded} />
+          {t('actionBuilder.advanced.advancedOptions')}
+          <ExpandButton
+            data-testid="advanced-option-arrow-btn"
+            expanded={isAdvancedOptionsExpanded}
+          />
         </SectionTitle>
         {isAdvancedOptionsExpanded && (
           <ActionsButton
+            data-testid="raw-transaction-action"
             onClick={() =>
               onSupportedActionSelect(SupportedAction.RAW_TRANSACTION)
             }
           >
-            {t('rawTransaction')}
+            {t('actionBuilder.advanced.rawTransaction')}
           </ActionsButton>
         )}
       </SectionWrapper>

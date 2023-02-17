@@ -21,10 +21,12 @@ import { DiscussionPage } from 'Modules/Guilds/pages/Discussion';
 const App = () => {
   return (
     <ThemeProvider theme={GuildsDarkTheme}>
+      <GlobalStyle />
+
       <TransactionsProvider>
+        <Header />
+
         <GuildsContextProvider>
-          <GlobalStyle />
-          <Header />
           <Container>
             <OnlineStatus>
               <Routes>
@@ -37,6 +39,18 @@ const App = () => {
                 <Route
                   path="/:chainName/:guildId/all-discussions"
                   element={<GuildsPage pageContent={'allDiscussions'} />}
+                />
+                <Route
+                  path="/:chainName/:guildId/members"
+                  element={<GuildsPage pageContent={'members'} />}
+                />
+                <Route
+                  path="/:chainName/:guildId/permissions"
+                  element={<GuildsPage pageContent={'permissions'} />}
+                />
+                <Route
+                  path="/:chainName/:guildId/treasury"
+                  element={<GuildsPage pageContent={'treasury'} />}
                 />
                 <Route
                   path="/:chainName/:guildId/proposal-type"

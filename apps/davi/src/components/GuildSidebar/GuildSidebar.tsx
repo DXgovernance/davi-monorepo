@@ -1,5 +1,5 @@
 import dxIcon from 'assets/images/dxdao-icon.svg';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { Loading } from 'components/primitives/Loading';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useTranslation } from 'react-i18next';
@@ -38,7 +38,11 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
     governance: `/${chainName}/${guildId}`,
     allProposals: `/${chainName}/${guildId}/all-proposals`,
     allDiscussions: `/${chainName}/${guildId}/all-discussions`,
+    members: `/${chainName}/${guildId}/members`,
+    permissions: `/${chainName}/${guildId}/permissions`,
+    treasury: `/${chainName}/${guildId}/treasury`,
   };
+
   return (
     <SidebarWrapper data-testid="sidebar">
       <DaoInfoPanel>
@@ -46,7 +50,9 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
           {numberOfMembers != null ? (
             <MemberIconWrapper>
               <MdOutlinePeopleAlt size={26} />
-              <Label>{numberOfMembers.toString()}</Label>
+              <Label data-testid="members-count">
+                {numberOfMembers.toString()}
+              </Label>
             </MemberIconWrapper>
           ) : (
             <Loading loading text />
@@ -56,7 +62,7 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
           <DaoBrand>
             <DaoIcon src={dxIcon} alt={guildName} />
 
-            <DaoTitle size={2} as="h1">
+            <DaoTitle data-testid="guild-name-sidebar" size={2} as="h1">
               {guildName || <Loading loading text />}
             </DaoTitle>
           </DaoBrand>
@@ -64,24 +70,32 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
         {actions}
       </DaoInfoPanel>
       <SidebarMenu>
-        <UnstyledLink data-testid="governance-page" to={locations.governance}>
+        <StyledLink data-testid="governance-page" to={locations.governance}>
           <SidebarMenuItem current={pathname === locations.governance}>
             {t('governance')}
           </SidebarMenuItem>
-        </UnstyledLink>
-        <UnstyledLink
+        </StyledLink>
+        <StyledLink
           data-testid="all-proposals-page"
           to={locations.allProposals}
         >
           <SidebarMenuItem current={pathname === locations.allProposals}>
-            {t('allProposals')}
+            {t('proposals.allProposals')}
           </SidebarMenuItem>
-        </UnstyledLink>
-        <UnstyledLink to={locations.allDiscussions}>
+        </StyledLink>
+        <StyledLink
+          data-testid="all-discussions-page"
+          to={locations.allDiscussions}
+        >
           <SidebarMenuItem current={pathname === locations.allDiscussions}>
-            {t('allDiscussions')}
+            {t('discussions.allDiscussions')}
           </SidebarMenuItem>
-        </UnstyledLink>
+        </StyledLink>
+        <StyledLink to={locations.treasury}>
+          <SidebarMenuItem current={pathname === locations.treasury}>
+            {t('treasury.treasury')}
+          </SidebarMenuItem>
+        </StyledLink>
       </SidebarMenu>
     </SidebarWrapper>
   );

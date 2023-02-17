@@ -1,8 +1,9 @@
-import { BigNumber, providers } from 'ethers';
+import { BigNumber } from 'ethers';
 import { ERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { ERC20, ERC20Guild } from 'dxdao-contracts/types';
-import { GuildConfigProps } from 'Modules/Guilds/Hooks/useGuildConfig';
 import React from 'react';
+import { GuildConfigProps } from 'types/types.guilds.d';
+
 export interface StakeTokensModalProps {
   isOpen: boolean;
   onDismiss: () => void;
@@ -14,10 +15,6 @@ export interface StakeTokensFormsProps {
   token: Token;
   userVotingPower: BigNumber;
   guild: Guild;
-  createTransaction: (
-    summary: string,
-    txFunction: () => Promise<providers.TransactionResponse>
-  ) => void;
   isRepGuild: boolean;
 }
 interface Guild {
@@ -46,10 +43,6 @@ export interface StakeTokenButtonProps {
   token: Token;
   guild: Guild;
   isStakeAmountValid: boolean;
-  createTransaction: (
-    summary: string,
-    txFunction: () => Promise<providers.TransactionResponse>
-  ) => void;
 }
 
 export interface BalanceInfoLineProps {

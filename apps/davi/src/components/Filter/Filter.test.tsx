@@ -29,28 +29,41 @@ jest.mock('contexts/Guilds/filters', () => ({
     };
   },
 }));
+
 jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   useTokenList: () => [],
 }));
-jest.mock('Modules/Guilds/Hooks/useVotingPowerOf', () => ({
-  useVotingPowerOf: () => ({
-    data: bn(10000),
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useVotingPowerOf: jest.fn().mockReturnValueOnce({ data: bn(10000) }),
+      },
+    },
   }),
 }));
-jest.mock('Modules/Guilds/Hooks/useGuildConfig', () => ({
-  useGuildConfig: () => ({
-    data: {
-      name: 'REPGuild',
-      token: '0x0000000000000000000000000000000000000000',
-      permissionRegistry: '0x0000000000000000000000000000000000000000',
-      proposalTime: bn(10000),
-      timeForExecution: bn(100002),
-      maxActiveProposals: bn(1000330),
-      votingPowerForProposalCreation: bn(1000022),
-      votingPowerForProposalExecution: bn(10044400),
-      tokenVault: '0x0000000000000000000000000000000000000000',
-      lockTime: bn(1004440022),
-      totalLocked: bn(200),
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useGuildConfig: () => ({
+          data: {
+            name: 'REPGuild',
+            token: '0x0000000000000000000000000000000000000000',
+            permissionRegistry: '0x0000000000000000000000000000000000000000',
+            proposalTime: bn(10000),
+            timeForExecution: bn(100002),
+            maxActiveProposals: bn(1000330),
+            votingPowerForProposalCreation: bn(1000022),
+            votingPowerForProposalExecution: bn(10044400),
+            tokenVault: '0x0000000000000000000000000000000000000000',
+            lockTime: bn(1004440022),
+            totalLocked: bn(200),
+          },
+        }),
+      },
     },
   }),
 }));
@@ -59,6 +72,25 @@ const mockAddress = ZERO_ADDRESS;
 jest.mock('wagmi', () => ({
   useAccount: () => ({ address: mockAddress }),
   useNetwork: () => ({ chain: mockChain }),
+  chain: {
+    mainnet: {},
+  },
+}));
+
+jest.mock('provider/ReadOnlyConnector', () => ({
+  READ_ONLY_CONNECTOR_ID: 'readOnly',
+}));
+
+jest.mock('contexts/Guilds/orbis', () => ({}));
+
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: {
+      fetchers: {
+        useIsProposalCreationAllowed: jest.fn(),
+      },
+    },
+  }),
 }));
 
 describe('Filter', () => {

@@ -18,8 +18,8 @@ exports[`MemberActions Should match snapshot with data 1`] = `
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -40,6 +40,10 @@ exports[`MemberActions Should match snapshot with data 1`] = `
   border: 1px solid #303338;
 }
 
+.c2:disabled {
+  color: #303338;
+}
+
 .c3 svg,
 .c3 img {
   margin-right: .4rem;
@@ -49,6 +53,7 @@ exports[`MemberActions Should match snapshot with data 1`] = `
 .c3 button {
   padding: .25rem 0.6rem;
   background-color: #1B1D1F;
+  color: #fff;
 }
 
 .c6 {
@@ -220,7 +225,7 @@ exports[`MemberActions Should match snapshot with data 1`] = `
         <div
           class="c12"
         >
-          votingPower
+          voting.votingPower
            
           <span>
             50%
@@ -229,7 +234,7 @@ exports[`MemberActions Should match snapshot with data 1`] = `
         <div
           class="c12"
         >
-          locked
+          members.locking.locked
            
           <span>
             0 GT
@@ -238,7 +243,7 @@ exports[`MemberActions Should match snapshot with data 1`] = `
         <div
           class="c12"
         >
-          unlockedIn
+          members.locking.unlockedIn
            
           <span>
             a day
@@ -248,7 +253,7 @@ exports[`MemberActions Should match snapshot with data 1`] = `
           class="c2 c13"
           data-testid="increase-voting-power-btn"
         >
-          increaseVotingPower
+          members.increaseVotingPower
         </button>
       </div>
     </div>
@@ -275,8 +280,8 @@ exports[`MemberActions Should match snapshot without data 1`] = `
   cursor: pointer;
   font-size: 14px;
   border: 1px solid #303338;
-  background-color: #295FF4;
-  color: #fff;
+  background-color: transparent;
+  color: #DEFF4E;
   border-radius: 32px;
   padding: 0.5rem 0.8rem;
   margin: 0.2rem;
@@ -297,6 +302,10 @@ exports[`MemberActions Should match snapshot without data 1`] = `
   border: 1px solid #303338;
 }
 
+.c2:disabled {
+  color: #303338;
+}
+
 .c3 svg,
 .c3 img {
   margin-right: .4rem;
@@ -306,6 +315,7 @@ exports[`MemberActions Should match snapshot without data 1`] = `
 .c3 button {
   padding: .25rem 0.6rem;
   background-color: #1B1D1F;
+  color: #fff;
 }
 
 .c4 {
@@ -505,7 +515,7 @@ exports[`MemberActions Should match snapshot without data 1`] = `
         <div
           class="c10"
         >
-          votingPower
+          voting.votingPower
            
           <span>
             <div
@@ -529,7 +539,7 @@ exports[`MemberActions Should match snapshot without data 1`] = `
         <div
           class="c10"
         >
-          locked
+          members.locking.locked
            
           <span>
             <div
@@ -553,7 +563,7 @@ exports[`MemberActions Should match snapshot without data 1`] = `
         <div
           class="c10"
         >
-          unlockedIn
+          members.locking.unlockedIn
            
           <span>
             <div
@@ -578,7 +588,7 @@ exports[`MemberActions Should match snapshot without data 1`] = `
           class="c2 c11"
           data-testid="increase-voting-power-btn"
         >
-          increaseVotingPower
+          members.increaseVotingPower
         </button>
       </div>
     </div>

@@ -66,13 +66,15 @@ const RawTransactionEditor: React.FC<ActionEditorProps> = ({
 
             return (
               <Control>
-                <ControlLabel>{t('toAddress')}</ControlLabel>
+                <ControlLabel>
+                  {t('actionBuilder.inputs.toAddress')}
+                </ControlLabel>
                 <ControlRow>
                   <AddressInput
                     {...field}
                     data-testid="input-to"
                     isInvalid={!!error}
-                    placeholder={t('ethereumAddress')}
+                    placeholder={t('actionBuilder.inputs.ethereumAddress')}
                   />
                 </ControlRow>
                 {!!error && (
@@ -93,7 +95,7 @@ const RawTransactionEditor: React.FC<ActionEditorProps> = ({
 
             return (
               <Control>
-                <ControlLabel>{`${t('value')} (${t('in')} wei)`}</ControlLabel>
+                <ControlLabel>{t('actionBuilder.inputs.inWei')}</ControlLabel>
                 <ControlRow>
                   <TokenAmountInput
                     {...field}
@@ -121,14 +123,16 @@ const RawTransactionEditor: React.FC<ActionEditorProps> = ({
 
             return (
               <Control>
-                <ControlLabel>{`${t('data')} (hex)`}</ControlLabel>
+                <ControlLabel>{`${t(
+                  'actionBuilder.advanced.data'
+                )} (hex)`}</ControlLabel>
                 <ControlRow>
                   <TextArea
                     {...field}
                     data-testid="input-data"
                     spellCheck={false}
                     isInvalid={!!error}
-                    placeholder={t('data')}
+                    placeholder={t('actionBuilder.advanced.data')}
                   />
                 </ControlRow>
                 {!!error && (
@@ -147,7 +151,7 @@ const RawTransactionEditor: React.FC<ActionEditorProps> = ({
           data-testid="submit-rawtransaction"
           type="submit"
         >
-          {t('saveAction')}
+          {t('actionBuilder.action.saveAction')}
         </Button>
       </form>
     </div>

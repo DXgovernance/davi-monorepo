@@ -1,22 +1,31 @@
-import { useNavigate } from 'react-router-dom';
-import { MAX_UINT } from 'utils';
-import { formatUnits } from 'ethers/lib/utils';
-import { ActionButton } from '../StakeTokensForm/StakeTokensForm.styled';
-import { Loading } from 'components/primitives/Loading';
-import { StakeTokenButtonProps } from '../../types';
-import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Loading } from 'components/primitives/Loading';
+import { ActionButton } from '../StakeTokensForm/StakeTokensForm.styled';
+import { StakeTokenButtonProps } from '../../types';
+import { useHookStoreProvider } from 'stores';
 const StakeTokensButton = ({
   isRepGuild,
   stakeAmount,
   token,
   guild,
   isStakeAmountValid,
-  createTransaction,
 }: StakeTokenButtonProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [approvedTokenAllowance, setApprovedTokenAllowance] = useState(false);
+
+  const {
+    hooks: {
+      writers: { useLockTokens, useApproveTokens },
+    },
+    daoId,
+  } = useHookStoreProvider();
+
+  const lockTokens = useLockTokens(daoId);
+  const approveTokens = useApproveTokens(guild?.config?.token);
+
   useEffect(() => {
     if (
       stakeAmount &&
@@ -26,24 +35,15 @@ const StakeTokensButton = ({
       setApprovedTokenAllowance(true);
     }
   }, [token, stakeAmount, approvedTokenAllowance]);
-  const lockTokens = async () => {
-    if (!isStakeAmountValid) return;
 
-    createTransaction(
-      `Lock ${formatUnits(stakeAmount, token?.info?.decimals)} ${
-        token?.info?.symbol
-      } tokens`,
-      async () => guild?.contract?.lockTokens(stakeAmount)
-    );
+  const handleLockTokens = async () => {
+    if (!isStakeAmountValid) return;
+    await lockTokens(stakeAmount, token?.info?.decimals, token?.info.symbol);
   };
 
-  const approveTokenSpending = async () => {
+  const handleApproveTokenSpending = async () => {
     if (!isStakeAmountValid) return;
-
-    createTransaction(
-      `Approve ${token?.info?.symbol} token spending`,
-      async () => token?.contract.approve(guild?.config?.tokenVault, MAX_UINT)
-    );
+    await approveTokens(guild?.config?.tokenVault);
   };
 
   return (
@@ -53,7 +53,7 @@ const StakeTokensButton = ({
           <ActionButton
             data-testid="lock-token-spending"
             disabled={!isStakeAmountValid}
-            onClick={lockTokens}
+            onClick={handleLockTokens}
           >
             Lock{' '}
             {token?.info?.symbol || (
@@ -63,19 +63,19 @@ const StakeTokensButton = ({
         ) : (
           <ActionButton
             disabled={!isStakeAmountValid}
-            onClick={approveTokenSpending}
+            onClick={handleApproveTokenSpending}
             data-testid="approve-token-spending"
           >
-            {t('approve')}{' '}
+            {t('actionBuilder.approval.approve')}{' '}
             {token?.info?.symbol || (
               <Loading loading text skeletonProps={{ width: 10 }} />
             )}{' '}
-            {t('spending')}
+            {t('actionBuilder.approval.spending')}
           </ActionButton>
         )
       ) : (
-        <ActionButton onClick={() => navigate('create-proposal')}>
-          {t('mintRep')}
+        <ActionButton onClick={() => navigate('create')}>
+          {t('actionBuilder.repMint.mintRep')}
         </ActionButton>
       )}
     </>

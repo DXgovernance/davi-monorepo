@@ -2,6 +2,7 @@ import { render } from 'utils/tests';
 import UpdateENSContentSummary from './UpdateENSContentSummary';
 import { mockDecodedCallUpdateENSContent } from './fixtures';
 import { BigNumber } from 'ethers';
+import { MOCK_ENS_NAME, MOCK_IMAGE_URL } from 'hooks/Guilds/ens/fixtures';
 
 jest.mock('wagmi', () => ({
   __esModule: true,
@@ -43,6 +44,18 @@ jest.mock('wagmi', () => ({
   chainId: {
     localhost: 1337,
   },
+}));
+
+jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
+  __esModule: true,
+  default: () => ({
+    ensName: MOCK_ENS_NAME,
+    imageUrl: MOCK_IMAGE_URL,
+  }),
+}));
+
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
 }));
 
 const mockBigNumber = BigNumber.from(100000000);

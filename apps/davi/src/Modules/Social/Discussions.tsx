@@ -1,20 +1,19 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
-// import { Orbis } from '@orbisclub/orbis-sdk';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Virtuoso } from 'react-virtuoso';
 import { DiscussionCard } from 'components/DiscussionCard';
 import { Discussion } from 'components/Forum/types';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { StyledLink } from 'Modules/Guilds/pages/Governance/Governance.styled';
 import { Loading } from 'components/primitives/Loading';
 import { ErrorLabel } from 'components/primitives/Forms/ErrorLabel';
 import { Button } from 'components/primitives/Button';
 import { DISCUSSIONS_TO_SHOW, REFRESH_DISCUSSIONS_INTERVAL } from './constants';
 import { Box } from 'components/primitives/Layout';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { StyledLink } from 'components/primitives/Links';
 
 const Discussions = () => {
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
 
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
   const [error, setError] = useState(null);
@@ -102,7 +101,11 @@ const Discussions = () => {
   const Footer = () => {
     return (
       <Box padding={'24px'}>
-        {isLoading ? <Loading loading text /> : t('forum.noMoreDiscussions')}
+        {isLoading ? (
+          <Loading loading text />
+        ) : (
+          t('discussions.noMoreDiscussions')
+        )}
       </Box>
     );
   };
@@ -111,7 +114,7 @@ const Discussions = () => {
     return (
       <>
         <Button variant="secondary" onClick={() => getDiscussions(0)}>
-          {t('reload')}
+          {t('discussions.activity.reload')}
         </Button>
         <br />
         <ErrorLabel>{error}</ErrorLabel>
@@ -123,9 +126,9 @@ const Discussions = () => {
     <>
       {discussions?.length === 0 && !isLoading && (
         <>
-          {t('forum.thereAreNoDiscussions')}.{' '}
+          {t('discussions.thereAreNoDiscussions')}.{' '}
           <StyledLink to={`/${chainName}/${guildId}/create`}>
-            {t('forum.createDiscussionWordy')}.
+            {t('discussions.createDiscussionWordy')}.
           </StyledLink>
         </>
       )}

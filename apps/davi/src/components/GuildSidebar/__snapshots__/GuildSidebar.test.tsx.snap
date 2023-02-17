@@ -50,6 +50,7 @@ exports[`GuildSidebar Should render with data 1`] = `
 
 .c1 {
   color: #fff;
+  background-color: #1B1D1F;
 }
 
 .c2 {
@@ -233,6 +234,7 @@ exports[`GuildSidebar Should render with data 1`] = `
           </svg>
           <span
             class="c5"
+            data-testid="members-count"
           >
             10
           </span>
@@ -251,6 +253,7 @@ exports[`GuildSidebar Should render with data 1`] = `
           />
           <h1
             class="c9 c10"
+            data-testid="guild-name-sidebar"
             size="2"
           >
             Test Guild
@@ -283,17 +286,28 @@ exports[`GuildSidebar Should render with data 1`] = `
         <div
           class="c14"
         >
-          allProposals
+          proposals.allProposals
         </div>
       </a>
       <a
         class="c13"
+        data-testid="all-discussions-page"
         href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/all-discussions"
       >
         <div
           class="c14"
         >
-          allDiscussions
+          discussions.allDiscussions
+        </div>
+      </a>
+      <a
+        class="c13"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/treasury"
+      >
+        <div
+          class="c14"
+        >
+          treasury.treasury
         </div>
       </a>
     </div>
@@ -345,6 +359,7 @@ exports[`GuildSidebar Should render without data 1`] = `
 
 .c1 {
   color: #fff;
+  background-color: #1B1D1F;
 }
 
 .c2 {
@@ -520,6 +535,7 @@ exports[`GuildSidebar Should render without data 1`] = `
           />
           <h1
             class="c7 c8"
+            data-testid="guild-name-sidebar"
             size="2"
           >
             <div
@@ -564,17 +580,28 @@ exports[`GuildSidebar Should render without data 1`] = `
         <div
           class="c12"
         >
-          allProposals
+          proposals.allProposals
         </div>
       </a>
       <a
         class="c11"
+        data-testid="all-discussions-page"
         href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/all-discussions"
       >
         <div
           class="c12"
         >
-          allDiscussions
+          discussions.allDiscussions
+        </div>
+      </a>
+      <a
+        class="c11"
+        href="/localhost/0xE9bDaB08f2FBb370d2a6F6661a92d9B6157E9fd2/treasury"
+      >
+        <div
+          class="c12"
+        >
+          treasury.treasury
         </div>
       </a>
     </div>

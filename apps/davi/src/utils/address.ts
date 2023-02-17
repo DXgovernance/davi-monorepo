@@ -1,5 +1,4 @@
 import { ethers, utils } from 'ethers';
-import { NETWORK_EXPLORERS } from './index';
 
 const arbitrum = require('../configs/arbitrum/config.json');
 const arbitrumTestnet = require('../configs/arbitrumTestnet/config.json');
@@ -17,7 +16,7 @@ const appConfig: AppConfig = {
   localhost,
 };
 
-export function shortenAddress(address, digits = 4) {
+export function shortenAddress(address: string, digits = 4) {
   if (!isAddress(address)) {
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }
@@ -49,21 +48,6 @@ export function toAddressStub(address, size = 'default') {
       return address;
     default:
       return `${start}...${end}`;
-  }
-}
-
-export function getBlockchainLink(
-  address: string,
-  networkName: string,
-  type?: string
-) {
-  switch (type) {
-    case 'user':
-      return `${window.location.pathname}#/user/${address}`;
-    case 'address':
-      return `${NETWORK_EXPLORERS[networkName]}/address/${address}`;
-    default:
-      return `${NETWORK_EXPLORERS[networkName]}/tx/${address}`;
   }
 }
 

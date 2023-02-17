@@ -61,7 +61,7 @@ exports[`SetGuildConfigInfoLine Should match snapshot 1`] = `
       <span
         class="c1"
       >
-        setGuildConfig
+        actionBuilder.config.setGuildConfig
       </span>
     </div>
     <span

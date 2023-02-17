@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscCommentDiscussion } from 'react-icons/vsc';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { useInterval } from 'utils';
 
 import { Postbox } from './Postbox';
@@ -28,7 +28,7 @@ function Discussion({
   algorithm?: keyof typeof IOrbisGetPostsAlgorithm;
 }) {
   const { t } = useTranslation();
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
@@ -81,7 +81,9 @@ function Discussion({
 
   const handleDeletion = async (post: IOrbisPost) => {
     const confirmed = window.confirm(
-      'Are you sure you want to delete this post?\r\nIf you ask for deletion your post might be removed from the Ceramic nodes hosting it.'
+      `${t('discussions.activity.deletionMessage1')}'\r\n${t(
+        'discussions.activity.deletionMessage2'
+      )}`
     );
     if (confirmed) {
       const res = await orbis.deletePost(post.stream_id);
@@ -126,7 +128,7 @@ function Discussion({
         ) : (
           <DiscussionEmpty>
             <VscCommentDiscussion size={56} />
-            <Box>{t('discussionEmpty')}</Box>
+            <Box>{t('discussions.activity.discussionEmpty')}</Box>
           </DiscussionEmpty>
         )}
       </DiscussionMasterPosts>
@@ -134,7 +136,7 @@ function Discussion({
       {hasMore && (
         <DiscussionLoadMore>
           <LoadMoreButton onClick={() => getPosts({})}>
-            {t('discussionLoadMore')}
+            {t('discussions.activity.discussionLoadMore')}
           </LoadMoreButton>
         </DiscussionLoadMore>
       )}

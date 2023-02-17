@@ -1,0 +1,8 @@
+query getGuildProposalIds($id: ID!) {
+  guild(id: $id) {
+    proposals {
+      id
+    }
+  }
+}
+

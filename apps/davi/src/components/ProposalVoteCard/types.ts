@@ -1,10 +1,9 @@
 import { BigNumber } from 'ethers';
-import type { VoteData } from 'Modules/Guilds/Hooks/useVotingResults';
 import { ERC20Guild } from 'dxdao-contracts/types';
 import { ProposalMetadata } from 'types/types.guilds';
 import { Moment } from 'moment';
 import { providers } from 'ethers';
-import { UseProposalVotesOfVoterReturn } from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
+import { FetcherHooksInterface } from 'stores/types';
 
 export interface VoteConfirmationModalProps {
   isOpen: boolean;
@@ -38,16 +37,16 @@ interface Proposal {
   title?: string;
 }
 
+type UseProposalVotesOfVoterReturn = ReturnType<
+  FetcherHooksInterface['useProposalVotesOfVoter']
+>['data'];
+
 export interface ProposalVoteCardProps {
   voteData: VoteData;
   proposal: Proposal;
-  timestamp: number;
   votingPower: VotingPower;
-  contract: ERC20Guild;
-  createTransaction: (
-    summary: string,
-    txFunction: () => Promise<providers.TransactionResponse>
-  ) => void;
+  timestamp: number;
+  votingMachineAddress: string;
   userVote?: UseProposalVotesOfVoterReturn;
 }
 

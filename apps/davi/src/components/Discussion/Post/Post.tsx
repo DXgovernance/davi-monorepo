@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { IOrbisPost } from 'types/types.orbis';
-import { OrbisContext } from 'contexts/Guilds/orbis';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { getUsername, getBadgeContent, formatMessage } from 'utils/orbis';
 import { Avatar } from 'components/Avatar';
 import {
@@ -37,7 +37,7 @@ const Post = ({
   onDeletion: () => void;
 }) => {
   const { t } = useTranslation();
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
 
   const [postClone, setPostClone] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -91,7 +91,9 @@ const Post = ({
           <PostBody>
             {formatMessage(postClone?.content)}
             {postClone?.count_commits > 1 && (
-              <PostEditedBadge>({t('postEdited')})</PostEditedBadge>
+              <PostEditedBadge>
+                ({t('discussions.activity.postEdited')})
+              </PostEditedBadge>
             )}
           </PostBody>
           {postClone?.indexing_metadata?.urlMetadata && (

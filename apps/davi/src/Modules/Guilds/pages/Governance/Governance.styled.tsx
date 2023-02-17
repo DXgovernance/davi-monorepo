@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { Heading } from 'components/primitives/Typography';
-import { Link } from 'react-router-dom';
-import { Button } from 'components/primitives/Button';
 import { Box } from 'components/primitives/Layout/Box';
 
 export const ProposalsList = styled(Box)`
@@ -13,11 +11,14 @@ export const StyledHeading = styled(Heading)`
   margin-bottom: 20px;
 `;
 
-export const StyledLink = styled(Link)`
+export const ActionButtonContainer = styled(Box)`
+  text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
-`;
-
-export const StyledButton = styled(Button)`
-  white-space: nowrap;
-  height: 45px;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 `;

@@ -1,18 +1,12 @@
 import { useMemo } from 'react';
-import { TokenInfo, TokenList } from '@uniswap/token-lists';
+import { TokenList } from '@uniswap/token-lists';
 import useIPFSFile from '../ipfs/useIPFSFile';
 import useNetworkConfig from 'hooks/Guilds/useNetworkConfig';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { getChainIcon } from 'utils';
 import { useNetwork } from 'wagmi';
 import { useENSContentHash } from '../ens/useENSPublicResolverContract';
-
-export enum TokenType {
-  NATIVE = 'NATIVE',
-  ERC20 = 'ERC20',
-}
-
-export type TokenInfoWithType = TokenInfo & { type: TokenType };
+import { TokenInfoWithType } from 'types/types';
 
 export const useTokenList = (
   chainId?: number,
@@ -28,7 +22,7 @@ export const useTokenList = (
     let list: TokenInfoWithType[] =
       tokenList.data?.tokens?.map(token => ({
         ...token,
-        type: TokenType.ERC20,
+        type: 'ERC20',
       })) || [];
 
     if (chainId) {
@@ -43,7 +37,7 @@ export const useTokenList = (
         list.push({
           ...token,
           chainId,
-          type: TokenType.ERC20,
+          type: 'ERC20',
         });
       });
     }
@@ -56,7 +50,7 @@ export const useTokenList = (
     const chain = chains.find(chain => chain?.id === chainId);
     if (includeNativeToken && chain?.nativeCurrency) {
       return {
-        type: TokenType.NATIVE,
+        type: 'NATIVE',
         name: chain.nativeCurrency?.name,
         symbol: chain.nativeCurrency?.symbol,
         address: null,

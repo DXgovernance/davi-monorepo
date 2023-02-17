@@ -1,11 +1,14 @@
 import { Moment } from 'moment';
-import {
-  BigNumber
-} from 'ethers';
-import { UseProposalVotesOfVoterReturn } from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
+import { BigNumber } from 'ethers';
+import { FetcherHooksInterface } from 'stores/types';
+
+type UseProposalVotesOfVoterReturn = ReturnType<
+  FetcherHooksInterface['useProposalVotesOfVoter']
+>['data'];
+
 export interface Proposal {
   id: `0x${string}`;
-  creator: string; 
+  creator: string;
   startTime: Moment;
   endTime: Moment;
   to: string[];
@@ -17,10 +20,8 @@ export interface Proposal {
   contractState: ContractState;
   totalVotes: BigNumber[];
   votesOfVoter?: UseProposalVotesOfVoterReturn;
-}
-
-export type InitialProposal = Partial<Proposal> & {
-  state: number
+  options: Option[];
+  votes?: Vote[];
 }
 
 export enum ProposalState {
@@ -29,7 +30,7 @@ export enum ProposalState {
   Executed = 'Executed',
   Rejected = 'Rejected',
   Failed = 'Failed',
-  Finished = 'Finished', 
+  Finished = 'Finished',
 }
 
 export enum ContractState {
@@ -44,20 +45,21 @@ export interface ProposalMetadata {
   link?: {
     master: string;
     context: string;
-  }
+  };
 }
 export interface Transaction {
-  hash: string
-  from: string
-  summary?: string
+  hash: string;
+  from: string;
+  summary?: string;
   receipt?: {
-    transactionHash: string,
-    blockNumber: number,
-    status: number,
-  }
-  lastCheckedBlockNumber?: number
-  addedTime: number
-  confirmedTime?: number
+    transactionHash: string;
+    blockNumber: number;
+    status: number;
+  };
+  lastCheckedBlockNumber?: number;
+  addedTime: number;
+  confirmedTime?: number;
+  runOnFinality?: (receipt: providers.TransactionReceipt) => void;
 }
 
 export enum GuildImplementationType {
@@ -72,3 +74,29 @@ export interface ENSAvatar {
   imageUrl?: string;
   ensName?: string;
 }
+
+export interface GuildConfigProps {
+  name: string;
+  token: `0x${string}`;
+  permissionRegistry: string;
+  proposalTime: BigNumber;
+  timeForExecution: BigNumber;
+  maxActiveProposals: BigNumber;
+  votingPowerForProposalCreation: BigNumber;
+  votingPowerForProposalExecution: BigNumber;
+  tokenVault: `0x${string}`;
+  lockTime: BigNumber;
+  voteGas: BigNumber;
+  maxGasPrice: BigNumber;
+  votingPowerPercentageForProposalExecution: BigNumber;
+  votingPowerPercentageForProposalCreation: BigNumber;
+  minimumMembersForProposalCreation: BigNumber;
+  minimumTokensLockedForProposalCreation: BigNumber;
+}
+
+export interface Vote {
+  optionLabel: string;
+  voter: string;
+  votingPower: number;
+}
+

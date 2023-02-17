@@ -1,0 +1,63 @@
+name: Tests & Format Check
+on:
+  push:
+    branches:
+      - develop
+      - master
+      - release/*
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.13.0]
+
+    steps:
+      - name: Inject workflow information
+        uses: potiuk/get-workflow-origin@v1_3
+        id: workflow-run-info
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          set-safe-directory: false
+
+      - name: Cloning contracts
+        run: git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts
+
+      - name: Pnpm setup
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.18.2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build local config
+        run: node apps/davi/scripts/beforeBuild.js
+
+      - name: Run Jests Test
+        run: pnpm run test
+
+      - name: Run code format check
+        run: pnpm run format-check  
+      
+
+
+
+
+
+
+
+

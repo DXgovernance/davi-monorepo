@@ -34,7 +34,9 @@ const Summary = ({ decodedCall }: SummaryProps) => {
   return (
     <>
       <DetailHeader>
-        {isNativeTransfer ? t('transfer') : t('interactWith')}{' '}
+        {isNativeTransfer
+          ? t('actionBuilder.transfer.transfer')
+          : t('actionBuilder.interactWith')}{' '}
         {!isNativeTransfer && parsedValueToString !== '0.0' ? (
           <RedHighlight>
             {parsedValueToString} {nativeTokenSymbol}

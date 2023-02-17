@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
 import i18next from 'i18next';
 
-export const isValidProposal = ({
+export const isValidGuildProposal = ({
   toArray,
   dataArray,
   valueArray,
@@ -17,13 +17,13 @@ export const isValidProposal = ({
   if (!title) {
     return {
       isValid: false,
-      error: 'Title is required',
+      error: i18next.t('proposal.errors.titleRequired'),
     };
   }
   if (totalOptions === 0) {
     return {
       isValid: false,
-      error: 'At least one Option is required',
+      error: i18next.t('proposal.errors.atLeastOneOptionRequired'),
     };
   }
   if (
@@ -33,7 +33,7 @@ export const isValidProposal = ({
   ) {
     return {
       isValid: false,
-      error: 'At least one action per option is required',
+      error: i18next.t('proposal.errors.atLeastOneActionPerOptionRequired'),
     };
   }
 
@@ -50,7 +50,9 @@ export const isEnsName = (
   let validationError = null;
 
   if (!name) {
-    validationError = i18next.t('ens.validation.nameCannotBeEmpty');
+    validationError = i18next.t(
+      'actionBuilder.ens.validation.nameCannotBeEmpty'
+    );
     isValid = false;
     return { isValid, validationError };
   }
@@ -61,18 +63,22 @@ export const isEnsName = (
     element => element.length === 0
   );
   if (numberOfInvalidLabels.length > 0) {
-    validationError = i18next.t('ens.validation.domainNameInvalidLength');
+    validationError = i18next.t(
+      'actionBuilder.ens.validation.domainNameInvalidLength'
+    );
     isValid = false;
   }
 
   if (name.includes(' ')) {
-    validationError = i18next.t('ens.validation.domainNameCannotIncludeSpaces');
+    validationError = i18next.t(
+      'actionBuilder.ens.validation.domainNameCannotIncludeSpaces'
+    );
     isValid = false;
   }
 
   if (labelArray.length > 3) {
     validationError = i18next.t(
-      'ens.validation.domainCannotBeMoreThanThreeLevels'
+      'actionBuilder.ens.validation.domainCannotBeMoreThanThreeLevels'
     );
     isValid = false;
   }

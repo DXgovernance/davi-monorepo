@@ -20,24 +20,30 @@ import {
   VoteOptionButton,
   VoteOptionsLabel,
 } from './ProposalVoteCard.styled';
-import { voteOnProposal, confirmVoteProposal } from './utils';
+import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
 import { hasVotingPowerProps, ProposalVoteCardProps } from './types';
 import { useTranslation } from 'react-i18next';
-import { getOptionLabel } from 'components/ProposalVoteCard/utils';
+import { getGuildOptionLabel } from 'utils/proposals';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
+import { useHookStoreProvider } from 'stores';
 
 const ProposalVoteCard = ({
   voteData,
   proposal,
   votingPower,
   timestamp,
-  contract,
-  createTransaction,
   userVote,
+  votingMachineAddress,
 }: ProposalVoteCardProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
+
+  const {
+    hooks: {
+      writers: { useVoteOnProposal },
+    },
+  } = useHookStoreProvider();
 
   const [isPercent, setIsPercent] = useState(true);
   const [selectedOption, setSelectedOption] = useState<BigNumber>();
@@ -47,9 +53,11 @@ const ProposalVoteCard = ({
     [proposal, timestamp]
   );
 
+  const voteOnProposal = useVoteOnProposal(votingMachineAddress);
+
   const votedOptionLabel = useMemo(() => {
     if (!userVote?.option) return null;
-    return getOptionLabel({
+    return getGuildOptionLabel({
       metadata: proposal?.metadata,
       optionKey: userVote?.option,
       t,
@@ -66,10 +74,11 @@ const ProposalVoteCard = ({
       hideProgressBar: true,
     });
 
-  const { hasNoVotingPower, hasVotingPowerAtCurrentSnapshot } = voteOnProposal({
-    votingPowerAtProposalSnapshot: votingPower?.atSnapshot,
-    votingPowerAtProposalCurrentSnapshot: votingPower?.atCurrentSnapshot,
-  });
+  const { hasNoVotingPower, hasVotingPowerAtCurrentSnapshot } =
+    checkVotingPower({
+      votingPowerAtProposalSnapshot: votingPower?.atSnapshot,
+      votingPowerAtProposalCurrentSnapshot: votingPower?.atCurrentSnapshot,
+    });
 
   const handleVoteOnProposal = ({
     hasNoVotingPower,
@@ -93,9 +102,9 @@ const ProposalVoteCard = ({
           {!voteData ? (
             <Loading loading text />
           ) : isOpen ? (
-            t('castVote')
+            t('voting.castVote')
           ) : (
-            t('voteResults')
+            t('voting.voteResults')
           )}
           <SmallButton
             variant="secondary"
@@ -131,13 +140,15 @@ const ProposalVoteCard = ({
         {/* Hide voting options if user has already voted */}
         {isOpen && !userVote?.option && voteData?.options && (
           <ButtonsContainer>
-            <VoteOptionsLabel>{t('options')}</VoteOptionsLabel>
+            <VoteOptionsLabel>
+              {t('actionBuilder.options.options')}
+            </VoteOptionsLabel>
 
             {/* Getting the full option keys list but displaying default 0 index option at the bottom */}
             {[...Object.keys(voteData?.options).slice(1), '0'].map(
               optionKey => {
                 const bItem = BigNumber.from(optionKey);
-                const label = getOptionLabel({
+                const label = getGuildOptionLabel({
                   metadata: proposal?.metadata,
                   optionKey: optionKey,
                   t,
@@ -171,7 +182,7 @@ const ProposalVoteCard = ({
                 })
               }
             >
-              {t('vote')}
+              {t('voting.vote')}
             </VoteActionButton>
           </ButtonsContainer>
         )}
@@ -181,17 +192,17 @@ const ProposalVoteCard = ({
         isOpen={modalOpen}
         onDismiss={() => setModalOpen(false)}
         onConfirm={() => {
-          confirmVoteProposal({
-            proposal,
-            contract,
+          voteOnProposal(
+            proposal?.id,
             selectedOption,
-            userVotingPower: votingPower.userVotingPower,
-            createTransaction,
-          });
+            votingPower.userVotingPower,
+            proposal?.title
+          );
+
           setModalOpen(false);
           setSelectedOption(null);
         }}
-        selectedOption={getOptionLabel({
+        selectedOption={getGuildOptionLabel({
           metadata: proposal?.metadata,
           optionKey: selectedOption?.toNumber(),
           t,

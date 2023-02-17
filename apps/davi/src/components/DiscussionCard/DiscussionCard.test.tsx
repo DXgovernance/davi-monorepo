@@ -17,6 +17,20 @@ jest.mock('wagmi', () => ({
   },
 }));
 
+jest.mock('contexts/Guilds/orbis', () => ({
+  useOrbisContext: () => ({
+    orbis: {
+      getPosts: () => ({
+        data: [1, 2, 3],
+      }),
+    },
+  }),
+}));
+
+jest.mock('provider', () => ({
+  getBlockExplorerUrl: () => null,
+}));
+
 describe('DiscussionCard', () => {
   it('should render with full parameters', async () => {
     const { container } = render(<DiscussionCard {...fullParameters} />);

@@ -1,4 +1,8 @@
-import { UseProposalVotesOfVoterReturn } from 'Modules/Guilds/Hooks/useProposalVotesOfVoter';
+import { FetcherHooksInterface } from 'stores/types';
+
+type UseProposalVotesOfVoterReturn = ReturnType<
+  FetcherHooksInterface['useProposalVotesOfVoter']
+>['data'];
 
 export interface ProposalCardActionsProps {
   votesOfVoter: UseProposalVotesOfVoterReturn;

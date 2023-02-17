@@ -1,8 +1,8 @@
 import { BigNumber } from 'ethers';
-import { GuildConfigProps } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { ERC20 } from 'dxdao-contracts/types';
 import { ERC20Guild } from 'dxdao-contracts/types/ERC20Guild';
 import { StakeTokensModalProps } from './types';
+import { GuildConfigProps } from 'types/types.guilds.d';
 
 const mockERC20Info = {
   decimals: 18,

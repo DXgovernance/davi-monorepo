@@ -13,7 +13,7 @@ export const ExecuteButton: React.FC<ExecuteButtonProps> = ({
 
   return (
     <Button data-testid="execute-btn" onClick={executeProposal}>
-      {t('execute')}
+      {t('proposal.actions.execute')}
     </Button>
   );
 };

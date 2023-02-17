@@ -4,6 +4,7 @@ import {
   VotingMachineProposalState,
 } from './utils';
 import * as IPFS from 'ipfs-core';
+import { TokenInfo } from '@uniswap/token-lists';
 
 declare global {
   // Window ethereum type
@@ -51,6 +52,13 @@ declare global {
     vote: number;
     amount: BigNumber;
     preBoosted: boolean;
+  }
+
+  interface VoteData {
+    options: { [name: string]: BigNumber };
+    quorum: BigNumber;
+    totalLocked: BigNumber;
+    token: ERC20Info;
   }
 
   interface Stake extends ProposalEvent {
@@ -194,9 +202,9 @@ declare global {
     blockNumber: number;
     address: string;
     reputation: {
-      events: RepEvent[],
-      total: BigNumber
-    },
+      events: RepEvent[];
+      total: BigNumber;
+    };
     schemes: { [address: string]: Scheme };
     proposals: { [id: string]: Proposal };
     callPermissions: CallPermissions;
@@ -221,21 +229,23 @@ declare global {
       };
     };
     daostack?: {
-      [address: string] : {
-        supported: boolean,
-        name: string,
-        type: string,
-        contractToCall: string,
-        creationLogEncoding: Array<Array<{
-          name: string,
-          type: string
-        }>>,
-        newProposalTopics: string[],
-        voteParams: string,
-        votingMachine: string,
-        redeemer?: string
-      }
-    },
+      [address: string]: {
+        supported: boolean;
+        name: string;
+        type: string;
+        contractToCall: string;
+        creationLogEncoding: Array<
+          Array<{
+            name: string;
+            type: string;
+          }>
+        >;
+        newProposalTopics: string[];
+        voteParams: string;
+        votingMachine: string;
+        redeemer?: string;
+      };
+    };
   }
 
   interface NetworkConfig {
@@ -364,3 +374,12 @@ export type ProposalsExtended = Proposal &
   Pick<Scheme, 'maxSecondsForExecution' | 'type'> & {
     autoBoost: Boolean;
   };
+
+export type TokenInfoWithType = TokenInfo & { type: 'NATIVE' | 'ERC20' };
+
+export interface TokenWithPermission extends TokenInfoWithType {
+  permission: {
+    fromTime: BigNumber;
+    valueAllowed: BigNumber;
+  };
+}

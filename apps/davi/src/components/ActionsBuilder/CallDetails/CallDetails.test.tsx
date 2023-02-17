@@ -9,6 +9,10 @@ import {
 
 const mockBigNumber = BigNumber.from(0);
 
+jest.mock('stores/modules/guilds/common/fetchers/rpc', () => ({
+  useProposalCalls: () => ({ options: [] }),
+}));
+
 jest.mock('hooks/Guilds/ens/useENSAvatar', () => ({
   __esModule: true,
   default: () => ({
@@ -33,6 +37,12 @@ jest.mock('hooks/Guilds/tokens/useTokenList', () => ({
   }),
 }));
 
+jest.mock('stores', () => ({
+  useHookStoreProvider: () => ({
+    hooks: { writers: { useLockTokens: jest.fn() } },
+  }),
+}));
+
 jest.mock('utils', () => ({
   getNetworkById: () => ({
     nativeAsset: {
@@ -52,6 +62,12 @@ jest.mock('wagmi', () => ({
     data: '0x0000000000000000000000000000000000000000',
   }),
 }));
+
+jest.mock('provider/ReadOnlyConnector', () => ({
+  READ_ONLY_CONNECTOR_ID: 'readOnly',
+}));
+
+jest.mock('contexts/Guilds/orbis', () => ({}));
 
 describe('CallDetails', () => {
   it('Should match', () => {

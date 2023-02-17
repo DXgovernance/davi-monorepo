@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
+import { useAccount } from 'wagmi';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'components/primitives/Button';
+import { useHookStoreProvider } from 'stores';
 import { Input } from 'components/primitives/Forms/Input';
 import { FilterMenu, FilterButton } from './components';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
@@ -15,8 +16,8 @@ import {
   StyledInputWrapper,
   FilterBadge,
 } from './Filter.styled';
-import { UnstyledLink } from 'components/primitives/Links';
-import useIsProposalCreationAllowed from 'Modules/Guilds/Hooks/useIsProposalCreationAllowed';
+import { StyledLink } from 'components/primitives/Links';
+import { Button } from 'components/primitives/Button';
 
 interface FilterProps {
   openSearchBar: boolean;
@@ -27,18 +28,27 @@ export const Filter: React.FC<FilterProps> = ({
   openSearchBar,
   setOpenSearchBar,
 }) => {
+  const {
+    hooks: {
+      fetchers: { useIsProposalCreationAllowed },
+    },
+  } = useHookStoreProvider();
   const { t } = useTranslation();
   const { chainName, guildId } = useTypedParams();
+  const { address: userAddress } = useAccount();
   const [viewFilter, setViewFilter] = useState(false);
   const { totalFilters, searchQuery, setSearchQuery } = useFilter();
-  const isProposalCreationAllowed = useIsProposalCreationAllowed();
+  const isProposalCreationAllowed = useIsProposalCreationAllowed(
+    guildId,
+    userAddress
+  );
 
   return (
     <FilterContainer>
       <FilterRow>
         {isMobile && !isProposalCreationAllowed && (
           <FilterButton onClick={() => setViewFilter(!viewFilter)}>
-            {t('filter')}
+            {t('filter.filter')}
             {totalFilters > 0 && <FilterBadge>{totalFilters}</FilterBadge>}
           </FilterButton>
         )}
@@ -55,14 +65,14 @@ export const Filter: React.FC<FilterProps> = ({
           </StyledIconButton>
           {isProposalCreationAllowed && (
             <>
-              <UnstyledLink to={`/${chainName}/${guildId}/create-proposal`}>
+              <StyledLink to={`/${chainName}/${guildId}/create-proposal`}>
                 <Button
-                  variant="secondary"
-                  data-testid="create-proposal-button"
+                  variant="primaryWithBorder"
+                  data-testid="create-proposal-btn"
                 >
-                  {t('createProposal')}
+                  {t('createProposal.createProposal')}
                 </Button>
-              </UnstyledLink>
+              </StyledLink>
             </>
           )}
         </ButtonContainer>
@@ -77,7 +87,7 @@ export const Filter: React.FC<FilterProps> = ({
               setSearchQuery(e.target.value);
             }}
             icon={<AiOutlineSearch size={24} />}
-            placeholder={t('searchTitleEnsAddress')}
+            placeholder={t('filter.searchTitleEnsAddress')}
           />
         </StyledInputWrapper>
       ) : null}

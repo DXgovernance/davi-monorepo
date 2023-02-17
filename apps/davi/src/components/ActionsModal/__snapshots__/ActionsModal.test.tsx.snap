@@ -254,6 +254,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   border-radius: 2rem;
+  outline: 0px;
 }
 
 .c14:active,
@@ -329,7 +330,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
               class="c4 c5"
               data-testid="modal-title"
             >
-              addAction
+              actionBuilder.action.addAction
             </h2>
             <svg
               class="c6"
@@ -370,11 +371,11 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 <div
                   class="c10 c11 c12"
                 >
-                  core
+                  actionBuilder.core
                 </div>
                 <button
                   class="c13 c14"
-                  data-testid="supported-action-erc20transfer"
+                  data-testid="erc20transfer-action"
                 >
                   <div
                     class="c15"
@@ -386,11 +387,12 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         vector.svg
                       </svg>
                     </div>
-                    transfer
+                    actionBuilder.transfer.transfer
                   </div>
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="set-permission-action"
                 >
                   <div
                     class="c15"
@@ -402,11 +404,12 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         vector.svg
                       </svg>
                     </div>
-                    permissions.setPermissions
+                    actionBuilder.permissions.setPermissions
                   </div>
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="rep-mint-action"
                 >
                   <div
                     class="c15"
@@ -418,11 +421,12 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         mint.svg
                       </svg>
                     </div>
-                    mintRep
+                    actionBuilder.repMint.mintRep
                   </div>
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="set-guild-config-action"
                 >
                   <div
                     class="c15"
@@ -444,7 +448,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                         />
                       </svg>
                     </div>
-                    setGuildConfig
+                    actionBuilder.config.setGuildConfig
                   </div>
                 </button>
               </div>
@@ -454,7 +458,7 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 <div
                   class="c10 c11 c12"
                 >
-                  externalContracts
+                  actionBuilder.externalContracts
                 </div>
               </div>
               <div
@@ -464,9 +468,10 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                   class="c17 c11 c12"
                   direction="row"
                 >
-                  advancedOptions
+                  actionBuilder.advanced.advancedOptions
                   <span
                     class="c18"
+                    data-testid="advanced-option-arrow-btn"
                     height="1.25rem"
                     width="1.25rem"
                   >

@@ -1,36 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { Loading } from 'components/primitives/Loading';
 import { FaChevronLeft } from 'react-icons/fa';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { IOrbisPost } from 'types/types.orbis';
 import {
+  ActionsGroup,
   HeaderTopRow,
   PageContainer,
   PageContent,
   PageHeader,
   PageTitle,
-  StyledIconButton,
+  PostDetailsRow,
 } from './Discussion.styled';
 import { useTranslation } from 'react-i18next';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
 import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
 import useDiscussionContext from 'Modules/Guilds/Hooks/useDiscussionContext';
-import { OrbisContext } from 'contexts/Guilds/orbis';
-import { StyledButton } from 'Modules/Guilds/styles';
+import { useOrbisContext } from 'contexts/Guilds/orbis';
+import { useHookStoreProvider } from 'stores';
+import PostActions from 'components/Discussion/Post/PostActions';
+import moment from 'moment';
+import { Button, IconButton } from 'components/primitives/Button';
+import { linkStyles } from '../Proposal/Proposal.styled';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();
   const { chainName, guildId, discussionId } = useTypedParams();
 
   const [op, setOp] = useState<IOrbisPost>();
-
+  const {
+    hooks: {
+      fetchers: { useGuildConfig },
+    },
+  } = useHookStoreProvider();
   const { data: guildConfig } = useGuildConfig(guildId);
-  const { orbis } = useContext(OrbisContext);
+  const { orbis } = useOrbisContext();
   const { context } = useDiscussionContext(
     `${guildId}-${discussionId}-discussions`
   );
@@ -45,47 +53,79 @@ const DiscussionPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `${t('discussions.activity.deletionMessage1')}'\r\n${t(
+        'discussions.activity.deletionMessage2'
+      )}`
+    );
+    if (confirmed) {
+      orbis.deletePost(discussionId);
+    }
+  };
+
   return (
     <PageContainer>
       <PageContent>
         <PageHeader>
           <HeaderTopRow>
-            <UnstyledLink to={`/${chainName}/${guildId}`}>
-              <StyledIconButton variant="secondary" iconLeft>
+            <StyledLink
+              to={`/${chainName}/${guildId}`}
+              customStyles={linkStyles}
+            >
+              <IconButton
+                data-testid="discussion-back-btn"
+                variant="secondary"
+                iconLeft
+                padding={'0.6rem 0.8rem'}
+                marginTop={'5px;'}
+              >
                 <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
                 {guildConfig?.name}
-              </StyledIconButton>
-            </UnstyledLink>
+              </IconButton>
+            </StyledLink>
 
-            <UnstyledLink
+            <StyledLink
               to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
             >
-              <StyledButton
-                variant="secondary"
+              <Button
+                variant="primaryWithBorder"
                 data-testid="create-proposal-button"
               >
-                {t('createProposal')}
-              </StyledButton>
-            </UnstyledLink>
+                {t('createProposal.createProposal')}
+              </Button>
+            </StyledLink>
           </HeaderTopRow>
-          <PageTitle>
+          <PageTitle data-testid="discussion-page-title">
             {op?.content?.title || (
               <Loading loading text skeletonProps={{ width: '800px' }} />
             )}
           </PageTitle>
         </PageHeader>
-
-        <AddressButton address={op?.creator_details.metadata?.address} />
+        <PostDetailsRow>
+          <AddressButton address={op?.creator_details.metadata?.address} />
+          {op?.timestamp && moment.unix(op.timestamp).fromNow()}
+        </PostDetailsRow>
 
         <ProposalDescription
           metadata={{ description: op?.content?.body }}
           error={null}
         />
 
+        <ActionsGroup>
+          <PostActions
+            post={op}
+            showThreadButton={false}
+            onClickDelete={handleDelete}
+          />
+        </ActionsGroup>
+
         <SidebarCard
           header={
             <SidebarCardHeaderSpaced>
-              <CardHeader>{t('discussionTitle')}</CardHeader>
+              <CardHeader>
+                {t('discussions.activity.discussionTitle')}
+              </CardHeader>
             </SidebarCardHeaderSpaced>
           }
         >

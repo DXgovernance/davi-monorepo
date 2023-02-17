@@ -1,6 +1,6 @@
 import { IconButton } from 'components/primitives/Button';
 import { Result, ResultState } from 'components/Result';
-import { UnstyledLink } from 'components/primitives/Links';
+import { StyledLink } from 'components/primitives/Links';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import { useTranslation } from 'react-i18next';
@@ -13,14 +13,14 @@ const NotFound: React.FC = () => {
   return (
     <Result
       state={ResultState.ERROR}
-      title={t('pageNotExist')}
-      subtitle={t('makeSureCorrectAddress')}
+      title={t('404.pageNotExist')}
+      subtitle={t('404.makeSureCorrectAddress')}
       extra={
-        <UnstyledLink to={`/${chainName}`}>
+        <StyledLink to={chainName ? `/${chainName}` : '/'}>
           <IconButton iconLeft>
-            <FiArrowLeft /> {t('takeMeHome')}
+            <FiArrowLeft /> {t('404.takeMeHome')}
           </IconButton>
-        </UnstyledLink>
+        </StyledLink>
       }
     />
   );

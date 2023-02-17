@@ -3,7 +3,6 @@ import { MdCached } from 'react-icons/md';
 import { Controller, useForm } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useGuildConfig } from 'Modules/Guilds/Hooks/useGuildConfig';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import {
   Control,
@@ -23,6 +22,7 @@ import {
 import { bn } from 'utils/safeBn';
 import { FIELDS } from './constants';
 import { SetGuildConfigFields, ControlField, FieldType } from './types';
+import { useHookStoreProvider } from 'stores';
 
 const getComponent = (type: FieldType) => {
   if (type === FieldType.duration) return DurationInput;
@@ -34,10 +34,15 @@ const SetGuildConfigEditor: FC<ActionEditorProps> = ({
   onSubmit,
 }) => {
   const { guildId } = useTypedParams();
-  const { data: currentGuildConfig } = useGuildConfig(guildId);
   const { t } = useTranslation();
   const [noValueUpdatedError, setNoValueUpdatedError] = useState(false);
   const theme = useTheme();
+  const {
+    hooks: {
+      fetchers: { useGuildConfig },
+    },
+  } = useHookStoreProvider();
+  const { data: currentGuildConfig } = useGuildConfig(guildId);
 
   const parsedData = useMemo<SetGuildConfigFields>(() => {
     if (!decodedCall) return null;
@@ -286,10 +291,14 @@ const SetGuildConfigEditor: FC<ActionEditorProps> = ({
         );
       })}
       {noValueUpdatedError && (
-        <Error>{t('noValueHasBeenUpdatedFromCurrentGuildConfig')}</Error>
+        <Error>
+          {t(
+            'actionBuilder.config.noValueHasBeenUpdatedFromCurrentGuildConfig'
+          )}
+        </Error>
       )}
       <Button m="1rem 0 0" fullWidth type="submit">
-        {t('saveAction')}
+        {t('actionBuilder.action.saveAction')}
       </Button>
     </form>
   );

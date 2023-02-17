@@ -1,5 +1,5 @@
 import { TokenWithBalance } from 'hooks/Guilds/erc20/useAllERC20Balances';
-import { TokenInfoWithType } from 'hooks/Guilds/tokens/useTokenList';
+import { TokenInfoWithType } from 'types/types';
 
 export type TokenWithBalanceIndexable = TokenWithBalance & { id: string };
 

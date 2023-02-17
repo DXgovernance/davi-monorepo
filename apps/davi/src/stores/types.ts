@@ -1,6 +1,6 @@
-import { useProposal } from './modules/common/fetchers/useProposal';
-import { useSnapshotId } from './modules/common/fetchers/useSnapshotId';
-import { useTotalLocked } from './modules/SnapshotERC20Guild/fetchers/rpc/useTotalLocked';
+import { BigNumber } from 'ethers';
+import { Option, Permission } from 'components/ActionsBuilder/types';
+import { Proposal, GuildConfigProps, Vote } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -11,33 +11,178 @@ interface GovernanceCapabilities {
 }
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
-type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepGuild';
-
+type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepERC20Guild';
+// TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
+  useGetNumberOfActiveProposals: (daoId: string) => {
+    data: BigNumber;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useGetMemberList: (daoId: string) => {
+    data: { id: string; address: `0x${string}`; tokensLocked: BigNumber }[];
+    isLoading: boolean;
+    isError: boolean;
+  };
+  useGetAllPermissions: (
+    daoId: string,
+    filter?: 'tokens' | 'functionCalls'
+  ) => {
+    data: {
+      id: string;
+      to: string;
+      from: string;
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+      functionSignature: string;
+      allowed: boolean;
+    }[];
+    isLoading: boolean;
+    isError: boolean;
+  };
   useProposal: (
     daoId: string,
     proposalId: `0x${string}`
-  ) => ReturnType<typeof useProposal>;
+  ) => {
+    data: Proposal;
+    error: Error;
+  };
   useSnapshotId: (useSnapshotIdProps: {
     contractAddress: string;
     proposalId: `0x${string}`;
-  }) => ReturnType<typeof useSnapshotId>;
+  }) => { data: BigNumber };
   useTotalLocked: (
     daoId: string,
     proposalId?: `0x${string}`
-  ) => ReturnType<typeof useTotalLocked>;
+  ) => {
+    data: BigNumber;
+  };
+  useDAOToken: (daoId: string) => { data: `0x${string}` };
+  useIsProposalCreationAllowed: (
+    daoId: string,
+    userAddress: `0x${string}`
+  ) => boolean;
+  useProposalVotesOfVoter: (
+    daoAddress: `0x${string}`,
+    proposalId: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: { option: string; votingPower: BigNumber };
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useVoterLockTimestamp: (
+    daoAddress: `0x${string}`,
+    userAddress: `0x${string}`
+  ) => {
+    data: moment.Moment;
+  };
+  useProposalCalls: (
+    daoId: string,
+    proposal: Proposal
+  ) => { options: Option[] };
+  useVotingResults: (
+    daoId: string,
+    proposalId: `0x${string}`,
+    proposal: Proposal['totalVotes']
+  ) => VoteData;
+  useVotingPowerOf: (useVotingPowerOfProps: {
+    contractAddress: string;
+    userAddress: `0x${string}`;
+    snapshotId?: string;
+    fallbackSnapshotId?: boolean;
+  }) => {
+    data: BigNumber;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useMemberCount: (daoId: `0x${string}`) => { data: number };
+  useGetPermissions: (
+    daoAddress: `0x${string}`,
+    permissionArgs: Permission
+  ) => {
+    data: {
+      valueAllowed: BigNumber;
+      fromTime: BigNumber;
+    };
+  };
+  useGuildConfig: (
+    guildAddress: string,
+    proposalId?: `0x${string}`
+  ) => {
+    data: GuildConfigProps;
+    isError: boolean;
+    isLoading: boolean;
+  };
+  useGuildProposalIds: (daoId: `0x${string}`) => {
+    data: `0x${string}`[];
+    isError: boolean;
+    isLoading: boolean;
+    errorMessage: string;
+  };
+  useGetVotes: (
+    daoId: string,
+    proposal: Proposal
+  ) => {
+    data: Vote[];
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 
-// TODO: here, the types depend on a very specific return type of the hook. Maybe at some point this should change, or have our own defined return types instead of relying on ReturnType<typeof hook>
-
-// TODO: useSnapshotId and implementation-specific hooks should be removed when all the hooks are ported. That logic should only reside inside the implementation, not as a global hook
+export interface WriterHooksInteface {
+  useApproveTokens: (
+    tokenAddress: `0x${string}`
+  ) => (daoTokenVault: string, amount?: string) => Promise<void>;
+  useCreateProposal: (
+    daoAddress: string,
+    linkRef?: string
+  ) => (
+    title: string,
+    description: string,
+    toArray: string[],
+    dataArray: string[],
+    valueArray: BigNumber[],
+    totalOptions: number,
+    otherFields: Record<string, any>,
+    skipMetadataUpload: boolean,
+    handleMetadataUploadError: (error: Error) => void,
+    cb: (error?: any, txtHash?: any) => void
+  ) => Promise<void>;
+  useExecuteProposal: (
+    daoAddress: string
+  ) => (proposalId: `0x${string}`) => Promise<void>;
+  useLockTokens: (
+    daoAddress: string
+  ) => (
+    stakeAmount: BigNumber,
+    decimals?: number,
+    symbol?: string
+  ) => Promise<void>;
+  useVoteOnProposal: (
+    daoAddress: string
+  ) => (
+    proposalId: string,
+    option: BigNumber,
+    votingPower: BigNumber,
+    title?: string,
+    cb?: (error?: any, txtHash?: any) => void
+  ) => Promise<void>;
+  useWithdrawTokens: (
+    daoAddress: string
+  ) => (
+    amount: BigNumber,
+    tokenDecimals?: number,
+    tokenSymbol?: string
+  ) => Promise<void>;
+}
 
 interface HooksInterfaceWithFallback {
   fetchers: {
     default: FetcherHooksInterface;
     fallback: FetcherHooksInterface;
   };
-  writers: null;
+  writers: WriterHooksInteface;
 }
 
 interface HooksInterfaceWithoutFallback
@@ -50,15 +195,15 @@ export interface FullGovernanceImplementation {
   bytecodes: `0x${string}`[];
   hooks: HooksInterfaceWithFallback;
   capabilities: GovernanceCapabilities;
-  checkDataSourceAvailability: () => boolean;
+  checkDataSourceAvailability: (chainId: number) => boolean;
 }
 
 export interface GovernanceTypeInterface
   extends Omit<FullGovernanceImplementation, 'hooks'> {
   hooks: HooksInterfaceWithoutFallback;
+  dataSource: 'primary' | 'secondary' | null;
 }
 
 export interface HookStoreContextInterface extends GovernanceTypeInterface {
-  isLoading: boolean;
   daoId: string;
 }

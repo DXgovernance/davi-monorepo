@@ -147,8 +147,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
             totalVotes: votingResults?.options[index],
             votePercentage: getBigNumberPercentage(
               votingResults?.options[index],
-              votingResults?.totalLocked,
-              2
+              votingResults?.totalLocked
             ),
           };
         })

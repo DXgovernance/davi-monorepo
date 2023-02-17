@@ -29,8 +29,7 @@ const VoteResultRow: React.FC<ResultRowProps> = ({
 
   const votingPowerPercent = useVotingPowerPercent(
     voteData?.options?.[optionKey],
-    voteData?.totalLocked,
-    2
+    voteData?.totalLocked
   );
   const label = getGuildOptionLabel({
     metadata: proposalMetadata,

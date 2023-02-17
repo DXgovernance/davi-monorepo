@@ -80,8 +80,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
         optionLabel,
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
-          totalLocked,
-          2
+          totalLocked
         ),
       };
     });

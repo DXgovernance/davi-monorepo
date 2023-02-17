@@ -17,12 +17,13 @@ import {
   useListenToVoteAdded,
 } from 'stores/modules/guilds/common/events';
 import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, refetch, error } = useQuery<getProposalQuery>(
     getProposalDocument,

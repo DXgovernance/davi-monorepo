@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
-import { ZERO_ADDRESS } from 'utils';
+import { SUPPORTED_DAVI_NETWORKS, ZERO_ADDRESS } from 'utils';
 import { apolloClient } from 'clients/apollo';
 
 export type GuildConfigProps = {
@@ -27,7 +27,7 @@ export type GuildConfigProps = {
 
 export const useGuildConfig = (guildAddress: string) => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,

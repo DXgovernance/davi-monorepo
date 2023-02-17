@@ -8,10 +8,11 @@ import {
 } from '.graphclient';
 import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events/useListenToProposalStateChanged';
 import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, refetch, loading, error } =
     useQuery<getNumberOfActiveProposalsQuery>(

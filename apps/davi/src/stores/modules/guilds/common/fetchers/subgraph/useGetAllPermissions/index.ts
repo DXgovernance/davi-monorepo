@@ -10,12 +10,13 @@ import {
 } from '.graphclient';
 import { apolloClient } from 'clients/apollo';
 import { FetcherHooksInterface } from 'stores/types';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseGetAllPermissions = FetcherHooksInterface['useGetAllPermissions'];
 
 export const useGetAllPermissions: IUseGetAllPermissions = (daoId, filter) => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const queryToExecute = useMemo(() => {
     if (!filter) {

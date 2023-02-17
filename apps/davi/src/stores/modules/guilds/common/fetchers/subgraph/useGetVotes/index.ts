@@ -12,12 +12,13 @@ import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import { getGuildOptionLabel } from 'utils/proposals';
 import { Vote } from 'types/types.guilds.d';
 import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 
 export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const {
     hooks: {

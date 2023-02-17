@@ -7,12 +7,13 @@ import {
 } from '.graphclient';
 import { FetcherHooksInterface } from 'stores/types';
 import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseGuildProposalIds = FetcherHooksInterface['useGuildProposalIds'];
 
 export const useGuildProposalIds: IUseGuildProposalIds = daoId => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getGuildProposalIdsQuery>(
     getGuildProposalIdsDocument,

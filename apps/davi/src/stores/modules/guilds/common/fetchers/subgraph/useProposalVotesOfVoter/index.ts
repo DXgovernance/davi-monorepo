@@ -9,6 +9,7 @@ import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseProposalVotesOfVoter =
   FetcherHooksInterface['useProposalVotesOfVoter'];
@@ -19,7 +20,7 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   userAddress: `0x${string}`
 ) => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
   const userAddressToLower = userAddress.toLowerCase();
 
   const { data, refetch, loading, error } =

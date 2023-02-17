@@ -5,12 +5,13 @@ import { useQuery } from '@apollo/client';
 import { getMemberListDocument, getMemberListQuery } from '.graphclient';
 import { FetcherHooksInterface } from 'stores/types';
 import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseGetMemberList = FetcherHooksInterface['useGetMemberList'];
 
 export const useGetMemberList: IUseGetMemberList = guildAddress => {
   const { chain } = useNetwork();
-  const chainId = useMemo(() => chain?.id, [chain]);
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getMemberListQuery>(
     getMemberListDocument,

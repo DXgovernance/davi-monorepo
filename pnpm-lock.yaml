@@ -528,33 +528,7 @@ importers:
       uint32: 0.2.1
 
   packages/graph-node:
-    specifiers:
-      '@graphprotocol/graph-cli': ^0.30.2
-      '@graphprotocol/graph-ts': ^0.29.0
-      '@typescript-eslint/eslint-plugin': ^5.38.0
-      '@typescript-eslint/parser': ^5.38.0
-      babel-polyfill: ^6.26.0
-      babel-register: ^6.26.0
-      dxdao-contracts: workspace:*
-      eslint: ^8.23.1
-      eslint-config-prettier: ^8.5.0
-      glob: ^8.0.3
-      js-yaml: ^4.1.0
-      prettier: ^2.7.1
-    dependencies:
-      babel-polyfill: 6.26.0
-      babel-register: 6.26.0
-      dxdao-contracts: link:../dxdao-contracts
-      js-yaml: 4.1.0
-    devDependencies:
-      '@graphprotocol/graph-cli': 0.30.4
-      '@graphprotocol/graph-ts': 0.29.0
-      '@typescript-eslint/eslint-plugin': 5.43.0_a2qhxslrsoaoxxmyjfllcpczu4
-      '@typescript-eslint/parser': 5.43.0_eslint@8.30.0
-      eslint: 8.30.0
-      eslint-config-prettier: 8.5.0_eslint@8.30.0
-      glob: 8.0.3
-      prettier: 2.8.1
+    specifiers: {}
 
 packages:
 

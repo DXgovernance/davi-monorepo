@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf artifacts cache contracts deployments deploy build",
+    "clean": "rm -rf artifacts cache contracts deployments deploy build typechain-types",
     "copy-contracts": "cp -r node_modules/dxdao-contracts/contracts ./",
     "compile": "pnpm run copy-contracts && hardhat compile",
     "dev": "./src/dev.sh"

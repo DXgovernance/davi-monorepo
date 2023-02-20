@@ -11,9 +11,11 @@
       "dependsOn": ["^setup", "compile"]
     },
     "dxdao-contracts#compile": {
-      "dependsOn": ["clean"]
+      "dependsOn": ["clean"],
+      "outputs": ["artifacts/**"]
     },
     "dxdao-contracts#setup": {
+      "dependsOn": ["dxdao-contracts#compile"],
       "outputs": ["types/**"]
     },
     "dev-scripts#compile": {
@@ -23,15 +25,7 @@
       "dependsOn": ["dev-scripts#compile"],
       "outputs": ["build/**", "artifacts/**"]
     },
-    "guilds-subgraph#dev": {
-      "dependsOn": ["^dev-scripts#compile"]
-    },
-    "1-5-subgraph#dev": {
-      "dependsOn": ["^dev-scripts#compile"]
-    },
-    "dev": {
-      "dependsOn": ["setup", "^dxdao-contracts#compile", "^dev-scripts#compile"]
-    },
+    "dev": {},
     "build": {
       "dependsOn": ["^setup"]
     },

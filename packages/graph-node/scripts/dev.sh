@@ -8,6 +8,12 @@ if ! which docker 2>&1 > /dev/null; then
     exit 1
 fi
 
+cleanup() {
+  echo "Graph-node::: Stopping docker compose"
+  docker compose down
+  exit 0
+}
+
 # <<<<<---------- Constants ---------->>>>>
 MAX_RETRY=120
 
@@ -82,6 +88,9 @@ waitForHardhat(){
 }
 
 # <<<<<---------- Start ---------->>>>>
+
+trap cleanup INT
+
 echo "Graph-node::: Starting Docker"
 safeDockerStart
 
@@ -92,4 +101,5 @@ echo "Graph-node::: Starting docker compose"
 docker compose up --detach &
 
 echo "Graph-node::: Watching docker logs"
+wait
 docker compose logs -f &

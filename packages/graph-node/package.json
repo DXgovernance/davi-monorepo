@@ -1,13 +1,10 @@
 {
-  "name": "guilds-subgraph",
-  "description": "Subgraph for DXgov Guilds Governance",
-  "repository": {
-    "url": "https://github.com/DXgovernance/dxdao-subgraph"
-  },
+  "name": "graph-node",
+  "description": "Localhost graph node",
   "version": "0.1.0",
   "scripts": {
-    "clean": "rm -rf ./data build && docker compose down",
-    "dev": "./scripts/dev.sh",
+    "clean": "docker compose down && rm -rf ./data build",
+    "dev": "pnpm run clean && ./scripts/dev.sh",
     "compose-up": "docker compose up"
   },
   "devDependencies": {

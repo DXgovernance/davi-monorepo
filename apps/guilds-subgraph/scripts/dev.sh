@@ -3,11 +3,6 @@
 # exit as soon as any command fails
 set -e
 
-if ! which docker 2>&1 > /dev/null; then
-    echo "Please install 'docker' first"
-    exit 1
-fi
-
 # <<<<<---------- Constants ---------->>>>>
 MAX_RETRY=120
 
@@ -65,8 +60,8 @@ tryStartLocal(){
     pnpm run start-local && break
 
     try_count=$((try_count + 1))
-    if [ $try_count -eq 5 ]; then
-        echo "pnpm run start-local failed after 5 attempts. Exiting..."
+    if [ $try_count -eq 10 ]; then
+        echo "pnpm run start-local failed after 10 attempts. Exiting..."
         exit 1
     fi
 

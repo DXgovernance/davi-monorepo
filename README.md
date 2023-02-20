@@ -78,24 +78,19 @@ Then there was a problem during the Linux setup. Common sources of this are
 
 
 #### 4. Dev script permissions
-If you see `permission denied: ./apps/dxdao-subgraph/scripts/dev.sh` you might need to set permissions for dev script.  
+If you see `permission denied: ./packages/graph-node/scripts/dev.sh` you might need to set permissions for dev script.  
 ```
-chmod +x ./apps/dxdao-subgraph/scripts/dev.sh
+chmod +x ./packages/graph-node/scripts/dev.sh
 ```
 
 ## Development
 
-To run project locally you need to compile contracts, run hardhat node from dev-scripts, run subgraph docker, create/deploy local subgraph and run davi-frontend. To do this you can do it in separate terminals or run `pnpm dev` from root project. See `turbo.json` for turbo config
-##### Option 1:
-Running all at once:
-``` pnpm run dev ```
+To run project locally you need to compile contracts, run hardhat node from dev-scripts, run docker graph-node container, create/deploy local subgraphs and run davi-frontend. Currently`pnpm dev` from root project won't work. To do so, you need to run 4 different processes:
 
-##### Option 2
-Running in separate terminals:
-1. Run hardhat node locally: ```pnpm run devScript``` 
-2. Start docker containers: ```pnpm run graphNode:dev``` (Will require hardhat to be running and docker to be installed and open)
-3. Create and deploy local subgraphs(1.5 & guilds): ```pnpm run subgraph:dev``` (graph-node container should be running. Verify before execute start-local)
-4. Build DAVI graph-client & run dApp:  ```pnpm run davi:dev```. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
+1. Run hardhat node locally: ```pnpm run dev-scripts:dev``` 
+2. Start docker containers: ```pnpm run graph-node:dev``` (Will require hardhat to be running and docker to be installed and open)
+3. Create and deploy local subgraphs (1.5 & guilds): ```pnpm run subgraph:dev``` (graph-node container should be running. Verify before execute start-local).
+4. After both subgraphs are deployed locally, build DAVI graph-client & run dApp with:  ```pnpm run davi:dev```. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
 
 
 ### Issues:

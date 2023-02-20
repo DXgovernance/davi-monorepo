@@ -41,8 +41,18 @@ done
 isHardhatRunning() {
     nc -z localhost 8545 2>&1
 }
-isSubgraphRunning(){
-    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/guilds/graphql)
+
+isGuildsSubgraphRunning(){
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/guilds)
+    if [[ $status_code -eq 200 ]]; then
+        return 0
+        break
+    else
+        return 1
+    fi
+}
+is1-5SubgraphRunning(){
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5)
     if [[ $status_code -eq 200 ]]; then
         return 0
         break
@@ -67,16 +77,15 @@ waitForHardhat(){
 
 waitForSubgraph(){
     retry_count=0
-    while ! isSubgraphRunning; do
+    while ( ! isGuildsSubgraphRunning  ||  ! is1-5SubgraphRunning ); do
         if [ $retry_count -eq $MAX_RETRY ]; then
-            echo "Subgraph Node is not ready after $MAX_RETRY retries. Exiting script"
+            echo "Subgraph not ready after $MAX_RETRY retries. Exiting script"
             exit 1
         fi
         echo "Subgraph not ready. Sleeping. ($retry_count / $MAX_RETRY)"
         sleep 1
         retry_count=$((retry_count+1))
     done
-    echo "Subgraph::: Local deployment ready!. Opening graphql playground in Browser"
 }
 
 if [ "$WAIT_HARDHAT" = "true" ]; then
@@ -87,6 +96,7 @@ fi
 if [ "$WAIT_SUBGRAPH" = "true" ]; then
     echo "waiting for subgraph"
     waitForSubgraph
+    echo "DAVI::: Local deployment ready!"
     pnpm run build-graph-client
 fi
 

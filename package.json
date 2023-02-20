@@ -12,23 +12,22 @@
   "scripts": {
     "clean": "turbo run clean",
     "compile": "turbo run compile",
-    "devScript": "turbo run dev --filter=\"dev-scripts\"",
+    "dev-scripts:dev": "turbo run dev --filter=\"dev-scripts\"",
+    "graph-node:dev": "cd packages/graph-node && pnpm run dev",
+    "graph-node:clean": "cd packages/graph-node && pnpm run clean",
+    "subgraph:dev": "turbo run dev --filter=\"*-subgraph\" --filter=!./packages/*",
+    "guilds-subgraph:start-local": "cd apps/guilds-subgraph && pnpm run start-local",
+    "1-5-subgraph:start-local": "cd apps/1-5-subgraph && pnpm run start-local",
     "davi:dev": "cd apps/davi && pnpm run dev",
     "davi:dev-no-wait": "cd apps/davi && pnpm run dev --no-subgraph-wait --no-hardhat-wait",
     "davi:build-graph-client": "cd apps/davi && pnpm run build-graph-client",
     "davi:test": "turbo run test --filter=davi",
     "davi:build": "turbo run build --filter=davi",
-    "subgraph:dev": "turbo run dev --filter=\"*-subgraph\"",
-    "graphNode:dev": "cd packages/graph-node && pnpm run dev",
-    "graphNode:clean": "cd packages/graph-node && pnpm run clean",
-    "guilds-subgraph:start-local": "cd apps/guilds-subgraph && pnpm run start-local",
-    "1-5-subgraph:start-local": "cd apps/1-5-subgraph && pnpm run start-local",
-    "dev": "turbo run dev",
-    "test": "turbo run test --filter=!dxdao-contracts",
+    "test1": "turbo run test --filter=!dxdao-contracts",
+    "test": "turbo run test --filter=\"./apps/**\"",
     "prepare": "husky install",
     "pre-commit": "turbo run pre-commit",
-    "format-check": "turbo run format-check --filter=!dxdao-contracts", 
-    "hardhat": "pnpm run hardhat"
+    "format-check": "turbo run format-check --filter=!dxdao-contracts"
   },
   "pnpm": {
     "overrides": {

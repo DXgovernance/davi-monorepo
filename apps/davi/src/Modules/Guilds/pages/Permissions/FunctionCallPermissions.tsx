@@ -12,7 +12,11 @@ import { useDecodedCall } from 'hooks/Guilds/contracts/useDecodedCall';
 import { Call } from 'components/ActionsBuilder/types';
 import { Loading } from 'components/primitives/Loading';
 import { Box } from 'components/primitives/Layout';
-import { Toggle } from 'components/primitives/Forms/Toggle';
+import {
+  Toggle,
+  ToggleContainer,
+  ToggleLabel,
+} from 'components/primitives/Forms/Toggle';
 import { ExternalLink } from 'components/primitives/Links/ExternalLink';
 import {
   Table,
@@ -20,8 +24,6 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  ToggleContainer,
-  ToggleLabel,
 } from './Permissions.styled';
 
 interface IFunctionCallPermissions {
@@ -192,7 +194,7 @@ const FunctionCallPermissions = ({
               })}
             </tbody>
           </Table>
-          <ToggleContainer>
+          <ToggleContainer width="100%" marginTop="16px">
             <ToggleLabel>
               {t('actionBuilder.advanced.advancedView')}
             </ToggleLabel>

@@ -11,7 +11,13 @@ interface GovernanceCapabilities {
 }
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
-type SupportedGovernanceSystem = 'SnapshotERC20Guild' | 'SnapshotRepERC20Guild';
+type SupportedGovernanceSystem =
+  | 'SnapshotERC20Guild'
+  | 'SnapshotRepERC20Guild'
+  | 'Governance1_5';
+
+export type SupportedSubgraphs = 'Guilds' | 'Governance1.5';
+
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
   useGetNumberOfActiveProposals: (daoId: string) => {

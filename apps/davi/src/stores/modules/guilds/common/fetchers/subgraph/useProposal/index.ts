@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useNetwork } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { BigNumber } from 'ethers';
 import { unix } from 'moment';
@@ -15,13 +16,19 @@ import {
   useListenToProposalStateChanged,
   useListenToVoteAdded,
 } from 'stores/modules/guilds/common/events';
+import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
+  const { chain } = useNetwork();
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
+
   const { data, refetch, error } = useQuery<getProposalQuery>(
     getProposalDocument,
     {
+      client: apolloClient[chainId]['Guilds'],
       variables: {
         id: daoId?.toLowerCase(),
         proposalId: proposalId?.toLowerCase(),
@@ -80,8 +87,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
         optionLabel,
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
-          totalLocked,
-          2
+          totalLocked
         ),
       };
     });

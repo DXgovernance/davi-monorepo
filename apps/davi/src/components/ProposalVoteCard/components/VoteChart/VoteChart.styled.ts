@@ -13,27 +13,39 @@ export const VotesChartContainer = styled.div`
 export const VotesChartRow = styled.div`
   display: flex;
   flex: 1;
-  height: 0.75rem;
-  border-radius: ${({ theme }) => theme.radii.pill};
+  height: 0.5rem;
+  margin-top: 2%;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.colors.border1};
-  overflow: hidden;
+  border-radius: ${({ theme }) => theme.radii.pill};
 `;
 
-export const ChartBar = styled.div<{ percent?: number; color: string }>`
+export const ChartBar = styled.div<{ percent?: number; color?: string }>`
   width: ${({ percent }) => (percent ? `${percent}%` : '')};
+  border-radius: ${({ theme }) => theme.radii.pill};
+
   background: ${({ color }) => color};
-  height: 0.75rem;
+  height: 0.5rem;
   overflow: hidden;
 `;
 
-// The margin top and height are different when quorum 0 or 100,
-// becase the border radious of the container, the marker needs to touch the curved line.
-export const VoteQuorumMarker = styled.div<{ quorum: number }>`
-  height: ${({ quorum }) => (quorum === 0 || quorum === 100 ? '18px' : '14px')};
-  margin-top: ${({ quorum }) =>
-    quorum === 0 || quorum === 100 ? '10px' : '14px'};
+export const VoteResult = styled.span<{}>`
+  margin-left: 1rem;
+`;
+
+export const VoteQuorumMarker = styled.div<{
+  optionsAmount: number;
+}>`
+  height: ${({ optionsAmount }) => `${1.2 * optionsAmount}rem`};
+  margin-top: 5px;
   width: 1px;
-  background: ${({ theme }) => theme.colors.border1};
+  background: ${({ theme }) => theme.colors.bg1};
+`;
+
+// todo: change to theme.
+export const VoteChartRowsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const VoteQuorumLabel = styled.div<{ quorum: number }>`
@@ -66,12 +78,7 @@ export const VoteQuorumContainer = styled.div<{ quorum: number }>`
   flex-direction: column;
   align-items: ${({ quorum }) =>
     quorum < 10 ? 'flex-start' : quorum > 90 ? 'flex-end' : 'center'};
-  left: ${({ quorum }) =>
-    quorum < 10
-      ? `${quorum}%`
-      : quorum > 90
-      ? `calc(${quorum}% - 65px)`
-      : `calc(${quorum}% - 32px)`};
+  left: ${({ quorum }) => `${quorum}px`};
 `;
 
 export const PaddedFlagCheckered = styled(FaFlagCheckered)`

@@ -51,9 +51,8 @@ export interface ProposalVoteCardProps {
 }
 
 export interface ResultRowProps {
-  isPercent: boolean;
   optionKey?: number;
-  voteData: VoteData;
+  options: { [name: string]: BigNumber };
   proposalMetadata: ProposalMetadata;
 }
 

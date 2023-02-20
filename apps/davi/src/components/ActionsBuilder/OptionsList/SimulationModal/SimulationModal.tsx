@@ -42,7 +42,7 @@ export const SimulationModal: React.FC<SimulationModalProps> = ({
         <StatusWrapper>
           <SimulationStatusWrapper status={status} />
           <Flex direction="row">
-            <Muted>{t('actionBuilder.poweredBy')}</Muted>{' '}
+            <Muted>{t('actionBuilder.simulations.poweredBy')}</Muted>{' '}
             <TenderlyLogo src={tenderlyLogo} />
           </Flex>
         </StatusWrapper>

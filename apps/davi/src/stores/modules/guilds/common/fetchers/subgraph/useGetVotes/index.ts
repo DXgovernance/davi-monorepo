@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { BigNumber } from 'ethers';
+import { useNetwork } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { getVotesDocument, getVotesQuery } from '.graphclient';
-
 import { useHookStoreProvider } from 'stores';
 import { FetcherHooksInterface } from 'stores/types';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
@@ -11,10 +11,15 @@ import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import { getGuildOptionLabel } from 'utils/proposals';
 import { Vote } from 'types/types.guilds.d';
+import { apolloClient } from 'clients/apollo';
+import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 
 export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
+  const { chain } = useNetwork();
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
+
   const {
     hooks: {
       fetchers: { useTotalLocked },
@@ -24,6 +29,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { data, refetch, loading, error } = useQuery<getVotesQuery>(
     getVotesDocument,
     {
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: proposal?.id },
     }
   );
@@ -45,8 +51,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
         optionLabel,
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
-          totalLocked,
-          2
+          totalLocked
         ),
       };
     });

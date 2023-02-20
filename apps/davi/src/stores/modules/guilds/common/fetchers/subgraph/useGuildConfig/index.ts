@@ -1,9 +1,10 @@
+import { useNetwork } from 'wagmi';
+import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
-import { useMemo } from 'react';
-import { ZERO_ADDRESS } from 'utils';
-import { FetcherHooksInterface } from 'stores/types';
+import { SUPPORTED_DAVI_NETWORKS, ZERO_ADDRESS } from 'utils';
+import { apolloClient } from 'clients/apollo';
 
 export type GuildConfigProps = {
   name: string;
@@ -24,12 +25,14 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
+export const useGuildConfig = (guildAddress: string) => {
+  const { chain } = useNetwork();
+  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
-export const useGuildConfig: IUseGuildConfig = (guildAddress: string) => {
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
+      client: apolloClient[chainId]['Guilds'],
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

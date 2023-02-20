@@ -6,19 +6,20 @@ import {
 import VotesChart from './components/VoteChart/VoteChart';
 import { VoteConfirmationModal } from './components/VoteConfirmationModal';
 import { UserVote } from './components/UserVote';
-import VoteResults from './components/VoteResults/VoteResults';
+import VoteOptions from './components/VoteOptions/VoteOptions';
 import { BigNumber } from 'ethers';
 import moment from 'moment';
 import { Loading } from 'components/primitives/Loading';
 import { useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import {
-  SmallButton,
   VotesContainer,
   ButtonsContainer,
   VoteActionButton,
-  VoteOptionButton,
-  VoteOptionsLabel,
+  StyledRadioInput,
+  OptionContainer,
+  OptionText,
+  VoteActionButtonContainer,
 } from './ProposalVoteCard.styled';
 import { checkVotingPower } from './utils';
 import { useTheme } from 'styled-components';
@@ -27,6 +28,12 @@ import { useTranslation } from 'react-i18next';
 import { getGuildOptionLabel } from 'utils/proposals';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { useHookStoreProvider } from 'stores';
+import {
+  Toggle,
+  ToggleContainer,
+  ToggleLabel,
+} from 'components/primitives/Forms/Toggle';
+import { Divider } from 'components/Divider';
 
 const ProposalVoteCard = ({
   voteData,
@@ -106,29 +113,27 @@ const ProposalVoteCard = ({
           ) : (
             t('voting.voteResults')
           )}
-          <SmallButton
-            variant="secondary"
-            onClick={() => setIsPercent(!isPercent)}
-          >
-            {!voteData ? (
-              <Loading loading text skeletonProps={{ width: 40 }} />
-            ) : isPercent ? (
-              '%'
-            ) : (
-              voteData?.token?.symbol
-            )}
-          </SmallButton>
+          <ToggleContainer>
+            <ToggleLabel>{t('actionBuilder.inputs.token')}</ToggleLabel>
+            <Toggle
+              value={!isPercent}
+              onChange={() => setIsPercent(!isPercent)}
+              small
+              name="toggle-is-percent"
+            />
+          </ToggleContainer>
         </SidebarCardHeaderSpaced>
       }
     >
       <SidebarCardContent>
         <VotesContainer>
-          <VoteResults
-            isPercent={isPercent}
-            voteData={voteData}
-            proposalMetadata={proposal?.metadata}
-          />
           <VotesChart isPercent={isPercent} voteData={voteData} />
+          {(userVote?.option || !isOpen) && (
+            <VoteOptions
+              options={voteData?.options}
+              proposalMetadata={proposal?.metadata}
+            />
+          )}
         </VotesContainer>
 
         <UserVote
@@ -140,10 +145,6 @@ const ProposalVoteCard = ({
         {/* Hide voting options if user has already voted */}
         {isOpen && !userVote?.option && voteData?.options && (
           <ButtonsContainer>
-            <VoteOptionsLabel>
-              {t('actionBuilder.options.options')}
-            </VoteOptionsLabel>
-
             {/* Getting the full option keys list but displaying default 0 index option at the bottom */}
             {[...Object.keys(voteData?.options).slice(1), '0'].map(
               optionKey => {
@@ -155,24 +156,42 @@ const ProposalVoteCard = ({
                 });
 
                 return (
-                  <VoteOptionButton
-                    key={optionKey}
-                    optionKey={Number(optionKey)}
-                    active={selectedOption && selectedOption.eq(bItem)}
-                    onClick={() => {
-                      setSelectedOption(
-                        selectedOption && selectedOption.eq(bItem)
-                          ? null
-                          : bItem
-                      );
-                    }}
-                  >
-                    {label}
-                  </VoteOptionButton>
+                  <>
+                    <OptionContainer
+                      direction="row"
+                      justifyContent="left"
+                      onClick={() => {
+                        setSelectedOption(
+                          selectedOption && selectedOption.eq(bItem)
+                            ? null
+                            : bItem
+                        );
+                      }}
+                    >
+                      <StyledRadioInput
+                        value={selectedOption}
+                        optionKey={Number(optionKey)}
+                        checked={selectedOption && selectedOption.eq(bItem)}
+                      />
+                      <OptionText
+                        optionKey={Number(optionKey)}
+                        variant="medium"
+                      >
+                        {label}
+                      </OptionText>
+                    </OptionContainer>
+                  </>
                 );
               }
             )}
+          </ButtonsContainer>
+        )}
+      </SidebarCardContent>
 
+      {isOpen && !userVote?.option && voteData?.options && (
+        <>
+          <Divider />
+          <VoteActionButtonContainer>
             <VoteActionButton
               disabled={!selectedOption}
               onClick={() =>
@@ -184,9 +203,9 @@ const ProposalVoteCard = ({
             >
               {t('voting.vote')}
             </VoteActionButton>
-          </ButtonsContainer>
-        )}
-      </SidebarCardContent>
+          </VoteActionButtonContainer>
+        </>
+      )}
 
       <VoteConfirmationModal
         isOpen={modalOpen}

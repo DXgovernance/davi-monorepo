@@ -8,10 +8,8 @@ hardhat_running() {
 }
 
 start_hardhat_node() {
-  # pnpm hardhat node --hostname 0.0.0.0 --no-deploy --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
-  # pnpm hardhat node --hostname 0.0.0.0 --tags LocalhostGuild --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
   pnpm hardhat node --hostname 0.0.0.0 --export "build/deployment-info.json" | grep -vE 'eth_getBlockByNumber|eth_getBlockByHash|eth_getTransactionReceipt|Mined empty block|eth_getLogs|eth_call|Transaction|From|To|Value|Gas used|Block|Contract deployment|Contract address|Contract call|eth_chainId|eth_blockNumber|eth_accounts' &
-
+  # We can add --tags LocalhostGuild,PermissionRegistry,etc.. with the deployments we want to trigger for localhost. By default all deployment files in /deploy folder will be trigger
   echo "Waiting for hardhat to launch..."
 
   while ! hardhat_running; do

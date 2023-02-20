@@ -2,6 +2,10 @@ const path = require("path");
 const fs = require("fs");
 const hre = require("hardhat");
 
+/**
+ * This script is intended to update the latest compiled abis for each project.
+ */
+
 const projects = [
   {
     name: "1-5-subgraph",

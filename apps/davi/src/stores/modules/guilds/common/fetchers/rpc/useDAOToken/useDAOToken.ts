@@ -1,4 +1,3 @@
-// import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';
 import { FetcherHooksInterface } from 'stores/types';
 import { useContractRead } from 'wagmi';
 import { BaseERC20Guild } from 'contracts/ts-files/BaseERC20Guild';

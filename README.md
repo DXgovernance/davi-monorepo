@@ -106,3 +106,22 @@ We are using dxdao-contracts as submodule. Currently it is working under `featur
 After [this pr](https://github.com/DXgovernance/dxdao-contracts/pull/294) is merged we can change .gitmodules config to use dxdao-contracts with main/develop branch
 To update dxdao-contracts submodule to latest commit use `git submodule update --remote --merge`
 To update dxdao-contracts submodule branch use `git submodule set-branch --branch [branch] dxdao-contracts`
+
+# DAVI Monorepo QA tests
+
+## How to setup
+
+1. Install dependencies `pnpm i`
+2. Make an `.env` file in the `davi` folder (see `.env.qa.example`)
+
+### How to run test
+
+To run test just type in terminal `yarn test:testName`
+
+-`testName` you can find in ```package.json```
+
+Now there is:
+
+1. `smokeLocal` will start localhost:3000 and run Smoke test on local
+2. `smokeQa` will run Smoke test on QA ENV
+3. `smokeProd` will run Smoke test on PROD ENV

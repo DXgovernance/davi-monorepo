@@ -4,17 +4,16 @@
 
 /// <reference types="cypress" />
 
-import configDevelopmentJSON from '../../config/development.json';
 import LandingPage from '../../support/pageObjects/LandingPage';
 import AnyGuildPage from '../../support/pageObjects/AnyGuildPage';
 import CreateProposalPage from '../../support/pageObjects/CreateProposalPage';
 import { clickAnywhereToClose, ethereumNetworkGuilds, gnosisNetworkGuilds } from '../../utils';
-
+let url = Cypress.config().baseUrl;
 
 describe('Check Project-DAVI', () => {
 
     before(() => {
-        cy.visit(configDevelopmentJSON.baseUrl);
+        cy.visit(url);
         LandingPage.goToGnosisNetwork();
     });
 
@@ -30,9 +29,9 @@ describe('Check Project-DAVI', () => {
         clickAnywhereToClose();
     });
 
-    it('Check Footer links'), () => {
+    it('Check Footer links', () => {
         LandingPage.checkFooterLinks();
-    };
+    });
 
     // TODO: ATM only asserting Gnosis network
     gnosisNetworkGuilds.forEach((guildName, i) => {

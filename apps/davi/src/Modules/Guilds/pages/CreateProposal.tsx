@@ -41,6 +41,7 @@ import { StyledLink } from 'components/primitives/Links';
 import { IconButton } from 'components/primitives/Button';
 import { linkStyles } from './Proposal/Proposal.styled';
 import { ProposalDescription } from 'components/ProposalDescription';
+import useLocalStorageWithExpiry from 'hooks/Guilds/useLocalStorageWithExpiry';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -83,6 +84,13 @@ const CreateProposalPage: React.FC = () => {
   ]);
   const [isPermissionWarningModalOpen, setIsPermissionWarningModalOpen] =
     useState(false);
+
+  const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
+    `${guildId}/create-proposal/html`,
+    null,
+    345600000
+  );
+
   const {
     Editor,
     EditorConfig,
@@ -90,9 +98,9 @@ const CreateProposalPage: React.FC = () => {
     html: proposalBodyHTML,
     clear,
   } = useTextEditor(
-    `${guildId}/create-proposal`,
-    345600000,
-    t('createProposal.enterProposalDescription')
+    t('createProposal.enterProposalDescription'),
+    onHTMLChange,
+    html
   );
 
   const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
@@ -156,6 +164,7 @@ const CreateProposalPage: React.FC = () => {
     handleCreateProposal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ignoreWarning, isActionDenied]);
+  console.log({ options });
 
   const handleCreateProposal = async () => {
     setIsCreatingProposal(true);

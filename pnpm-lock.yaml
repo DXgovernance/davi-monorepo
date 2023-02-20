@@ -166,12 +166,12 @@ importers:
       react-switch: ^7.0.0
       react-toastify: ^8.1.0
       react-virtuoso: ^2.16.5
+      showdown: ^2.1.0
       start-server-and-test: ^1.14.0
       styled-components: ^5.3.5
       swr: ^1.1.2
       ts-generator: ^0.1.1
       ts-node: ^10.9.1
-      turndown: ^7.1.1
       typechain-target-ethers-v5: ^5.0.1
       typescript: ^4.9.3
       wagmi: ^0.7.15
@@ -273,11 +273,11 @@ importers:
       react-switch: 7.0.0_biqbaboplfbrettd7655fr4n2y
       react-toastify: 8.2.0_biqbaboplfbrettd7655fr4n2y
       react-virtuoso: 2.19.1_biqbaboplfbrettd7655fr4n2y
+      showdown: 2.1.0
       styled-components: 5.3.6_biqbaboplfbrettd7655fr4n2y
       swr: 1.3.0_react@18.2.0
       ts-generator: 0.1.1
       ts-node: 10.9.1_rniibfx3zftzehea7t244vwgdu
-      turndown: 7.1.1
       typechain-target-ethers-v5: 5.0.1_c4tpmuajjwy7vjodfmym27ncri
       typescript: 4.9.4
       wagmi: 0.7.15_5fkdkfy2bkgsnhvxgn477z7iae
@@ -589,11 +589,6 @@ packages:
       xml2js: 0.4.23
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /@achingbrain/node-fetch/2.6.7:
-    resolution: {integrity: sha512-iTASGs+HTFK5E4ZqcMsHmeJ4zodyq8L38lZV33jwqcBJYoUt3HjN4+ot+O9/0b+ke8ddE7UgOtVuZN/OkV19/g==}
-    engines: {node: 4.x || >=6.0.0}
     dev: false
 
   /@achingbrain/ssdp/4.0.1:
@@ -3181,11 +3176,11 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  /@ceramicnetwork/blockchain-utils-linking/2.6.0:
-    resolution: {integrity: sha512-jq5U8yw7t2razPW8jqZ3akS7k2mFKf7GNVKMjIWCVWinuyLDthnjEQMe4vIiMLUdKCO7/eYOWEePVwhW8V7tFw==}
+  /@ceramicnetwork/blockchain-utils-linking/2.9.0:
+    resolution: {integrity: sha512-PzIBJM/rmkS+aViy0OO4B0gbb75/AUaJremhHGkDBELIyOdziBmsK8fBZI0hygkieuC/qmhj1xufbWMPqDKK6g==}
     dependencies:
-      '@ceramicnetwork/streamid': 2.7.0
-      '@didtools/cacao': 1.0.0
+      '@ceramicnetwork/streamid': 2.10.0
+      '@didtools/cacao': 1.2.0
       '@stablelib/random': 1.0.2
       '@stablelib/sha256': 1.0.1
       caip: 1.1.0
@@ -3195,13 +3190,14 @@ packages:
       - encoding
     dev: false
 
-  /@ceramicnetwork/common/2.13.0:
-    resolution: {integrity: sha512-QAbyCRKhm0H0GOHIxKHYSFE6Ak3mb5o+qyfnFz5K7FcUtvjnGUWAqZMdvedzVYLS9lBYirl9oel+h3xEx2gpuw==}
+  /@ceramicnetwork/common/2.18.0:
+    resolution: {integrity: sha512-z716JnPjDzGy9P2p++XsF3ApbLRmeZX4notAaYH9MW2PAqcaQeGBistxgLV/JZaOOGc9MDDiTGeCJ8CL/PiB0w==}
     dependencies:
-      '@ceramicnetwork/streamid': 2.7.0
-      '@didtools/cacao': 1.0.0
-      '@didtools/pkh-ethereum': 0.0.1
-      '@didtools/pkh-solana': 0.0.1
+      '@ceramicnetwork/streamid': 2.10.0
+      '@didtools/cacao': 1.2.0
+      '@didtools/pkh-ethereum': 0.0.3
+      '@didtools/pkh-solana': 0.0.4
+      '@didtools/pkh-tezos': 0.0.2
       '@stablelib/random': 1.0.2
       caip: 1.1.0
       cross-fetch: 3.1.5
@@ -3217,26 +3213,26 @@ packages:
       - encoding
     dev: false
 
-  /@ceramicnetwork/http-client/2.10.0:
-    resolution: {integrity: sha512-+caYOXFvOSgoOiv41vU6Du6Ru52iZAir1hxbAnSO4uHN9wruAYxMD/a9YoepMcvr8veGtQhPvvaGA+rI5MNJ6g==}
+  /@ceramicnetwork/http-client/2.15.0:
+    resolution: {integrity: sha512-WYZOadKh4WdI5GSBJp2QxeKvDTUdxrZhQdTysvxWuOzQEUtIphOINfEK//3n/G3ObP/aKhea1ThJjKZyQIghlw==}
     dependencies:
-      '@ceramicnetwork/common': 2.13.0
-      '@ceramicnetwork/stream-caip10-link': 2.8.0
-      '@ceramicnetwork/stream-model': 0.11.0
-      '@ceramicnetwork/stream-model-instance': 0.9.0
-      '@ceramicnetwork/stream-tile': 2.9.0
-      '@ceramicnetwork/streamid': 2.7.0
+      '@ceramicnetwork/common': 2.18.0
+      '@ceramicnetwork/stream-caip10-link': 2.13.0
+      '@ceramicnetwork/stream-model': 0.16.0
+      '@ceramicnetwork/stream-model-instance': 0.14.0
+      '@ceramicnetwork/stream-tile': 2.14.0
+      '@ceramicnetwork/streamid': 2.10.0
       query-string: 7.1.1
       rxjs: 7.5.7
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@ceramicnetwork/stream-caip10-link/2.8.0:
-    resolution: {integrity: sha512-5rZOF+cQEmTxhNA6hBltlBHq0vNNkAUqW2qZ69q5497X+bGGHXzG2fLus68T3o5SXpW2EayuDkPrH4K2/PbUPg==}
+  /@ceramicnetwork/stream-caip10-link/2.13.0:
+    resolution: {integrity: sha512-AQuoB9tTQqAcVfkc1xCOmB0ILBt6gEIL4/76V81ztLlFX4AchqEzL9T3p5+CZfFZWRlD0ESdOEWvmaFZd6pOEw==}
     dependencies:
-      '@ceramicnetwork/common': 2.13.0
-      '@ceramicnetwork/streamid': 2.7.0
+      '@ceramicnetwork/common': 2.18.0
+      '@ceramicnetwork/streamid': 2.10.0
       caip: 1.1.0
       did-resolver: 3.2.2
       lodash.clonedeep: 4.5.0
@@ -3244,11 +3240,11 @@ packages:
       - encoding
     dev: false
 
-  /@ceramicnetwork/stream-model-instance/0.9.0:
-    resolution: {integrity: sha512-COcaVhzlairDFZHBbdQ27Bo0zkdC0E0SDMUc/R5NlgczI5OxNhrG7TShGcRzBGeQJfMa8UrxVAYFpXmn3QQ8QQ==}
+  /@ceramicnetwork/stream-model-instance/0.14.0:
+    resolution: {integrity: sha512-xqAOd2dB3abIGWHVDYTJKkyAZXC3Y/y8ilciq5WEyAL0jB3QE+JlJlz7+MypWYUO57vMPkicvWeoneLdEr4+Fw==}
     dependencies:
-      '@ceramicnetwork/common': 2.13.0
-      '@ceramicnetwork/streamid': 2.7.0
+      '@ceramicnetwork/common': 2.18.0
+      '@ceramicnetwork/streamid': 2.10.0
       '@ipld/dag-cbor': 7.0.3
       '@stablelib/random': 1.0.2
       fast-json-patch: 3.1.1
@@ -3257,11 +3253,11 @@ packages:
       - encoding
     dev: false
 
-  /@ceramicnetwork/stream-model/0.11.0:
-    resolution: {integrity: sha512-2sP59rThgCjNHaix0w/ekdcltnRj/wzF2hd8roZ0SeO7msHJWD+6lDIdtGLAdg8XpD5KUFdXd/L+1FvXaAaK9g==}
+  /@ceramicnetwork/stream-model/0.16.0:
+    resolution: {integrity: sha512-EOcFbSLN47i/E7NSle9QKSS9UwQvwUFQ15ZsN69dKPQaHiEpwuChJry9O+8w4X12991kKrjVwC3cwi+XwDFbWA==}
     dependencies:
-      '@ceramicnetwork/common': 2.13.0
-      '@ceramicnetwork/streamid': 2.7.0
+      '@ceramicnetwork/common': 2.18.0
+      '@ceramicnetwork/streamid': 2.10.0
       '@ipld/dag-cbor': 7.0.3
       '@stablelib/random': 1.0.2
       fast-json-patch: 3.1.1
@@ -3273,11 +3269,11 @@ packages:
       - encoding
     dev: false
 
-  /@ceramicnetwork/stream-tile/2.9.0:
-    resolution: {integrity: sha512-KoL/7paY+M04L7oaTDnNkyRvqhlbfh+5yDy6ReJ0wGqv5tmCsyX8wiaC5dUGGNMiALORGvtWeoZhjQynDB8riw==}
+  /@ceramicnetwork/stream-tile/2.14.0:
+    resolution: {integrity: sha512-2RDfL+H/A+CfAa2lY9zJnEK2GeftnFyeKMeziu6AMb6dKy8BZN7JnDhHCs1U8uZi0YhEFs2vue1OhhYYBfdj9Q==}
     dependencies:
-      '@ceramicnetwork/common': 2.13.0
-      '@ceramicnetwork/streamid': 2.7.0
+      '@ceramicnetwork/common': 2.18.0
+      '@ceramicnetwork/streamid': 2.10.0
       '@ipld/dag-cbor': 7.0.3
       '@stablelib/random': 1.0.2
       dids: 3.4.0
@@ -3288,12 +3284,12 @@ packages:
       - encoding
     dev: false
 
-  /@ceramicnetwork/streamid/2.7.0:
-    resolution: {integrity: sha512-gRPA5UAYPAPN7KdKMp/hNnAlSp7yeIzWnzKhPYZNo3QbUbZriWQC0IvD8naNV2tzy02z6fwdOxRcLyFP9uPYeg==}
+  /@ceramicnetwork/streamid/2.10.0:
+    resolution: {integrity: sha512-sVTt1vqCrTBCOOu7FSI8+4VeRbBqgxzJmnvfbq9P/St1aUSw5Yvjq1HaT2VnUbfc2oJRAa0m4wjOyLn6rlPPLQ==}
     dependencies:
       '@ipld/dag-cbor': 7.0.3
+      mapmoize: 1.2.1
       multiformats: 9.9.0
-      typescript-memoize: 1.1.1
       uint8arrays: 3.1.1
       varint: 6.0.0
     dev: false
@@ -3795,20 +3791,22 @@ packages:
       - react-dom
     dev: true
 
-  /@didtools/cacao/1.0.0:
-    resolution: {integrity: sha512-EhhvOJkLEnttPh2HneAVTc/p5xBZJmeytLr/ShLY0Dq1Na8wMeShQVu0oOex0p9s8/+U63E8xCtRPVF5iqHGvQ==}
+  /@didtools/cacao/1.2.0:
+    resolution: {integrity: sha512-y0nMgV8DL0jgHUq0uhjMqrW9p79PopQnugLWx02tss+iR0ahON2cfal20+eFx2p3kXtvaL8U+iByrjmyuokj+A==}
     engines: {node: '>=14.14'}
     dependencies:
       '@ipld/dag-cbor': 7.0.3
       apg-js: 4.1.2
+      caip: 1.1.0
       multiformats: 9.9.0
+      uint8arrays: 4.0.3
     dev: false
 
   /@didtools/pkh-ethereum/0.0.1:
     resolution: {integrity: sha512-2hDt1f60WXUNWMVS9S9b0pmXl78ivkVxZJHeyBUkbz7O7To1rHvlgvJ0gFJ3sKVemI1llpClzwd3PEjZfGwiUw==}
     engines: {node: '>=14.14'}
     dependencies:
-      '@didtools/cacao': 1.0.0
+      '@didtools/cacao': 1.2.0
       '@ethersproject/wallet': 5.7.0
       '@stablelib/random': 1.0.2
       caip: 1.1.0
@@ -3818,31 +3816,52 @@ packages:
     resolution: {integrity: sha512-ka+iwlvBCVQqO3btZ1wssAm0VmG25nqZkD1rSV5IRT8LNAvne2cjKzt/hMutK9PULMD/yJRifwFupgfu7JI9Cg==}
     engines: {node: '>=14.14'}
     dependencies:
-      '@didtools/cacao': 1.0.0
+      '@didtools/cacao': 1.2.0
       '@ethersproject/wallet': 5.7.0
       '@stablelib/random': 1.0.2
       caip: 1.1.0
     dev: false
 
-  /@didtools/pkh-solana/0.0.1:
-    resolution: {integrity: sha512-l/rimusjUDl3bEGD+os7YqxyNpY9545e4a+qXeqDxNX2kfndnAa4Oz+GOPSll9Q9sTgnB5DeuOMbmYxzHxNDqw==}
+  /@didtools/pkh-ethereum/0.0.3:
+    resolution: {integrity: sha512-+hfVzkk6fd0CifgdNzQ+og2B1q8O7Wmx3IZQz1wejQH8HfjRX0tNL41aw5Df6T9Vzps0R45ULnY46SVdmORg3A==}
     engines: {node: '>=14.14'}
     dependencies:
-      '@didtools/cacao': 1.0.0
-      '@stablelib/ed25519': 1.0.3
+      '@didtools/cacao': 1.2.0
+      '@ethersproject/wallet': 5.7.0
+      '@stablelib/random': 1.0.2
       caip: 1.1.0
-      uint8arrays: 3.1.1
     dev: false
 
   /@didtools/pkh-solana/0.0.2:
     resolution: {integrity: sha512-PTV8Eu37+/7u+GNqH0fjjoiUpss5v9cfpnCo5yXi+lQ06VR02MvMAfWtI61+QN8xjgmd8wHpQP7CtX32skWOxw==}
     engines: {node: '>=14.14'}
     dependencies:
-      '@didtools/cacao': 1.0.0
+      '@didtools/cacao': 1.2.0
       '@stablelib/ed25519': 1.0.3
       '@stablelib/random': 1.0.2
       caip: 1.1.0
       uint8arrays: 3.1.1
+    dev: false
+
+  /@didtools/pkh-solana/0.0.4:
+    resolution: {integrity: sha512-vV7qUabOYdpCoJHE6mS1teCCgXtYDpUnsT6CrzY7lEsmSB0gw9W14VhfosI2urv2CAJj2xW2Xm4hsrYulngS6w==}
+    engines: {node: '>=14.14'}
+    dependencies:
+      '@didtools/cacao': 1.2.0
+      '@stablelib/ed25519': 1.0.3
+      '@stablelib/random': 1.0.2
+      caip: 1.1.0
+      uint8arrays: 3.1.1
+    dev: false
+
+  /@didtools/pkh-tezos/0.0.2:
+    resolution: {integrity: sha512-G23+XLkCiHGsFO7ATW+ApczJzE7iRYV4tI43nBP13/IZ1Bx0ietZLOS84AdeGqZLHtsWqbKjzEX41x7+OfXCWQ==}
+    engines: {node: '>=14.14'}
+    dependencies:
+      '@didtools/cacao': 1.2.0
+      '@stablelib/random': 1.0.2
+      '@taquito/utils': 14.2.0
+      caip: 1.1.0
     dev: false
 
   /@discoveryjs/json-ext/0.5.7:
@@ -8234,6 +8253,7 @@ packages:
     dependencies:
       ethers: 5.7.2
       hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+    dev: false
 
   /@nomiclabs/hardhat-ethers/2.2.1_hardhat@2.12.3:
     resolution: {integrity: sha512-RHWYwnxryWR8hzRmU4Jm/q4gzvXpetUOJ4OPlwH2YARcDB+j79+yAYCwO0lN1SUOb4++oOTJEe6AWLEc42LIvg==}
@@ -8518,9 +8538,9 @@ packages:
   /@orbisclub/orbis-sdk/0.3.99:
     resolution: {integrity: sha512-Qq/pML9hsfddxJTEJZtwJqU13swjXkFsaKGyPUeMfiiVefTRMR6Vr2U6xnslye1PVH/T0cj+rKsdylXd79Mhkg==}
     dependencies:
-      '@ceramicnetwork/blockchain-utils-linking': 2.6.0
-      '@ceramicnetwork/http-client': 2.10.0
-      '@ceramicnetwork/stream-tile': 2.9.0
+      '@ceramicnetwork/blockchain-utils-linking': 2.9.0
+      '@ceramicnetwork/http-client': 2.15.0
+      '@ceramicnetwork/stream-tile': 2.14.0
       '@didtools/pkh-ethereum': 0.0.2
       '@didtools/pkh-solana': 0.0.2
       '@ethersproject/bytes': 5.7.0
@@ -8533,7 +8553,7 @@ packages:
       dids: 3.4.0
       key-did-provider-ed25519: 2.0.1
       key-did-resolver: 2.3.0
-      lit-js-sdk: 1.1.234
+      lit-js-sdk: 1.1.246
       react-image-file-resizer: 0.4.8
       uint8arrays: 3.1.1
     transitivePeerDependencies:
@@ -9140,6 +9160,14 @@ packages:
     resolution: {integrity: sha512-ClJWvmL6UBM/wjkvv/7m5VP3GMr9t0osr4yVgLZsLCOz4hGN9gIAFEqnJ0TsSMAN+n840nf2cHZnA5/KFqHC7Q==}
     dependencies:
       '@stablelib/int': 1.0.1
+    dev: false
+
+  /@stablelib/blake2b/1.0.1:
+    resolution: {integrity: sha512-B3KyKoBAjkIFeH7romcF96i+pVFYk7K2SBQ1pZvaxV+epSBXJ+n0C66esUhyz6FF+5FbdQVm77C5fzGFcEZpKA==}
+    dependencies:
+      '@stablelib/binary': 1.0.1
+      '@stablelib/hash': 1.0.1
+      '@stablelib/wipe': 1.0.1
     dev: false
 
   /@stablelib/bytes/1.0.1:
@@ -10940,6 +10968,21 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
+  /@taquito/utils/14.2.0:
+    resolution: {integrity: sha512-nuqYdkiRPrca2/ztSPokuhvizlOqCzNHM/fX3mIXl8TWO4JiGr0hhPKeJ1Vk9NCG/Qd1A3iQqNP5PQlDAhe/mw==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@stablelib/blake2b': 1.0.1
+      '@stablelib/ed25519': 1.0.3
+      '@types/bs58check': 2.1.0
+      bignumber.js: 9.1.0
+      blakejs: 1.2.1
+      bs58check: 2.1.2
+      buffer: 6.0.3
+      elliptic: 6.5.4
+      typedarray-to-buffer: 4.0.0
+    dev: false
+
   /@testing-library/cypress/8.0.2_cypress@9.5.3:
     resolution: {integrity: sha512-KVdm7n37sg/A4e3wKMD4zUl0NpzzVhx06V9Tf0hZHZ7nrZ4yFva6Zwg2EFF1VzHkEfN/ahUzRtT1qiW+vuWnJw==}
     engines: {node: '>=12', npm: '>=6'}
@@ -11842,6 +11885,12 @@ packages:
     resolution: {integrity: sha512-p7ienRMiS41Nu2/igbJxxLDWrSZ0WxM8UQgCeO9KhoVF7cOVFkrKsiDr1EsJIla8vV3oEEjGcz11jc5yimhzZw==}
     dependencies:
       '@types/node': 18.11.9
+
+  /@types/bs58check/2.1.0:
+    resolution: {integrity: sha512-OxsysnJQh82vy9DRbOcw9m2j/WiyqZLn0YBhKxdQ+aCwoHj+tWzyCgpwAkr79IfDXZKxc6h7k89T9pwS78CqTQ==}
+    dependencies:
+      '@types/node': 18.11.9
+    dev: false
 
   /@types/cacheable-request/6.0.3:
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==}
@@ -12924,6 +12973,7 @@ packages:
 
   /@walletconnect/ethereum-provider/1.7.8_3cxu5zja4e2r5wmvge7mdcljwq:
     resolution: {integrity: sha512-dnl560zFMdK/LD4MD2XwHbWj7RXOaeXWPc9jzDaosLQLAXfA5mKe4XbCFFUPbVMYuyBdRI9NZv3Ci/qDb5wncQ==}
+    deprecated: 'WalletConnect''s v1 SDKs are now deprecated. Please upgrade to a v2 SDK. For details see: https://docs.walletconnect.com/'
     dependencies:
       '@walletconnect/client': 1.8.0_3cxu5zja4e2r5wmvge7mdcljwq
       '@walletconnect/jsonrpc-http-connection': 1.0.3
@@ -17509,7 +17559,6 @@ packages:
   /commander/9.4.1:
     resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
     engines: {node: ^12.20.0 || >=14}
-    dev: true
 
   /common-path-prefix/3.0.0:
     resolution: {integrity: sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w==}
@@ -19172,7 +19221,7 @@ packages:
     resolution: {integrity: sha512-hLKlfPGoEp9T6malsuNyF1bCrU0AcECZJ1SP2lvbHiic7ko2PdiZPmmVipVId+ZqmshU4AlLLEozZc9Iu1X1UA==}
     engines: {node: '>=14.14'}
     dependencies:
-      '@ceramicnetwork/stream-tile': 2.9.0
+      '@ceramicnetwork/stream-tile': 2.14.0
       '@stablelib/random': 1.0.2
       dids: 3.4.0
       key-did-provider-ed25519: 2.0.1
@@ -19186,7 +19235,7 @@ packages:
     resolution: {integrity: sha512-hXHkOTL9E5R4rbQwDVOktiiEq57Y6yWOEYjev1ojOpMr2Rkx9g8bw0v6BQIsbPB94aaYxUCtaejNl2FrublfiA==}
     engines: {node: '>=14.14'}
     dependencies:
-      '@didtools/cacao': 1.0.0
+      '@didtools/cacao': 1.2.0
       '@didtools/pkh-ethereum': 0.0.1
       '@stablelib/random': 1.0.2
       dag-jose-utils: 2.0.0
@@ -19417,10 +19466,6 @@ packages:
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.3.0
-
-  /domino/2.1.6:
-    resolution: {integrity: sha512-3VdM/SXBZX2omc9JF9nOPCtDaYQ67BGp5CoLpIQlO2KCAPETs8TcDHacF26jXadGbvUteZzRTeos2fhID5+ucQ==}
-    dev: false
 
   /domutils/1.7.0:
     resolution: {integrity: sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg==}
@@ -23573,7 +23618,7 @@ packages:
     peerDependencies:
       hardhat: ^2.0.0
     dependencies:
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.3_mwhvu7sfp6vq5ryuwb6hlbjfka
 
   /hardhat-deploy/0.11.20:
     resolution: {integrity: sha512-6G2aFLW0mfZxY0ljDf8rxzEJkVh57gr3Eia5H2DeBIQNJh0dhBV2Y5LDq4E4J9K4Crq0DjpxGNTshEtAB9eWxA==}
@@ -23604,9 +23649,9 @@ packages:
       hardhat: ^2.9.1
     dependencies:
       '@firebase/firestore-types': 2.2.0
-      '@nomiclabs/hardhat-ethers': 2.2.1_gsql6crh4t5imixi2nhgp37drm
+      '@nomiclabs/hardhat-ethers': 2.2.1_hardhat@2.12.3
       firebase: 8.2.6
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.3_mwhvu7sfp6vq5ryuwb6hlbjfka
     transitivePeerDependencies:
       - '@firebase/app-types'
     dev: true
@@ -23761,7 +23806,6 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
-    dev: true
 
   /hardhat/2.12.3_z6wznmtyb6ovnulj6iujpct7um:
     resolution: {integrity: sha512-qxOvRNgQnLqRFssn5f8VP5KN3caytShU0HNeKxmPVK1Ix/0xDVhIC7JOLxG69DjOihUfmxmjqspsHbZvFj6EhQ==}
@@ -23832,6 +23876,7 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
+    dev: false
 
   /harmony-reflect/1.6.2:
     resolution: {integrity: sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g==}
@@ -25834,7 +25879,7 @@ packages:
       merge-options: 3.0.4
       nanoid: 3.3.4
       native-fetch: 3.0.0_hmwa7nplpltavckpkeobtw6pv4
-      node-fetch: /@achingbrain/node-fetch/2.6.7
+      node-fetch: '@registry.npmjs.org/@achingbrain/node-fetch/-/node-fetch-2.6.7.tgz'
       react-native-fetch-api: 2.0.0
       stream-to-it: 0.2.4
     dev: false
@@ -29086,14 +29131,14 @@ packages:
       wrap-ansi: 7.0.0
     dev: true
 
-  /lit-connect-modal/0.1.10:
-    resolution: {integrity: sha512-hiE/0yrl15EDNH08OqcntiNXDOvU4zviiaOOCT4jG2N3L2dyMFLOwXXrkNobQ6B8/8MgXmMJu2TCp6RwhmCzNw==}
+  /lit-connect-modal/0.1.11:
+    resolution: {integrity: sha512-EG6pcCqdxZQJt3MPDq3gJ5Sz4E5sJdydtAF7VFJu6z6GDHO1Ybp8WrTx8CUnHiF54/MQBRi6Nb7cbTvv+BKWvQ==}
     dependencies:
       micromodal: 0.4.10
     dev: false
 
-  /lit-js-sdk/1.1.234:
-    resolution: {integrity: sha512-jriua+Igavu5kbGYxMuUxmNrd4TfMXGNoG3hNoBA0+FyTYvYo9assYegWkP8w8vTW2FGC5qJDhNvFf0pOAfgWQ==}
+  /lit-js-sdk/1.1.246:
+    resolution: {integrity: sha512-eD0y0chdc7QXWzOr/f6sVd+d77YFlmgz65dDu46zYKk591FmHQ+qRlqaNStq+YtpfZ5+P9MKou+F+0dD01Y9Ng==}
     dependencies:
       '@ethersproject/bytes': 5.7.0
       '@ethersproject/contracts': 5.7.0
@@ -29107,7 +29152,7 @@ packages:
       bufferutil: 4.0.7
       cross-blob: 3.0.2
       jszip: 3.10.1
-      lit-connect-modal: 0.1.10
+      lit-connect-modal: 0.1.11
       lit-siwe: 1.1.8_vs2eitok36dr26fji5ujfsmafm
       node-fetch: 3.3.0
       pako: 2.1.0
@@ -29609,6 +29654,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       object-visit: 1.0.1
+
+  /mapmoize/1.2.1:
+    resolution: {integrity: sha512-LK8ArSM1wbfRPTnl+LpdxW1pwkfY6GxtM9p+STr6aDtM7ImR8jLuf4ekei43/AN0f7XDSrohzwwK57eGHSDAuA==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+    dev: false
 
   /markdown-escapes/1.0.4:
     resolution: {integrity: sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==}
@@ -30718,7 +30768,7 @@ packages:
     peerDependencies:
       node-fetch: '*'
     dependencies:
-      node-fetch: /@achingbrain/node-fetch/2.6.7
+      node-fetch: '@registry.npmjs.org/@achingbrain/node-fetch/-/node-fetch-2.6.7.tgz'
     dev: false
 
   /native-fetch/3.0.0_node-fetch@2.6.8:
@@ -33570,6 +33620,7 @@ packages:
     resolution: {integrity: sha512-N9iVG+CGJsI4b4ZGazjwLnxErD2d9Pe4DPvvXSxYA9tFNu8ymXME4Qs5HIQ0LMJpNM7zj+m0NlNnNeqFpKzqnA==}
     deprecated: Unmaintained
     dev: true
+    bundledDependencies: []
 
   /promisify/0.0.3:
     resolution: {integrity: sha512-CcBGsRhhq466fsZVyHfptuKqon6eih0CqMsJE0kWIIjbpVNEyDoaKLELm2WVs//W/WXRBHip+6xhTExTkHUwtA==}
@@ -36219,6 +36270,13 @@ packages:
     resolution: {integrity: sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==}
     dev: true
 
+  /showdown/2.1.0:
+    resolution: {integrity: sha512-/6NVYu4U819R2pUIk79n67SYgJHWCce0a5xTP979WbNp0FL9MN1I1QK662IDU1b6JzKTvmhgI7T7JYIxBi3kMQ==}
+    hasBin: true
+    dependencies:
+      commander: 9.4.1
+    dev: false
+
   /side-channel/1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
     dependencies:
@@ -38280,7 +38338,6 @@ packages:
       typescript: 4.8.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-    dev: true
 
   /ts-pnp/1.2.0_typescript@4.9.4:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
@@ -38448,12 +38505,6 @@ packages:
       turbo-windows-arm64: 1.6.3
     dev: true
 
-  /turndown/7.1.1:
-    resolution: {integrity: sha512-BEkXaWH7Wh7e9bd2QumhfAXk5g34+6QUmmWx+0q6ThaVOLuLUqsnkq35HQ5SBHSaxjSfSM7US5o4lhJNH7B9MA==}
-    dependencies:
-      domino: 2.1.6
-    dev: false
-
   /tv4/1.3.0:
     resolution: {integrity: sha512-afizzfpJgvPr+eDkREK4MxJ/+r8nEEHcmitwgnPUqpaP+FpwQyadnxNoSACbgc/b1LsZYtODGoPiFxQrgJgjvw==}
     engines: {node: '>= 0.8.0'}
@@ -38599,6 +38650,10 @@ packages:
     dependencies:
       is-typedarray: 1.0.0
 
+  /typedarray-to-buffer/4.0.0:
+    resolution: {integrity: sha512-6dOYeZfS3O9RtRD1caom0sMxgK59b27+IwoNy8RDPsmslSGOyU+mpTamlaIW7aNKi90ZQZ9DFaZL3YRoiSCULQ==}
+    dev: false
+
   /typedarray/0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
@@ -38612,10 +38667,6 @@ packages:
     resolution: {integrity: sha512-zXFars5LUkI3zP492ls0VskH3TtdeHCqu0i7/duGt60i5IGPIpAHE/DWo5FqJ6EjQ15YKXrt+AETjv60Dat34Q==}
     dev: true
 
-  /typescript-memoize/1.1.1:
-    resolution: {integrity: sha512-GQ90TcKpIH4XxYTI2F98yEQYZgjNMOGPpOgdjIBhaLaWji5HPWlRnZ4AeA1hfBxtY7bCGDJsqDDHk/KaHOl5bA==}
-    dev: false
-
   /typescript-tuple/2.2.1:
     resolution: {integrity: sha512-Zcr0lbt8z5ZdEzERHAMAniTiIKerFCMgd7yjq1fPnDJ43et/k9twIFQMUYff9k5oXcsQ0WpvFcgzK2ZKASoW6Q==}
     dependencies:
@@ -38626,7 +38677,6 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /typescript/4.9.4:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
@@ -41854,6 +41904,13 @@ packages:
     dev: false
     optional: true
 
+  '@registry.npmjs.org/@achingbrain/node-fetch/-/node-fetch-2.6.7.tgz':
+    resolution: {tarball: https://registry.npmjs.org/@achingbrain/node-fetch/-/node-fetch-2.6.7.tgz}
+    name: '@achingbrain/node-fetch'
+    version: 2.6.7
+    engines: {node: 4.x || >=6.0.0}
+    dev: false
+
   '@tgz.pm2.io/gkt-1.0.0.tgz':
     resolution: {tarball: https://tgz.pm2.io/gkt-1.0.0.tgz}
     name: gkt
@@ -41905,7 +41962,7 @@ packages:
     dev: true
 
   github.com/ethereumjs/ethereumjs-abi/ee3994657fa7a427238e6ba92a84d0b529bbcde0:
-    resolution: {tarball: https://codeload.github.com/ethereumjs/ethereumjs-abi/tar.gz/ee3994657fa7a427238e6ba92a84d0b529bbcde0}
+    resolution: {commit: ee3994657fa7a427238e6ba92a84d0b529bbcde0, repo: git+ssh://git@github.com/ethereumjs/ethereumjs-abi.git, type: git}
     name: ethereumjs-abi
     version: 0.6.8
     dependencies:
@@ -41913,7 +41970,7 @@ packages:
       ethereumjs-util: 6.2.1
 
   github.com/hugomrdias/concat-stream/057bc7b5d6d8df26c8cf00a3f151b6721a0a8034:
-    resolution: {tarball: https://codeload.github.com/hugomrdias/concat-stream/tar.gz/057bc7b5d6d8df26c8cf00a3f151b6721a0a8034}
+    resolution: {commit: 057bc7b5d6d8df26c8cf00a3f151b6721a0a8034, repo: git+ssh://git@github.com/hugomrdias/concat-stream.git, type: git}
     name: concat-stream
     version: 2.0.0
     engines: {node: '>=6.0.0'}
@@ -41935,7 +41992,7 @@ packages:
     dev: true
 
   github.com/web3-js/WebSocket-Node/ef5ea2f41daf4a2113b80c9223df884b4d56c400:
-    resolution: {tarball: https://codeload.github.com/web3-js/WebSocket-Node/tar.gz/ef5ea2f41daf4a2113b80c9223df884b4d56c400}
+    resolution: {commit: ef5ea2f41daf4a2113b80c9223df884b4d56c400, repo: git+ssh://git@github.com/web3-js/WebSocket-Node.git, type: git}
     name: websocket
     version: 1.0.29
     engines: {node: '>=0.10.0'}

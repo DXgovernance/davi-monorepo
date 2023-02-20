@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import useLocalStorageWithExpiry from 'hooks/Guilds/useLocalStorageWithExpiry';
 import { Editor } from './components/Editor';
 import { useTextEditor } from './useTextEditor';
 
@@ -16,10 +17,16 @@ export default {
 } as ComponentMeta<typeof Editor>;
 
 function DemoEditor() {
+  const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
+    `42/create-proposal/html`,
+    null,
+    345600000
+  );
+
   const { Editor, EditorConfig } = useTextEditor(
-    `42/create-proposal`,
-    345600000,
-    'Enter text here'
+    'Enter text here',
+    onHTMLChange,
+    html
   );
   return <Editor EditorConfig={EditorConfig} />;
 }

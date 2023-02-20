@@ -17,16 +17,15 @@ import { GuildsDarkTheme } from 'components/theme';
 import CreateDiscussionPage from 'Modules/Guilds/pages/CreateDiscussion';
 import { OnlineStatus } from 'components/OnlineStatus';
 import { DiscussionPage } from 'Modules/Guilds/pages/Discussion';
+import EditDiscussionPage from 'Modules/Guilds/pages/EditDiscussion';
 
 const App = () => {
   return (
     <ThemeProvider theme={GuildsDarkTheme}>
-      <GlobalStyle />
-
       <TransactionsProvider>
-        <Header />
-
         <GuildsContextProvider>
+          <GlobalStyle />
+          <Header />
           <Container>
             <OnlineStatus>
               <Routes>
@@ -75,6 +74,10 @@ const App = () => {
                 <Route
                   path="/:chainName/:guildId/create"
                   element={<CreateDiscussionPage />}
+                />
+                <Route
+                  path="/:chainName/:guildId/discussion/:discussionId/edit"
+                  element={<EditDiscussionPage />}
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>

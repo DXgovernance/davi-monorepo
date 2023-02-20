@@ -5,57 +5,49 @@ import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
 import { Editor } from './components/Editor';
-import TurndownService from 'turndown';
-import useLocalStorageWithExpiry from 'hooks/Guilds/useLocalStorageWithExpiry';
-
-const turndownService = new TurndownService();
+import useMarkdownToHTML from 'hooks/Guilds/conversions/useMarkdownToHTML';
+import useHTMLToMarkdown from 'hooks/Guilds/conversions/useHTMLToMarkdown';
 
 export const useTextEditor = (
-  localPath: string,
-  ttlMs: number,
-  placeholder: string
+  placeholder: string,
+  onHTMLChange: any,
+  html: string,
+  initialDescription?: string
 ) => {
-  const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
-    `${localPath}/html`,
-    null,
-    ttlMs
-  );
-  const [md, onMdChange] = useLocalStorageWithExpiry<string>(
-    `${localPath}/md`,
-    null,
-    ttlMs
-  );
+  const initialHTML = useMarkdownToHTML(initialDescription);
+  const md = useHTMLToMarkdown(html);
+
   const clear = () => {
     EditorConfig.commands.clearContent();
-    onMdChange('');
     onHTMLChange('');
   };
 
-  const EditorConfig = useEditor({
-    content: html ? html : {},
-    extensions: [
-      StarterKit.configure({
-        history: { depth: 10 },
-      }),
-      Focus.configure({
-        className: 'has-focus',
-        mode: 'all',
-      }),
-      Placeholder.configure({
-        placeholder,
-      }),
-      Highlight,
-      Link,
-    ],
-    onUpdate: ({ editor }) => {
-      const html = editor.getHTML();
-      if (html) {
-        onHTMLChange && onHTMLChange(html);
-        onMdChange && onMdChange(turndownService.turndown(html));
-        // onJSONChange && onJSONChange(JSON.stringify(editor.getJSON()));
-      }
+  const EditorConfig = useEditor(
+    {
+      content: html ? html : initialHTML,
+      extensions: [
+        StarterKit.configure({
+          history: { depth: 10 },
+        }),
+        Focus.configure({
+          className: 'has-focus',
+          mode: 'all',
+        }),
+        Placeholder.configure({
+          placeholder,
+        }),
+        Highlight,
+        Link,
+      ],
+      onUpdate: ({ editor }) => {
+        const html = editor.getHTML();
+        if (html) {
+          onHTMLChange && onHTMLChange(html);
+        }
+      },
     },
-  });
+    [initialDescription]
+  );
 
   return { Editor, EditorConfig, html, md, clear };
 };

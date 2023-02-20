@@ -230,6 +230,7 @@
     "proposalDuration": "Proposal Duration",
     "quorum": "Quorum",
     "backToOverview": "Back to Overview",
+    "backToDiscussion": "Back to Discussion",
     "seeAllProposals": "See all proposals",
     "createdBy": "Created by",
     "proposalInfoCard": {
@@ -330,6 +331,9 @@
     "retry": "Retry",
     "createAnyway": "Create anyway"
   },
+  "editDiscussion": {
+    "editDiscussion": "Edit Discussion"
+  },
   "discussions": {
     "allDiscussions": "All discussions",
     "discussions_zero": "No Discussions",
@@ -338,6 +342,7 @@
     "thereAreNoDiscussions": "There are no discussions",
     "noMoreDiscussions": "There are no more discussions",
     "createDiscussion": "Create Discussion",
+    "updateDiscussion": "Update Discussion",
     "createDiscussionWordy": "Create a new discussion",
     "discussionPlaceholder": "Write discussion content",
     "title": "Title",

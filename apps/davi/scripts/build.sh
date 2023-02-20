@@ -5,7 +5,6 @@ node scripts/beforeBuild.js
 
 # Add in once we upgrade to support ordered environment variables
 # export REACT_APP_GIT_SHA=$(echo $(git rev-parse  HEAD) | cut -c1-9)
-export DXGOV_GUILD_GRAPHQL_ENDPOINT=https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis
 export REACT_APP_VERSION=$npm_package_version
 export SKIP_PREFLIGHT_CHECK=true
 

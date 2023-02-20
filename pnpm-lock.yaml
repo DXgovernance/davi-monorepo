@@ -115,6 +115,7 @@ importers:
       cypress-wait-until: ^1.7.2
       diff: ^5.1.0
       dxdao-contracts: workspace:*
+      env-cmd: ^10.1.0
       eslint: ^8.30.0
       eslint-config-react-app: ^7.0.1
       eslint-plugin-cypress: ^2.12.1
@@ -228,6 +229,7 @@ importers:
       copy-to-clipboard: 3.3.3
       diff: 5.1.0
       dxdao-contracts: link:../dxdao-contracts
+      env-cmd: 10.1.0
       eslint-config-react-app: 7.0.1_lzzuuodtsqwxnvqeq4g4likcqa
       eslint-plugin-cypress: 2.12.1_eslint@8.30.0
       ethers: 5.7.2
@@ -445,7 +447,7 @@ importers:
       moment: 2.29.4
       prettier: 2.7.1
       prettier-plugin-solidity: 1.0.0-rc.1_prettier@2.7.1
-      solidity-docgen: 0.6.0-beta.34_hardhat@2.12.2
+      solidity-docgen: 0.6.0-beta.32_hardhat@2.12.2
       truffle-flattener: 1.6.0
       web3: 1.8.1
     devDependencies:
@@ -17478,7 +17480,6 @@ packages:
   /commander/4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
-    dev: true
 
   /commander/5.1.0:
     resolution: {integrity: sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==}
@@ -19828,6 +19829,15 @@ packages:
   /entities/4.4.0:
     resolution: {integrity: sha512-oYp7156SP8LkeGD0GF85ad1X9Ai79WtRsZ2gxJqtBuzH+98YUV6jkHEKlZkMbcrjJjIVJNIDP/3WL9wQkoPbWA==}
     engines: {node: '>=0.12'}
+
+  /env-cmd/10.1.0:
+    resolution: {integrity: sha512-mMdWTT9XKN7yNth/6N6g2GuKuJTsKMDHlQFUDacb/heQRRWOTIZ42t1rMHnQu4jYxU1ajdTeJM+9eEETlqToMA==}
+    engines: {node: '>=8.0.0'}
+    hasBin: true
+    dependencies:
+      commander: 4.1.1
+      cross-spawn: 7.0.3
+    dev: false
 
   /env-paths/2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
@@ -33584,7 +33594,6 @@ packages:
     resolution: {integrity: sha512-N9iVG+CGJsI4b4ZGazjwLnxErD2d9Pe4DPvvXSxYA9tFNu8ymXME4Qs5HIQ0LMJpNM7zj+m0NlNnNeqFpKzqnA==}
     deprecated: Unmaintained
     dev: true
-    bundledDependencies: []
 
   /promisify/0.0.3:
     resolution: {integrity: sha512-CcBGsRhhq466fsZVyHfptuKqon6eih0CqMsJE0kWIIjbpVNEyDoaKLELm2WVs//W/WXRBHip+6xhTExTkHUwtA==}
@@ -36488,8 +36497,8 @@ packages:
       - supports-color
     dev: true
 
-  /solidity-docgen/0.6.0-beta.34_hardhat@2.12.2:
-    resolution: {integrity: sha512-igdGrkg8gT1jn+B2NwzjEtSf+7NTrSi/jz88zO7MZWgETmcWbXaxgAsQP4BQeC4YFeH0Pie1NsLP7+9qDgvFtA==}
+  /solidity-docgen/0.6.0-beta.32_hardhat@2.12.2:
+    resolution: {integrity: sha512-LGcosbgqxrqTo9winVq3+Xz1shS9k4p+RKwqPVPI0HtjfsKF9Mc5GzBzOUhce9uwzy0yJfhf832whfY1UKt4Aw==}
     peerDependencies:
       hardhat: ^2.8.0
     dependencies:

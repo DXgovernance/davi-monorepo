@@ -29,7 +29,6 @@ import PostActions from 'components/Discussion/Post/PostActions';
 import moment from 'moment';
 import { Button, IconButton } from 'components/primitives/Button';
 import { linkStyles } from '../Proposal/Proposal.styled';
-// import { PostBody } from 'components/Discussion/Post/Post.styled';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();

@@ -11,8 +11,11 @@ import {
   VoteQuorumMarker,
   VoteQuorumLabel,
   PaddedFlagCheckered,
+  VoteChartRowsContainer,
+  VoteResult,
 } from './VoteChart.styled';
 import { VoteChartProps } from '../../types';
+import { formatUnits } from 'ethers/lib/utils';
 
 //TODO: rewrite css dynamics types
 const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
@@ -27,10 +30,16 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
     voteData?.totalLocked
   );
 
+  if (!voteData) return <></>;
+
+  const voteOptionswithVotingPower = Object.entries(voteData?.options).filter(
+    ([idx, item]) => !BigNumber.from(item).isZero()
+  ).length;
+
   return (
     <VotesChartContainer>
       {voteData?.options ? (
-        <VotesChartRow>
+        <>
           {Object.entries(voteData.options).map(([idx, item]) => {
             const percentBN = BigNumber.from(
               voteData?.totalLocked || 0
@@ -39,21 +48,45 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
               : item.mul(100).mul(Math.pow(10, 2)).div(voteData?.totalLocked);
             const percent = Math.round(percentBN.toNumber()) / Math.pow(10, 2);
 
-            return (
-              <ChartBar
-                key={idx}
-                percent={percent}
-                color={theme?.colors?.votes?.[idx]}
-              />
+            return percent > 0 ? (
+              <VoteChartRowsContainer>
+                <VotesChartRow>
+                  <ChartBar
+                    key={idx}
+                    percent={percent}
+                    color={theme?.colors?.votes?.[idx]}
+                  />
+                </VotesChartRow>
+                <VoteResult>
+                  {isPercent
+                    ? `${percent}%`
+                    : `${formatUnits(voteData?.options?.[idx] || 0)} ${
+                        voteData?.token?.symbol
+                      }`}
+                </VoteResult>
+              </VoteChartRowsContainer>
+            ) : (
+              <></>
             );
           })}
-        </VotesChartRow>
+        </>
       ) : (
         <Loading loading text skeletonProps={{ height: 24, count: 2 }} />
       )}
+      {voteOptionswithVotingPower === 0 && (
+        <VoteChartRowsContainer>
+          <VotesChartRow>
+            <ChartBar />
+          </VotesChartRow>
+        </VoteChartRowsContainer>
+      )}
       {voteData && (
         <VoteQuorumContainer quorum={flagCheckered}>
-          <VoteQuorumMarker quorum={flagCheckered} />
+          <VoteQuorumMarker
+            optionsAmount={
+              voteOptionswithVotingPower === 0 ? 1 : voteOptionswithVotingPower
+            }
+          />
           <VoteQuorumLabel quorum={flagCheckered}>
             <PaddedFlagCheckered />
             <span>{isPercent ? flagCheckered : nQuorum}</span>

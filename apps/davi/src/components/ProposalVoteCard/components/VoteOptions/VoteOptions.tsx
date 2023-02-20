@@ -1,5 +1,3 @@
-import { formatUnits } from 'ethers/lib/utils';
-import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { Bullet } from 'components/primitives/Bullet';
 import { Loading } from 'components/primitives/Loading';
 import { useTheme } from 'styled-components';
@@ -14,12 +12,10 @@ import {
   VotesRowWrapper,
   VoteOption,
   OptionBullet,
-} from './VoteResults.styled';
+} from './VoteOptions.styled';
 
-const VoteResultRow: React.FC<ResultRowProps> = ({
-  isPercent,
+const VoteOptionsRow: React.FC<ResultRowProps> = ({
   optionKey,
-  voteData,
   proposalMetadata,
 }) => {
   const theme = useTheme();
@@ -27,10 +23,6 @@ const VoteResultRow: React.FC<ResultRowProps> = ({
 
   const isReady = optionKey !== undefined;
 
-  const votingPowerPercent = useVotingPowerPercent(
-    voteData?.options?.[optionKey],
-    voteData?.totalLocked
-  );
   const label = getGuildOptionLabel({
     metadata: proposalMetadata,
     optionKey,
@@ -52,57 +44,43 @@ const VoteResultRow: React.FC<ResultRowProps> = ({
         </OptionBullet>
         {isReady ? label : <Loading loading text />}
       </VoteOption>
-      {isReady && voteData ? (
-        <span>
-          {isPercent
-            ? `${votingPowerPercent}%`
-            : `${formatUnits(voteData?.options?.[optionKey] || 0)} ${
-                voteData?.token?.symbol
-              }`}
-        </span>
-      ) : (
-        <Loading loading text skeletonProps={{ width: 50 }} />
-      )}
     </VotesRowWrapper>
   );
 };
 
-const VoteResults: React.FC<VoteResultsProps> = ({
-  isPercent,
-  voteData,
+const VoteOptions: React.FC<VoteResultsProps> = ({
+  // isPercent,
+  options,
   proposalMetadata,
 }) => {
-  const orderedOptions = voteData?.options && [
-    ...Object.keys(voteData.options).slice(1),
-    '0',
-  ];
+  const orderedOptions = options && [...Object.keys(options).slice(1), '0'];
 
   return orderedOptions ? (
     <>
       {orderedOptions.map(key => (
-        <VoteResultRow
+        <VoteOptionsRow
           key={key}
           optionKey={Number(key)}
-          isPercent={isPercent}
-          voteData={voteData}
+          // isPercent={isPercent}
+          options={options}
           proposalMetadata={proposalMetadata}
         />
       ))}
     </>
   ) : (
     <>
-      <VoteResultRow
-        isPercent={isPercent}
-        voteData={voteData}
+      <VoteOptionsRow
+        // isPercent={isPercent}
+        options={options}
         proposalMetadata={proposalMetadata}
       />
-      <VoteResultRow
-        isPercent={isPercent}
-        voteData={voteData}
+      <VoteOptionsRow
+        // isPercent={isPercent}
+        options={options}
         proposalMetadata={proposalMetadata}
       />
     </>
   );
 };
 
-export default VoteResults;
+export default VoteOptions;

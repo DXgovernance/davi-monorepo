@@ -47,19 +47,9 @@ export const mockProposalVoteCardProps = {
 
 export const mockVoteResults = {
   isPercent: true,
-  voteData: {
-    options: {
-      0: mockBigNumberOption,
-      1: mockBigNumberOption,
-    },
-    quorum: mockBignumber,
-    totalLocked: mockBigNumberTotalLocked,
-    token: {
-      name: 'DXdao',
-      symbol: 'DXD',
-      decimals: 18,
-      totalSupply: mockBigNumberTotalSupply,
-    },
+  options: {
+    0: mockBigNumberOption,
+    1: mockBigNumberOption,
   },
   proposalMetadata: {
     description: 'This is a test proposal',

@@ -8,8 +8,8 @@ const hre = require("hardhat");
 
 const projects = [
   {
-    name: "1-5-subgraph",
-    targetABIDir: "../../../apps/1-5-subgraph/abis",
+    name: "dao-subgraph",
+    targetABIDir: "../../../apps/dao-subgraph/abis",
     targetContracts: [
       "DAOAvatar",
       "DAOController",

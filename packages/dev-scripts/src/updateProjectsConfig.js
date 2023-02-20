@@ -71,7 +71,7 @@ if (fs.existsSync(addressesFilePath)) {
   // Write addresses to 1.5 subgraph
   console.log("Writing 1.5 subgraph local networks.json");
   fs.writeFileSync(
-    path.resolve(__dirname, "../../../apps/1-5-subgraph/networks.json"),
+    path.resolve(__dirname, "../../../apps/dao-subgraph/networks.json"),
     JSON.stringify(
       {
         private: {
@@ -100,6 +100,13 @@ if (fs.existsSync(addressesFilePath)) {
 
   // Write addresses to davi
   console.log("Writing davi localhost config.json");
+  const localhostPath = path.resolve(
+    __dirname,
+    "../../../apps/davi/src/configs/localhost"
+  );
+  if (!fs.existsSync(localhostPath)) {
+    fs.mkdirSync(localhostPath);
+  }
   fs.writeFileSync(
     path.resolve(
       __dirname,

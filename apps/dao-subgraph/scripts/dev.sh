@@ -32,13 +32,13 @@ waitForGraphContainer(){
 startGraphQlPlayground(){
     retry_count=0
     while true; do
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5/graphql)
+        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/dao/graphql)
         if [[ $status_code -eq 200 ]]; then
             echo "Subgraph::: Local deployment ready!. Opening graphql playground in Browser"
             if [[ "$(uname -s)" == "Darwin" ]]; then
-                open http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5
+                open http://127.0.0.1:8000/subgraphs/name/dxdao/dao
             elif [[ "$(uname -s)" == "Linux" ]]; then
-                xdg-open http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5
+                xdg-open http://127.0.0.1:8000/subgraphs/name/dxdao/dao
             fi
             break
         else

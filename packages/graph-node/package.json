@@ -4,12 +4,9 @@
   "version": "0.1.0",
   "scripts": {
     "clean": "docker compose down && rm -rf ./data build",
-    "dev": "pnpm run clean && ./scripts/dev.sh",
+    "dev": "./scripts/dev.sh",
     "compose-up": "docker compose up"
   },
-  "devDependencies": {
-  },
-  "dependencies": {
-  }
+  "devDependencies": {},
+  "dependencies": {}
 }
-

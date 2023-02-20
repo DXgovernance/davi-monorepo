@@ -17,7 +17,7 @@
     "graph-node:clean": "cd packages/graph-node && pnpm run clean",
     "subgraph:dev": "turbo run dev --filter=\"*-subgraph\" --filter=!./packages/*",
     "guilds-subgraph:start-local": "cd apps/guilds-subgraph && pnpm run start-local",
-    "1-5-subgraph:start-local": "cd apps/1-5-subgraph && pnpm run start-local",
+    "dao-subgraph:start-local": "cd apps/dao-subgraph && pnpm run start-local",
     "davi:dev": "cd apps/davi && pnpm run dev",
     "davi:dev-no-wait": "cd apps/davi && pnpm run dev --no-subgraph-wait --no-hardhat-wait",
     "davi:build-graph-client": "cd apps/davi && pnpm run build-graph-client",

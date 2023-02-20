@@ -43,7 +43,7 @@ isHardhatRunning() {
 }
 
 isGuildsSubgraphRunning(){
-    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/guilds)
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/guilds/graphql)
     if [[ $status_code -eq 200 ]]; then
         return 0
         break
@@ -52,7 +52,7 @@ isGuildsSubgraphRunning(){
     fi
 }
 is1-5SubgraphRunning(){
-    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5)
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/subgraphs/name/dxdao/dao/graphql)
     if [[ $status_code -eq 200 ]]; then
         return 0
         break

@@ -3,9 +3,10 @@ sources:
     handler:
       graphql:
         endpoint: ${DXGOV_GUILD_GRAPHQL_ENDPOINT}
-  - name: 1-5-subgraph
+  - name: dao-subgraph
     handler:
       graphql:
-        endpoint: ${DXGOV_1-5_GRAPHQL_ENDPOINT}
+        endpoint: ${DXGOV_DAO_GRAPHQL_ENDPOINT}
 documents:
   - './src/**/*.graphql'
+

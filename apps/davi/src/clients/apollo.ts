@@ -35,7 +35,7 @@ export const subgraphClientsUris: {
   },
   [SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID]: {
     Guilds: 'http://127.0.0.1:8000/subgraphs/name/dxdao/guilds',
-    'Governance1.5': 'http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5',
+    'Governance1.5': 'http://127.0.0.1:8000/subgraphs/name/dxdao/dao',
   },
 };
 

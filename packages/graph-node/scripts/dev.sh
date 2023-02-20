@@ -89,7 +89,7 @@ waitForHardhat(){
 
 # <<<<<---------- Start ---------->>>>>
 
-trap cleanup INT
+trap cleanup SIGINT
 
 echo "Graph-node::: Starting Docker"
 safeDockerStart

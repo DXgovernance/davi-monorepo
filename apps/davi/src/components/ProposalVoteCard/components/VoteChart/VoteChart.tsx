@@ -30,6 +30,8 @@ const VotesChart: React.FC<VoteChartProps> = ({ isPercent, voteData }) => {
     voteData?.totalLocked
   );
 
+  if (!voteData) return <></>;
+
   const voteOptionswithVotingPower = Object.entries(voteData?.options).filter(
     ([idx, item]) => !BigNumber.from(item).isZero()
   ).length;

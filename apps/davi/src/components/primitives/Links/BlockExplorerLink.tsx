@@ -59,13 +59,13 @@ export const BlockExplorerLink: React.FC<BlockExplorerLinkProps> = ({
           />
         </Segment>
       )}
-      {disableLink ? (
-        <div> {displayLinkText} </div>
-      ) : (
-        <ExternalLink href={blockExplorerUrl} data-testid="external-link">
-          {displayLinkText}
-        </ExternalLink>
-      )}
+      <ExternalLink
+        href={blockExplorerUrl}
+        disableLink={disableLink}
+        data-testid="external-link"
+      >
+        {displayLinkText}
+      </ExternalLink>
     </Flex>
   );
 };

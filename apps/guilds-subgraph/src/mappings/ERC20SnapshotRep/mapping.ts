@@ -8,13 +8,13 @@ import {
 export function handleTransfer(event: Transfer): void {
   let tokenAddress = event.address.toHexString();
   let token = Token.load(tokenAddress);
-  const guild = Guild.load(token!.guildAddress);
 
   let tokenContract = ERC20SnapshotRep.bind(event.address);
 
   const zeroAddress = '0x0000000000000000000000000000000000000000';
 
-  if (!guild || guild.type != 'SnapshotRepERC20Guild') {
+  const guild = token!.guildAddress ? Guild.load(token!.guildAddress!) : null;
+  if (guild && guild.type != 'SnapshotRepERC20Guild') {
     return;
   }
 
@@ -24,19 +24,17 @@ export function handleTransfer(event: Transfer): void {
     ? event.params.to.toHexString()
     : event.params.from.toHexString();
 
-  let memberId = `${token!.guildAddress}-${memberAddress}`;
+  let memberId = token!.guildAddress
+    ? `${token!.guildAddress!}-${memberAddress}`
+    : `unknown-${memberAddress}`;
   let member = Member.load(memberId);
 
   if (!member) {
     member = new Member(memberId);
     member.address = event.params.to.toHexString();
     member.tokensLocked = new BigInt(0);
-
-    let guildMembersClone = guild.members;
-    guildMembersClone!.push(memberId);
-    guild.members = guildMembersClone;
-
-    guild.save();
+    member.token = tokenAddress;
+    if (guild) member.guild = token!.guildAddress!;
   }
 
   member.tokensLocked = tokenContract.balanceOf(
@@ -46,15 +44,6 @@ export function handleTransfer(event: Transfer): void {
   if (member.tokensLocked > new BigInt(0)) {
     member.save();
   } else {
-    let guildMembersClone = guild.members;
-    for (let i = 0; i < guildMembersClone!.length; i++) {
-      if (guildMembersClone![i] == memberId) {
-        guildMembersClone!.splice(i, 1);
-      }
-    }
-    guild.members = guildMembersClone;
-
-    guild.save();
     member.unset(memberId);
   }
 }

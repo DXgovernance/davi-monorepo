@@ -6,6 +6,7 @@ abis:
   - SnapshotERC20Guild
 entities:
   - Guild
+  - Token
 eventHandlers:
   - event: Deployed(address,bytes32)
     handler: handleDeployedEvent

@@ -16,7 +16,7 @@ type Guild @entity {
   type: GuildType
   permissions: [GuildPermission!]! @derivedFrom(field: "guild")
   proposals: [Proposal!]
-  members: [Member!]
+  members: [Member!] @derivedFrom(field: "guild")
   isActive: Boolean
   bytecodeHash: String
 }
@@ -38,7 +38,7 @@ type Token @entity {
   name: String!
   symbol: String!
   decimals: Int!
-  guildAddress: String!
+  guildAddress: String
   # permissions: GuildPermission[]
 }
 

@@ -19,11 +19,18 @@
       "outputs": ["types/**"]
     },
     "dev-scripts#compile": {
-      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"]
+      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"],
+      "cache": false
     },
     "dev-scripts#dev": {
       "dependsOn": ["dev-scripts#compile"],
       "outputs": ["build/**", "artifacts/**"]
+    },
+    "dao-subgraph#dev": {
+      "cache": false
+    },
+    "guilds-subgraph#dev": {
+      "cache": false
     },
     "dev": {},
     "build": {

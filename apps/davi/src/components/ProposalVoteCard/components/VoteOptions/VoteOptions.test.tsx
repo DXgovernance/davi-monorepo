@@ -1,10 +1,10 @@
 import { render } from 'utils/tests';
-import VoteResults from './VoteResults';
+import VoteOptions from './VoteOptions';
 import { mockVoteResults } from '../../fixture';
 
 describe('VoteResults', () => {
   it('matches the snapshot', () => {
-    const { container } = render(<VoteResults {...mockVoteResults} />);
+    const { container } = render(<VoteOptions {...mockVoteResults} />);
     expect(container).toMatchSnapshot();
   });
 });

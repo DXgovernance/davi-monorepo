@@ -87,17 +87,3 @@ export const TokenNameAndSymbol = styled(Flex)`
   flex-direction: row;
   justify-content: flex-start;
 `;
-
-export const ToggleContainer = styled(Flex)`
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: 16px;
-  gap: 10px;
-`;
-
-export const ToggleLabel = styled.span`
-  font-size: 12px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.grey};
-`;

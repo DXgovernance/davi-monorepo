@@ -109,19 +109,24 @@ To update dxdao-contracts submodule branch use `git submodule set-branch --branc
 
 # DAVI Monorepo QA tests
 
-## How to setup
+## Prerequisites
 
-1. Install dependencies `pnpm i`
-2. Make an `.env` file in the `davi` folder (see `.env.qa.example`)
+1. Navigate to `apps/davi`
+2. Run `pnpm i` 
+3. Make an `.env` file in the `davi` folder (see `.env.qa.example`) - file contains all parameters for `localhost` and `metamask` setups
 
 ### How to run test
 
-To run test just type in terminal `yarn test:testName`
+To run Smoke test in terminal run:
 
--`testName` you can find in ```package.json```
+ `pnpm test:[testName]`
 
-Now there is:
+All available `[testName]` can be found in:
 
-1. `smokeLocal` will start localhost:3000 and run Smoke test on local
-2. `smokeQa` will run Smoke test on QA ENV
-3. `smokeProd` will run Smoke test on PROD ENV
+`apps > davi > cypress > config`
+
+Currently there are:
+
+1. `smokeLocal` - starts localhost:3000 and runs Smoke test on local
+2. `smokeQa` - runs Smoke test on QA ENV
+3. `smokeProd` - runs Smoke test on PROD ENV

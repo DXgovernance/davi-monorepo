@@ -9,6 +9,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { PageContainer, PageContent, StyledButton, Label } from '../styles';
 import { connect, isConnected, editPost, postTemplate } from 'components/Forum';
 import { DiscussionContent } from 'components/Forum/types';
@@ -21,6 +22,7 @@ import { ProposalDescription } from 'components/ProposalDescription';
 import { WalletModal } from 'components/Web3Modals';
 import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
+import { NotificationHeading } from 'components/ToastNotifications/NotificationHeading';
 
 const EditDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
@@ -96,9 +98,35 @@ const EditDiscussionPage: React.FC = () => {
   };
 
   const handleBack = () => {
-    setTimeout(() => {
-      navigate(`/${chain}/${guildId}/discussion/${discussionId}`);
-    }, 3000);
+    /**
+     * Adds 3 secs delay before routing back to discussion,
+     * due to the slowness of orbis to update the post
+     */
+    const resolveAfter3Sec = new Promise<void>(resolve =>
+      setTimeout(() => {
+        resolve();
+        navigate(`/${chain}/${guildId}/discussion/${discussionId}`);
+      }, 3000)
+    );
+    toast.promise(
+      resolveAfter3Sec,
+      {
+        pending: {
+          render() {
+            return (
+              <NotificationHeading>
+                {t('editDiscussion.savingChanges')}
+              </NotificationHeading>
+            );
+          },
+        },
+      },
+      {
+        toastId: discussionId,
+        autoClose: 3000,
+        isLoading: true,
+      }
+    );
   };
 
   const handleEditDiscussion = async (post: DiscussionContent) => {
@@ -197,7 +225,7 @@ const EditDiscussionPage: React.FC = () => {
                 handleEditDiscussion({
                   title,
                   body: discussionBodyMd,
-                  context: `DAVI-${guildId}`
+                  context: `DAVI-${guildId}`,
                 });
               }}
               backgroundColor={isValid ? 'none' : theme.colors.bg1}

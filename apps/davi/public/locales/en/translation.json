@@ -332,7 +332,8 @@
     "createAnyway": "Create anyway"
   },
   "editDiscussion": {
-    "editDiscussion": "Edit Discussion"
+    "editDiscussion": "Edit Discussion",
+    "savingChanges": "Saving Changes"
   },
   "discussions": {
     "allDiscussions": "All discussions",

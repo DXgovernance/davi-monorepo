@@ -63,6 +63,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       contractState,
       totalVotes,
       votes,
+      executionTransactionHash,
     } = proposal;
 
     const contractStatesMapping = {
@@ -107,6 +108,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       options: null,
       votes: parsedVotes,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
+      executionTransactionHash,
     };
   }, [proposal, proposalMetadata, t, totalLocked]);
 

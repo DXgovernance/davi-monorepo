@@ -22,6 +22,7 @@ export interface Proposal {
   votesOfVoter?: UseProposalVotesOfVoterReturn;
   options: Option[];
   votes?: Vote[];
+  executionTransactionHash?: string;
 }
 
 export enum ProposalState {

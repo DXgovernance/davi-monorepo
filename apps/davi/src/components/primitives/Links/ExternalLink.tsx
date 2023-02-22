@@ -5,11 +5,18 @@ import { ExternalLinkProps } from './types';
 export const ExternalLink: React.FC<ExternalLinkProps> = ({
   href,
   children,
+  disableLink,
+  hideIcon = false,
 }) => {
-  return (
+  return disableLink ? (
+    <>
+      <LinkDetail>{children}</LinkDetail>
+      {!hideIcon && <FiExternalLink />}
+    </>
+  ) : (
     <StyledSegmentLink href={href} target="_blank" rel="noopener">
       <LinkDetail>{children}</LinkDetail>
-      <FiExternalLink />
+      {!hideIcon && <FiExternalLink />}
     </StyledSegmentLink>
   );
 };

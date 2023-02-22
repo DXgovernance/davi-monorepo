@@ -8,6 +8,10 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   padding: 0;
 }
 
+.c11 {
+  overflow-wrap: break-word;
+}
+
 .c8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -38,7 +42,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   align-items: center;
 }
 
-.c11 {
+.c12 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -78,7 +82,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   text-decoration: none;
 }
 
-.c19 {
+.c20 {
   margin-right: 0.5rem;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -94,7 +98,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   align-items: center;
 }
 
-.c17 {
+.c18 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -119,21 +123,21 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   width: auto;
 }
 
-.c17:disabled {
+.c18:disabled {
   color: initial;
   opacity: 0.4;
   cursor: auto;
 }
 
-.c17:hover:enabled {
+.c18:hover:enabled {
   border-color: #fff;
 }
 
-.c17:active:enabled {
+.c18:active:enabled {
   border: 1px solid #303338;
 }
 
-.c17:disabled {
+.c18:disabled {
   color: #303338;
 }
 
@@ -149,7 +153,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   font-weight: 600;
 }
 
-.c13 {
+.c14 {
   font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
   font-size: 20px;
   line-height: 1.2;
@@ -187,11 +191,11 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   justify-content: space-between;
 }
 
-.c12 {
+.c13 {
   margin: 1rem 0;
 }
 
-.c15 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -209,7 +213,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   align-items: flex-end;
 }
 
-.c14 {
+.c15 {
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
@@ -237,490 +241,9 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
 .c7 {
   font-size: 0.95rem;
   font-weight: 600;
-}
-
-.c16 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none;
-  border: 1px solid #303338;
-  border-radius: 1rem 0rem 0rem 1rem;
-  border-right: none;
-  font-weight: 600;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 30px;
-  padding: 0 12px;
-}
-
-.c18 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none;
-  background-color: transparent;
-  border-radius: 0rem 1rem 1rem 0rem;
-  height: 32px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: 0;
-  padding: 0 12px;
-  color: #A1A6B0;
-}
-
-.c18:hover {
-  color: #fff;
-  cursor: default;
-}
-
-.c20 {
-  width: 5rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-
-@media only screen and (min-width:768px) {
-  .c10 {
-    padding-right: 0.5rem;
-  }
-}
-
-@media only screen and (max-width:524px) {
-  .c15 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: flex-start;
-    -webkit-box-align: flex-start;
-    -ms-flex-align: flex-start;
-    align-items: flex-start;
-  }
-}
-
-@media only screen and (min-width:768px) {
-  .c14 {
-    font-size: 1.25rem;
-  }
-}
-
-<div>
-   
-  <a
-    class="c0"
-    data-testid="proposal-card"
-    href="/testUrl"
-  >
-    <div
-      class="c1 c2 c3"
-    >
-      <div
-        class="c1 c4"
-      >
-        <div
-          class="c1 c5"
-        >
-          <div
-            class=""
-          >
-            <span
-              aria-busy="true"
-              aria-live="polite"
-            >
-              <span
-                class="react-loading-skeleton"
-                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
-              >
-                ‌
-              </span>
-              <br />
-            </span>
-          </div>
-          <h2
-            class="c6 c7"
-          >
-            venky0x.eth
-          </h2>
-        </div>
-        <div
-          class="c8"
-        >
-          <div
-            class="c9"
-          >
-            <div
-              class="c1 c10"
-            >
-              <span
-                title="May 9th, 2022 - 8:00 am"
-              >
-                endedTimeAgo
-              </span>
-            </div>
-            <div
-              class="c1 c11"
-              data-testid="proposal-state"
-            >
-               
-              Active
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="c1 c12"
-      >
-        <h2
-          class="c13 c14"
-          data-testid="proposal-title"
-          size="2"
-        >
-          <strong>
-            SWPR single reward campaign
-          </strong>
-        </h2>
-      </div>
-      <div
-        class="c1 c15"
-      >
-        <div
-          class="c1 c5"
-        >
-          <div
-            class="c1 c5 c16"
-          >
-            50
-            % - 
-            For
-          </div>
-          <button
-            aria-label="action details button"
-            class="c17 c18"
-          >
-            <span
-              class="c19"
-            >
-              <svg
-                fill="currentColor"
-                height="16"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 24 24"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"
-                />
-              </svg>
-            </span>
-            <span
-              class="c19"
-            >
-               
-               
-            </span>
-            <span
-              class="c19"
-            >
-              <svg
-                fill="none"
-                height="1em"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <line
-                  x1="5"
-                  x2="19"
-                  y1="12"
-                  y2="12"
-                />
-                <polyline
-                  points="12 5 19 12 12 19"
-                />
-              </svg>
-            </span>
-            <span
-              class="c19"
-            >
-              test.eth
-            </span>
-          </button>
-        </div>
-        <div
-          class="c20"
-        />
-      </div>
-    </div>
-  </a>
-   
-</div>
-`;
-
-exports[`ProposalCard ProposalCard Renders properly with more than one option  1`] = `
-.c1 {
-  box-sizing: 'border-box';
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.c9 {
-  font-size: 0.8rem;
-  font-weight: 600;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c11 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: 0.5rem;
-  border-radius: 15px;
-  border: 1px solid #DEFF4E;
-  background-color: #1B1D1F;
-  color: #DEFF4E;
-  padding: 0.25rem 0.4rem;
-}
-
-.c10 {
-  padding: 0 0.2rem;
-}
-
-.c0 {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: #fff;
-}
-
-.c0:focus,
-.c0:hover,
-.c0:visited,
-.c0:link,
-.c0:active {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c19 {
-  margin-right: 0.5rem;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c17 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid #303338;
-  background-color: transparent;
-  color: #DEFF4E;
-  border-radius: 32px;
-  padding: 0.5rem 0.8rem;
-  margin: 0.2rem;
-  width: auto;
-}
-
-.c17:disabled {
-  color: initial;
-  opacity: 0.4;
-  cursor: auto;
-}
-
-.c17:hover:enabled {
-  border-color: #fff;
-}
-
-.c17:active:enabled {
-  border: 1px solid #303338;
-}
-
-.c17:disabled {
-  color: #303338;
-}
-
-.c6 {
-  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-.c6 strong,
-.c6 b {
-  font-weight: 600;
-}
-
-.c13 {
-  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 600;
-}
-
-.c2 {
-  border: 1px solid #303338;
-  border-radius: 10px;
-}
-
-.c3 {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  color: #BDC0C7;
-  background-color: #1B1D1F;
-}
-
-.c3:hover {
-  border-color: #fff;
-  color: #fff;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c12 {
-  margin: 1rem 0;
-}
-
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c14 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c7 {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -737,499 +260,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   width: fit-content;
   height: 30px;
   padding: 0 12px;
-}
-
-.c18 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none;
-  background-color: transparent;
-  border-radius: 0rem 1rem 1rem 0rem;
-  height: 32px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: 0;
-  padding: 0 12px;
-  color: #A1A6B0;
-}
-
-.c18:hover {
-  color: #fff;
-  cursor: default;
-}
-
-.c20 {
-  width: 5rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-
-@media only screen and (min-width:768px) {
-  .c10 {
-    padding-right: 0.5rem;
-  }
-}
-
-@media only screen and (max-width:524px) {
-  .c15 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: flex-start;
-    -webkit-box-align: flex-start;
-    -ms-flex-align: flex-start;
-    align-items: flex-start;
-  }
-}
-
-@media only screen and (min-width:768px) {
-  .c14 {
-    font-size: 1.25rem;
-  }
-}
-
-<div>
-   
-  <a
-    class="c0"
-    data-testid="proposal-card"
-    href="/testUrl"
-  >
-    <div
-      class="c1 c2 c3"
-    >
-      <div
-        class="c1 c4"
-      >
-        <div
-          class="c1 c5"
-        >
-          <div
-            class=""
-          >
-            <span
-              aria-busy="true"
-              aria-live="polite"
-            >
-              <span
-                class="react-loading-skeleton"
-                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
-              >
-                ‌
-              </span>
-              <br />
-            </span>
-          </div>
-          <h2
-            class="c6 c7"
-          >
-            venky0x.eth
-          </h2>
-        </div>
-        <div
-          class="c8"
-        >
-          <div
-            class="c9"
-          >
-            <div
-              class="c1 c10"
-            >
-              <span
-                title="May 9th, 2022 - 8:00 am"
-              >
-                endedTimeAgo
-              </span>
-            </div>
-            <div
-              class="c1 c11"
-              data-testid="proposal-state"
-            >
-               
-              Active
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="c1 c12"
-      >
-        <h2
-          class="c13 c14"
-          data-testid="proposal-title"
-          size="2"
-        >
-          <strong>
-            SWPR single reward campaign
-          </strong>
-        </h2>
-      </div>
-      <div
-        class="c1 c15"
-      >
-        <div
-          class="c1 c5"
-        >
-          <div
-            class="c1 c5 c16"
-          >
-            50
-            % - 
-            For
-          </div>
-          <button
-            aria-label="action details button"
-            class="c17 c18"
-          >
-            <span
-              class="c19"
-            >
-              <svg
-                fill="currentColor"
-                height="16"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 24 24"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"
-                />
-              </svg>
-            </span>
-            <span
-              class="c19"
-            >
-               
-               
-            </span>
-            <span
-              class="c19"
-            >
-              <svg
-                fill="none"
-                height="1em"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <line
-                  x1="5"
-                  x2="19"
-                  y1="12"
-                  y2="12"
-                />
-                <polyline
-                  points="12 5 19 12 12 19"
-                />
-              </svg>
-            </span>
-            <span
-              class="c19"
-            >
-              test.eth
-            </span>
-          </button>
-        </div>
-        <div
-          class="c20"
-        />
-      </div>
-    </div>
-  </a>
-   
-</div>
-`;
-
-exports[`ProposalCard ProposalCard Renders properly with more than one option containing more than one action 1`] = `
-.c1 {
-  box-sizing: 'border-box';
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.c9 {
-  font-size: 0.8rem;
-  font-weight: 600;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c11 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: 0.5rem;
-  border-radius: 15px;
-  border: 1px solid #DEFF4E;
-  background-color: #1B1D1F;
-  color: #DEFF4E;
-  padding: 0.25rem 0.4rem;
-}
-
-.c10 {
-  padding: 0 0.2rem;
-}
-
-.c0 {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: #fff;
-}
-
-.c0:focus,
-.c0:hover,
-.c0:visited,
-.c0:link,
-.c0:active {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c17 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid #303338;
-  background-color: transparent;
-  color: #DEFF4E;
-  border-radius: 32px;
-  padding: 0.5rem 0.8rem;
-  margin: 0.2rem;
-  width: auto;
-}
-
-.c17:disabled {
-  color: initial;
-  opacity: 0.4;
-  cursor: auto;
-}
-
-.c17:hover:enabled {
-  border-color: #fff;
-}
-
-.c17:active:enabled {
-  border: 1px solid #303338;
-}
-
-.c17:disabled {
-  color: #303338;
-}
-
-.c6 {
-  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-.c6 strong,
-.c6 b {
-  font-weight: 600;
-}
-
-.c13 {
-  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 600;
-}
-
-.c2 {
-  border: 1px solid #303338;
-  border-radius: 10px;
-}
-
-.c3 {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  color: #BDC0C7;
-  background-color: #1B1D1F;
-}
-
-.c3:hover {
-  border-color: #fff;
-  color: #fff;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c12 {
-  margin: 1rem 0;
-}
-
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c14 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c7 {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.c16 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none;
-  border: 1px solid #303338;
-  border-radius: 1rem 0rem 0rem 1rem;
-  border-right: none;
-  font-weight: 600;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 30px;
-  padding: 0 12px;
-}
-
-.c18 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none;
-  background-color: transparent;
-  border-radius: 0rem 1rem 1rem 0rem;
-  height: 32px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: 0;
-  padding: 0 12px;
-  color: #A1A6B0;
-}
-
-.c18:hover {
-  color: #fff;
-  cursor: pointer;
 }
 
 .c19 {
@@ -1237,31 +267,27 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: 600;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  background-color: transparent;
+  border-radius: 0rem 1rem 1rem 0rem;
+  height: 32px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0;
+  padding: 0 12px;
+  color: #A1A6B0;
 }
 
-.c20 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #303338;
-  border-radius: 50%;
-  height: 24px;
-  width: 24px;
-  margin-right: 8px;
+.c19:hover {
+  color: #fff;
+  cursor: default;
 }
 
 .c21 {
@@ -1284,7 +310,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
 }
 
 @media only screen and (max-width:524px) {
-  .c15 {
+  .c16 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1296,7 +322,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
 }
 
 @media only screen and (min-width:768px) {
-  .c14 {
+  .c15 {
     font-size: 1.25rem;
   }
 }
@@ -1356,19 +382,23 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
             </div>
             <div
               class="c1 c11"
-              data-testid="proposal-state"
             >
-               
-              Active
+              <div
+                class="c1 c12"
+                data-testid="proposal-state"
+              >
+                 
+                Active
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c1 c12"
+        class="c1 c13"
       >
         <h2
-          class="c13 c14"
+          class="c14 c15"
           data-testid="proposal-title"
           size="2"
         >
@@ -1378,13 +408,13 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
         </h2>
       </div>
       <div
-        class="c1 c15"
+        class="c1 c16"
       >
         <div
           class="c1 c5"
         >
           <div
-            class="c1 c5 c16"
+            class="c1 c5 c17"
           >
             50
             % - 
@@ -1392,13 +422,1007 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
           </div>
           <button
             aria-label="action details button"
-            class="c17 c18"
+            class="c18 c19"
+          >
+            <span
+              class="c20"
+            >
+              <svg
+                fill="currentColor"
+                height="16"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"
+                />
+              </svg>
+            </span>
+            <span
+              class="c20"
+            >
+               
+               
+            </span>
+            <span
+              class="c20"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="5"
+                  x2="19"
+                  y1="12"
+                  y2="12"
+                />
+                <polyline
+                  points="12 5 19 12 12 19"
+                />
+              </svg>
+            </span>
+            <span
+              class="c20"
+            >
+              test.eth
+            </span>
+          </button>
+        </div>
+        <div
+          class="c21"
+        />
+      </div>
+    </div>
+  </a>
+   
+</div>
+`;
+
+exports[`ProposalCard ProposalCard Renders properly with more than one option  1`] = `
+.c1 {
+  box-sizing: 'border-box';
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.c11 {
+  overflow-wrap: break-word;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c9 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0.5rem;
+  border-radius: 15px;
+  border: 1px solid #DEFF4E;
+  background-color: #1B1D1F;
+  color: #DEFF4E;
+  padding: 0.25rem 0.4rem;
+}
+
+.c10 {
+  padding: 0 0.2rem;
+}
+
+.c0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #fff;
+}
+
+.c0:focus,
+.c0:hover,
+.c0:visited,
+.c0:link,
+.c0:active {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c20 {
+  margin-right: 0.5rem;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c18 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid #303338;
+  background-color: transparent;
+  color: #DEFF4E;
+  border-radius: 32px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.2rem;
+  width: auto;
+}
+
+.c18:disabled {
+  color: initial;
+  opacity: 0.4;
+  cursor: auto;
+}
+
+.c18:hover:enabled {
+  border-color: #fff;
+}
+
+.c18:active:enabled {
+  border: 1px solid #303338;
+}
+
+.c18:disabled {
+  color: #303338;
+}
+
+.c6 {
+  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.c6 strong,
+.c6 b {
+  font-weight: 600;
+}
+
+.c14 {
+  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.c2 {
+  border: 1px solid #303338;
+  border-radius: 10px;
+}
+
+.c3 {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: #BDC0C7;
+  background-color: #1B1D1F;
+}
+
+.c3:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c13 {
+  margin: 1rem 0;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c15 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c7 {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  border: 1px solid #303338;
+  border-radius: 1rem 0rem 0rem 1rem;
+  border-right: none;
+  font-weight: 600;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 30px;
+  padding: 0 12px;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  background-color: transparent;
+  border-radius: 0rem 1rem 1rem 0rem;
+  height: 32px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0;
+  padding: 0 12px;
+  color: #A1A6B0;
+}
+
+.c19:hover {
+  color: #fff;
+  cursor: default;
+}
+
+.c21 {
+  width: 5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+@media only screen and (min-width:768px) {
+  .c10 {
+    padding-right: 0.5rem;
+  }
+}
+
+@media only screen and (max-width:524px) {
+  .c16 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (min-width:768px) {
+  .c15 {
+    font-size: 1.25rem;
+  }
+}
+
+<div>
+   
+  <a
+    class="c0"
+    data-testid="proposal-card"
+    href="/testUrl"
+  >
+    <div
+      class="c1 c2 c3"
+    >
+      <div
+        class="c1 c4"
+      >
+        <div
+          class="c1 c5"
+        >
+          <div
+            class=""
+          >
+            <span
+              aria-busy="true"
+              aria-live="polite"
+            >
+              <span
+                class="react-loading-skeleton"
+                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
+              >
+                ‌
+              </span>
+              <br />
+            </span>
+          </div>
+          <h2
+            class="c6 c7"
+          >
+            venky0x.eth
+          </h2>
+        </div>
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
           >
             <div
-              class="c19"
+              class="c1 c10"
+            >
+              <span
+                title="May 9th, 2022 - 8:00 am"
+              >
+                endedTimeAgo
+              </span>
+            </div>
+            <div
+              class="c1 c11"
             >
               <div
-                class="c20"
+                class="c1 c12"
+                data-testid="proposal-state"
+              >
+                 
+                Active
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c1 c13"
+      >
+        <h2
+          class="c14 c15"
+          data-testid="proposal-title"
+          size="2"
+        >
+          <strong>
+            SWPR single reward campaign
+          </strong>
+        </h2>
+      </div>
+      <div
+        class="c1 c16"
+      >
+        <div
+          class="c1 c5"
+        >
+          <div
+            class="c1 c5 c17"
+          >
+            50
+            % - 
+            For
+          </div>
+          <button
+            aria-label="action details button"
+            class="c18 c19"
+          >
+            <span
+              class="c20"
+            >
+              <svg
+                fill="currentColor"
+                height="16"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"
+                />
+              </svg>
+            </span>
+            <span
+              class="c20"
+            >
+               
+               
+            </span>
+            <span
+              class="c20"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="5"
+                  x2="19"
+                  y1="12"
+                  y2="12"
+                />
+                <polyline
+                  points="12 5 19 12 12 19"
+                />
+              </svg>
+            </span>
+            <span
+              class="c20"
+            >
+              test.eth
+            </span>
+          </button>
+        </div>
+        <div
+          class="c21"
+        />
+      </div>
+    </div>
+  </a>
+   
+</div>
+`;
+
+exports[`ProposalCard ProposalCard Renders properly with more than one option containing more than one action 1`] = `
+.c1 {
+  box-sizing: 'border-box';
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.c11 {
+  overflow-wrap: break-word;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c9 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0.5rem;
+  border-radius: 15px;
+  border: 1px solid #DEFF4E;
+  background-color: #1B1D1F;
+  color: #DEFF4E;
+  padding: 0.25rem 0.4rem;
+}
+
+.c10 {
+  padding: 0 0.2rem;
+}
+
+.c0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #fff;
+}
+
+.c0:focus,
+.c0:hover,
+.c0:visited,
+.c0:link,
+.c0:active {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c18 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid #303338;
+  background-color: transparent;
+  color: #DEFF4E;
+  border-radius: 32px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.2rem;
+  width: auto;
+}
+
+.c18:disabled {
+  color: initial;
+  opacity: 0.4;
+  cursor: auto;
+}
+
+.c18:hover:enabled {
+  border-color: #fff;
+}
+
+.c18:active:enabled {
+  border: 1px solid #303338;
+}
+
+.c18:disabled {
+  color: #303338;
+}
+
+.c6 {
+  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.c6 strong,
+.c6 b {
+  font-weight: 600;
+}
+
+.c14 {
+  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.c2 {
+  border: 1px solid #303338;
+  border-radius: 10px;
+}
+
+.c3 {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: #BDC0C7;
+  background-color: #1B1D1F;
+}
+
+.c3:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c13 {
+  margin: 1rem 0;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c15 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 0;
+  gap: 0.5rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c7 {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  border: 1px solid #303338;
+  border-radius: 1rem 0rem 0rem 1rem;
+  border-right: none;
+  font-weight: 600;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 30px;
+  padding: 0 12px;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  background-color: transparent;
+  border-radius: 0rem 1rem 1rem 0rem;
+  height: 32px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0;
+  padding: 0 12px;
+  color: #A1A6B0;
+}
+
+.c19:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+.c21 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #303338;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+}
+
+.c22 {
+  width: 5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+@media only screen and (min-width:768px) {
+  .c10 {
+    padding-right: 0.5rem;
+  }
+}
+
+@media only screen and (max-width:524px) {
+  .c16 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (min-width:768px) {
+  .c15 {
+    font-size: 1.25rem;
+  }
+}
+
+<div>
+   
+  <a
+    class="c0"
+    data-testid="proposal-card"
+    href="/testUrl"
+  >
+    <div
+      class="c1 c2 c3"
+    >
+      <div
+        class="c1 c4"
+      >
+        <div
+          class="c1 c5"
+        >
+          <div
+            class=""
+          >
+            <span
+              aria-busy="true"
+              aria-live="polite"
+            >
+              <span
+                class="react-loading-skeleton"
+                style="width: 24px; height: 24px; border-radius: 50%; --base-color: #333; --highlight-color: #555;"
+              >
+                ‌
+              </span>
+              <br />
+            </span>
+          </div>
+          <h2
+            class="c6 c7"
+          >
+            venky0x.eth
+          </h2>
+        </div>
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+          >
+            <div
+              class="c1 c10"
+            >
+              <span
+                title="May 9th, 2022 - 8:00 am"
+              >
+                endedTimeAgo
+              </span>
+            </div>
+            <div
+              class="c1 c11"
+            >
+              <div
+                class="c1 c12"
+                data-testid="proposal-state"
+              >
+                 
+                Active
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c1 c13"
+      >
+        <h2
+          class="c14 c15"
+          data-testid="proposal-title"
+          size="2"
+        >
+          <strong>
+            SWPR single reward campaign
+          </strong>
+        </h2>
+      </div>
+      <div
+        class="c1 c16"
+      >
+        <div
+          class="c1 c5"
+        >
+          <div
+            class="c1 c5 c17"
+          >
+            50
+            % - 
+            For
+          </div>
+          <button
+            aria-label="action details button"
+            class="c18 c19"
+          >
+            <div
+              class="c20"
+            >
+              <div
+                class="c21"
               >
                 2
               </div>
@@ -1408,7 +1432,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
           </button>
         </div>
         <div
-          class="c21"
+          class="c22"
         />
       </div>
     </div>

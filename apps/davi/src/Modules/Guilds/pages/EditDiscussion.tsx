@@ -35,7 +35,6 @@ const EditDiscussionPage: React.FC = () => {
   const [user, setUser] = useState('');
   const [editMode, setEditMode] = useState(true);
   const [title, setTitle] = useState('');
-  const [streamId, setStreamId] = useState<string>('');
   const [html, onHTMLChange] = useState<string>();
   const [initialDescription, setInitialDescription] = useState<string>('');
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
@@ -64,7 +63,6 @@ const EditDiscussionPage: React.FC = () => {
     const { data } = await orbis.getPost(discussionId);
     setTitle(data?.content?.title);
     setInitialDescription(data?.content?.body);
-    setStreamId(data?.stream_id);
   };
 
   useEffect(() => {
@@ -97,8 +95,11 @@ const EditDiscussionPage: React.FC = () => {
     setEditMode(v => !v);
   };
 
-  const handleBack = () =>
-    navigate(`/${chain}/${guildId}/discussion/${discussionId}`);
+  const handleBack = () => {
+    setTimeout(() => {
+      navigate(`/${chain}/${guildId}/discussion/${discussionId}`);
+    }, 3000);
+  };
 
   const handleEditDiscussion = async (post: DiscussionContent) => {
     if (!hasWalletConnection) {
@@ -107,7 +108,7 @@ const EditDiscussionPage: React.FC = () => {
     }
 
     if (postTemplate(post)) {
-      const res = await editPost(orbis, streamId, post);
+      const res = await editPost(orbis, discussionId, post);
       handleBack();
       return {
         res,
@@ -196,11 +197,7 @@ const EditDiscussionPage: React.FC = () => {
                 handleEditDiscussion({
                   title,
                   body: discussionBodyMd,
-                  context: `DAVI-${guildId}`,
-                  master: null,
-                  replyTo: null,
-                  mentions: [],
-                  data: {},
+                  context: `DAVI-${guildId}`
                 });
               }}
               backgroundColor={isValid ? 'none' : theme.colors.bg1}

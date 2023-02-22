@@ -75,12 +75,12 @@ const EditDiscussionPage: React.FC = () => {
     EditorConfig,
     md: discussionBodyMd,
     html: discussionBodyHtml,
-  } = useTextEditor(
-    t('discussions.discussionPlaceholder'),
+  } = useTextEditor({
+    placeholder: t('discussions.discussionPlaceholder'),
     onHTMLChange,
     html,
-    initialDescription
-  );
+    initialContent: initialDescription,
+  });
 
   const hasWalletConnection = useMemo(() => {
     return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;
@@ -197,7 +197,7 @@ const EditDiscussionPage: React.FC = () => {
                 handleEditDiscussion({
                   title,
                   body: discussionBodyMd,
-                  context: `DAVI-${guildId}`
+                  context: `DAVI-${guildId}`,
                 });
               }}
               backgroundColor={isValid ? 'none' : theme.colors.bg1}

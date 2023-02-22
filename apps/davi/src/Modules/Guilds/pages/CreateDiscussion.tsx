@@ -81,7 +81,11 @@ const CreateDiscussionPage: React.FC = () => {
     EditorConfig,
     md: discussionBodyMd,
     html: discussionBodyHtml,
-  } = useTextEditor(t('discussions.discussionPlaceholder'), onHTMLChange, html);
+  } = useTextEditor({
+    placeholder: t('discussions.discussionPlaceholder'),
+    onHTMLChange,
+    html,
+  });
 
   const hasWalletConnection = useMemo(() => {
     return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;

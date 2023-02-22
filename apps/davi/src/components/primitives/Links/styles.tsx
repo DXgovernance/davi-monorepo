@@ -3,8 +3,8 @@ import { Box } from '../Layout';
 
 export const StyledSegmentLink = styled.a`
   color: ${({ theme }) => theme.colors.grey};
-  margin-right: 0.5rem;
   display: flex;
+  gap: 0.5rem;
   align-items: center;
   text-decoration: none;
   overflow-wrap: break-word;
@@ -14,11 +14,6 @@ export const StyledSegmentLink = styled.a`
   }
 `;
 
-export const FlexContainer = styled.div`
-  display: flex;
-`;
-
 export const LinkDetail = styled(Box)`
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 `;

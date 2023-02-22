@@ -4,6 +4,7 @@ import { Loading } from 'components/primitives/Loading';
 import { ProposalState } from 'types/types.guilds.d';
 import { ProposalStatusProps } from './types';
 import { TimeDetail } from './TimeDetail';
+import { ExternalLink } from 'components/primitives/Links/ExternalLink';
 
 const ProposalStatusWrapper = styled.div`
   display: flex;
@@ -72,11 +73,13 @@ const DetailText = styled(Box)`
     padding-right: 0.5rem;
   }
 `;
+
 export const ProposalStatus: React.FC<ProposalStatusProps> = ({
   status,
   endTime,
   bordered,
   hideTime,
+  executeTxLink,
 }) => {
   return (
     <ProposalStatusWrapper>
@@ -96,13 +99,19 @@ export const ProposalStatus: React.FC<ProposalStatusProps> = ({
           </DetailText>
         )}
         {status ? (
-          <ProposalStatusDetail
-            data-testid="proposal-state"
-            statusDetail={status}
+          <ExternalLink
+            href={executeTxLink ?? null}
+            disableLink={!executeTxLink}
+            hideIcon
           >
-            {' '}
-            {status}
-          </ProposalStatusDetail>
+            <ProposalStatusDetail
+              data-testid="proposal-state"
+              statusDetail={status}
+            >
+              {' '}
+              {status}
+            </ProposalStatusDetail>
+          </ExternalLink>
         ) : (
           <Loading
             test-id="skeleton"

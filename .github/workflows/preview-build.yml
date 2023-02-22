@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cloning contracts
-        run: git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts
+        run: git clone -b v2.0 https://github.com/DXgovernance/dxdao-contracts packages/dxdao-contracts
 
       - name: Pnpm setup
         uses: pnpm/action-setup@v2

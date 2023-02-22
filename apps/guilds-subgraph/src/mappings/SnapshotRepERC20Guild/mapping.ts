@@ -7,7 +7,7 @@ import {
   VoteAdded,
 } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
 import { BaseERC20Guild } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
-import { ERC20 } from '../../types/GuildRegistry/ERC20';
+import { ERC20Token } from '../../types/GuildRegistry/ERC20Token';
 import {
   Guild,
   Proposal,
@@ -35,7 +35,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   //   Get token config
   let tokenAddress = contract.getToken();
 
-  let tokenContract = ERC20.bind(tokenAddress);
+  let tokenContract = ERC20Token.bind(tokenAddress);
   ERC20SnapshotRepTemplate.create(tokenAddress);
 
   let token = Token.load(tokenAddress.toHexString());
@@ -61,9 +61,9 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.proposalTime = contract.getProposalTime();
   guild.lockTime = contract.getLockTime();
   guild.timeForExecution = contract.getTimeForExecution();
-  guild.votingPowerForProposalCreation =
+  guild.votingPowerPercentageForProposalCreation =
     contract.getVotingPowerForProposalCreation();
-  guild.votingPowerForProposalExecution =
+  guild.votingPowerPercentageForProposalExecution =
     contract.getVotingPowerForProposalExecution();
   guild.voteGas = contract.getVoteGas();
   guild.maxGasPrice = contract.getMaxGasPrice();
@@ -236,7 +236,7 @@ export function handleVoting(event: VoteAdded): void {
     vote.proposalId = proposalId;
     vote.voter = event.params.voter.toHexString();
     // TODO: change to event.params.option when merging refactor branch of dxdao-contracts
-    vote.option = event.params.action;
+    vote.option = event.params.option;
     // TODO: check when one voter votes twice
     if (proposal) {
       let votesCopy = proposal.votes;
@@ -246,12 +246,12 @@ export function handleVoting(event: VoteAdded): void {
       const newTotalVotes = proposalData.totalVotes;
       proposal.totalVotes = newTotalVotes;
 
-      let optionId = `${proposalId}-${event.params.action}`;
+      let optionId = `${proposalId}-${event.params.option}`;
       let option = Option.load(optionId);
       // update option data on vote event
       if (!!option) {
         let optionVotesCopy = option.votes;
-        const newVoteAmount = newTotalVotes[event.params.action.toI32()];
+        const newVoteAmount = newTotalVotes[event.params.option.toI32()];
         optionVotesCopy.push(voteId);
 
         option.voteAmount = newVoteAmount;

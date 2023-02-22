@@ -86,6 +86,7 @@ export interface InputProps<T>
   ariaLabel?: string;
   displayClearIcon?: boolean;
   marginRight?: string;
+  accentColor?: string;
 }
 
 export const Input: React.FC<InputProps<any>> = ({
@@ -96,6 +97,7 @@ export const Input: React.FC<InputProps<any>> = ({
   muted,
   disabled,
   marginRight,
+  type,
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -119,7 +121,7 @@ export const Input: React.FC<InputProps<any>> = ({
       marginRight={marginRight}
     >
       <IconContainer>{icon}</IconContainer>
-      <UnstyledInput ref={inputRef} disabled={disabled} {...rest} />
+      <UnstyledInput ref={inputRef} type={type} disabled={disabled} {...rest} />
       <IconContainer right>{iconRight}</IconContainer>
     </InputWrapper>
   );

@@ -46,8 +46,8 @@ export const useGuildConfig = (guildAddress: string) => {
       proposalTime,
       timeForExecution,
       maxActiveProposals,
-      votingPowerForProposalCreation,
-      votingPowerForProposalExecution,
+      votingPowerPercentageForProposalCreation,
+      votingPowerPercentageForProposalExecution,
       lockTime,
       voteGas,
       maxGasPrice,
@@ -66,11 +66,11 @@ export const useGuildConfig = (guildAddress: string) => {
       maxActiveProposals: maxActiveProposals
         ? BigNumber.from(maxActiveProposals)
         : undefined,
-      votingPowerForProposalCreation: votingPowerForProposalCreation
-        ? BigNumber.from(votingPowerForProposalCreation)
+      votingPowerForProposalCreation: votingPowerPercentageForProposalCreation
+        ? BigNumber.from(votingPowerPercentageForProposalCreation)
         : undefined,
-      votingPowerForProposalExecution: votingPowerForProposalExecution
-        ? BigNumber.from(votingPowerForProposalExecution)
+      votingPowerForProposalExecution: votingPowerPercentageForProposalExecution
+        ? BigNumber.from(votingPowerPercentageForProposalExecution)
         : undefined,
       tokenVault: ZERO_ADDRESS,
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,

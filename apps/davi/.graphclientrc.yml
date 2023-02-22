@@ -1,8 +1,12 @@
 sources:
-  - name: dxgov-guild-subgraph
+  - name: guild-subgraph
     handler:
       graphql:
-        # endpoint: http://127.0.0.1:8000/subgraphs/name/dxdao/guilds
-        endpoint: https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis
+        endpoint: ${DXGOV_GUILD_GRAPHQL_ENDPOINT}
+  - name: dao-subgraph
+    handler:
+      graphql:
+        endpoint: ${DXGOV_DAO_GRAPHQL_ENDPOINT}
 documents:
   - './src/**/*.graphql'
+

@@ -15,24 +15,24 @@
       "outputs": ["artifacts/**"]
     },
     "dxdao-contracts#setup": {
+      "dependsOn": ["dxdao-contracts#compile"],
       "outputs": ["types/**"]
     },
     "dev-scripts#compile": {
-      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"]
+      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"],
+      "cache": false
     },
     "dev-scripts#dev": {
       "dependsOn": ["dev-scripts#compile"],
       "outputs": ["build/**", "artifacts/**"]
     },
+    "dao-subgraph#dev": {
+      "cache": false
+    },
     "guilds-subgraph#dev": {
-      "dependsOn": ["^dev-scripts#compile"]
+      "cache": false
     },
-    "1-5-subgraph#dev": {
-      "dependsOn": ["^dev-scripts#compile"]
-    },
-    "dev": {
-      "dependsOn": ["setup", "^dxdao-contracts#compile", "^dev-scripts#compile"]
-    },
+    "dev": {},
     "build": {
       "dependsOn": ["^setup"]
     },

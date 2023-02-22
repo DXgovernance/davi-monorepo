@@ -17,7 +17,7 @@ exports[`VoteChart matches the snapshot 1`] = `
   width: 100%;
 }
 
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -25,34 +25,52 @@ exports[`VoteChart matches the snapshot 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  height: 0.75rem;
-  border-radius: 32px;
+  height: 0.5rem;
+  margin-top: 2%;
+  overflow: hidden;
   background-color: #303338;
-  overflow: hidden;
-}
-
-.c2 {
-  width: 10%;
-  background: #E75C5C;
-  height: 0.75rem;
-  overflow: hidden;
+  border-radius: 32px;
 }
 
 .c3 {
   width: 10%;
-  background: #295FF4;
-  height: 0.75rem;
+  border-radius: 32px;
+  background: #FD568C;
+  height: 0.5rem;
   overflow: hidden;
 }
 
 .c5 {
-  height: 18px;
-  margin-top: 10px;
-  width: 1px;
-  background: #303338;
+  width: 10%;
+  border-radius: 32px;
+  background: #00F5F5;
+  height: 0.5rem;
+  overflow: hidden;
 }
 
-.c6 {
+.c4 {
+  margin-left: 1rem;
+}
+
+.c7 {
+  height: 2.4rem;
+  margin-top: 5px;
+  width: 1px;
+  background: #1B1D1F;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c8 {
   padding: 4px 8px;
   border: 1px solid #303338;
   border-radius: 0px 32px 32px;
@@ -68,11 +86,11 @@ exports[`VoteChart matches the snapshot 1`] = `
   display: flex;
 }
 
-.c6 span {
+.c8 span {
   margin-left: 2px;
 }
 
-.c4 {
+.c6 {
   width: 65px;
   position: absolute;
   display: -webkit-box;
@@ -89,10 +107,10 @@ exports[`VoteChart matches the snapshot 1`] = `
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  left: 0%;
+  left: 0px;
 }
 
-.c7 {
+.c9 {
   margin-right: 0.4rem;
 }
 
@@ -106,24 +124,46 @@ exports[`VoteChart matches the snapshot 1`] = `
     >
       <div
         class="c2"
-        color="#E75C5C"
-      />
-      <div
-        class="c3"
-        color="#295FF4"
-      />
+      >
+        <div
+          class="c3"
+          color="#FD568C"
+        />
+      </div>
+      <span
+        class="c4"
+      >
+        10%
+      </span>
     </div>
     <div
-      class="c4"
+      class="c1"
     >
       <div
-        class="c5"
+        class="c2"
+      >
+        <div
+          class="c5"
+          color="#00F5F5"
+        />
+      </div>
+      <span
+        class="c4"
+      >
+        10%
+      </span>
+    </div>
+    <div
+      class="c6"
+    >
+      <div
+        class="c7"
       />
       <div
-        class="c6"
+        class="c8"
       >
         <svg
-          class="c7"
+          class="c9"
           fill="currentColor"
           height="1em"
           stroke="currentColor"

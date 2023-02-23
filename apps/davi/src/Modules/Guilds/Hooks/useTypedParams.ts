@@ -10,13 +10,7 @@ interface TypedParams {
 
 export const useTypedParams = (): TypedParams => {
   const { guildId, proposalId, discussionId, proposalType, chainName } =
-    useParams<{
-      guildId?: `0x${string}`;
-      proposalId?: `0x${string}`;
-      discussionId?: `${string}`;
-      proposalType?: string;
-      chainName?: string;
-    }>();
+    useParams<Partial<TypedParams>>();
   return {
     guildId,
     proposalId,

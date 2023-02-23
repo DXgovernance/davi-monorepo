@@ -257,7 +257,11 @@ export function handleTokenLocking(event: TokensLocked): void {
   if (!member) {
     member = new Member(memberId);
     member.address = event.params.voter.toHexString();
-    member.guild = guild.id;
+
+    let guildMembersClone = guild.members;
+    guildMembersClone!.push(memberId);
+    guild.members = guildMembersClone;
+    guild.save();
   }
 
   member.tokensLocked = contract.votingPowerOf(event.params.voter);
@@ -280,9 +284,15 @@ export function handleTokenWithdrawal(event: TokensWithdrawn): void {
   member!.tokensLocked = contract.votingPowerOf(event.params.voter);
 
   if (member!.tokensLocked == new BigInt(0)) {
-    member!.unset(memberId);
-  } else {
-    member!.save();
+    let guildMembersClone = guild.members;
+    for (let i = 0; i < guildMembersClone!.length; i++) {
+      if (guildMembersClone![i] == memberId) {
+        guildMembersClone!.splice(i, 1);
+      }
+    }
+    guild.members = guildMembersClone;
+
+    guild.save();
   }
 }
 

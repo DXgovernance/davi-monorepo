@@ -1,5 +1,6 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -14,7 +15,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
           useProposalVotesOfVoter: null,
-          useVoterLockTimestamp: null,
+          useVoterLockTimestamp: useVoterLockTimestamp,
           useProposalCalls: null,
           useVotingResults: null,
           useVotingPowerOf: null,
@@ -34,7 +35,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
           useProposalVotesOfVoter: null,
-          useVoterLockTimestamp: null,
+          useVoterLockTimestamp: useVoterLockTimestamp,
           useProposalCalls: null,
           useVotingResults: null,
           useVotingPowerOf: null,

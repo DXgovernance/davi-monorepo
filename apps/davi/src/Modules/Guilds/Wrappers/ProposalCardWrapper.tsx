@@ -51,7 +51,6 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
       statusProps={{
         status,
         endTime: endTime,
-        contractState: proposal?.contractState,
       }}
       address={address}
     />

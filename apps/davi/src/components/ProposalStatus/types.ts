@@ -1,6 +1,5 @@
-// import { Moment } from 'moment';
 import { Moment } from 'moment';
-import { ProposalState } from 'types/types.guilds';
+import { ProposalState } from 'types/types.guilds.d';
 
 export interface ProposalStatusProps {
   status: ProposalState;

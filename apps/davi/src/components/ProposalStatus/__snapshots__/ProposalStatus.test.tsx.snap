@@ -188,7 +188,6 @@ exports[`ProposalStatus votes 1`] = `
         class="c2 c4"
         data-testid="proposal-state"
       >
-         
         Active
       </div>
     </div>

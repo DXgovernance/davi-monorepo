@@ -380,7 +380,6 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
               class="c1 c11"
               data-testid="proposal-state"
             >
-               
               Active
             </div>
           </div>
@@ -861,7 +860,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
               class="c1 c11"
               data-testid="proposal-state"
             >
-               
               Active
             </div>
           </div>
@@ -1358,7 +1356,6 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
               class="c1 c11"
               data-testid="proposal-state"
             >
-               
               Active
             </div>
           </div>

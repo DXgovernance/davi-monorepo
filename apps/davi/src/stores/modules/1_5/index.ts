@@ -2,6 +2,7 @@ import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import { useGuildConfig } from './fetchers/subgraph/useGuildConfig';
 import { useMemberCount } from './fetchers/subgraph/useMemberCount';
+import { useTotalLocked } from './fetchers/subgraph/useTotalLocked';
 import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
@@ -13,7 +14,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         default: {
           useProposal: null,
           useSnapshotId: null,
-          useTotalLocked: null,
+          useTotalLocked,
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
           useProposalVotesOfVoter: null,
@@ -33,7 +34,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         fallback: {
           useProposal: null,
           useSnapshotId: null,
-          useTotalLocked: null,
+          useTotalLocked,
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
           useProposalVotesOfVoter: null,

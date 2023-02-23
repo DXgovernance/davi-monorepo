@@ -59,7 +59,7 @@ class AnyGuildPage {
     this.proposalPageTitle = 'proposal-page-title';
     this.proposalPageBackButton = 'proposal-back-btn';
     this.creatorName = 'creator-address-name';
-    this.createProposalButton = 'create-proposal-btn';
+    this.createProposalButton = 'create-proposal-button';
     // Discussions
     this.allDiscussionPage = 'all-discussions-page';
     this.firstDiscussionCard = 'discussion-card';
@@ -115,7 +115,7 @@ class AnyGuildPage {
 
   checkIfYouAreOnAllProposalsPage() {
     cy.findByTestId(this.allProposalsPage)
-      .contains('All Proposals')
+      .contains('All proposals')
       .should('have.css', 'color','rgb(222, 255, 78)'
     );
   };
@@ -134,17 +134,17 @@ class AnyGuildPage {
     cy.findByTestId(this.actionFilterBtn).contains('Action').click();
 
     actionFilterOptions.forEach((option, i) => {
-      cy.findAllByTestId(this.actionFilterBtn)
+      cy.findAllByTestId(this.actionFilterOption)
       .eq(i)
       .contains(option)
     });
   };
 
   checkCurrencyFilterOptions() {
-    cy.findByTestId(this.currencyFilterBtn).contains('Currency').click();
+    cy.findByTestId(this.currencyFilterBtn).contains('Token').click();
     
     currencyFilterOptions.forEach((option, i) => {
-      cy.findAllByTestId(this.currencyFilterBtn)
+      cy.findAllByTestId(this.currencyFilterOption)
       .eq(i)
       .contains(option)
     });
@@ -173,7 +173,7 @@ class AnyGuildPage {
 
   checkIfYouAreOnAllDiscussionPage() {
     cy.findByTestId(this.allDiscussionPage)
-      .contains('All Discussions')
+      .contains('All discussions')
       .should('have.css', 'color','rgb(222, 255, 78)'
     );
     cy.findByTestId(this.createDiscussionButton).should('be.visible');

@@ -1,0 +1,11 @@
+query getVotingPowerOf($id: ID!, $userAddress: String!) {
+  dao(id: $id) {
+    id
+    reputationToken {
+      members(where: { address: $userAddress }) {
+        reputationTokenAmount
+      }
+    }
+  }
+}
+

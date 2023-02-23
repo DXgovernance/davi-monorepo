@@ -33,6 +33,8 @@ import {
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
   useGuildProposalIds,
+  useProposalState,
+  useTimeDetail,
 } from '../common/fetchers/rpc';
 import {
   useTotalLocked,
@@ -80,6 +82,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
           useGuildProposalIds: useGuildProposalIdsFromSubgraph,
+          useProposalState,
+          useTimeDetail,
         },
         fallback: {
           useProposal,
@@ -100,6 +104,8 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetAllPermissions,
           useGetNumberOfActiveProposals,
           useGuildProposalIds,
+          useProposalState,
+          useTimeDetail,
         },
       },
       writers: {

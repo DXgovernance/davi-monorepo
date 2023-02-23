@@ -1,4 +1,4 @@
-import useProposalState from '.';
+import { useProposalState } from './useProposalState';
 import { Proposal, ContractState } from 'types/types.guilds.d';
 import { BigNumber } from 'ethers';
 import { renderHook } from '@testing-library/react-hooks';

@@ -11,7 +11,6 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { FiArrowLeft } from 'react-icons/fi';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
-import { useProposalState } from 'hooks/Guilds/useProposalState';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
@@ -29,7 +28,6 @@ import {
   SidebarContent,
 } from './Proposal.styled';
 import { useTranslation } from 'react-i18next';
-import useTimeDetail from 'Modules/Guilds/Hooks/useTimeDetail';
 import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
 import { Header as CardHeader } from 'components/Card';
@@ -44,7 +42,13 @@ const ProposalPage: React.FC = () => {
   const {
     hooks: {
       writers: { useExecuteProposal },
-      fetchers: { useProposal, useTotalLocked, useGuildConfig },
+      fetchers: {
+        useProposal,
+        useTotalLocked,
+        useGuildConfig,
+        useProposalState,
+        useTimeDetail,
+      },
     },
   } = useHookStoreProvider();
   const { t } = useTranslation();

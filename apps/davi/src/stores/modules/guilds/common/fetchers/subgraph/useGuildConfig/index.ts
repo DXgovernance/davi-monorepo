@@ -5,25 +5,7 @@ import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
 import { SUPPORTED_DAVI_NETWORKS, ZERO_ADDRESS } from 'utils';
 import { apolloClient } from 'clients/apollo';
-
-export type GuildConfigProps = {
-  name: string;
-  token: `0x${string}`;
-  permissionRegistry: string;
-  proposalTime: BigNumber;
-  timeForExecution: BigNumber;
-  maxActiveProposals: BigNumber;
-  votingPowerForProposalCreation: BigNumber;
-  votingPowerForProposalExecution: BigNumber;
-  tokenVault: `0x${string}`;
-  lockTime: BigNumber;
-  voteGas: BigNumber;
-  maxGasPrice: BigNumber;
-  votingPowerPercentageForProposalExecution: BigNumber;
-  votingPowerPercentageForProposalCreation: BigNumber;
-  minimumMembersForProposalCreation: BigNumber;
-  minimumTokensLockedForProposalCreation: BigNumber;
-};
+import { GuildConfigProps } from 'types/types.guilds';
 
 export const useGuildConfig = (guildAddress: string) => {
   const { chain } = useNetwork();

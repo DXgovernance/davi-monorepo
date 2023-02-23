@@ -1,5 +1,6 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import { useGuildConfig } from './fetchers/subgraph/useGuildConfig';
 import { useMemberCount } from './fetchers/subgraph/useMemberCount';
 import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
 
@@ -22,7 +23,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useVotingPowerOf: null,
           useMemberCount,
           useGetPermissions: null,
-          useGuildConfig: null,
+          useGuildConfig,
           useGetVotes: null,
           useGetMemberList: null,
           useGetAllPermissions: null,
@@ -42,7 +43,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useVotingPowerOf: null,
           useMemberCount,
           useGetPermissions: null,
-          useGuildConfig: null,
+          useGuildConfig,
           useGetVotes: null,
           useGetMemberList: null,
           useGetAllPermissions: null,

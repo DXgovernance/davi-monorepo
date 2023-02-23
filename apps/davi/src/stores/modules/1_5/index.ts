@@ -5,11 +5,14 @@ import { useMemberCount } from './fetchers/subgraph/useMemberCount';
 import { useTotalLocked } from './fetchers/subgraph/useTotalLocked';
 import { useVotingPowerOf } from './fetchers/subgraph/useVotingPowerOf';
 import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
+import { useWithdrawTokens } from './writers/useWithdrawTokens';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
     name: 'Governance1_5',
-    bytecodes: [],
+    bytecodes: [
+      '0x5a7c2852d5c2d5940670284861fb5549797abc88673d311096fd8fc2bb1c7dc0',
+    ],
     hooks: {
       fetchers: {
         default: {
@@ -59,7 +62,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         useExecuteProposal: null,
         useLockTokens: null,
         useVoteOnProposal: null,
-        useWithdrawTokens: null,
+        useWithdrawTokens: useWithdrawTokens,
       },
     },
     capabilities: {

@@ -22,10 +22,12 @@ import EditDiscussionPage from 'Modules/Guilds/pages/EditDiscussion';
 const App = () => {
   return (
     <ThemeProvider theme={GuildsDarkTheme}>
+      <GlobalStyle />
+
       <TransactionsProvider>
+        <Header />
+
         <GuildsContextProvider>
-          <GlobalStyle />
-          <Header />
           <Container>
             <OnlineStatus>
               <Routes>

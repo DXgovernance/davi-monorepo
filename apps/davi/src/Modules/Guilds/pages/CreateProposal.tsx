@@ -86,7 +86,7 @@ const CreateProposalPage: React.FC = () => {
     useState(false);
 
   const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
-    `${guildId}/create-proposal/html`,
+    `${guildId}/${discussionId ?? "create-proposal"}/html`,
     null,
     345600000
   );
@@ -164,8 +164,7 @@ const CreateProposalPage: React.FC = () => {
     handleCreateProposal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ignoreWarning, isActionDenied]);
-  console.log({ options });
-
+  
   const handleCreateProposal = async () => {
     setIsCreatingProposal(true);
     const encodedOptions = bulkEncodeCallsFromOptions(options);

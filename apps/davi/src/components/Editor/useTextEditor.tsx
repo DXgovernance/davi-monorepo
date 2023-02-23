@@ -12,9 +12,9 @@ export const useTextEditor = (
   placeholder: string,
   onHTMLChange: any,
   html: string,
-  initialDescription?: string
+  initialContent?: string
 ) => {
-  const initialHTML = useMarkdownToHTML(initialDescription);
+  const initialHTML = useMarkdownToHTML(initialContent);
   const md = useHTMLToMarkdown(html);
 
   const clear = () => {
@@ -46,7 +46,7 @@ export const useTextEditor = (
         }
       },
     },
-    [initialDescription]
+    [initialContent]
   );
 
   return { Editor, EditorConfig, html, md, clear };

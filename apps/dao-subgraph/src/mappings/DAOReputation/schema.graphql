@@ -1,7 +1,18 @@
+type ReputationToken @entity {
+  id: ID!
+  address: String!
+  members: [Member!] @derivedFrom(field: "reputationToken")
+  name: String!
+  symbol: String!
+  controllerAddress: String!
+  amount: BigInt!
+}
+
 type Member @entity {
   id: ID!
   address: String!
-  reputation: BigInt!
+  reputationToken: ReputationToken
+  reputationTokenAmount: BigInt!
   votes: [Vote!] @derivedFrom(field: "member")
 }
 

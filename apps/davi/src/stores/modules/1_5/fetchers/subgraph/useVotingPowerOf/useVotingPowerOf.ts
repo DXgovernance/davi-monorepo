@@ -29,9 +29,9 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
 
   const userVotingPower = useMemo(() => {
     if (!data?.dao) return undefined;
-    return BigNumber.from(
-      data?.dao?.reputationToken?.members?.[0]?.reputationTokenAmount
-    );
+    const member = data?.dao?.reputationToken?.members?.[0];
+
+    return member ? BigNumber.from(member.reputationTokenAmount) : undefined;
   }, [data?.dao]);
 
   return {

@@ -1,0 +1,10 @@
+query getMemberList1_5($id: ID!) {
+  dao(id: $id) {
+    reputationToken {
+      members {
+        id
+      }
+    }
+  }
+}
+

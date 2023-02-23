@@ -37,19 +37,9 @@ function getImplementationType(bytecodeHash: string): string | null {
 // Handler to initialize guilds once they are deployed.
 export function handleDeployedEvent(event: Deployed): void {
   const contractAddress = event.params.addr;
-  const bytecodeHash = event.params.bytecodeHash.toHexString();
-  log.info('Create2Deployer: Indexing contractAddress, bytecodeHash, {}, {}', [
-    contractAddress.toHexString(),
-    bytecodeHash,
-  ]);
-
-  // If no type found, contract deployed was not a guild and will not be created here.
-  const guildType = getImplementationType(bytecodeHash);
-  if (guildType) {
-    log.info('Create2Deployer: Matched contractAddress as, {}, {}', [
-      contractAddress.toHexString(),
-      guildType,
-    ]);
+  const type = getImplementationType(event.params.bytecodeHash.toHexString());
+  // If no type found, contract deployed was not a guild and will not be trated here.
+  if (!!type) {
 
     const guildAddress = contractAddress;
     // Create Guild instance
@@ -61,36 +51,19 @@ export function handleDeployedEvent(event: Deployed): void {
     // At this point Guild wasn't initialized so we only create guild with default params
     guild.isActive = false;
     guild.proposals = [];
-    guild.bytecodeHash = bytecodeHash;
-    guild.type = guildType;
+    guild.members = [];
+    guild.bytecodeHash = event.params.bytecodeHash.toHexString();
+    guild.type = type;
 
     guild.save();
 
-    if (guildType == 'SnapshotRepERC20Guild') {
+    if (type == 'SnapshotRepERC20Guild') {
       SnapshotRepERC20GuildTemplate.create(guildAddress);
-    } else if (guildType == 'SnapshotERC20Guild') {
+    } else if (type == 'SnapshotERC20Guild') {
       SnapshotERC20GuildTemplate.create(guildAddress);
-    } else if (guildType == 'ERC20Guild' || guildType == 'DXDGuild') {
+    } else if (type == 'ERC20Guild' || type == 'DXDGuild') {
       BaseERC20GuildTemplate.create(guildAddress);
     }
-
-    return;
   }
-
-  // Matching Rep token creation
-  if (bytecodeHash == bytecodeHashForRepToken) {
-    let tokenContract = ERC20.bind(contractAddress);
-    let token = new Token(contractAddress.toHexString());
-    token.name = tokenContract.name();
-    token.type = 'ERC20';
-    token.symbol = tokenContract.symbol();
-    token.decimals = tokenContract.decimals();
-    token.save();
-    ERC20SnapshotRepTemplate.create(contractAddress);
-  }
-
-  log.warning('Create2Deployer: ContractAddress type not matched, {}', [
-    contractAddress.toHexString(),
-  ]);
 }
 

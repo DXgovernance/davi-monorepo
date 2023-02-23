@@ -257,7 +257,11 @@ export function handleTokenLocking(event: TokensLocked): void {
   if (!member) {
     member = new Member(memberId);
     member.address = event.params.voter.toHexString();
-    member.guild = guild.id;
+
+    let guildMembersClone = guild.members;
+    guildMembersClone!.push(memberId);
+    guild.members = guildMembersClone;
+    guild.save();
   }
 
   member.tokensLocked = contract.votingPowerOf(event.params.voter);

@@ -29,6 +29,7 @@ const Discussions = () => {
 
   const getDiscussions = async (page: number = 0) => {
     setIsLoading(true);
+
     let { data, error } = await orbis.getPosts(
       {
         algorithm: 'all-context-master-posts',

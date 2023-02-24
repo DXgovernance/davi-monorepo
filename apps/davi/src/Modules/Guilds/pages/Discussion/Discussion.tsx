@@ -129,7 +129,12 @@ const DiscussionPage: React.FC = () => {
             </SidebarCardHeaderSpaced>
           }
         >
-          <Discussion context={context} master={''} />
+          <Discussion
+            context={context}
+            master={''}
+            daoId={guildId}
+            parentId={discussionId}
+          />
         </SidebarCard>
       </PageContent>
     </PageContainer>

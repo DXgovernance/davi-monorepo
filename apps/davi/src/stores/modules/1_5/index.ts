@@ -1,19 +1,28 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import { useProposalState, useTimeDetail } from './fetchers/rpc';
+import {
+  useProposal,
+  useGuildProposalIds,
+  useGetNumberOfActiveProposals,
+  useProposalVotesOfVoter,
+} from './fetchers/subgraph';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
     name: 'Governance1_5',
-    bytecodes: [],
+    bytecodes: [
+      '0x5a7c2852d5c2d5940670284861fb5549797abc88673d311096fd8fc2bb1c7dc0',
+    ],
     hooks: {
       fetchers: {
         default: {
-          useProposal: null,
+          useProposal,
           useSnapshotId: null,
           useTotalLocked: null,
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
-          useProposalVotesOfVoter: null,
+          useProposalVotesOfVoter,
           useVoterLockTimestamp: null,
           useProposalCalls: null,
           useVotingResults: null,
@@ -24,8 +33,10 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGetVotes: null,
           useGetMemberList: null,
           useGetAllPermissions: null,
-          useGetNumberOfActiveProposals: null,
-          useGuildProposalIds: null,
+          useGetNumberOfActiveProposals,
+          useGuildProposalIds,
+          useProposalState,
+          useTimeDetail,
         },
         fallback: {
           useProposal: null,
@@ -46,6 +57,8 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGetAllPermissions: null,
           useGetNumberOfActiveProposals: null,
           useGuildProposalIds: null,
+          useProposalState: null,
+          useTimeDetail: null,
         },
       },
       writers: {

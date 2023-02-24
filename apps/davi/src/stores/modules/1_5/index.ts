@@ -1,6 +1,10 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
-import { useProposalState, useTimeDetail } from './fetchers/rpc';
+import {
+  useProposalState,
+  useTimeDetail,
+  useIsProposalCreationAllowed,
+} from './fetchers/rpc';
 import {
   useProposal,
   useGuildProposalIds,
@@ -21,7 +25,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useSnapshotId: null,
           useTotalLocked: null,
           useDAOToken: null,
-          useIsProposalCreationAllowed: null,
+          useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useVoterLockTimestamp: null,
           useProposalCalls: null,

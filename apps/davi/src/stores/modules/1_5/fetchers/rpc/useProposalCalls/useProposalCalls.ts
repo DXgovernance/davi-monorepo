@@ -17,7 +17,10 @@ import {
   decodeCall,
 } from 'hooks/Guilds/contracts/useDecodedCall';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
-import { useRichContractRegistry } from 'hooks/Guilds/contracts/useRichContractRegistry';
+import {
+  RichContractData,
+  useRichContractRegistry,
+} from 'hooks/Guilds/contracts/useRichContractRegistry';
 import { Call, Option } from 'components/ActionsBuilder/types';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
 
@@ -26,18 +29,47 @@ const isApprovalData = (data: string) =>
 const isApprovalCall = (call: Call) => isApprovalData(call?.data);
 const isZeroHash = (data: string) => data === ZERO_HASH;
 
+const encodeActions = async (
+  calls: Call[],
+  contracts: RichContractData[],
+  chainId: number
+) => {
+  const filteredCalls = calls.filter(
+    call => !isZeroHash(call?.data) || !preventEmptyString(call?.value).isZero()
+  );
+
+  const encodedActions = await Promise.all(
+    filteredCalls.map(async (call: Call) => {
+      if (!!call?.approvalCall) {
+        // If current call is an "spending" call will have a inner approvalCall
+        const { decodedCall: decodedApprovalCall } = await decodeCall(
+          call?.approvalCall,
+          contracts,
+          chainId
+        );
+        // Avoid spreading unnecesary approvalCall;
+        const { approvalCall, ...newCall } = call;
+
+        return {
+          ...newCall,
+          approval: {
+            ...decodedApprovalCall,
+            amount: decodedApprovalCall?.args?._value,
+            token: decodedApprovalCall?.to,
+          },
+        };
+      }
+      return call;
+    })
+  );
+
+  return encodedActions;
+};
+
 type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
 export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   const { data: metadata } = useProposalMetadata(proposal?.contentHash);
-
-  const voteOptions = {
-    0: proposal?.totalVotes[0], // NO votes
-    1: proposal?.totalVotes[1], // YES votes
-  };
-
-  // TODO: useTotalLocked hook when ready
-  const totalLocked = BigNumber.from(1000000000000000); //! HARDCODED
 
   const { contracts } = useRichContractRegistry();
   const { chain } = useNetwork();
@@ -56,6 +88,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
       data: dataArray[idx],
       value: valuesArray[idx],
     });
+
     return dataArray
       ?.map((_, index) => {
         const call = buildCall(index);
@@ -76,92 +109,90 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   }, [daoId, toArray, dataArray, valuesArray]);
 
   useEffect(() => {
-    const OPTION_INDEX = 1;
-    let cancelled = false;
-
     if (!daoId || !proposal?.id || !calls) {
       setOptions([]);
       return () => {};
     }
-    async function decodeOptions() {
-      const filteredCalls = calls.filter(
-        call =>
-          !isZeroHash(call?.data) || !preventEmptyString(call?.value).isZero()
-      );
 
-      const encodedActions = await Promise.all(
-        filteredCalls.map(async (call: Call) => {
-          if (!!call?.approvalCall) {
-            // If current call is an "spending" call will have a inner approvalCall
-            const { decodedCall: decodedApprovalCall } = await decodeCall(
-              call?.approvalCall,
-              contracts,
-              chain?.id
-            );
-            // Avoid spreading unnecesary approvalCall;
-            const { approvalCall, ...newCall } = call;
+    let cancelled = false;
 
-            return {
-              ...newCall,
-              approval: {
-                ...decodedApprovalCall,
-                amount: decodedApprovalCall?.args?._value,
-                token: decodedApprovalCall?.to,
-              },
-            };
-          }
-          return call;
-        })
-      );
+    // TODO: useTotalLocked hook when ready
+    const totalLocked = BigNumber.from(1000000000000000); //! HARDCODED
 
+    const populateOption = async (
+      actions: Call[],
+      votes: BigNumber,
+      index: number
+    ): Promise<Option> => {
       const optionLabel = getGuildOptionLabel({
         metadata,
-        optionKey: OPTION_INDEX,
+        optionKey: index,
         t,
       });
 
-      const encodedOptions: Option = {
-        id: `option-${OPTION_INDEX}`,
-        label: optionLabel || `Option ${OPTION_INDEX}`,
-        color: theme?.colors?.votes?.[OPTION_INDEX],
-        actions: encodedActions,
-        totalVotes: voteOptions[OPTION_INDEX],
-        votePercentage: getBigNumberPercentage(
-          voteOptions[OPTION_INDEX],
-          totalLocked
-        ),
+      return {
+        id: `option-${index}`,
+        label: optionLabel || `Option ${index}`,
+        color: theme?.colors?.votes?.[index],
+        actions,
+        totalVotes: votes,
+        votePercentage: getBigNumberPercentage(votes, totalLocked),
       };
+    };
 
-      return bulkDecodeCallsFromOptions([encodedOptions], contracts, chain?.id);
-    }
-    decodeOptions().then(options =>
-      // Return options putting default against-call last
-      setOptions([...options.slice(1), options[0]])
-    );
+    const decodeOptions = async () => {
+      // NO and YES indexes are defined at the contract level
+      const YES_INDEX = 1;
+      const NO_INDEX = 0;
+
+      // Yes option
+      const encodedYesActions = await encodeActions(
+        calls,
+        contracts,
+        chain?.id
+      );
+      const yesVotes = proposal?.totalVotes[YES_INDEX];
+      const populatedYesOption = await populateOption(
+        encodedYesActions,
+        yesVotes,
+        YES_INDEX
+      );
+
+      // No option
+      const encodedNoActions = []; // NO has no actions
+      const noVotes = proposal?.totalVotes[NO_INDEX];
+      const populatedNoOption = await populateOption(
+        encodedNoActions,
+        noVotes,
+        NO_INDEX
+      );
+
+      return bulkDecodeCallsFromOptions(
+        [populatedYesOption, populatedNoOption],
+        contracts,
+        chain?.id
+      );
+    };
+
+    decodeOptions().then(options => setOptions(options));
 
     decodeOptions().then(options => {
-      if (!cancelled) {
-        // Return options putting default against-call last
-        setOptions([...options.slice(1), options[0]]);
-      }
+      if (!cancelled) setOptions(options);
     });
 
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     daoId,
     proposal?.id,
+    proposal?.totalVotes,
     contracts,
     chain,
     calls,
     theme,
     metadata,
     t,
-    // TODO: check for re-renders
-    // votingResults?.totalLocked,
-    // votingResults?.options,
   ]);
 
   return {

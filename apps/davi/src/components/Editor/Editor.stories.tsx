@@ -23,11 +23,11 @@ function DemoEditor() {
     345600000
   );
 
-  const { Editor, EditorConfig } = useTextEditor(
-    'Enter text here',
+  const { Editor, EditorConfig } = useTextEditor({
+    placeholder: 'Enter text here',
     onHTMLChange,
-    html
-  );
+    html,
+  });
   return <Editor EditorConfig={EditorConfig} />;
 }
 

@@ -9,7 +9,11 @@ describe('Editor', () => {
 
     const { result } = renderHook(() => {
       const [html, onHTMLChange] = useState<string>('');
-      return useTextEditor('Enter proposal body', onHTMLChange, html);
+      return useTextEditor({
+        placeholder: 'Enter proposal body',
+        onHTMLChange,
+        html,
+      });
     });
     const { Editor, EditorConfig } = result.current;
     const { container } = render(<Editor EditorConfig={EditorConfig} />, {

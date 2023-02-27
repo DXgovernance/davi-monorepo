@@ -75,7 +75,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   const seedJson = json.fromString(membersSeed);
   const seedJsonObj = seedJson.toObject();
   const guildSeedData = seedJsonObj.get(guildAddress.toHexString())
-  if (guildSeedData != null) {
+  if (guildSeedData !== null) {
     const members = guildSeedData.toArray();
 
     for (let i = 0; i <members.length; i++) {

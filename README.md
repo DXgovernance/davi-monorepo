@@ -21,8 +21,9 @@ To run project locally you need to compile contracts, run hardhat node from dev-
 
 1. Run hardhat node locally: `pnpm run dev-scripts:dev`
 2. Start docker containers: `pnpm run graph-node:dev` (Will require hardhat to be running and docker to be installed and open)
-3. Create and deploy local subgraphs (1.5 & guilds): `pnpm run subgraph:dev` (graph-node container should be running. Verify before execute start-local).
-4. After both subgraphs are deployed locally, build DAVI graph-client & run dApp with: `pnpm run davi:dev`. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
+3. Point `deployedHashedBytecodesJSON` to local in `./apps/guilds-subgraph/src/mappings/Create2Deployer/mapping.ts#L13` (const deployedHashedBytecodesJSON = local)
+4. Create and deploy local subgraphs (1.5 & guilds): `pnpm run subgraph:dev` (graph-node container should be running. Verify before execute start-local).
+5. After both subgraphs are deployed locally, build DAVI graph-client & run dApp with: `pnpm run davi:dev`. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
 
 ### If you're on Linux:
 

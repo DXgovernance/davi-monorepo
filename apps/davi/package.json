@@ -22,7 +22,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-graph-client": "graphclient build && rm -rf src/.graphclient && mv .graphclient src",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "clean": "rm -rf src/.graphclient"
   },
   "engines": {
     "node": "^16.13.0"

@@ -43,6 +43,7 @@
       "dependsOn": ["^setup", "^dxdao-contracts#compile"]
     },
     "pre-commit": {},
-    "format-check": {}
+    "format-check": {},
+    "format": {}
   }
 }

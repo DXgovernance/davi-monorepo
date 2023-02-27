@@ -23,7 +23,7 @@
     "davi:build-graph-client": "cd apps/davi && pnpm run build-graph-client",
     "davi:test": "turbo run test --filter=davi",
     "davi:build": "turbo run build --filter=davi",
-    "test1": "turbo run test --filter=!dxdao-contracts",
+    "davi:format": "turbo run format --filter=davi",
     "test": "turbo run test --filter=\"./apps/**\"",
     "prepare": "husky install",
     "pre-commit": "turbo run pre-commit",

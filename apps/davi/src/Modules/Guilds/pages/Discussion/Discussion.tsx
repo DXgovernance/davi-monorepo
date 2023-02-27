@@ -8,12 +8,15 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { IOrbisPost } from 'types/types.orbis';
 import {
   ActionsGroup,
+  ButtonContainer,
   HeaderTopRow,
   PageContainer,
   PageContent,
   PageHeader,
   PageTitle,
   PostDetailsRow,
+  PostEditedBadge,
+  TitleContainer,
 } from './Discussion.styled';
 import { useTranslation } from 'react-i18next';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
@@ -85,22 +88,42 @@ const DiscussionPage: React.FC = () => {
               </IconButton>
             </StyledLink>
 
-            <StyledLink
-              to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
-            >
-              <Button
-                variant="primaryWithBorder"
-                data-testid="create-proposal-button"
+            <ButtonContainer>
+              <StyledLink
+                to={`/${chainName}/${guildId}/discussion/${discussionId}/edit`}
               >
-                {t('createProposal.createProposal')}
-              </Button>
-            </StyledLink>
+                <Button
+                  variant="primaryWithBorder"
+                  data-testid="edit-proposal-button"
+                >
+                  {t('editDiscussion.editDiscussion')}
+                </Button>
+              </StyledLink>
+              <StyledLink
+                to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
+              >
+                <Button
+                  variant="primaryWithBorder"
+                  data-testid="create-proposal-button"
+                >
+                  {t('createProposal.createProposal')}
+                </Button>
+              </StyledLink>
+            </ButtonContainer>
           </HeaderTopRow>
-          <PageTitle data-testid="discussion-page-title">
-            {op?.content?.title || (
-              <Loading loading text skeletonProps={{ width: '800px' }} />
+          <TitleContainer>
+            <PageTitle data-testid="discussion-page-title">
+              {op?.content?.title || (
+                <Loading loading text skeletonProps={{ width: '800px' }} />
+              )}
+            </PageTitle>
+
+            {op?.count_commits > 1 && (
+              <PostEditedBadge>
+                ({t('discussions.activity.postEdited')})
+              </PostEditedBadge>
             )}
-          </PageTitle>
+          </TitleContainer>
         </PageHeader>
         <PostDetailsRow>
           <AddressButton address={op?.creator_details.metadata?.address} />

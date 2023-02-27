@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { DiscussionMasterPost } from '../Discussion.styled';
 import {
-  // PostBody,
   PostCreatorAddressBadge,
   PostCreatorName,
   PostHeader,

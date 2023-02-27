@@ -14,8 +14,11 @@ import { Avatar } from 'components/Avatar';
 import moment from 'moment';
 import { getBadgeContent, getUsername } from 'utils/orbis';
 import { useFilter } from 'contexts/Guilds';
+import { ZERO_ADDRESS } from 'utils';
+import { useTranslation } from 'react-i18next';
 
 const Proposal = ({ post, onDeletion }) => {
+  const { t } = useTranslation();
   const discussionMasterPost = useRef<HTMLDivElement>(null);
 
   const proposalId = post.master;
@@ -51,10 +54,14 @@ const Proposal = ({ post, onDeletion }) => {
         </PostTime>
       </PostHeader>
       <PostWrapper>
-        {proposal?.creator !== '0x0000000000000000000000000000000000000000' ? (
+        {proposal?.creator !== ZERO_ADDRESS ? (
           <ProposalCardWrapper key={proposalId} proposalId={proposalId} />
         ) : (
-          <h3>{`Sorry, this proposal sees to be on another chain, try switching to ${post?.content?.data?.chain?.name} to view it`}</h3>
+          <h3>
+            {t('discussions.proposalOnOtherChain', {
+              chain: post?.content?.data?.chain?.name,
+            })}
+          </h3>
         )}
       </PostWrapper>
     </DiscussionMasterPost>

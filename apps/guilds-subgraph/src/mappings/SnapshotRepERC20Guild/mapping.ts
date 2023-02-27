@@ -16,16 +16,12 @@ import {
   Action,
   ProposalStateLog,
   Token,
+  Member,
 } from '../../types/schema';
 import { ERC20SnapshotRep as ERC20SnapshotRepTemplate } from '../../types/templates';
 
-import {
-  log,
-  json,
-  JSONValueKind,
-  ipfs,
-  BigInt,
-} from '@graphprotocol/graph-ts';
+import { json, JSONValueKind, ipfs, BigInt, Address, log } from '@graphprotocol/graph-ts';
+import {membersSeed} from './seedState';
 
 // Handler to upgradable initializer event.
 export function handleGuildInitialized(event: GuildInitialized): void {
@@ -74,6 +70,30 @@ export function handleGuildInitialized(event: GuildInitialized): void {
     contract.getMinimumTokensLockedForProposalCreation();
   guild.token = token.id;
 
+  const guildMembers: string[] = [];
+
+  const seedJson = json.fromString(membersSeed);
+  const seedJsonObj = seedJson.toObject();
+  const guildSeedData = seedJsonObj.get(guildAddress.toHexString())
+  if (guildSeedData != null) {
+    const members = guildSeedData.toArray();
+
+    for (let i = 0; i <members.length; i++) {
+      let memberAddress = members[i].toString();
+      let memberId = `${guildAddress.toHexString()}-${memberAddress}`;
+      
+      let member = Member.load(memberId);
+      if (!member) {
+        member = new Member(memberId);
+        member.address = memberAddress;
+        member.tokensLocked = contract.votingPowerOf(Address.fromString(memberAddress));
+        member.save();
+      }
+      guildMembers.push(memberId);
+    }
+  }
+
+  guild.members = guildMembers;
   guild.save();
 }
 

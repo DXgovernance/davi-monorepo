@@ -1,4 +1,4 @@
-import { json, log } from '@graphprotocol/graph-ts';
+import { json } from '@graphprotocol/graph-ts';
 import { Deployed } from '../../types/Create2Deployer/Create2Deployer';
 import { prod } from './prod';
 import { local } from './local';
@@ -8,11 +8,7 @@ import {
   SnapshotERC20Guild as SnapshotERC20GuildTemplate,
   ERC20SnapshotRep as ERC20SnapshotRepTemplate,
 } from '../../types/templates';
-import { Guild, Token } from '../../types/schema';
-import { ERC20 } from '../../types/GuildRegistry/ERC20';
-
-const bytecodeHashForRepToken =
-  '0x6983ad0806d33dc274aff571cced86d383671ad93924d2384ec9d56f77584a37';
+import { Guild } from '../../types/schema';
 
 // TODO: pull correct bytecodes at build time
 const deployedHashedBytecodesJSON = prod;
@@ -40,7 +36,6 @@ export function handleDeployedEvent(event: Deployed): void {
   const type = getImplementationType(event.params.bytecodeHash.toHexString());
   // If no type found, contract deployed was not a guild and will not be trated here.
   if (!!type) {
-
     const guildAddress = contractAddress;
     // Create Guild instance
     let guild = Guild.load(guildAddress.toHexString());

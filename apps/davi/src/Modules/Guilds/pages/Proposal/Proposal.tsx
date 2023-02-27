@@ -72,7 +72,6 @@ const ProposalPage: React.FC = () => {
   const { data: metadata, error: metadataError } = useProposalMetadata(
     proposal?.contentHash
   );
-  console.log({ metadata });
 
   const { data: totalLocked } = useTotalLocked(guildId, proposalId);
 

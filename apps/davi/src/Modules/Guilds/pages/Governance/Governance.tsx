@@ -83,7 +83,7 @@ const Governance = ({ guildId }) => {
       onToggleState(ProposalState.Executable);
   }, [onToggleState]);
 
-  const revertedProposals = useMemo(() => {
+  const reversedProposals = useMemo(() => {
     if (!proposalIds) return null;
     // clone array as the original proposalIds array from Ethers is immutable
     const clone = [...proposalIds];
@@ -157,7 +157,7 @@ const Governance = ({ guildId }) => {
         )}
         {proposalIds ? (
           <>
-            {revertedProposals.map(proposal => (
+            {reversedProposals.map(proposal => (
               <ProposalCardWrapper key={proposal} proposalId={proposal} />
             ))}
           </>

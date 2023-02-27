@@ -56,11 +56,11 @@ exports[`GenericCallParamsMatcher Should match snapshot for all component types 
 
 .c4 {
   color: #A1A6B0;
-  margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -76,7 +76,6 @@ exports[`GenericCallParamsMatcher Should match snapshot for all component types 
 }
 
 .c6 {
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 }
 
@@ -258,11 +257,11 @@ exports[`GenericCallParamsMatcher replaces all component types correctly 1`] = `
 
 .c4 {
   color: #A1A6B0;
-  margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -278,7 +277,6 @@ exports[`GenericCallParamsMatcher replaces all component types correctly 1`] = `
 }
 
 .c6 {
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 }
 

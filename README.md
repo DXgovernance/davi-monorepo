@@ -10,10 +10,10 @@
 ## How to setup
 
 1. Create a fork of this repo.
-2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`
+2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`. If you clone this repo without `--recurse-submodules` be sure to go to `packages/dxdao-contracts` and clone necesary branch pointed in `./.gitmodules` file.
 3. Install dependencies `pnpm i`
-4. Make an `.env` file in the `./packages/dev-scripts`folder (see `.env.example`) and write a seed phrase and deploy salt for hardhat.
-5. Make an `.env` file in the `./apps/davi`folder (see `.env.example`).
+4. Make an `.env` file in the `./packages/dev-scripts` folder (see `.env.example`) and write a seed phrase and deploy salt for hardhat.
+5. Make an `.env` file in the `./apps/davi` folder (see `.env.example`).
 
 ## Development
 
@@ -92,3 +92,27 @@ If you see `permission denied: ./packages/graph-node/scripts/dev.sh` you might n
 ```
 chmod +x ./packages/graph-node/scripts/dev.sh
 ```
+
+# DAVI Monorepo QA tests
+
+## Prerequisites
+
+1. Navigate to `apps/davi`
+2. Run `pnpm i`
+3. Make an `.env` file in the `davi` folder (see `.env.qa.example`) - file contains all parameters for `localhost` and `metamask` setups
+
+### How to run test
+
+To run Smoke test in terminal run:
+
+`pnpm test:[testName]`
+
+All available `[testName]` can be found in:
+
+`apps > davi > cypress > config`
+
+Currently there are:
+
+1. `smokeLocal` - starts localhost:3000 and runs Smoke test on local
+2. `smokeQa` - runs Smoke test on QA ENV
+3. `smokeProd` - runs Smoke test on PROD ENV

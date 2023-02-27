@@ -21,7 +21,8 @@ export const subgraphClientsUris: {
     'Governance1.5': '',
   },
   [SUPPORTED_DAVI_NETWORKS.GNOSIS_ID]: {
-    Guilds: '',
+    Guilds:
+      'https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis',
     'Governance1.5': '',
   },
   // testnets

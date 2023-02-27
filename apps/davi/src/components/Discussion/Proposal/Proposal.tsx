@@ -33,7 +33,7 @@ const Proposal = ({ post, onDeletion }) => {
     onResetState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log({ post });
+
   return (
     <DiscussionMasterPost ref={discussionMasterPost}>
       <PostHeader>

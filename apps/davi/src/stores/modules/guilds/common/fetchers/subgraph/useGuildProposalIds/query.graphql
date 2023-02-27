@@ -1,6 +1,6 @@
 query getGuildProposalIds($id: ID!) {
   guild(id: $id) {
-    proposals(orderBy: startTime, orderDirection: desc) {
+    proposals(orderBy: startTime, orderDirection: asc) {
       id
     }
   }

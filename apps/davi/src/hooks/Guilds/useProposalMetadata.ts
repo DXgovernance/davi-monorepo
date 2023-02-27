@@ -32,6 +32,7 @@ function useProposalMetadata(contentHash: string) {
       data: {
         description: orbisData.data?.content?.body,
         voteOptions: orbisData.data?.content?.data.voteOptions,
+        discussionRef: orbisData.data?.content?.data?.discussionRef,
         link: {
           master: orbisData.data?.master,
           context: orbisData.data?.context,

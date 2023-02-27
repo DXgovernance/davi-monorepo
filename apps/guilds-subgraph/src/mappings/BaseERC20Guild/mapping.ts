@@ -293,9 +293,8 @@ export function handleTokenWithdrawal(event: TokensWithdrawn): void {
     guild.members = guildMembersClone;
 
     guild.save();
+    member!.unset(memberId);
   }
-
-  member!.unset(memberId);
 }
 
 function isIPFS(contentHash: string): boolean {

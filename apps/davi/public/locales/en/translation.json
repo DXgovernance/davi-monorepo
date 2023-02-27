@@ -331,6 +331,10 @@
     "retry": "Retry",
     "createAnyway": "Create anyway"
   },
+  "editDiscussion": {
+    "editDiscussion": "Edit Discussion",
+    "savingChanges": "Saving Changes"
+  },
   "discussions": {
     "allDiscussions": "All discussions",
     "discussions_zero": "No Discussions",
@@ -339,6 +343,7 @@
     "thereAreNoDiscussions": "There are no discussions",
     "noMoreDiscussions": "There are no more discussions",
     "createDiscussion": "Create Discussion",
+    "updateDiscussion": "Update Discussion",
     "createDiscussionWordy": "Create a new discussion",
     "discussionPlaceholder": "Write discussion content",
     "title": "Title",

@@ -33,7 +33,7 @@ const Proposal = ({ post, onDeletion }) => {
     onResetState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log({ post });
   return (
     <DiscussionMasterPost ref={discussionMasterPost}>
       <PostHeader>
@@ -54,7 +54,7 @@ const Proposal = ({ post, onDeletion }) => {
         {proposal?.creator !== '0x0000000000000000000000000000000000000000' ? (
           <ProposalCardWrapper key={proposalId} proposalId={proposalId} />
         ) : (
-          <h3>{`Sorry, this proposal sees to be on another chain, try switching to ${post?.data?.chain} to view it`}</h3>
+          <h3>{`Sorry, this proposal sees to be on another chain, try switching to ${post?.content?.data?.chain?.name} to view it`}</h3>
         )}
       </PostWrapper>
     </DiscussionMasterPost>

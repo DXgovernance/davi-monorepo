@@ -10,6 +10,7 @@ import { Result, ResultState } from 'components/Result';
 import React, { useContext, useMemo } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FiArrowLeft } from 'react-icons/fi';
+import { AiFillHome } from 'react-icons/ai';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
 import { useProposalState } from 'hooks/Guilds/useProposalState';
@@ -71,6 +72,7 @@ const ProposalPage: React.FC = () => {
   const { data: metadata, error: metadataError } = useProposalMetadata(
     proposal?.contentHash
   );
+  console.log({ metadata });
 
   const { data: totalLocked } = useTotalLocked(guildId, proposalId);
 
@@ -137,16 +139,35 @@ const ProposalPage: React.FC = () => {
                 customStyles={linkStyles}
               >
                 <IconButton
-                  data-testid="proposal-back-btn"
+                  data-testid="proposal-home-btn"
                   variant="secondary"
                   iconLeft
                   padding={'0.6rem 0.8rem'}
                   marginTop={'5px;'}
                 >
-                  <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                  <AiFillHome style={{ marginRight: '15px' }} />{' '}
                   {guildConfig?.name}
                 </IconButton>
               </StyledLink>
+              {metadata?.discussionRef ? (
+                <StyledLink
+                  to={`/${chainName}/${guildId}/discussion/${metadata?.discussionRef}`}
+                  customStyles={linkStyles}
+                >
+                  <IconButton
+                    data-testid="proposal-back-btn"
+                    variant="secondary"
+                    iconLeft
+                    padding={'0.6rem 0.8rem'}
+                    marginTop={'5px;'}
+                  >
+                    <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                    {t('proposal.backToDiscussion')}
+                  </IconButton>
+                </StyledLink>
+              ) : (
+                <></>
+              )}
 
               <ProposalStatus
                 status={status}

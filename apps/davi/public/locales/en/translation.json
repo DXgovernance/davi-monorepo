@@ -230,6 +230,7 @@
     "proposalDuration": "Proposal Duration",
     "quorum": "Quorum",
     "backToOverview": "Back to Overview",
+    "backToDiscussion": "Back to Discussion",
     "seeAllProposals": "See all proposals",
     "createdBy": "Created by",
     "proposalInfoCard": {

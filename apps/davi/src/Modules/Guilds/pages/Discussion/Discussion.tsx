@@ -4,7 +4,7 @@ import { ProposalDescription } from 'components/ProposalDescription';
 import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { Loading } from 'components/primitives/Loading';
-import { FaChevronLeft } from 'react-icons/fa';
+import { AiFillHome } from 'react-icons/ai';
 import { IOrbisPost } from 'types/types.orbis';
 import {
   ActionsGroup,
@@ -80,7 +80,7 @@ const DiscussionPage: React.FC = () => {
                 padding={'0.6rem 0.8rem'}
                 marginTop={'5px;'}
               >
-                <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                <AiFillHome style={{ marginRight: '15px' }} />{' '}
                 {guildConfig?.name}
               </IconButton>
             </StyledLink>

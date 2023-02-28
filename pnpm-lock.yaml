@@ -122,8 +122,8 @@ importers:
       ethers: ^5.7.2
       git-revision-webpack-plugin: ^3.0.6
       graphql: ^16.6.0
-      hardhat: ^2.9.1
-      hardhat-dependency-compiler: ^1.1.2
+      hardhat: ^2.12.7
+      hardhat-dependency-compiler: ^1.1.3
       hardhat-ethernal: ^1.0.0
       highlight.js: ^11.6.0
       i18next: ^21.6.16
@@ -201,9 +201,9 @@ importers:
       '@graphql-mesh/runtime': 0.46.5_graphql@16.6.0
       '@graphql-mesh/store': 0.9.5_graphql@16.6.0
       '@graphql-mesh/utils': 0.43.5_graphql@16.6.0
-      '@nomiclabs/hardhat-ethers': 2.2.1_gsql6crh4t5imixi2nhgp37drm
-      '@nomiclabs/hardhat-truffle5': 2.0.7_uoc6ciyj3xhodavqe55pqj6luu
-      '@nomiclabs/hardhat-web3': 2.0.0_hardhat@2.12.3+web3@1.8.1
+      '@nomiclabs/hardhat-ethers': 2.2.1_4tzilew2vuitdwerzusliplz24
+      '@nomiclabs/hardhat-truffle5': 2.0.7_ylfkboqmyk6ivwczfrdul454fu
+      '@nomiclabs/hardhat-web3': 2.0.0_hardhat@2.12.7+web3@1.8.1
       '@orbisclub/orbis-sdk': 0.3.99
       '@pnpm/merge-lockfile-changes': 4.0.3
       '@tanstack/react-query': 4.20.9_biqbaboplfbrettd7655fr4n2y
@@ -236,8 +236,8 @@ importers:
       ethers: 5.7.2
       git-revision-webpack-plugin: 3.0.6
       graphql: 16.6.0
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
-      hardhat-dependency-compiler: 1.1.3_hardhat@2.12.3
+      hardhat: 2.12.7_z6wznmtyb6ovnulj6iujpct7um
+      hardhat-dependency-compiler: 1.1.3_hardhat@2.12.7
       highlight.js: 11.6.0
       i18next: 21.10.0
       i18next-browser-languagedetector: 7.0.1
@@ -320,7 +320,7 @@ importers:
       cypress-react-selector: 2.3.20
       cypress-wait-until: 1.7.2
       eslint: 8.30.0
-      hardhat-ethernal: 1.1.1_3mpss4owsstbijogechjg2qcye
+      hardhat-ethernal: 1.1.1_qzf4oyn54gqjdmbv7adrb6huai
       jest-styled-components: 7.1.1_styled-components@5.3.6
       lint-staged: 12.5.0
       node-polyfill-webpack-plugin: 2.0.1_webpack@4.44.2
@@ -8227,14 +8227,14 @@ packages:
       hardhat: 2.12.2
     dev: true
 
-  /@nomiclabs/hardhat-ethers/2.2.1_gsql6crh4t5imixi2nhgp37drm:
+  /@nomiclabs/hardhat-ethers/2.2.1_4tzilew2vuitdwerzusliplz24:
     resolution: {integrity: sha512-RHWYwnxryWR8hzRmU4Jm/q4gzvXpetUOJ4OPlwH2YARcDB+j79+yAYCwO0lN1SUOb4++oOTJEe6AWLEc42LIvg==}
     peerDependencies:
       ethers: ^5.0.0
       hardhat: ^2.0.0
     dependencies:
       ethers: 5.7.2
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.7_z6wznmtyb6ovnulj6iujpct7um
 
   /@nomiclabs/hardhat-ethers/2.2.1_hardhat@2.12.3:
     resolution: {integrity: sha512-RHWYwnxryWR8hzRmU4Jm/q4gzvXpetUOJ4OPlwH2YARcDB+j79+yAYCwO0lN1SUOb4++oOTJEe6AWLEc42LIvg==}
@@ -8316,20 +8316,20 @@ packages:
       - web3-utils
     dev: true
 
-  /@nomiclabs/hardhat-truffle5/2.0.7_uoc6ciyj3xhodavqe55pqj6luu:
+  /@nomiclabs/hardhat-truffle5/2.0.7_ylfkboqmyk6ivwczfrdul454fu:
     resolution: {integrity: sha512-Pw8451IUZp1bTp0QqCHCYfCHs66sCnyxPcaorapu9mfOV9xnZsVaFdtutnhNEiXdiZwbed7LFKpRsde4BjFwig==}
     peerDependencies:
       '@nomiclabs/hardhat-web3': ^2.0.0
       hardhat: ^2.6.4
       web3: ^1.0.0-beta.36
     dependencies:
-      '@nomiclabs/hardhat-web3': 2.0.0_hardhat@2.12.3+web3@1.8.1
+      '@nomiclabs/hardhat-web3': 2.0.0_hardhat@2.12.7+web3@1.8.1
       '@nomiclabs/truffle-contract': 4.5.10_web3@1.8.1
       '@types/chai': 4.3.4
       chai: 4.3.7
       ethereumjs-util: 7.1.5
       fs-extra: 7.0.1
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.7_z6wznmtyb6ovnulj6iujpct7um
       web3: 1.8.1
     transitivePeerDependencies:
       - bufferutil
@@ -8363,14 +8363,14 @@ packages:
       hardhat: 2.12.3_mwhvu7sfp6vq5ryuwb6hlbjfka
     dev: true
 
-  /@nomiclabs/hardhat-web3/2.0.0_hardhat@2.12.3+web3@1.8.1:
+  /@nomiclabs/hardhat-web3/2.0.0_hardhat@2.12.7+web3@1.8.1:
     resolution: {integrity: sha512-zt4xN+D+fKl3wW2YlTX3k9APR3XZgPkxJYf36AcliJn3oujnKEVRZaHu0PhgLjO+gR+F/kiYayo9fgd2L8970Q==}
     peerDependencies:
       hardhat: ^2.0.0
       web3: ^1.0.0-beta.36
     dependencies:
       '@types/bignumber.js': 5.0.0
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.7_z6wznmtyb6ovnulj6iujpct7um
       web3: 1.8.1
     dev: false
 
@@ -13388,7 +13388,7 @@ packages:
       form-data-encoder: 1.7.1
       formdata-node: 4.4.1
       node-fetch: 2.6.8
-      undici: 5.12.0
+      undici: 5.19.1
       web-streams-polyfill: 3.2.1
     transitivePeerDependencies:
       - encoding
@@ -13403,7 +13403,7 @@ packages:
       form-data-encoder: 1.7.1
       formdata-node: 4.4.1
       node-fetch: 2.6.8
-      undici: 5.12.0
+      undici: 5.19.1
       web-streams-polyfill: 3.2.1
     transitivePeerDependencies:
       - encoding
@@ -13418,7 +13418,7 @@ packages:
       form-data-encoder: 1.7.1
       formdata-node: 4.4.1
       node-fetch: 2.6.8
-      undici: 5.12.0
+      undici: 5.19.1
       urlpattern-polyfill: 6.0.2
       web-streams-polyfill: 3.2.1
     transitivePeerDependencies:
@@ -14601,7 +14601,7 @@ packages:
   /axios/0.21.4_debug@4.3.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
     transitivePeerDependencies:
       - debug
     dev: true
@@ -14609,7 +14609,7 @@ packages:
   /axios/0.26.1:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
     transitivePeerDependencies:
       - debug
     dev: true
@@ -14617,7 +14617,7 @@ packages:
   /axios/0.27.2_debug@4.3.4:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
@@ -14627,7 +14627,7 @@ packages:
   /axios/1.1.3:
     resolution: {integrity: sha512-00tXVRwKx/FZr/IDVFt4C+f9FYairX517WoGCL6dpOntqLkZofjhu43F/Xl44UOpqa+9sLFDrG/XAnFsUYgkDA==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -19276,9 +19276,9 @@ packages:
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
     dependencies:
       debug: 4.3.4
-      native-fetch: 4.0.2_undici@5.12.0
+      native-fetch: 4.0.2_undici@5.19.1
       receptacle: 1.3.2
-      undici: 5.12.0
+      undici: 5.19.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -22469,6 +22469,7 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
 
   /follow-redirects/1.15.2_debug@4.1.1:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
@@ -22493,6 +22494,17 @@ packages:
     dependencies:
       debug: 4.3.2
     dev: true
+
+  /follow-redirects/1.15.2_debug@4.3.4:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.4
 
   /follow-redirects/1.5.10:
     resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
@@ -23581,7 +23593,17 @@ packages:
     peerDependencies:
       hardhat: ^2.0.0
     dependencies:
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.3_mwhvu7sfp6vq5ryuwb6hlbjfka
+    dev: true
+
+  /hardhat-dependency-compiler/1.1.3_hardhat@2.12.7:
+    resolution: {integrity: sha512-bCDqsOxGST6WkbMvj4lPchYWidNSSBm5CFnkyAex1T11cGmr9otZTGl81W6f9pmrtBXbKCvr3OSuNJ6Q394sAw==}
+    engines: {node: '>=14.14.0'}
+    peerDependencies:
+      hardhat: ^2.0.0
+    dependencies:
+      hardhat: 2.12.7_z6wznmtyb6ovnulj6iujpct7um
+    dev: false
 
   /hardhat-deploy/0.11.20:
     resolution: {integrity: sha512-6G2aFLW0mfZxY0ljDf8rxzEJkVh57gr3Eia5H2DeBIQNJh0dhBV2Y5LDq4E4J9K4Crq0DjpxGNTshEtAB9eWxA==}
@@ -23612,9 +23634,23 @@ packages:
       hardhat: ^2.9.1
     dependencies:
       '@firebase/firestore-types': 2.2.0
-      '@nomiclabs/hardhat-ethers': 2.2.1_gsql6crh4t5imixi2nhgp37drm
+      '@nomiclabs/hardhat-ethers': 2.2.1_hardhat@2.12.3
       firebase: 8.2.6
-      hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
+      hardhat: 2.12.3_mwhvu7sfp6vq5ryuwb6hlbjfka
+    transitivePeerDependencies:
+      - '@firebase/app-types'
+    dev: true
+
+  /hardhat-ethernal/1.1.1_qzf4oyn54gqjdmbv7adrb6huai:
+    resolution: {integrity: sha512-I7drNE1t7+vknZzmF9jfw762XPM6SurlKBABlYbJupYgZOVjwcVBsm9qvE3+jIrS2L6T1z2hXzhU67KEF1XOCA==}
+    peerDependencies:
+      '@nomiclabs/hardhat-ethers': npm:hardhat-deploy-ethers@^0.3.0-beta.10
+      hardhat: ^2.9.1
+    dependencies:
+      '@firebase/firestore-types': 2.2.0
+      '@nomiclabs/hardhat-ethers': 2.2.1_4tzilew2vuitdwerzusliplz24
+      firebase: 8.2.6
+      hardhat: 2.12.7_z6wznmtyb6ovnulj6iujpct7um
     transitivePeerDependencies:
       - '@firebase/app-types'
     dev: true
@@ -23771,8 +23807,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /hardhat/2.12.3_z6wznmtyb6ovnulj6iujpct7um:
-    resolution: {integrity: sha512-qxOvRNgQnLqRFssn5f8VP5KN3caytShU0HNeKxmPVK1Ix/0xDVhIC7JOLxG69DjOihUfmxmjqspsHbZvFj6EhQ==}
+  /hardhat/2.12.7_z6wznmtyb6ovnulj6iujpct7um:
+    resolution: {integrity: sha512-voWoN6zn5d8BOEaczSyK/1PyfdeOeI3SbGCFb36yCHTJUt6OIqLb+ZDX30VhA1UsYKzLqG7UnWl3fKJUuANc6A==}
     engines: {node: ^14.0.0 || ^16.0.0 || ^18.0.0}
     hasBin: true
     peerDependencies:
@@ -23833,7 +23869,7 @@ packages:
       ts-node: 10.9.1_rniibfx3zftzehea7t244vwgdu
       tsort: 0.0.1
       typescript: 4.9.4
-      undici: 5.12.0
+      undici: 5.19.1
       uuid: 8.3.2
       ws: 7.5.9
     transitivePeerDependencies:
@@ -24320,7 +24356,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -27107,7 +27143,7 @@ packages:
       iso-url: 1.2.1
       it-stream-types: 1.0.5
       uint8arrays: 4.0.3
-      ws: 8.11.0
+      ws: 8.12.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -30737,12 +30773,12 @@ packages:
       node-fetch: 2.6.8
     dev: false
 
-  /native-fetch/4.0.2_undici@5.12.0:
+  /native-fetch/4.0.2_undici@5.19.1:
     resolution: {integrity: sha512-4QcVlKFtv2EYVS5MBgsGX5+NWKtbDbIECdUXDBGDMAZXq3Jkv9zf+y8iS7Ub8fEdga3GpYeazp9gauNqXHJOCg==}
     peerDependencies:
       undici: '*'
     dependencies:
-      undici: 5.12.0
+      undici: 5.19.1
     dev: false
 
   /natural-compare-lite/1.4.0:
@@ -36407,7 +36443,7 @@ packages:
     dependencies:
       command-exists: 1.2.9
       commander: 3.0.2
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
       fs-extra: 0.30.0
       js-sha3: 0.8.0
       memorystream: 0.3.1
@@ -38787,6 +38823,12 @@ packages:
 
   /undici/5.12.0:
     resolution: {integrity: sha512-zMLamCG62PGjd9HHMpo05bSLvvwWOZgGeiWlN/vlqu3+lRo3elxktVGEyLMX+IO7c2eflLjcW74AlkhEZm15mg==}
+    engines: {node: '>=12.18'}
+    dependencies:
+      busboy: 1.6.0
+
+  /undici/5.19.1:
+    resolution: {integrity: sha512-YiZ61LPIgY73E7syxCDxxa3LV2yl3sN8spnIuTct60boiiRaE1J8mNWHO8Im2Zi/sFrPusjLlmRPrsyraSqX6A==}
     engines: {node: '>=12.18'}
     dependencies:
       busboy: 1.6.0
@@ -41461,6 +41503,7 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dev: true
 
   /ws/8.12.0:
     resolution: {integrity: sha512-kU62emKIdKVeEIOIKVegvqpXMSTAMLJozpHZaJNDYqBjzlSYXQGviYwN1osDLJ9av68qHd4a2oSjd7yD4pacig==}

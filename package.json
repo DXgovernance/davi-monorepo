@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "clean": "turbo run clean",
-    "compile": "turbo run compile",
-    "dev-scripts:dev": "turbo run dev --filter=\"dev-scripts\"",
+    "compile": "turbo run compile --filter=!./packages/dxdao-contracts",
+    "dev-scripts:dev": "turbo run dev --filter=\"dev-scripts\" --filter=!./packages/dxdao-contracts",
     "graph-node:dev": "cd packages/graph-node && pnpm run dev",
     "graph-node:clean": "cd packages/graph-node && pnpm run clean",
     "subgraph:dev": "turbo run dev --filter=\"*-subgraph\" --filter=!./packages/*",

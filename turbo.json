@@ -5,21 +5,12 @@
       "dependsOn": ["^clean"]
     },
     "compile": {
-      "dependsOn": ["^compile", "clean"]
+      "dependsOn": ["clean"]
     },
     "setup": {
       "dependsOn": ["^setup", "compile"]
     },
-    "dxdao-contracts#compile": {
-      "dependsOn": ["clean"],
-      "outputs": ["artifacts/**"]
-    },
-    "dxdao-contracts#setup": {
-      "dependsOn": ["dxdao-contracts#compile"],
-      "outputs": ["types/**"]
-    },
     "dev-scripts#compile": {
-      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"],
       "cache": false
     },
     "dev-scripts#dev": {

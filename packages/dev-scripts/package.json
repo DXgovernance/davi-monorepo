@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf artifacts cache contracts deployments deploy build typechain-types",
+    "clean": "rm -rf artifacts cache contracts deployments deploy build typechain-types hardhat.config.js deploy scripts test types .contracts.json",
     "copy-contracts": "cp -r node_modules/dxdao-contracts/contracts ./",
-    "compile": "pnpm run copy-contracts && hardhat compile",
+    "copy-config": "cp -r node_modules/dxdao-contracts/hardhat.config.js ./",
+    "copy-deploy": "cp -r node_modules/dxdao-contracts/deploy ./",
+    "copy-scripts": "cp -r node_modules/dxdao-contracts/scripts ./",
+    "copy-json-contracts": "cp -r node_modules/dxdao-contracts/.contracts.json ./",
+    "copy-tests": "cp -r node_modules/dxdao-contracts/test ./",
+    "compile": "pnpm run copy-contracts && pnpm run copy-config && pnpm run copy-deploy && pnpm run copy-scripts && pnpm run copy-json-contracts && pnpm run copy-tests && hardhat compile",
+    "setup": "hardhat typechain",
     "dev": "./src/dev.sh"
   },
   "keywords": [],
@@ -27,7 +33,8 @@
     "moment": "^2.29.4",
     "ts-node": "^10.9.1",
     "typechain": "7.0.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "ipfs-core": "^0.14.1"
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.4.0",

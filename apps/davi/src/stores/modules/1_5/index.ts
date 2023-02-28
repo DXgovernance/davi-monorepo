@@ -1,5 +1,6 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import { useGetAllPermissions } from './fetchers/subgraph/useGetAllPermissions';
 import { useGetMemberList } from './fetchers/subgraph/useGetMemberList';
 import { useGuildConfig } from './fetchers/subgraph/useGuildConfig';
 import { useMemberCount } from './fetchers/subgraph/useMemberCount';
@@ -32,7 +33,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildConfig,
           useGetVotes: null,
           useGetMemberList,
-          useGetAllPermissions: null,
+          useGetAllPermissions,
           useGetNumberOfActiveProposals: null,
           useGuildProposalIds: null,
         },

@@ -24,6 +24,9 @@
       "cache": false
     },
     "dev": {},
+    "davi#build-graph-client": {
+      "dependsOn": ["dxdao-contracts#compile"]
+    },
     "build": {
       "dependsOn": ["^setup"]
     },

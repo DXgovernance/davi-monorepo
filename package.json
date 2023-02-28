@@ -21,6 +21,7 @@
     "davi:dev": "cd apps/davi && pnpm run dev",
     "davi:dev-no-wait": "cd apps/davi && pnpm run dev --no-subgraph-wait --no-hardhat-wait",
     "davi:build-graph-client": "cd apps/davi && pnpm run build-graph-client",
+    "contracts:setup": "cd packages/dxdao-contracts && pnpm run setup",
     "davi:test": "turbo run test --filter=davi",
     "davi:build": "turbo run build --filter=davi",
     "davi:format": "turbo run format --filter=davi",

@@ -91,6 +91,16 @@ export const GuildSidebar: React.FC<GuildSidebarProps> = ({
             {t('discussions.allDiscussions')}
           </SidebarMenuItem>
         </StyledLink>
+        <StyledLink to={locations.members}>
+          <SidebarMenuItem current={pathname === locations.members}>
+            {t('members.members')}
+          </SidebarMenuItem>
+        </StyledLink>
+        <StyledLink to={locations.permissions}>
+          <SidebarMenuItem current={pathname === locations.permissions}>
+            {t('actionBuilder.permissions.permissions')}
+          </SidebarMenuItem>
+        </StyledLink>
         <StyledLink to={locations.treasury}>
           <SidebarMenuItem current={pathname === locations.treasury}>
             {t('treasury.treasury')}

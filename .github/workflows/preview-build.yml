@@ -41,7 +41,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build dapp
-        run: CI=false pnpm run davi:build
+        run: CI=false pnpm run davi:build-graph-client && pnpm run davi:dev
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2

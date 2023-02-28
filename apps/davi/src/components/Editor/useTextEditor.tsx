@@ -8,15 +8,21 @@ import { Editor } from './components/Editor';
 import useMarkdownToHTML from 'hooks/Guilds/conversions/useMarkdownToHTML';
 import useHTMLToMarkdown from 'hooks/Guilds/conversions/useHTMLToMarkdown';
 
-export const useTextEditor = (
-  placeholder: string,
-  onHTMLChange: any,
-  html: string,
-  initialContent?: string
-) => {
+interface useTextEditorProps {
+  placeholder: string;
+  onHTMLChange: (html: string) => void;
+  html: string;
+  initialContent?: string;
+}
+
+export const useTextEditor = ({
+  placeholder,
+  onHTMLChange,
+  html,
+  initialContent,
+}: useTextEditorProps) => {
   const initialHTML = useMarkdownToHTML(initialContent);
   const md = useHTMLToMarkdown(html);
-
   const clear = () => {
     EditorConfig.commands.clearContent();
     onHTMLChange('');
@@ -24,7 +30,7 @@ export const useTextEditor = (
 
   const EditorConfig = useEditor(
     {
-      content: html ? html : initialHTML,
+      content: initialHTML ? initialHTML : html,
       extensions: [
         StarterKit.configure({
           history: { depth: 10 },

@@ -72,6 +72,7 @@ const CreateProposalPage: React.FC = () => {
   const [editMode, setEditMode] = useState(true);
   const [isCreatingProposal, setIsCreatingProposal] = useState(false);
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [ignoreWarning, setIgnoreWarning] = useState(false);
   const [options, setOptions] = useState<Option[]>([
     {
@@ -86,7 +87,7 @@ const CreateProposalPage: React.FC = () => {
     useState(false);
 
   const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
-    `${guildId}/${discussionId ?? "create-proposal"}/html`,
+    `${guildId}/${discussionId ?? 'create-proposal'}/html`,
     null,
     345600000
   );
@@ -97,11 +98,12 @@ const CreateProposalPage: React.FC = () => {
     md: proposalBodyMd,
     html: proposalBodyHTML,
     clear,
-  } = useTextEditor(
-    t('createProposal.enterProposalDescription'),
+  } = useTextEditor({
+    placeholder: t('createProposal.enterProposalDescription'),
     onHTMLChange,
-    html
-  );
+    html,
+    initialContent: description,
+  });
 
   const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
     useState(false);
@@ -156,6 +158,17 @@ const CreateProposalPage: React.FC = () => {
     });
   }, [user, orbis]);
 
+  useEffect(() => {
+    const handleGetProposalContent = async () => {
+      if (discussionId) {
+        const { data } = await orbis.getPost(discussionId);
+        setTitle(data.content.title);
+        setDescription(data.content.body);
+      }
+    };
+    handleGetProposalContent();
+  }, [discussionId, orbis]);
+
   const checkIfWarningIgnored = useCallback(async () => {
     if (!ignoreWarning && isActionDenied) {
       setIsPermissionWarningModalOpen(true);
@@ -164,7 +177,7 @@ const CreateProposalPage: React.FC = () => {
     handleCreateProposal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ignoreWarning, isActionDenied]);
-  
+
   const handleCreateProposal = async () => {
     setIsCreatingProposal(true);
     const encodedOptions = bulkEncodeCallsFromOptions(options);
@@ -243,7 +256,6 @@ const CreateProposalPage: React.FC = () => {
   }, [title, proposalBodyHTML, proposalBodyMd]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
-
   return (
     <PageContainer>
       <PageContent>

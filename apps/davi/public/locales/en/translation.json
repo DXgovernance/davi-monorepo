@@ -347,6 +347,7 @@
     "createDiscussionWordy": "Create a new discussion",
     "discussionPlaceholder": "Write discussion content",
     "title": "Title",
+    "proposalOnOtherChain": "Sorry, this proposal seems to be on another chain, try switching to {{chain}} to view it",
     "postOptions": {
       "edit": "Edit",
       "delete": "Delete"

@@ -65,7 +65,5 @@ typings/
 
 # next.js build output
 .next
-
-
 /networks.json
 src/mappings/Create2Deployer/local.ts

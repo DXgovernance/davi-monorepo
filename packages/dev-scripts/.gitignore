@@ -10,4 +10,10 @@ cache
 artifacts
 contracts
 deployments
-build/
+build
+deploy
+scripts
+test
+types
+.contracts.json
+hardhat.config.base.js

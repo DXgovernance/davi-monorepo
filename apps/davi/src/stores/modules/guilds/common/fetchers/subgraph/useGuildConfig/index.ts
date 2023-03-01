@@ -5,6 +5,10 @@ import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
 import { SUPPORTED_DAVI_NETWORKS, ZERO_ADDRESS } from 'utils';
 import { apolloClient } from 'clients/apollo';
+import { FetcherHooksInterface } from 'stores/types';
+import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
+
+type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
 
 export type GuildConfigProps = {
   name: string;
@@ -25,7 +29,7 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-export const useGuildConfig = (guildAddress: string) => {
+export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
   const { chain } = useNetwork();
   const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
@@ -36,6 +40,13 @@ export const useGuildConfig = (guildAddress: string) => {
       variables: { id: guildAddress?.toLowerCase() },
     }
   );
+
+  const { data: votingPowerForProposalExecution } =
+    useVotingPowerForProposalExecution({
+      contractAddress: guildAddress,
+      proposalId,
+    });
+
   const transformedData: GuildConfigProps = useMemo(() => {
     if (!data?.guild) return undefined;
     const guild = data.guild;
@@ -46,6 +57,7 @@ export const useGuildConfig = (guildAddress: string) => {
       proposalTime,
       timeForExecution,
       maxActiveProposals,
+      votingPowerForProposalCreation,
       votingPowerPercentageForProposalCreation,
       votingPowerPercentageForProposalExecution,
       lockTime,
@@ -66,18 +78,22 @@ export const useGuildConfig = (guildAddress: string) => {
       maxActiveProposals: maxActiveProposals
         ? BigNumber.from(maxActiveProposals)
         : undefined,
-      votingPowerForProposalCreation: votingPowerPercentageForProposalCreation
-        ? BigNumber.from(votingPowerPercentageForProposalCreation)
+      votingPowerForProposalCreation: votingPowerForProposalCreation
+        ? BigNumber.from(votingPowerForProposalCreation)
         : undefined,
-      votingPowerForProposalExecution: votingPowerPercentageForProposalExecution
-        ? BigNumber.from(votingPowerPercentageForProposalExecution)
-        : undefined,
+      votingPowerForProposalExecution,
       tokenVault: ZERO_ADDRESS,
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
       maxGasPrice: maxGasPrice ? BigNumber?.from(maxGasPrice) : undefined,
-      votingPowerPercentageForProposalExecution: BigNumber.from(0),
-      votingPowerPercentageForProposalCreation: BigNumber.from(0),
+      votingPowerPercentageForProposalExecution:
+        votingPowerPercentageForProposalExecution
+          ? BigNumber?.from(votingPowerPercentageForProposalExecution)
+          : undefined,
+      votingPowerPercentageForProposalCreation:
+        votingPowerPercentageForProposalCreation
+          ? BigNumber?.from(votingPowerPercentageForProposalCreation)
+          : undefined,
       minimumMembersForProposalCreation: minimumMembersForProposalCreation
         ? BigNumber?.from(minimumMembersForProposalCreation)
         : undefined,
@@ -86,7 +102,7 @@ export const useGuildConfig = (guildAddress: string) => {
           ? BigNumber?.from(minimumTokensLockedForProposalCreation)
           : undefined,
     };
-  }, [data]);
+  }, [data, votingPowerForProposalExecution]);
 
   return {
     data: transformedData,

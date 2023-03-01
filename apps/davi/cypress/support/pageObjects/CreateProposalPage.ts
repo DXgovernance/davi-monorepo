@@ -2,9 +2,8 @@
 // Filename: CreateProposalPage.ts
 //
 
-import { clickAnywhereToClose } from '../../utils';
-
 class CreateProposalPage {
+    closeModal_Button() {return cy.findByTestId('close-modal')}
     public backToOverviewButton: string;
     public proposalTitleInput: string;
     public proposalDescriptionInput: string;
@@ -58,14 +57,18 @@ class CreateProposalPage {
         cy.findByTestId(this.addActionButton).should('be.visible').click();
         cy.findByTestId(this.modalTitle).should('be.visible').contains('Add Action');
         cy.findByTestId(this.actionList).should('be.visible');
-        clickAnywhereToClose();
+        this.closeModal()
     };
 
     checkAddOptionModal() {
         cy.findByTestId(this.addOptionButotn).should('be.visible').click();
         cy.findByTestId(this.modalTitle).should('be.visible').contains('Add Option');
-        clickAnywhereToClose();
+        this.closeModal()
     };
+
+    closeModal() {
+        this.closeModal_Button().click()
+    }
 
     returnToGuildPageFromCreateProposalPage() {
         cy.findByTestId(this.backToOverviewButton).should('be.visible').click();

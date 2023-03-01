@@ -1,15 +1,17 @@
 import { json } from '@graphprotocol/graph-ts';
 import { Deployed } from '../../types/Create2Deployer/Create2Deployer';
+import { prod } from './prod';
 import { local } from './local';
 import {
   BaseERC20Guild as BaseERC20GuildTemplate,
   SnapshotRepERC20Guild as SnapshotRepERC20GuildTemplate,
   SnapshotERC20Guild as SnapshotERC20GuildTemplate,
+  ERC20SnapshotRep as ERC20SnapshotRepTemplate,
 } from '../../types/templates';
 import { Guild } from '../../types/schema';
 
-// TODO: pull correct bytecodes at build time
-const deployedHashedBytecodesJSON = local;
+// TODO: Use env for this if possible
+const deployedHashedBytecodesJSON = prod;
 
 const parsedJson = json.fromString(deployedHashedBytecodesJSON);
 const deployedHashedBytecodes = parsedJson.toArray();

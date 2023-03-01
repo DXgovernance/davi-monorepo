@@ -6,16 +6,17 @@ import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { Loading } from 'components/primitives/Loading';
 import { Result, ResultState } from 'components/Result';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FiArrowLeft } from 'react-icons/fi';
+import { AiFillHome } from 'react-icons/ai';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { ActionsBuilder } from 'components/ActionsBuilder';
-import { useAccount } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import {
   HeaderTopRow,
@@ -28,7 +29,6 @@ import {
   SidebarContent,
 } from './Proposal.styled';
 import { useTranslation } from 'react-i18next';
-import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
 import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
@@ -37,6 +37,7 @@ import { useHookStoreProvider } from 'stores';
 import { ProposalVotesCard } from 'components/ProposalVotesCard';
 import { Flex } from 'components/primitives/Layout';
 import { IconButton } from 'components/primitives/Button';
+import { getBlockExplorerUrl } from 'provider';
 
 const ProposalPage: React.FC = () => {
   const {
@@ -54,10 +55,10 @@ const ProposalPage: React.FC = () => {
   const { t } = useTranslation();
   const { connector } = useAccount();
   const { chainName, guildId, proposalId } = useTypedParams();
+  const { chain } = useNetwork();
 
   const { data: proposal, error } = useProposal(guildId, proposalId);
   const { data: guildConfig } = useGuildConfig(guildId);
-  const { loaded } = useGuildImplementationTypeConfig(guildId);
   const { context } = useDiscussionContext(`${guildId}-${proposalId}`);
 
   const { data: metadata, error: metadataError } = useProposalMetadata(
@@ -73,13 +74,15 @@ const ProposalPage: React.FC = () => {
 
   const status = useProposalState(proposal);
   const endTime = useTimeDetail(guildId, status, proposal?.endTime);
+  const executionTxLink = useMemo(() => {
+    if (!proposal?.executionTransactionHash) return null;
+    return getBlockExplorerUrl(chain, proposal?.executionTransactionHash, 'tx');
+  }, [chain, proposal?.executionTransactionHash]);
 
   const executeProposal = useExecuteProposal(guildId);
   const handleExecuteProposal = () => executeProposal(proposalId);
 
-  if (!loaded) return <></>;
-
-  if (!proposal) {
+  if (!proposalId || !proposal) {
     return (
       <Result
         state={ResultState.ERROR}
@@ -100,9 +103,7 @@ const ProposalPage: React.FC = () => {
         }
       />
     );
-  }
-
-  if (error) {
+  } else if (error) {
     return (
       <Result
         state={ResultState.ERROR}
@@ -122,18 +123,41 @@ const ProposalPage: React.FC = () => {
               customStyles={linkStyles}
             >
               <IconButton
-                data-testid="proposal-back-btn"
+                data-testid="proposal-home-btn"
                 variant="secondary"
                 iconLeft
                 padding={'0.6rem 0.8rem'}
                 marginTop={'5px;'}
               >
-                <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                <AiFillHome style={{ marginRight: '15px' }} />{' '}
                 {guildConfig?.name}
               </IconButton>
             </StyledLink>
+            {metadata?.discussionRef ? (
+              <StyledLink
+                to={`/${chainName}/${guildId}/discussion/${metadata?.discussionRef}`}
+                customStyles={linkStyles}
+              >
+                <IconButton
+                  data-testid="proposal-back-btn"
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                >
+                  <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                  {t('proposal.backToDiscussion')}
+                </IconButton>
+              </StyledLink>
+            ) : (
+              <></>
+            )}
 
-            <ProposalStatus status={status} endTime={endTime} />
+            <ProposalStatus
+              status={status}
+              endTime={endTime}
+              executeTxLink={executionTxLink}
+            />
             {status === ProposalState.Executable && !isReadOnly(connector) && (
               <ExecuteButton executeProposal={handleExecuteProposal} />
             )}

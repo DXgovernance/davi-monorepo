@@ -5,7 +5,7 @@ fs.writeFileSync(
   path.resolve(__dirname, '../networks.json'),
   JSON.stringify(
     {
-      private: {
+      gnosis: {
         PermissionRegistry: {
           address: '0x89df00AD80781349BE54232A06353b47B0EA3069',
           startBlock: 1,

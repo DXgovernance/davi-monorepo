@@ -48,11 +48,11 @@ exports[`UndecodableCallDetails Should match snapshot 1`] = `
 
 .c7 {
   color: #A1A6B0;
-  margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -68,7 +68,6 @@ exports[`UndecodableCallDetails Should match snapshot 1`] = `
 }
 
 .c8 {
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 }
 
@@ -270,11 +269,11 @@ exports[`UndecodableCallDetails Should match snapshot with approval call 1`] = `
 
 .c7 {
   color: #A1A6B0;
-  margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -290,7 +289,6 @@ exports[`UndecodableCallDetails Should match snapshot with approval call 1`] = `
 }
 
 .c8 {
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 }
 

@@ -13,4 +13,6 @@ export interface BlockExplorerLinkProps {
 export interface ExternalLinkProps {
   href: string;
   children: ReactNode;
+  disableLink?: boolean;
+  hideIcon?: boolean;
 }

@@ -26,7 +26,7 @@ fi
 
 
 start_hardhat_node
-cp -r ../types ../../dxdao-contracts/types
+cp -r ./types ../dxdao-contracts/types
 node ./src/buildConfig.js
 node ./src/updateProjectsConfig.js
 pnpm hardhat run ./src/updateAbis.js 

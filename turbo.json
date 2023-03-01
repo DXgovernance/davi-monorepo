@@ -36,9 +36,7 @@
     "lint": {
       "dependsOn": ["^setup"]
     },
-    "test": {
-      "dependsOn": ["^setup", "^dxdao-contracts#compile"]
-    },
+    "test": {},
     "pre-commit": {},
     "format-check": {},
     "format": {}

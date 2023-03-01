@@ -1,4 +1,4 @@
-import { useNetwork } from 'wagmi';
+import { useBlockNumber, useNetwork } from 'wagmi';
 import { FetcherHooksInterface } from 'stores/types';
 import { useQuery } from '@apollo/client';
 import {
@@ -20,8 +20,12 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   userAddress: `0x${string}`
 ) => {
   const { chain } = useNetwork();
+  const { data: block } = useBlockNumber({
+    watch: true,
+  });
+  let currentBlock = 0;
   const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
-  const userAddressToLower = userAddress.toLowerCase();
+  const userAddressToLower = userAddress?.toLowerCase();
 
   const { data, refetch, loading, error } =
     useQuery<getProposalVotesOfVoterQuery>(getProposalVotesOfVoterDocument, {
@@ -48,7 +52,36 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
     }
   }, [data?.proposal?.votes]);
 
-  useListenToVoteAdded(daoAddress, refetch, proposalId);
+  // Backoff and retry logic
+  const backoff = (fun, successFun, failureFun, exponent) => {
+    setTimeout(async () => {
+      const { data } = await fun();
+      if (currentBlock < 1) {
+        console.log('Still fetching current block');
+      } else if (data?._meta.block.number > currentBlock) {
+        successFun();
+      } else if (exponent <= 20) {
+        backoff(fun, successFun, failureFun, exponent + 1);
+      } else {
+        failureFun();
+      }
+    }, Math.pow(2, exponent) + Math.random() * 10000);
+  };
+
+  // Listen for events
+  useListenToVoteAdded(
+    daoAddress,
+    async () => {
+      currentBlock = block;
+      backoff(
+        refetch,
+        () => (currentBlock = 0),
+        () => console.log('Failed to fetch new data'),
+        0
+      );
+    },
+    proposalId
+  );
 
   return {
     data: parsedData,

@@ -63,7 +63,11 @@ export interface FetcherHooksInterface {
   ) => {
     data: BigNumber;
   };
-  useDAOToken: (daoId: string) => { data: `0x${string}` };
+  useDAOToken: (daoId: string) => {
+    data: `0x${string}`;
+    isError: boolean;
+    isLoading: boolean;
+  };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`

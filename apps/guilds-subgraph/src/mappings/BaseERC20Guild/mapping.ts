@@ -35,10 +35,10 @@ export function handleConfigChange(call: SetConfigCall): void {
   guild.proposalTime = call.inputs._proposalTime;
   guild.lockTime = call.inputs._lockTime;
   guild.timeForExecution = call.inputs._timeForExecution;
-  guild.votingPowerForProposalCreation =
-    call.inputs._votingPowerForProposalCreation;
-  guild.votingPowerForProposalExecution =
-    call.inputs._votingPowerForProposalExecution;
+  guild.votingPowerPercentageForProposalCreation =
+    call.inputs._votingPowerPercentageForProposalCreation;
+  guild.votingPowerPercentageForProposalExecution =
+    call.inputs._votingPowerPercentageForProposalExecution;
   guild.voteGas = call.inputs._voteGas;
   guild.maxGasPrice = call.inputs._maxGasPrice;
   guild.maxActiveProposals = call.inputs._maxActiveProposals;
@@ -207,7 +207,7 @@ export function handleVoting(event: VoteAdded): void {
     vote.proposalId = proposalId;
     vote.voter = event.params.voter.toHexString();
     // TODO: change to event.params.option when merging refactor branch of dxdao-contracts
-    vote.option = event.params.action;
+    vote.option = event.params.option;
     // TODO: check when one voter votes twice
     if (proposal) {
       let votesCopy = proposal.votes;
@@ -217,12 +217,12 @@ export function handleVoting(event: VoteAdded): void {
       const newTotalVotes = proposalData.totalVotes;
       proposal.totalVotes = newTotalVotes;
 
-      let optionId = `${proposalId}-${event.params.action}`;
+      let optionId = `${proposalId}-${event.params.option}`;
       let option = Option.load(optionId);
       // update option data on vote event
       if (!!option) {
         let optionVotesCopy = option.votes;
-        const newVoteAmount = newTotalVotes[event.params.action.toI32()];
+        const newVoteAmount = newTotalVotes[event.params.option.toI32()];
         optionVotesCopy.push(voteId);
 
         option.voteAmount = newVoteAmount;
@@ -249,6 +249,12 @@ export function handleTokenLocking(event: TokensLocked): void {
   const guild = Guild.load(guildAddress.toHexString());
 
   if (!guild) return;
+  // Update guild required vp to create and execute proposals
+  guild.votingPowerForProposalCreation =
+    contract.getVotingPowerForProposalCreation();
+  guild.votingPowerForProposalExecution =
+    contract.getVotingPowerForProposalExecution();
+  guild.save();
 
   const memberId = `${guildAddress.toHexString()}-${event.params.voter.toHexString()}`;
 
@@ -276,6 +282,13 @@ export function handleTokenWithdrawal(event: TokensWithdrawn): void {
   const guild = Guild.load(guildAddress.toHexString());
 
   if (!guild) return;
+
+  // Update guild required vp to create and execute proposals
+  guild.votingPowerForProposalCreation =
+    contract.getVotingPowerForProposalCreation();
+  guild.votingPowerForProposalExecution =
+    contract.getVotingPowerForProposalExecution();
+  guild.save();
 
   const memberId = `${guildAddress.toHexString()}-${event.params.voter.toHexString()}`;
 

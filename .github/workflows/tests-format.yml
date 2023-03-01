@@ -28,7 +28,7 @@ jobs:
           set-safe-directory: false
 
       - name: Cloning contracts
-        run: git clone -b feature/monorepo-setup-w-create2 https://github.com/DXgovernance/dxdao-contracts apps/dxdao-contracts
+        run: git clone -b v2.0 https://github.com/DXgovernance/dxdao-contracts packages/dxdao-contracts
 
       - name: Pnpm setup
         uses: pnpm/action-setup@v2
@@ -48,16 +48,7 @@ jobs:
         run: node apps/davi/scripts/beforeBuild.js
 
       - name: Run Jests Test
-        run: pnpm run test
+        run: pnpm run test --force
 
       - name: Run code format check
-        run: pnpm run format-check  
-      
-
-
-
-
-
-
-
-
+        run: pnpm run format-check

@@ -21,11 +21,11 @@
     "test:smokeLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runSmokeLocal",
     "test:smokeQa": "env-cmd -f .env synpress run --configFile ./cypress/config/qa.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
     "test:smokeProd": "env-cmd -f .env synpress run --configFile ./cypress/config/prod.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
-    "updateContracts": "pnpm hardhat compile && node scripts/updateContracts.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-graph-client": "graphclient build && rm -rf src/.graphclient && mv .graphclient src",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "clean": "rm -rf src/.graphclient"
   },
   "engines": {
     "node": "^16.13.0"
@@ -51,6 +51,7 @@
     "@graphql-mesh/graphql": "^0.33.8",
     "@graphql-mesh/http": "^0.3.8",
     "@graphql-mesh/merger-bare": "^0.16.7",
+    "@graphql-mesh/merger-stitching": "^0.18.15",
     "@graphql-mesh/runtime": "^0.46.5",
     "@graphql-mesh/store": "^0.9.5",
     "@graphql-mesh/utils": "^0.43.5",
@@ -231,3 +232,4 @@
     ]
   }
 }
+

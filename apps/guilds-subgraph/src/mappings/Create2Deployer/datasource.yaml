@@ -2,7 +2,7 @@ abis:
   - Create2Deployer
   - SnapshotRepERC20Guild
   - BaseERC20Guild
-  - ERC20
+  - ERC20Token
   - SnapshotERC20Guild
 entities:
   - Guild

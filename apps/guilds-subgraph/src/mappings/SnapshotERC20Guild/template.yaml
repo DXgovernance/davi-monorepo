@@ -1,7 +1,7 @@
 abis:
   - SnapshotRepERC20Guild
   - BaseERC20Guild
-  - ERC20
+  - ERC20Token
   - SnapshotERC20Guild
 entities:
   - Guild
@@ -13,5 +13,8 @@ eventHandlers:
     handler: handleProposalStateChange
   - event: VoteAdded(indexed bytes32,indexed uint256,address,uint256)
     handler: handleVoting
-
+  - event: TokensLocked(address,uint256)
+    handler: handleTokenLocking
+  - event: TokensWithdrawn(address,uint256)
+    handler: handleTokenWithdrawal
 

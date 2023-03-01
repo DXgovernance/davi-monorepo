@@ -58,6 +58,8 @@ export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
       timeForExecution,
       maxActiveProposals,
       votingPowerForProposalCreation,
+      votingPowerPercentageForProposalCreation,
+      votingPowerPercentageForProposalExecution,
       lockTime,
       voteGas,
       maxGasPrice,
@@ -84,8 +86,14 @@ export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
       maxGasPrice: maxGasPrice ? BigNumber?.from(maxGasPrice) : undefined,
-      votingPowerPercentageForProposalExecution: BigNumber.from(0),
-      votingPowerPercentageForProposalCreation: BigNumber.from(0),
+      votingPowerPercentageForProposalExecution:
+        votingPowerPercentageForProposalExecution
+          ? BigNumber?.from(votingPowerPercentageForProposalExecution)
+          : undefined,
+      votingPowerPercentageForProposalCreation:
+        votingPowerPercentageForProposalCreation
+          ? BigNumber?.from(votingPowerPercentageForProposalCreation)
+          : undefined,
       minimumMembersForProposalCreation: minimumMembersForProposalCreation
         ? BigNumber?.from(minimumMembersForProposalCreation)
         : undefined,

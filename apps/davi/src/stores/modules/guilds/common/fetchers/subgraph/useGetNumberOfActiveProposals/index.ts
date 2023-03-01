@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
 import { BigNumber } from 'ethers';
 import {
@@ -7,18 +6,18 @@ import {
   getNumberOfActiveProposalsQuery,
 } from '.graphclient';
 import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events/useListenToProposalStateChanged';
-import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
+import { SupportedSubgraph } from 'stores/types';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, refetch, loading, error } =
     useQuery<getNumberOfActiveProposalsQuery>(
       getNumberOfActiveProposalsDocument,
       {
-        client: apolloClient[chainId]['Guilds'],
+        client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
         variables: { id: guildAddress?.toLowerCase() },
       }
     );

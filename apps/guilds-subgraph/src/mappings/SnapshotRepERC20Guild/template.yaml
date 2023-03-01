@@ -13,4 +13,8 @@ eventHandlers:
     handler: handleProposalStateChange
   - event: VoteAdded(indexed bytes32,indexed uint256,address,uint256)
     handler: handleVoting
+  - event: TokensLocked(address,uint256)
+    handler: handleTokenLocking
+  - event: TokensWithdrawn(address,uint256)
+    handler: handleTokenWithdrawal
 

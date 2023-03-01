@@ -41,6 +41,7 @@ import { StyledLink } from 'components/primitives/Links';
 import { IconButton } from 'components/primitives/Button';
 import { linkStyles } from './Proposal/Proposal.styled';
 import { ProposalDescription } from 'components/ProposalDescription';
+import useLocalStorageWithExpiry from 'hooks/Guilds/useLocalStorageWithExpiry';
 
 export const EMPTY_CALL: Call = {
   data: ZERO_HASH,
@@ -71,6 +72,7 @@ const CreateProposalPage: React.FC = () => {
   const [editMode, setEditMode] = useState(true);
   const [isCreatingProposal, setIsCreatingProposal] = useState(false);
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [ignoreWarning, setIgnoreWarning] = useState(false);
   const [options, setOptions] = useState<Option[]>([
     {
@@ -83,17 +85,25 @@ const CreateProposalPage: React.FC = () => {
   ]);
   const [isPermissionWarningModalOpen, setIsPermissionWarningModalOpen] =
     useState(false);
+
+  const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
+    `${guildId}/${discussionId ?? 'create-proposal'}/html`,
+    null,
+    345600000
+  );
+
   const {
     Editor,
     EditorConfig,
     md: proposalBodyMd,
     html: proposalBodyHTML,
     clear,
-  } = useTextEditor(
-    `${guildId}/create-proposal`,
-    345600000,
-    t('createProposal.enterProposalDescription')
-  );
+  } = useTextEditor({
+    placeholder: t('createProposal.enterProposalDescription'),
+    onHTMLChange,
+    html,
+    initialContent: description,
+  });
 
   const [isMetadataErrorModalOpen, setIsMetadataErrorModalOpen] =
     useState(false);
@@ -147,6 +157,17 @@ const CreateProposalPage: React.FC = () => {
       }
     });
   }, [user, orbis]);
+
+  useEffect(() => {
+    const handleGetProposalContent = async () => {
+      if (discussionId) {
+        const { data } = await orbis.getPost(discussionId);
+        setTitle(data.content.title);
+        setDescription(data.content.body);
+      }
+    };
+    handleGetProposalContent();
+  }, [discussionId, orbis]);
 
   const checkIfWarningIgnored = useCallback(async () => {
     if (!ignoreWarning && isActionDenied) {
@@ -235,7 +256,6 @@ const CreateProposalPage: React.FC = () => {
   }, [title, proposalBodyHTML, proposalBodyMd]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
-
   return (
     <PageContainer>
       <PageContent>
@@ -250,6 +270,7 @@ const CreateProposalPage: React.FC = () => {
               iconLeft
               padding={'0.6rem 0.8rem'}
               marginTop={'5px;'}
+              data-testid="back-to-overview-btn"
             >
               <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
               {t('proposal.backToOverview')}{' '}

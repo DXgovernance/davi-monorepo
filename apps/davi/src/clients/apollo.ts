@@ -21,8 +21,8 @@ export const subgraphClientsUris: {
     'Governance1.5': '',
   },
   [SUPPORTED_DAVI_NETWORKS.GNOSIS_ID]: {
-    Guilds: '',
-    'Governance1.5': '',
+    Guilds: process.env.REACT_APP_DXGOV_GUILD_GRAPHQL_ENDPOINT_GNOSIS,
+    'Governance1.5': process.env.REACT_APP_DXGOV_DAO_GRAPHQL_ENDPOINT_GNOSIS,
   },
   // testnets
   [SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID]: {

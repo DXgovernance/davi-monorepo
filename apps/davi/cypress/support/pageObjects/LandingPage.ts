@@ -41,7 +41,7 @@ class LandingPage {
 
   goToGnosisNetwork() {
     cy.findByTestId(this.networkModalBtn).click();
-    cy.contains('Gnosis');
+    cy.contains('Gnosis').click();
   };
 
   openNetworkModal() {
@@ -55,11 +55,7 @@ class LandingPage {
   };
 
   goToGuildPage(guildName, i) {
-    cy.findAllByTestId(this.guildName, { timeout: 10_000 })
-      .should('be.visible')
-      .eq(i)
-      .contains(guildName)
-      .click();
+    cy.contains(guildName).click();
   };
 
   checkWalletOptions() {

@@ -48,16 +48,7 @@ jobs:
         run: node apps/davi/scripts/beforeBuild.js
 
       - name: Run Jests Test
-        run: pnpm run test
+        run: pnpm run test --force
 
       - name: Run code format check
-        run: pnpm run format-check  
-      
-
-
-
-
-
-
-
-
+        run: pnpm run format-check

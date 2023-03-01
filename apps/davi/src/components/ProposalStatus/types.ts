@@ -7,6 +7,7 @@ export interface ProposalStatusProps {
   endTime: { detail: string; moment: Moment };
   bordered?: boolean;
   hideTime?: boolean;
+  executeTxLink?: string;
 }
 
 export interface TimeDetailProps {

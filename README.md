@@ -10,10 +10,10 @@
 ## How to setup
 
 1. Create a fork of this repo.
-2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`
+2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`. If you clone this repo without `--recurse-submodules` be sure to go to `packages/dxdao-contracts` and clone necesary branch pointed in `./.gitmodules` file.
 3. Install dependencies `pnpm i`
-4. Make an `.env` file in the `./packages/dev-scripts`folder (see `.env.example`) and write a seed phrase and deploy salt for hardhat.
-5. Make an `.env` file in the `./apps/davi`folder (see `.env.example`).
+4. Make an `.env` file in the `./packages/dev-scripts` folder (see `.env.example`) and write a seed phrase and deploy salt for hardhat.
+5. Make an `.env` file in the `./apps/davi` folder (see `.env.example`).
 
 ## Development
 
@@ -21,8 +21,9 @@ To run project locally you need to compile contracts, run hardhat node from dev-
 
 1. Run hardhat node locally: `pnpm run dev-scripts:dev`
 2. Start docker containers: `pnpm run graph-node:dev` (Will require hardhat to be running and docker to be installed and open)
-3. Create and deploy local subgraphs (1.5 & guilds): `pnpm run subgraph:dev` (graph-node container should be running. Verify before execute start-local).
-4. After both subgraphs are deployed locally, build DAVI graph-client & run dApp with: `pnpm run davi:dev`. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
+3. Point `deployedHashedBytecodesJSON` to local in `./apps/guilds-subgraph/src/mappings/Create2Deployer/mapping.ts#L13` (const deployedHashedBytecodesJSON = local)
+4. Create and deploy local subgraphs (1.5 & guilds): `pnpm run subgraph:dev` (graph-node container should be running. Verify before execute start-local).
+5. After both subgraphs are deployed locally, build DAVI graph-client & run dApp with: `pnpm run davi:dev`. If you don't want to wait for hardhat node and subgraphs do `davi:dev-no-wait`
 
 ### If you're on Linux:
 
@@ -92,3 +93,27 @@ If you see `permission denied: ./packages/graph-node/scripts/dev.sh` you might n
 ```
 chmod +x ./packages/graph-node/scripts/dev.sh
 ```
+
+# DAVI Monorepo QA tests
+
+## Prerequisites
+
+1. Navigate to `apps/davi`
+2. Run `pnpm i`
+3. Make an `.env` file in the `davi` folder (see `.env.qa.example`) - file contains all parameters for `localhost` and `metamask` setups
+
+### How to run test
+
+To run Smoke test in terminal run:
+
+`pnpm test:[testName]`
+
+All available `[testName]` can be found in:
+
+`apps > davi > cypress > config`
+
+Currently there are:
+
+1. `smokeLocal` - starts localhost:3000 and runs Smoke test on local
+2. `smokeQa` - runs Smoke test on QA ENV
+3. `smokeProd` - runs Smoke test on PROD ENV

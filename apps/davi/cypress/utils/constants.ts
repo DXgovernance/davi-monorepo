@@ -1,10 +1,18 @@
+
+import { faker } from '@faker-js/faker';
+
+export const data = {
+  discussionTitle: faker.lorem.word(),
+  discussionDescription: faker.lorem.sentence()
+}
+
 export const ACCOUNTS = [
   { name: 'Account 1', address: '0x9578e973bba0cc33bdbc93c7f77bb3fe6d47d68a' },
   {
     name: 'Account dxdao #1',
     address: '0xc5b20ade9c9cd5e0cc087c62b26b815a4bc1881f',
   },
-  {
+  { 
     name: 'Account dxdao #2',
     address: '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698',
   },

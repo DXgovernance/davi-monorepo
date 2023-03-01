@@ -24,3 +24,16 @@ export async function createPost(orbis: OrbisType, content: DiscussionContent) {
     console.error('Error creating post: ', res.error);
   }
 }
+
+export async function editPost(
+  orbis: OrbisType,
+  streamId: string,
+  content: DiscussionContent
+) {
+  let res = await orbis.editPost(streamId, content);
+  if (res.status === 200) {
+    return res;
+  } else {
+    console.error('Error updating post: ', res.error);
+  }
+}

@@ -112,11 +112,11 @@ exports[`CallDetails Should match 1`] = `
 
 .c9 {
   color: #A1A6B0;
-  margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -132,7 +132,6 @@ exports[`CallDetails Should match 1`] = `
 }
 
 .c10 {
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 }
 
@@ -415,11 +414,11 @@ exports[`CallDetails Should match with empty data 1`] = `
 
 .c9 {
   color: #A1A6B0;
-  margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -435,7 +434,6 @@ exports[`CallDetails Should match with empty data 1`] = `
 }
 
 .c10 {
-  margin-right: 0.5rem;
   overflow-wrap: break-word;
 }
 

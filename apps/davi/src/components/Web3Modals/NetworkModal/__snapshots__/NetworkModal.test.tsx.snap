@@ -311,6 +311,7 @@ exports[`NetworkModal Should match snapshot 1`] = `
             </h2>
             <svg
               class="c6"
+              data-testid="close-modal"
               fill="none"
               height="1em"
               stroke="currentColor"

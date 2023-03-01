@@ -2,6 +2,7 @@ import { MOCK_BIG_NUMBER } from 'Modules/Guilds/Hooks/fixtures';
 import { ZERO_ADDRESS, ZERO_HASH } from 'utils';
 import { useCreateProposal } from './useCreateProposal';
 import { renderHook } from '@testing-library/react-hooks';
+import { mockChain } from 'components/Web3Modals/fixtures';
 
 const proposalData = {
   title: 'proposal',
@@ -31,6 +32,18 @@ jest.mock('hooks/Guilds/ipfs/useWeb3Storage', () => ({
   default: () => ({
     pinToStorage: () => Promise.resolve(mockReturnIpfsHash),
   }),
+}));
+
+jest.mock('wagmi', () => ({
+  useContractRead: () => ({ data: '' }),
+  useEnsResolver: () => ({
+    data: {
+      name: 'name.eth',
+      address: '0x0000000000000000000000000000000000000000',
+      contentHash: '0x0',
+    },
+  }),
+  useNetwork: () => ({ chain: mockChain, chains: [mockChain] }),
 }));
 
 jest.mock('hooks/Guilds/ipfs/usePinataIPFS', () => ({

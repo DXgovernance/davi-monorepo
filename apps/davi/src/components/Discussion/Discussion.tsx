@@ -6,7 +6,7 @@ import { useInterval } from 'utils';
 
 import { Postbox } from './Postbox';
 import { Divider } from 'components/Divider';
-import DiscussionMasterPost from './DiscussionMasterPost';
+import ActivityItem from './ActivityItem';
 import {
   DiscussionContainer,
   DiscussionMasterPosts,
@@ -22,14 +22,20 @@ function Discussion({
   context,
   master = '',
   algorithm = 'all-context-master-posts',
+  daoId,
+  parentId,
 }: {
   context: string;
   master?: string;
   algorithm?: keyof typeof IOrbisGetPostsAlgorithm;
+  daoId?: string;
+  parentId?: string;
 }) {
   const { t } = useTranslation();
   const { orbis } = useOrbisContext();
   const [posts, setPosts] = useState([]);
+  const [proposals, setProposals] = useState([]);
+  const [all, setAll] = useState([]);
   const [page, setPage] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
   const [hasMore, setHasMore] = useState(false);
@@ -75,6 +81,51 @@ function Discussion({
     }
   };
 
+  // Getting linked proposals
+  const getProposals = async ({ polling = false, reset = false }) => {
+    if (isFetching || !context || !orbis) return;
+
+    if (!polling) {
+      setPausePolling(true);
+      setIsFetching(true);
+    }
+
+    const _proposals = reset ? [] : [...proposals];
+
+    let { data, error } = await orbis.getPosts(
+      {
+        context: `DAVI-${daoId}-${parentId}-proposal`,
+      },
+      0
+    );
+
+    if (error) console.log(error);
+
+    if (data) {
+      if (!polling) {
+        data?.forEach(proposal => {
+          proposal.type = 'proposal';
+        });
+        const nextPage = reset ? 1 : page + 1;
+        setPage(nextPage);
+        setProposals([..._proposals, ...data]);
+        setHasMore(data.length >= 50);
+        setPausePolling(false);
+        setIsFetching(false);
+      } else {
+        const unique = data.filter(
+          (a: IOrbisPost) => !_proposals.some(b => a.stream_id === b.stream_id)
+        );
+        if (unique.length > 0) {
+          unique?.forEach(proposal => {
+            proposal.type = 'proposal';
+          });
+          setProposals([..._proposals, ...unique]);
+        }
+      }
+    }
+  };
+
   const onNewMasterPostCreated = (newPost: IOrbisPost) => {
     setPosts([newPost, ...posts]);
   };
@@ -97,12 +148,29 @@ function Discussion({
 
   useInterval(() => getPosts({ polling: true }), !pausePolling ? 10000 : null);
 
+  useInterval(
+    () => getProposals({ polling: true }),
+    !pausePolling ? 10000 : null
+  );
   useEffect(() => {
     if (context) {
       getPosts({});
+      getProposals({});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);
+
+  useEffect(() => {
+    if (all.length !== posts.length + proposals.length) {
+      setAll(
+        [...posts, ...proposals].sort(function (a, b) {
+          return b.timestamp - a.timestamp;
+        })
+      );
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posts, proposals]);
 
   return (
     <DiscussionContainer>
@@ -117,13 +185,15 @@ function Discussion({
       <Divider />
 
       <DiscussionMasterPosts>
-        {posts.length > 0 ? (
-          posts.map(post => (
-            <DiscussionMasterPost
-              key={post.stream_id}
-              post={post}
-              onDeletion={() => handleDeletion(post)}
-            />
+        {all.length > 0 ? (
+          all.map(post => (
+            // Handle multiple types in this component
+            <div>
+              <ActivityItem
+                post={post}
+                handleDeletion={() => handleDeletion(post)}
+              />
+            </div>
           ))
         ) : (
           <DiscussionEmpty>

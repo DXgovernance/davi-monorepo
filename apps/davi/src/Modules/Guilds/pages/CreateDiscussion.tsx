@@ -33,6 +33,7 @@ import { ProposalDescription } from 'components/ProposalDescription';
 import { WalletModal } from 'components/Web3Modals';
 import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
+import useLocalStorageWithExpiry from 'hooks/Guilds/useLocalStorageWithExpiry';
 
 const CreateDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
@@ -69,16 +70,22 @@ const CreateDiscussionPage: React.FC = () => {
     });
   }, [user, orbis]);
 
+  const [html, onHTMLChange] = useLocalStorageWithExpiry<string>(
+    `${guildId}/create-discussion/html`,
+    null,
+    345600000
+  );
+
   const {
     Editor,
     EditorConfig,
     md: discussionBodyMd,
     html: discussionBodyHtml,
-  } = useTextEditor(
-    `${guildId}/create-discussion`,
-    345600000,
-    t('discussions.discussionPlaceholder')
-  );
+  } = useTextEditor({
+    placeholder: t('discussions.discussionPlaceholder'),
+    onHTMLChange,
+    html,
+  });
 
   const hasWalletConnection = useMemo(() => {
     return !isWalletConnecting && !isReadOnly(connector) && isWalletConnected;

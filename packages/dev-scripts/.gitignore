@@ -16,4 +16,4 @@ scripts
 test
 types
 .contracts.json
-hardhat.config.js
+hardhat.config.base.js

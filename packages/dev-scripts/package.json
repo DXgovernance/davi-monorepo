@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf artifacts cache contracts deployments deploy build typechain-types hardhat.config.js deploy scripts test types .contracts.json",
+    "clean": "rm -rf artifacts cache contracts deployments deploy build typechain-types hardhat.config.base.js deploy scripts test types .contracts.json",
     "copy-contracts": "cp -r node_modules/dxdao-contracts/contracts ./",
-    "copy-config": "cp -r node_modules/dxdao-contracts/hardhat.config.js ./",
+    "copy-config": "cp -r node_modules/dxdao-contracts/hardhat.config.js ./hardhat.config.base.js",
     "copy-deploy": "cp -r node_modules/dxdao-contracts/deploy ./",
     "copy-scripts": "cp -r node_modules/dxdao-contracts/scripts ./",
     "copy-json-contracts": "cp -r node_modules/dxdao-contracts/.contracts.json ./",

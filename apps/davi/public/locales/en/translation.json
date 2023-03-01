@@ -231,6 +231,7 @@
     "quorum": "Quorum",
     "backToOverview": "Back to Overview",
     "backToDiscussion": "Back to Discussion",
+    "originalDiscussion": "Original Discussion",
     "seeAllProposals": "See all proposals",
     "createdBy": "Created by",
     "proposalInfoCard": {

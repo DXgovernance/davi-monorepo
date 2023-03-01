@@ -45,29 +45,28 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
 }
 
 .c0 {
-  box-sizing: 'border-box';
-  min-width: 0;
+  display: Flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .c2 {
@@ -232,7 +231,7 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
     class="c0 c1"
   >
     <div
-      class="c0 c1 c2"
+      class="c0 c2"
     >
       50
       % - 
@@ -436,29 +435,28 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
 }
 
 .c0 {
-  box-sizing: 'border-box';
-  min-width: 0;
+  display: Flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .c2 {
@@ -530,7 +528,7 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
     class="c0 c1"
   >
     <div
-      class="c0 c1 c2"
+      class="c0 c2"
     >
       50
       % - 
@@ -644,29 +642,28 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
 }
 
 .c0 {
-  box-sizing: 'border-box';
-  min-width: 0;
+  display: Flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .c2 {
@@ -738,7 +735,7 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
     class="c0 c1"
   >
     <div
-      class="c0 c1 c2"
+      class="c0 c2"
     >
       <div
         class=""
@@ -866,29 +863,28 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
 }
 
 .c0 {
-  box-sizing: 'border-box';
-  min-width: 0;
+  display: Flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .c2 {
@@ -976,7 +972,7 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
     class="c0 c1"
   >
     <div
-      class="c0 c1 c2"
+      class="c0 c2"
     >
       50
       % - 
@@ -1072,29 +1068,28 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
 }
 
 .c0 {
-  box-sizing: 'border-box';
-  min-width: 0;
+  display: Flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  gap: 0.5rem;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .c2 {
@@ -1166,7 +1161,7 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
     class="c0 c1"
   >
     <div
-      class="c0 c1 c2"
+      class="c0 c2"
     >
       50
       % - 

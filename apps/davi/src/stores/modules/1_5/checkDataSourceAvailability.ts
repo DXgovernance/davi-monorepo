@@ -17,13 +17,16 @@ export const checkDataSourceAvailability = async chainId => {
     }
    }`;
 
-    const response = await fetch(subgraphClientsUris[chainId]['Guilds'], {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
-    });
+    const response = await fetch(
+      subgraphClientsUris[chainId][SupportedSubgraph.Governance1_5],
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      }
+    );
     const { data, errors } = await response.json();
 
     if (data?._meta?.block?.timestamp < Math.floor(Date.now() / 1000) - 600) {

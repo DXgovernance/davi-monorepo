@@ -32,8 +32,6 @@ export const HookStoreProvider: React.FC<
 }) => {
   const urlParams = useMatch('/:chainName/:daoId/*');
   const { chain } = useNetwork();
-  const [governanceType, setGovernanceType] =
-    useState<GovernanceTypeInterface>(null);
 
   const daoIdFromUrl = useMemo(
     () => (urlParams ? urlParams.params.daoId : ''),
@@ -65,34 +63,31 @@ export const HookStoreProvider: React.FC<
     }
   }, [targetDataSource, dataSource]);
 
-  useEffect(() => {
-    async function load() {
-      let match = governanceInterfaces.find(governance => {
-        return governance.bytecodes.find(
-          bytecode => bytecode === daoBytecodeHash
-        );
-      });
+  const governanceType: GovernanceTypeInterface = useMemo(() => {
+    let match = governanceInterfaces.find(governance => {
+      return governance.bytecodes.find(
+        bytecode => bytecode === daoBytecodeHash
+      );
+    });
 
-      if (!match) return null;
+    if (!match) return null;
 
-      setGovernanceType({
-        name: match.name,
-        bytecodes: match.bytecodes,
-        capabilities: match.capabilities,
-        dataSource: dataSource,
-        hooks: {
-          fetchers:
-            dataSource === 'primary'
-              ? match.hooks.fetchers.default
-              : dataSource === 'secondary'
-              ? match.hooks.fetchers.fallback
-              : null,
-          writers: match.hooks.writers,
-        },
-        checkDataSourceAvailability: await match.checkDataSourceAvailability,
-      });
-    }
-    load();
+    return {
+      name: match.name,
+      bytecodes: match.bytecodes,
+      capabilities: match.capabilities,
+      dataSource: dataSource,
+      hooks: {
+        fetchers:
+          dataSource === 'primary'
+            ? match.hooks.fetchers.default
+            : dataSource === 'secondary'
+            ? match.hooks.fetchers.fallback
+            : null,
+        writers: match.hooks.writers,
+      },
+      checkDataSourceAvailability: match.checkDataSourceAvailability,
+    };
   }, [daoBytecodeHash, dataSource]);
 
   useEffect(() => {

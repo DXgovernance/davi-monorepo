@@ -1,8 +1,0 @@
-query getSyncStatus {
-  _meta {
-    block {
-      number
-      timestamp
-    }
-  }
-}

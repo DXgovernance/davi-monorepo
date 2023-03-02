@@ -16,7 +16,10 @@ type SupportedGovernanceSystem =
   | 'SnapshotRepERC20Guild'
   | 'Governance1_5';
 
-export type SupportedSubgraphs = 'Guilds' | 'Governance1.5';
+export enum SupportedSubgraph {
+  Guilds = 'Guilds',
+  Governance1_5 = 'Governance1.5',
+}
 
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {

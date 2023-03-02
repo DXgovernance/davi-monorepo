@@ -25,8 +25,6 @@ export const CACHE_METADATA_ENS = 'cache.dxvote.eth';
 
 const defaultAlchemyKey = 'FvNKXPCxtzFYrtP4r45pmtxOR0AMCtQv';
 
-export const DISCOURSE_URL_ROOT = 'https://daotalk.org';
-
 export const MAINNET_ID = 1;
 export const GNOSIS_ID = 100;
 export const LOCALHOST_ID = 1337;
@@ -37,13 +35,13 @@ export const ARBITRUM_TESTNET_ID = 421611;
 export const DEFAULT_CHAIN_ID =
   process.env.NODE_ENV === 'development' ? LOCALHOST_ID : MAINNET_ID;
 
-export enum SUPPORTED_DAVI_NETWORKS {
-  MAINNET_ID = 1,
-  GOERLI_ID = 5,
-  ARBITRUM_ID = 42161,
-  ARBITRUM_TESTNET_ID = 421611,
-  LOCALHOST_ID = 1337,
-  GNOSIS_ID = 100,
+export enum CHAIN_ID {
+  MAINNET = MAINNET_ID,
+  GOERLI = GOERLI_ID,
+  ARBITRUM = ARBITRUM_ID,
+  ARBITRUM_TESTNET = ARBITRUM_TESTNET_ID,
+  LOCALHOST = LOCALHOST_ID,
+  GNOSIS = GNOSIS_ID,
 }
 
 export const POKT_NETWORK_URLS = {

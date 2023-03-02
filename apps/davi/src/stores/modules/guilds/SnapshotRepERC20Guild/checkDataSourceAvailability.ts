@@ -1,8 +1,9 @@
 import { subgraphClientsUris } from 'clients/apollo';
+import { SupportedSubgraph } from 'stores/types';
 
 export const checkDataSourceAvailability = async chainId => {
   try {
-    if (!subgraphClientsUris[chainId]['Guilds']) {
+    if (!subgraphClientsUris?.[chainId]?.[SupportedSubgraph.Guilds]) {
       console.debug('No subgraph URL for this chain, using fallback');
       return false;
     }

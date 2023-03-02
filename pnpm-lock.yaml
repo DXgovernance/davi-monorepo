@@ -51,6 +51,7 @@ importers:
       '@dnd-kit/utilities': ^3.1.0
       '@ensdomains/content-hash': ^2.5.7
       '@ethersproject/providers': ^5.7.2
+      '@faker-js/faker': ^7.6.0
       '@graphprotocol/client-cli': ^2.2.16
       '@graphql-mesh/cache-localforage': ^0.7.5
       '@graphql-mesh/cross-helpers': ^0.3.1
@@ -296,14 +297,15 @@ importers:
       webpack-manifest-plugin: 2.2.0_webpack@4.44.2
       workbox-webpack-plugin: 5.1.4_webpack@4.44.2
     devDependencies:
-      '@graphprotocol/client-cli': 2.2.18_4ypim5hjsq3aoucuq6rxjz442a
-      '@storybook/addon-actions': 6.5.16_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addon-essentials': 6.5.16_z526srz6e67bkoex2hsciwf7ua
-      '@storybook/addon-interactions': 6.5.16_uwkcr5bxnundzrsf5dv5ljpvxe
-      '@storybook/addon-links': 6.5.16_biqbaboplfbrettd7655fr4n2y
-      '@storybook/node-logger': 6.5.16
-      '@storybook/preset-create-react-app': 4.1.2_h342isg7n7zipkghetldef5tze
-      '@storybook/react': 6.5.16_a5ainwq6j6e77vl54wahuheooy
+      '@faker-js/faker': 7.6.0
+      '@graphprotocol/client-cli': 2.2.16_dvgirfdsy4cky7rqkuzgo4keja
+      '@storybook/addon-actions': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-essentials': 6.5.13_m3zuu6jlzuadxvbwg37tw4mxge
+      '@storybook/addon-interactions': 6.5.13_irfx6iquzs6ky4omqf4xjdrrsy
+      '@storybook/addon-links': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/node-logger': 6.5.13
+      '@storybook/preset-create-react-app': 4.1.2_wuatc3qqs7pmbgghs5mjag5q4a
+      '@storybook/react': 6.5.13_u7mmoyqfty2flmkfggora6dwra
       '@storybook/testing-library': 0.0.11_biqbaboplfbrettd7655fr4n2y
       '@synthetixio/synpress': 1.2.0_zwlq2uqint3vd25yypk4562ptu
       '@testing-library/cypress': 8.0.7_cypress@9.7.0
@@ -4614,6 +4616,11 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: true
 
   /@findeth/abi/0.3.1:
     resolution: {integrity: sha512-T9HUVEjEgM0MzVLY4gs52ffz5AlHeC3CSGFcEzL4ojKMVzMxa3na1GW/XCmunrhnWP2cDh4fE2MhqLxA0CHqTw==}

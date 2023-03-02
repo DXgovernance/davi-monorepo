@@ -16,6 +16,8 @@
     "test": "react-app-rewired test --watchAll=false --verbose --testTimeout=10000",
     "test:coverage": "pnpm run test --coverage",
     "runSmokeLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
+    "runRegressionLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json -s ./cypress/integration/regression/*.spec.ts",
+    "test:regressionLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runRegressionLocal",
     "test:smokeLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runSmokeLocal",
     "test:smokeQa": "env-cmd -f .env synpress run --configFile ./cypress/config/qa.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
     "test:smokeProd": "env-cmd -f .env synpress run --configFile ./cypress/config/prod.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
@@ -145,6 +147,7 @@
     "workbox-webpack-plugin": "^5.1.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@graphprotocol/client-cli": "^2.2.16",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",

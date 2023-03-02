@@ -1,5 +1,4 @@
-import { useNetwork } from 'wagmi';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useQuery } from '@apollo/client';
 import {
   getProposalVotesOfVoterDocument,
@@ -8,8 +7,8 @@ import {
 import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
-import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
 import { useBackoff } from '../utils/backoff';
 
 type IUseProposalVotesOfVoter =
@@ -22,15 +21,13 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
 ) => {
   const { chain } = useNetwork();
   const { backoff } = useBackoff();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
-  const userAddressToLower = userAddress?.toLowerCase();
 
   const { data, refetch, loading, error } =
     useQuery<getProposalVotesOfVoterQuery>(getProposalVotesOfVoterDocument, {
-      client: apolloClient[chainId]['Guilds'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         proposalId: proposalId,
-        userAddress: userAddressToLower,
+        userAddress: userAddress?.toLowerCase(),
       },
     });
 

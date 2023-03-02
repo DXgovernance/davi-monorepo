@@ -270,6 +270,7 @@ const CreateProposalPage: React.FC = () => {
               iconLeft
               padding={'0.6rem 0.8rem'}
               marginTop={'5px;'}
+              data-testid="back-to-overview-btn"
             >
               <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
               {t('proposal.backToOverview')}{' '}

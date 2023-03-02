@@ -1,4 +1,9 @@
 import moment from 'moment';
+import { preventEmptyString } from 'utils';
+import { Call } from 'components/ActionsBuilder/types';
+import { decodeCall } from 'hooks/Guilds/contracts/useDecodedCall';
+import { RichContractData } from 'hooks/Guilds/contracts/useRichContractRegistry';
+import { ZERO_HASH } from './constants';
 
 export const encodeRepMint = (library, repAmount, to, avatar) => {
   const repFunctionEncoded = library.eth.abi.encodeFunctionSignature(
@@ -68,4 +73,43 @@ export const encodeDxdVestingRelease = (library, token) => {
     .substring(2);
 
   return vestingFunctionEncoded + vestingParamsEncoded;
+};
+
+export const encodeActions = async (
+  calls: Call[],
+  contracts: RichContractData[],
+  chainId: number
+) => {
+  const isZeroHash = (data: string) => data === ZERO_HASH;
+
+  const filteredCalls = calls.filter(
+    call => !isZeroHash(call?.data) || !preventEmptyString(call?.value).isZero()
+  );
+
+  const encodedActions = await Promise.all(
+    filteredCalls.map(async (call: Call) => {
+      if (!!call?.approvalCall) {
+        // If current call is an "spending" call will have a inner approvalCall
+        const { decodedCall: decodedApprovalCall } = await decodeCall(
+          call?.approvalCall,
+          contracts,
+          chainId
+        );
+        // Avoid spreading unnecesary approvalCall;
+        const { approvalCall, ...newCall } = call;
+
+        return {
+          ...newCall,
+          approval: {
+            ...decodedApprovalCall,
+            amount: decodedApprovalCall?.args?._value,
+            token: decodedApprovalCall?.to,
+          },
+        };
+      }
+      return call;
+    })
+  );
+
+  return encodedActions;
 };

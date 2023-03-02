@@ -1,22 +1,19 @@
 import { useMemo } from 'react';
-import { useNetwork } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getMemberListDocument, getMemberListQuery } from '.graphclient';
-import { FetcherHooksInterface } from 'stores/types';
-import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
+import { getApolloClient } from 'clients/apollo';
+import { useNetwork } from 'wagmi';
 
 type IUseGetMemberList = FetcherHooksInterface['useGetMemberList'];
 
 export const useGetMemberList: IUseGetMemberList = guildAddress => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
-
   const { data, loading, error } = useQuery<getMemberListQuery>(
     getMemberListDocument,
     {
-      client: apolloClient[chainId]['Guilds'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

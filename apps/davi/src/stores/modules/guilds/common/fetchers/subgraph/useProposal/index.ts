@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
-import { useNetwork } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { BigNumber } from 'ethers';
 import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
 import { getProposalDocument, getProposalQuery } from '.graphclient';
 import { useHookStoreProvider } from 'stores';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/guilds/common/fetchers/rpc';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
@@ -16,19 +15,18 @@ import {
   useListenToProposalStateChanged,
   useListenToVoteAdded,
 } from 'stores/modules/guilds/common/events';
-import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, refetch, error } = useQuery<getProposalQuery>(
     getProposalDocument,
     {
-      client: apolloClient[chainId]['Guilds'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         proposalId: proposalId?.toLowerCase(),

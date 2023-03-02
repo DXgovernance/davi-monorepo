@@ -55,11 +55,7 @@ class LandingPage {
   };
 
   goToGuildPage(guildName, i) {
-    cy.findAllByTestId(this.guildName)
-      .should('be.visible')
-      .eq(i)
-      .contains(guildName)
-      .click();
+    cy.contains(guildName).click();
   };
 
   checkWalletOptions() {

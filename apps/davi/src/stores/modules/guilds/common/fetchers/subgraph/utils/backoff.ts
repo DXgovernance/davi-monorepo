@@ -1,6 +1,6 @@
 import { useBlockNumber } from 'wagmi';
 
-export const useBackoff = (refetch: () => any) => {
+export const useBackoff = () => {
   const { data: block } = useBlockNumber({
     watch: true,
   });
@@ -22,13 +22,15 @@ export const useBackoff = (refetch: () => any) => {
     }, Math.pow(2, exponent) + Math.random() * 10000);
   };
 
-  return async () => {
-    currentBlock = block;
-    backoff(
-      refetch,
-      () => (currentBlock = 0),
-      () => console.log('Failed to fetch new data'),
-      0
-    );
+  return {
+    backoff: async (refetch: () => any) => {
+      currentBlock = block;
+      backoff(
+        refetch,
+        () => (currentBlock = 0),
+        () => console.log('Failed to fetch new data'),
+        0
+      );
+    },
   };
 };

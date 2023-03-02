@@ -13,11 +13,13 @@ import { getGuildOptionLabel } from 'utils/proposals';
 import { Vote } from 'types/types.guilds.d';
 import { apolloClient } from 'clients/apollo';
 import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { useBackoff } from '../utils/backoff';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 
 export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { chain } = useNetwork();
+  const { backoff } = useBackoff();
   const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const {
@@ -57,7 +59,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
     });
   }, [data?.proposal?.votes, proposalMetadata, t, totalLocked]);
 
-  useListenToVoteAdded(guildId, refetch, proposal?.id);
+  useListenToVoteAdded(guildId, () => backoff(refetch), proposal?.id);
 
   return {
     data: parsedData,

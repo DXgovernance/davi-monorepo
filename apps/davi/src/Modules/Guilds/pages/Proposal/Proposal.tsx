@@ -86,8 +86,8 @@ const ProposalPage: React.FC = () => {
     return (
       <Result
         state={ResultState.ERROR}
-        title="We couldn't find that proposal."
-        subtitle="It probably doesn't exist."
+        title={t('proposal.errors.couldntFindTheProposal')}
+        subtitle={t('proposal.errors.probablyNonExistent')}
         extra={
           <StyledLink to={`/${chainName}/${guildId}`} customStyles={linkStyles}>
             <IconButton

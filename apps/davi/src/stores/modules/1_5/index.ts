@@ -1,26 +1,34 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import { useGuildConfig } from './fetchers/subgraph/useGuildConfig';
+import { useMemberCount } from './fetchers/subgraph/useMemberCount';
+import { useTotalLocked } from './fetchers/subgraph/useTotalLocked';
+import { useVotingPowerOf } from './fetchers/subgraph/useVotingPowerOf';
+import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
+import { useWithdrawTokens } from './writers/useWithdrawTokens';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
     name: 'Governance1_5',
-    bytecodes: [],
+    bytecodes: [
+      '0x5a7c2852d5c2d5940670284861fb5549797abc88673d311096fd8fc2bb1c7dc0',
+    ],
     hooks: {
       fetchers: {
         default: {
           useProposal: null,
           useSnapshotId: null,
-          useTotalLocked: null,
+          useTotalLocked,
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
           useProposalVotesOfVoter: null,
-          useVoterLockTimestamp: null,
+          useVoterLockTimestamp,
           useProposalCalls: null,
           useVotingResults: null,
-          useVotingPowerOf: null,
-          useMemberCount: null,
+          useVotingPowerOf,
+          useMemberCount,
           useGetPermissions: null,
-          useGuildConfig: null,
+          useGuildConfig,
           useGetVotes: null,
           useGetMemberList: null,
           useGetAllPermissions: null,
@@ -30,17 +38,17 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         fallback: {
           useProposal: null,
           useSnapshotId: null,
-          useTotalLocked: null,
+          useTotalLocked,
           useDAOToken: null,
           useIsProposalCreationAllowed: null,
           useProposalVotesOfVoter: null,
-          useVoterLockTimestamp: null,
+          useVoterLockTimestamp,
           useProposalCalls: null,
           useVotingResults: null,
-          useVotingPowerOf: null,
-          useMemberCount: null,
+          useVotingPowerOf,
+          useMemberCount,
           useGetPermissions: null,
-          useGuildConfig: null,
+          useGuildConfig,
           useGetVotes: null,
           useGetMemberList: null,
           useGetAllPermissions: null,
@@ -54,7 +62,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         useExecuteProposal: null,
         useLockTokens: null,
         useVoteOnProposal: null,
-        useWithdrawTokens: null,
+        useWithdrawTokens: useWithdrawTokens,
       },
     },
     capabilities: {

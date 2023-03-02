@@ -5,6 +5,7 @@ type Permission @entity {
   functionSignature: String!
   valueAllowed: BigInt!
   fromTime: BigInt!
+  allowed: Boolean!
 
   # TODO: Makes sense to compute these?
   # valueTransferred: BigInt

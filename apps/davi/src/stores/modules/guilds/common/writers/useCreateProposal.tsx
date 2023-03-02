@@ -9,6 +9,7 @@ import useWeb3Storage from 'hooks/Guilds/ipfs/useWeb3Storage';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
 import { createPost } from 'components/Forum';
 import { providers } from 'ethers';
+import { useNetwork } from 'wagmi';
 
 type IUseCreateProposal = WriterHooksInteface['useCreateProposal'];
 type IHandleCreateProposal = ReturnType<IUseCreateProposal>;
@@ -18,6 +19,7 @@ export const useCreateProposal: IUseCreateProposal = (
   discussionRef?: string
 ) => {
   const { t } = useTranslation();
+  const { chain } = useNetwork();
   const daoContract = useERC20Guild(daoAddress);
   const { createTransaction } = useTransactions();
   const { pinToPinata } = usePinataIPFS();
@@ -54,7 +56,7 @@ export const useCreateProposal: IUseCreateProposal = (
           master: receipt.logs[0].topics[1],
           replyTo: null,
           mentions: [],
-          data: {},
+          data: { chain: chain },
         };
         createPost(orbis, link);
       };

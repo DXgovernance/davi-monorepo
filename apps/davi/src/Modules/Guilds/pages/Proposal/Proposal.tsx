@@ -7,9 +7,10 @@ import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { Loading } from 'components/primitives/Loading';
 import { Result, ResultState } from 'components/Result';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FiArrowLeft } from 'react-icons/fi';
+import { AiFillHome } from 'react-icons/ai';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
 import { useProposalState } from 'hooks/Guilds/useProposalState';
@@ -17,7 +18,7 @@ import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
 import { ActionsBuilder } from 'components/ActionsBuilder';
-import { useAccount } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import {
   HeaderTopRow,
@@ -40,6 +41,7 @@ import { useHookStoreProvider } from 'stores';
 import { ProposalVotesCard } from 'components/ProposalVotesCard';
 import { Flex } from 'components/primitives/Layout';
 import { IconButton } from 'components/primitives/Button';
+import { getBlockExplorerUrl } from 'provider';
 
 const ProposalPage: React.FC = () => {
   const {
@@ -56,6 +58,7 @@ const ProposalPage: React.FC = () => {
   const { t } = useTranslation();
   const { connector } = useAccount();
   const { chainName, guildId, proposalId } = useTypedParams();
+  const { chain } = useNetwork();
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
@@ -79,6 +82,10 @@ const ProposalPage: React.FC = () => {
 
   const status = useProposalState(proposal);
   const endTime = useTimeDetail(guildId, status, proposal?.endTime);
+  const executionTxLink = useMemo(() => {
+    if (!proposal?.executionTransactionHash) return null;
+    return getBlockExplorerUrl(chain, proposal?.executionTransactionHash, 'tx');
+  }, [chain, proposal?.executionTransactionHash]);
 
   const executeProposal = useExecuteProposal(guildId);
   const handleExecuteProposal = () => executeProposal(proposalId);
@@ -131,18 +138,41 @@ const ProposalPage: React.FC = () => {
                 customStyles={linkStyles}
               >
                 <IconButton
-                  data-testid="proposal-back-btn"
+                  data-testid="proposal-home-btn"
                   variant="secondary"
                   iconLeft
                   padding={'0.6rem 0.8rem'}
                   marginTop={'5px;'}
                 >
-                  <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                  <AiFillHome style={{ marginRight: '15px' }} />{' '}
                   {guildConfig?.name}
                 </IconButton>
               </StyledLink>
+              {metadata?.discussionRef ? (
+                <StyledLink
+                  to={`/${chainName}/${guildId}/discussion/${metadata?.discussionRef}`}
+                  customStyles={linkStyles}
+                >
+                  <IconButton
+                    data-testid="proposal-back-btn"
+                    variant="secondary"
+                    iconLeft
+                    padding={'0.6rem 0.8rem'}
+                    marginTop={'5px;'}
+                  >
+                    <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                    {t('proposal.backToDiscussion')}
+                  </IconButton>
+                </StyledLink>
+              ) : (
+                <></>
+              )}
 
-              <ProposalStatus status={status} endTime={endTime} />
+              <ProposalStatus
+                status={status}
+                endTime={endTime}
+                executeTxLink={executionTxLink}
+              />
               {status === ProposalState.Executable &&
                 !isReadOnly(connector) && (
                   <ExecuteButton executeProposal={handleExecuteProposal} />

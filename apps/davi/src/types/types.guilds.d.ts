@@ -22,6 +22,7 @@ export interface Proposal {
   votesOfVoter?: UseProposalVotesOfVoterReturn;
   options: Option[];
   votes?: Vote[];
+  executionTransactionHash?: string;
 }
 
 export enum ProposalState {
@@ -42,6 +43,7 @@ export enum ContractState {
 export interface ProposalMetadata {
   description: string;
   voteOptions: string[];
+  discussionRef?: string;
   link?: {
     master: string;
     context: string;

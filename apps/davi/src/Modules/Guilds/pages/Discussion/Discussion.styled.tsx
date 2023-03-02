@@ -4,6 +4,16 @@ import { IconButton } from 'components/primitives/Button';
 
 export const PageContainer = styled(Box)``;
 
+export const ButtonContainer = styled(Box)`
+  display: flex;
+`;
+
+export const TitleContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const SidebarContent = styled(Box)`
   @media only screen and (min-width: 768px) {
     margin-left: 1rem;
@@ -62,4 +72,10 @@ export const PostDetailsRow = styled(Box)`
   display: flex;
   align-items: center;
   gap: 1rem;
+`;
+
+export const PostEditedBadge = styled.span`
+  color: ${({ theme }) => theme.colors.grey};
+  font-size: ${({ theme }) => theme.fontSizes.label};
+  margin-left: 3px;
 `;

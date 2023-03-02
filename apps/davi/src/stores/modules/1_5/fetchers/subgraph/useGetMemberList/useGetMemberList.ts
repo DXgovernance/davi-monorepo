@@ -31,7 +31,5 @@ export const useGetMemberList: IUseGetMemberList = (daoId: string) => {
     });
   }, [data?.dao?.reputationToken?.members]);
 
-  debugger;
-
   return { data: membersList, isLoading: loading, isError: !!error };
 };

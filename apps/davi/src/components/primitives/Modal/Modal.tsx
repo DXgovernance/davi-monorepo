@@ -85,7 +85,7 @@ export const Modal: React.FC<ModalProps> = ({
                 {!backnCross && (
                   <>
                     <HeaderText data-testid="modal-title">{header}</HeaderText>
-                    <CloseIcon onClick={onDismiss} />
+                    <CloseIcon data-testid="close-modal" onClick={onDismiss} />
                   </>
                 )}
                 {backnCross && (

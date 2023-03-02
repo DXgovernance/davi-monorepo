@@ -23,6 +23,7 @@ import {
 } from 'hooks/Guilds/contracts/useRichContractRegistry';
 import { Call, Option } from 'components/ActionsBuilder/types';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
+import { useTotalLocked } from '../../subgraph';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
@@ -76,6 +77,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const [options, setOptions] = useState<Option[]>([]);
+  const { data: totalLocked } = useTotalLocked(daoId, proposal?.id);
 
   const toArray = proposal?.to;
   const dataArray = proposal?.data;
@@ -115,9 +117,6 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
     }
 
     let cancelled = false;
-
-    // TODO: useTotalLocked hook when ready
-    const totalLocked = BigNumber.from(1000000000000000); //! HARDCODED
 
     const populateOption = async (
       actions: Call[],
@@ -187,6 +186,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
     daoId,
     proposal?.id,
     proposal?.totalVotes,
+    totalLocked,
     contracts,
     chain,
     calls,

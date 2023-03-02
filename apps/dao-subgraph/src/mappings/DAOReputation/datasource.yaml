@@ -1,5 +1,6 @@
 entities:
   - Member
+  - ReputationToken
 eventHandlers:
   - event: Mint(indexed address,uint256)
     handler: handleMint

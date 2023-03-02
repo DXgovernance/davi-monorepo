@@ -1,0 +1,10 @@
+query getDaoProposalIds($id: ID!) {
+  dao(id: $id) {
+    schemes {
+      proposals {
+        id
+      }
+    }
+  }
+}
+

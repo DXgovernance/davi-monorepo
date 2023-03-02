@@ -4,16 +4,14 @@ import { ProposalInfoCard } from 'components/ProposalInfoCard';
 import { ProposalStatus } from 'components/ProposalStatus';
 import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { Loading } from 'components/primitives/Loading';
 import { Result, ResultState } from 'components/Result';
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FiArrowLeft } from 'react-icons/fi';
 import { AiFillHome } from 'react-icons/ai';
 import ProposalVoteCardWrapper from 'Modules/Guilds/Wrappers/ProposalVoteCardWrapper';
 import { ExecuteButton } from 'components/ExecuteButton';
-import { useProposalState } from 'hooks/Guilds/useProposalState';
 import { ProposalState } from 'types/types.guilds.d';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import useVotingPowerPercent from 'Modules/Guilds/Hooks/useVotingPowerPercent';
@@ -31,8 +29,6 @@ import {
   SidebarContent,
 } from './Proposal.styled';
 import { useTranslation } from 'react-i18next';
-import useTimeDetail from 'Modules/Guilds/Hooks/useTimeDetail';
-import useGuildImplementationTypeConfig from 'Modules/Guilds/Hooks/useGuildImplementationType';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
 import { Header as CardHeader } from 'components/Card';
 import { Discussion } from 'components/Discussion';
@@ -51,7 +47,8 @@ const ProposalPage: React.FC = () => {
         useProposal,
         useTotalLocked,
         useGuildConfig,
-        useGuildProposalIds,
+        useProposalState,
+        useTimeDetail,
       },
     },
   } = useHookStoreProvider();
@@ -60,13 +57,8 @@ const ProposalPage: React.FC = () => {
   const { chainName, guildId, proposalId } = useTypedParams();
   const { chain } = useNetwork();
 
-  const { isLoading: isGuildAvailabilityLoading } = useContext(
-    GuildAvailabilityContext
-  );
-  const { data: proposalIds } = useGuildProposalIds(guildId);
   const { data: proposal, error } = useProposal(guildId, proposalId);
   const { data: guildConfig } = useGuildConfig(guildId);
-  const { loaded } = useGuildImplementationTypeConfig(guildId);
   const { context } = useDiscussionContext(`${guildId}-${proposalId}`);
 
   const { data: metadata, error: metadataError } = useProposalMetadata(
@@ -90,135 +82,126 @@ const ProposalPage: React.FC = () => {
   const executeProposal = useExecuteProposal(guildId);
   const handleExecuteProposal = () => executeProposal(proposalId);
 
-  if (!loaded) {
-    return <></>;
-  } else {
-    if (!isGuildAvailabilityLoading) {
-      if (proposalIds && proposalIds.includes(proposalId) === false) {
-        return (
-          <Result
-            state={ResultState.ERROR}
-            title="We couldn't find that proposal."
-            subtitle="It probably doesn't exist."
-            extra={
-              <StyledLink
-                to={`/${chainName}/${guildId}`}
-                customStyles={linkStyles}
-              >
-                <IconButton
-                  variant="secondary"
-                  iconLeft
-                  padding={'0.6rem 0.8rem'}
-                  marginTop={'5px;'}
-                >
-                  <FiArrowLeft style={{ marginRight: '15px' }} />{' '}
-                  {t('proposal.seeAllProposals')}
-                </IconButton>
-              </StyledLink>
-            }
-          />
-        );
-      } else if (error) {
-        return (
-          <Result
-            state={ResultState.ERROR}
-            title={t('proposal.errors.genericProposalError')}
-            subtitle={error.message}
-          />
-        );
-      }
-    }
+  if (!proposalId || !proposal) {
     return (
-      <PageContainer>
-        <PageContent>
-          <PageHeader>
-            <HeaderTopRow>
-              <StyledLink
-                to={`/${chainName}/${guildId}`}
-                customStyles={linkStyles}
-              >
-                <IconButton
-                  data-testid="proposal-home-btn"
-                  variant="secondary"
-                  iconLeft
-                  padding={'0.6rem 0.8rem'}
-                  marginTop={'5px;'}
-                >
-                  <AiFillHome style={{ marginRight: '15px' }} />{' '}
-                  {guildConfig?.name}
-                </IconButton>
-              </StyledLink>
-              {metadata?.discussionRef ? (
-                <StyledLink
-                  to={`/${chainName}/${guildId}/discussion/${metadata?.discussionRef}`}
-                  customStyles={linkStyles}
-                >
-                  <IconButton
-                    data-testid="proposal-back-btn"
-                    variant="secondary"
-                    iconLeft
-                    padding={'0.6rem 0.8rem'}
-                    marginTop={'5px;'}
-                  >
-                    <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
-                    {t('proposal.backToDiscussion')}
-                  </IconButton>
-                </StyledLink>
-              ) : (
-                <></>
-              )}
-
-              <ProposalStatus
-                status={status}
-                endTime={endTime}
-                executeTxLink={executionTxLink}
-              />
-              {status === ProposalState.Executable &&
-                !isReadOnly(connector) && (
-                  <ExecuteButton executeProposal={handleExecuteProposal} />
-                )}
-            </HeaderTopRow>
-            <PageTitle data-testid="proposal-page-title">
-              {proposal?.title || (
-                <Loading loading text skeletonProps={{ width: '800px' }} />
-              )}
-            </PageTitle>
-            <Flex direction="row" justifyContent="left">
-              {t('proposal.createdBy')}
-              <AddressButton address={proposal?.creator} />
-            </Flex>
-          </PageHeader>
-          <ProposalDescription metadata={metadata} error={metadataError} />
-          <ProposalActionsWrapper>
-            <ActionsBuilder options={proposal?.options} editable={false} />
-          </ProposalActionsWrapper>
-          <SidebarCard
-            header={
-              <SidebarCardHeaderSpaced>
-                <CardHeader>
-                  {t('discussions.activity.discussionTitle')}
-                </CardHeader>
-              </SidebarCardHeaderSpaced>
-            }
-          >
-            <Discussion context={context} master={''} />
-          </SidebarCard>
-        </PageContent>
-        <SidebarContent>
-          <ProposalVoteCardWrapper
-            proposal={proposal}
-            proposalMetadata={metadata}
-          />
-          <ProposalVotesCard votes={proposal?.votes} />
-          <ProposalInfoCard
-            proposal={proposal}
-            guildConfig={guildConfig}
-            quorum={quorum}
-          />
-        </SidebarContent>
-      </PageContainer>
+      <Result
+        state={ResultState.ERROR}
+        title={t('proposal.errors.couldntFindTheProposal')}
+        subtitle={t('proposal.errors.probablyNonExistent')}
+        extra={
+          <StyledLink to={`/${chainName}/${guildId}`} customStyles={linkStyles}>
+            <IconButton
+              variant="secondary"
+              iconLeft
+              padding={'0.6rem 0.8rem'}
+              marginTop={'5px;'}
+            >
+              <FiArrowLeft style={{ marginRight: '15px' }} />{' '}
+              {t('proposal.seeAllProposals')}
+            </IconButton>
+          </StyledLink>
+        }
+      />
+    );
+  } else if (error) {
+    return (
+      <Result
+        state={ResultState.ERROR}
+        title={t('proposal.errors.genericProposalError')}
+        subtitle={error.message}
+      />
     );
   }
+
+  return (
+    <PageContainer>
+      <PageContent>
+        <PageHeader>
+          <HeaderTopRow>
+            <StyledLink
+              to={`/${chainName}/${guildId}`}
+              customStyles={linkStyles}
+            >
+              <IconButton
+                data-testid="proposal-home-btn"
+                variant="secondary"
+                iconLeft
+                padding={'0.6rem 0.8rem'}
+                marginTop={'5px;'}
+              >
+                <AiFillHome style={{ marginRight: '15px' }} />{' '}
+                {guildConfig?.name}
+              </IconButton>
+            </StyledLink>
+            {metadata?.discussionRef ? (
+              <StyledLink
+                to={`/${chainName}/${guildId}/discussion/${metadata?.discussionRef}`}
+                customStyles={linkStyles}
+              >
+                <IconButton
+                  data-testid="proposal-back-btn"
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                >
+                  <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                  {t('proposal.backToDiscussion')}
+                </IconButton>
+              </StyledLink>
+            ) : (
+              <></>
+            )}
+
+            <ProposalStatus
+              status={status}
+              endTime={endTime}
+              executeTxLink={executionTxLink}
+            />
+            {status === ProposalState.Executable && !isReadOnly(connector) && (
+              <ExecuteButton executeProposal={handleExecuteProposal} />
+            )}
+          </HeaderTopRow>
+          <PageTitle data-testid="proposal-page-title">
+            {proposal?.title || (
+              <Loading loading text skeletonProps={{ width: '800px' }} />
+            )}
+          </PageTitle>
+          <Flex direction="row" justifyContent="left">
+            {t('proposal.createdBy')}
+            <AddressButton address={proposal?.creator} />
+          </Flex>
+        </PageHeader>
+        <ProposalDescription metadata={metadata} error={metadataError} />
+        <ProposalActionsWrapper>
+          <ActionsBuilder options={proposal?.options} editable={false} />
+        </ProposalActionsWrapper>
+        <SidebarCard
+          header={
+            <SidebarCardHeaderSpaced>
+              <CardHeader>
+                {t('discussions.activity.discussionTitle')}
+              </CardHeader>
+            </SidebarCardHeaderSpaced>
+          }
+        >
+          <Discussion context={context} master={''} />
+        </SidebarCard>
+      </PageContent>
+      <SidebarContent>
+        <ProposalVoteCardWrapper
+          proposal={proposal}
+          proposalMetadata={metadata}
+        />
+        <ProposalVotesCard votes={proposal?.votes} />
+        <ProposalInfoCard
+          proposal={proposal}
+          guildConfig={guildConfig}
+          quorum={quorum}
+        />
+      </SidebarContent>
+    </PageContainer>
+  );
 };
 
 export default ProposalPage;

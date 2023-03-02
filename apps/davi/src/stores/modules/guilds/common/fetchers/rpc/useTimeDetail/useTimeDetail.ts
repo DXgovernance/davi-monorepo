@@ -1,15 +1,14 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import { useHookStoreProvider } from 'stores';
-import { ProposalState } from 'types/types.guilds.d';
 import { isBeforeCurrentTime } from 'utils/time/time';
 import useTimeDifferenceHumanized from 'hooks/Guilds/time/useTimeDifferenceHumanized';
+import { FetcherHooksInterface } from 'stores/types';
+import { ProposalState } from 'types/types.guilds.d';
 
-const useTimeDetail = (
-  guildId: string,
-  status: ProposalState,
-  endTime: Moment
-) => {
+type IUseTimeDetail = FetcherHooksInterface['useTimeDetail'];
+
+export const useTimeDetail: IUseTimeDetail = (guildId, status, endTime) => {
   const { t } = useTranslation();
   const {
     hooks: {
@@ -42,5 +41,3 @@ const useTimeDetail = (
 
   return { detail: endTimeDetail, moment: endTimeMoment };
 };
-
-export default useTimeDetail;

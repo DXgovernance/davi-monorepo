@@ -1,6 +1,12 @@
 import { BigNumber } from 'ethers';
+import { Moment } from 'moment';
 import { Option, Permission } from 'components/ActionsBuilder/types';
-import { Proposal, GuildConfigProps, Vote } from 'types/types.guilds.d';
+import {
+  Proposal,
+  GuildConfigProps,
+  Vote,
+  ProposalState,
+} from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -138,6 +144,12 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useProposalState: (proposal: Proposal) => ProposalState;
+  useTimeDetail: (
+    daoId: string,
+    status: ProposalState,
+    endTime: Moment
+  ) => { detail: string; moment: Moment };
 }
 
 export interface WriterHooksInteface {

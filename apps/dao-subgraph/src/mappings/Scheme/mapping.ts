@@ -47,6 +47,10 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
 
   const proposalTimes = votingMachineContract.getProposalTimes(proposalId);
 
+  const proposalVotes = votingMachineContract.getProposalStatus(proposalId);
+  const negativeVotes = proposalVotes.getVotesNo();
+  const positiveVotes = proposalVotes.getVotesYes();
+
   let proposal = Proposal.load(proposalId.toHexString());
   if (!proposal) {
     proposal = new Proposal(proposalId.toHexString());
@@ -87,6 +91,7 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
     votingMachineExecutionStateArray[
       proposalDataFromVotingMachine.getExecutionState()
     ];
+  proposal.totalVotes = [negativeVotes, positiveVotes];
   proposal.winningVote = proposalDataFromVotingMachine.getWinningVote();
   proposal.proposer = proposalDataFromVotingMachine.getProposer().toHexString();
   proposal.currentBoostedVotePeriodLimit =

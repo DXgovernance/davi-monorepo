@@ -17,6 +17,7 @@ type Proposal @entity {
   callbacks: String
   votingMachineProposalState: VotingMachineProposalState
   votingMachineExecutionState: VotingMachineExecutionState
+  totalVotes: [BigInt!]
   winningVote: BigInt
   proposer: String
   currentBoostedVotePeriodLimit: BigInt

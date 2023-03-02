@@ -6,13 +6,17 @@ import {
   Redeem,
   VoteLog,
   VotingMachineProposalStateLog,
+  Proposal,
 } from '../../types/schema';
 import {
   VoteProposal,
   Stake as StakeEvent,
   Redeem as RedeemEvent,
 } from '../../types/templates/VotingMachine/VotingMachine';
-import { StateChange } from '../../types/templates/Scheme/VotingMachine';
+import {
+  StateChange,
+  VotingMachine as VotingMachineContract,
+} from '../../types/templates/Scheme/VotingMachine';
 
 const votingMachineProposalStateArray = [
   'None',
@@ -30,9 +34,23 @@ export function handleVoteProposal(event: VoteProposal): void {
   const voterAddress = event.params.voter.toHexString();
   const voteId = `${proposalId}-${voterAddress}`;
 
+  const votingMachineContract = VotingMachineContract.bind(event.address);
+
   const avatarAddress = event.params.avatar;
   const avatar = DAO.load(avatarAddress.toHexString());
   if (!avatar) return;
+
+  // Update votes on proposal
+  let proposal = Proposal.load(proposalId);
+  if (!proposal) return;
+  const proposalVotes = votingMachineContract.getProposalStatus(
+    event.params.proposalId
+  );
+  const negativeVotes = proposalVotes.getVotesNo();
+  const positiveVotes = proposalVotes.getVotesYes();
+
+  proposal.totalVotes = [negativeVotes, positiveVotes];
+  proposal.save();
 
   // Handle new vote entity
 

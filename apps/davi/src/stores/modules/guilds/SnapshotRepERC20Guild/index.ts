@@ -22,6 +22,8 @@ import {
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
   useGuildProposalIds,
+  useProposalState,
+  useTimeDetail,
 } from '../common/fetchers/rpc';
 import {
   useGuildConfig as useGuildConfigFromSubgraph,
@@ -79,6 +81,8 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
           useGuildProposalIds: useGuildProposalIdsFromSubgraph,
+          useProposalState,
+          useTimeDetail,
         },
         fallback: {
           useProposal,
@@ -99,6 +103,8 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
           useGetAllPermissions,
           useGetNumberOfActiveProposals,
           useGuildProposalIds,
+          useProposalState,
+          useTimeDetail,
         },
       },
       writers: {

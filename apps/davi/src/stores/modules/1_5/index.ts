@@ -1,13 +1,24 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
-import { useGetAllPermissions } from './fetchers/subgraph/useGetAllPermissions';
-import { useGetMemberList } from './fetchers/subgraph/useGetMemberList';
-import { useGuildConfig } from './fetchers/subgraph/useGuildConfig';
-import { useMemberCount } from './fetchers/subgraph/useMemberCount';
-import { useTotalLocked } from './fetchers/subgraph/useTotalLocked';
-import { useVotingPowerOf } from './fetchers/subgraph/useVotingPowerOf';
+import {
+  useProposalState,
+  useTimeDetail,
+  useIsProposalCreationAllowed,
+} from './fetchers/rpc';
+import {
+  useProposal,
+  useGuildProposalIds,
+  useGetNumberOfActiveProposals,
+  useProposalVotesOfVoter,
+  useTotalLocked,
+  useVotingPowerOf,
+  useMemberCount,
+  useGuildConfig,
+  useGetMemberList,
+  useGetAllPermissions,
+} from './fetchers/subgraph';
 import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
-import { useWithdrawTokens } from './writers/useWithdrawTokens';
+import { useWithdrawTokens } from './writers';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -18,13 +29,13 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
     hooks: {
       fetchers: {
         default: {
-          useProposal: null,
+          useProposal,
           useSnapshotId: null,
           useTotalLocked,
           useDAOToken: null,
-          useIsProposalCreationAllowed: null,
-          useProposalVotesOfVoter: null,
           useVoterLockTimestamp,
+          useIsProposalCreationAllowed,
+          useProposalVotesOfVoter,
           useProposalCalls: null,
           useVotingResults: null,
           useVotingPowerOf,
@@ -34,8 +45,10 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGetVotes: null,
           useGetMemberList,
           useGetAllPermissions,
-          useGetNumberOfActiveProposals: null,
-          useGuildProposalIds: null,
+          useGetNumberOfActiveProposals,
+          useGuildProposalIds,
+          useProposalState,
+          useTimeDetail,
         },
         fallback: {
           useProposal: null,
@@ -56,6 +69,8 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGetAllPermissions: null,
           useGetNumberOfActiveProposals: null,
           useGuildProposalIds: null,
+          useProposalState: null,
+          useTimeDetail: null,
         },
       },
       writers: {
@@ -64,7 +79,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         useExecuteProposal: null,
         useLockTokens: null,
         useVoteOnProposal: null,
-        useWithdrawTokens: useWithdrawTokens,
+        useWithdrawTokens,
       },
     },
     capabilities: {

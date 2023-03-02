@@ -24,5 +24,3 @@ export const useProposalState = (proposal: Proposal): ProposalState => {
       return null;
   }
 };
-
-export default useProposalState;

@@ -1,6 +1,6 @@
-import { DecodedCall } from 'components/ActionsBuilder/types';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
+import { DecodedCall } from 'components/ActionsBuilder/types';
 
 interface IUseTotalSupply {
   decodedCall: DecodedCall;

@@ -20,13 +20,13 @@ describe('Check Project-DAVI', () => {
     it('Check Wallet options modal', () => {  
         LandingPage.openWalletModal();   
         LandingPage.checkWalletOptions();
-        clickAnywhereToClose();
+        cy.closeModal()
     });
 
     it('Check Network options modal', () => {  
         LandingPage.openNetworkModal();   
         LandingPage.checkNetworkOptions()
-        clickAnywhereToClose();
+        cy.closeModal()
     });
 
     it('Check Footer links', () => {

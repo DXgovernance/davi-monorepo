@@ -9,6 +9,7 @@
 // ***********************************************
 
 import '@testing-library/cypress/add-commands';
+import "@synthetixio/synpress/support";
 // Synpress types -> https://github.com/Synthetixio/synpress/blob/master/support/index.d.ts
 // Synpress commands -> https://github.com/Synthetixio/synpress/blob/master/plugins/index.js
 declare global {
@@ -18,7 +19,7 @@ declare global {
        * Include custom cy.command types
        */
       // customCyCommandType(param?: string): Cypress.Chainable<Element>;
+      closeModal(): Cypress.Chainable<Element>
     }
   }
-}
-
+} 

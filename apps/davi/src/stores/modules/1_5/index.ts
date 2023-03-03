@@ -16,6 +16,7 @@ import {
   useGuildConfig,
   useGetMemberList,
   useGetAllPermissions,
+  useGetPermissions,
 } from './fetchers/subgraph';
 import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
 import { useWithdrawTokens } from './writers';
@@ -40,7 +41,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useVotingResults: null,
           useVotingPowerOf,
           useMemberCount,
-          useGetPermissions: null,
+          useGetPermissions,
           useGuildConfig,
           useGetVotes: null,
           useGetMemberList,

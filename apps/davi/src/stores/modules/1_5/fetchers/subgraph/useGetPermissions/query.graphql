@@ -1,0 +1,10 @@
+query getPermission($from: String!, $to: String!, $functionSignature: String!) {
+  permissions(
+    where: { from: $from, to: $to, functionSignature: $functionSignature }
+  ) {
+    id
+    valueAllowed
+    fromTime
+  }
+}
+

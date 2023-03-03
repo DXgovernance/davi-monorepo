@@ -85,7 +85,7 @@ export const useTransactionSimulation = () => {
     return `https://dashboard.tenderly.co/public/${TENDERLY_USER}/${TENDERLY_PROJECT}/simulator/${simulationId}`;
   }
 
-  return {simulateTransactions, getSimulationUrl};
+  return { simulateTransactions, getSimulationUrl };
 };
 
 const simulateActions = async (

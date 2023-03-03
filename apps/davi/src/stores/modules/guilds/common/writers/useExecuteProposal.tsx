@@ -13,9 +13,14 @@ export const useExecuteProposal: IExecuteProposal = daoAddress => {
   const daoContract = useERC20Guild(daoAddress);
 
   const handleExecuteProposal: IHandleExecuteProposal = useCallback(
-    async proposalId => {
+    async proposal => {
       createTransaction(t('proposal.actions.executeProposal'), async () => {
-        return daoContract.endProposal(proposalId);
+        try {
+          return daoContract.endProposal(proposal.id);
+        } catch (e) {
+          console.error(e);
+          return null;
+        }
       });
     },
     [daoContract, createTransaction, t]

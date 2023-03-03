@@ -173,8 +173,8 @@ export interface WriterHooksInteface {
   ) => Promise<void>;
   useExecuteProposal: (
     daoAddress: string,
-    schemeAddress?: string
-  ) => (proposalId: `0x${string}`, winningOption?: number) => Promise<void>;
+    subDaoAddress?: string
+  ) => (proposal: Proposal) => Promise<void>;
   useLockTokens: (
     daoAddress: string
   ) => (

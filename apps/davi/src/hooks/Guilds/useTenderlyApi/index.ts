@@ -17,8 +17,6 @@ export const useTransactionSimulation = () => {
       // because the bundled simulation API skips the subsequent transactions if one fails.
       let failedTransactions = 0;
 
-      console.log({ options });
-
       /**
        * Loops through each option.
        */
@@ -31,10 +29,6 @@ export const useTransactionSimulation = () => {
         const simulationResults = (
           await simulateActions(actionsPayload, chain?.id)
         )?.simulation_results;
-
-        console.log({ simulationResults });
-
-        debugger;
 
         let simulatedActionPointer = 0;
 
@@ -67,9 +61,6 @@ export const useTransactionSimulation = () => {
           simulatedActionPointer++;
           shouldDoubleIncrement ? (j += 2) : j++;
         }
-
-        // const simulationUrls = simulationResults.simulation_results.map(result => result?.simulation?.id ? `https://dashboard.tenderly.co/public/${TENDERLY_USER}/${TENDERLY_PROJECT}/simulator/${result.simulation.id}` : null)
-        // console.log(simulationUrls);
       }
 
       return { options, failedTransactions, error: null };
@@ -85,7 +76,7 @@ export const useTransactionSimulation = () => {
     return `https://dashboard.tenderly.co/public/${TENDERLY_USER}/${TENDERLY_PROJECT}/simulator/${simulationId}`;
   }
 
-  return {simulateTransactions, getSimulationUrl};
+  return { simulateTransactions, getSimulationUrl };
 };
 
 const simulateActions = async (

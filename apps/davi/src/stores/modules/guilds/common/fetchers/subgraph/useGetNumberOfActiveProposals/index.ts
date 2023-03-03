@@ -9,9 +9,11 @@ import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/ev
 import { useNetwork } from 'wagmi';
 import { getApolloClient } from 'clients/apollo';
 import { SupportedSubgraph } from 'stores/types';
+import { useBackoff } from '../utils/backoff';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   const { chain } = useNetwork();
+  const { backoff } = useBackoff();
 
   const { data, refetch, loading, error } =
     useQuery<getNumberOfActiveProposalsQuery>(
@@ -25,7 +27,7 @@ export const useGetNumberOfActiveProposals = (guildAddress: string) => {
     if (!data?.guild) return undefined;
     return BigNumber.from(data.guild.proposals.length);
   }, [data]);
-  useListenToProposalStateChanged(guildAddress, refetch);
+  useListenToProposalStateChanged(guildAddress, () => backoff(refetch));
   return {
     data: transformedData,
     isLoading: loading,

@@ -12,11 +12,13 @@ import { getGuildOptionLabel } from 'utils/proposals';
 import { Vote } from 'types/types.guilds.d';
 import { useNetwork } from 'wagmi';
 import { getApolloClient } from 'clients/apollo';
+import { useBackoff } from '../utils/backoff';
 
 type IUseGetVotes = FetcherHooksInterface['useGetVotes'];
 
 export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
   const { chain } = useNetwork();
+  const { backoff } = useBackoff();
 
   const {
     hooks: {
@@ -55,7 +57,7 @@ export const useGetVotes: IUseGetVotes = (guildId, proposal) => {
     });
   }, [data?.proposal?.votes, proposalMetadata, t, totalLocked]);
 
-  useListenToVoteAdded(guildId, refetch, proposal?.id);
+  useListenToVoteAdded(guildId, () => backoff(refetch), proposal?.id);
 
   return {
     data: parsedData,

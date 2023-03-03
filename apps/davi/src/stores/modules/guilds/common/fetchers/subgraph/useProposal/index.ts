@@ -17,6 +17,7 @@ import {
 } from 'stores/modules/guilds/common/events';
 import { useNetwork } from 'wagmi';
 import { getApolloClient } from 'clients/apollo';
+import { useBackoff } from '../utils/backoff';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -42,6 +43,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
   } = useHookStoreProvider();
 
   const { t } = useTranslation();
+  const { backoff } = useBackoff();
   const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
   const { data: totalLocked } = useTotalLocked(daoId, proposalId);
 
@@ -114,8 +116,8 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
 
   if (parsedProposalData && options) parsedProposalData.options = options;
 
-  useListenToProposalStateChanged(daoId, refetch, proposalId);
-  useListenToVoteAdded(daoId, refetch, proposalId);
+  useListenToProposalStateChanged(daoId, () => backoff(refetch), proposalId);
+  useListenToVoteAdded(daoId, () => backoff(refetch), proposalId);
 
   return {
     data: parsedProposalData,

@@ -229,12 +229,8 @@ export function handleTokenLocking(event: TokensLocked): void {
 
   if (!member) {
     member = new Member(memberId);
+    member.guildId = guildAddress.toHexString();
     member.address = event.params.voter.toHexString();
-
-    let guildMembersClone = guild.members;
-    guildMembersClone!.push(memberId);
-    guild.members = guildMembersClone;
-    guild.save();
   }
 
   member.tokensLocked = contract.votingPowerOf(event.params.voter);
@@ -262,19 +258,6 @@ export function handleTokenWithdrawal(event: TokensWithdrawn): void {
   let member = Member.load(memberId);
 
   member!.tokensLocked = contract.votingPowerOf(event.params.voter);
-
-  if (member!.tokensLocked == new BigInt(0)) {
-    let guildMembersClone = guild.members;
-    for (let i = 0; i < guildMembersClone!.length; i++) {
-      if (guildMembersClone![i] == memberId) {
-        guildMembersClone!.splice(i, 1);
-      }
-    }
-    guild.members = guildMembersClone;
-
-    guild.save();
-    member!.unset(memberId);
-  }
 }
 
 function isIPFS(contentHash: string): boolean {

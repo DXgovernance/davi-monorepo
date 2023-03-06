@@ -29,33 +29,15 @@ export function handleTransfer(event: Transfer): void {
 
   if (!member) {
     member = new Member(memberId);
+    member.guildId = token!.guildAddress;
     member.address = event.params.to.toHexString();
     member.tokensLocked = new BigInt(0);
-
-    let guildMembersClone = guild.members;
-    guildMembersClone!.push(memberId);
-    guild.members = guildMembersClone;
-
-    guild.save();
   }
 
   member.tokensLocked = tokenContract.balanceOf(
     Address.fromString(member.address)
   );
 
-  if (member.tokensLocked > new BigInt(0)) {
-    member.save();
-  } else {
-    let guildMembersClone = guild.members;
-    for (let i = 0; i < guildMembersClone!.length; i++) {
-      if (guildMembersClone![i] == memberId) {
-        guildMembersClone!.splice(i, 1);
-      }
-    }
-    guild.members = guildMembersClone;
-
-    guild.save();
-    member.unset(memberId);
-  }
+  member.save();
 }
 

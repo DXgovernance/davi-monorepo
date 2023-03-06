@@ -59,6 +59,7 @@ type Vote @entity {
 
 type Member @entity {
   id: ID!
+  guildId: Guild!
   address: String!
   tokensLocked: BigInt!
 }

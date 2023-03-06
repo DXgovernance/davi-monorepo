@@ -82,8 +82,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.minimumTokensLockedForProposalCreation =
     contract.getMinimumTokensLockedForProposalCreation();
   guild.token = token.id;
-
-  const guildMembers: string[] = [];
+  guild.save();
 
   const seedJson = json.fromString(membersSeed);
   const seedJsonObj = seedJson.toObject();
@@ -98,18 +97,15 @@ export function handleGuildInitialized(event: GuildInitialized): void {
       let member = Member.load(memberId);
       if (!member) {
         member = new Member(memberId);
+        member.guildId = guildAddress.toHexString();
         member.address = memberAddress;
         member.tokensLocked = contract.votingPowerOf(
           Address.fromString(memberAddress)
         );
         member.save();
       }
-      guildMembers.push(memberId);
     }
   }
-
-  guild.members = guildMembers;
-  guild.save();
 }
 
 export function handleProposalStateChange(event: ProposalStateChanged): void {
@@ -293,12 +289,8 @@ export function handleTokenLocking(event: TokensLocked): void {
 
   if (!member) {
     member = new Member(memberId);
+    member.guildId = guildAddress.toHexString();
     member.address = event.params.voter.toHexString();
-
-    let guildMembersClone = guild.members;
-    guildMembersClone!.push(memberId);
-    guild.members = guildMembersClone;
-    guild.save();
   }
 
   member.tokensLocked = contract.votingPowerOf(event.params.voter);
@@ -326,19 +318,6 @@ export function handleTokenWithdrawal(event: TokensWithdrawn): void {
   let member = Member.load(memberId);
 
   member!.tokensLocked = contract.votingPowerOf(event.params.voter);
-
-  if (member!.tokensLocked == new BigInt(0)) {
-    let guildMembersClone = guild.members;
-    for (let i = 0; i < guildMembersClone!.length; i++) {
-      if (guildMembersClone![i] == memberId) {
-        guildMembersClone!.splice(i, 1);
-      }
-    }
-    guild.members = guildMembersClone;
-
-    guild.save();
-    member!.unset(memberId);
-  }
 }
 
 function isIPFS(contentHash: string): boolean {

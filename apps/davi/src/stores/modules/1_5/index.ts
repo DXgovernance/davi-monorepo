@@ -17,9 +17,11 @@ import {
   useGetMemberList,
   useGetAllPermissions,
   useGetPermissions,
+  useVotingResults,
 } from './fetchers/subgraph';
+import { useSnapshotId } from './fetchers/subgraph/useSnapshotId';
 import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
-import { useWithdrawTokens } from './writers';
+import { useVoteOnProposal, useWithdrawTokens } from './writers';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -31,14 +33,14 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
       fetchers: {
         default: {
           useProposal,
-          useSnapshotId: null,
+          useSnapshotId,
           useTotalLocked,
           useDAOToken: null,
           useVoterLockTimestamp,
           useIsProposalCreationAllowed,
           useProposalVotesOfVoter,
           useProposalCalls: null,
-          useVotingResults: null,
+          useVotingResults,
           useVotingPowerOf,
           useMemberCount,
           useGetPermissions,
@@ -79,7 +81,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         useCreateProposal: null,
         useExecuteProposal: null,
         useLockTokens: null,
-        useVoteOnProposal: null,
+        useVoteOnProposal,
         useWithdrawTokens,
       },
     },

@@ -9,3 +9,4 @@ export { useMemberCount } from './useMemberCount';
 export { useTotalLocked } from './useTotalLocked';
 export { useVotingPowerOf } from './useVotingPowerOf';
 export { useGetPermissions } from './useGetPermissions';
+export { useVotingResults } from './useVotingResults';

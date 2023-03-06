@@ -28,7 +28,7 @@ const ProposalVoteCardWrapper = ({
   } = useHookStoreProvider();
   const { guildId, proposalId } = useTypedParams();
   const { address: userAddress } = useAccount();
-  const voteData = useVotingResults(guildId, proposalId, proposal?.totalVotes);
+  const voteData = useVotingResults(guildId, proposalId, proposal);
   const { data: userVote } = useProposalVotesOfVoter(
     guildId,
     proposalId,
@@ -43,11 +43,11 @@ const ProposalVoteCardWrapper = ({
     contractAddress: guildId,
     userAddress,
   });
+
   const { data: snapshotId } = useSnapshotId({
     contractAddress: guildId,
     proposalId,
   });
-
   // Get voting power without fallbackSnapshotId
   const { data: votingPowerAtProposalSnapshot } = useVotingPowerOf({
     contractAddress: guildId,

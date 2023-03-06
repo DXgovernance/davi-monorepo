@@ -73,9 +73,6 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
     proposal.title = proposalData.title;
     proposal.contentHash = proposalData.contentHash;
     proposal.totalVotes = proposalData.totalVotes;
-    proposal.votes = [];
-    proposal.options = [];
-    proposal.statesLog = [];
 
     let voteOptionsLabel: string[] = [];
 
@@ -115,12 +112,7 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
 
     for (let i = 0; i < amountOfOptions; i++) {
       let optionId = `${proposalId}-${i}`;
-
       let option = new Option(optionId);
-
-      let optionsCopy = proposal.options;
-      optionsCopy!.push(optionId);
-      proposal.options = optionsCopy;
 
       if (voteOptionsLabel.length == amountOfOptions) {
         if (i == 0) {
@@ -132,7 +124,6 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
 
       option.proposalId = proposalId;
       option.actions = [];
-      option.votes = [];
       option.voteAmount = new BigInt(0);
 
       // Skip Option zero and return actions []
@@ -179,14 +170,11 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
   const proposalStateLogId = `${proposalId}-${newState}-${timestamp}`;
 
   let proposalStateLog = new ProposalStateLog(proposalStateLogId);
+  proposalStateLog.proposalId = proposalId;
   proposalStateLog.state = newState;
   proposalStateLog.timestamp = timestamp;
   proposalStateLog.transactionHash = event.transaction.hash.toHexString();
   proposalStateLog.save();
-
-  let proposalStatesLogCopy = proposal.statesLog;
-  proposalStatesLogCopy!.push(proposalStateLogId);
-  proposal.statesLog = proposalStatesLogCopy;
 
   proposal.contractState = newState;
   proposal.save();
@@ -212,18 +200,9 @@ export function handleVoting(event: VoteAdded): void {
     vote = new Vote(voteId);
     vote.proposalId = proposalId;
     vote.option = event.params.option;
+    vote.optionId = optionId;
     vote.optionLabel = option.label;
     vote.voter = event.params.voter.toHexString();
-
-    // Add vote to proposal array. Refactor to use derived entity
-    let votesCopy = proposal.votes;
-    votesCopy!.push(voteId);
-    proposal.votes = votesCopy;
-
-    // Add vote to options array. Refactor to use derived entity
-    let optionVotesCopy = option.votes;
-    optionVotesCopy.push(voteId);
-    option.votes = optionVotesCopy;
   }
 
   vote.votingPower = event.params.votingPower;

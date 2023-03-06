@@ -79,6 +79,11 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
   proposal.descriptionHash = proposalDataFromScheme.descriptionHash;
   proposal.submittedTime = proposalDataFromScheme.submittedTime;
 
+  // Snapshot
+  proposal.snapshot = schemeContract
+    .proposalSnapshots(proposalId)
+    .toHexString();
+
   // VotingMachine data
 
   proposal.schemeId = proposalDataFromVotingMachine.getSchemeId().toHexString();

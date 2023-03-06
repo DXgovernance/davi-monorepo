@@ -9,7 +9,7 @@ type Proposal @entity {
   title: String!
   contentHash: String!
   contractState: BigInt!
-  guildId: String!
+  guildId: Guild!
   totalVotes: [BigInt!]
   votes: [Vote!] @derivedFrom(field: "proposalId")
   options: [Option!] @derivedFrom(field: "proposalId")

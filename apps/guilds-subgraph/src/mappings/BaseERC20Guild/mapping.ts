@@ -149,14 +149,6 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
 
       option.save();
     }
-
-    let guild = Guild.load(address.toHexString());
-    if (guild) {
-      let proposalsCopy = guild.proposals;
-      proposalsCopy!.push(proposalId);
-      guild.proposals = proposalsCopy;
-      guild.save();
-    }
   }
 
   // executed

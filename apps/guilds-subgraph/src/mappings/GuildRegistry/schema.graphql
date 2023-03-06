@@ -17,7 +17,7 @@ type Guild @entity {
   minimumTokensLockedForProposalCreation: BigInt
   type: GuildType
   permissions: [GuildPermission!]! @derivedFrom(field: "guild")
-  proposals: [Proposal!]
+  proposals: [Proposal!] @derivedFrom(field: "guildId")
   members: [Member!]
   isActive: Boolean
   bytecodeHash: String

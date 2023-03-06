@@ -199,47 +199,43 @@ export function handleVoting(event: VoteAdded): void {
   let contract = BaseERC20Guild.bind(event.address);
   const proposalData = contract.getProposal(event.params.proposalId);
 
+  let optionId = `${proposalId}-${event.params.option}`;
+  let option = Option.load(optionId);
+  if (!option) return;
+
   let vote = Vote.load(voteId);
   let proposal = Proposal.load(proposalId);
+  if (!proposal) return;
 
+  // Create vote
   if (!vote) {
     vote = new Vote(voteId);
     vote.proposalId = proposalId;
-    vote.voter = event.params.voter.toHexString();
-    // TODO: change to event.params.option when merging refactor branch of dxdao-contracts
     vote.option = event.params.option;
-    // TODO: check when one voter votes twice
-    if (proposal) {
-      let votesCopy = proposal.votes;
-      votesCopy!.push(voteId);
-      proposal.votes = votesCopy;
+    vote.optionLabel = option.label;
+    vote.voter = event.params.voter.toHexString();
 
-      const newTotalVotes = proposalData.totalVotes;
-      proposal.totalVotes = newTotalVotes;
+    // Add vote to proposal array. Refactor to use derived entity
+    let votesCopy = proposal.votes;
+    votesCopy!.push(voteId);
+    proposal.votes = votesCopy;
 
-      let optionId = `${proposalId}-${event.params.option}`;
-      let option = Option.load(optionId);
-      // update option data on vote event
-      if (!!option) {
-        let optionVotesCopy = option.votes;
-        const newVoteAmount = newTotalVotes[event.params.option.toI32()];
-        optionVotesCopy.push(voteId);
-
-        option.voteAmount = newVoteAmount;
-        option.votes = optionVotesCopy;
-        option.save();
-
-        vote.optionLabel = option.label;
-      }
-
-      proposal.save();
-    }
+    // Add vote to options array. Refactor to use derived entity
+    let optionVotesCopy = option.votes;
+    optionVotesCopy.push(voteId);
+    option.votes = optionVotesCopy;
   }
-  // TODO: if vote exists update option.voteAmount and push new vote(?)
+
   vote.votingPower = event.params.votingPower;
   vote.transactionHash = event.transaction.hash.toHexString();
-
   vote.save();
+
+  const optionNumber = event.params.option.toI32();
+  option.voteAmount = proposalData.totalVotes[optionNumber];
+  option.save();
+
+  proposal.totalVotes = proposalData.totalVotes;
+  proposal.save();
 }
 
 export function handleTokenLocking(event: TokensLocked): void {

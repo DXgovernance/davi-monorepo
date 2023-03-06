@@ -1,0 +1,12 @@
+{
+  "name": "graph-node",
+  "description": "Localhost graph node",
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "docker compose down && rm -rf ./data build",
+    "dev": "./scripts/dev.sh",
+    "compose-up": "docker compose up"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

@@ -6,6 +6,8 @@ type Guild @entity {
   proposalTime: BigInt
   lockTime: BigInt
   timeForExecution: BigInt
+  votingPowerPercentageForProposalCreation: BigInt
+  votingPowerPercentageForProposalExecution: BigInt
   votingPowerForProposalCreation: BigInt
   votingPowerForProposalExecution: BigInt
   voteGas: BigInt
@@ -21,10 +23,6 @@ type Guild @entity {
   bytecodeHash: String
 }
 
-enum TokenType {
-  ERC20
-}
-
 enum GuildType {
   ERC20Guild
   DXDGuild
@@ -34,7 +32,7 @@ enum GuildType {
 
 type Token @entity {
   id: ID!
-  type: TokenType!
+  type: String!
   name: String!
   symbol: String!
   decimals: Int!

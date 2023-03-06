@@ -1,0 +1,10 @@
+query getTotalLocked($id: ID!) {
+  dao(id: $id) {
+    id
+    reputationToken {
+      id
+      amount
+    }
+  }
+}
+

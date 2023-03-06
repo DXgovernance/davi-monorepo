@@ -1,0 +1,11 @@
+query getGuildConfig1_5($id: ID!) {
+  dao(id: $id) {
+    id
+    reputationToken {
+      id
+      address
+      name
+    }
+  }
+}
+

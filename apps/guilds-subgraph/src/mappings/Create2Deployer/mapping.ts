@@ -10,7 +10,7 @@ import {
 } from '../../types/templates';
 import { Guild } from '../../types/schema';
 
-// TODO: pull correct bytecodes at build time
+// TODO: Use env for this if possible
 const deployedHashedBytecodesJSON = prod;
 
 const parsedJson = json.fromString(deployedHashedBytecodesJSON);

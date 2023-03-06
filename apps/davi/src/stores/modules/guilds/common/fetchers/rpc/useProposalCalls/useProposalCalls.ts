@@ -2,9 +2,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { bulkDecodeCallsFromOptions } from 'hooks/Guilds/contracts/useDecodedCall';
-import { decodeCall } from 'hooks/Guilds/contracts/useDecodedCall';
 import { Call, Option } from 'components/ActionsBuilder/types';
-import { preventEmptyString, ZERO_HASH } from 'utils';
+import { encodeActions } from 'utils';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
 import { useRichContractRegistry } from 'hooks/Guilds/contracts/useRichContractRegistry';
 import { ERC20_APPROVE_SIGNATURE } from 'utils';
@@ -19,7 +18,6 @@ import { getGuildOptionLabel } from 'utils/proposals';
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
 const isApprovalCall = (call: Call) => isApprovalData(call?.data);
-const isZeroHash = (data: string) => data === ZERO_HASH;
 
 type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
@@ -99,40 +97,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
     async function decodeOptions() {
       const encodedOptions: Option[] = await Promise.all(
         splitCalls.map(async (calls, index) => {
-          const filteredActions = calls.filter(
-            call =>
-              !isZeroHash(call?.data) ||
-              !preventEmptyString(call?.value).isZero()
-          );
-          const actions = await Promise.all(
-            filteredActions.map(async call => {
-              if (!!call?.approvalCall) {
-                // If current call is an "spending" call will have a inner approvalCall
-                const { decodedCall: decodedApprovalCall } = await decodeCall(
-                  call?.approvalCall,
-                  contracts,
-                  chain?.id
-                );
-                // Avoid spreading unnecesary approvalCall;
-                const { approvalCall, ...newCall } = call;
-
-                return {
-                  ...newCall,
-                  approval: {
-                    /**
-                     * amount being approved. Is extracted from the decoded approval call data (_value field).
-                     * token is the token address
-                     * More info on how we set these values: bulkEncodeCallsFromOptions function in hooks/Guilds/contracts/useEncodedCall.ts
-                     */
-                    ...decodedApprovalCall,
-                    amount: decodedApprovalCall?.args?._value,
-                    token: decodedApprovalCall?.to,
-                  },
-                };
-              }
-              return call;
-            })
-          );
+          const actions = await encodeActions(calls, contracts, chain?.id);
           const optionLabel = getGuildOptionLabel({
             metadata,
             optionKey: index,

@@ -1,0 +1,16 @@
+query getDaoVotesOfVoter($id: ID!, $proposalId: ID!, $userAddress: String!) {
+  dao(id: $id) {
+    schemes {
+      proposals(where: { id: $proposalId }) {
+        id
+        votes(where: { voterAddress: $userAddress }) {
+          id
+          option
+          reputation
+          voterAddress
+        }
+      }
+    }
+  }
+}
+

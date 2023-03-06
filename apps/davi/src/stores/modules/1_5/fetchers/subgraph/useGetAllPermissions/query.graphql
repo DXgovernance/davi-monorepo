@@ -1,0 +1,12 @@
+query getDaoPermissions($id: String!) {
+  permissions(where: { from: $id }) {
+    id
+    to
+    valueAllowed
+    from
+    fromTime
+    functionSignature
+    allowed
+  }
+}
+

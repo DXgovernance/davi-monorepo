@@ -13,9 +13,7 @@ jest.mock('Modules/Guilds/Hooks/useGuildRegistry', () => ({
 
 describe('useGuildRegistry', () => {
   it('should return guilds in the registry', () => {
-    const { data, isError, isLoading } = useGuildRegistry(
-      MOCK_CONTRACT_ADDRESS
-    );
+    const { data, isLoading, error } = useGuildRegistry(MOCK_CONTRACT_ADDRESS);
     expect(data).toMatchInlineSnapshot(`
       Array [
         "0x0000000000000000000000000000000000000001",
@@ -23,7 +21,7 @@ describe('useGuildRegistry', () => {
         "0x0000000000000000000000000000000000000003",
       ]
     `);
-    expect(isError).toBe(false);
+    expect(error).toBeUndefined();
     expect(isLoading).toBe(false);
   });
 });

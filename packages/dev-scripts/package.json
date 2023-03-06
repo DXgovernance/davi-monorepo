@@ -1,0 +1,44 @@
+{
+  "name": "dev-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf artifacts cache contracts deployments deploy build typechain-types hardhat.config.base.js deploy scripts test types .contracts.json",
+    "copy-contracts": "cp -r node_modules/dxdao-contracts/contracts ./",
+    "copy-config": "cp -r node_modules/dxdao-contracts/hardhat.config.js ./hardhat.config.base.js",
+    "copy-deploy": "cp -r node_modules/dxdao-contracts/deploy ./",
+    "copy-scripts": "cp -r node_modules/dxdao-contracts/scripts ./",
+    "copy-json-contracts": "cp -r node_modules/dxdao-contracts/.contracts.json ./",
+    "copy-tests": "cp -r node_modules/dxdao-contracts/test ./",
+    "compile": "pnpm run copy-contracts && pnpm run copy-config && pnpm run copy-deploy && pnpm run copy-scripts && pnpm run copy-json-contracts && pnpm run copy-tests && hardhat compile",
+    "setup": "hardhat typechain",
+    "dev": "./src/dev.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.1",
+    "@nomiclabs/hardhat-truffle5": "^2.0.7",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@typechain/hardhat": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "dxdao-contracts": "workspace:*",
+    "hardhat": "^2.12.3",
+    "hardhat-dependency-compiler": "^1.1.3",
+    "hardhat-deploy": "^0.11.20",
+    "hardhat-ethernal": "^1.0.0",
+    "moment": "^2.29.4",
+    "ts-node": "^10.9.1",
+    "typechain": "7.0.0",
+    "typescript": "^4.5.5",
+    "ipfs-core": "^0.14.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "4.4.0",
+    "@openzeppelin/contracts-upgradeable": "4.4.0",
+    "openzeppelin-solidity": "2.4.0"
+  }
+}

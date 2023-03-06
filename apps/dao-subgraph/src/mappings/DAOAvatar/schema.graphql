@@ -1,0 +1,7 @@
+type DAO @entity {
+  id: ID!
+  reputationToken: ReputationToken!
+  controllerAddress: String!
+  schemes: [Scheme!] @derivedFrom(field: "avatar")
+}
+

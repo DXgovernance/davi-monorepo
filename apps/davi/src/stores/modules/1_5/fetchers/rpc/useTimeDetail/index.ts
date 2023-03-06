@@ -1,0 +1,1 @@
+export { useTimeDetail } from './useTimeDetail';

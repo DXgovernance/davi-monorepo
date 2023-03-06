@@ -24,7 +24,7 @@ describe('Check create discussion', () => {
 
     it('Accept metamask access', () => {
         cy.acceptMetamaskAccess().should("be.true");
-        clickAnywhereToClose();
+        cy.closeModal()
     });
 
     it('Go to gnosis network', () => {

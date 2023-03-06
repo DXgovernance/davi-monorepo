@@ -3,8 +3,12 @@ import {
   ProposalStateChanged,
   VoteAdded,
 } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
-import { BaseERC20Guild } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
-import { ERC20 } from '../../types/GuildRegistry/ERC20';
+import {
+  BaseERC20Guild,
+  TokensLocked,
+  TokensWithdrawn,
+} from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
+import { ERC20Token } from '../../types/GuildRegistry/ERC20Token';
 import {
   Guild,
   Proposal,
@@ -13,6 +17,7 @@ import {
   Action,
   ProposalStateLog,
   Token,
+  Member,
 } from '../../types/schema';
 import {
   log,
@@ -30,7 +35,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   //   Get token config
   let tokenAddress = contract.getToken();
 
-  let tokenContract = ERC20.bind(tokenAddress);
+  let tokenContract = ERC20Token.bind(tokenAddress);
   let token = Token.load(tokenAddress.toHexString());
   if (!token) {
     token = new Token(tokenAddress.toHexString());
@@ -54,6 +59,10 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.proposalTime = contract.getProposalTime();
   guild.lockTime = contract.getLockTime();
   guild.timeForExecution = contract.getTimeForExecution();
+  guild.votingPowerPercentageForProposalCreation =
+    contract.votingPowerPercentageForProposalCreation();
+  guild.votingPowerPercentageForProposalExecution =
+    contract.votingPowerPercentageForProposalExecution();
   guild.votingPowerForProposalCreation =
     contract.getVotingPowerForProposalCreation();
   guild.votingPowerForProposalExecution =
@@ -228,8 +237,7 @@ export function handleVoting(event: VoteAdded): void {
     vote = new Vote(voteId);
     vote.proposalId = proposalId;
     vote.voter = event.params.voter.toHexString();
-    // TODO: change to event.params.option when merging refactor branch of dxdao-contracts
-    vote.option = event.params.action;
+    vote.option = event.params.option;
     // TODO: check when one voter votes twice
     if (proposal) {
       let votesCopy = proposal.votes;
@@ -239,12 +247,12 @@ export function handleVoting(event: VoteAdded): void {
       const newTotalVotes = proposalData.totalVotes;
       proposal.totalVotes = newTotalVotes;
 
-      let optionId = `${proposalId}-${event.params.action}`;
+      let optionId = `${proposalId}-${event.params.option}`;
       let option = Option.load(optionId);
       // update option data on vote event
       if (!!option) {
         let optionVotesCopy = option.votes;
-        const newVoteAmount = newTotalVotes[event.params.action.toI32()];
+        const newVoteAmount = newTotalVotes[event.params.option.toI32()];
         optionVotesCopy.push(voteId);
 
         option.voteAmount = newVoteAmount;
@@ -261,6 +269,74 @@ export function handleVoting(event: VoteAdded): void {
   vote.transactionHash = event.transaction.hash.toHexString();
 
   vote.save();
+}
+
+export function handleTokenLocking(event: TokensLocked): void {
+  let guildAddress = event.address;
+  let contract = BaseERC20Guild.bind(guildAddress);
+
+  const guild = Guild.load(guildAddress.toHexString());
+
+  if (!guild) return;
+  // Update guild required vp to create and execute proposals
+  guild.votingPowerForProposalCreation =
+    contract.getVotingPowerForProposalCreation();
+  guild.votingPowerForProposalExecution =
+    contract.getVotingPowerForProposalExecution();
+  guild.save();
+
+  const memberId = `${guildAddress.toHexString()}-${event.params.voter.toHexString()}`;
+
+  let member = Member.load(memberId);
+
+  if (!member) {
+    member = new Member(memberId);
+    member.address = event.params.voter.toHexString();
+
+    let guildMembersClone = guild.members;
+    guildMembersClone!.push(memberId);
+    guild.members = guildMembersClone;
+    guild.save();
+  }
+
+  member.tokensLocked = contract.votingPowerOf(event.params.voter);
+
+  member.save();
+}
+
+export function handleTokenWithdrawal(event: TokensWithdrawn): void {
+  let guildAddress = event.address;
+  let contract = BaseERC20Guild.bind(guildAddress);
+
+  const guild = Guild.load(guildAddress.toHexString());
+
+  if (!guild) return;
+
+  // Update guild required vp to create and execute proposals
+  guild.votingPowerForProposalCreation =
+    contract.getVotingPowerForProposalCreation();
+  guild.votingPowerForProposalExecution =
+    contract.getVotingPowerForProposalExecution();
+  guild.save();
+
+  const memberId = `${guildAddress.toHexString()}-${event.params.voter.toHexString()}`;
+
+  let member = Member.load(memberId);
+
+  member!.tokensLocked = contract.votingPowerOf(event.params.voter);
+
+  if (member!.tokensLocked == new BigInt(0)) {
+    let guildMembersClone = guild.members;
+    for (let i = 0; i < guildMembersClone!.length; i++) {
+      if (guildMembersClone![i] == memberId) {
+        guildMembersClone!.splice(i, 1);
+      }
+    }
+    guild.members = guildMembersClone;
+
+    guild.save();
+    member!.unset(memberId);
+  }
 }
 
 function isIPFS(contentHash: string): boolean {

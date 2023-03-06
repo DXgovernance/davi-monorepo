@@ -12,3 +12,5 @@ export { useGetMemberList } from './useGetMemberList';
 export { useGetAllPermissions } from './useGetAllPermissions';
 export { useGetNumberOfActiveProposals } from './useGetNumberOfActiveProposals';
 export { useGuildProposalIds } from './useGuildProposalIds';
+export { useProposalState } from './useProposalState';
+export { useTimeDetail } from './useTimeDetail';

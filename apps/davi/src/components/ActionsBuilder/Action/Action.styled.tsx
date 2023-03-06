@@ -105,6 +105,7 @@ export const SectionBody = styled(Box)`
 
 export const SimulationLinkContainer = styled(Box)`
   display: flex;
+  align-items: center;
   margin-top: 1rem;
 `;
 

@@ -36,9 +36,12 @@ export const useTransactionSimulation = () => {
          * Loops through bundled simulation results and
          * adds to relevant direct decoded actions as well as the approval actions.
          */
-        for (let j = 0; simulatedActionPointer < simulationResults.length; ) {
+        for (
+          let j = 0;
+          simulatedActionPointer < simulationResults.length;
+          j++
+        ) {
           // Double increment of j is needed when there is an approval action embedded
-          let shouldDoubleIncrement = false;
           if (!!options[i].decodedActions[j]?.approval) {
             options[i].decodedActions[j].approval.simulationResult =
               simulationResults[simulatedActionPointer];
@@ -48,7 +51,6 @@ export const useTransactionSimulation = () => {
             }
 
             simulatedActionPointer++;
-            shouldDoubleIncrement = true;
           }
 
           options[i].decodedActions[j].simulationResult =
@@ -59,7 +61,6 @@ export const useTransactionSimulation = () => {
           }
 
           simulatedActionPointer++;
-          shouldDoubleIncrement ? (j += 2) : j++;
         }
       }
 

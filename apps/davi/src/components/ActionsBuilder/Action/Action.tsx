@@ -37,7 +37,7 @@ import {
 } from './Action.styled';
 import { useTransactionSimulation } from 'hooks/Guilds/useTenderlyApi';
 import { ExternalLink } from 'components/primitives/Links/ExternalLink';
-import { Muted } from '../OptionsList/SimulationModal/SimulationModal.styled';
+import { Box } from 'components/primitives/Layout';
 
 interface ActionViewProps {
   call?: Call;
@@ -199,13 +199,10 @@ export const ActionRow: React.FC<ActionViewProps> = ({
               {simulationResult?.simulation && (
                 <DetailWrapper>
                   <>
-                    <SectionHeader>
-                      {t('actionBuilder.simulations.simulationFailed')}
-                    </SectionHeader>
-                    <SectionBody>
-                      {decodedAction.simulationResult.transaction.error_message}
-                    </SectionBody>
                     <SimulationLinkContainer>
+                      <Box>
+                        {t('actionBuilder.simulations.simulationFailed')}
+                      </Box>
                       <ExternalLink
                         href={getSimulationUrl(
                           simulationResult?.simulation?.id
@@ -226,11 +223,10 @@ export const ActionRow: React.FC<ActionViewProps> = ({
               {simulationResult?.simulation && (
                 <DetailWrapper>
                   <>
-                    <SectionHeader>
-                      {t('actionBuilder.simulations.simulationPassed')}
-                    </SectionHeader>
                     <SimulationLinkContainer>
-                      <Muted>{t('actionBuilder.simulations.viewOn')}</Muted>{' '}
+                      <Box>
+                        {t('actionBuilder.simulations.simulationPassed')}
+                      </Box>
                       <ExternalLink
                         href={getSimulationUrl(
                           simulationResult?.simulation?.id

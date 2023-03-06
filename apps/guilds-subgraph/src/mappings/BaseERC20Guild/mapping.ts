@@ -123,8 +123,8 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
       }
 
       option.proposalId = proposalId;
-      option.actions = [];
       option.voteAmount = new BigInt(0);
+      option.save();
 
       // Skip Option zero and return actions []
       if (i > 0) {
@@ -134,20 +134,13 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
           action.optionId = optionId;
           let actionIndex = actionsPerOption * (i - 1) + j;
 
-          if (option.actions) {
-            action.data = data[actionIndex];
-            action.from = address.toHexString();
-            action.to = to[actionIndex];
-            action.value = proposalData.value[actionIndex];
-          }
-          let actionsCopy = option.actions;
-          actionsCopy!.push(actionId);
-          option.actions = actionsCopy;
+          action.data = data[actionIndex];
+          action.from = address.toHexString();
+          action.to = to[actionIndex];
+          action.value = proposalData.value[actionIndex];
           action.save();
         }
       }
-
-      option.save();
     }
   }
 

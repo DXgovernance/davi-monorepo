@@ -32,14 +32,14 @@ type Option @entity {
   id: ID!
   label: String
   proposalId: Proposal!
-  actions: [Action!]
+  actions: [Action!] @derivedFrom(field: "optionId")
   voteAmount: BigInt
   votes: [Vote!] @derivedFrom(field: "optionId")
 }
 
 type Action @entity {
   id: ID!
-  optionId: String!
+  optionId: Option!
   to: String!
   data: String!
   value: BigInt!

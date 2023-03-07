@@ -7,7 +7,7 @@
 import LandingPage from '../../support/pageObjects/LandingPage';
 import AnyGuildPage from '../../support/pageObjects/AnyGuildPage';
 import CreateProposalPage from '../../support/pageObjects/CreateProposalPage';
-import { clickAnywhereToClose, ethereumNetworkGuilds, gnosisNetworkGuilds } from '../../utils';
+import { gnosisNetworkGuilds } from '../../utils';
 const url = Cypress.config().baseUrl;
 
 describe('Check Project-DAVI', () => {

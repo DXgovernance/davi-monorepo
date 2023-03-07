@@ -17,6 +17,7 @@
     "test:coverage": "pnpm run test --coverage",
     "runSmokeLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json --config supportFile='cypress/support/index.ts' -s ./cypress/integration/smoke/SmokeTest.spec.ts",
     "runRegressionLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json --config supportFile='cypress/support/index.ts' -s ./cypress/integration/regression/*.spec.ts",
+    "runWIP": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json --config supportFile='cypress/support/index.ts' -s ./cypress/integration/regression/CreateProposalTest.spec.ts",
     "test:regressionLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runRegressionLocal",
     "test:smokeLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runSmokeLocal",
     "test:smokeQa": "env-cmd -f .env synpress run --configFile ./cypress/config/qa.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",

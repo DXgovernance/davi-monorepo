@@ -26,8 +26,6 @@ export const useGetVotingMachineAddressBySchemeAddress: IUseGetVotingMachineAddr
       }
     );
 
-    debugger;
-
     if (!data || !data.scheme || !data.scheme.votingMachine) return null;
 
     return {

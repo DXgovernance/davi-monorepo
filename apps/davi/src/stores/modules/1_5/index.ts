@@ -1,10 +1,12 @@
 import { FullGovernanceImplementation } from 'stores/types';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+
 import {
   useProposalState,
   useTimeDetail,
   useIsProposalCreationAllowed,
 } from './fetchers/rpc';
+
 import {
   useProposal,
   useGuildProposalIds,
@@ -17,10 +19,10 @@ import {
   useGetMemberList,
   useGetAllPermissions,
   useGetPermissions,
+  useVoterLockTimestamp,
   useVotingResults,
 } from './fetchers/subgraph';
 import { useSnapshotId } from './fetchers/subgraph/useSnapshotId';
-import { useVoterLockTimestamp } from './fetchers/useVoterLockTimestamp';
 import { useVoteOnProposal, useWithdrawTokens } from './writers';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =

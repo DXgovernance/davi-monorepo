@@ -5,66 +5,22 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import {
-  preventEmptyString,
-  ZERO_HASH,
   ERC20_APPROVE_SIGNATURE,
   getGuildOptionLabel,
+  encodeActions,
 } from 'utils';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
 import { FetcherHooksInterface } from 'stores/types';
-import {
-  bulkDecodeCallsFromOptions,
-  decodeCall,
-} from 'hooks/Guilds/contracts/useDecodedCall';
+import { bulkDecodeCallsFromOptions } from 'hooks/Guilds/contracts/useDecodedCall';
 import useProposalMetadata from 'hooks/Guilds/useProposalMetadata';
-import {
-  RichContractData,
-  useRichContractRegistry,
-} from 'hooks/Guilds/contracts/useRichContractRegistry';
+import { useRichContractRegistry } from 'hooks/Guilds/contracts/useRichContractRegistry';
 import { Call, Option } from 'components/ActionsBuilder/types';
 import { EMPTY_CALL } from 'Modules/Guilds/pages/CreateProposal';
+import { useTotalLocked } from '../../subgraph';
 
 const isApprovalData = (data: string) =>
   data && data?.substring(0, 10) === ERC20_APPROVE_SIGNATURE;
 const isApprovalCall = (call: Call) => isApprovalData(call?.data);
-const isZeroHash = (data: string) => data === ZERO_HASH;
-
-const encodeActions = async (
-  calls: Call[],
-  contracts: RichContractData[],
-  chainId: number
-) => {
-  const filteredCalls = calls.filter(
-    call => !isZeroHash(call?.data) || !preventEmptyString(call?.value).isZero()
-  );
-
-  const encodedActions = await Promise.all(
-    filteredCalls.map(async (call: Call) => {
-      if (!!call?.approvalCall) {
-        // If current call is an "spending" call will have a inner approvalCall
-        const { decodedCall: decodedApprovalCall } = await decodeCall(
-          call?.approvalCall,
-          contracts,
-          chainId
-        );
-        // Avoid spreading unnecesary approvalCall;
-        const { approvalCall, ...newCall } = call;
-
-        return {
-          ...newCall,
-          approval: {
-            ...decodedApprovalCall,
-            amount: decodedApprovalCall?.args?._value,
-            token: decodedApprovalCall?.to,
-          },
-        };
-      }
-      return call;
-    })
-  );
-
-  return encodedActions;
-};
 
 type IUseProposalCalls = FetcherHooksInterface['useProposalCalls'];
 
@@ -76,6 +32,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const [options, setOptions] = useState<Option[]>([]);
+  const { data: totalLocked } = useTotalLocked(daoId, proposal?.id);
 
   const toArray = proposal?.to;
   const dataArray = proposal?.data;
@@ -115,9 +72,6 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
     }
 
     let cancelled = false;
-
-    // TODO: useTotalLocked hook when ready
-    const totalLocked = BigNumber.from(1000000000000000); //! HARDCODED
 
     const populateOption = async (
       actions: Call[],
@@ -187,6 +141,7 @@ export const useProposalCalls: IUseProposalCalls = (daoId, proposal) => {
     daoId,
     proposal?.id,
     proposal?.totalVotes,
+    totalLocked,
     contracts,
     chain,
     calls,

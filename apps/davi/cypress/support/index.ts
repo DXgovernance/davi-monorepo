@@ -14,4 +14,6 @@
 // ***********************************************************
 
 import './commands';
-
+Cypress.Commands.add("closeModal", () => {
+  cy.findByTestId('close-modal').click()
+});

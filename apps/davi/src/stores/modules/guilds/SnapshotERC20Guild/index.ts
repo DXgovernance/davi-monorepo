@@ -16,6 +16,7 @@ import {
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
   useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
+  useGetVotingMachineAddressBySchemeAddress,
 } from '../common/fetchers/subgraph';
 
 import {
@@ -84,6 +85,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGuildProposalIds: useGuildProposalIdsFromSubgraph,
           useProposalState,
           useTimeDetail,
+          useGetVotingMachineAddressBySchemeAddress,
         },
         fallback: {
           useProposal,
@@ -106,6 +108,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGuildProposalIds,
           useProposalState,
           useTimeDetail,
+          useGetVotingMachineAddressBySchemeAddress,
         },
       },
       writers: {

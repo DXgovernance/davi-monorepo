@@ -150,6 +150,11 @@ export interface FetcherHooksInterface {
     status: ProposalState,
     endTime: Moment
   ) => { detail: string; moment: Moment };
+  useGetVotingMachineAddressBySchemeAddress: (schemeAddress: string) => {
+    votingMachineAddress: string;
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 
 export interface WriterHooksInteface {

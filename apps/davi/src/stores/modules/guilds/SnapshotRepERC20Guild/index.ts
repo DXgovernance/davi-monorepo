@@ -34,6 +34,7 @@ import {
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
   useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
+  useGetVotingMachineAddressBySchemeAddress,
 } from '../common/fetchers/subgraph';
 import {
   useTotalLocked,
@@ -83,6 +84,7 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
           useGuildProposalIds: useGuildProposalIdsFromSubgraph,
           useProposalState,
           useTimeDetail,
+          useGetVotingMachineAddressBySchemeAddress,
         },
         fallback: {
           useProposal,
@@ -105,6 +107,7 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
           useGuildProposalIds,
           useProposalState,
           useTimeDetail,
+          useGetVotingMachineAddressBySchemeAddress,
         },
       },
       writers: {

@@ -6,6 +6,8 @@ import { ERC20 } from 'dxdao-contracts/types/ERC20';
 import { useProvider, useSigner } from 'wagmi';
 import { useMemo } from 'react';
 import { getContract } from '@wagmi/core';
+import VotingMachineContract from 'contracts/VotingMachine.json';
+import { VotingMachine } from 'dxdao-contracts/types/VotingMachine';
 
 export default function useContract<T extends Contract>(
   contractId: string,
@@ -48,6 +50,19 @@ export function useERC20Guild(
   return useContract<ERC20Guild>(
     contractId,
     BaseERC20GuildContract.abi,
+    chainId,
+    withSignerIfPossible
+  );
+}
+
+export function useVotingMachineContract(
+  votingMachineAddress: string,
+  withSignerIfPossible?: boolean,
+  chainId?: number
+) {
+  return useContract<VotingMachine>(
+    votingMachineAddress,
+    VotingMachineContract.abi,
     chainId,
     withSignerIfPossible
   );

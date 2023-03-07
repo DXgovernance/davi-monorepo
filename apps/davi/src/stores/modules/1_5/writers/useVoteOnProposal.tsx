@@ -2,26 +2,30 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTransactions } from 'contexts/Guilds';
 import { WriterHooksInteface } from 'stores/types';
-import { useERC20Guild } from 'hooks/Guilds/contracts/useContract';
+import { useVotingMachineContract } from 'hooks/Guilds/contracts/useContract';
 
 type IUseVoteOnProposal = WriterHooksInteface['useVoteOnProposal'];
 type IHandleVoteOnProposal = ReturnType<IUseVoteOnProposal>;
 
-export const useVoteOnProposal: IUseVoteOnProposal = daoAddress => {
+export const useVoteOnProposal: IUseVoteOnProposal = (
+  daoAddress,
+  votingMachineAddress
+) => {
   const { t } = useTranslation();
   const { createTransaction } = useTransactions();
-  const daoContract = useERC20Guild(daoAddress, true);
+
+  const votingMachineContract = useVotingMachineContract(votingMachineAddress);
 
   const handleVoteOnProposal: IHandleVoteOnProposal = useCallback(
     async (proposalId, option, votingPower, title = '', cb = null) => {
       createTransaction(
         `${t('voting.voteOnProposal')}${` ${title}` ?? ''}`,
-        async () => daoContract.setVote(proposalId, option, votingPower),
+        async () => votingMachineContract.vote(proposalId, option, votingPower),
         true,
         cb
       );
     },
-    [daoContract, createTransaction, t]
+    [createTransaction, t, votingMachineContract]
   );
 
   return handleVoteOnProposal;

@@ -3,7 +3,7 @@ import { SupportedSubgraph } from 'stores/types';
 
 export const checkDataSourceAvailability = async chainId => {
   try {
-    if (!!subgraphClientsUris?.[chainId]?.[SupportedSubgraph.Governance1_5]) {
+    if (!subgraphClientsUris?.[chainId]?.[SupportedSubgraph.Guilds]) {
       console.debug('No subgraph URL for this chain, using fallback');
       return false;
     }
@@ -18,7 +18,7 @@ export const checkDataSourceAvailability = async chainId => {
    }`;
 
     const response = await fetch(
-      subgraphClientsUris[chainId][SupportedSubgraph.Governance1_5],
+      subgraphClientsUris[chainId][SupportedSubgraph.Guilds],
       {
         method: 'POST',
         headers: {

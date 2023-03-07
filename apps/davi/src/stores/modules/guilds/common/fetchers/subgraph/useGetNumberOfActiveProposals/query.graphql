@@ -6,5 +6,10 @@ query getNumberOfActiveProposals($id: ID!) {
       id
     }
   }
+  _meta {
+    block {
+      number
+    }
+  }
 }
 

@@ -3,11 +3,10 @@ import {
   getGuildConfig1_5Query,
 } from '.graphclient';
 import { useQuery } from '@apollo/client';
-import { apolloClient } from 'clients/apollo';
+import { getApolloClient } from 'clients/apollo';
 import { useMemo } from 'react';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { GuildConfigProps } from 'types/types.guilds';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
 import { useNetwork } from 'wagmi';
 
 type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
@@ -17,12 +16,11 @@ export const useGuildConfig: IUseGuildConfig = (
   proposalId?: `0x${string}`
 ) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getGuildConfig1_5Query>(
     getGuildConfig1_5Document,
     {
-      client: apolloClient[chainId]['Governance1.5'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: { id: daoId?.toLowerCase() },
     }
   );

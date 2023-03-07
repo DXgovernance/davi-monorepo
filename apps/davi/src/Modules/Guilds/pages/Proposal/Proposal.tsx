@@ -146,7 +146,7 @@ const ProposalPage: React.FC = () => {
                   marginTop={'5px;'}
                 >
                   <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
-                  {t('proposal.backToDiscussion')}
+                  {t('proposal.originalDiscussion')}
                 </IconButton>
               </StyledLink>
             ) : (

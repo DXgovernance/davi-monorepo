@@ -32,12 +32,13 @@ import {
   SectionBody,
   SectionHeader,
   Separator,
+  SimulationError,
   SimulationLinkContainer,
+  SimulationStatusContainer,
   TenderlyURLLogo,
 } from './Action.styled';
 import { useTransactionSimulation } from 'hooks/Guilds/useTenderlyApi';
 import { ExternalLink } from 'components/primitives/Links/ExternalLink';
-import { Box } from 'components/primitives/Layout';
 
 interface ActionViewProps {
   call?: Call;
@@ -200,9 +201,9 @@ export const ActionRow: React.FC<ActionViewProps> = ({
                 <DetailWrapper>
                   <>
                     <SimulationLinkContainer>
-                      <Box>
+                      <SimulationStatusContainer>
                         {t('actionBuilder.simulations.simulationFailed')}
-                      </Box>
+                      </SimulationStatusContainer>
                       <ExternalLink
                         href={getSimulationUrl(
                           simulationResult?.simulation?.id
@@ -212,6 +213,11 @@ export const ActionRow: React.FC<ActionViewProps> = ({
                         <TenderlyURLLogo src={tenderlyLogo} />
                       </ExternalLink>
                     </SimulationLinkContainer>
+                    {simulationResult?.transaction?.error_message && (
+                      <SimulationError>
+                        {simulationResult?.transaction?.error_message}
+                      </SimulationError>
+                    )}
                   </>
                 </DetailWrapper>
               )}
@@ -224,9 +230,9 @@ export const ActionRow: React.FC<ActionViewProps> = ({
                 <DetailWrapper>
                   <>
                     <SimulationLinkContainer>
-                      <Box>
+                      <SimulationStatusContainer>
                         {t('actionBuilder.simulations.simulationPassed')}
-                      </Box>
+                      </SimulationStatusContainer>
                       <ExternalLink
                         href={getSimulationUrl(
                           simulationResult?.simulation?.id

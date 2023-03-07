@@ -103,6 +103,15 @@ export const SectionBody = styled(Box)`
   color: ${({ theme }) => theme.colors.grey};
 `;
 
+export const SimulationError = styled(Box)`
+  color: ${({ theme }) => theme.colors.grey};
+  margin-top: 1rem;
+`;
+
+export const SimulationStatusContainer = styled(Box)`
+  margin-right: 0.6rem;
+`;
+
 export const SimulationLinkContainer = styled(Box)`
   display: flex;
   align-items: center;

@@ -7,6 +7,10 @@ export const ProposalDescriptionWrapper = styled.div`
   word-break: break-word;
   text-align: left;
   color: ${({ theme }) => theme.colors.grey2};
+
+  a {
+    color: ${({ theme }) => theme.colors.active};
+  }
 `;
 
 export const ProposalDescriptionContainer = styled.div<{

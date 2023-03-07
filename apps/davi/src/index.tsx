@@ -5,16 +5,16 @@ import moment from 'moment';
 import * as ReactDOMClient from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import { WagmiConfig, useNetwork } from 'wagmi';
+import { useNetwork, WagmiConfig } from 'wagmi';
 import EnsureReadOnlyConnection from 'components/Web3Modals/EnsureReadOnlyConnection';
 import SyncRouterWithWagmi from 'components/Web3Modals/SyncRouterWithWagmi';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { loadFathom } from 'analytics/fathom';
 import { SITE_ID } from 'configs';
 import { ApolloProvider } from '@apollo/client';
-import { apolloClient } from 'clients/apollo';
+import { getApolloClient } from 'clients/apollo';
 import { wagmiClient } from 'clients/wagmi';
-import { DEFAULT_CHAIN_ID } from 'utils';
+import { SupportedSubgraph } from 'stores/types';
 
 initializeI18Next();
 
@@ -30,8 +30,6 @@ moment.updateLocale('en', {
 const Root = () => {
   const { chain } = useNetwork();
 
-  const chainId = useMemo(() => chain?.id || DEFAULT_CHAIN_ID, [chain]);
-
   useEffect(() => {
     loadFathom(SITE_ID)
       .then(() => {
@@ -43,7 +41,9 @@ const Root = () => {
   }, []);
 
   return (
-    <ApolloProvider client={apolloClient[chainId]}>
+    <ApolloProvider
+      client={getApolloClient(SupportedSubgraph.Guilds, chain?.id)}
+    >
       <WagmiConfig client={wagmiClient}>
         <HashRouter>
           <SyncRouterWithWagmi>

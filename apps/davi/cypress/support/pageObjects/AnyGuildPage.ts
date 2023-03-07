@@ -29,10 +29,7 @@ class AnyGuildPage {
   public firstDiscussionCard: string;
   public firstDiscussionCreator: string;
   public firstDiscussionTitle: string;
-  public createDiscussionButton: string;
   public discussionPageCreator: string;
-  public discussionPageTitle: string;
-  public discussionPageDescription: string;
   public discussionPageBackButton: string;
   public creatorName: string;
   public createProposalButton: string;
@@ -59,29 +56,36 @@ class AnyGuildPage {
     this.proposalPageTitle = 'proposal-page-title';
     this.proposalPageBackButton = 'proposal-back-btn';
     this.creatorName = 'creator-address-name';
-    this.createProposalButton = 'create-proposal-btn';
+    this.createProposalButton = 'create-proposal-button';
     // Discussions
     this.allDiscussionPage = 'all-discussions-page';
     this.firstDiscussionCard = 'discussion-card';
     this.firstDiscussionCreator = 'discussion-creator';
     this.firstDiscussionTitle = 'discussion-title';
-    this.discussionPageTitle = 'discussion-page-title';
-    this.discussionPageDescription = 'discussion-page-description';
-    this.createDiscussionButton = 'create-discussion-btn';
     this.discussionPageBackButton = 'discussion-back-btn';
   }
-
+  createDiscussion_Button() { return cy.findAllByTestId("create-discussion-btn");}
+  discussionPageTitle_Text() { return cy.findAllByTestId("discussion-page-title");}
+  discussionPageDescription_Text() { return cy.findAllByTestId("discussion-page-description");}
 
   checkIfYouAreOnSelectedGuildPage(guildName) {
     cy.findAllByTestId(this.guildName).contains(guildName);
   };
+
+  checkDiscussionName(discussionName) {
+    this.discussionPageTitle_Text().should('include.text', discussionName)
+  }
+
+  checkDiscussionDescription(discussionDescription) {
+    this.discussionPageDescription_Text().should('include.text', discussionDescription)
+  }
 
   // Governance page
   checkIfYouAreOnGovernancePage() {
     cy.findByTestId(this.governancePage)
       .contains('Governance')
       .should('have.css', 'color', 'rgb(222, 255, 78)');
-    cy.findByTestId(this.createDiscussionButton).should('be.visible');
+    this.createDiscussion_Button().should('be.visible');
   };
 
   // If there are no Active or Executable proposals there should be message with hyperlink
@@ -115,9 +119,9 @@ class AnyGuildPage {
 
   checkIfYouAreOnAllProposalsPage() {
     cy.findByTestId(this.allProposalsPage)
-      .contains('All Proposals')
-      .should('have.css', 'color','rgb(222, 255, 78)'
-    );
+      .contains('All proposals')
+      .should('have.css', 'color', 'rgb(222, 255, 78)'
+      );
   };
 
   checkStateFilterOptions() {
@@ -125,8 +129,8 @@ class AnyGuildPage {
 
     stateFilterOptions.forEach((option, i) => {
       cy.findAllByTestId(this.stateFilterOption)
-      .eq(i)
-      .contains(option)
+        .eq(i)
+        .contains(option)
     });
   };
 
@@ -134,19 +138,19 @@ class AnyGuildPage {
     cy.findByTestId(this.actionFilterBtn).contains('Action').click();
 
     actionFilterOptions.forEach((option, i) => {
-      cy.findAllByTestId(this.actionFilterBtn)
-      .eq(i)
-      .contains(option)
+      cy.findAllByTestId(this.actionFilterOption)
+        .eq(i)
+        .contains(option)
     });
   };
 
   checkCurrencyFilterOptions() {
-    cy.findByTestId(this.currencyFilterBtn).contains('Currency').click();
-    
+    cy.findByTestId(this.currencyFilterBtn).contains('Token').click();
+
     currencyFilterOptions.forEach((option, i) => {
-      cy.findAllByTestId(this.currencyFilterBtn)
-      .eq(i)
-      .contains(option)
+      cy.findAllByTestId(this.currencyFilterOption)
+        .eq(i)
+        .contains(option)
     });
   };
 
@@ -157,7 +161,7 @@ class AnyGuildPage {
       .get('input[placeholder="Search proposal"]');
   };
 
-   // TODO: improve with assertion of proposal creator
+  // TODO: improve with assertion of proposal creator
   goToFirstProposalPage() {
     cy.findAllByTestId(this.firstProposalTitle).first().click();
   };
@@ -173,15 +177,16 @@ class AnyGuildPage {
 
   checkIfYouAreOnAllDiscussionPage() {
     cy.findByTestId(this.allDiscussionPage)
-      .contains('All Discussions')
-      .should('have.css', 'color','rgb(222, 255, 78)'
-    );
-    cy.findByTestId(this.createDiscussionButton).should('be.visible');
+      .contains('All discussions')
+      .should('have.css', 'color', 'rgb(222, 255, 78)'
+      );
+    this.createDiscussion_Button().should('be.visible');
   };
 
   // TODO: improve with assertion of discussion creator
   goToFirstDiscussionPage() {
-    cy.findAllByTestId(this.firstDiscussionTitle).should('be.visible').click();
+    cy.scrollTo('bottom')
+    cy.findAllByTestId(this.firstDiscussionTitle).eq(0).should('be.visible').click();
   };
 
   returnToGuildPageFromDiscussionPage() {
@@ -200,7 +205,7 @@ class AnyGuildPage {
 
   // Discussion page
   checkIfYouAreOnDiscussionPage() {
-    cy.findByTestId(this.discussionPageTitle).should('be.visible');
+    this.discussionPageTitle_Text().should('be.visible');
     cy.findByTestId(this.creatorName).should('be.visible');
     cy.findByTestId(this.createProposalButton).should('be.visible');
   };

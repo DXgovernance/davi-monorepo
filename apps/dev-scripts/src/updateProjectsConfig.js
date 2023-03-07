@@ -27,7 +27,7 @@ if (fs.existsSync(bytecodesFilePath)) {
   fs.writeFileSync(
     path.resolve(
       __dirname,
-      "../../dxdao-subgraph/src/mappings/Create2Deployer/local.ts"
+      "../../guilds-subgraph/src/mappings/Create2Deployer/local.ts"
     ),
     `export const local = ${JSON.stringify(stringBytecodes)};`
   );
@@ -45,7 +45,7 @@ if (fs.existsSync(addressesFilePath)) {
   // Write addresses to subgraph
   console.log("Writing subgraph local networks.json");
   fs.writeFileSync(
-    path.resolve(__dirname, "../../dxdao-subgraph/networks.json"),
+    path.resolve(__dirname, "../../guilds-subgraph/networks.json"),
     JSON.stringify(
       {
         private: {

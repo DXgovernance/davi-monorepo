@@ -1,4 +1,4 @@
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useQuery } from '@apollo/client';
 import {
   getProposalVotesOfVoterDocument,
@@ -7,6 +7,9 @@ import {
 import { useListenToVoteAdded } from 'stores/modules/guilds/common/events';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
+import { useBackoff } from '../utils/backoff';
 
 type IUseProposalVotesOfVoter =
   FetcherHooksInterface['useProposalVotesOfVoter'];
@@ -16,13 +19,15 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   proposalId: `0x${string}`,
   userAddress: `0x${string}`
 ) => {
-  const userAddressToLower = userAddress.toLowerCase();
+  const { chain } = useNetwork();
+  const { backoff } = useBackoff();
 
   const { data, refetch, loading, error } =
     useQuery<getProposalVotesOfVoterQuery>(getProposalVotesOfVoterDocument, {
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         proposalId: proposalId,
-        userAddress: userAddressToLower,
+        userAddress: userAddress?.toLowerCase(),
       },
     });
 
@@ -42,7 +47,8 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
     }
   }, [data?.proposal?.votes]);
 
-  useListenToVoteAdded(daoAddress, refetch, proposalId);
+  // Listen for events
+  useListenToVoteAdded(daoAddress, () => backoff(refetch), proposalId);
 
   return {
     data: parsedData,

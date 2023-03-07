@@ -34,7 +34,7 @@ const ConfirmRemoveActionModal: React.FC<ConfirmRemoveActionModalProps> = ({
       <Container>
         <TextContainer>
           <Title>
-            {t('actionBuilder.action.areYuoSureYouWantToRemoveAction')}
+            {t('actionBuilder.action.areYouSureYouWantToRemoveAction')}
           </Title>
           <InfoItem>
             {t('actionBuilder.action.theRemovalCannotBeReverted')}
@@ -42,9 +42,7 @@ const ConfirmRemoveActionModal: React.FC<ConfirmRemoveActionModalProps> = ({
         </TextContainer>
 
         <ActionWrapper>
-          <CancelButton onClick={onDismiss}>
-            {t('actionBuilder.modal.cancel')}
-          </CancelButton>
+          <CancelButton onClick={onDismiss}>{t('modals.cancel')}</CancelButton>
           <ConfirmButton onClick={onConfirm}>
             {t('actionBuilder.action.removeAction')}
           </ConfirmButton>

@@ -2,14 +2,18 @@ import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getMemberListDocument, getMemberListQuery } from '.graphclient';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
+import { getApolloClient } from 'clients/apollo';
+import { useNetwork } from 'wagmi';
 
 type IUseGetMemberList = FetcherHooksInterface['useGetMemberList'];
 
 export const useGetMemberList: IUseGetMemberList = guildAddress => {
+  const { chain } = useNetwork();
   const { data, loading, error } = useQuery<getMemberListQuery>(
     getMemberListDocument,
     {
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

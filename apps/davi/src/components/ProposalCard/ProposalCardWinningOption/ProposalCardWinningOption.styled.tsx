@@ -1,10 +1,12 @@
 import { Button } from 'components/primitives/Button';
+import { Flex } from 'components/primitives/Layout';
 import styled from 'styled-components';
-import { IconDetailWrapper } from '../ProposalCard.styled';
 
-export const WinningOptionWrapper = styled(IconDetailWrapper)``;
+export const WinningOptionWrapper = styled(Flex)`
+  flex-direction: row;
+`;
 
-export const OptionVotesAndLabelWrapper = styled(IconDetailWrapper)`
+export const OptionVotesAndLabelWrapper = styled(Flex)`
   display: flex;
   flex: none;
   border: 1px solid ${({ theme }) => theme.colors.border1};

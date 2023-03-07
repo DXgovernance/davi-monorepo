@@ -91,10 +91,10 @@ export const HookStoreProvider: React.FC<
   }, [daoBytecodeHash, dataSource]);
 
   useEffect(() => {
-    const getDataSourceAvailability = () => {
+    const getDataSourceAvailability = async () => {
       if (governanceType) {
         const isDefaultSourceAvailable =
-          governanceType.checkDataSourceAvailability(chain?.id);
+          await governanceType.checkDataSourceAvailability(chain?.id);
         if (isDefaultSourceAvailable && dataSource !== 'primary') {
           setTargetDataSource('primary');
         }

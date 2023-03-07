@@ -4,14 +4,19 @@ import {
   getGuildProposalIdsQuery,
   getGuildProposalIdsDocument,
 } from '.graphclient';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
 
 type IUseGuildProposalIds = FetcherHooksInterface['useGuildProposalIds'];
 
 export const useGuildProposalIds: IUseGuildProposalIds = daoId => {
+  const { chain } = useNetwork();
+
   const { data, loading, error } = useQuery<getGuildProposalIdsQuery>(
     getGuildProposalIdsDocument,
     {
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: { id: daoId?.toLowerCase() },
     }
   );

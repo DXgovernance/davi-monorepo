@@ -1,0 +1,6 @@
+entities:
+  - Permission
+eventHandlers:
+  - event: PermissionSet(address,address,bytes4,uint256,uint256)
+    handler: handlePermissionSet
+

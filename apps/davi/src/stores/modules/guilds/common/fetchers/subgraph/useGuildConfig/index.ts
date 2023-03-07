@@ -1,8 +1,14 @@
+import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
-import { useMemo } from 'react';
 import { ZERO_ADDRESS } from 'utils';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
+import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
+
+type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
 
 export type GuildConfigProps = {
   name: string;
@@ -23,13 +29,23 @@ export type GuildConfigProps = {
   minimumTokensLockedForProposalCreation: BigNumber;
 };
 
-export const useGuildConfig = (guildAddress: string) => {
+export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
+  const { chain } = useNetwork();
+
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: { id: guildAddress?.toLowerCase() },
     }
   );
+
+  const { data: votingPowerForProposalExecution } =
+    useVotingPowerForProposalExecution({
+      contractAddress: guildAddress,
+      proposalId,
+    });
+
   const transformedData: GuildConfigProps = useMemo(() => {
     if (!data?.guild) return undefined;
     const guild = data.guild;
@@ -41,7 +57,6 @@ export const useGuildConfig = (guildAddress: string) => {
       timeForExecution,
       maxActiveProposals,
       votingPowerForProposalCreation,
-      votingPowerForProposalExecution,
       lockTime,
       voteGas,
       maxGasPrice,
@@ -63,9 +78,7 @@ export const useGuildConfig = (guildAddress: string) => {
       votingPowerForProposalCreation: votingPowerForProposalCreation
         ? BigNumber.from(votingPowerForProposalCreation)
         : undefined,
-      votingPowerForProposalExecution: votingPowerForProposalExecution
-        ? BigNumber.from(votingPowerForProposalExecution)
-        : undefined,
+      votingPowerForProposalExecution,
       tokenVault: ZERO_ADDRESS,
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
@@ -80,7 +93,7 @@ export const useGuildConfig = (guildAddress: string) => {
           ? BigNumber?.from(minimumTokensLockedForProposalCreation)
           : undefined,
     };
-  }, [data]);
+  }, [data, votingPowerForProposalExecution]);
 
   return {
     data: transformedData,

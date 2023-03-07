@@ -14,8 +14,7 @@ const UserVote: React.FC<UserVoteProps> = ({
   const { t } = useTranslation();
   const votingPowerPercent = useVotingPowerPercent(
     userVote?.votingPower,
-    voteData?.totalLocked,
-    2
+    voteData?.totalLocked
   );
 
   const voting = `${formatUnits(userVote?.votingPower || 0)} ${

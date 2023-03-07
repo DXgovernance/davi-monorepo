@@ -1,0 +1,35 @@
+{
+  "name": "1-5-subgraph",
+  "description": "Subgraph for DXgov 1.5 Governance",
+  "repository": {
+    "url": "https://github.com/DXgovernance/dxdao-subgraph"
+  },
+  "version": "0.1.0",
+  "scripts": {
+    "codegen": "node scripts/generate-schema.js && node scripts/generate-subgraph.js && graph codegen --output-dir src/types",
+    "build": "graph build",
+    "start-local": "pnpm run codegen && pnpm run create-local && pnpm run deploy-local",
+    "create-local": "graph create dxdao/dxgov-1-5 --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy dxdao/dxgov-1-5 --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020 -l v0.0.1",
+    "deploy": "pnpm run generate-networks && graph deploy dxdao/dxgov-1-5 --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "clean": "rm -rf ./data build",
+    "generate-networks": "node ./scripts/generate-prod-networks.js",
+    "dev": "./scripts/dev.sh"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.30.2",
+    "@graphprotocol/graph-ts": "^0.29.0",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "glob": "^8.0.3",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "js-yaml": "^4.1.0"
+  }
+}
+

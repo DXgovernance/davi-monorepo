@@ -230,6 +230,8 @@
     "proposalDuration": "Proposal Duration",
     "quorum": "Quorum",
     "backToOverview": "Back to Overview",
+    "backToDiscussion": "Back to Discussion",
+    "originalDiscussion": "Original Discussion",
     "seeAllProposals": "See all proposals",
     "createdBy": "Created by",
     "proposalInfoCard": {
@@ -330,6 +332,10 @@
     "retry": "Retry",
     "createAnyway": "Create anyway"
   },
+  "editDiscussion": {
+    "editDiscussion": "Edit Discussion",
+    "savingChanges": "Saving Changes"
+  },
   "discussions": {
     "allDiscussions": "All discussions",
     "discussions_zero": "No Discussions",
@@ -338,9 +344,11 @@
     "thereAreNoDiscussions": "There are no discussions",
     "noMoreDiscussions": "There are no more discussions",
     "createDiscussion": "Create Discussion",
+    "updateDiscussion": "Update Discussion",
     "createDiscussionWordy": "Create a new discussion",
     "discussionPlaceholder": "Write discussion content",
     "title": "Title",
+    "proposalOnOtherChain": "Sorry, this proposal seems to be on another chain, try switching to {{chain}} to view it",
     "postOptions": {
       "edit": "Edit",
       "delete": "Delete"

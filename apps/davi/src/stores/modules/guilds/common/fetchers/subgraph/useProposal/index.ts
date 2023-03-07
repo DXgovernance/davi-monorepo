@@ -5,7 +5,7 @@ import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
 import { getProposalDocument, getProposalQuery } from '.graphclient';
 import { useHookStoreProvider } from 'stores';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useProposalCalls } from 'stores/modules/guilds/common/fetchers/rpc';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { getBigNumberPercentage } from 'utils/bnPercentage';
@@ -15,13 +15,19 @@ import {
   useListenToProposalStateChanged,
   useListenToVoteAdded,
 } from 'stores/modules/guilds/common/events';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
+import { useBackoff } from '../utils/backoff';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
+  const { chain } = useNetwork();
+
   const { data, refetch, error } = useQuery<getProposalQuery>(
     getProposalDocument,
     {
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         proposalId: proposalId?.toLowerCase(),
@@ -37,6 +43,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
   } = useHookStoreProvider();
 
   const { t } = useTranslation();
+  const { backoff } = useBackoff();
   const { data: proposalMetadata } = useProposalMetadata(proposal?.contentHash);
   const { data: totalLocked } = useTotalLocked(daoId, proposalId);
 
@@ -56,6 +63,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       contractState,
       totalVotes,
       votes,
+      executionTransactionHash,
     } = proposal;
 
     const contractStatesMapping = {
@@ -80,8 +88,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
         optionLabel,
         votingPower: getBigNumberPercentage(
           BigNumber.from(vote?.votingPower),
-          totalLocked,
-          2
+          totalLocked
         ),
       };
     });
@@ -101,6 +108,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       options: null,
       votes: parsedVotes,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
+      executionTransactionHash,
     };
   }, [proposal, proposalMetadata, t, totalLocked]);
 
@@ -108,8 +116,8 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
 
   if (parsedProposalData && options) parsedProposalData.options = options;
 
-  useListenToProposalStateChanged(daoId, refetch, proposalId);
-  useListenToVoteAdded(daoId, refetch, proposalId);
+  useListenToProposalStateChanged(daoId, () => backoff(refetch), proposalId);
+  useListenToVoteAdded(daoId, () => backoff(refetch), proposalId);
 
   return {
     data: parsedProposalData,

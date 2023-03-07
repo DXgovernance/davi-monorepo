@@ -3,46 +3,73 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { SupportedSubgraph } from 'stores/types';
+import { CHAIN_ID, MAINNET_ID } from 'utils';
 
 // FIX: Add subgraphs URIs here
-export const subgraphClientsUris = {
-  [SUPPORTED_DAVI_NETWORKS.MAINNET_ID]: '',
-  [SUPPORTED_DAVI_NETWORKS.ARBITRUM_ID]: '',
-  [SUPPORTED_DAVI_NETWORKS.GNOSIS_ID]: '',
+export const subgraphClientsUris: Record<
+  CHAIN_ID,
+  Record<SupportedSubgraph, string>
+> = {
+  [CHAIN_ID.MAINNET]: {
+    [SupportedSubgraph.Guilds]: '',
+    [SupportedSubgraph.Governance1_5]: '',
+  },
+  [CHAIN_ID.ARBITRUM]: {
+    [SupportedSubgraph.Guilds]: '',
+    [SupportedSubgraph.Governance1_5]: '',
+  },
+  [CHAIN_ID.GNOSIS]: {
+    [SupportedSubgraph.Guilds]:
+      'https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis',
+    [SupportedSubgraph.Governance1_5]: '',
+  },
   // testnets
-  [SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID]: '',
-  [SUPPORTED_DAVI_NETWORKS.GOERLI_ID]: '',
-  [SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID]:
-    'http://127.0.0.1:8000/subgraphs/name/dxdao/guilds',
+  [CHAIN_ID.ARBITRUM_TESTNET]: {
+    [SupportedSubgraph.Guilds]: '',
+    [SupportedSubgraph.Governance1_5]: '',
+  },
+  [CHAIN_ID.GOERLI]: {
+    [SupportedSubgraph.Guilds]: '',
+    [SupportedSubgraph.Governance1_5]: '',
+  },
+  [CHAIN_ID.LOCALHOST]: {
+    [SupportedSubgraph.Guilds]:
+      'http://127.0.0.1:8000/subgraphs/name/dxdao/guilds',
+    [SupportedSubgraph.Governance1_5]:
+      'http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5',
+  },
 };
 
-const setupApolloClient = (network: SUPPORTED_DAVI_NETWORKS) =>
-  new ApolloClient({
-    uri: subgraphClientsUris[network],
-    cache: new InMemoryCache(),
-  });
+const setupApolloClient = (chainId: CHAIN_ID) => {
+  return {
+    [SupportedSubgraph.Guilds]: new ApolloClient({
+      uri: subgraphClientsUris[chainId][SupportedSubgraph.Guilds],
+      cache: new InMemoryCache(),
+    }),
+    [SupportedSubgraph.Governance1_5]: new ApolloClient({
+      uri: subgraphClientsUris[chainId][SupportedSubgraph.Governance1_5],
+      cache: new InMemoryCache(),
+    }),
+  };
+};
 
-export const apolloClient: {
-  [chainId in SUPPORTED_DAVI_NETWORKS]: ApolloClient<NormalizedCacheObject>;
-} = {
-  [SUPPORTED_DAVI_NETWORKS.MAINNET_ID]: setupApolloClient(
-    SUPPORTED_DAVI_NETWORKS.MAINNET_ID
-  ),
-  [SUPPORTED_DAVI_NETWORKS.GNOSIS_ID]: setupApolloClient(
-    SUPPORTED_DAVI_NETWORKS.GNOSIS_ID
-  ),
-  [SUPPORTED_DAVI_NETWORKS.ARBITRUM_ID]: setupApolloClient(
-    SUPPORTED_DAVI_NETWORKS.ARBITRUM_ID
-  ),
+export const apolloClient: Record<
+  CHAIN_ID,
+  Record<SupportedSubgraph, ApolloClient<NormalizedCacheObject>>
+> = {
+  [CHAIN_ID.MAINNET]: setupApolloClient(CHAIN_ID.MAINNET),
+  [CHAIN_ID.GNOSIS]: setupApolloClient(CHAIN_ID.GNOSIS),
+  [CHAIN_ID.ARBITRUM]: setupApolloClient(CHAIN_ID.ARBITRUM),
   // testnets
-  [SUPPORTED_DAVI_NETWORKS.GOERLI_ID]: setupApolloClient(
-    SUPPORTED_DAVI_NETWORKS.GOERLI_ID
-  ),
-  [SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID]: setupApolloClient(
-    SUPPORTED_DAVI_NETWORKS.ARBITRUM_TESTNET_ID
-  ),
-  [SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID]: setupApolloClient(
-    SUPPORTED_DAVI_NETWORKS.LOCALHOST_ID
-  ),
+  [CHAIN_ID.GOERLI]: setupApolloClient(CHAIN_ID.GOERLI),
+  [CHAIN_ID.ARBITRUM_TESTNET]: setupApolloClient(CHAIN_ID.ARBITRUM_TESTNET),
+  [CHAIN_ID.LOCALHOST]: setupApolloClient(CHAIN_ID.LOCALHOST),
+};
+
+export const getApolloClient = (
+  subgraph: SupportedSubgraph,
+  chainId: CHAIN_ID = MAINNET_ID
+) => {
+  return apolloClient?.[chainId]?.[subgraph];
 };

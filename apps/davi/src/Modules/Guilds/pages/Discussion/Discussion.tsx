@@ -4,16 +4,19 @@ import { ProposalDescription } from 'components/ProposalDescription';
 import { StyledLink } from 'components/primitives/Links';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { Loading } from 'components/primitives/Loading';
-import { FaChevronLeft } from 'react-icons/fa';
+import { AiFillHome } from 'react-icons/ai';
 import { IOrbisPost } from 'types/types.orbis';
 import {
   ActionsGroup,
+  ButtonContainer,
   HeaderTopRow,
   PageContainer,
   PageContent,
   PageHeader,
   PageTitle,
   PostDetailsRow,
+  PostEditedBadge,
+  TitleContainer,
 } from './Discussion.styled';
 import { useTranslation } from 'react-i18next';
 import { SidebarCard, SidebarCardHeaderSpaced } from 'components/SidebarCard';
@@ -80,27 +83,47 @@ const DiscussionPage: React.FC = () => {
                 padding={'0.6rem 0.8rem'}
                 marginTop={'5px;'}
               >
-                <FaChevronLeft style={{ marginRight: '15px' }} />{' '}
+                <AiFillHome style={{ marginRight: '15px' }} />{' '}
                 {guildConfig?.name}
               </IconButton>
             </StyledLink>
 
-            <StyledLink
-              to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
-            >
-              <Button
-                variant="primaryWithBorder"
-                data-testid="create-proposal-button"
+            <ButtonContainer>
+              <StyledLink
+                to={`/${chainName}/${guildId}/discussion/${discussionId}/edit`}
               >
-                {t('createProposal.createProposal')}
-              </Button>
-            </StyledLink>
+                <Button
+                  variant="primaryWithBorder"
+                  data-testid="edit-proposal-button"
+                >
+                  {t('editDiscussion.editDiscussion')}
+                </Button>
+              </StyledLink>
+              <StyledLink
+                to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
+              >
+                <Button
+                  variant="primaryWithBorder"
+                  data-testid="create-proposal-button"
+                >
+                  {t('createProposal.createProposal')}
+                </Button>
+              </StyledLink>
+            </ButtonContainer>
           </HeaderTopRow>
-          <PageTitle data-testid="discussion-page-title">
-            {op?.content?.title || (
-              <Loading loading text skeletonProps={{ width: '800px' }} />
+          <TitleContainer>
+            <PageTitle data-testid="discussion-page-title">
+              {op?.content?.title || (
+                <Loading loading text skeletonProps={{ width: '800px' }} />
+              )}
+            </PageTitle>
+
+            {op?.count_commits > 1 && (
+              <PostEditedBadge>
+                ({t('discussions.activity.postEdited')})
+              </PostEditedBadge>
             )}
-          </PageTitle>
+          </TitleContainer>
         </PageHeader>
         <PostDetailsRow>
           <AddressButton address={op?.creator_details.metadata?.address} />
@@ -129,7 +152,13 @@ const DiscussionPage: React.FC = () => {
             </SidebarCardHeaderSpaced>
           }
         >
-          <Discussion context={context} master={''} />
+          {' '}
+          <Discussion
+            context={context}
+            master={''}
+            daoId={guildId}
+            parentId={discussionId}
+          />
         </SidebarCard>
       </PageContent>
     </PageContainer>

@@ -1,0 +1,7 @@
+type Member @entity {
+  id: ID!
+  address: String!
+  reputation: BigInt!
+  votes: [Vote!] @derivedFrom(field: "member")
+}
+

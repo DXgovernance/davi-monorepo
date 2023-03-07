@@ -1,0 +1,8 @@
+entities:
+  - Member
+eventHandlers:
+  - event: Mint(indexed address,uint256)
+    handler: handleMint
+  - event: Burn(indexed address,uint256)
+    handler: handleBurn
+

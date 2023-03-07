@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
@@ -7,9 +6,8 @@ import {
   getDaoNumberOfActiveProposalsDocument,
   getDaoNumberOfActiveProposalsQuery,
 } from '.graphclient';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
-import { apolloClient } from 'clients/apollo';
-import { FetcherHooksInterface } from 'stores/types';
+import { getApolloClient } from 'clients/apollo';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 
 type IUseGetNumberOfActiveProposals =
   FetcherHooksInterface['useGetNumberOfActiveProposals'];
@@ -17,7 +15,6 @@ type IUseGetNumberOfActiveProposals =
 export const useGetNumberOfActiveProposals: IUseGetNumberOfActiveProposals =
   daoId => {
     const { chain } = useNetwork();
-    const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
     // TODO: This query gets all "Submitted" proposals. We should define what an active proposal is, and fetch accordingly
 
@@ -25,7 +22,7 @@ export const useGetNumberOfActiveProposals: IUseGetNumberOfActiveProposals =
       useQuery<getDaoNumberOfActiveProposalsQuery>(
         getDaoNumberOfActiveProposalsDocument,
         {
-          client: apolloClient[chainId]['Governance1.5'],
+          client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
           variables: {
             id: daoId?.toLowerCase(),
           },

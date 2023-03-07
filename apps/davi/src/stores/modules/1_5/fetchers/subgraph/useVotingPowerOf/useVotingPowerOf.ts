@@ -1,10 +1,9 @@
 import { getVotingPowerOfDocument, getVotingPowerOfQuery } from '.graphclient';
 import { useQuery } from '@apollo/client';
-import { apolloClient } from 'clients/apollo';
+import { getApolloClient } from 'clients/apollo';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
-import { FetcherHooksInterface } from 'stores/types';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useNetwork } from 'wagmi';
 
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
@@ -14,12 +13,11 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
   userAddress,
 }) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getVotingPowerOfQuery>(
     getVotingPowerOfDocument,
     {
-      client: apolloClient[chainId]['Governance1.5'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         userAddress: userAddress?.toLowerCase(),

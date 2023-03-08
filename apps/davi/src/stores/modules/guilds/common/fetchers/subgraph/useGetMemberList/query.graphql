@@ -1,6 +1,6 @@
 query getMemberList($id: ID!) {
   guild(id: $id) {
-    members {
+    members(where: { tokensLocked_gt: "0" }) {
       id
       address
       tokensLocked

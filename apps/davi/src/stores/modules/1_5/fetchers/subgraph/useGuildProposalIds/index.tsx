@@ -1,8 +1,6 @@
-import { useMemo } from 'react';
-import { FetcherHooksInterface } from 'stores/types';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useNetwork } from 'wagmi';
-import { apolloClient } from 'clients/apollo';
+import { getApolloClient } from 'clients/apollo';
 import {
   getDaoProposalIdsDocument,
   getDaoProposalIdsQuery,
@@ -13,12 +11,11 @@ type IUseGuildProposalIds = FetcherHooksInterface['useGuildProposalIds'];
 
 export const useGuildProposalIds: IUseGuildProposalIds = daoId => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, error, loading } = useQuery<getDaoProposalIdsQuery>(
     getDaoProposalIdsDocument,
     {
-      client: apolloClient[chainId]['Governance1.5'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
       },

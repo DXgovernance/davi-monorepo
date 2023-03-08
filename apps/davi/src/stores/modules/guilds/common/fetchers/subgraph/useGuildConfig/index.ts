@@ -1,24 +1,23 @@
-import { useNetwork } from 'wagmi';
 import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
-import { SUPPORTED_DAVI_NETWORKS, ZERO_ADDRESS } from 'utils';
-import { apolloClient } from 'clients/apollo';
+import { ZERO_ADDRESS } from 'utils';
 import { GuildConfigProps } from 'types/types.guilds';
-import { FetcherHooksInterface } from 'stores/types';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
 
 type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
 
 export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getGuildConfigQuery>(
     getGuildConfigDocument,
     {
-      client: apolloClient[chainId]['Guilds'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: { id: guildAddress?.toLowerCase() },
     }
   );

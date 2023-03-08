@@ -1,4 +1,5 @@
 import { ethers, utils } from 'ethers';
+import i18next from 'i18next';
 
 const arbitrum = require('../configs/arbitrum/config.json');
 const arbitrumTestnet = require('../configs/arbitrumTestnet/config.json');
@@ -17,8 +18,9 @@ const appConfig: AppConfig = {
 };
 
 export function shortenAddress(address: string, digits = 4) {
-  if (!isAddress(address)) {
-    throw Error(`Invalid 'address' parameter '${address}'.`);
+  if (!address || !isAddress(address)) {
+    console.error(`${i18next.t('inputValidation.invalidAddress')}: ${address}`);
+    return null;
   }
   return `${address.substring(0, digits + 2)}...${address.substring(
     42 - digits

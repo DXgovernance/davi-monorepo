@@ -51,9 +51,14 @@ const Postbox = ({
   cancelReplyTo?: () => void;
 }) => {
   const { t } = useTranslation();
-  const { orbis, profile, connectOrbis, checkOrbisConnection } =
-    useOrbisContext();
-  const { isConnected, connector } = useAccount();
+  const {
+    orbis,
+    profile,
+    connectOrbis,
+    checkOrbisConnection,
+    disconnectOrbis,
+  } = useOrbisContext();
+  const { isConnected, connector, address } = useAccount();
 
   const postboxArea = useRef<HTMLDivElement>(null);
 
@@ -310,6 +315,12 @@ const Postbox = ({
     if (!profile && isConnected && !isReadOnly(connector))
       checkOrbisConnection();
   }, [isConnected, connector, profile, checkOrbisConnection]);
+
+  useEffect(() => {
+    if (profile && profile?.address?.toLowerCase() !== address?.toLowerCase()) {
+      disconnectOrbis();
+    }
+  }, [address, profile, disconnectOrbis]);
 
   if (isConnected && isReadOnly(connector)) {
     return (

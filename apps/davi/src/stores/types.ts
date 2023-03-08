@@ -22,7 +22,10 @@ type SupportedGovernanceSystem =
   | 'SnapshotRepERC20Guild'
   | 'Governance1_5';
 
-export type SupportedSubgraphs = 'Guilds' | 'Governance1.5';
+export enum SupportedSubgraph {
+  Guilds = 'Guilds',
+  Governance1_5 = 'Governance1.5',
+}
 
 // TODO: Wrap fetcher return types in a common FetcherHookReturn type which has common loading / error statuses
 export interface FetcherHooksInterface {
@@ -172,8 +175,9 @@ export interface WriterHooksInteface {
     cb: (error?: any, txtHash?: any) => void
   ) => Promise<void>;
   useExecuteProposal: (
-    daoAddress: string
-  ) => (proposalId: `0x${string}`) => Promise<void>;
+    daoAddress: string,
+    subDaoAddress?: string
+  ) => (proposal: Proposal) => Promise<void>;
   useLockTokens: (
     daoAddress: string
   ) => (
@@ -217,7 +221,7 @@ export interface FullGovernanceImplementation {
   bytecodes: `0x${string}`[];
   hooks: HooksInterfaceWithFallback;
   capabilities: GovernanceCapabilities;
-  checkDataSourceAvailability: (chainId: number) => boolean;
+  checkDataSourceAvailability: (chainId: number) => Promise<boolean>;
 }
 
 export interface GovernanceTypeInterface

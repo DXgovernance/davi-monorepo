@@ -4,9 +4,8 @@ import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
 
 import { getDaoProposalDocument, getDaoProposalQuery } from '.graphclient';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
-import { FetcherHooksInterface } from 'stores/types';
-import { apolloClient } from 'clients/apollo';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
+import { getApolloClient } from 'clients/apollo';
 import { ContractState, Proposal } from 'types/types.guilds.d';
 import { useProposalCalls } from '../../rpc/useProposalCalls';
 import { BigNumber } from 'ethers';
@@ -15,12 +14,11 @@ type IUseProposal = FetcherHooksInterface['useProposal'];
 
 export const useProposal: IUseProposal = (daoId, proposalId) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data, error } = useQuery<getDaoProposalQuery>(
     getDaoProposalDocument,
     {
-      client: apolloClient[chainId]['Governance1.5'],
+      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         proposalId: proposalId?.toLowerCase(),

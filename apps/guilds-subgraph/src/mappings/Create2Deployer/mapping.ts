@@ -45,8 +45,6 @@ export function handleDeployedEvent(event: Deployed): void {
 
     // At this point Guild wasn't initialized so we only create guild with default params
     guild.isActive = false;
-    guild.proposals = [];
-    guild.members = [];
     guild.bytecodeHash = event.params.bytecodeHash.toHexString();
     guild.type = type;
 

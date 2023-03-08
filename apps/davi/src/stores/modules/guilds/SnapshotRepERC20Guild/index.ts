@@ -41,7 +41,7 @@ import {
   useVotingPowerOf,
   useMemberCount,
 } from './fetchers/rpc';
-import { checkDataSourceAvailability } from './checkDataSourceAvailability';
+import { checkDataSourceAvailability } from '../common/checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
 import prodBytecodes from 'bytecodes/prod.json';
 

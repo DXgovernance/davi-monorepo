@@ -18,7 +18,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
   const { data, error } = useQuery<getDaoProposalQuery>(
     getDaoProposalDocument,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         proposalId: proposalId?.toLowerCase(),

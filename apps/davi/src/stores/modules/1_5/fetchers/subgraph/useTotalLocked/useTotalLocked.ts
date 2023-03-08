@@ -17,7 +17,7 @@ export const useTotalLocked: IUseTotalLocked = (
   const { data, loading, error } = useQuery<getTotalLockedQuery>(
     getTotalLockedDocument,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: { id: daoId?.toLowerCase() },
     }
   );

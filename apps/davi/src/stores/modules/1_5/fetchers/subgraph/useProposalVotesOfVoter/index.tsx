@@ -21,7 +21,7 @@ export const useProposalVotesOfVoter: IUseProposalVotesOfVoter = (
   const { data, error, loading } = useQuery<getDaoVotesOfVoterQuery>(
     getDaoVotesOfVoterDocument,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         proposalId: proposalId?.toLowerCase(),

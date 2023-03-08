@@ -1,3 +1,4 @@
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const ProposalDescriptionWrapper = styled.div`
@@ -10,6 +11,9 @@ export const ProposalDescriptionWrapper = styled.div`
 
   a {
     color: ${({ theme }) => theme.colors.active};
+  }
+  a:visited {
+    color: ${({ theme }) =>  shade(0.3, theme.colors.active)};
   }
 `;
 

@@ -10,6 +10,10 @@ exports[`ProposalDescription Should render an error 1`] = `
   color: #BDC0C7;
 }
 
+.c0 a {
+  color: #DEFF4E;
+}
+
 <div>
    
   <div
@@ -29,6 +33,10 @@ exports[`ProposalDescription Should render loading if it has no metadata 1`] = `
   word-break: break-word;
   text-align: left;
   color: #BDC0C7;
+}
+
+.c0 a {
+  color: #DEFF4E;
 }
 
 <div>
@@ -66,6 +74,10 @@ exports[`ProposalDescription Should render with description 1`] = `
   word-break: break-word;
   text-align: left;
   color: #BDC0C7;
+}
+
+.c0 a {
+  color: #DEFF4E;
 }
 
 .c1 {

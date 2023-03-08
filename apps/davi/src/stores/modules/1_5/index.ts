@@ -21,7 +21,7 @@ import {
   useVoterLockTimestamp,
 } from './fetchers/subgraph';
 
-import { useWithdrawTokens } from './writers/useWithdrawTokens';
+import { useExecuteProposal, useWithdrawTokens } from './writers';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -79,10 +79,10 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
       writers: {
         useApproveTokens: null,
         useCreateProposal: null,
-        useExecuteProposal: null,
+        useExecuteProposal,
         useLockTokens: null,
         useVoteOnProposal: null,
-        useWithdrawTokens: useWithdrawTokens,
+        useWithdrawTokens,
       },
     },
     capabilities: {

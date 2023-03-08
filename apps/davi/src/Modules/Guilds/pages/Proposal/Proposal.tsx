@@ -51,6 +51,7 @@ const ProposalPage: React.FC = () => {
         useTimeDetail,
       },
     },
+    name: governanceImplementationName,
   } = useHookStoreProvider();
   const { t } = useTranslation();
   const { connector } = useAccount();
@@ -79,8 +80,18 @@ const ProposalPage: React.FC = () => {
     return getBlockExplorerUrl(chain, proposal?.executionTransactionHash, 'tx');
   }, [chain, proposal?.executionTransactionHash]);
 
-  const executeProposal = useExecuteProposal(guildId);
-  const handleExecuteProposal = () => executeProposal(proposalId);
+  // TODO: implement scheme selector/fetcher
+  // ! For now it is hardcoded untill we implement a scheme selector / fetcher
+  const schemeAddress = useMemo(() => {
+    if (governanceImplementationName === 'Governance1_5') {
+      return '0x1c501f8d9079f263115600298423bc004dafc912';
+    } else {
+      return null;
+    }
+  }, [governanceImplementationName]);
+
+  const executeProposal = useExecuteProposal(guildId, schemeAddress);
+  const handleExecuteProposal = () => executeProposal(proposal);
 
   if (!proposalId || !proposal) {
     return (

@@ -175,8 +175,9 @@ export interface WriterHooksInteface {
     cb: (error?: any, txtHash?: any) => void
   ) => Promise<void>;
   useExecuteProposal: (
-    daoAddress: string
-  ) => (proposalId: `0x${string}`) => Promise<void>;
+    daoAddress: string,
+    subDaoAddress?: string
+  ) => (proposal: Proposal) => Promise<void>;
   useLockTokens: (
     daoAddress: string
   ) => (

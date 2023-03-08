@@ -28,7 +28,7 @@ const ProposalVoteCardWrapper = ({
   } = useHookStoreProvider();
   const { guildId, proposalId } = useTypedParams();
   const { address: userAddress } = useAccount();
-  const voteData = useVotingResults(guildId, proposalId, proposal);
+  const voteData = useVotingResults(guildId, proposalId, proposal?.totalVotes);
   const { data: userVote } = useProposalVotesOfVoter(
     guildId,
     proposalId,

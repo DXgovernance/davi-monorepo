@@ -9,7 +9,7 @@ type IUseVotingResults = FetcherHooksInterface['useVotingResults'];
 export const useVotingResults: IUseVotingResults = (
   daoId,
   proposalId,
-  proposal
+  totalVotes
 ) => {
   const {
     hooks: {
@@ -22,8 +22,6 @@ export const useVotingResults: IUseVotingResults = (
   const { data: tokenInfo } = useERC20Info(data?.token);
 
   const { data: totalLocked } = useTotalLocked(daoId, proposalId);
-
-  const totalVotes = proposal?.totalVotes;
 
   const voteData = useMemo(() => {
     if (!totalVotes || !data || !tokenInfo) return undefined;

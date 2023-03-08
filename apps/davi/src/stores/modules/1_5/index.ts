@@ -21,8 +21,8 @@ import {
   useGetPermissions,
   useVoterLockTimestamp,
   useVotingResults,
+  useSnapshotId,
 } from './fetchers/subgraph';
-import { useSnapshotId } from './fetchers/subgraph/useSnapshotId';
 import { useWithdrawTokens } from './writers';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =

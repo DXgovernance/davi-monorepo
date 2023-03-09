@@ -15,6 +15,7 @@ export function handleMint(event: Mint): void {
   const tokenAddress = event.address;
   const repContract = DAOReputation.bind(tokenAddress);
   const repTokenId = tokenAddress.toHexString();
+  const snapshotId = repContract.getCurrentSnapshotId();
 
   let reputationToken = ReputationToken.load(repTokenId);
   if (!reputationToken) {
@@ -23,11 +24,12 @@ export function handleMint(event: Mint): void {
     reputationToken.name = repContract.name();
     reputationToken.symbol = repContract.symbol();
     reputationToken.amount = BigInt.fromString('0');
+    reputationToken.currentSnapshotId = BigInt.fromString('0');
   }
   reputationToken.amount = reputationToken.amount.plus(event.params.amount);
+  reputationToken.currentSnapshotId = snapshotId;
 
   // Snapshot
-  const snapshotId = repContract.getCurrentSnapshotId();
   const snapshot = new Snapshot(snapshotId.toHexString());
   snapshot.snapshotId = snapshotId;
   snapshot.value = reputationToken.amount;

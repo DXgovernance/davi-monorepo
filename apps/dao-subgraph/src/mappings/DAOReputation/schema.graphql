@@ -7,6 +7,7 @@ type ReputationToken @entity {
   controllerAddress: String!
   amount: BigInt!
   snapshots: [Snapshot!] @derivedFrom(field: "reputationTokenSnapshot")
+  currentSnapshotId: BigInt!
 }
 
 type Snapshot @entity {

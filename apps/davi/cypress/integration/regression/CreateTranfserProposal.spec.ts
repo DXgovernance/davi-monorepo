@@ -13,8 +13,9 @@ import { ACCOUNTS } from '../../utils/constants';
 import { data } from '../../utils/constants'
 const url = Cypress.config().baseUrl;
 
-describe('Check create discussion', () => {
+describe('Check create transfer proposal', () => {
     before(() => {
+        cy.resetMetamaskAccount()
         cy.visit(url);
     });
 
@@ -56,7 +57,7 @@ describe('Check create discussion', () => {
         AnyGuildPage.checkDiscussionDescription(data.discussionDescription)
     });
 
-    it('Click on create proposal', () => {
+    it('Click on create proposal on Discussion Page', () => {
         CreateProposalPage.clickOnCreateProposalButton()
         cy.confirmMetamaskSignatureRequest()
     });
@@ -82,7 +83,7 @@ describe('Check create discussion', () => {
         CreateProposalPage.enterTransferEthereumAddress(ACCOUNTS[0].address)
     });
 
-    it('Click on create proposal', () => {
+    it('Enter Transfer Ethereum amount', () => {
         CreateProposalPage.enterTransferEthereumAmount(data.ethereumAmount)
     });
 
@@ -98,7 +99,7 @@ describe('Check create discussion', () => {
         CreateProposalPage.clickSaveTransferAction()
     });
 
-    it('Click on create proposal', () => {
+    it('Click on create proposal on Proposal Page', () => {
         CreateProposalPage.clickOnCreateProposal()
     });
 

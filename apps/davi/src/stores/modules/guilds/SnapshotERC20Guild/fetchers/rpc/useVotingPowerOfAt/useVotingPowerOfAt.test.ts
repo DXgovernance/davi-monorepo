@@ -5,9 +5,10 @@ import {
   MOCK_USER_ADDRESS,
 } from 'Modules/Guilds/Hooks/fixtures';
 import { useVotingPowerOfAt } from './useVotingPowerOfAt';
-jest.mock('Modules/Guilds/Hooks/useVotingPowerOfAt', () => ({
+
+jest.mock('./useVotingPowerOfAt', () => ({
   __esModule: true,
-  default: () => ({
+  useVotingPowerOfAt: () => ({
     data: MOCK_BIG_NUMBER,
     isError: false,
     isLoading: false,

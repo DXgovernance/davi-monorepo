@@ -1,4 +1,4 @@
-query getVotingPowerOf($id: ID!, $userAddress: String!) {
+query getVotingPowerOfAt($id: ID!, $userAddress: String!) {
   dao(id: $id) {
     id
     reputationToken {
@@ -6,6 +6,11 @@ query getVotingPowerOf($id: ID!, $userAddress: String!) {
       currentSnapshotId
       members(where: { address: $userAddress }) {
         reputationTokenAmount
+        snapshots {
+          id
+          snapshotId
+          value
+        }
       }
     }
   }

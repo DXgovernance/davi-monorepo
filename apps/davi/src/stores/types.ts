@@ -100,7 +100,7 @@ export interface FetcherHooksInterface {
   useVotingResults: (
     daoId: string,
     proposalId: `0x${string}`,
-    proposal: Proposal
+    proposal: Proposal['totalVotes']
   ) => VoteData;
   useVotingPowerOf: (useVotingPowerOfProps: {
     contractAddress: string;

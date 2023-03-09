@@ -6,6 +6,14 @@ type ReputationToken @entity {
   symbol: String!
   controllerAddress: String!
   amount: BigInt!
+  snapshots: [Snapshot!] @derivedFrom(field: "reputationTokenSnapshot")
+}
+
+type Snapshot @entity {
+  id: ID!
+  snapshotId: BigInt!
+  value: BigInt!
+  reputationTokenSnapshot: ReputationToken
 }
 
 type Member @entity {
@@ -14,5 +22,13 @@ type Member @entity {
   reputationToken: ReputationToken
   reputationTokenAmount: BigInt!
   votes: [Vote!] @derivedFrom(field: "member")
+  snapshots: [VoterSnapshot!] @derivedFrom(field: "voter")
+}
+
+type VoterSnapshot @entity {
+  id: ID!
+  snapshotId: BigInt!
+  value: BigInt!
+  voter: Member!
 }
 

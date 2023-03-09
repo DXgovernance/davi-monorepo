@@ -9,10 +9,10 @@ type IUseVotingResults = FetcherHooksInterface['useVotingResults'];
 export const useVotingResults: IUseVotingResults = (
   daoId,
   proposalId,
-  proposal
+  totalVotes
 ) => {
   // TODO: chequear estos valores
-  const options = [proposal?.totalVotes[0], proposal?.totalVotes[1]];
+  const options = [totalVotes[0], totalVotes[1]];
 
   const {
     hooks: {
@@ -33,4 +33,3 @@ export const useVotingResults: IUseVotingResults = (
     token,
   };
 };
-

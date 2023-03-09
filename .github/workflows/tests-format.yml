@@ -28,7 +28,8 @@ jobs:
           set-safe-directory: false
 
       - name: Cloning contracts
-        run: git clone -b v2.0 https://github.com/DXgovernance/dxdao-contracts packages/dxdao-contracts
+        run: git clone -b v2.0 https://github.com/DXgovernance/dxdao-contracts packages/dxdao-contracts && git submodule sync packages/dxdao-contracts
+        # TODO: Replace v2.0 to develop after https://github.com/DXgovernance/dxdao-contracts/pull/277 is merged
 
       - name: Pnpm setup
         uses: pnpm/action-setup@v2

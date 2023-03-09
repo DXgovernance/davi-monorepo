@@ -23,3 +23,9 @@ export const StyledDivider = styled(Divider)`
   margin-left: -24px;
   width: calc(100% + 48px);
 `;
+
+export const SchemePropertiesGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 67px;
+`;

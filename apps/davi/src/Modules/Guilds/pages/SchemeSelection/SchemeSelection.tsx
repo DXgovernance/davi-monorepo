@@ -10,35 +10,36 @@ import { SupportedSubgraph } from 'stores/types';
 import { SidebarCard, SidebarCardContent } from 'components/SidebarCard';
 import { Divider } from 'components/Divider';
 import {
-  InfoDetail,
-  InfoDetailMuted,
-} from 'components/ProposalInfoCard/ProposalInfoCard.styled';
-import {
   OptionText,
   StyledRadioInput,
 } from 'components/ProposalVoteCard/ProposalVoteCard.styled';
+import { Result, ResultState } from 'components/Result';
 import { IconButton } from 'components/primitives/Button';
 import { Box, Flex } from 'components/primitives/Layout';
 import { StyledLink } from 'components/primitives/Links';
+import { Loading } from 'components/primitives/Loading';
 import { Heading } from 'components/primitives/Typography';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { PageContainer, SidebarContent } from 'Modules/Guilds/styles';
 
 import {
-  CardBody,
   CardContainer,
   CardTitle,
-  SchemePropertiesGrid,
   StyledDivider,
 } from './SchemeSelection.styled';
 import { Treasury } from '../Treasury';
 import { PermissionsPage } from '../Permissions';
+import { SchemeInfo } from './SchemeInfo';
 
 const SchemeSelection = () => {
   const { chain } = useNetwork();
   const { guildId: daoId, chainName } = useTypedParams();
 
-  const { data } = useQuery<getSchemesQuery>(getSchemesDocument, {
+  const {
+    data,
+    loading: isSchemeLoading,
+    error: errorFetchingScheme,
+  } = useQuery<getSchemesQuery>(getSchemesDocument, {
     client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
     variables: { id: daoId?.toLowerCase() },
   });
@@ -52,6 +53,18 @@ const SchemeSelection = () => {
     data.dao.schemes.length === 0
   ) {
     return <></>;
+  }
+
+  if (errorFetchingScheme) {
+    return (
+      <PageContainer>
+        <Result
+          title="scheme error"
+          subtitle={errorFetchingScheme.message}
+          state={ResultState.ERROR}
+        />
+      </PageContainer>
+    );
   }
 
   const schemes = data.dao.schemes;
@@ -81,66 +94,11 @@ const SchemeSelection = () => {
             <CardContainer>
               <CardTitle size={1}>Scheme parameters</CardTitle>
               <StyledDivider />
-              <CardBody>
-                <SchemePropertiesGrid>
-                  <InfoDetail>
-                    <span>Quorum</span>
-                    {/* ! HARDCODED */}
-                    <InfoDetailMuted>40%</InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Can manage schemes</span>
-                    <InfoDetailMuted>
-                      {selectedScheme.canManageSchemes ? 'yes' : 'no'}
-                    </InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Proposal time max</span>
-                    {/* ! HARDCODED */}
-                    <InfoDetailMuted>3 days</InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Can control main treasury</span>
-                    <InfoDetailMuted>
-                      {selectedScheme.canMakeAvatarCalls ? 'yes' : 'no'}
-                    </InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Proposal time in boost</span>
-                    {/* ! HARDCODED */}
-                    <InfoDetailMuted>1 day</InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Can change reputation</span>
-                    <InfoDetailMuted>
-                      {selectedScheme.canChangeReputation ? 'yes' : 'no'}
-                    </InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Proposal time in pre boost</span>
-                    {/* ! HARDCODED */}
-                    <InfoDetailMuted>1 day</InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Max rep percentage change</span>
-                    <InfoDetailMuted>
-                      {selectedScheme.maxRepPercentageChange}%
-                    </InfoDetailMuted>
-                  </InfoDetail>
-
-                  <InfoDetail>
-                    <span>Type</span>
-                    <InfoDetailMuted>{selectedScheme.type}</InfoDetailMuted>
-                  </InfoDetail>
-                </SchemePropertiesGrid>
-              </CardBody>
+              {isSchemeLoading ? (
+                <Loading loading text />
+              ) : (
+                <SchemeInfo selectedScheme={selectedScheme} />
+              )}
             </CardContainer>
             <Divider />
           </div>
@@ -185,14 +143,11 @@ const SchemeSelection = () => {
 
 export default SchemeSelection;
 
-// TODO: handle loading
-// TODO: handle error
+// TODO: fix permissions for avatar scheme
 // TODO: prevent guild from accessing scheme-selection
 // TODO: add translations
 // TODO: trigger scheme selection when creating a proposal in DAOs
-// TODO: get missing data: proposal time, quorum, boost, etc
-// TODO: make radio button white and formatted
-// TODO: fix permissions for avatar scheme
 // TODO: pass scheme ID to proposal page. Maybe in params?
+// TODO: make radio button white and formatted
 // ? since we aren't enforcing scheme unique names, how should we display data to differentiate them?
 // ? have a "go back to scheme selecction" button in proposal?

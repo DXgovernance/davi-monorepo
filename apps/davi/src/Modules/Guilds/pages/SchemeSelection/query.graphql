@@ -9,18 +9,23 @@ query getSchemes($id: ID!) {
       isRegistered
       orgBoostedProposalsCnt
       paramsHash
-      votingMachine
       permissionRegistry
       stakingTokenBalance
       # capabilities
-      canChangeReputation # OK
+      canChangeReputation
       canMakeAvatarCalls
-      canManageSchemes # OK
+      canManageSchemes
       maxGasPrice
       maxRepPercentageChange
       type
       voteGas
       voteGasBalance
+      votingMachine {
+        boostedVoteRequiredPercentage
+        preBoostedVotePeriodLimit
+        boostedVotePeriodLimit
+        quietEndingPeriod
+      }
     }
   }
 }

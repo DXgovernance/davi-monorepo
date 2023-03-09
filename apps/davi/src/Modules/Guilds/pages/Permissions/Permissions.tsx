@@ -28,8 +28,6 @@ const Permissions = ({ subDaoAddress = null }) => {
     'assets'
   );
 
-  console.log(tokenPermissions);
-
   return (
     <>
       <TabContainer>

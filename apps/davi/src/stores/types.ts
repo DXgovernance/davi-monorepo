@@ -155,6 +155,16 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useVotingPowerOfAt: (
+    contractAddress: string,
+    userAddress: `0x${string}`,
+    snapshotId?: string,
+    fallbackSnapshotId?: boolean
+  ) => {
+    data: BigNumber;
+    isError: boolean;
+    isLoading: boolean;
+  };
 }
 
 export interface WriterHooksInteface {

@@ -42,6 +42,7 @@ import {
   useVoterLockTimestamp,
   useVotingPowerOf,
   useMemberCount,
+  useVotingPowerOfAt,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from './checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
@@ -86,6 +87,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalState,
           useTimeDetail,
           useGetVotingMachineAddressBySchemeAddress,
+          useVotingPowerOfAt,
         },
         fallback: {
           useProposal,
@@ -109,6 +111,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useProposalState,
           useTimeDetail,
           useGetVotingMachineAddressBySchemeAddress,
+          useVotingPowerOfAt,
         },
       },
       writers: {

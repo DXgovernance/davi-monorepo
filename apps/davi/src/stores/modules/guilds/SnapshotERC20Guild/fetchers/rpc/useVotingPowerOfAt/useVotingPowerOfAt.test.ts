@@ -1,10 +1,10 @@
-import useVotingPowerOfAt from 'Modules/Guilds/Hooks/useVotingPowerOfAt';
 import {
   MOCK_BIG_NUMBER,
   MOCK_CONTRACT_ADDRESS,
   MOCK_SNAPSHOT_ID,
   MOCK_USER_ADDRESS,
 } from 'Modules/Guilds/Hooks/fixtures';
+import { useVotingPowerOfAt } from './useVotingPowerOfAt';
 jest.mock('Modules/Guilds/Hooks/useVotingPowerOfAt', () => ({
   __esModule: true,
   default: () => ({
@@ -16,12 +16,12 @@ jest.mock('Modules/Guilds/Hooks/useVotingPowerOfAt', () => ({
 
 describe('useVotingPowerOfAt', () => {
   it('should return the voting power of at snapshot id', () => {
-    const { data, isError, isLoading } = useVotingPowerOfAt({
-      contractAddress: MOCK_CONTRACT_ADDRESS,
-      userAddress: MOCK_USER_ADDRESS,
-      snapshotId: MOCK_SNAPSHOT_ID.toString(),
-      fallbackSnapshotId: true,
-    });
+    const { data, isError, isLoading } = useVotingPowerOfAt(
+      MOCK_CONTRACT_ADDRESS,
+      MOCK_USER_ADDRESS,
+      MOCK_SNAPSHOT_ID.toString(),
+      true
+    );
     expect(data).toMatchInlineSnapshot(`
       Object {
         "hex": "0x01",

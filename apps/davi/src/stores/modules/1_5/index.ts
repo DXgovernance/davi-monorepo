@@ -56,6 +56,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useProposalState,
           useTimeDetail,
           useGetVotingMachineAddressBySchemeAddress,
+          useVotingPowerOfAt: null,
         },
         fallback: {
           useProposal: null,
@@ -79,6 +80,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useProposalState: null,
           useTimeDetail: null,
           useGetVotingMachineAddressBySchemeAddress: null,
+          useVotingPowerOfAt: null,
         },
       },
       writers: {

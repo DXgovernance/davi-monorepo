@@ -7,7 +7,7 @@
       "create": "Crear DAO"
     },
     "projectDavi": {
-      "projectDavi": "Proyecto-DAVI"
+      "projectDavi": "Project-DAVI"
     },
     "governance": "Governanza",
     "language": {
@@ -371,8 +371,8 @@
         "postboxShare": "Compartir",
         "mentionsSearchLoading": "Cargando...",
         "postboxConnectWallet": "Conectar monedero para empezar a compartir comentarios",
-        "postboxConnectCeramic": "Generar una nueva sesión Ceramic para empezar a compartir comentarios",
-        "postboxConnectCeramicButton": "Generar sesión Ceramic",
+        "postboxConnectCeramic": "Generar una nueva sesión de Ceramic para empezar a compartir comentarios",
+        "postboxConnectCeramicButton": "Generar sesión de Ceramic",
         "postboxEditCancel": "Cancelar",
         "postboxEditSave": "Guardar",
         "removalMessage1": "¿Está seguro de que desea remover esta publicación?",
@@ -414,7 +414,7 @@
     "404": {
       "pageNotExist": "Esa página no existe",
       "makeSureCorrectAddress": "Asegúrese de haber escrito la dirección correcta",
-      "takeMeHome": "Llévame a casa"
+      "takeMeHome": "Llévame al inicio"
     },
     "footer": {
       "reportABug": "Reportar un bug",

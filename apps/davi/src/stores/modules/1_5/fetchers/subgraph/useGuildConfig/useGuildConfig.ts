@@ -20,7 +20,7 @@ export const useGuildConfig: IUseGuildConfig = (
   const { data, loading, error } = useQuery<getGuildConfig1_5Query>(
     getGuildConfig1_5Document,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: { id: daoId?.toLowerCase() },
     }
   );

@@ -1,10 +1,11 @@
+import moment from 'moment';
+import { BigNumber } from 'ethers';
+import { useTranslation } from 'react-i18next';
 import { getSchemesQuery } from '.graphclient';
 import {
   InfoDetail,
   InfoDetailMuted,
 } from 'components/ProposalInfoCard/ProposalInfoCard.styled';
-import { BigNumber } from 'ethers';
-import moment from 'moment';
 import { CardBody, SchemePropertiesGrid } from './SchemeSelection.styled';
 
 type Scheme = getSchemesQuery['dao']['schemes'][0];
@@ -15,6 +16,7 @@ const humanizedTime = (time: string) => {
 };
 
 export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
+  const { t } = useTranslation();
   const formattedBoostedVoteRequiredPercentage = BigNumber.from(
     selectedScheme.votingMachine.boostedVoteRequiredPercentage
   )
@@ -37,59 +39,59 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
     <CardBody>
       <SchemePropertiesGrid>
         <InfoDetail>
-          <span>Quorum</span>
+          <span>{t('proposal.quorum')}</span>
           <InfoDetailMuted>
             {formattedBoostedVoteRequiredPercentage}%
           </InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Can manage schemes</span>
+          <span>{t('schemes.canManageSchemes')}</span>
           <InfoDetailMuted>
             {selectedScheme.canManageSchemes ? 'yes' : 'no'}
           </InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Proposal time max</span>
+          <span>{t('schemes.maxProposalTime')}</span>
           <InfoDetailMuted>{formattedQuietEndingPeriod}</InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Can control main treasury</span>
+          <span>{t('schemes.canControlMainTreasury')}</span>
           <InfoDetailMuted>
             {selectedScheme.canMakeAvatarCalls ? 'yes' : 'no'}
           </InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Proposal time in boost</span>
+          <span>{t('schemes.proposalTimeInBoost')}</span>
           <InfoDetailMuted>{formattedBoostedVotePeriodLimit}</InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Can change reputation</span>
+          <span>{t('schemes.canChangeReputation')}</span>
           <InfoDetailMuted>
             {selectedScheme.canChangeReputation ? 'yes' : 'no'}
           </InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Proposal time in pre boost</span>
+          <span>{t('schemes.proposalTimeInPreBoost')}</span>
           <InfoDetailMuted>
             {formattedPreBoostedVotePeriodLimit}
           </InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Max rep percentage change</span>
+          <span>{t('schemes.maxRepPercentageChange')}</span>
           <InfoDetailMuted>
             {selectedScheme.maxRepPercentageChange}%
           </InfoDetailMuted>
         </InfoDetail>
 
         <InfoDetail>
-          <span>Type</span>
+          <span>{t('schemes.type')}</span>
           <InfoDetailMuted>{selectedScheme.type}</InfoDetailMuted>
         </InfoDetail>
       </SchemePropertiesGrid>

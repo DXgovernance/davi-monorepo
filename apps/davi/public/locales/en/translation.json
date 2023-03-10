@@ -382,6 +382,19 @@
       "reload": "Reload"
     }
   },
+  "schemes": {
+    "schemeParameters": "Scheme parameters",
+    "schemeForProposal": "Scheme for proposal",
+    "maxProposalTime": "Maximum proposal time",
+    "proposalTimeInBoost": "Proposal time in boost",
+    "proposalTimeInPreBoost": "Proposal time in pre boost",
+    "canManageSchemes": "Can manage schemes",
+    "canControlMainTreasury": "Can control main treasury",
+    "canChangeReputation": "Can change reputation",
+    "maxRepPercentageChange": "Maximum rep percentage change",
+    "type": "Type",
+    "errorFetchingSchemes": "Error while fetching schemes"
+  },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",
     "amountIsRequired": "Amount is required",

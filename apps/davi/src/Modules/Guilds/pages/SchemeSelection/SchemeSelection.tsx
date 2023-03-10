@@ -73,7 +73,7 @@ const SchemeSelection = () => {
     return (
       <PageContainer>
         <Result
-          title="scheme error"
+          title={t('schemes.errorFetchingSchemes')}
           subtitle={errorFetchingScheme.message}
           state={ResultState.ERROR}
         />
@@ -97,7 +97,7 @@ const SchemeSelection = () => {
               marginTop={'5px;'}
             >
               <FaChevronLeft style={{ marginRight: '15px' }} />
-              Cancel
+              {t('modals.cancel')}
             </IconButton>
           </StyledLink>
 
@@ -106,7 +106,7 @@ const SchemeSelection = () => {
           </Heading>
           <div>
             <CardContainer>
-              <CardTitle size={1}>Scheme parameters</CardTitle>
+              <CardTitle size={1}>{t('schemes.schemeParameters')}</CardTitle>
               <StyledDivider />
               {isSchemeLoading ? (
                 <Loading loading text />
@@ -148,7 +148,7 @@ const SchemeSelection = () => {
           </Flex>
         </div>
         <SidebarContent>
-          <SidebarCard header="Scheme for proposal">
+          <SidebarCard header={t('schemes.schemeForProposal')}>
             <SidebarCardContent>
               {schemes.map((_, index) => {
                 return (
@@ -180,7 +180,6 @@ const SchemeSelection = () => {
 
 export default SchemeSelection;
 
-// TODO: add translations
 // TODO: make radio button white and formatted
 // TODO: separating lines between options
 // ? since we aren't enforcing scheme unique names, how should we display data to differentiate them?

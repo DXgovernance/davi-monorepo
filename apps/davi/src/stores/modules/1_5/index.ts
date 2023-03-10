@@ -25,6 +25,7 @@ import {
   useSnapshotId,
 } from './fetchers/subgraph';
 import { useExecuteProposal, useWithdrawTokens } from './writers';
+import { useVoteOnProposal } from './writers/useVoteOnProposal';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -88,7 +89,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         useCreateProposal: null,
         useExecuteProposal,
         useLockTokens: null,
-        useVoteOnProposal: null,
+        useVoteOnProposal,
         useWithdrawTokens,
       },
     },

@@ -3,7 +3,7 @@ import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
 import { apolloClient } from 'clients/apollo';
 import { FetcherHooksInterface } from 'stores/types';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { CHAIN_ID } from 'utils';
 import {
   getVotingMachineBySchemeDocument,
   getVotingMachineBySchemeQuery,
@@ -15,7 +15,7 @@ type IUseGetVotingMachineAddressBySchemeAddress =
 export const useGetVotingMachineAddressBySchemeAddress: IUseGetVotingMachineAddressBySchemeAddress =
   (schemeAddress: string) => {
     const { chain } = useNetwork();
-    const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
+    const chainId: CHAIN_ID = useMemo(() => chain?.id, [chain]);
     const { data, loading, error } = useQuery<getVotingMachineBySchemeQuery>(
       getVotingMachineBySchemeDocument,
       {

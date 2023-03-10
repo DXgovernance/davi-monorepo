@@ -7,7 +7,7 @@ import { apolloClient } from 'clients/apollo';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
 import { FetcherHooksInterface } from 'stores/types';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { CHAIN_ID } from 'utils';
 import { useNetwork } from 'wagmi';
 
 type IUseVotingPowerOfAt = FetcherHooksInterface['useVotingPowerOfAt'];
@@ -18,7 +18,7 @@ export const useVotingPowerOfAt: IUseVotingPowerOfAt = (
   snapshotId
 ) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
+  const chainId: CHAIN_ID = useMemo(() => chain?.id, [chain]);
 
   const { data, loading, error } = useQuery<getVotingPowerOfAtQuery>(
     getVotingPowerOfAtDocument,

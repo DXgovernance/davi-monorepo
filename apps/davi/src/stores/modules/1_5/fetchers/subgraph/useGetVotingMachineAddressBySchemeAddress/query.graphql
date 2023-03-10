@@ -3,4 +3,3 @@ query getVotingMachineByScheme($schemeAddress: ID!) {
     votingMachine
   }
 }
-

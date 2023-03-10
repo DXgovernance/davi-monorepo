@@ -15,4 +15,3 @@ query getVotingPowerOfAt($id: ID!, $userAddress: String!) {
     }
   }
 }
-

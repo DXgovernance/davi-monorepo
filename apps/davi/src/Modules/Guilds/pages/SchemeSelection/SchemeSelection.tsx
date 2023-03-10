@@ -117,11 +117,19 @@ const SchemeSelection = () => {
             <Divider />
           </div>
           <Box margin="20px 0px">
-            <PermissionsPage subDaoAddress={selectedScheme.id} />
+            <PermissionsPage
+              subDaoAddress={
+                selectedScheme.canMakeAvatarCalls ? null : selectedScheme.id
+              }
+            />
             <Divider />
           </Box>
           <Box>
-            <Treasury subDaoAddress={selectedScheme.id} />
+            <Treasury
+              subDaoAddress={
+                selectedScheme.canMakeAvatarCalls ? null : selectedScheme.id
+              }
+            />
           </Box>
           <Flex margin="20px 0px" alignItems="flex-end">
             <StyledLink
@@ -172,7 +180,6 @@ const SchemeSelection = () => {
 
 export default SchemeSelection;
 
-// TODO: fix permissions for avatar scheme
 // TODO: add translations
 // TODO: make radio button white and formatted
 // TODO: separating lines between options

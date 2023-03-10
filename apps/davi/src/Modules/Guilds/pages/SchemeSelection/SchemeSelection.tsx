@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { FaChevronLeft } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
-import { FaChevronLeft } from 'react-icons/fa';
 
 import { getSchemesDocument, getSchemesQuery } from '.graphclient';
 import { getApolloClient } from 'clients/apollo';
+import { useHookStoreProvider } from 'stores';
 import { SupportedSubgraph } from 'stores/types';
 
 import { SidebarCard, SidebarCardContent } from 'components/SidebarCard';
@@ -14,7 +17,7 @@ import {
   StyledRadioInput,
 } from 'components/ProposalVoteCard/ProposalVoteCard.styled';
 import { Result, ResultState } from 'components/Result';
-import { IconButton } from 'components/primitives/Button';
+import { Button, IconButton } from 'components/primitives/Button';
 import { Box, Flex } from 'components/primitives/Layout';
 import { StyledLink } from 'components/primitives/Links';
 import { Loading } from 'components/primitives/Loading';
@@ -27,13 +30,19 @@ import {
   CardTitle,
   StyledDivider,
 } from './SchemeSelection.styled';
+import { SchemeInfo } from './SchemeInfo';
 import { Treasury } from '../Treasury';
 import { PermissionsPage } from '../Permissions';
-import { SchemeInfo } from './SchemeInfo';
 
 const SchemeSelection = () => {
+  const { t } = useTranslation();
   const { chain } = useNetwork();
   const { guildId: daoId, chainName } = useTypedParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const discussionId = searchParams.get('ref');
+
+  const { name: governanceName } = useHookStoreProvider();
 
   const {
     data,
@@ -44,7 +53,12 @@ const SchemeSelection = () => {
     variables: { id: daoId?.toLowerCase() },
   });
 
-  const [selectedSchemeIndex, setSelectedSchemeIndex] = useState<number>(0); // Defaults to first scheme
+  const [selectedSchemeIndex, setSelectedSchemeIndex] = useState(0); // Defaults to first scheme
+
+  if (governanceName !== 'Governance1_5') {
+    navigate(`/${chainName}/${daoId}/create-proposal`);
+    return <></>;
+  }
 
   if (
     !data ||
@@ -109,6 +123,21 @@ const SchemeSelection = () => {
           <Box>
             <Treasury subDaoAddress={selectedScheme.id} />
           </Box>
+          <Flex margin="20px 0px" alignItems="flex-end">
+            <StyledLink
+              to={`/${chainName}/${daoId}/create-proposal?subdao=${
+                selectedScheme.id
+              }${discussionId ? '&ref=' + discussionId : ''}`}
+              variant="outline"
+            >
+              <Button
+                variant="primaryWithBorder"
+                data-testid="create-proposal-btn"
+              >
+                {t('createProposal.createProposal')}
+              </Button>
+            </StyledLink>
+          </Flex>
         </div>
         <SidebarContent>
           <SidebarCard header="Scheme for proposal">
@@ -144,10 +173,9 @@ const SchemeSelection = () => {
 export default SchemeSelection;
 
 // TODO: fix permissions for avatar scheme
-// TODO: prevent guild from accessing scheme-selection
 // TODO: add translations
-// TODO: trigger scheme selection when creating a proposal in DAOs
-// TODO: pass scheme ID to proposal page. Maybe in params?
 // TODO: make radio button white and formatted
+// TODO: separating lines between options
 // ? since we aren't enforcing scheme unique names, how should we display data to differentiate them?
 // ? have a "go back to scheme selecction" button in proposal?
+// ? in "create proposal" page, show which scheme was selected

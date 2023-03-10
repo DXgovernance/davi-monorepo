@@ -54,6 +54,7 @@ const CreateProposalPage: React.FC = () => {
   const { guildId, chainName: chain } = useTypedParams();
   const [searchParams] = useSearchParams();
   const discussionId = searchParams.get('ref');
+  const subdaoId = searchParams.get('subdao');
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
@@ -62,6 +63,7 @@ const CreateProposalPage: React.FC = () => {
     hooks: {
       writers: { useCreateProposal },
     },
+    name: governanceName,
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
@@ -256,6 +258,14 @@ const CreateProposalPage: React.FC = () => {
   }, [title, proposalBodyHTML, proposalBodyMd]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
+
+  if (!subdaoId && governanceName === 'Governance1_5') {
+    let url = `/${chain}/${guildId}/scheme-selection`;
+    if (discussionId) url = `${url}?ref=${discussionId}`;
+    navigate(url);
+    return <></>;
+  }
+
   return (
     <PageContainer>
       <PageContent>

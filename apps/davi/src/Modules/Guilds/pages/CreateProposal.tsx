@@ -210,9 +210,11 @@ const CreateProposalPage: React.FC = () => {
       dataArray.length === 0 &&
       valueArray.length === 0
     ) {
-      toArray.push(ZERO_ADDRESS);
-      dataArray.push(ZERO_HASH);
-      valueArray.push(BigNumber.from(0));
+      options.forEach(o => {
+        toArray.push(ZERO_ADDRESS);
+        dataArray.push(ZERO_HASH);
+        valueArray.push(BigNumber.from(0));
+      });
     }
 
     const otherFields = { options };

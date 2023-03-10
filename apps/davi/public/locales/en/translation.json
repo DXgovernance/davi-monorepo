@@ -191,12 +191,14 @@
     },
     "simulations": {
       "simulateTransactions": "Simulate transactions",
+      "simulationPassed": "Simulation passed",
       "simulationFailed": "Simulation failed",
       "actionsVerified": "Actions verified",
       "actionsFailed": "Action verifications failed",
       "verifyingActions": "Verifying actions",
       "error": "Error while simulating transactions",
-      "poweredBy": "powered by"
+      "poweredBy": "powered by",
+      "viewOn": "View on"
     },
     "save": "Save",
     "core": "Core",

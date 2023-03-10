@@ -22,9 +22,9 @@ import {
   useVoterLockTimestamp,
   useVotingResults,
   useGetVotingMachineAddressBySchemeAddress,
+  useSnapshotId,
 } from './fetchers/subgraph';
-import { useSnapshotId } from './fetchers/subgraph/useSnapshotId';
-import { useVoteOnProposal, useWithdrawTokens } from './writers';
+import { useExecuteProposal, useWithdrawTokens } from './writers';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -86,9 +86,9 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
       writers: {
         useApproveTokens: null,
         useCreateProposal: null,
-        useExecuteProposal: null,
+        useExecuteProposal,
         useLockTokens: null,
-        useVoteOnProposal,
+        useVoteOnProposal: null,
         useWithdrawTokens,
       },
     },

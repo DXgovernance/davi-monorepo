@@ -1,13 +1,16 @@
-import { Contract } from 'ethers';
-import BaseERC20GuildContract from '../../../contracts/BaseERC20Guild.json';
-import { ERC20Guild } from 'dxdao-contracts/types/ERC20Guild';
-import ERC20_ABI from '../../../contracts/ERC20.json';
-import { ERC20 } from 'dxdao-contracts/types/ERC20';
-import { useProvider, useSigner } from 'wagmi';
 import { useMemo } from 'react';
+import { Contract } from 'ethers';
+import { useProvider, useSigner } from 'wagmi';
 import { getContract } from '@wagmi/core';
 import VotingMachineContract from 'contracts/VotingMachine.json';
 import { VotingMachine } from 'dxdao-contracts/types/VotingMachine';
+
+import BaseERC20GuildContract from 'contracts/BaseERC20Guild.json';
+import { ERC20Guild } from 'dxdao-contracts/types/ERC20Guild';
+import ERC20_ABI from 'contracts/ERC20.json';
+import { ERC20 } from 'dxdao-contracts/types/ERC20';
+import SchemeContract from 'contracts/Scheme.json';
+import { Scheme } from 'dxdao-contracts/types/Scheme';
 
 export default function useContract<T extends Contract>(
   contractId: string,
@@ -50,6 +53,19 @@ export function useERC20Guild(
   return useContract<ERC20Guild>(
     contractId,
     BaseERC20GuildContract.abi,
+    chainId,
+    withSignerIfPossible
+  );
+}
+
+export function useSchemeContract(
+  schemeAddress: string,
+  withSignerIfPossible?: boolean,
+  chainId?: number
+) {
+  return useContract<Scheme>(
+    schemeAddress,
+    SchemeContract.abi,
     chainId,
     withSignerIfPossible
   );

@@ -23,5 +23,9 @@ query getProposal($id: ID!, $proposalId: ID!) {
       }
     }
   }
+  _meta {
+    block {
+      number
+    }
+  }
 }
-

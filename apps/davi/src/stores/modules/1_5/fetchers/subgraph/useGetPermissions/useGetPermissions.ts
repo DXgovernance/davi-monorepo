@@ -1,13 +1,11 @@
-import { useMemo } from 'react';
 import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { useNetwork } from 'wagmi';
 
 import { getPermissionDocument, getPermissionQuery } from '.graphclient';
-import { apolloClient } from 'clients/apollo';
+import { getApolloClient } from 'clients/apollo';
 import { Permission } from 'components/ActionsBuilder/types';
-import { FetcherHooksInterface } from 'stores/types';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 
 type IUseGetPermissions = FetcherHooksInterface['useGetPermissions'];
 
@@ -16,14 +14,13 @@ export const useGetPermissions: IUseGetPermissions = (
   permissionArgs: Permission
 ) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { from, to, functionSignature } = permissionArgs;
 
   const { data, loading, error } = useQuery<getPermissionQuery>(
     getPermissionDocument,
     {
-      client: apolloClient[chainId]['Governance1.5'],
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: {
         from: from?.toLowerCase(),
         to: to?.toLowerCase(),

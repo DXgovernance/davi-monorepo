@@ -42,4 +42,3 @@ query getAllFunctionCallPermissions($id: ID!) {
     }
   }
 }
-

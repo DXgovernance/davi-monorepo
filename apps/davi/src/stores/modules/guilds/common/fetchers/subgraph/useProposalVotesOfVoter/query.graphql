@@ -5,5 +5,9 @@ query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
       votingPower
     }
   }
+  _meta {
+    block {
+      number
+    }
+  }
 }
-

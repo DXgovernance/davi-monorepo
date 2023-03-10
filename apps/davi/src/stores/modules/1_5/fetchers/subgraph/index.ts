@@ -12,3 +12,4 @@ export { useGetPermissions } from './useGetPermissions';
 export { useVotingResults } from './useVotingResults';
 export { useVoterLockTimestamp } from './useVoterLockTimestamp';
 export { useGetVotingMachineAddressBySchemeAddress } from './useGetVotingMachineAddressBySchemeAddress';
+export { useSnapshotId } from './useSnapshotId';

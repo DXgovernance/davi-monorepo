@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
 import { BigNumber } from 'ethers';
 import {
@@ -7,18 +6,20 @@ import {
   getNumberOfActiveProposalsQuery,
 } from '.graphclient';
 import { useListenToProposalStateChanged } from 'stores/modules/guilds/common/events/useListenToProposalStateChanged';
-import { apolloClient } from 'clients/apollo';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { useNetwork } from 'wagmi';
+import { getApolloClient } from 'clients/apollo';
+import { SupportedSubgraph } from 'stores/types';
+import { useBackoff } from '../utils/backoff';
 
 export const useGetNumberOfActiveProposals = (guildAddress: string) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
+  const { backoff } = useBackoff();
 
   const { data, refetch, loading, error } =
     useQuery<getNumberOfActiveProposalsQuery>(
       getNumberOfActiveProposalsDocument,
       {
-        client: apolloClient[chainId]['Guilds'],
+        client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
         variables: { id: guildAddress?.toLowerCase() },
       }
     );
@@ -26,7 +27,7 @@ export const useGetNumberOfActiveProposals = (guildAddress: string) => {
     if (!data?.guild) return undefined;
     return BigNumber.from(data.guild.proposals.length);
   }, [data]);
-  useListenToProposalStateChanged(guildAddress, refetch);
+  useListenToProposalStateChanged(guildAddress, () => backoff(refetch));
   return {
     data: transformedData,
     isLoading: loading,

@@ -1,15 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
-import { Result, ResultState } from 'components/Result';
-import { Flex } from 'components/primitives/Layout';
-import ProposalCardWrapper from '../../Wrappers/ProposalCardWrapper';
-import { useFilter } from 'contexts/Guilds';
-import { Input } from 'components/primitives/Forms/Input';
+import { useAccount } from 'wagmi';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
-import { useTypedParams } from '../../Hooks/useTypedParams';
+import { isReadOnly } from 'provider/wallets';
+import { Result, ResultState } from 'components/Result';
+import { Flex } from 'components/primitives/Layout';
+import { Input } from 'components/primitives/Forms/Input';
+import { Button } from 'components/primitives/Button';
 import { StyledLink } from 'components/primitives/Links';
+import ProposalCardWrapper from '../../Wrappers/ProposalCardWrapper';
+import { useFilter } from 'contexts/Guilds';
+import { useTypedParams } from '../../Hooks/useTypedParams';
 import {
   ActionButtonContainer,
   ProposalsList,
@@ -18,12 +22,7 @@ import {
 import { ProposalState } from 'types/types.guilds.d';
 import Discussions from 'Modules/Social/Discussions';
 import { useHookStoreProvider } from 'stores';
-import { Button } from 'components/primitives/Button';
-import { useNavigate } from 'react-router-dom';
-import { useAccount } from 'wagmi';
-import { isReadOnly } from 'provider/wallets';
 import { WalletModal } from 'components/Web3Modals';
-
 const Governance = ({ guildId }) => {
   const {
     hooks: {

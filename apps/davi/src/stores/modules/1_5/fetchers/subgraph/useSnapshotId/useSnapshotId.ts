@@ -1,14 +1,13 @@
 import { useMemo } from 'react';
 import { useNetwork } from 'wagmi';
 import { BigNumber } from 'ethers';
-import { FetcherHooksInterface } from 'stores/types';
-import { SUPPORTED_DAVI_NETWORKS } from 'utils';
+import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import {
   getProposalSnapshotIdDocument,
   getProposalSnapshotIdQuery,
 } from '.graphclient';
 import { useQuery } from '@apollo/client';
-import { apolloClient } from 'clients/apollo';
+import { getApolloClient } from 'clients/apollo';
 
 type IUseSnapshotId = FetcherHooksInterface['useSnapshotId'];
 
@@ -17,12 +16,11 @@ export const useSnapshotId: IUseSnapshotId = ({
   proposalId,
 }) => {
   const { chain } = useNetwork();
-  const chainId: SUPPORTED_DAVI_NETWORKS = useMemo(() => chain?.id, [chain]);
 
   const { data } = useQuery<getProposalSnapshotIdQuery>(
     getProposalSnapshotIdDocument,
     {
-      client: apolloClient[chainId]['Governance1.5'],
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: {
         id: proposalId,
       },
@@ -39,4 +37,3 @@ export const useSnapshotId: IUseSnapshotId = ({
 };
 
 export default useSnapshotId;
-

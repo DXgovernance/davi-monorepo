@@ -7,4 +7,3 @@ query getDaoNumberOfActiveProposals($id: ID!) {
     }
   }
 }
-

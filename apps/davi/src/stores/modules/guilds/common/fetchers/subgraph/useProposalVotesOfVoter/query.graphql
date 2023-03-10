@@ -11,4 +11,3 @@ query getProposalVotesOfVoter($proposalId: ID!, $userAddress: String!) {
     }
   }
 }
-

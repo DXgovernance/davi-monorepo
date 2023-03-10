@@ -29,4 +29,3 @@ query getDaoProposal($id: ID!, $proposalId: ID!) {
     }
   }
 }
-

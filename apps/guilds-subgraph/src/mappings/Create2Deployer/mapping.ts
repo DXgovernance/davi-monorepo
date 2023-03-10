@@ -10,7 +10,7 @@ import {
 } from '../../types/templates';
 import { Guild } from '../../types/schema';
 
-// TODO: Use env for this if possible
+// TODO: Use .env for this if possible
 const deployedHashedBytecodesJSON = prod;
 
 const parsedJson = json.fromString(deployedHashedBytecodesJSON);

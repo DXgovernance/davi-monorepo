@@ -7,4 +7,3 @@ query getTotalLocked($id: ID!) {
     }
   }
 }
-

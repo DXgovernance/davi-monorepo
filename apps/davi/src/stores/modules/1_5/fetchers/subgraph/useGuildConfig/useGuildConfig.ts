@@ -26,12 +26,12 @@ export const useGuildConfig: IUseGuildConfig = (
   );
 
   const guildConfig: GuildConfigProps = useMemo(() => {
-    if (!data?.dao) return undefined;
+    if (!data || !data.dao) return null;
 
     return {
-      token: data?.dao?.reputationToken?.address as `0x${string}`,
+      token: data.dao?.reputationToken?.address as `0x${string}`,
       permissionRegistry: null,
-      name: data?.dao?.reputationToken?.name,
+      name: data.dao?.reputationToken?.name,
       proposalTime: null,
       timeForExecution: null,
       maxActiveProposals: null,
@@ -47,6 +47,7 @@ export const useGuildConfig: IUseGuildConfig = (
       minimumTokensLockedForProposalCreation: null,
     };
   }, [data]);
+
   return {
     data: guildConfig,
     isLoading: loading,

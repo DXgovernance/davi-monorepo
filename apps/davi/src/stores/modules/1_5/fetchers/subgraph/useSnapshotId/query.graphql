@@ -1,0 +1,6 @@
+query getProposalSnapshotId($id: ID!) {
+  proposal(id: $id) {
+    id
+    snapshot
+  }
+}

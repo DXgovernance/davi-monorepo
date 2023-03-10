@@ -9,4 +9,3 @@ query getDaoPermissions($id: String!) {
     allowed
   }
 }
-

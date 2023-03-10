@@ -13,7 +13,7 @@ export const ProposalDescriptionWrapper = styled.div`
     color: ${({ theme }) => theme.colors.active};
   }
   a:visited {
-    color: ${({ theme }) =>  shade(0.3, theme.colors.active)};
+    color: ${({ theme }) => shade(0.3, theme.colors.active)};
   }
 `;
 

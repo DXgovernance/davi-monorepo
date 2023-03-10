@@ -13,4 +13,3 @@ query getDaoVotesOfVoter($id: ID!, $proposalId: ID!, $userAddress: String!) {
     }
   }
 }
-

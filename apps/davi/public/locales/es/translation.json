@@ -134,14 +134,14 @@
         "unknownToken": "Token desconocido"
       },
       "repMint": {
-        "mint": "Acuñar",
-        "mintRep": "Acuñar REP",
+        "mint": "Mint",
+        "mintRep": "Mint REP",
         "recipient": "Destinatario",
-        "recipientTooltip": "La dirección que va a recibir el REP acuñado.",
+        "recipientTooltip": "La dirección que va a recibir el REP creado.",
         "repPercent": "Reputación en %",
-        "repPercentTooltip": "El porcentaje de la reputación total suministrada que será acuñada.",
+        "repPercentTooltip": "El porcentaje de la reputación total suministrada que será creada.",
         "repAmount": "Cantidad de Reputación",
-        "repAmountTooltip": "La cantidad de REP que será acuñado."
+        "repAmountTooltip": "La cantidad de REP que será creada."
       },
       "ens": {
         "updateContentCoreAction": "Actualizar Contenido ENS",

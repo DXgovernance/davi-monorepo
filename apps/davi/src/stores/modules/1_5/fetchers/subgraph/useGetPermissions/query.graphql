@@ -7,4 +7,3 @@ query getPermission($from: String!, $to: String!, $functionSignature: String!) {
     fromTime
   }
 }
-

@@ -393,6 +393,7 @@
     "canChangeReputation": "Can change reputation",
     "maxRepPercentageChange": "Maximum rep percentage change",
     "type": "Type",
+    "next": "Next",
     "errorFetchingSchemes": "Error while fetching schemes"
   },
   "inputValidation": {

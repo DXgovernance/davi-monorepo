@@ -24,7 +24,7 @@
     "unsupportedNetwork": "Red No Admitida",
     "switchNetwork": "Cambiar Red",
     "errorConnecting": "Error conectando",
-    "pleaseSwitchNetwork": "Usted está actualmente conectado a una red no admitida. Por favor cambíe a una red admitida para continuar.",
+    "pleaseSwitchNetwork": "Usted está actualmente conectado a una red no admitida. Por favor cambie a una red admitida para continuar.",
     "account": "Cuenta",
     "connectToAWallet": "Conectar a un monedero",
     "connectedTo": "Conectado a {{walletName}}",

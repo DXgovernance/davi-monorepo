@@ -14,7 +14,7 @@ export const useGetMemberList: IUseGetMemberList = (daoId: string) => {
   const { data, loading, error } = useQuery<getMemberList1_5Query>(
     getMemberList1_5Document,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: { id: daoId?.toLowerCase() },
     }
   );

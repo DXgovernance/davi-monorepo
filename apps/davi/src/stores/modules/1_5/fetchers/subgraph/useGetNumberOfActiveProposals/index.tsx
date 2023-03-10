@@ -22,7 +22,7 @@ export const useGetNumberOfActiveProposals: IUseGetNumberOfActiveProposals =
       useQuery<getDaoNumberOfActiveProposalsQuery>(
         getDaoNumberOfActiveProposalsDocument,
         {
-          client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+          client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
           variables: {
             id: daoId?.toLowerCase(),
           },

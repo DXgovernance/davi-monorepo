@@ -17,7 +17,7 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
   const { data, loading, error } = useQuery<getVotingPowerOfQuery>(
     getVotingPowerOfDocument,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
       variables: {
         id: daoId?.toLowerCase(),
         userAddress: userAddress?.toLowerCase(),

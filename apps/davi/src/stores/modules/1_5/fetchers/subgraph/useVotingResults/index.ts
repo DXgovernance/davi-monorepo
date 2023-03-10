@@ -1,0 +1,1 @@
+export { useVotingResults } from './useVotingResults';

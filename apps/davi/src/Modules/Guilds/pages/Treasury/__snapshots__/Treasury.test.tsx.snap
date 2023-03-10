@@ -6,6 +6,8 @@ exports[`Treasury Page Should render without data 1`] = `
   min-width: 200px;
   height: 1px;
   background-color: #303338;
+  margin: 0;
+  padding: 0;
 }
 
 .c0 {

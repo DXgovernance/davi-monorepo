@@ -10,14 +10,15 @@ import { getApolloClient } from 'clients/apollo';
 import { useHookStoreProvider } from 'stores';
 import { SupportedSubgraph } from 'stores/types';
 
-import { SidebarCard, SidebarCardContent } from 'components/SidebarCard';
-import { Divider } from 'components/Divider';
 import {
-  OptionText,
-  StyledRadioInput,
-} from 'components/ProposalVoteCard/ProposalVoteCard.styled';
+  SidebarCard,
+  SidebarCardContent,
+  SidebarCardHeaderSpaced,
+} from 'components/SidebarCard';
+import { Divider } from 'components/Divider';
 import { Result, ResultState } from 'components/Result';
 import { Button, IconButton } from 'components/primitives/Button';
+import { RadioInput } from 'components/primitives/Forms/RadioInput';
 import { Box, Flex } from 'components/primitives/Layout';
 import { StyledLink } from 'components/primitives/Links';
 import { Loading } from 'components/primitives/Loading';
@@ -148,26 +149,34 @@ const SchemeSelection = () => {
           </Flex>
         </div>
         <SidebarContent>
-          <SidebarCard header={t('schemes.schemeForProposal')}>
+          <SidebarCard
+            header={
+              <SidebarCardHeaderSpaced>
+                {t('schemes.schemeForProposal')}
+              </SidebarCardHeaderSpaced>
+            }
+          >
             <SidebarCardContent>
               {schemes.map((_, index) => {
                 return (
-                  <Flex
-                    direction="row"
-                    justifyContent="left"
-                    onClick={() => {
-                      setSelectedSchemeIndex(index);
-                    }}
-                  >
-                    <StyledRadioInput
-                      value={schemes[index]}
-                      optionKey={index}
-                      checked={selectedSchemeIndex === index}
-                    />
-                    <OptionText optionKey={index} variant="medium">
-                      {schemes[index].name}
-                    </OptionText>
-                  </Flex>
+                  <>
+                    <Flex
+                      direction="row"
+                      justifyContent="left"
+                      onClick={() => {
+                        setSelectedSchemeIndex(index);
+                      }}
+                    >
+                      <RadioInput
+                        value={schemes[index]}
+                        checked={selectedSchemeIndex === index}
+                      />
+                      <Box margin={'0px 10px'}>{schemes[index].name}</Box>
+                    </Flex>
+                    {index !== schemes.length - 1 && (
+                      <Divider margin="14px 0px " />
+                    )}
+                  </>
                 );
               })}
             </SidebarCardContent>
@@ -180,8 +189,8 @@ const SchemeSelection = () => {
 
 export default SchemeSelection;
 
-// TODO: make radio button white and formatted
 // TODO: separating lines between options
 // ? since we aren't enforcing scheme unique names, how should we display data to differentiate them?
 // ? have a "go back to scheme selecction" button in proposal?
 // ? in "create proposal" page, show which scheme was selected
+// ? what goes in the text?

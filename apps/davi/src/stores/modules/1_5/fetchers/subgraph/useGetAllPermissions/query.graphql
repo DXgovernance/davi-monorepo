@@ -36,4 +36,3 @@ query getAllDaoFunctionCallPermissions($from: String!) {
     allowed
   }
 }
-

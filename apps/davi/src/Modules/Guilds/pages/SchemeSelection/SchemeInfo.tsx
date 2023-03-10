@@ -15,8 +15,6 @@ const humanizedTime = (time: string) => {
 };
 
 export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
-  console.log(selectedScheme.votingMachine.boostedVotePeriodLimit);
-
   const formattedBoostedVoteRequiredPercentage = BigNumber.from(
     selectedScheme.votingMachine.boostedVoteRequiredPercentage
   )

@@ -19,9 +19,6 @@ export const useGetAllPermissions: IUseGetAllPermissions = (
 ) => {
   const { chain } = useNetwork();
 
-  // if it's an avatar scheme, then we should get the permissions for the avatar address
-  // TODO: fix conditional to fetch permissions
-
   const queryToExecute = useMemo(() => {
     if (!filter) {
       return getAllDaoPermissionsDocument;

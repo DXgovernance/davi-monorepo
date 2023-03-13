@@ -290,18 +290,20 @@ const CreateProposalPage: React.FC = () => {
               </IconButton>
             </StyledLink>
 
-            <StyledLink to={schemeSelectionUrl} customStyles={linkStyles}>
-              <IconButton
-                variant="secondary"
-                iconLeft
-                padding={'0.6rem 0.8rem'}
-                marginTop={'5px;'}
-                data-testid="back-to-scheme-btn"
-              >
-                <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
-                {t('schemes.backToScheme')}
-              </IconButton>
-            </StyledLink>
+            {governanceName === 'Governance1_5' && (
+              <StyledLink to={schemeSelectionUrl} customStyles={linkStyles}>
+                <IconButton
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                  data-testid="back-to-scheme-btn"
+                >
+                  <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
+                  {t('schemes.backToScheme')}
+                </IconButton>
+              </StyledLink>
+            )}
           </div>
 
           <StyledButton

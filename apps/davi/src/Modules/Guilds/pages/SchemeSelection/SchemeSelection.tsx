@@ -203,5 +203,3 @@ const SchemeSelection = () => {
 };
 
 export default SchemeSelection;
-
-// TODO: fix hardcoded scheme variable in Proposal page

@@ -289,7 +289,7 @@ export const OptionsList: React.FC<OptionsListProps> = ({
     SimulationState.none
   );
   const [isSimulationModalOpened, setIsSimulationModalOpened] = useState(false);
-  const simulateTransactions = useTransactionSimulation();
+  const { simulateTransactions } = useTransactionSimulation();
 
   const handleTransactionSimulation = async () => {
     setSimulationStatus(SimulationState.pending);

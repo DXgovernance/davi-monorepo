@@ -64,6 +64,7 @@ export interface Option {
 export interface ApproveSendTokens extends DecodedCall {
   amount?: BigNumber | string;
   token?: string;
+  simulationResult?: any;
 }
 
 export interface Permission {

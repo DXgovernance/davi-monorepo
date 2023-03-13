@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FaChevronLeft } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -43,6 +43,7 @@ const SchemeSelection = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const discussionId = searchParams.get('ref');
+  const subdaoId = searchParams.get('subdao');
 
   const { name: governanceName } = useHookStoreProvider();
 
@@ -55,7 +56,22 @@ const SchemeSelection = () => {
     variables: { id: daoId?.toLowerCase() },
   });
 
-  const [selectedSchemeIndex, setSelectedSchemeIndex] = useState(0); // Defaults to first scheme
+  const [selectedSchemeIndex, setSelectedSchemeIndex] = useState(0);
+
+  useEffect(() => {
+    try {
+      data.dao.schemes.find((scheme, index) => {
+        if (scheme.id === subdaoId) {
+          setSelectedSchemeIndex(index);
+          return true;
+        } else {
+          return false;
+        }
+      });
+    } catch {
+      return;
+    }
+  }, [data, subdaoId]);
 
   if (governanceName !== 'Governance1_5') {
     navigate(`/${chainName}/${daoId}/create-proposal`);
@@ -188,8 +204,4 @@ const SchemeSelection = () => {
 
 export default SchemeSelection;
 
-// TODO: fix radio button on vote showing white...
-// TODO: have a "go back to scheme selection" button in proposal
-// ? since we aren't enforcing scheme unique names, how should we display data to differentiate them?
-// ? in "create proposal" page, show which scheme was selected
-// ? what goes in the scheme selection text?
+// TODO: fix hardcoded scheme variable in Proposal page

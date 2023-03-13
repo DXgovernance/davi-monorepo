@@ -8,10 +8,12 @@ import { Loading } from 'components/primitives/Loading';
 import { Row, Label, ColoredLabel } from './SidebarInfoCard.styled';
 import { SidebarInfoCardProps } from './types';
 import { useTranslation } from 'react-i18next';
+import { shortenAddress } from 'utils';
 
 const SidebarInfoCard: React.FC<SidebarInfoCardProps> = ({
   proposalTime,
   quorum,
+  subdaoId,
 }) => {
   const { t } = useTranslation();
 
@@ -46,6 +48,12 @@ const SidebarInfoCard: React.FC<SidebarInfoCardProps> = ({
             )}
           </ColoredLabel>
         </Row>
+        {subdaoId && (
+          <Row>
+            <Label>{t('schemes.schemes_one')}</Label>
+            <ColoredLabel>{shortenAddress(subdaoId)}</ColoredLabel>
+          </Row>
+        )}
       </SidebarCardContent>
     </SidebarCard>
   );

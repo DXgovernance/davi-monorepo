@@ -13,7 +13,6 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
   contractAddress: daoId,
   userAddress,
   snapshotId,
-  fallbackSnapshotId = true,
 }) => {
   const { chain } = useNetwork();
 
@@ -43,7 +42,7 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
   const votingPowerAtSnapshotResponse = useVotingPowerOfAt(
     daoId,
     userAddress,
-    fallbackSnapshotId ? snapshotId ?? currentSnapshotId : snapshotId
+    snapshotId
   );
 
   return snapshotId

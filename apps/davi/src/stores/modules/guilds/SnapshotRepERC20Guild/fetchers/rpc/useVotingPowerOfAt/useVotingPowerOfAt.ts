@@ -1,10 +1,18 @@
 import { SnapshotRepERC20Guild } from 'contracts/ts-files/SnapshotRepERC20Guild';
 import { BigNumber } from 'ethers';
 import useCurrentSnapshotId from 'Modules/Guilds/Hooks/useCurrentSnapshotId';
-import { FetcherHooksInterface } from 'stores/types';
 import { useContractRead } from 'wagmi';
 
-type IUseVotingPowerOfAt = FetcherHooksInterface['useVotingPowerOfAt'];
+type IUseVotingPowerOfAt = (
+  contractAddress: string,
+  userAddress: `0x${string}`,
+  snapshotId?: string,
+  fallbackSnapshotId?: boolean
+) => {
+  data: BigNumber;
+  isError: boolean;
+  isLoading: boolean;
+};
 
 /**
  * Get the voting power of an account at snapshot id

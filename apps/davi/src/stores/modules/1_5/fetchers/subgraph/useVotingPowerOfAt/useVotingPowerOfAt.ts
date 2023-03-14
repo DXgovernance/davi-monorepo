@@ -6,11 +6,18 @@ import { useQuery } from '@apollo/client';
 import { apolloClient } from 'clients/apollo';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
-import { FetcherHooksInterface } from 'stores/types';
 import { CHAIN_ID } from 'utils';
 import { useNetwork } from 'wagmi';
 
-type IUseVotingPowerOfAt = FetcherHooksInterface['useVotingPowerOfAt'];
+type IUseVotingPowerOfAt = (
+  daoAddress: string,
+  userAddress: `0x${string}`,
+  snapshotId?: string
+) => {
+  data: BigNumber;
+  isError: boolean;
+  isLoading: boolean;
+};
 
 export const useVotingPowerOfAt: IUseVotingPowerOfAt = (
   daoId,

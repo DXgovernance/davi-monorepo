@@ -48,7 +48,6 @@ const ProposalVoteCard = ({
 
   const {
     hooks: {
-      fetchers: { useGetVotingMachineAddressBySchemeAddress },
       writers: { useVoteOnProposal },
     },
     name: governanceImplementationName,
@@ -72,13 +71,7 @@ const ProposalVoteCard = ({
     }
   }, [governanceImplementationName]);
 
-  const votingMachine =
-    useGetVotingMachineAddressBySchemeAddress(schemeAddress);
-
-  const voteOnProposal = useVoteOnProposal(
-    guildId,
-    votingMachine?.votingMachineAddress
-  );
+  const voteOnProposal = useVoteOnProposal(guildId, schemeAddress);
 
   const votedOptionLabel = useMemo(() => {
     if (!userVote?.option) return null;

@@ -5,7 +5,6 @@ import { mockProposalVoteCardProps } from './fixture';
 jest.mock('stores', () => ({
   useHookStoreProvider: () => ({
     hooks: {
-      fetchers: { useGetVotingMachineAddressBySchemeAddress: jest.fn() },
       writers: { useVoteOnProposal: jest.fn() },
     },
   }),

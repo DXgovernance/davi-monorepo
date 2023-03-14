@@ -153,21 +153,6 @@ export interface FetcherHooksInterface {
     status: ProposalState,
     endTime: Moment
   ) => { detail: string; moment: Moment };
-  useGetVotingMachineAddressBySchemeAddress: (schemeAddress: string) => {
-    votingMachineAddress: string;
-    isError: boolean;
-    isLoading: boolean;
-  };
-  useVotingPowerOfAt: (
-    contractAddress: string,
-    userAddress: `0x${string}`,
-    snapshotId?: string,
-    fallbackSnapshotId?: boolean
-  ) => {
-    data: BigNumber;
-    isError: boolean;
-    isLoading: boolean;
-  };
 }
 
 export interface WriterHooksInteface {

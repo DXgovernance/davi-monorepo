@@ -24,7 +24,6 @@ export function handleMint(event: Mint): void {
     reputationToken.name = repContract.name();
     reputationToken.symbol = repContract.symbol();
     reputationToken.amount = BigInt.fromString('0');
-    reputationToken.currentSnapshotId = BigInt.fromString('0');
   }
   reputationToken.amount = reputationToken.amount.plus(event.params.amount);
   reputationToken.currentSnapshotId = snapshotId;

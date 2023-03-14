@@ -2,15 +2,17 @@ import { useMemo } from 'react';
 import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
 import { apolloClient } from 'clients/apollo';
-import { FetcherHooksInterface } from 'stores/types';
 import { CHAIN_ID } from 'utils';
 import {
   getVotingMachineBySchemeDocument,
   getVotingMachineBySchemeQuery,
 } from '.graphclient';
 
-type IUseGetVotingMachineAddressBySchemeAddress =
-  FetcherHooksInterface['useGetVotingMachineAddressBySchemeAddress'];
+type IUseGetVotingMachineAddressBySchemeAddress = (schemeAddress: string) => {
+  votingMachineAddress: string;
+  isError: boolean;
+  isLoading: boolean;
+};
 
 export const useGetVotingMachineAddressBySchemeAddress: IUseGetVotingMachineAddressBySchemeAddress =
   (schemeAddress: string) => {

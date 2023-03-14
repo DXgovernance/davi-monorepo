@@ -34,14 +34,12 @@ import {
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
   useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
-  useGetVotingMachineAddressBySchemeAddress,
 } from '../common/fetchers/subgraph';
 import {
   useTotalLocked,
   useVoterLockTimestamp,
   useVotingPowerOf,
   useMemberCount,
-  useVotingPowerOfAt,
 } from './fetchers/rpc';
 import { checkDataSourceAvailability } from '../common/checkDataSourceAvailability';
 import localBytecodes from 'bytecodes/local.json';
@@ -85,8 +83,6 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
           useGuildProposalIds: useGuildProposalIdsFromSubgraph,
           useProposalState,
           useTimeDetail,
-          useGetVotingMachineAddressBySchemeAddress,
-          useVotingPowerOfAt,
         },
         fallback: {
           useProposal,
@@ -109,8 +105,6 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
           useGuildProposalIds,
           useProposalState,
           useTimeDetail,
-          useGetVotingMachineAddressBySchemeAddress,
-          useVotingPowerOfAt,
         },
       },
       writers: {

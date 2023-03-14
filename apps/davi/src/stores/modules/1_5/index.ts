@@ -21,7 +21,6 @@ import {
   useGetPermissions,
   useVoterLockTimestamp,
   useVotingResults,
-  useGetVotingMachineAddressBySchemeAddress,
   useSnapshotId,
 } from './fetchers/subgraph';
 import { useExecuteProposal, useWithdrawTokens } from './writers';
@@ -56,8 +55,6 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildProposalIds,
           useProposalState,
           useTimeDetail,
-          useGetVotingMachineAddressBySchemeAddress,
-          useVotingPowerOfAt: null,
         },
         fallback: {
           useProposal: null,
@@ -80,8 +77,6 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildProposalIds: null,
           useProposalState: null,
           useTimeDetail: null,
-          useGetVotingMachineAddressBySchemeAddress: null,
-          useVotingPowerOfAt: null,
         },
       },
       writers: {

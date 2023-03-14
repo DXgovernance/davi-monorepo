@@ -14,7 +14,7 @@ export const useGetPermissions: IUseGetPermissions = (
 ) => {
   const { data: guildConfig } = useGuildConfig(daoAddress);
 
-  const { from, to, functionSignature } = permissionArgs;
+  const { from, to, functionSignature } = permissionArgs || {};
 
   // The type castings are there because, if we use template literals
   // in the permissionArgs, it leads to the whole app needing 0x${string} types.

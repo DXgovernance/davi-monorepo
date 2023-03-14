@@ -60,8 +60,8 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
       return {
         source: decodedCall.from,
         token,
-        amount: decodedCall.args._value,
-        recipientAddress: decodedCall.args._to,
+        amount: decodedCall.args.amount,
+        recipientAddress: decodedCall.args.recipient,
       };
     } else if (decodedCall.callType === SupportedAction.NATIVE_TRANSFER) {
       const token = tokens.find(token => token.type === 'NATIVE');
@@ -96,8 +96,8 @@ const ERC20TransferEditor: React.FC<ActionEditorProps> = ({
           value: BigNumber.from(0),
           function: ERC20Contract.getFunction('transfer'),
           args: {
-            _value: values.amount,
-            _to: values.recipientAddress,
+            amount: values.amount,
+            recipient: values.recipientAddress,
           },
         },
       ]);

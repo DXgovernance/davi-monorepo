@@ -19,7 +19,7 @@ import { Divider } from 'components/Divider';
 import { Result, ResultState } from 'components/Result';
 import { IconButton } from 'components/primitives/Button';
 import { RadioInput } from 'components/primitives/Forms/RadioInput';
-import { Box, Flex } from 'components/primitives/Layout';
+import { Box } from 'components/primitives/Layout';
 import { StyledLink } from 'components/primitives/Links';
 import { Loading } from 'components/primitives/Loading';
 import { Heading } from 'components/primitives/Typography';
@@ -30,6 +30,7 @@ import {
   CardContainer,
   CardTitle,
   NextButton,
+  RadioInputContainer,
   StyledDivider,
 } from './SchemeSelection.styled';
 import { SchemeInfo } from './SchemeInfo';
@@ -162,9 +163,7 @@ const SchemeSelection = () => {
               {schemes.map((_, index) => {
                 return (
                   <>
-                    <Flex
-                      direction="row"
-                      justifyContent="left"
+                    <RadioInputContainer
                       onClick={() => {
                         setSelectedSchemeIndex(index);
                       }}
@@ -173,8 +172,8 @@ const SchemeSelection = () => {
                         value={schemes[index]}
                         checked={selectedSchemeIndex === index}
                       />
-                      <Box margin={'0px 10px'}>{schemes[index].name}</Box>
-                    </Flex>
+                      {schemes[index].name}
+                    </RadioInputContainer>
                     {index !== schemes.length - 1 && (
                       <Divider margin="14px 0px " />
                     )}

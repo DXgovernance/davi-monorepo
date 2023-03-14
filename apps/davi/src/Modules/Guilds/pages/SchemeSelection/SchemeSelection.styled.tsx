@@ -46,3 +46,11 @@ export const NextButton = styled(Button)`
     opacity: 1;
   }
 `;
+
+export const RadioInputContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+`;

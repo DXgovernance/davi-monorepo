@@ -14,7 +14,7 @@ type Snapshot @entity {
   id: ID!
   snapshotId: BigInt!
   value: BigInt!
-  reputationTokenSnapshot: ReputationToken
+  reputationTokenSnapshot: ReputationToken!
 }
 
 type Member @entity {

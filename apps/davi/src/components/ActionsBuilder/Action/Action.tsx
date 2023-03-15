@@ -19,7 +19,7 @@ import UndecodableCallDetails from '../UndecodableCalls/UndecodableCallDetails';
 import UndecodableCallInfoLine from '../UndecodableCalls/UndecodableCallInfoLine';
 import { Call, DecodedAction } from '../types';
 import { ConfirmRemoveActionModal } from '../ConfirmRemoveActionModal';
-
+import tenderlyLogo from 'assets/images/tenderly-dark-mode.svg';
 import {
   CardActions,
   CardHeader,
@@ -32,7 +32,13 @@ import {
   SectionBody,
   SectionHeader,
   Separator,
+  SimulationError,
+  SimulationLinkContainer,
+  SimulationStatusContainer,
+  TenderlyURLLogo,
 } from './Action.styled';
+import { useTransactionSimulation } from 'hooks/Guilds/useTenderlyApi';
+import { ExternalLink } from 'components/primitives/Links/ExternalLink';
 
 interface ActionViewProps {
   call?: Call;
@@ -78,6 +84,9 @@ export const ActionRow: React.FC<ActionViewProps> = ({
   const decodedCall = action.decodedCall || decodedAction?.decodedCall;
   const approval = action.approval || decodedAction?.approval;
   const permissions = useGetPermissions(guildId, permissionArgs);
+  const { getSimulationUrl } = useTransactionSimulation();
+
+  const simulationResult = decodedAction?.simulationResult;
 
   const [expanded, setExpanded] = useState(false);
   const [confirmRemoveActionModalIsOpen, setConfirmRemoveActionModalIsOpen] =
@@ -116,19 +125,13 @@ export const ActionRow: React.FC<ActionViewProps> = ({
       hasValueTransferOnContractCall ||
       decodedCall.callType === 'RAW_TRANSACTION'
     )
-      if (!decodedAction?.simulationResult) return CardStatus.normal;
+      if (!simulationResult) return CardStatus.normal;
 
-    if (decodedAction?.simulationResult?.simulation.status === false) {
+    if (simulationResult?.simulation.status === false) {
       return CardStatus.simulationFailed;
     }
     return CardStatus.normal; // default return so ESLint doesn't complain
-  }, [
-    decodedCall,
-    decodedAction?.simulationResult,
-    isEditable,
-    isDragging,
-    permissions,
-  ]);
+  }, [decodedCall, simulationResult, isEditable, isDragging, permissions]);
 
   useEffect(() => {
     if (!onEdit || !decodedAction) return;
@@ -194,14 +197,54 @@ export const ActionRow: React.FC<ActionViewProps> = ({
           <Separator cardStatus={cardStatus} />
           {cardStatus === CardStatus.simulationFailed && (
             <>
-              <DetailWrapper>
-                <SectionHeader>
-                  {t('simulations.simulationFailed')}
-                </SectionHeader>
-                <SectionBody>
-                  {decodedAction.simulationResult.transaction.error_message}
-                </SectionBody>
-              </DetailWrapper>
+              {simulationResult?.simulation && (
+                <DetailWrapper>
+                  <>
+                    <SimulationLinkContainer>
+                      <SimulationStatusContainer>
+                        {t('actionBuilder.simulations.simulationFailed')}
+                      </SimulationStatusContainer>
+                      <ExternalLink
+                        href={getSimulationUrl(
+                          simulationResult?.simulation?.id
+                        )}
+                        data-testid="external-link"
+                      >
+                        <TenderlyURLLogo src={tenderlyLogo} />
+                      </ExternalLink>
+                    </SimulationLinkContainer>
+                    {simulationResult?.transaction?.error_message && (
+                      <SimulationError>
+                        {simulationResult?.transaction?.error_message}
+                      </SimulationError>
+                    )}
+                  </>
+                </DetailWrapper>
+              )}
+              <Separator />
+            </>
+          )}
+          {cardStatus !== CardStatus.simulationFailed && (
+            <>
+              {simulationResult?.simulation && (
+                <DetailWrapper>
+                  <>
+                    <SimulationLinkContainer>
+                      <SimulationStatusContainer>
+                        {t('actionBuilder.simulations.simulationPassed')}
+                      </SimulationStatusContainer>
+                      <ExternalLink
+                        href={getSimulationUrl(
+                          simulationResult?.simulation?.id
+                        )}
+                        data-testid="external-link"
+                      >
+                        <TenderlyURLLogo src={tenderlyLogo} />
+                      </ExternalLink>
+                    </SimulationLinkContainer>
+                  </>
+                </DetailWrapper>
+              )}
               <Separator />
             </>
           )}

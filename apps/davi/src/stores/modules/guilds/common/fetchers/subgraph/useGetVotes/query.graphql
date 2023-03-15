@@ -13,4 +13,3 @@ query getVotes($id: ID!) {
     }
   }
 }
-

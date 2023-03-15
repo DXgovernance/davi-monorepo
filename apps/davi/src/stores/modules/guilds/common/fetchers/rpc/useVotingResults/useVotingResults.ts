@@ -10,7 +10,7 @@ export const useVotingResults: IUseVotingResults = (
   daoId,
   proposalId,
   totalVotes
-): VoteData => {
+) => {
   const {
     hooks: {
       fetchers: { useTotalLocked, useGuildConfig },

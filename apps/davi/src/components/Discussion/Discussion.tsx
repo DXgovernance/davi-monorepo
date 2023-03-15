@@ -16,18 +16,18 @@ import {
   DiscussionEmpty,
 } from './Discussion.styled';
 import { Box } from 'components/primitives/Layout';
-import { IOrbisGetPostsAlgorithm, IOrbisPost } from 'types/types.orbis';
+import { IOrbisPost } from 'types/types.orbis';
 
 function Discussion({
   context,
   master = '',
-  algorithm = 'all-context-master-posts',
+  masterOnly = true,
   daoId,
   parentId,
 }: {
   context: string;
   master?: string;
-  algorithm?: keyof typeof IOrbisGetPostsAlgorithm;
+  masterOnly?: boolean;
   daoId?: string;
   parentId?: string;
 }) {
@@ -55,7 +55,7 @@ function Discussion({
       {
         context,
         master,
-        algorithm,
+        only_master: masterOnly,
       },
       polling || reset ? 0 : page
     );

@@ -36,7 +36,12 @@ export const membersSeed = `{
   ],
   "0xfd40f8ab40f21f99810e0a060bdc49d082ce23d5": [
     "0x91628ddc3a6ff9b48a2f34fc315d243eb07a9501",
-    "0xc36cbdd85791a718cefca21045e773856a89c197"
+    "0xc36cbdd85791a718cefca21045e773856a89c197",
+    "0x8E900Cf9BD655e34bb610f0Ef365D8d476fD7337",
+    "0x08EEc580AD41e9994599BaD7d2a74A9874A2852c",
+    "0x1861974f32eacdcced0f81b0f8eccfed58153a9d",
+    "0x19B548aCD4AD55d6A8a0ec4E89375a95496A80eF",
+    "0xd179b3217f9593a9faac7c85d5acaf1f5223d762"
   ]
 }
 `;

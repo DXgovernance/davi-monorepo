@@ -11,6 +11,7 @@ type Proposal @entity {
   title: String
   descriptionHash: String
   submittedTime: BigInt
+  snapshot: String
 
   # VotingMachine properties
   schemeId: String

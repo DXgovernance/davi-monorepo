@@ -63,7 +63,7 @@ const CreateProposalPage: React.FC = () => {
     hooks: {
       writers: { useCreateProposal },
     },
-    name: governanceName,
+    capabilities: { hasSubDAO },
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
@@ -263,7 +263,7 @@ const CreateProposalPage: React.FC = () => {
   if (isGuildAvailabilityLoading) return <Loading loading />;
 
   const schemeSelectionUrl = `/${chain}/${guildId}/scheme-selection${location.search}`;
-  if (!subdaoId && governanceName === 'Governance1_5') {
+  if (hasSubDAO === true && !subdaoId) {
     navigate(schemeSelectionUrl);
     return <></>;
   }
@@ -290,7 +290,7 @@ const CreateProposalPage: React.FC = () => {
               </IconButton>
             </StyledLink>
 
-            {governanceName === 'Governance1_5' && (
+            {hasSubDAO === true && (
               <StyledLink to={schemeSelectionUrl} customStyles={linkStyles}>
                 <IconButton
                   variant="secondary"

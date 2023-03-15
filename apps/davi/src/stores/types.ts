@@ -14,6 +14,7 @@ interface GovernanceCapabilities {
   consensus: 'holographic' | 'quorum';
   votingStyle: 'binary' | 'competition';
   votingPowerTally: 'snapshot' | 'live';
+  hasSubDAO: boolean;
 }
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 

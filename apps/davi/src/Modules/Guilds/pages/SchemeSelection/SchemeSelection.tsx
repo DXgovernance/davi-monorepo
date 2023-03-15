@@ -46,7 +46,9 @@ const SchemeSelection = () => {
   const discussionId = searchParams.get('ref');
   const subdaoId = searchParams.get('subdao');
 
-  const { name: governanceName } = useHookStoreProvider();
+  const {
+    capabilities: { hasSubDAO },
+  } = useHookStoreProvider();
 
   const {
     data,
@@ -74,7 +76,7 @@ const SchemeSelection = () => {
     }
   }, [data, subdaoId]);
 
-  if (governanceName !== 'Governance1_5') {
+  if (hasSubDAO === false) {
     navigate(`/${chainName}/${daoId}/create-proposal`);
     return <></>;
   }

@@ -122,6 +122,7 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
       consensus: 'quorum',
       votingStyle: 'competition',
       votingPowerTally: 'snapshot',
+      hasSubDAO: false,
     },
     checkDataSourceAvailability,
   };

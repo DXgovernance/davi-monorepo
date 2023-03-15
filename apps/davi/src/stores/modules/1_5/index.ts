@@ -98,6 +98,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
       consensus: 'holographic',
       votingStyle: 'binary',
       votingPowerTally: 'snapshot',
+      hasSubDAO: true,
     },
     checkDataSourceAvailability,
   };

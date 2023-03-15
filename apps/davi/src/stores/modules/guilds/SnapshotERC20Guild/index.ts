@@ -123,6 +123,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
       consensus: 'quorum',
       votingStyle: 'competition',
       votingPowerTally: 'snapshot',
+      hasSubDAO: false,
     },
     checkDataSourceAvailability,
   };

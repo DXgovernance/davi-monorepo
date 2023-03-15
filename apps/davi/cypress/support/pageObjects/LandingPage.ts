@@ -54,9 +54,17 @@ class LandingPage {
     cy.findByTestId(this.walletModalTitle).contains('Connect to a wallet');
   };
 
+  chooseMetamaskWallet() {
+    cy.contains('MetaMask').click();
+  }
+
   goToGuildPage(guildName, i) {
     cy.contains(guildName).click();
   };
+
+  goToFirstGuild() {
+    cy.findAllByTestId('guild-name').first().click()
+  }
 
   checkWalletOptions() {
     walletOptions.forEach((walletName, i) => {

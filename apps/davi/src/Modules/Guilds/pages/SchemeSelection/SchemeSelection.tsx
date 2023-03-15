@@ -2,13 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FaChevronLeft } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { useNetwork } from 'wagmi';
-import { useQuery } from '@apollo/client';
 
-import { getSchemesDocument, getSchemesQuery } from '.graphclient';
-import { getApolloClient } from 'clients/apollo';
 import { useHookStoreProvider } from 'stores';
-import { SupportedSubgraph } from 'stores/types';
 
 import {
   SidebarCard,
@@ -39,70 +34,71 @@ import { PermissionsPage } from '../Permissions';
 
 const SchemeSelection = () => {
   const { t } = useTranslation();
-  const { chain } = useNetwork();
   const { guildId: daoId, chainName } = useTypedParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const discussionId = searchParams.get('ref');
   const subdaoId = searchParams.get('subdao');
 
   const {
+    hooks: {
+      fetchers: { useGetSubDAOs },
+    },
     capabilities: { hasSubDAO },
   } = useHookStoreProvider();
 
   const {
-    data,
-    loading: isSchemeLoading,
-    error: errorFetchingScheme,
-  } = useQuery<getSchemesQuery>(getSchemesDocument, {
-    client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
-    variables: { id: daoId?.toLowerCase() },
-  });
+    data: schemes,
+    isLoading: isSchemeLoading,
+    isError,
+    errorMessage,
+  } = useGetSubDAOs(daoId);
 
   const [selectedSchemeIndex, setSelectedSchemeIndex] = useState(0);
 
   useEffect(() => {
+    // handles case where the user goes back to selecting a scheme from the proposal creation page
     try {
-      data.dao.schemes.find((scheme, index) => {
-        if (scheme.id === subdaoId) {
-          setSelectedSchemeIndex(index);
-          return true;
-        } else {
-          return false;
-        }
-      });
+      if (subdaoId) {
+        schemes.find((scheme, index) => {
+          if (scheme.id === subdaoId) {
+            setSelectedSchemeIndex(index);
+            if (discussionId) setSearchParams(`ref=${discussionId}`);
+            else setSearchParams('');
+            return true;
+          } else {
+            return false;
+          }
+        });
+      }
     } catch {
       return;
     }
-  }, [data, subdaoId]);
+  }, [schemes, subdaoId, discussionId, setSearchParams]);
 
   if (hasSubDAO === false) {
     navigate(`/${chainName}/${daoId}/create-proposal`);
     return <></>;
   }
 
-  if (
-    !data ||
-    !data.dao ||
-    !data.dao.schemes ||
-    data.dao.schemes.length === 0
-  ) {
-    return <></>;
-  }
-
-  if (errorFetchingScheme) {
+  if (isError) {
     return (
       <PageContainer>
         <Result
           title={t('schemes.errorFetchingSchemes')}
-          subtitle={errorFetchingScheme.message}
+          subtitle={errorMessage}
           state={ResultState.ERROR}
         />
       </PageContainer>
     );
   }
 
-  const schemes = data.dao.schemes;
+  if (!schemes) return <></>;
+
+  if (schemes?.length === 0) {
+    return <PageContainer>{t('schemes.daoHasNoSchemes')}</PageContainer>;
+  }
+
   const selectedScheme = schemes[selectedSchemeIndex];
 
   return (
@@ -164,7 +160,7 @@ const SchemeSelection = () => {
             <SidebarCardContent>
               {schemes.map((_, index) => {
                 return (
-                  <>
+                  <div>
                     <RadioInputContainer
                       onClick={() => {
                         setSelectedSchemeIndex(index);
@@ -179,7 +175,7 @@ const SchemeSelection = () => {
                     {index !== schemes.length - 1 && (
                       <Divider margin="14px 0px " />
                     )}
-                  </>
+                  </div>
                 );
               })}
             </SidebarCardContent>

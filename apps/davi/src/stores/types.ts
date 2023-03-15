@@ -6,6 +6,7 @@ import {
   GuildConfigProps,
   Vote,
   ProposalState,
+  SubDAO,
 } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
@@ -154,6 +155,12 @@ export interface FetcherHooksInterface {
     status: ProposalState,
     endTime: Moment
   ) => { detail: string; moment: Moment };
+  useGetSubDAOs: (daoId: string) => {
+    data: SubDAO[];
+    isLoading: boolean;
+    errorMessage: string;
+    isError: boolean;
+  };
 }
 
 export interface WriterHooksInteface {

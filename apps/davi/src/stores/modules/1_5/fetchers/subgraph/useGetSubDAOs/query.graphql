@@ -1,0 +1,32 @@
+query getSchemes($id: ID!) {
+  dao(id: $id) {
+    schemes {
+      # scheme data
+      id
+      name
+      averagesDownstakesOfBoosted
+      controller
+      isRegistered
+      orgBoostedProposalsCnt
+      paramsHash
+      permissionRegistry
+      stakingTokenBalance
+      # capabilities
+      canChangeReputation
+      canMakeAvatarCalls
+      canManageSchemes
+      maxGasPrice
+      maxRepPercentageChange
+      type
+      voteGas
+      voteGasBalance
+      votingMachine {
+        boostedVoteRequiredPercentage
+        preBoostedVotePeriodLimit
+        boostedVotePeriodLimit
+        quietEndingPeriod
+      }
+    }
+  }
+}
+

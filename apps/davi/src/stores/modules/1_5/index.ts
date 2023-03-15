@@ -22,6 +22,7 @@ import {
   useVoterLockTimestamp,
   useVotingResults,
   useSnapshotId,
+  useGetSubDAOs,
 } from './fetchers/subgraph';
 import {
   useExecuteProposal,
@@ -59,6 +60,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildProposalIds,
           useProposalState,
           useTimeDetail,
+          useGetSubDAOs,
         },
         fallback: {
           useProposal: null,
@@ -81,6 +83,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildProposalIds: null,
           useProposalState: null,
           useTimeDetail: null,
+          useGetSubDAOs: null,
         },
       },
       writers: {

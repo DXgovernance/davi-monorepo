@@ -42,7 +42,7 @@ export const mockProposalVoteCardProps = {
     option: '0',
     votingPower: BigNumber.from(100000000),
   },
-  votingMachineAddress: ANY_ADDRESS,
+  guildId: ANY_ADDRESS,
 };
 
 export const mockVoteResults = {

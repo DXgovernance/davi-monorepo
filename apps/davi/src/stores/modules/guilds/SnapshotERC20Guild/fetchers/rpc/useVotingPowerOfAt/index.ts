@@ -1,0 +1,1 @@
+export { useVotingPowerOfAt } from './useVotingPowerOfAt';

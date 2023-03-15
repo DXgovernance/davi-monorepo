@@ -95,9 +95,8 @@ const DiscussionPage: React.FC = () => {
                 {guildConfig?.name}
               </IconButton>
             </StyledLink>
-
-            {isCreator && (
-              <ButtonContainer>
+            <ButtonContainer>
+              {isCreator && (
                 <StyledLink
                   to={`/${chainName}/${guildId}/discussion/${discussionId}/edit`}
                 >
@@ -108,18 +107,18 @@ const DiscussionPage: React.FC = () => {
                     {t('editDiscussion.editDiscussion')}
                   </Button>
                 </StyledLink>
-                <StyledLink
-                  to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
+              )}
+              <StyledLink
+                to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
+              >
+                <Button
+                  variant="primaryWithBorder"
+                  data-testid="create-proposal-button"
                 >
-                  <Button
-                    variant="primaryWithBorder"
-                    data-testid="create-proposal-button"
-                  >
-                    {t('createProposal.createProposal')}
-                  </Button>
-                </StyledLink>
-              </ButtonContainer>
-            )}
+                  {t('createProposal.createProposal')}
+                </Button>
+              </StyledLink>
+            </ButtonContainer>
           </HeaderTopRow>
           <TitleContainer>
             <PageTitle data-testid="discussion-page-title">

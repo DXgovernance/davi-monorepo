@@ -186,7 +186,8 @@ export interface WriterHooksInteface {
     symbol?: string
   ) => Promise<void>;
   useVoteOnProposal: (
-    daoAddress: string
+    daoAddress: string,
+    subDaoAddres?: string
   ) => (
     proposalId: string,
     option: BigNumber,

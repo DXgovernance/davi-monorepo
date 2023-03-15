@@ -82,7 +82,7 @@ const ProposalVoteCardWrapper = ({
         atCurrentSnapshot: votingPowerAtProposalCurrentSnapshot,
       }}
       userVote={userVote}
-      votingMachineAddress={guildId}
+      guildId={guildId}
     />
   );
 };

@@ -96,7 +96,6 @@ const CreateProposalPage: React.FC = () => {
     Editor,
     EditorConfig,
     md: proposalBodyMd,
-    html: proposalBodyHTML,
     clear,
   } = useTextEditor({
     placeholder: t('createProposal.enterProposalDescription'),
@@ -251,11 +250,10 @@ const CreateProposalPage: React.FC = () => {
 
   const isValid = useMemo(() => {
     if (!title) return false;
-    if (!proposalBodyHTML) return false;
-    if (!proposalBodyMd || !proposalBodyMd.length) return false;
+    if (!description) return false;
 
     return true;
-  }, [title, proposalBodyHTML, proposalBodyMd]);
+  }, [title, description]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
   return (

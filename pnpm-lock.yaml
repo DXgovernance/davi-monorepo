@@ -334,139 +334,6 @@ importers:
       start-server-and-test: 1.14.0
       web3: 1.8.1
 
-  apps/dxdao-contracts:
-    specifiers:
-      '@babel/cli': ^7.10.1
-      '@babel/eslint-parser': ^7.17.0
-      '@maticnetwork/eth-decoder': ^0.0.4
-      '@nomiclabs/hardhat-ethers': ^2.0.2
-      '@nomiclabs/hardhat-etherscan': ^3.1.0
-      '@nomiclabs/hardhat-truffle5': ^2.0.7
-      '@nomiclabs/hardhat-web3': ^2.0.0
-      '@openzeppelin/contract-loader': ^0.6.1
-      '@openzeppelin/contracts': 4.4.0
-      '@openzeppelin/contracts-upgradeable': 4.4.0
-      '@openzeppelin/hardhat-upgrades': ^1.6.0
-      '@openzeppelin/test-helpers': ^0.5.15
-      '@truffle/contract': ^4.2.21
-      '@truffle/hdwallet-provider': ^1.4.0
-      '@typechain/ethers-v5': ^9.0.0
-      '@typechain/hardhat': ^5.0.0
-      arb-ethers-web3-bridge: ^0.7.3
-      babel-plugin-syntax-async-functions: ^6.13.0
-      babel-polyfill: ^6.26.0
-      babel-preset-es2015: ^6.24.1
-      babel-register: ^6.26.0
-      bignumber.js: ^5.0.0
-      chai: ^4.2.0
-      cross-conf-env: ^1.1.2
-      default-options: ^1.0.0
-      dotenv: ^8.2.0
-      eip-712: ^1.0.0
-      eslint: ^5.16.0
-      eslint-config-defaults: ^9.0.0
-      eslint-config-standard: ^11.0.0-beta.0
-      eslint-plugin-import: ^2.20.2
-      eslint-plugin-node: ^5.2.1
-      eslint-plugin-promise: ^3.6.0
-      eslint-plugin-react: ^7.20.3
-      eslint-plugin-standard: ^3.0.1
-      ethereumjs-abi: ^0.6.5
-      ethers: ^5.1.0
-      hardhat: ^2.12.0
-      hardhat-contract-sizer: ^2.5.1
-      hardhat-dependency-compiler: ^1.1.1
-      hardhat-deploy: ^0.11.18
-      hardhat-gas-reporter: ^1.0.4
-      husky: ^7.0.4
-      ipfs-core: ^0.14.1
-      lint-staged: ^12.3.4
-      math: 0.0.3
-      moment: ^2.27.0
-      pm2: ^2.9.3
-      prettier: ^2.0.5
-      prettier-plugin-solidity: ^1.0.0-beta.19
-      promisify: ^0.0.3
-      pug: ^2.0.0-rc.4
-      rimraf: ^2.6.2
-      run-with-ganache: ^0.1.1
-      solhint: ^3.3.5
-      solhint-plugin-prettier: ^0.0.5
-      solidity-coverage: ^0.8.2
-      solidity-docgen: ^0.6.0-beta.30
-      truffle: ^5.1.28
-      truffle-flattener: ^1.4.4
-      truffle-hdwallet-provider: ^1.0.17
-      typechain: 7.0.0
-      uint32: ^0.2.1
-      web3: ^1.8.0
-    dependencies:
-      '@maticnetwork/eth-decoder': 0.0.4
-      '@openzeppelin/contracts': 4.4.0
-      '@openzeppelin/contracts-upgradeable': 4.4.0
-      '@openzeppelin/test-helpers': 0.5.16
-      '@truffle/hdwallet-provider': 1.7.0
-      arb-ethers-web3-bridge: 0.7.3
-      chai: 4.3.7
-      eip-712: 1.0.0
-      ipfs-core: 0.14.3
-      math: 0.0.3
-      moment: 2.29.4
-      prettier: 2.8.1
-      prettier-plugin-solidity: 1.0.0-rc.1_prettier@2.8.1
-      solidity-docgen: 0.6.0-beta.34_hardhat@2.13.0
-      truffle-flattener: 1.6.0
-      web3: 1.8.1
-    devDependencies:
-      '@babel/cli': 7.19.3
-      '@babel/eslint-parser': 7.19.1_eslint@5.16.0
-      '@nomiclabs/hardhat-ethers': 2.2.1_wknqauzjtp3mhprkntsmqpccee
-      '@nomiclabs/hardhat-etherscan': 3.1.2_hardhat@2.13.0
-      '@nomiclabs/hardhat-truffle5': 2.0.7_j44zv7qsf6saqi6s773mmrgwbq
-      '@nomiclabs/hardhat-web3': 2.0.0_hardhat@2.13.0+web3@1.8.1
-      '@openzeppelin/contract-loader': 0.6.3
-      '@openzeppelin/hardhat-upgrades': 1.21.0_ref57f3vgme2ccoau5fgz7xtpu
-      '@truffle/contract': 4.6.6
-      '@typechain/ethers-v5': 9.0.0_5w23fijnqhdmw57ucjh4d7lm4y
-      '@typechain/hardhat': 5.0.0_fbf5wjrmymwhnmhb5325xotkmq
-      babel-plugin-syntax-async-functions: 6.13.0
-      babel-polyfill: 6.26.0
-      babel-preset-es2015: 6.24.1
-      babel-register: 6.26.0
-      bignumber.js: 5.0.0
-      cross-conf-env: 1.3.0
-      default-options: 1.0.0
-      dotenv: 8.6.0
-      eslint: 5.16.0
-      eslint-config-defaults: 9.0.0
-      eslint-config-standard: 11.0.0_4nhl2regw2d2bn35int2uietny
-      eslint-plugin-import: 2.26.0_eslint@5.16.0
-      eslint-plugin-node: 5.2.1_eslint@5.16.0
-      eslint-plugin-promise: 3.8.0
-      eslint-plugin-react: 7.31.10_eslint@5.16.0
-      eslint-plugin-standard: 3.1.0_eslint@5.16.0
-      ethereumjs-abi: 0.6.8
-      ethers: 5.7.2
-      hardhat: 2.13.0
-      hardhat-contract-sizer: 2.6.1_hardhat@2.13.0
-      hardhat-dependency-compiler: 1.1.3_hardhat@2.13.0
-      hardhat-deploy: 0.11.20
-      hardhat-gas-reporter: 1.0.9_hardhat@2.13.0
-      husky: 7.0.4
-      lint-staged: 12.5.0
-      pm2: 2.10.4
-      promisify: 0.0.3
-      pug: 2.0.4
-      rimraf: 2.7.1
-      run-with-ganache: 0.1.1
-      solhint: 3.3.7
-      solhint-plugin-prettier: 0.0.5_5kwtnhqahoccfvvvali4go3riq
-      solidity-coverage: 0.8.2_hardhat@2.13.0
-      truffle: 5.6.5
-      truffle-hdwallet-provider: 1.0.17
-      typechain: 7.0.0
-      uint32: 0.2.1
-
   apps/guilds-subgraph:
     specifiers:
       '@graphprotocol/graph-cli': ^0.30.2
@@ -8626,26 +8493,6 @@ packages:
       - supports-color
     dev: true
 
-  /@nomiclabs/hardhat-etherscan/3.1.2_hardhat@2.13.0:
-    resolution: {integrity: sha512-IEikeOVq0C/7CY6aD74d8L4BpGoc/FNiN6ldiPVg0QIFIUSu4FSGA1dmtJZJKk1tjpwgrfTLQNWnigtEaN9REg==}
-    peerDependencies:
-      hardhat: ^2.0.4
-    dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@ethersproject/address': 5.7.0
-      cbor: 5.2.0
-      chalk: 2.4.2
-      debug: 4.3.4
-      fs-extra: 7.0.1
-      hardhat: 2.13.0
-      lodash: 4.17.21
-      semver: 6.3.0
-      table: 6.8.1
-      undici: 5.12.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@nomiclabs/hardhat-truffle5/2.0.7_ehcjbjo7oogw4nzhtzeqe7lsce:
     resolution: {integrity: sha512-Pw8451IUZp1bTp0QqCHCYfCHs66sCnyxPcaorapu9mfOV9xnZsVaFdtutnhNEiXdiZwbed7LFKpRsde4BjFwig==}
     peerDependencies:
@@ -8695,6 +8542,7 @@ packages:
       - web3-core-promievent
       - web3-eth-abi
       - web3-utils
+    dev: false
 
   /@nomiclabs/hardhat-truffle5/2.0.7_uoc6ciyj3xhodavqe55pqj6luu:
     resolution: {integrity: sha512-Pw8451IUZp1bTp0QqCHCYfCHs66sCnyxPcaorapu9mfOV9xnZsVaFdtutnhNEiXdiZwbed7LFKpRsde4BjFwig==}
@@ -8752,6 +8600,7 @@ packages:
       '@types/bignumber.js': 5.0.0
       hardhat: 2.13.0_z6wznmtyb6ovnulj6iujpct7um
       web3: 1.8.1
+    dev: false
 
   /@nomiclabs/truffle-contract/4.5.10:
     resolution: {integrity: sha512-nF/6InFV+0hUvutyFgsdOMCoYlr//2fJbRER4itxYtQtc4/O1biTwZIKRu+5l2J5Sq6LU2WX7vZHtDgQdhWxIQ==}
@@ -8855,31 +8704,6 @@ packages:
       debug: 4.3.4
       ethers: 5.7.2
       hardhat: 2.12.3
-      proper-lockfile: 4.1.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /@openzeppelin/hardhat-upgrades/1.21.0_ref57f3vgme2ccoau5fgz7xtpu:
-    resolution: {integrity: sha512-Kwl7IN0Hlhj4HluMTTl0DrtU90OI/Q6rG3sAyd2pv3fababe9EuZqs9DydOlkWM45JwTzC+eBzX3TgHsqI13eA==}
-    hasBin: true
-    peerDependencies:
-      '@nomiclabs/hardhat-ethers': ^2.0.0
-      '@nomiclabs/hardhat-etherscan': ^3.1.0
-      '@nomiclabs/harhdat-etherscan': '*'
-      ethers: ^5.0.5
-      hardhat: ^2.0.2
-    peerDependenciesMeta:
-      '@nomiclabs/harhdat-etherscan':
-        optional: true
-    dependencies:
-      '@nomiclabs/hardhat-ethers': 2.2.1_wknqauzjtp3mhprkntsmqpccee
-      '@nomiclabs/hardhat-etherscan': 3.1.2_hardhat@2.13.0
-      '@openzeppelin/upgrades-core': 1.20.4
-      chalk: 4.1.2
-      debug: 4.3.4
-      ethers: 5.7.2
-      hardhat: 2.13.0
       proper-lockfile: 4.1.2
     transitivePeerDependencies:
       - supports-color
@@ -12198,18 +12022,6 @@ packages:
       fs-extra: 9.1.0
       hardhat: 2.12.3_z6wznmtyb6ovnulj6iujpct7um
       typechain: 7.0.0_typescript@4.9.4
-    dev: true
-
-  /@typechain/hardhat/5.0.0_fbf5wjrmymwhnmhb5325xotkmq:
-    resolution: {integrity: sha512-Pqk+KdREbU6Uk3en1Z5caQpWt2bKU+KTOi+6dZwcIXJpF1wKoAwF1cbaYSQEzrG4BSUTM1rHQhW5JHSfeqpsAg==}
-    peerDependencies:
-      hardhat: ^2.0.10
-      lodash: ^4.17.15
-      typechain: ^7.0.0
-    dependencies:
-      fs-extra: 9.1.0
-      hardhat: 2.13.0
-      typechain: 7.0.0
     dev: true
 
   /@types/accepts/1.3.5:
@@ -24030,16 +23842,6 @@ packages:
       hardhat: 2.12.3
     dev: true
 
-  /hardhat-contract-sizer/2.6.1_hardhat@2.13.0:
-    resolution: {integrity: sha512-b8wS7DBvyo22kmVwpzstAQTdDCThpl/ySBqZh5ga9Yxjf61/uTL12TEg5nl7lDeWy73ntEUzxMwY6XxbQEc2wA==}
-    peerDependencies:
-      hardhat: ^2.0.0
-    dependencies:
-      chalk: 4.1.2
-      cli-table3: 0.6.3
-      hardhat: 2.13.0
-    dev: true
-
   /hardhat-dependency-compiler/1.1.3_hardhat@2.12.3:
     resolution: {integrity: sha512-bCDqsOxGST6WkbMvj4lPchYWidNSSBm5CFnkyAex1T11cGmr9otZTGl81W6f9pmrtBXbKCvr3OSuNJ6Q394sAw==}
     engines: {node: '>=14.14.0'}
@@ -24056,6 +23858,7 @@ packages:
       hardhat: ^2.0.0
     dependencies:
       hardhat: 2.13.0_z6wznmtyb6ovnulj6iujpct7um
+    dev: false
 
   /hardhat-deploy/0.11.20:
     resolution: {integrity: sha512-6G2aFLW0mfZxY0ljDf8rxzEJkVh57gr3Eia5H2DeBIQNJh0dhBV2Y5LDq4E4J9K4Crq0DjpxGNTshEtAB9eWxA==}
@@ -24115,19 +23918,6 @@ packages:
       array-uniq: 1.0.3
       eth-gas-reporter: 0.2.25
       hardhat: 2.12.3
-      sha1: 1.1.1
-    transitivePeerDependencies:
-      - '@codechecks/client'
-    dev: true
-
-  /hardhat-gas-reporter/1.0.9_hardhat@2.13.0:
-    resolution: {integrity: sha512-INN26G3EW43adGKBNzYWOlI3+rlLnasXTwW79YNnUhXPDa+yHESgt639dJEs37gCjhkbNKcRRJnomXEuMFBXJg==}
-    peerDependencies:
-      hardhat: ^2.0.2
-    dependencies:
-      array-uniq: 1.0.3
-      eth-gas-reporter: 0.2.25
-      hardhat: 2.13.0
       sha1: 1.1.1
     transitivePeerDependencies:
       - '@codechecks/client'
@@ -24271,74 +24061,6 @@ packages:
       - supports-color
       - utf-8-validate
     dev: true
-
-  /hardhat/2.13.0:
-    resolution: {integrity: sha512-ZlzBOLML1QGlm6JWyVAG8lVTEAoOaVm1in/RU2zoGAnYEoD1Rp4T+ZMvrLNhHaaeS9hfjJ1gJUBfiDr4cx+htQ==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    peerDependencies:
-      ts-node: '*'
-      typescript: '*'
-    peerDependenciesMeta:
-      ts-node:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@metamask/eth-sig-util': 4.0.1
-      '@nomicfoundation/ethereumjs-block': 4.0.0
-      '@nomicfoundation/ethereumjs-blockchain': 6.0.0
-      '@nomicfoundation/ethereumjs-common': 3.0.0
-      '@nomicfoundation/ethereumjs-evm': 1.0.0
-      '@nomicfoundation/ethereumjs-rlp': 4.0.0
-      '@nomicfoundation/ethereumjs-statemanager': 1.0.0
-      '@nomicfoundation/ethereumjs-trie': 5.0.0
-      '@nomicfoundation/ethereumjs-tx': 4.0.0
-      '@nomicfoundation/ethereumjs-util': 8.0.0
-      '@nomicfoundation/ethereumjs-vm': 6.0.0
-      '@nomicfoundation/solidity-analyzer': 0.1.0
-      '@sentry/node': 5.30.0
-      '@types/bn.js': 5.1.1
-      '@types/lru-cache': 5.1.1
-      abort-controller: 3.0.0
-      adm-zip: 0.4.16
-      aggregate-error: 3.1.0
-      ansi-escapes: 4.3.2
-      chalk: 2.4.2
-      chokidar: 3.5.3
-      ci-info: 2.0.0
-      debug: 4.3.4
-      enquirer: 2.3.6
-      env-paths: 2.2.1
-      ethereum-cryptography: 1.1.2
-      ethereumjs-abi: 0.6.8
-      find-up: 2.1.0
-      fp-ts: 1.19.3
-      fs-extra: 7.0.1
-      glob: 7.2.0
-      immutable: 4.1.0
-      io-ts: 1.10.4
-      keccak: 3.0.2
-      lodash: 4.17.21
-      mnemonist: 0.38.5
-      mocha: 10.1.0
-      p-map: 4.0.0
-      qs: 6.11.0
-      raw-body: 2.5.1
-      resolve: 1.17.0
-      semver: 6.3.0
-      solc: 0.7.3_debug@4.3.4
-      source-map-support: 0.5.21
-      stacktrace-parser: 0.1.10
-      tsort: 0.0.1
-      undici: 5.20.0
-      uuid: 8.3.2
-      ws: 7.5.9
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
 
   /hardhat/2.13.0_z6wznmtyb6ovnulj6iujpct7um:
     resolution: {integrity: sha512-ZlzBOLML1QGlm6JWyVAG8lVTEAoOaVm1in/RU2zoGAnYEoD1Rp4T+ZMvrLNhHaaeS9hfjJ1gJUBfiDr4cx+htQ==}
@@ -37030,37 +36752,6 @@ packages:
       - supports-color
     dev: true
 
-  /solidity-coverage/0.8.2_hardhat@2.13.0:
-    resolution: {integrity: sha512-cv2bWb7lOXPE9/SSleDO6czkFiMHgP4NXPj+iW9W7iEKLBk7Cj0AGBiNmGX3V1totl9wjPrT0gHmABZKZt65rQ==}
-    hasBin: true
-    peerDependencies:
-      hardhat: ^2.11.0
-    dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@solidity-parser/parser': 0.14.5
-      chalk: 2.4.2
-      death: 1.1.0
-      detect-port: 1.5.1
-      difflib: 0.2.4
-      fs-extra: 8.1.0
-      ghost-testrpc: 0.0.2
-      global-modules: 2.0.0
-      globby: 10.0.2
-      hardhat: 2.13.0
-      jsonschema: 1.4.1
-      lodash: 4.17.21
-      mocha: 7.1.2
-      node-emoji: 1.11.0
-      pify: 4.0.1
-      recursive-readdir: 2.2.3
-      sc-istanbul: 0.4.6
-      semver: 7.3.8
-      shelljs: 0.8.5
-      web3-utils: 1.8.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /solidity-docgen/0.6.0-beta.34_hardhat@2.12.3:
     resolution: {integrity: sha512-igdGrkg8gT1jn+B2NwzjEtSf+7NTrSi/jz88zO7MZWgETmcWbXaxgAsQP4BQeC4YFeH0Pie1NsLP7+9qDgvFtA==}
     peerDependencies:
@@ -37068,16 +36759,6 @@ packages:
     dependencies:
       handlebars: 4.7.7
       hardhat: 2.12.3
-      solidity-ast: 0.4.38
-    dev: false
-
-  /solidity-docgen/0.6.0-beta.34_hardhat@2.13.0:
-    resolution: {integrity: sha512-igdGrkg8gT1jn+B2NwzjEtSf+7NTrSi/jz88zO7MZWgETmcWbXaxgAsQP4BQeC4YFeH0Pie1NsLP7+9qDgvFtA==}
-    peerDependencies:
-      hardhat: ^2.8.0
-    dependencies:
-      handlebars: 4.7.7
-      hardhat: 2.13.0
       solidity-ast: 0.4.38
     dev: false
 

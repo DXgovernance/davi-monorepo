@@ -404,7 +404,7 @@
     "cantBeGreaterThan100": "No puede ser mayor al 100%"
   },
   "daoErrors": {
-    "noDAOsRegistered": "No hay DAOs registrados en esta red",
+    "noDAOsRegistered": "No hay DAOs registradas en esta red",
     "daoNotAvailable": "DAO no disponible",
     "daoNotAvailableOnThisNetwork": "Este gremio no está disponible en esta red",
     "noDAOInThisAddress": "No hay gremios existentes en esta dirección",

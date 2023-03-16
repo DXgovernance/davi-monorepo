@@ -35,7 +35,7 @@
     "connectTheWalletToProceed": "Conectar el monedero para avanzar"
   },
   "transactions": {
-    "waitingForConfirmation": "Esperando Por Confirmación",
+    "waitingForConfirmation": "Esperando Confirmación",
     "confirmThisTransactionInYourWallet": "Confirme esta Transacción en su Monedero",
     "transactionSubmitted": "Transacción Enviada",
     "viewOnBlockExplorer": "Visualizar en el Explorador de Bloques",
@@ -70,7 +70,7 @@
     "action": {
       "actions_one": "Acción",
       "actions_other": "Acciones",
-      "addAction": "Añadir Acciones",
+      "addAction": "Añadir Acción",
       "saveAction": "Guardar Acción",
       "onChainActions_zero": "No hay acción on-chain",
       "onChainActions_one": "{{count}} acción on-chain",
@@ -86,8 +86,8 @@
       "edit": "Editar"
     },
     "options": {
-      "against": "En contra de",
-      "for": "A favor de",
+      "against": "En contra",
+      "for": "A favor",
       "addOption": "Añadir Opción",
       "editOption": "Editar Opción",
       "deleteOption": "Borrar Opción",
@@ -101,7 +101,7 @@
       "asset": "Activo",
       "token": "Token",
       "tokenAmount": "Cantidad de Tokens",
-      "recipient": "Destinatario",
+      "recipient": "Receptor",
       "ethereumAddress": "Dirección Ethereum",
       "toAddress": "A la Dirección",
       "address": "Dirección",
@@ -217,7 +217,7 @@
     "noRevertAction": "Esta acción no puede ser revertida",
     "votingPower": "Poder de Votación",
     "voteImpact": "Impacto de Voto",
-    "voteOnProposal": "Voto en propuestas",
+    "voteOnProposal": "Votar Propuesta",
     "youVotedForOption": "Usted votó por la opción \"{{optionLabel}}\" con {{amount}}"
   },
   "proposal": {
@@ -240,10 +240,10 @@
       "proposalHistory": "Historial de la Propuesta"
     },
     "time": {
-      "expiredTimeAgo": "expirado {{timeDifferenceHumanized}} atrás",
+      "expiredTimeAgo": "expirado hace {{timeDifferenceHumanized}}",
       "expiresInTimeDetail": "expira en {{timeDifferenceHumanized}}",
-      "endingTimeLeft": "{{timeDifferenceHumanized}} restante",
-      "endedTimeAgo": "finalizó {{timeDifferenceHumanized}} atrás",
+      "endingTimeLeft": "{{timeDifferenceHumanized}} restantes",
+      "endedTimeAgo": "finalizó hace {{timeDifferenceHumanized}}",
       "aFewSeconds": "unos cuantos segundos"
     },
     "errors": {
@@ -252,7 +252,7 @@
       "titleRequired": "El título es requerido",
       "atLeastOneOptionRequired": "Por lo menos una opción es requerida",
       "atLeastOneActionPerOptionRequired": "Por lo menos una acción por opción es requerida",
-      "optionsArrayIsEmpty": "La matriz de opciones está vacía",
+      "optionsArrayIsEmpty": "Las opciones están vacías",
       "metadataUploadError": "Error en la carga de Metadatos",
       "genericProposalError": "Nos encontramos con un error.",
       "couldntFindTheProposal": "No pudimos encontrar esa propuesta",
@@ -265,7 +265,7 @@
   },
   "duration": {
     "selectDuration": "Seleccionar duración",
-    "durationWarningMessage": "Por favor cambie la entrada {{value}} por la columna {{timeColumn}} ya que se encuentra por encima del límite. El valor máximo permitido es {{limit.max}}.",
+    "durationWarningMessage": "Por favor cambie la entrada {{value}} en la columna {{timeColumn}} ya que se encuentra por encima del límite. El valor máximo permitido es {{limit.max}}.",
     "seconds_one": "segundo",
     "seconds_other": "segundos",
     "minutes_one": "minuto",
@@ -346,7 +346,7 @@
     "thereAreNoDiscussions": "No hay discusiones",
     "noMoreDiscussions": "No hay más discusiones",
     "createDiscussion": "Crear Discusión",
-    "updateDiscussion": "Subir Discusión",
+    "updateDiscussion": "Actualizar Discusión",
     "createDiscussionWordy": "Crear una nueva discusión",
     "discussionPlaceholder": "Escribir contenido de discusión",
     "title": "Título",
@@ -404,11 +404,11 @@
     "cantBeGreaterThan100": "No puede ser mayor al 100%"
   },
   "daoErrors": {
-    "noDAOsRegistered": "No hay DAOs registrados en esta red",
+    "noDAOsRegistered": "No hay DAOs registradas en esta red",
     "daoNotAvailable": "DAO no disponible",
     "daoNotAvailableOnThisNetwork": "Este gremio no está disponible en esta red",
     "noDAOInThisAddress": "No hay gremios existentes en esta dirección",
-    "unknownDAO": "DAO Desconocido",
+    "unknownDAO": "DAO Desconocida",
     "errorLoadingDAOsList": "Error durante la carga de la lista de DAOs"
   },
   "404": {

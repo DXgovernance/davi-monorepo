@@ -243,7 +243,7 @@
       "expiredTimeAgo": "expirado hace {{timeDifferenceHumanized}}",
       "expiresInTimeDetail": "expira en {{timeDifferenceHumanized}}",
       "endingTimeLeft": "{{timeDifferenceHumanized}} restante",
-      "endedTimeAgo": "finalizó {{timeDifferenceHumanized}} atrás",
+      "endedTimeAgo": "finalizó hace {{timeDifferenceHumanized}}",
       "aFewSeconds": "unos cuantos segundos"
     },
     "errors": {

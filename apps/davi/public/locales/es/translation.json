@@ -408,7 +408,7 @@
     "daoNotAvailable": "DAO no disponible",
     "daoNotAvailableOnThisNetwork": "Este gremio no está disponible en esta red",
     "noDAOInThisAddress": "No hay gremios existentes en esta dirección",
-    "unknownDAO": "DAO Desconocido",
+    "unknownDAO": "DAO Desconocida",
     "errorLoadingDAOsList": "Error durante la carga de la lista de DAOs"
   },
   "404": {

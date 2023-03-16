@@ -252,7 +252,7 @@
       "titleRequired": "El título es requerido",
       "atLeastOneOptionRequired": "Por lo menos una opción es requerida",
       "atLeastOneActionPerOptionRequired": "Por lo menos una acción por opción es requerida",
-      "optionsArrayIsEmpty": "La matriz de opciones está vacía",
+      "optionsArrayIsEmpty": "Las opciones están vacías",
       "metadataUploadError": "Error en la carga de Metadatos",
       "genericProposalError": "Nos encontramos con un error.",
       "couldntFindTheProposal": "No pudimos encontrar esa propuesta",

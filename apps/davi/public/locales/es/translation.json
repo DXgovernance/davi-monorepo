@@ -101,7 +101,7 @@
       "asset": "Activo",
       "token": "Token",
       "tokenAmount": "Cantidad de Tokens",
-      "recipient": "Destinatario",
+      "recipient": "Receptor",
       "ethereumAddress": "Dirección Ethereum",
       "toAddress": "A la Dirección",
       "address": "Dirección",

@@ -28,8 +28,8 @@ import {
   useExecuteProposal,
   useWithdrawTokens,
   useCreateProposal,
-  useVoteOnProposal,
 } from './writers';
+import { useVoteOnProposal } from './writers/useVoteOnProposal';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {

@@ -1,9 +1,9 @@
-import useVotingPowerOfAt from 'Modules/Guilds/Hooks/useVotingPowerOfAt';
 import { useContractRead } from 'wagmi';
 import { BigNumber } from 'ethers';
 import { useListenToLockAndWithdrawTokens } from 'stores/modules/guilds/SnapshotERC20Guild/events';
 import { SnapshotERC20Guild } from 'contracts/ts-files/SnapshotERC20Guild';
 import { FetcherHooksInterface } from 'stores/types';
+import { useVotingPowerOfAt } from '../useVotingPowerOfAt';
 
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
 
@@ -32,12 +32,12 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
     refetchVotingPowerOf();
   });
 
-  const votingPowerAtSnapshotResponse = useVotingPowerOfAt({
-    contractAddress: guildAddress,
+  const votingPowerAtSnapshotResponse = useVotingPowerOfAt(
+    guildAddress,
     userAddress,
     snapshotId,
-    fallbackSnapshotId,
-  });
+    fallbackSnapshotId
+  );
 
   return snapshotId
     ? votingPowerAtSnapshotResponse

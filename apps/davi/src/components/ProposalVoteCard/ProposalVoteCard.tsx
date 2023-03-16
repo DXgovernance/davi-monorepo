@@ -41,7 +41,7 @@ const ProposalVoteCard = ({
   votingPower,
   timestamp,
   userVote,
-  votingMachineAddress,
+  guildId,
 }: ProposalVoteCardProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -50,6 +50,7 @@ const ProposalVoteCard = ({
     hooks: {
       writers: { useVoteOnProposal },
     },
+    name: governanceImplementationName,
   } = useHookStoreProvider();
 
   const [isPercent, setIsPercent] = useState(true);
@@ -60,7 +61,17 @@ const ProposalVoteCard = ({
     [proposal, timestamp]
   );
 
-  const voteOnProposal = useVoteOnProposal(votingMachineAddress);
+  // TODO: implement scheme selector/fetcher
+  // ! For now it is hardcoded untill we implement a scheme selector / fetcher
+  const schemeAddress = useMemo(() => {
+    if (governanceImplementationName === 'Governance1_5') {
+      return '0x2b3edbada0f3f42ac547666b1c6e0b26b2a6ac51';
+    } else {
+      return null;
+    }
+  }, [governanceImplementationName]);
+
+  const voteOnProposal = useVoteOnProposal(guildId, schemeAddress);
 
   const votedOptionLabel = useMemo(() => {
     if (!userVote?.option) return null;

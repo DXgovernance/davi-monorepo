@@ -1,0 +1,5 @@
+query getVotingMachineByScheme($schemeAddress: ID!) {
+  scheme(id: $schemeAddress) {
+    votingMachine
+  }
+}

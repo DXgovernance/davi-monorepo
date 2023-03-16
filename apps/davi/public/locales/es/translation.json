@@ -35,7 +35,7 @@
     "connectTheWalletToProceed": "Conectar el monedero para avanzar"
   },
   "transactions": {
-    "waitingForConfirmation": "Esperando Por Confirmación",
+    "waitingForConfirmation": "Esperando Confirmación",
     "confirmThisTransactionInYourWallet": "Confirme esta Transacción en su Monedero",
     "transactionSubmitted": "Transacción Enviada",
     "viewOnBlockExplorer": "Visualizar en el Explorador de Bloques",

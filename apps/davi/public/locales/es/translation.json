@@ -240,7 +240,7 @@
       "proposalHistory": "Historial de la Propuesta"
     },
     "time": {
-      "expiredTimeAgo": "expirado {{timeDifferenceHumanized}} atrás",
+      "expiredTimeAgo": "expirado hace {{timeDifferenceHumanized}}",
       "expiresInTimeDetail": "expira en {{timeDifferenceHumanized}}",
       "endingTimeLeft": "{{timeDifferenceHumanized}} restante",
       "endedTimeAgo": "finalizó {{timeDifferenceHumanized}} atrás",

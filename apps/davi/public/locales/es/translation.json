@@ -217,7 +217,7 @@
     "noRevertAction": "Esta acción no puede ser revertida",
     "votingPower": "Poder de Votación",
     "voteImpact": "Impacto de Voto",
-    "voteOnProposal": "Voto en propuestas",
+    "voteOnProposal": "Votar Propuesta",
     "youVotedForOption": "Usted votó por la opción \"{{optionLabel}}\" con {{amount}}"
   },
   "proposal": {

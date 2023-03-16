@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import AddressButton from 'components/AddressButton/AddressButton';
 import { ProposalDescription } from 'components/ProposalDescription';
 import { StyledLink } from 'components/primitives/Links';
@@ -29,10 +29,12 @@ import PostActions from 'components/Discussion/Post/PostActions';
 import moment from 'moment';
 import { Button, IconButton } from 'components/primitives/Button';
 import { linkStyles } from '../Proposal/Proposal.styled';
+import { useAccount } from 'wagmi';
 
 const DiscussionPage: React.FC = () => {
   const { t } = useTranslation();
   const { chainName, guildId, discussionId } = useTypedParams();
+  const { address: addressConnected } = useAccount();
 
   const [op, setOp] = useState<IOrbisPost>();
   const {
@@ -67,6 +69,12 @@ const DiscussionPage: React.FC = () => {
     }
   };
 
+  const isCreator = useMemo(() => {
+    return (
+      addressConnected.toLowerCase() === op?.creator_details.metadata?.address
+    );
+  }, [addressConnected, op?.creator_details.metadata?.address]);
+
   return (
     <PageContainer>
       <PageContent>
@@ -87,18 +95,19 @@ const DiscussionPage: React.FC = () => {
                 {guildConfig?.name}
               </IconButton>
             </StyledLink>
-
             <ButtonContainer>
-              <StyledLink
-                to={`/${chainName}/${guildId}/discussion/${discussionId}/edit`}
-              >
-                <Button
-                  variant="primaryWithBorder"
-                  data-testid="edit-proposal-button"
+              {isCreator && (
+                <StyledLink
+                  to={`/${chainName}/${guildId}/discussion/${discussionId}/edit`}
                 >
-                  {t('editDiscussion.editDiscussion')}
-                </Button>
-              </StyledLink>
+                  <Button
+                    variant="primaryWithBorder"
+                    data-testid="edit-proposal-button"
+                  >
+                    {t('editDiscussion.editDiscussion')}
+                  </Button>
+                </StyledLink>
+              )}
               <StyledLink
                 to={`/${chainName}/${guildId}/create-proposal?ref=${discussionId}`}
               >

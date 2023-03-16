@@ -265,7 +265,7 @@
   },
   "duration": {
     "selectDuration": "Seleccionar duración",
-    "durationWarningMessage": "Por favor cambie la entrada {{value}} por la columna {{timeColumn}} ya que se encuentra por encima del límite. El valor máximo permitido es {{limit.max}}.",
+    "durationWarningMessage": "Por favor cambie la entrada {{value}} en la columna {{timeColumn}} ya que se encuentra por encima del límite. El valor máximo permitido es {{limit.max}}.",
     "seconds_one": "segundo",
     "seconds_other": "segundos",
     "minutes_one": "minuto",

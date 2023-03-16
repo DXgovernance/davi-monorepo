@@ -29,7 +29,7 @@ import {
   useWithdrawTokens,
   useCreateProposal,
 } from './writers';
-import { useVoteOnProposal } from './writers/useVoteOnProposal';
+import { useVoteOnProposal } from './writers/useVoteOnProposal/useVoteOnProposal';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {

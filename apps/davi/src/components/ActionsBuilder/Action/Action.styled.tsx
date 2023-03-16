@@ -1,7 +1,7 @@
 import { EditButton, Grip } from '../common';
 import { CardWrapper, Header } from 'components/Card';
 import { Box } from 'components/primitives/Layout/Box';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CardStatus } from './Action';
 import { TenderlyLogo } from '../OptionsList/SimulationModal/SimulationModal.styled';
 
@@ -42,27 +42,6 @@ export const CardLabel = styled(Box)`
   align-items: center;
   font-size: 0.9rem;
   font-weight: 500;
-`;
-
-export const ChevronIcon = styled.span<{ active?: boolean }>`
-  cursor: pointer;
-  height: 1.4rem;
-  width: 1.4rem;
-  border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.border1};
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.border3};
-  }
-
-  ${({ active }) =>
-    active &&
-    css`
-      border-color: ${({ theme }) => theme.colors.border3};
-    `}
 `;
 
 export const DetailWrapper = styled(Box)`

@@ -9,6 +9,7 @@ const ButtonWrapper = styled.span<{
   height: ${({ height }) => height};
   width: ${({ width }) => width};
   border-radius: 50%;
+  color: ${({ theme }) => theme.colors.text};
   border: 1px solid ${({ theme }) => theme.colors.border1};
   display: inline-flex;
   justify-content: center;

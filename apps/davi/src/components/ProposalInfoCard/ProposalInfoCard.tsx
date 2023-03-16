@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import {
-  InfoDetail,
-  InfoDetailMuted,
-  ProposalHistoryIcon,
-} from './ProposalInfoCard.styled';
+import { InfoDetail, InfoDetailMuted } from './ProposalInfoCard.styled';
 import {
   SidebarCard,
   SidebarCardContent,
   SidebarCardHeaderSpaced,
 } from 'components/SidebarCard';
 import { Loading } from 'components/primitives/Loading';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { duration } from 'moment';
 import { ProposalInfoCardProps } from './types';
 import { ProposalHistory } from './ProposalHistory';
 import { useTranslation } from 'react-i18next';
+import { ExpandButton } from 'components/ExpandButton';
 
 const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
   proposal,
@@ -63,16 +59,10 @@ const ProposalInfoCard: React.FC<ProposalInfoCardProps> = ({
 
         <InfoDetail>
           <span>{t('proposal.proposalInfoCard.proposalHistory')}</span>
-          <ProposalHistoryIcon
-            active={isHistoryExpanded}
+          <ExpandButton
+            expanded={isHistoryExpanded}
             onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
-          >
-            {isHistoryExpanded ? (
-              <FiChevronUp height={16} />
-            ) : (
-              <FiChevronDown height={16} />
-            )}
-          </ProposalHistoryIcon>
+          />
         </InfoDetail>
       </SidebarCardContent>
       {isHistoryExpanded && <ProposalHistory proposal={proposal} />}

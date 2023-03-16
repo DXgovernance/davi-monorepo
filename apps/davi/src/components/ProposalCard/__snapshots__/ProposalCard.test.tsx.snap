@@ -25,6 +25,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c11 {
@@ -539,6 +540,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c11 {
@@ -1053,6 +1055,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c11 {

@@ -37,6 +37,7 @@ exports[`OnlineStatus Should match snapshot offline 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 <div>

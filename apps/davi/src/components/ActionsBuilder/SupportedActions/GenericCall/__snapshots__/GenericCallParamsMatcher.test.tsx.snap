@@ -52,6 +52,7 @@ exports[`GenericCallParamsMatcher Should match snapshot for all component types 
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c4 {
@@ -253,6 +254,7 @@ exports[`GenericCallParamsMatcher replaces all component types correctly 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c4 {

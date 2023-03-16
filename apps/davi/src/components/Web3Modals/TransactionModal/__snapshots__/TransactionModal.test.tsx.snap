@@ -18,6 +18,7 @@ exports[`TransactionModal Should match snapshot 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c9 {

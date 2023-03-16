@@ -25,6 +25,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c8 {
@@ -44,6 +45,7 @@ exports[`DiscussionCard should render with full parameters 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c0 {

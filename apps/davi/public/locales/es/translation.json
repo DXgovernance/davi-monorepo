@@ -79,10 +79,10 @@
       "onchainAction": "Acción On-chain",
       "noOnchainAction": "No hay acción on-chain",
       "confirmRemoval": "Confirmar Eliminación",
-      "areYouSureYouWantToRemoveAction": "¿Está seguro de que desea remover esta acción?",
+      "areYouSureYouWantToRemoveAction": "¿Está seguro de que desea eliminar esta acción?",
       "theRemovalCannotBeReverted": "La eliminación no puede ser revertida",
-      "removeAction": "Remover Acción",
-      "remove": "Remover",
+      "removeAction": "Eliminar Acción",
+      "remove": "Eliminar",
       "edit": "Editar"
     },
     "options": {
@@ -375,7 +375,7 @@
       "postboxConnectCeramicButton": "Generar sesión de Ceramic",
       "postboxEditCancel": "Cancelar",
       "postboxEditSave": "Guardar",
-      "removalMessage1": "¿Está seguro de que desea remover esta publicación?",
+      "removalMessage1": "¿Está seguro de que desea eliminar esta publicación?",
       "removalMessage2": "Esto usa sus poderes de moderación y debería ser usado únicamente para contenido inapropiado.",
       "deletionMessage1": "¿Está seguro de que desea borrar esta publicación?",
       "deletionMessage2": "Si solicita la eliminación su publicación podría ser removida de los nodos de Ceramic alojándolo.",

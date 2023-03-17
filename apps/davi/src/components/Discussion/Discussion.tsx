@@ -92,16 +92,12 @@ function Discussion({
 
     const _proposals = reset ? [] : [...proposals];
 
-    let { data, error } = await orbis.getPosts(
-      {
-        context: `DAVI-${daoId}-${parentId}-proposal`,
-      },
-      0
-    );
-
+    const { data, error } = await orbis.getPosts({
+      context: `DAVI-${daoId}-${parentId}-proposal`,
+    });
     if (error) console.log(error);
 
-    if (data) {
+    if (data?.length > 0) {
       if (!polling) {
         data?.forEach(proposal => {
           proposal.type = 'proposal';

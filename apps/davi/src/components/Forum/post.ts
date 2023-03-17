@@ -17,7 +17,7 @@ export const postTemplate = (post: DiscussionContent): DiscussionContent => {
 };
 
 export async function createPost(orbis: OrbisType, content: DiscussionContent) {
-  let res = await orbis.createPost(content);
+  const res = await orbis.createPost(content);
   if (res.status === 200) {
     return res;
   } else {
@@ -30,7 +30,7 @@ export async function editPost(
   streamId: string,
   content: DiscussionContent
 ) {
-  let res = await orbis.editPost(streamId, content);
+  const res = await orbis.editPost(streamId, content);
   if (res.status === 200) {
     return res;
   } else {

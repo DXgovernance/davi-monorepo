@@ -1,0 +1,144 @@
+import { useState } from 'react';
+import { lighten } from 'polished';
+import ReactSpeedometer from 'react-d3-speedometer';
+import { FiThumbsDown, FiThumbsUp, FiInfo } from 'react-icons/fi';
+import { useTheme } from 'styled-components';
+
+import { Flex } from 'components/primitives/Layout';
+import {
+  LockButton,
+  ModalContainer,
+  StakeIconButton,
+  StakeSelectionContainer,
+} from './HolographicConsensusCard.styled';
+import { Button } from 'components/primitives/Button';
+import { Slider } from 'components/primitives/Forms/Slider';
+import { StakeOptions } from './HolographicConsensusCard';
+import { Text } from 'components/primitives/Typography';
+
+export const HolographicConsensusModal = () => {
+  const theme = useTheme();
+
+  const [selectedStake, setSelectedStake] = useState(null);
+  const [stakePercentage, setStakePercentage] = useState('0');
+
+  const handleSelectedStake = (option: StakeOptions) => {
+    if (selectedStake === option) setSelectedStake(null);
+    else setSelectedStake(option);
+  };
+
+  return (
+    <ModalContainer>
+      <Flex>
+        <ReactSpeedometer
+          value={7735}
+          minValue={0}
+          maxValue={10000}
+          width={170}
+          height={170}
+          maxSegmentLabels={0}
+          segmentColors={[
+            theme.colors.votes[0],
+            lighten(0.1, theme.colors.votes[0]),
+            theme.colors.white,
+            lighten(0.1, theme.colors.votes[2]),
+            theme.colors.yellow,
+          ]}
+          ringWidth={12}
+          needleHeightRatio={0.55}
+          currentValueText=" "
+          needleColor={theme.colors.white}
+        />
+        <Flex margin="-77px 0px 20px 0px">
+          <Text sizeVariant="small">Pending Boost</Text>
+        </Flex>
+      </Flex>
+
+      <StakeSelectionContainer>
+        <Flex
+          direction="row"
+          gap="24px"
+          fullWidth
+          justifyContent="space-between"
+        >
+          <StakeIconButton
+            variant="against"
+            onClick={() => handleSelectedStake('against')}
+            active={selectedStake === 'against'}
+          >
+            <FiThumbsDown
+              size="17px"
+              color={
+                selectedStake === 'against'
+                  ? theme.colors.bg1
+                  : theme.colors.votes[0]
+              }
+            />
+          </StakeIconButton>
+          <StakeIconButton
+            variant="for"
+            onClick={() => handleSelectedStake('for')}
+            active={selectedStake === 'for'}
+          >
+            <FiThumbsUp
+              size="17px"
+              color={
+                selectedStake === 'for' ? theme.colors.bg1 : theme.colors.yellow
+              }
+            />
+          </StakeIconButton>
+        </Flex>
+        <Flex direction="row" justifyContent="space-between" margin="10px 0px">
+          <Text colorVariant="muted">Balance: </Text>
+          <Flex direction="row">
+            <Text bold>10.00</Text>
+            <Text colorVariant="muted">DXD</Text>
+          </Flex>
+        </Flex>
+        <Slider
+          value={stakePercentage}
+          onChange={setStakePercentage}
+          min={'0'}
+          max={'100'}
+        />
+        <Flex direction="row" justifyContent="space-between">
+          {((parseInt(stakePercentage) / 100) * 18).toFixed(2)}
+          <Button>Max</Button>
+        </Flex>
+      </StakeSelectionContainer>
+
+      <Flex fullWidth>
+        <Flex direction="row" justifyContent="space-between" fullWidth>
+          <Text colorVariant="muted">Potential reward</Text>
+          <Flex direction="row">
+            <Text bold>1</Text>
+            <Text colorVariant="muted">DXD</Text>
+          </Flex>
+        </Flex>
+        <Flex
+          direction="row"
+          justifyContent="space-between"
+          margin="12px 0px"
+          fullWidth
+        >
+          <Text colorVariant="muted">Unlock time</Text>
+          <Text bold>March 13th</Text>
+        </Flex>
+        <Flex direction="row" fullWidth justifyContent="flex-start" gap="10px">
+          <div>
+            <FiInfo color={theme.colors.active} size="20px" />
+          </div>
+          <Text colorVariant="accentuated" textAlign="left">
+            Your prediction will be locked until the proposal ends and you could
+            lose your DXD if your prediction is wrong.
+          </Text>
+        </Flex>
+        <Flex margin="32px 0px 0px 0px" fullWidth>
+          <LockButton>Lock DXD</LockButton>
+        </Flex>
+      </Flex>
+    </ModalContainer>
+  );
+};
+
+// For now, progress styling only works on Firefox

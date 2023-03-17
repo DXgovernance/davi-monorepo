@@ -1,10 +1,8 @@
 import { Flex } from 'components/primitives/Layout';
+import { Text } from 'components/primitives/Typography';
 import { shortenAddress } from 'utils';
 import { IStake, IStakes, StakeOptions } from './HolographicConsensusCard';
-import {
-  MutedText,
-  StakeDetailsContainer,
-} from './HolographicConsensusCard.styled';
+import { StakeDetailsContainer } from './HolographicConsensusCard.styled';
 
 export const StakeDetails = ({
   selectedStake,
@@ -17,8 +15,8 @@ export const StakeDetails = ({
     <StakeDetailsContainer>
       {stakeDetails[selectedStake].map((stake: IStake) => (
         <Flex direction="row" justifyContent="space-between" margin="6px 0px">
-          <div>{shortenAddress(stake.address)}</div>
-          <MutedText>{stake.amount}</MutedText>
+          <span>{shortenAddress(stake.address)}</span>
+          <Text colorVariant="muted">{stake.amount} DXD</Text>
         </Flex>
       ))}
     </StakeDetailsContainer>

@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import ReactSpeedometer from 'react-d3-speedometer';
 import { useTheme } from 'styled-components';
 import { lighten } from 'polished';
 import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
-import { useState } from 'react';
 
 import {
   SidebarCard,
@@ -11,16 +11,17 @@ import {
 } from 'components/SidebarCard';
 import { CardDivider } from 'components/Card';
 import { Flex } from 'components/primitives/Layout';
+import { Modal } from 'components/primitives/Modal';
+import { ExpandButton } from 'components/ExpandButton';
+import { HolographicConsensusModal } from './HolographicConsensusModal';
 import {
-  BoostedStatePill,
-  PredictionMessageSpan,
   StakeButtonsContainer,
   StakeIconButton,
   StakeNumberButton,
   StakesAmount,
 } from './HolographicConsensusCard.styled';
 import { StakeDetails } from './StakeDetails';
-import { ExpandButton } from 'components/ExpandButton';
+import { Text } from 'components/primitives/Typography';
 
 export interface IStake {
   address: string;
@@ -91,6 +92,7 @@ export type StakeOptions = 'for' | 'against';
 
 export const HolographicConsensusCard = () => {
   const theme = useTheme();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStakeDetailsOpen, setIsStakeDetailsOpen] = useState(false);
   const [selectedStake, setSelectedStake] = useState<StakeOptions>('for');
 
@@ -127,7 +129,9 @@ export const HolographicConsensusCard = () => {
             currentValueText=" "
             needleColor={theme.colors.white}
           />
-          <BoostedStatePill>Pending Boost</BoostedStatePill>
+          <Flex margin="-77px 0px 24px 0px">
+            <Text sizeVariant="small">Pending Boost</Text>
+          </Flex>
           <CardDivider />
           <StakeButtonsContainer>
             <StakeNumberButton
@@ -168,27 +172,41 @@ export const HolographicConsensusCard = () => {
             </>
           )}
           <CardDivider />
-          <PredictionMessageSpan>
-            Place your prediction to steer the proposal
-          </PredictionMessageSpan>
+
+          <Flex margin="24px 0px">
+            <Text sizeVariant="big" bold>
+              Place your prediction to steer the proposal
+            </Text>
+          </Flex>
+
           <Flex direction="row" gap="24px">
-            <StakeIconButton variant="against">
+            <StakeIconButton
+              variant="against"
+              onClick={() => setIsModalOpen(true)}
+            >
               <FiThumbsDown size="17px" color={theme.colors.votes[0]} />
             </StakeIconButton>
-            <StakeIconButton variant="for">
+            <StakeIconButton variant="for" onClick={() => setIsModalOpen(true)}>
               <FiThumbsUp size="17px" color={theme.colors.yellow} />
             </StakeIconButton>
           </Flex>
         </Flex>
       </SidebarCardContent>
+      <Modal
+        isOpen={isModalOpen}
+        onDismiss={() => setIsModalOpen(false)}
+        maxWidth={380}
+        header="Confirm prediction"
+      >
+        <HolographicConsensusModal />
+      </Modal>
     </SidebarCard>
   );
 };
 
-// TODO: Modal
 // TODO: Add translations
 // TODO: token icon
-// TODO: add color to proposal state
+// TODO: add color to proposal state pill
 // TODO: Logic!
 // ? border bottom of non-selected stake button?
 

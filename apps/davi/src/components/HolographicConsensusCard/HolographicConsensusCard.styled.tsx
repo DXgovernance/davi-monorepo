@@ -1,13 +1,7 @@
+import { Button } from 'components/primitives/Button';
 import { SidebarCardContentWrapper } from 'components/SidebarCard/SidebarCard.styled';
 import styled, { css } from 'styled-components';
 import { StakeOptions } from './HolographicConsensusCard';
-
-export const BoostedStatePill = styled.div`
-  margin-top: -77px;
-  margin-bottom: 20px;
-  border-radius: ${({ theme }) => theme.radii.curved};
-  font-size: 12px;
-`;
 
 export const StakeButtonsContainer = styled.div`
   display: flex;
@@ -44,7 +38,8 @@ export const StakeIconButton = styled.button<{
   cursor: pointer;
   padding: 11px 43px;
   border-radius: ${({ theme }) => theme.radii.pill};
-  background-color: ${({ theme }) => theme.colors.bg1};
+  background-color: transparent;
+  width: 100%;
   border: 1px solid
     ${({ variant, theme }) =>
       variant === 'for' ? theme.colors.yellow : theme.colors.votes[0]};
@@ -54,24 +49,13 @@ export const StakeIconButton = styled.button<{
     css`
       ${variant === 'for'
         ? `background-color: ${theme.colors.yellow};`
-        : `background-color: ${theme.colors.votes[0]};`}
+        : `background-color: ${theme.colors.votes[0]};`};
     `};
 `;
 
 export const StakeDetailsContainer = styled(SidebarCardContentWrapper)`
   width: 100%;
   margin-top: 24px;
-`;
-
-export const PredictionMessageSpan = styled.span`
-  margin: 24px 0px;
-  font-size: ${({ theme }) => theme.fontSizes.header1};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  text-align: center;
-`;
-
-export const MutedText = styled.span`
-  color: ${({ theme }) => theme.colors.grey};
 `;
 
 export const StakesAmount = styled.div`
@@ -81,4 +65,35 @@ export const StakesAmount = styled.div`
   margin-right: 12px;
   color: ${({ theme }) => theme.colors.grey};
   background-color: ${({ theme }) => theme.colors.darkGreen1};
+`;
+
+export const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+`;
+
+export const StakeSelectionContainer = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  margin: 32px 0px;
+  padding: 16px 20px;
+  border: 1px solid ${({ theme }) => theme.colors.border1};
+  border-radius: ${({ theme }) => theme.radii.curved};
+`;
+
+export const LockButton = styled(Button)`
+  height: 2.5rem;
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  color: ${({ theme }) => theme.colors.bg4};
+  :hover {
+    background-color: ${({ theme }) => theme.colors.darkGreen1};
+    border: 1px solid ${({ theme }) => theme.colors.yellow};
+    color: ${({ theme }) => theme.colors.yellow};
+    opacity: 1;
+  }
 `;

@@ -18,6 +18,7 @@ import CreateDiscussionPage from 'Modules/Guilds/pages/CreateDiscussion';
 import { OnlineStatus } from 'components/OnlineStatus';
 import { DiscussionPage } from 'Modules/Guilds/pages/Discussion';
 import EditDiscussionPage from 'Modules/Guilds/pages/EditDiscussion';
+import { SchemeSelectionPage } from 'Modules/Guilds/pages/SchemeSelection';
 
 const App = () => {
   return (
@@ -56,6 +57,10 @@ const App = () => {
                 <Route
                   path="/:chainName/:guildId/proposal-type"
                   element={<ProposalTypes data={ProposalTypesConfig} />}
+                />
+                <Route
+                  path="/:chainName/:guildId/scheme-selection"
+                  element={<SchemeSelectionPage />}
                 />
                 <Route
                   path="/:chainName/:guildId/proposal/:proposalId"

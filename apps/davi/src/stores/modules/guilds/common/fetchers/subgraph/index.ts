@@ -6,3 +6,4 @@ export { useProposal } from './useProposal';
 export { useGuildProposalIds } from './useGuildProposalIds';
 export { useGetAllPermissions } from './useGetAllPermissions';
 export { useProposalVotesOfVoter } from './useProposalVotesOfVoter';
+export { useGetSubDAOs } from './useGetSubDAOs';

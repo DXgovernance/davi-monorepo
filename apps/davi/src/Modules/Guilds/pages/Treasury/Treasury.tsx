@@ -57,16 +57,18 @@ const AssetRow = ({
   );
 };
 
-const Treasury = () => {
+const Treasury = ({ subDaoAddress = null }) => {
   const { t } = useTranslation();
   const { guildId: daoAddress } = useTypedParams();
+
+  const treasuryAddress = subDaoAddress ?? daoAddress;
 
   const {
     data,
     isLoading: isBalancesLoading,
     isError: isErrorRetrievingBalances,
     error,
-  } = useAllERC20Balances(daoAddress, true);
+  } = useAllERC20Balances(treasuryAddress, true);
 
   /**
    * Setting up a key and filter out tokens with zero balances

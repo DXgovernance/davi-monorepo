@@ -45,14 +45,11 @@ export const VoteActionButtonContainer = styled.div`
 export const StyledRadioInput = styled(RadioInput)<{
   optionKey?: number;
 }>`
-  accent-color: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
-  :hover {
-    border-color: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
-  }
+  box-shadow: 0 0 0 1px
+    ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
 
   :checked {
-    background-color: ${({ theme, optionKey }) =>
-      theme.colors.votes[optionKey]};
+    background: ${({ theme, optionKey }) => theme.colors.votes[optionKey]};
   }
 `;
 

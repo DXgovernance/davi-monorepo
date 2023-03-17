@@ -3,12 +3,9 @@ type Permission @entity {
   from: String!
   to: String!
   functionSignature: String!
+  isToken: Boolean!
   valueAllowed: BigInt!
   fromTime: BigInt!
   allowed: Boolean!
-
-  # TODO: Makes sense to compute these?
-  # valueTransferred: BigInt
-  # valueTransferredOnBlock: BigInt
 }
 

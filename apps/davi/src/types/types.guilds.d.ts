@@ -102,3 +102,31 @@ export interface Vote {
   votingPower: number;
 }
 
+export interface SubDAO {
+  // scheme data
+  id: string;
+  name: string;
+  averagesDownstakesOfBoosted: BigNumber;
+  controller: string;
+  isRegistered: boolean;
+  orgBoostedProposalsCnt: BigNumber;
+  paramsHash: string;
+  permissionRegistry: string;
+  stakingTokenBalance: BigNumber;
+
+  // capabilities
+  canChangeReputation: boolean;
+  canMakeAvatarCalls: boolean;
+  canManageSchemes: boolean;
+  maxGasPrice: BigNumber;
+  maxRepPercentageChange: BigNumber;
+  type: string;
+  voteGas: BigNumber;
+  voteGasBalance: BigNumber;
+  votingMachine: {
+    boostedVoteRequiredPercentage: BigNumber;
+    preBoostedVotePeriodLimit: BigNumber;
+    boostedVotePeriodLimit: BigNumber;
+    quietEndingPeriod: BigNumber;
+  };
+}

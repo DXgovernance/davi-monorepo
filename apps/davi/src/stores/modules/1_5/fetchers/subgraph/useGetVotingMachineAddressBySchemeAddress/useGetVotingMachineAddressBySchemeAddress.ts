@@ -31,7 +31,7 @@ export const useGetVotingMachineAddressBySchemeAddress: IUseGetVotingMachineAddr
     if (!data || !data.scheme || !data.scheme.votingMachine) return null;
 
     return {
-      votingMachineAddress: data.scheme.votingMachine,
+      votingMachineAddress: data.scheme.votingMachine.id,
       isLoading: loading,
       isError: !!error,
     };

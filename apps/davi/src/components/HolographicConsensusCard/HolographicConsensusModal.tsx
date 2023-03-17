@@ -15,9 +15,11 @@ import { Button } from 'components/primitives/Button';
 import { Slider } from 'components/primitives/Forms/Slider';
 import { StakeOptions } from './HolographicConsensusCard';
 import { Text } from 'components/primitives/Typography';
+import { useTranslation } from 'react-i18next';
 
 export const HolographicConsensusModal = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [selectedStake, setSelectedStake] = useState(null);
   const [stakePercentage, setStakePercentage] = useState('0');
@@ -89,7 +91,7 @@ export const HolographicConsensusModal = () => {
           </StakeIconButton>
         </Flex>
         <Flex direction="row" justifyContent="space-between" margin="10px 0px">
-          <Text colorVariant="muted">Balance: </Text>
+          <Text colorVariant="muted">{t('members.locking.balance')}: </Text>
           <Flex direction="row">
             <Text bold>10.00</Text>
             <Text colorVariant="muted">DXD</Text>
@@ -103,13 +105,15 @@ export const HolographicConsensusModal = () => {
         />
         <Flex direction="row" justifyContent="space-between">
           {((parseInt(stakePercentage) / 100) * 18).toFixed(2)}
-          <Button>Max</Button>
+          <Button>{t('members.locking.max')}</Button>
         </Flex>
       </StakeSelectionContainer>
 
       <Flex fullWidth>
         <Flex direction="row" justifyContent="space-between" fullWidth>
-          <Text colorVariant="muted">Potential reward</Text>
+          <Text colorVariant="muted">
+            {t('holographicConsensus.potentialReward')}
+          </Text>
           <Flex direction="row">
             <Text bold>1</Text>
             <Text colorVariant="muted">DXD</Text>
@@ -121,7 +125,7 @@ export const HolographicConsensusModal = () => {
           margin="12px 0px"
           fullWidth
         >
-          <Text colorVariant="muted">Unlock time</Text>
+          <Text colorVariant="muted">{t('members.locking.unlockTime')}</Text>
           <Text bold>March 13th</Text>
         </Flex>
         <Flex direction="row" fullWidth justifyContent="flex-start" gap="10px">
@@ -129,12 +133,15 @@ export const HolographicConsensusModal = () => {
             <FiInfo color={theme.colors.active} size="20px" />
           </div>
           <Text colorVariant="accentuated" textAlign="left">
-            Your prediction will be locked until the proposal ends and you could
-            lose your DXD if your prediction is wrong.
+            {t('holographicConsensus.lockWarning')}.
           </Text>
         </Flex>
         <Flex margin="32px 0px 0px 0px" fullWidth>
-          <LockButton>Lock DXD</LockButton>
+          <LockButton
+            disabled={selectedStake === null || stakePercentage === '0'}
+          >
+            {t('members.locking.lock')} DXD
+          </LockButton>
         </Flex>
       </Flex>
     </ModalContainer>

@@ -22,6 +22,7 @@ import {
 } from './HolographicConsensusCard.styled';
 import { StakeDetails } from './StakeDetails';
 import { Text } from 'components/primitives/Typography';
+import { useTranslation } from 'react-i18next';
 
 export interface IStake {
   address: string;
@@ -92,6 +93,8 @@ export type StakeOptions = 'for' | 'against';
 
 export const HolographicConsensusCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStakeDetailsOpen, setIsStakeDetailsOpen] = useState(false);
   const [selectedStake, setSelectedStake] = useState<StakeOptions>('for');
@@ -100,7 +103,7 @@ export const HolographicConsensusCard = () => {
     <SidebarCard
       header={
         <SidebarCardHeaderSpaced>
-          Predictions
+          {t('holographicConsensus.predictions')}
           <ExpandButton
             expanded={isStakeDetailsOpen}
             onClick={() => setIsStakeDetailsOpen(!isStakeDetailsOpen)}
@@ -175,7 +178,7 @@ export const HolographicConsensusCard = () => {
 
           <Flex margin="24px 0px">
             <Text sizeVariant="big" bold>
-              Place your prediction to steer the proposal
+              {t('holographicConsensus.placeYourPrediction')}
             </Text>
           </Flex>
 
@@ -196,7 +199,7 @@ export const HolographicConsensusCard = () => {
         isOpen={isModalOpen}
         onDismiss={() => setIsModalOpen(false)}
         maxWidth={380}
-        header="Confirm prediction"
+        header={t('holographicConsensus.confirmPrediction')}
       >
         <HolographicConsensusModal />
       </Modal>
@@ -204,10 +207,15 @@ export const HolographicConsensusCard = () => {
   );
 };
 
-// TODO: Add translations
-// TODO: token icon
+// TODO: fetch token icon
+// TODO: fetch token symbol
+// TODO: fetch user's token locked
+// TODO: fetch current stakes in proposal
+// TODO: maybe add stakes in the current dev scripts?
+// TODO: make generic big button (like LOCK button) and change disabled&hover styles
 // TODO: add color to proposal state pill
-// TODO: Logic!
+// TODO: Proposal states: this is a whole implementation of the state logic that will include the hook useProposalState
+// TODO: lock logic
 // ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

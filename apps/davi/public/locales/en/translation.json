@@ -297,12 +297,14 @@
     "increaseVotingPower": "Increase Voting Power",
     "locking": {
       "locked": "Locked",
+      "lock": "Lock",
       "unlocked": "Unlocked",
       "unlockedIn": "Unlocked in",
       "staked": "Staked",
       "withdraw": "Withdraw",
       "balance": "Balance",
       "unlockDate": "Unlock Date",
+      "unlockTime": "Unlock time",
       "spending": "Spending",
       "max": "Max",
       "stakeTokens": "Stake {{token}} tokens",
@@ -400,6 +402,13 @@
     "type": "Type",
     "next": "Next",
     "errorFetchingSchemes": "Error while fetching schemes"
+  },
+  "holographicConsensus": {
+    "predictions": "Predictions",
+    "confirmPrediction": "Confirm prediction",
+    "placeYourPrediction": "Place your prediction to steer the proposal",
+    "potentialReward": "Potential reward",
+    "lockWarning": "Your prediction will be locked until the proposal ends and you could lose your DXD if your prediction is wrong"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",

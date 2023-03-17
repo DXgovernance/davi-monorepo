@@ -32,7 +32,7 @@ exports[`VoteResults matches the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   margin: 5px 0px 5px 0px;
 }

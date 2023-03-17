@@ -58,7 +58,7 @@ export const VoteQuorumLabel = styled.div<{ quorum: number }>`
       ? `${theme.radii.pill} 0px ${theme.radii.pill} ${theme.radii.pill}`
       : `${theme.radii.pill}`};
   font-size: ${({ theme }) => theme.fontSizes.body};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   align-items: center;
   display: flex;
 

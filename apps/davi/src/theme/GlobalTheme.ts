@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle<{ theme: GuildsTheme }>`
   }
 
   strong, b {
-    font-weight: ${({ theme }) => theme.fontWeights.medium};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
   }
 
   code, pre {

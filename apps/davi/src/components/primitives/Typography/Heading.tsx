@@ -13,13 +13,13 @@ const sizeStyles = (size = 1) =>
 
       strong,
       b {
-        font-weight: ${({ theme }) => theme.fontWeights.medium};
+        font-weight: ${({ theme }) => theme.fontWeights.bold};
       }
     `,
     2: css`
       font-size: ${({ theme }) => theme.fontSizes.header2};
       line-height: ${({ theme }) => theme.lineHeights.header2};
-      font-weight: ${({ theme }) => theme.fontWeights.medium};
+      font-weight: ${({ theme }) => theme.fontWeights.bold};
     `,
   }[size]);
 

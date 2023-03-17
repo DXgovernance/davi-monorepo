@@ -62,6 +62,5 @@ export const Card: React.FC<CardProps> = ({
 
 export const CardDivider = styled(Divider)`
   margin: 0;
-  margin-left: -24px;
   width: calc(100% + 48px);
 `;

@@ -5,11 +5,13 @@ import { FiThumbsDown, FiThumbsUp, FiInfo } from 'react-icons/fi';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import { resolveUri } from 'utils';
 import { TokenInfoWithType } from 'types/types';
 import { Flex } from 'components/primitives/Layout';
 import { Button } from 'components/primitives/Button';
 import { Slider } from 'components/primitives/Forms/Slider';
 import { Text } from 'components/primitives/Typography';
+import { Avatar } from 'components/Avatar';
 
 import {
   LockButton,
@@ -18,15 +20,17 @@ import {
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
 import { StakeOptions } from './HolographicConsensusCard';
-import { Avatar } from 'components/Avatar';
-import { resolveUri } from 'utils';
+import { BigNumber } from 'ethers';
+import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
 
 interface IHolographicConsensusModal {
   tokenInfo: TokenInfoWithType;
+  userStakeTokenBalance: BigNumber;
 }
 
 export const HolographicConsensusModal = ({
   tokenInfo,
+  userStakeTokenBalance,
 }: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -38,6 +42,11 @@ export const HolographicConsensusModal = ({
     if (selectedStake === option) setSelectedStake(null);
     else setSelectedStake(option);
   };
+
+  const roundedBalance = useBigNumberToNumber(
+    userStakeTokenBalance,
+    tokenInfo?.decimals
+  );
 
   return (
     <ModalContainer>
@@ -69,6 +78,7 @@ export const HolographicConsensusModal = ({
       <StakeSelectionContainer>
         <Flex
           direction="row"
+          margin="0 0 20px 0"
           gap="24px"
           fullWidth
           justifyContent="space-between"
@@ -103,7 +113,7 @@ export const HolographicConsensusModal = ({
         <Flex direction="row" justifyContent="space-between" margin="10px 0px">
           <Text colorVariant="muted">{t('members.locking.balance')}: </Text>
           <Flex direction="row" gap="4px">
-            <Text bold>10.00</Text>
+            <Text bold>{roundedBalance}</Text>
             <Avatar
               src={resolveUri(tokenInfo?.logoURI)}
               defaultSeed={tokenInfo?.address}
@@ -119,8 +129,12 @@ export const HolographicConsensusModal = ({
           max={'100'}
         />
         <Flex direction="row" justifyContent="space-between">
-          {((parseInt(stakePercentage) / 100) * 18).toFixed(2)}
-          <Button>{t('members.locking.max')}</Button>
+          <Text sizeVariant="big" bold>
+            {roundedBalance * (Number(stakePercentage) / 100)}
+          </Text>
+          <Button onClick={() => setStakePercentage('100')}>
+            {t('members.locking.max')}
+          </Button>
         </Flex>
       </StakeSelectionContainer>
 

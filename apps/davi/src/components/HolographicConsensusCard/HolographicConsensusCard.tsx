@@ -3,11 +3,12 @@ import ReactSpeedometer from 'react-d3-speedometer';
 import { useTheme } from 'styled-components';
 import { lighten } from 'polished';
 import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
-import { useNetwork } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 
 import { useHookStoreProvider } from 'stores';
 import { resolveUri } from 'utils';
+import { TokenInfoWithType } from 'types/types';
 import {
   SidebarCard,
   SidebarCardContent,
@@ -23,6 +24,7 @@ import { Modal } from 'components/primitives/Modal';
 import { Text } from 'components/primitives/Typography';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
+import { useERC20Balance } from 'hooks/Guilds/erc20/useERC20Balance';
 
 import { HolographicConsensusModal } from './HolographicConsensusModal';
 import {
@@ -117,10 +119,6 @@ export const HolographicConsensusCard = ({
   const { guildId: daoId } = useTypedParams();
   const { chain } = useNetwork();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isStakeDetailsOpen, setIsStakeDetailsOpen] = useState(false);
-  const [selectedStake, setSelectedStake] = useState<StakeOptions>('for');
-
   const {
     data: schemeData,
     isLoading,
@@ -128,6 +126,26 @@ export const HolographicConsensusCard = ({
     errorMessage,
   } = useGetSubDAOs(daoId, schemeId);
   const { tokens } = useTokenList(chain?.id);
+
+  let stakeTokenAddress: string = null;
+  let stakeTokenInfo: TokenInfoWithType = null;
+
+  try {
+    stakeTokenAddress = schemeData[0]?.votingMachine?.stakingTokenAddress;
+    stakeTokenInfo = tokens.find(token => {
+      return token?.address?.toLowerCase() === stakeTokenAddress?.toLowerCase();
+    });
+  } catch {}
+
+  const { address: userAddress } = useAccount();
+  const { data: userStakeTokenBalance } = useERC20Balance(
+    stakeTokenAddress,
+    userAddress
+  );
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isStakeDetailsOpen, setIsStakeDetailsOpen] = useState(false);
+  const [showStakeOption, setShowStakeOption] = useState<StakeOptions>('for');
 
   if (isLoading) {
     return (
@@ -148,11 +166,6 @@ export const HolographicConsensusCard = ({
       </SidebarCard>
     );
   }
-
-  const stakeTokenAddress = schemeData[0]?.votingMachine?.stakingTokenAddress;
-  const stakeTokenInfo = tokens.find(token => {
-    return token?.address?.toLowerCase() === stakeTokenAddress?.toLowerCase();
-  });
 
   if (!stakeTokenAddress) return <></>;
 
@@ -197,10 +210,10 @@ export const HolographicConsensusCard = ({
             <StakeNumberButton
               variant="against"
               active={
-                isStakeDetailsOpen === true && selectedStake === 'against'
+                isStakeDetailsOpen === true && showStakeOption === 'against'
               }
               onClick={() => {
-                setSelectedStake('against');
+                setShowStakeOption('against');
                 if (isStakeDetailsOpen === false) setIsStakeDetailsOpen(true);
               }}
             >
@@ -219,9 +232,9 @@ export const HolographicConsensusCard = ({
 
             <StakeNumberButton
               variant="for"
-              active={isStakeDetailsOpen === true && selectedStake === 'for'}
+              active={isStakeDetailsOpen === true && showStakeOption === 'for'}
               onClick={() => {
-                setSelectedStake('for');
+                setShowStakeOption('for');
                 if (isStakeDetailsOpen === false) setIsStakeDetailsOpen(true);
               }}
             >
@@ -242,31 +255,38 @@ export const HolographicConsensusCard = ({
             <>
               <CardDivider />
               <StakeDetails
-                selectedStake={selectedStake}
+                selectedStake={showStakeOption}
                 stakeDetails={fakeStakes}
                 tokenSymbol={stakeTokenInfo?.symbol}
               />
             </>
           )}
-          <CardDivider />
 
-          <Flex margin="24px 0px">
-            <Text sizeVariant="big" bold>
-              {t('holographicConsensus.placeYourPrediction')}
-            </Text>
-          </Flex>
+          {userStakeTokenBalance?.isZero() === false && (
+            <>
+              <CardDivider />
+              <Flex margin="24px 0px">
+                <Text sizeVariant="big" bold>
+                  {t('holographicConsensus.placeYourPrediction')}
+                </Text>
+              </Flex>
 
-          <Flex direction="row" gap="24px">
-            <StakeIconButton
-              variant="against"
-              onClick={() => setIsModalOpen(true)}
-            >
-              <FiThumbsDown size="17px" color={theme.colors.votes[0]} />
-            </StakeIconButton>
-            <StakeIconButton variant="for" onClick={() => setIsModalOpen(true)}>
-              <FiThumbsUp size="17px" color={theme.colors.yellow} />
-            </StakeIconButton>
-          </Flex>
+              <Flex direction="row" gap="24px">
+                <StakeIconButton
+                  variant="against"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <FiThumbsDown size="17px" color={theme.colors.votes[0]} />
+                </StakeIconButton>
+                <StakeIconButton
+                  variant="for"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <FiThumbsUp size="17px" color={theme.colors.yellow} />
+                </StakeIconButton>
+              </Flex>
+            </>
+          )}
         </Flex>
       </SidebarCardContent>
       <Modal
@@ -275,21 +295,28 @@ export const HolographicConsensusCard = ({
         maxWidth={380}
         header={t('holographicConsensus.confirmPrediction')}
       >
-        <HolographicConsensusModal tokenInfo={stakeTokenInfo} />
+        <HolographicConsensusModal
+          tokenInfo={stakeTokenInfo}
+          userStakeTokenBalance={userStakeTokenBalance}
+        />
       </Modal>
     </SidebarCard>
   );
 };
 
+// TODO: maybe add stakes in the current dev scripts?
+// TODO: add DAO staking token entity to subgraph
 // TODO: fetch user's token locked
 // TODO: fetch current stakes in proposal
-// TODO: maybe add stakes in the current dev scripts?
 // TODO: lock logic
 // TODO: make generic big button (like LOCK button) and change disabled&hover styles
 // TODO: add color to proposal state pill
 // TODO: fetch proposal state
 // TODO: translations
 // TODO: stake: show ENS or address
+// TODO: if a user staked, it can only increase its stake on the previous option
+// TODO: calculate speedometer value
+// TODO: decimals in token balance and total staked
 // ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

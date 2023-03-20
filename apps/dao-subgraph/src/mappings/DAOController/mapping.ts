@@ -66,6 +66,9 @@ export function handleRegisterScheme(event: RegisterScheme): void {
     votingMachine = new VotingMachine(votingMachineAddress.toHexString());
   }
 
+  votingMachine.stakingTokenAddress = votingMachineContract
+    .stakingToken()
+    .toHexString();
   votingMachine.queuedVoteRequiredPercentage =
     votingParams.getQueuedVoteRequiredPercentage();
   votingMachine.queuedVotePeriodLimit = votingParams.getQueuedVotePeriodLimit();

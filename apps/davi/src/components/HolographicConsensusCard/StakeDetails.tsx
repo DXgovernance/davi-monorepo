@@ -18,7 +18,12 @@ export const StakeDetails = ({
   return (
     <StakeDetailsContainer>
       {stakeDetails[selectedStake].map((stake: IStake) => (
-        <Flex direction="row" justifyContent="space-between" margin="6px 0px">
+        <Flex
+          direction="row"
+          justifyContent="space-between"
+          margin="6px 0px"
+          key={stake.address}
+        >
           <span>{shortenAddress(stake.address)}</span>
           <Text colorVariant="muted">
             {stake.amount} {tokenSymbol}

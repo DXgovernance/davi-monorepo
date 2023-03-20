@@ -18,6 +18,8 @@ import {
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
 import { StakeOptions } from './HolographicConsensusCard';
+import { Avatar } from 'components/Avatar';
+import { resolveUri } from 'utils';
 
 interface IHolographicConsensusModal {
   tokenInfo: TokenInfoWithType;
@@ -100,8 +102,13 @@ export const HolographicConsensusModal = ({
         </Flex>
         <Flex direction="row" justifyContent="space-between" margin="10px 0px">
           <Text colorVariant="muted">{t('members.locking.balance')}: </Text>
-          <Flex direction="row">
+          <Flex direction="row" gap="4px">
             <Text bold>10.00</Text>
+            <Avatar
+              src={resolveUri(tokenInfo?.logoURI)}
+              defaultSeed={tokenInfo?.address}
+              size={20}
+            />
             <Text colorVariant="muted">{tokenInfo?.symbol}</Text>
           </Flex>
         </Flex>
@@ -122,8 +129,13 @@ export const HolographicConsensusModal = ({
           <Text colorVariant="muted">
             {t('holographicConsensus.potentialReward')}
           </Text>
-          <Flex direction="row">
+          <Flex direction="row" gap="4px">
             <Text bold>1</Text>
+            <Avatar
+              src={resolveUri(tokenInfo?.logoURI)}
+              defaultSeed={tokenInfo?.address}
+              size={20}
+            />
             <Text colorVariant="muted">{tokenInfo?.symbol}</Text>
           </Flex>
         </Flex>

@@ -105,7 +105,13 @@
       "ethereumAddress": "Ethereum Address",
       "toAddress": "To Address",
       "address": "Address",
-      "contract": "Contract"
+      "contract": "Contract",
+      "sellToken": "Sell Token",
+      "buyToken": "Buy Token",
+      "sellAmount": "Sell Amount",
+      "buyAmount": "Buy Amount",
+      "unitBuyPrice": "Unit Buy Price",
+      "atLeastAmount": "You receive at least"
     },
     "permissions": {
       "permissions": "Permissions",
@@ -171,9 +177,11 @@
       "approveSpendingCall": "Approve spending call",
       "addressToWhichTheExpenseIsBeingAuthorized": "Address to which the expense is being authorized",
       "amountBeingApproved": "Amount being approved",
-      "approveTokenSpending": "Approve {{tokenSymbol}} token spending"
+      "approveTokenSpending": "Approve {{tokenSymbol}} token spending",
+      "setLimitOrderApproval": "Set Limit Order Approval"
     },
     "config": {
+      "limitOrder": "Limit Order",
       "setGuildConfig": "Set Guild Config",
       "noValueHasBeenUpdatedFromCurrentGuildConfig": "No value has been updated from current guild config",
       "proposalTimeHasToBeMoreThanZero": "Proposal time has to be more than 0",
@@ -387,10 +395,19 @@
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",
     "amountIsRequired": "Amount is required",
+    "buyAmountIsRequired": "Buy amount is required",
+    "sellAmountIsRequired": "Sell amount is required",
     "invalidRecipientAddress": "Invalid recipient address",
     "tokenIsRequired": "Token is required",
+    "buyTokenIsRequired": "Buy token is required",
+    "sellTokenIsRequired": "Sell token is required",
+    "invalidBuyTokenAddress": "Invalid buy token address",
+    "invalidSellTokenAddress": "Invalid sell token address",
+    "buyAndSellTokensCannotBeTheSame": "Buy and sell tokens cannot be the same",
     "amountCannotBeZero": "Amount cannot be zero",
+    "sellAmountCannotBeZero": "Sell amount cannot be zero",
     "invalidAmount": "Invalid amount",
+    "invalidSellAmount": "Invalid sell amount",
     "invalidValue": "Invalid value",
     "invalidTokenAddress": "Invalid token address",
     "dataIsNotAHexString": "Data is not a hex string",

@@ -23,6 +23,8 @@ import {
 import { useNetwork } from 'wagmi';
 import { isAvailableOnENS } from 'hooks/Guilds/ens/utils';
 import { ExpandButton } from 'components/ExpandButton';
+import { IoSwapVerticalOutline } from 'react-icons/io5';
+import { isAvailableOnCow } from 'hooks/Guilds/cow/utils';
 
 interface ContractsListProps {
   onSelect: (contract: RichContractData) => void;
@@ -89,6 +91,19 @@ const ContractsList: React.FC<ContractsListProps> = ({
             <ButtonLabel>
               <StyledIcon src={ENSIcon} />
               {t('actionBuilder.ens.updateContentCoreAction')}
+            </ButtonLabel>
+          </ActionsButton>
+        ) : null}
+        {isAvailableOnCow(chain.id) ? (
+          <ActionsButton
+            data-testid="cow-limit-order-action"
+            onClick={() =>
+              onSupportedActionSelect(SupportedAction.COW_SWAP_LIMIT_ORDER)
+            }
+          >
+            <ButtonLabel>
+              <StyledIcon src={() => <IoSwapVerticalOutline size={20} />} />
+              {t('actionBuilder.config.limitOrder')}
             </ButtonLabel>
           </ActionsButton>
         ) : null}

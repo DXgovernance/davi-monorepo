@@ -1,11 +1,26 @@
 import useIPFSFile from 'hooks/Guilds/ipfs/useIPFSFile';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ProposalMetadata } from 'types/types.guilds';
 import { useOrbisContext } from 'contexts/Guilds/orbis';
+import * as contentHashLib from '@ensdomains/content-hash';
 
 function useProposalMetadata(contentHash: string) {
   const { orbis } = useOrbisContext();
   const [orbisData, setOrbisData] = useState<any>();
+
+  // Support backwards compatible encoded ipfs hashes
+  const { decodedContentHash } = useMemo(() => {
+    if (!contentHash || contentHash?.includes('://')) console.log('hey');
+
+    try {
+      return {
+        decodedContentHash: contentHashLib.decode(contentHash),
+      };
+    } catch (e) {
+      console.error(e);
+      return { decodeError: e };
+    }
+  }, [contentHash]);
 
   // Get orbis data
   useEffect(() => {
@@ -24,7 +39,9 @@ function useProposalMetadata(contentHash: string) {
 
   const { data: metadata, error: metadataError } =
     useIPFSFile<ProposalMetadata>(
-      contentHash?.substring(7, contentHash?.length + 1)
+      decodedContentHash
+        ? decodedContentHash
+        : contentHash?.substring(7, contentHash?.length + 1)
     );
 
   if (orbisData) {

@@ -10,7 +10,7 @@ function useProposalMetadata(contentHash: string) {
 
   // Support backwards compatible encoded ipfs hashes
   const { decodedContentHash } = useMemo(() => {
-    if (!contentHash || contentHash?.includes('://')) console.log('hey');
+    if (!contentHash || contentHash?.includes('://')) return {};
 
     try {
       return {
@@ -18,7 +18,6 @@ function useProposalMetadata(contentHash: string) {
       };
     } catch (e) {
       console.error(e);
-      return { decodeError: e };
     }
   }, [contentHash]);
 

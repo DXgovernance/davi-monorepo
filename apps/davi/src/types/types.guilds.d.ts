@@ -23,6 +23,7 @@ export interface Proposal {
   options: Option[];
   votes?: Vote[];
   executionTransactionHash?: string;
+  subDao?: string;
 }
 
 export enum ProposalState {
@@ -124,9 +125,11 @@ export interface SubDAO {
   voteGas: BigNumber;
   voteGasBalance: BigNumber;
   votingMachine: {
+    stakingTokenAddress: string;
     boostedVoteRequiredPercentage: BigNumber;
     preBoostedVotePeriodLimit: BigNumber;
     boostedVotePeriodLimit: BigNumber;
     quietEndingPeriod: BigNumber;
   };
 }
+

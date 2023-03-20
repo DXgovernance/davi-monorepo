@@ -47,6 +47,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       descriptionHash,
       state,
       totalVotes,
+      scheme: { id: schemeId },
     } = proposal;
 
     let mappedContractState: ContractState;
@@ -86,6 +87,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       totalVotes: [noVotes, yesVotes],
       options: null,
       votes: null,
+      subDao: schemeId,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
     };
   }, [data]);

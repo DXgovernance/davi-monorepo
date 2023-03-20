@@ -7,10 +7,10 @@ import {
   ConnectionError,
   Container,
   Language,
-  LanguageBar,
+  LanguageBar as WalletModalItem,
   LanguageList,
-  LanguageTitle,
-  LanguageValue,
+  LanguageTitle as WalletModalItemTitle,
+  LanguageValue as WalletModalItemValue,
   TransactionsList,
   TransactionsListHeading,
 } from './WalletModal.styled';
@@ -23,10 +23,11 @@ import { Divider } from 'components/Divider';
 import { Button } from 'components/primitives/Button';
 import { READ_ONLY_CONNECTOR_ID } from 'provider/ReadOnlyConnector';
 import useSwitchNetwork from 'hooks/Guilds/web3/useSwitchNetwork';
-import { BiWorld } from 'react-icons/bi';
+import { BiWorld, BiEditAlt } from 'react-icons/bi';
 import { FiChevronRight } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
 import { supportedLanguages } from 'configs';
+import { CustomRPC } from 'components/CustomRPC/CustomRPC';
 
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
@@ -36,6 +37,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
   const { t, i18n } = useTranslation();
   const [isWalletListActive, setIsWalletsListActive] = useState(false);
   const [isLanguagesOpen, setIsLanguagesOpen] = useState(false);
+  const [isCustomRPCOpen, setIsCustomRPCOpen] = useState(false);
   const { chain } = useNetwork();
   const { chains, switchNetwork } = useSwitchNetwork();
   const { transactions, clearAllTransactions } = useTransactions();
@@ -99,68 +101,89 @@ export const WalletModal: React.FC<WalletModalProps> = ({
       transactions
         .sort((tx1, tx2) => tx2.addedTime - tx1.addedTime)
         .slice(0, 5);
-    return isLanguagesOpen ? (
-      <LanguageList>
-        {supportedLanguages.map(languageCode => {
-          const currentLanguage = getLanguageName(i18n.language);
-          const language = getLanguageName(languageCode);
-          return (
-            <Language
-              onClick={() => {
-                i18n.changeLanguage(languageCode);
-                setIsLanguagesOpen(false);
-              }}
-            >
-              {language}
-              {currentLanguage === language ? <TiTick></TiTick> : <></>}
-            </Language>
-          );
-        })}
-      </LanguageList>
-    ) : (
-      <>
-        <LanguageBar onClick={() => setIsLanguagesOpen(true)}>
-          <LanguageTitle>
-            <BiWorld size={24} />
-            {t('language.language')}
-          </LanguageTitle>
-          <LanguageValue>
-            {getLanguageName(i18n.language)}
-            <FiChevronRight size={24} />
-          </LanguageValue>
-        </LanguageBar>
-        <WalletInfoBox openOptions={() => setIsWalletsListActive(true)} />
-        <Divider />
-        <TransactionsList>
-          {recentTransactions?.length === 0 ? (
-            <TransactionsListHeading>
-              {t('transactions.yourTransactionsWillAppearHere')}
-            </TransactionsListHeading>
-          ) : (
-            <>
+    if (isLanguagesOpen) {
+      return (
+        <LanguageList>
+          {supportedLanguages.map(languageCode => {
+            const currentLanguage = getLanguageName(i18n.language);
+            const language = getLanguageName(languageCode);
+            return (
+              <Language
+                onClick={() => {
+                  i18n.changeLanguage(languageCode);
+                  setIsLanguagesOpen(false);
+                }}
+              >
+                {language}
+                {currentLanguage === language ? <TiTick></TiTick> : <></>}
+              </Language>
+            );
+          })}
+        </LanguageList>
+      );
+    } else if (isCustomRPCOpen) {
+      return <CustomRPC />;
+    } else
+      return (
+        <>
+          <WalletModalItem onClick={() => setIsLanguagesOpen(true)}>
+            <WalletModalItemTitle>
+              <BiWorld size={24} />
+              {t('language.language')}
+            </WalletModalItemTitle>
+            <WalletModalItemValue>
+              {getLanguageName(i18n.language)}
+              <FiChevronRight size={24} />
+            </WalletModalItemValue>
+          </WalletModalItem>
+          <>
+            <WalletModalItem onClick={() => setIsCustomRPCOpen(true)}>
+              <WalletModalItemTitle>
+                <BiEditAlt size={24} />
+                {t('customRPC.customRPC')}
+              </WalletModalItemTitle>
+              <WalletModalItemValue>
+                {/* {getLanguageName(i18n.language)} */}
+                <FiChevronRight size={24} />
+              </WalletModalItemValue>
+            </WalletModalItem>
+          </>
+          <WalletInfoBox openOptions={() => setIsWalletsListActive(true)} />
+          <Divider />
+          <TransactionsList>
+            {recentTransactions?.length === 0 ? (
               <TransactionsListHeading>
-                {t('transactions.recentTransactions')}
+                {t('transactions.yourTransactionsWillAppearHere')}
               </TransactionsListHeading>
-              <Divider />
-              {recentTransactions?.map(transaction => (
-                <Transaction transaction={transaction} key={transaction.hash} />
-              ))}
-              {recentTransactions?.length > 0 && (
-                <ButtonContainer>
-                  <Button onClick={clearAllTransactions}>
-                    {t('transactions.clearAll')}
-                  </Button>
-                </ButtonContainer>
-              )}
-            </>
-          )}
-        </TransactionsList>
-      </>
-    );
+            ) : (
+              <>
+                <TransactionsListHeading>
+                  {t('transactions.recentTransactions')}
+                </TransactionsListHeading>
+                <Divider />
+                {recentTransactions?.map(transaction => (
+                  <Transaction
+                    transaction={transaction}
+                    key={transaction.hash}
+                  />
+                ))}
+                {recentTransactions?.length > 0 && (
+                  <ButtonContainer>
+                    <Button onClick={clearAllTransactions}>
+                      {t('transactions.clearAll')}
+                    </Button>
+                  </ButtonContainer>
+                )}
+              </>
+            )}
+          </TransactionsList>
+        </>
+      );
   }
 
   const getHeader = () => {
     if (isLanguagesOpen) return t('language.languages');
+    if (isCustomRPCOpen) return t('customRPC.customRPC');
     if (isConnected && chain?.unsupported) {
       return t('connections.unsupportedNetwork');
     }
@@ -213,7 +236,11 @@ export const WalletModal: React.FC<WalletModalProps> = ({
       header={getHeader()}
       isOpen={isOpen}
       onDismiss={() => {
-        isLanguagesOpen ? setIsLanguagesOpen(false) : onClose();
+        if (isLanguagesOpen) setIsLanguagesOpen(false);
+        else if (isCustomRPCOpen) {
+          setIsCustomRPCOpen(false);
+          window.location.reload();
+        } else onClose();
       }}
       onConfirm={getPrimaryAction()}
       confirmText={getPrimaryActionLabel()}

@@ -20,22 +20,6 @@ export const VoteActionButton = styled(Button)`
   width: 100%;
   font-weight: 600;
   font-size: 16px;
-  background-color: ${({ theme }) => theme.colors.yellow};
-  color: ${({ theme }) => theme.colors.bg4};
-
-  :hover:enabled {
-    background-color: ${({ theme }) => theme.colors.darkGreen1};
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    color: ${({ theme }) => theme.colors.yellow};
-    opacity: 1;
-  }
-
-  :disabled {
-    background-color: transparent;
-    border: 1px solid ${({ theme }) => theme.colors.border1};
-    color: ${({ theme }) => theme.colors.grey};
-    opacity: 1;
-  }
 `;
 
 export const VoteActionButtonContainer = styled.div`

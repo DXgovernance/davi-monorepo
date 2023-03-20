@@ -2,10 +2,8 @@ import SidebarInfoCardWrapper from 'Modules/Guilds/Wrappers/SidebarInfoCardWrapp
 import { Input } from 'components/primitives/Forms/Input';
 import { Box, Flex } from 'components/primitives/Layout';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { GuildAvailabilityContext } from 'contexts/Guilds/guildAvailability';
 import { useTextEditor } from 'components/Editor';
-import { Loading } from 'components/primitives/Loading';
-import { useContext, useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
@@ -39,9 +37,6 @@ const CreateDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
 
   const { guildId, chainName: chain } = useTypedParams();
-  const { isLoading: isGuildAvailabilityLoading } = useContext(
-    GuildAvailabilityContext
-  );
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -129,7 +124,6 @@ const CreateDiscussionPage: React.FC = () => {
     return true;
   }, [title, discussionBodyHtml, discussionBodyMd]);
 
-  if (isGuildAvailabilityLoading) return <Loading loading />;
   return (
     <>
       <PageContainer>

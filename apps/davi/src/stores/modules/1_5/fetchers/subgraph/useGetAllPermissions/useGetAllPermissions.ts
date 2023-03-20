@@ -1,6 +1,8 @@
 import {
-  getDaoPermissionsDocument,
-  getDaoPermissionsQuery,
+  getAllDaoFunctionCallPermissionsDocument,
+  getAllDaoPermissionsDocument,
+  getAllDaoPermissionsQuery,
+  getAllDaoTokenPermissionsDocument,
 } from '.graphclient';
 import { useQuery } from '@apollo/client';
 import { getApolloClient } from 'clients/apollo';
@@ -11,14 +13,31 @@ import { useNetwork } from 'wagmi';
 
 type IUseGetAllPermissions = FetcherHooksInterface['useGetAllPermissions'];
 
-export const useGetAllPermissions: IUseGetAllPermissions = daoId => {
+export const useGetAllPermissions: IUseGetAllPermissions = (
+  schemeId,
+  filter
+) => {
   const { chain } = useNetwork();
 
-  const { data, loading, error } = useQuery<getDaoPermissionsQuery>(
-    getDaoPermissionsDocument,
+  const queryToExecute = useMemo(() => {
+    if (!filter) {
+      return getAllDaoPermissionsDocument;
+    }
+
+    if (filter === 'functionCalls') {
+      return getAllDaoFunctionCallPermissionsDocument;
+    }
+
+    if (filter === 'tokens') {
+      return getAllDaoTokenPermissionsDocument;
+    }
+  }, [filter]);
+
+  const { data, loading, error } = useQuery<getAllDaoPermissionsQuery>(
+    queryToExecute,
     {
-      client: getApolloClient(SupportedSubgraph.Guilds, chain?.id),
-      variables: { id: daoId?.toLowerCase() },
+      client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
+      variables: { from: schemeId?.toLowerCase() },
     }
   );
 

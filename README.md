@@ -117,3 +117,4 @@ Currently there are:
 1. `smokeLocal` - starts localhost:3000 and runs Smoke test on local
 2. `smokeQa` - runs Smoke test on QA ENV
 3. `smokeProd` - runs Smoke test on PROD ENV
+4. `regressionLocal` - starts localhost:3000 and runs Regression test on local

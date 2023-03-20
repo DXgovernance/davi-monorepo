@@ -23,6 +23,7 @@ import { WalletModal } from 'components/Web3Modals';
 import { useAccount } from 'wagmi';
 import { isReadOnly } from 'provider/wallets';
 import { NotificationHeading } from 'components/ToastNotifications/NotificationHeading';
+import { IOrbisPost } from 'types/types.orbis';
 
 const EditDiscussionPage: React.FC = () => {
   const { orbis } = useOrbisContext();
@@ -40,6 +41,7 @@ const EditDiscussionPage: React.FC = () => {
   const [html, onHTMLChange] = useState<string>();
   const [initialDescription, setInitialDescription] = useState<string>('');
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+  const [post, setPost] = useState<IOrbisPost>();
 
   const theme = useTheme();
 
@@ -47,6 +49,7 @@ const EditDiscussionPage: React.FC = () => {
     connector,
     isConnecting: isWalletConnecting,
     isConnected: isWalletConnected,
+    address: addressConnected,
   } = useAccount();
 
   useEffect(() => {
@@ -63,14 +66,24 @@ const EditDiscussionPage: React.FC = () => {
 
   const getPost = async () => {
     const { data } = await orbis.getPost(discussionId);
-    setTitle(data?.content?.title);
-    setInitialDescription(data?.content?.body);
+    setPost(data);
   };
+
+  const isCreator = useMemo(() => {
+    return (
+      addressConnected.toLowerCase() === post?.creator_details.metadata?.address
+    );
+  }, [addressConnected, post]);
 
   useEffect(() => {
     getPost();
+    if (post && !isCreator) {
+      navigate(`/${chain}/${guildId}/discussion/${discussionId}`);
+    }
+    setTitle(post?.content?.title);
+    setInitialDescription(post?.content?.body);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [post]);
 
   const {
     Editor,

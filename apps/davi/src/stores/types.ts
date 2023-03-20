@@ -6,6 +6,7 @@ import {
   GuildConfigProps,
   Vote,
   ProposalState,
+  SubDAO,
 } from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
@@ -14,6 +15,7 @@ interface GovernanceCapabilities {
   consensus: 'holographic' | 'quorum';
   votingStyle: 'binary' | 'competition';
   votingPowerTally: 'snapshot' | 'live';
+  hasSubDAO: boolean;
 }
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
@@ -153,6 +155,12 @@ export interface FetcherHooksInterface {
     status: ProposalState,
     endTime: Moment
   ) => { detail: string; moment: Moment };
+  useGetSubDAOs: (daoId: string) => {
+    data: SubDAO[];
+    isLoading: boolean;
+    errorMessage: string;
+    isError: boolean;
+  };
 }
 
 export interface WriterHooksInteface {
@@ -186,7 +194,8 @@ export interface WriterHooksInteface {
     symbol?: string
   ) => Promise<void>;
   useVoteOnProposal: (
-    daoAddress: string
+    daoAddress: string,
+    subDaoAddres?: string
   ) => (
     proposalId: string,
     option: BigNumber,

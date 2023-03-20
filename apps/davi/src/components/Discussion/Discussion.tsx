@@ -16,18 +16,18 @@ import {
   DiscussionEmpty,
 } from './Discussion.styled';
 import { Box } from 'components/primitives/Layout';
-import { IOrbisGetPostsAlgorithm, IOrbisPost } from 'types/types.orbis';
+import { IOrbisPost } from 'types/types.orbis';
 
 function Discussion({
   context,
   master = '',
-  algorithm = 'all-context-master-posts',
+  masterOnly = true,
   daoId,
   parentId,
 }: {
   context: string;
   master?: string;
-  algorithm?: keyof typeof IOrbisGetPostsAlgorithm;
+  masterOnly?: boolean;
   daoId?: string;
   parentId?: string;
 }) {
@@ -55,7 +55,7 @@ function Discussion({
       {
         context,
         master,
-        algorithm,
+        only_master: masterOnly,
       },
       polling || reset ? 0 : page
     );
@@ -92,16 +92,12 @@ function Discussion({
 
     const _proposals = reset ? [] : [...proposals];
 
-    let { data, error } = await orbis.getPosts(
-      {
-        context: `DAVI-${daoId}-${parentId}-proposal`,
-      },
-      0
-    );
-
+    const { data, error } = await orbis.getPosts({
+      context: `DAVI-${daoId}-${parentId}-proposal`,
+    });
     if (error) console.log(error);
 
-    if (data) {
+    if (data?.length > 0) {
       if (!polling) {
         data?.forEach(proposal => {
           proposal.type = 'proposal';

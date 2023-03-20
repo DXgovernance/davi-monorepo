@@ -146,8 +146,8 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
       to: '',
       value: BigNumber.from(0),
       args: {
-        _to: '',
-        _value: '',
+        recipient: '',
+        amount: '',
       },
     },
   },

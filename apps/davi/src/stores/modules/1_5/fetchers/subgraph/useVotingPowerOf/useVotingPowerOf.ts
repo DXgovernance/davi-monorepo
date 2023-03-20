@@ -5,12 +5,14 @@ import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
 import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useNetwork } from 'wagmi';
+import { useVotingPowerOfAt } from '../useVotingPowerOfAt';
 
 type IUseVotingPowerOf = FetcherHooksInterface['useVotingPowerOf'];
 
 export const useVotingPowerOf: IUseVotingPowerOf = ({
   contractAddress: daoId,
   userAddress,
+  snapshotId,
 }) => {
   const { chain } = useNetwork();
 
@@ -25,16 +27,31 @@ export const useVotingPowerOf: IUseVotingPowerOf = ({
     }
   );
 
-  const userVotingPower = useMemo(() => {
-    if (!data?.dao) return undefined;
-    const member = data?.dao?.reputationToken?.members?.[0];
+  const votingPowerOfResponse = useMemo(() => {
+    if (!data || !data.dao || !data.dao.reputationToken.members)
+      return undefined;
+    const member = data.dao.reputationToken.members?.[0];
 
     return member ? BigNumber.from(member.reputationTokenAmount) : undefined;
-  }, [data?.dao]);
+  }, [data]);
 
-  return {
-    data: userVotingPower,
-    isLoading: loading,
-    isError: !!error,
-  };
+  const currentSnapshotId = data?.dao?.reputationToken?.currentSnapshotId;
+
+  if (!snapshotId) snapshotId = currentSnapshotId;
+
+  const votingPowerAtSnapshotResponse = useVotingPowerOfAt(
+    daoId,
+    userAddress,
+    snapshotId
+  );
+
+  return snapshotId
+    ? votingPowerAtSnapshotResponse
+    : {
+        data: votingPowerOfResponse
+          ? BigNumber.from(votingPowerOfResponse)
+          : undefined,
+        isError: !!error,
+        isLoading: loading,
+      };
 };

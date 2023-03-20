@@ -3,21 +3,29 @@ import { lighten } from 'polished';
 import ReactSpeedometer from 'react-d3-speedometer';
 import { FiThumbsDown, FiThumbsUp, FiInfo } from 'react-icons/fi';
 import { useTheme } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
+import { TokenInfoWithType } from 'types/types';
 import { Flex } from 'components/primitives/Layout';
+import { Button } from 'components/primitives/Button';
+import { Slider } from 'components/primitives/Forms/Slider';
+import { Text } from 'components/primitives/Typography';
+
 import {
   LockButton,
   ModalContainer,
   StakeIconButton,
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
-import { Button } from 'components/primitives/Button';
-import { Slider } from 'components/primitives/Forms/Slider';
 import { StakeOptions } from './HolographicConsensusCard';
-import { Text } from 'components/primitives/Typography';
-import { useTranslation } from 'react-i18next';
 
-export const HolographicConsensusModal = () => {
+interface IHolographicConsensusModal {
+  tokenInfo: TokenInfoWithType;
+}
+
+export const HolographicConsensusModal = ({
+  tokenInfo,
+}: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -94,7 +102,7 @@ export const HolographicConsensusModal = () => {
           <Text colorVariant="muted">{t('members.locking.balance')}: </Text>
           <Flex direction="row">
             <Text bold>10.00</Text>
-            <Text colorVariant="muted">DXD</Text>
+            <Text colorVariant="muted">{tokenInfo?.symbol}</Text>
           </Flex>
         </Flex>
         <Slider
@@ -116,7 +124,7 @@ export const HolographicConsensusModal = () => {
           </Text>
           <Flex direction="row">
             <Text bold>1</Text>
-            <Text colorVariant="muted">DXD</Text>
+            <Text colorVariant="muted">{tokenInfo?.symbol}</Text>
           </Flex>
         </Flex>
         <Flex
@@ -140,7 +148,7 @@ export const HolographicConsensusModal = () => {
           <LockButton
             disabled={selectedStake === null || stakePercentage === '0'}
           >
-            {t('members.locking.lock')} DXD
+            {t('members.locking.lock')} {tokenInfo?.symbol}
           </LockButton>
         </Flex>
       </Flex>

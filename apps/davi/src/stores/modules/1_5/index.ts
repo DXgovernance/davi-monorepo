@@ -22,13 +22,14 @@ import {
   useVoterLockTimestamp,
   useVotingResults,
   useSnapshotId,
+  useGetSubDAOs,
 } from './fetchers/subgraph';
 import {
   useExecuteProposal,
   useWithdrawTokens,
   useCreateProposal,
-  useVoteOnProposal,
 } from './writers';
+import { useVoteOnProposal } from './writers/useVoteOnProposal/useVoteOnProposal';
 
 export const governance1_5Implementation: Readonly<FullGovernanceImplementation> =
   {
@@ -59,6 +60,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildProposalIds,
           useProposalState,
           useTimeDetail,
+          useGetSubDAOs,
         },
         fallback: {
           useProposal: null,
@@ -81,6 +83,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
           useGuildProposalIds: null,
           useProposalState: null,
           useTimeDetail: null,
+          useGetSubDAOs: null,
         },
       },
       writers: {
@@ -98,6 +101,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
       consensus: 'holographic',
       votingStyle: 'binary',
       votingPowerTally: 'snapshot',
+      hasSubDAO: true,
     },
     checkDataSourceAvailability,
   };

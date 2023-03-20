@@ -63,7 +63,7 @@ const CreateProposalPage: React.FC = () => {
     hooks: {
       writers: { useCreateProposal },
     },
-    name: governanceName,
+    capabilities: { hasSubDAO },
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
@@ -99,7 +99,6 @@ const CreateProposalPage: React.FC = () => {
     Editor,
     EditorConfig,
     md: proposalBodyMd,
-    html: proposalBodyHTML,
     clear,
   } = useTextEditor({
     placeholder: t('createProposal.enterProposalDescription'),
@@ -254,16 +253,15 @@ const CreateProposalPage: React.FC = () => {
 
   const isValid = useMemo(() => {
     if (!title) return false;
-    if (!proposalBodyHTML) return false;
-    if (!proposalBodyMd || !proposalBodyMd.length) return false;
+    if (!description) return false;
 
     return true;
-  }, [title, proposalBodyHTML, proposalBodyMd]);
+  }, [title, description]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
 
   const schemeSelectionUrl = `/${chain}/${guildId}/scheme-selection${location.search}`;
-  if (!subdaoId && governanceName === 'Governance1_5') {
+  if (hasSubDAO === true && !subdaoId) {
     navigate(schemeSelectionUrl);
     return <></>;
   }
@@ -290,7 +288,7 @@ const CreateProposalPage: React.FC = () => {
               </IconButton>
             </StyledLink>
 
-            {governanceName === 'Governance1_5' && (
+            {hasSubDAO === true && (
               <StyledLink to={schemeSelectionUrl} customStyles={linkStyles}>
                 <IconButton
                   variant="secondary"

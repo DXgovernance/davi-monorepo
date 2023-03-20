@@ -401,7 +401,8 @@
     "backToScheme": "Back to Scheme",
     "type": "Type",
     "next": "Next",
-    "errorFetchingSchemes": "Error while fetching schemes"
+    "errorFetchingSchemes": "Error while fetching schemes",
+    "daoHasNoSchemes": "This DAO has no schemes registered"
   },
   "holographicConsensus": {
     "predictions": "Predictions",

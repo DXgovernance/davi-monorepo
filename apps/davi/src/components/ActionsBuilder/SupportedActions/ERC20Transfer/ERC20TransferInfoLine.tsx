@@ -32,8 +32,8 @@ const ERC20TransferInfoLine: React.FC<ActionViewProps> = ({
       return {
         source: decodedCall.from,
         token,
-        amount: decodedCall.args._value,
-        recipientAddress: decodedCall.args._to,
+        amount: decodedCall.args.amount,
+        recipientAddress: decodedCall.args.recipient,
       };
     } else if (decodedCall.callType === SupportedAction.NATIVE_TRANSFER) {
       const token = tokens.find(token => token.type === 'NATIVE');

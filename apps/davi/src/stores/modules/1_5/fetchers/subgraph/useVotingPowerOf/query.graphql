@@ -3,6 +3,7 @@ query getVotingPowerOf($id: ID!, $userAddress: String!) {
     id
     reputationToken {
       id
+      currentSnapshotId
       members(where: { address: $userAddress }) {
         reputationTokenAmount
       }

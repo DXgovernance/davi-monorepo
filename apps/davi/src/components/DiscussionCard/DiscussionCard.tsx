@@ -17,6 +17,7 @@ import { BsHandThumbsDown } from 'react-icons/bs';
 import { IoHeartOutline } from 'react-icons/io5';
 import { Avatar } from 'components/Avatar';
 import { FaRegLaughSquint } from 'react-icons/fa';
+import { RiFilePaper2Line } from 'react-icons/ri';
 
 export const DiscussionCard: React.FC<DiscussionCardProps> = ({
   discussion,
@@ -26,17 +27,27 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
   const creatorAddress = discussion.creator_details.metadata?.address;
   const { ensName } = useENSAvatar(creatorAddress, 1);
   const [replyCount, setReplyCount] = useState(0);
-
+  const [proposalCount, setProposalCount] = useState(0);
   useEffect(() => {
-    const fetchData = async () => {
-      let { data } = await orbis.getPosts({
+    const fetchDiscussion = async () => {
+      const { data } = await orbis.getPosts({
         context: `DAVI-${guildId}-${discussion.stream_id}-discussions`,
       });
       setReplyCount(data?.length);
     };
-    fetchData();
+    fetchDiscussion();
   }, [discussion, guildId, orbis]);
 
+  useEffect(() => {
+    const fetchProposals = async () => {
+      const { data, error } = await orbis.getPosts({
+        context: `DAVI-${guildId}-${discussion.stream_id}-proposal`,
+      });
+      if (error) console.log(error);
+      setProposalCount(data?.length);
+    };
+    fetchProposals();
+  }, [discussion, guildId, orbis]);
   return (
     <StyledLink
       to={`/${chainName}/${guildId}/discussion/${discussion.stream_id}`}
@@ -68,6 +79,9 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
           </FooterElement>
           <FooterElement>
             <MdReply size="20px" /> {replyCount}
+          </FooterElement>
+          <FooterElement>
+            <RiFilePaper2Line size="20px" /> {proposalCount}
           </FooterElement>
         </Flex>
       </MainWrapper>

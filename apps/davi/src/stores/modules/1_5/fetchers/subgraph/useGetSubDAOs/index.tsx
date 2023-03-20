@@ -1,22 +1,28 @@
 import { useNetwork } from 'wagmi';
 import { useQuery } from '@apollo/client';
-import { getSchemesDocument, getSchemesQuery } from '.graphclient';
+import {
+  getAllSchemesDocument,
+  getSchemeDocument,
+  getAllSchemesQuery,
+} from '.graphclient';
 import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { getApolloClient } from 'clients/apollo';
 import { SubDAO } from 'types/types.guilds';
 
 type IUseGetSubDAOs = FetcherHooksInterface['useGetSubDAOs'];
 
-export const useGetSubDAOs: IUseGetSubDAOs = daoId => {
+export const useGetSubDAOs: IUseGetSubDAOs = (daoId, schemeId) => {
   const { chain } = useNetwork();
+
+  const queryToExecute = schemeId ? getSchemeDocument : getAllSchemesDocument;
 
   const {
     data,
     loading: isLoading,
     error,
-  } = useQuery<getSchemesQuery>(getSchemesDocument, {
+  } = useQuery<getAllSchemesQuery>(queryToExecute, {
     client: getApolloClient(SupportedSubgraph.Governance1_5, chain?.id),
-    variables: { id: daoId?.toLowerCase() },
+    variables: { id: daoId?.toLowerCase(), schemeId: schemeId?.toLowerCase() },
   });
 
   if (!data || !data.dao) {
@@ -57,6 +63,7 @@ export const useGetSubDAOs: IUseGetSubDAOs = daoId => {
       voteGas: scheme.voteGas,
       voteGasBalance: scheme.voteGasBalance,
       votingMachine: {
+        stakingTokenAddress: scheme.votingMachine.stakingTokenAddress,
         boostedVoteRequiredPercentage:
           scheme.votingMachine.boostedVoteRequiredPercentage,
         preBoostedVotePeriodLimit:

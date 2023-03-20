@@ -1,14 +1,14 @@
 import moment from 'moment';
 import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
-import { getSchemesQuery } from '.graphclient';
+import { getAllSchemesQuery } from '.graphclient';
 import {
   InfoDetail,
   InfoDetailMuted,
 } from 'components/ProposalInfoCard/ProposalInfoCard.styled';
 import { CardBody, SchemePropertiesGrid } from './SchemeSelection.styled';
 
-type Scheme = getSchemesQuery['dao']['schemes'][0];
+type Scheme = getAllSchemesQuery['dao']['schemes'][0];
 
 const humanizedTime = (time: string) => {
   const timeInSeconds = Number.parseInt(time);

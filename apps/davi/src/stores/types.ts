@@ -155,7 +155,10 @@ export interface FetcherHooksInterface {
     status: ProposalState,
     endTime: Moment
   ) => { detail: string; moment: Moment };
-  useGetSubDAOs: (daoId: string) => {
+  useGetSubDAOs: (
+    daoId: string,
+    schemeId?: string
+  ) => {
     data: SubDAO[];
     isLoading: boolean;
     errorMessage: string;

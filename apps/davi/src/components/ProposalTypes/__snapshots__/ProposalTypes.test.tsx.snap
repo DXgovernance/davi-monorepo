@@ -84,7 +84,7 @@ exports[`ProposalTypes Should match snapshot 1`] = `
 }
 
 .c16:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c4 {

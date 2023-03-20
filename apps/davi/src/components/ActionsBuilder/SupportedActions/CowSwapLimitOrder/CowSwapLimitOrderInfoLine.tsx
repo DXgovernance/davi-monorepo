@@ -83,8 +83,6 @@ const CowSwapLimitOrderInfoLine: React.FC<ActionViewProps> = ({
     6
   );
 
-  console.log(parsedData?.functionSignature === ERC20_APPROVE_SIGNATURE);
-
   return (
     <>
       <Segment>

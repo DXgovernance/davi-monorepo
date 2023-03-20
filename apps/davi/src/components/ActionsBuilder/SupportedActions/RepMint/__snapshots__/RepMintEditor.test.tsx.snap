@@ -42,7 +42,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
 }
 
 .c12:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {

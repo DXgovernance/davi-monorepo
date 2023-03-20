@@ -42,7 +42,7 @@ exports[`ERC20TransferEditor Should match snapshot 1`] = `
 }
 
 .c12:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c6 {
@@ -442,7 +442,7 @@ exports[`ERC20TransferEditor Should match snapshot with an address without ENS n
 }
 
 .c12:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c6 {
@@ -842,7 +842,7 @@ exports[`ERC20TransferEditor Should match snapshot with default values 1`] = `
 }
 
 .c10:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c6 {

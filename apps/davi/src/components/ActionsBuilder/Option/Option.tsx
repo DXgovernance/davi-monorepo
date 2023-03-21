@@ -1,7 +1,7 @@
 import { ActionRow } from '../Action';
 import { AddButton, DataTag, EditButton, Grip } from '../common';
 import { ProposalOptionTag } from '../common';
-import { DecodedAction, Option } from '../types';
+import { DecodedAction, Option, SupportedAction } from '../types';
 import {
   SortableContext,
   useSortable,
@@ -134,7 +134,12 @@ export const OptionRow: React.FC<OptionRowProps> = ({
               return (
                 <ActionRow
                   key={index}
-                  isEditable={!action?.decodedCall?.optionalProps?.hidden}
+                  isEditable={
+                    !(
+                      action?.decodedCall?.callType ===
+                      SupportedAction.ERC20_APPROVE
+                    )
+                  }
                   decodedAction={option?.decodedActions?.[index]}
                   permissionArgs={permissionsArgs}
                   onEdit={updatedAction => updateAction(updatedAction)}

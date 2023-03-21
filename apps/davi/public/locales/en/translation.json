@@ -178,7 +178,7 @@
       "addressToWhichTheExpenseIsBeingAuthorized": "Address to which the expense is being authorized",
       "amountBeingApproved": "Amount being approved",
       "approveTokenSpending": "Approve {{tokenSymbol}} token spending",
-      "setLimitOrderApproval": "Set Limit Order Approval"
+      "erc20Approval": "ERC20 Approval for {{tokenSymbol}}"
     },
     "config": {
       "limitOrder": "Limit Order",

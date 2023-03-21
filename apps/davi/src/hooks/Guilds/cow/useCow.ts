@@ -3,8 +3,9 @@ import { useNetwork } from 'wagmi';
 import { BigNumber, FixedNumber } from 'ethers';
 import moment from 'moment';
 import { COW_CONFIG } from './config';
+import { useScientific } from '../conversions/useScientific';
 
-export interface CowSwapQuote {
+export interface CowQuote {
   sellToken: string;
   buyToken: string;
   sellAmount: string;
@@ -17,8 +18,9 @@ export interface CowSwapQuote {
 export const useCow = () => {
   const { chain } = useNetwork();
   const [error, setError] = useState('');
+  const { parseScientific } = useScientific();
 
-  const getQuote = async (params: Partial<CowSwapQuote>) => {
+  const getQuote = async (params: Partial<CowQuote>) => {
     setError('');
     try {
       const res = await fetch(`${COW_CONFIG[chain?.id]}/api/v1/quote`, {
@@ -37,21 +39,19 @@ export const useCow = () => {
         }),
       });
 
+      const response = await res.json();
+
       if (!res?.ok) {
-        const data = await res.json();
-        setError(data?.description ?? 'Error getting quote');
-        return;
+        throw new Error(response?.description);
       }
 
-      const data = await res.json();
-
-      return data?.quote;
+      return response?.quote;
     } catch (err: any) {
       setError(err?.message ?? 'Error getting quote');
     }
   };
 
-  const createOrder = async (quote: CowSwapQuote) => {
+  const createOrder = async (quote: CowQuote) => {
     const {
       sellToken,
       buyToken,
@@ -129,20 +129,30 @@ export const useCow = () => {
           },
         }
       );
-      
+
       const response = await res.json();
 
-      if(!res?.ok) {
+      if (!res?.ok) {
         throw new Error(response?.description);
       }
 
       const priceStrigified = response?.price?.toString();
 
-      // Convert to fixed number
-      const price = FixedNumber.from(priceStrigified);
+      const converted: string = parseScientific(Number(priceStrigified), 18);
 
-      // Adjust for decimals (some tokens use 18 some 6, USDC for example uses 6)
-      const adjustedPrice = price.divUnsafe(FixedNumber.from(10 ** (18 - decimals))).round(6).toString();
+      // The price returned sometimes has more decimals than the fixed number can handle (18).
+      // Therefore. it gets 20 decimals and then rounded to 18, but then converts it back to 18 decimals.
+      const price = FixedNumber.fromString(
+        FixedNumber.from(converted, 'fixed128x20').round(18).toString(),
+        'fixed'
+      );
+
+      // Adjust for incorrect decimal points returned by the API when it's not 18,
+      // (some tokens use 18 some 6 decimal points, USDC for example uses 6)
+      const adjustedPrice = price
+        .divUnsafe(FixedNumber.from(10 ** (18 - decimals)))
+        .round(6)
+        .toString();
 
       return adjustedPrice;
     } catch (err: any) {

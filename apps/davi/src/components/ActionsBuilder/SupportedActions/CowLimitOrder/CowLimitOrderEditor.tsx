@@ -21,22 +21,22 @@ import LimitOrder, {
   ValidateLimitOrderValues as LimitOrderValues,
 } from './validateLimitOrder';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
-import { CowSwapQuote, useCow } from 'hooks/Guilds/cow/useCow';
+import { CowQuote, useCow } from 'hooks/Guilds/cow/useCow';
 import {
   FieldError,
   Spacer,
   SwapQuoteError,
   UnitPriceContainer,
-} from './CowSwapLimitOrderEditor.styled';
+} from './CowLimitOrderEditor.styled';
 import { formatUnits } from 'ethers/lib/utils';
 import { BiRefresh } from 'react-icons/bi';
 import { ERC20_APPROVE_SIGNATURE, getNetworkById } from 'utils';
 import { DecodedCall, SupportedAction } from 'components/ActionsBuilder/types';
-import { settlementContractAddress } from 'hooks/Guilds/cow/config';
+import { settlementContractAddress, vaultRelayerContractAddress } from 'hooks/Guilds/cow/config';
 import ERC20 from 'contracts/ERC20.json';
 import { Loading } from 'components/primitives/Loading';
 
-const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
+const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
   decodedCall,
   onSubmit,
   isEdit,
@@ -56,10 +56,10 @@ const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
     getQuote,
     createOrder,
     getNativePrice,
-    error: cowSwapError,
+    error: cowError,
   } = useCow();
 
-  const [quote, setQuote] = useState<CowSwapQuote>(null);
+  const [quote, setQuote] = useState<CowQuote>(null);
   const [isUnitPriceUpdated, setIsUnitPriceUpdated] = useState(false);
   const [isTokensUpdated, setIsTokensUpdated] = useState(false);
 
@@ -126,6 +126,10 @@ const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
     const isValid = await trigger();
 
     try {
+      // retrieve native price before getting the quote, 
+      // else if quote has an error will get it dismissed.
+      await retrieveNativePrice();
+
       if (isValid) {
         const quote = await getQuote({
           buyToken: getValues('buyToken.address'),
@@ -135,7 +139,6 @@ const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
         });
         setQuote(quote);
       }
-      await retrieveNativePrice();
       setIsUnitPriceUpdated(false);
       setIsTokensUpdated(false);
     } finally {
@@ -149,15 +152,14 @@ const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
     const ERC20Contract = new utils.Interface(ERC20.abi);
     const cowApprovalCall: DecodedCall = {
       ...decodedCall,
-      callType: SupportedAction.COW_LIMIT_ORDER_APPROVE,
+      callType: SupportedAction.ERC20_APPROVE,
       to: values.sellToken.address,
       function: ERC20Contract.getFunction('approve'),
       args: {
-        spender: settlementContractAddress,
+        spender: vaultRelayerContractAddress,
         amount: values.sellAmount,
       },
       optionalProps: {
-        hidden: true,
         functionSignature: ERC20_APPROVE_SIGNATURE,
       },
     };
@@ -467,7 +469,7 @@ const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
           </>
         </ControlRow>
 
-        {cowSwapError && <SwapQuoteError>{cowSwapError}</SwapQuoteError>}
+        {cowError && <SwapQuoteError>{cowError}</SwapQuoteError>}
 
         <div style={{ display: 'flex' }}>
           {isLoading ? (
@@ -514,5 +516,5 @@ const CowSwapLimitOrderEditor: React.FC<ActionEditorProps> = ({
   );
 };
 
-export default CowSwapLimitOrderEditor;
+export default CowLimitOrderEditor;
 

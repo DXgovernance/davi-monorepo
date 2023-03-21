@@ -12,4 +12,5 @@ export const COW_CONFIG: EnvConfigs = {
   [SupportedChainId.GOERLI]: 'https://api.cow.fi/goerli',
 };
 
+export const vaultRelayerContractAddress = "0xC92E8bdf79f0507f65a392b0ab4667716BFE0110";
 export const settlementContractAddress = "0x9008D19f58AAbD9eD0D60971565AA8510560ab41";

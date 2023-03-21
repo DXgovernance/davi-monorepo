@@ -6,19 +6,19 @@ import { FiArrowRight } from 'react-icons/fi';
 import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useNetwork } from 'wagmi';
 import { IoSwapVerticalOutline } from 'react-icons/io5';
-import { CowSwapQuote, useCow } from 'hooks/Guilds/cow/useCow';
+import { CowQuote, useCow } from 'hooks/Guilds/cow/useCow';
 import { BigNumber } from 'ethers';
 import { ERC20_APPROVE_SIGNATURE } from 'utils/constants';
 import { useTranslation } from 'react-i18next';
 
-const CowSwapLimitOrderInfoLine: React.FC<ActionViewProps> = ({
+const CowLimitOrderInfoLine: React.FC<ActionViewProps> = ({
   decodedCall,
 }) => {
   const { t } = useTranslation();
 
   const { chain } = useNetwork();
   const { tokens } = useTokenList(chain?.id, false);
-  const [order, setOrder] = useState<CowSwapQuote>(null);
+  const [order, setOrder] = useState<CowQuote>(null);
 
   const findTokenByAddress = useCallback(
     (address: string) => {
@@ -107,4 +107,4 @@ const CowSwapLimitOrderInfoLine: React.FC<ActionViewProps> = ({
   );
 };
 
-export default CowSwapLimitOrderInfoLine;
+export default CowLimitOrderInfoLine;

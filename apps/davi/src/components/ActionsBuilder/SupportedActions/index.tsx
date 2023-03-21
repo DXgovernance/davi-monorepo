@@ -26,8 +26,9 @@ import SetGuildConfigEditor from './SetGuildConfig/SetGuildConfigEditor';
 import Summary from './common/Summary';
 import RawTransactionEditor from './RawTransaction/RawTransactionEditor';
 import RawTransactionInfoLine from './RawTransaction/RawTransactionInfoLine';
-import CowSwapLimitOrderEditor from './CowSwapLimitOrder/CowSwapLimitOrderEditor';
-import CowSwapLimitOrderInfoLine from './CowSwapLimitOrder/CowSwapLimitOrderInfoLine';
+import CowLimitOrderEditor from './CowLimitOrder/CowLimitOrderEditor';
+import CowLimitOrderInfoLine from './CowLimitOrder/CowLimitOrderInfoLine';
+import ERC20ApproveInfoLine from './ERC20Approve/ERC20ApproveInfoLine';
 
 export interface SupportedActionMetadata {
   title: string;
@@ -63,6 +64,11 @@ export const supportedActions: Record<
     infoLineView: ERC20TransferInfoLine,
     summaryView: Summary,
     editor: ERC20TransferEditor,
+  },
+  [SupportedAction.ERC20_APPROVE]: {
+    title: 'Approve',
+    infoLineView: ERC20ApproveInfoLine,
+    editor: null,
   },
   [SupportedAction.ERC20_TRANSFER]: {
     title: 'Transfer',
@@ -107,13 +113,8 @@ export const supportedActions: Record<
   },
   [SupportedAction.COW_SWAP_LIMIT_ORDER]: {
     title: 'Limit Order',
-    infoLineView: CowSwapLimitOrderInfoLine,
-    editor: CowSwapLimitOrderEditor,
-  },
-  [SupportedAction.COW_LIMIT_ORDER_APPROVE]: {
-    title: 'Approve',
-    infoLineView: CowSwapLimitOrderInfoLine,
-    editor: null,
+    infoLineView: CowLimitOrderInfoLine,
+    editor: CowLimitOrderEditor,
   },
 };
 const ERC20Contract = new utils.Interface(ERC20.abi);
@@ -134,6 +135,24 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
       to: '',
       value: '',
       args: null,
+    },
+  },
+  [SupportedAction.ERC20_APPROVE]: {
+    id: '',
+    contract: ERC20Contract,
+    decodedCall: {
+      from: '',
+      callType: SupportedAction.ERC20_APPROVE,
+      function: ERC20Contract.getFunction('approve'),
+      to: '',
+      args: {
+        spender: '',
+        amount: '',
+      },
+      value: BigNumber.from(0),
+      optionalProps: {
+        functionSignature: ''
+      },
     },
   },
   [SupportedAction.ERC20_TRANSFER]: {
@@ -256,25 +275,6 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
         _minimumTokensLockedForProposalCreation: '',
       },
       optionalProps: {},
-    },
-  },
-  [SupportedAction.COW_LIMIT_ORDER_APPROVE]: {
-    id: '',
-    contract: ERC20Contract,
-    decodedCall: {
-      from: '',
-      callType: SupportedAction.COW_LIMIT_ORDER_APPROVE,
-      function: ERC20Contract.getFunction('approve'),
-      to: '',
-      args: {
-        spender: '',
-        amount: '',
-      },
-      value: BigNumber.from(0),
-      optionalProps: {
-        functionSignature: '',
-        hidden: true,
-      },
     },
   },
   [SupportedAction.COW_SWAP_LIMIT_ORDER]: {

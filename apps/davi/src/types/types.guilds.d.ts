@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { BigNumber } from 'ethers';
 import { FetcherHooksInterface } from 'stores/types';
+import { IStakes } from 'components/HolographicConsensusCard/types';
 
 type UseProposalVotesOfVoterReturn = ReturnType<
   FetcherHooksInterface['useProposalVotesOfVoter']
@@ -24,6 +25,8 @@ export interface Proposal {
   votes?: Vote[];
   executionTransactionHash?: string;
   subDao?: string;
+  totalStakes?: BigNumber;
+  stakes?: IStakes;
 }
 
 export enum ProposalState {

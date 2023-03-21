@@ -34,79 +34,10 @@ import {
   StakesAmount,
 } from './HolographicConsensusCard.styled';
 import { StakeDetails } from './StakeDetails';
-
-export interface IStake {
-  address: string;
-  amount: string;
-}
-
-export interface IStakes {
-  for: IStake[];
-  against: IStake[];
-}
-
-const fakeStakes: IStakes = {
-  for: [
-    {
-      address: '0x9578e973bba0cc33bdbc93c7f77bb3fe6d47d68a',
-      amount: '121',
-    },
-    {
-      address: '0xc5b20ade9c9cd5e0cc087c62b26b815a4bc1881f',
-      amount: '34',
-    },
-    {
-      address: '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698',
-      amount: '4',
-    },
-    {
-      address: '0xd507743abcdb265f5fcef125e3f6cf7250cfe9da',
-      amount: '21',
-    },
-    {
-      address: '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698',
-      amount: '4',
-    },
-    {
-      address: '0xd507743abcdb265f5fcef125e3f6cf7250cfe9da',
-      amount: '21',
-    },
-    {
-      address: '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698',
-      amount: '4',
-    },
-    {
-      address: '0xd507743abcdb265f5fcef125e3f6cf7250cfe9da',
-      amount: '21',
-    },
-    {
-      address: '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698',
-      amount: '4',
-    },
-    {
-      address: '0xd507743abcdb265f5fcef125e3f6cf7250cfe9da',
-      amount: '21',
-    },
-  ],
-  against: [
-    {
-      address: '0x84eeb305da0a4309a696d43de9f79f04e66eb4f8',
-      amount: '100',
-    },
-    {
-      address: '0x1b929bdde0fb3b7b759696f23d6cac0963d326e6',
-      amount: '12.46',
-    },
-  ],
-};
-
-export type StakeOptions = 'for' | 'against';
-
-interface IHolographicConsensusCard {
-  schemeId: string;
-}
+import { IHolographicConsensusCard, StakeOptions } from './types';
 
 export const HolographicConsensusCard = ({
+  proposalStakes,
   schemeId,
 }: IHolographicConsensusCard) => {
   const theme = useTheme();
@@ -219,7 +150,7 @@ export const HolographicConsensusCard = ({
             >
               <Flex direction="row" alignItems="center" gap="4px">
                 {isStakeDetailsOpen === true && (
-                  <StakesAmount>{fakeStakes?.against?.length}</StakesAmount>
+                  <StakesAmount>{proposalStakes?.against?.length}</StakesAmount>
                 )}
                 <Avatar
                   src={resolveUri(stakeTokenInfo?.logoURI)}
@@ -240,7 +171,7 @@ export const HolographicConsensusCard = ({
             >
               <Flex direction="row" alignItems="center" gap="4px">
                 {isStakeDetailsOpen === true && (
-                  <StakesAmount>{fakeStakes?.for?.length}</StakesAmount>
+                  <StakesAmount>{proposalStakes?.for?.length}</StakesAmount>
                 )}
                 <Avatar
                   src={resolveUri(stakeTokenInfo?.logoURI)}
@@ -256,8 +187,9 @@ export const HolographicConsensusCard = ({
               <CardDivider />
               <StakeDetails
                 selectedStake={showStakeOption}
-                stakeDetails={fakeStakes}
+                stakeDetails={proposalStakes}
                 tokenSymbol={stakeTokenInfo?.symbol}
+                tokenDecimals={stakeTokenInfo?.decimals}
               />
             </>
           )}
@@ -304,10 +236,6 @@ export const HolographicConsensusCard = ({
   );
 };
 
-// TODO: maybe add stakes in the current dev scripts?
-// TODO: add DAO staking token entity to subgraph
-// TODO: fetch user's token locked
-// TODO: fetch current stakes in proposal
 // TODO: lock logic
 // TODO: make generic big button (like LOCK button) and change disabled&hover styles
 // TODO: add color to proposal state pill
@@ -317,6 +245,7 @@ export const HolographicConsensusCard = ({
 // TODO: if a user staked, it can only increase its stake on the previous option
 // TODO: calculate speedometer value
 // TODO: decimals in token balance and total staked
+// TODO: rename "for" and "against" to "yes" and "no"
 // ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

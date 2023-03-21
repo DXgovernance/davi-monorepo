@@ -205,7 +205,10 @@ const ProposalPage: React.FC = () => {
           quorum={quorum}
         />
         {consensus === 'holographic' && (
-          <HolographicConsensusCard schemeId={proposal.subDao} />
+          <HolographicConsensusCard
+            proposalStakes={proposal?.stakes}
+            schemeId={proposal?.subDao}
+          />
         )}
       </SidebarContent>
     </PageContainer>

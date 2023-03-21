@@ -19,9 +19,9 @@ import {
   StakeIconButton,
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
-import { StakeOptions } from './HolographicConsensusCard';
+import { StakeOptions } from './types';
 import { BigNumber } from 'ethers';
-import useBigNumberToNumber from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
 
 interface IHolographicConsensusModal {
   tokenInfo: TokenInfoWithType;
@@ -43,7 +43,7 @@ export const HolographicConsensusModal = ({
     else setSelectedStake(option);
   };
 
-  const roundedBalance = useBigNumberToNumber(
+  const roundedBalance = bigNumberToNumber(
     userStakeTokenBalance,
     tokenInfo?.decimals
   );

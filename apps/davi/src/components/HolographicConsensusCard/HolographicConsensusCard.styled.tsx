@@ -1,7 +1,7 @@
 import { Button } from 'components/primitives/Button';
 import { SidebarCardContentWrapper } from 'components/SidebarCard/SidebarCard.styled';
 import styled, { css } from 'styled-components';
-import { StakeOptions } from './HolographicConsensusCard';
+import { StakeOptions } from './types';
 
 export const StakeButtonsContainer = styled.div`
   display: flex;

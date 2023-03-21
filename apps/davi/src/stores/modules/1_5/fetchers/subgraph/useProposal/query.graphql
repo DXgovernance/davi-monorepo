@@ -28,6 +28,11 @@ query getDaoProposal($id: ID!, $proposalId: ID!) {
         scheme {
           id
         }
+        stakes {
+          staker
+          amount
+          option
+        }
       }
     }
   }

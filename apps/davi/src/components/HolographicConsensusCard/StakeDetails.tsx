@@ -1,35 +1,35 @@
+import { shortenAddress } from 'utils';
 import { Flex } from 'components/primitives/Layout';
 import { Text } from 'components/primitives/Typography';
-import { shortenAddress } from 'utils';
-import { IStake, IStakes, StakeOptions } from './HolographicConsensusCard';
+import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import { IStake, IStakeDetails } from './types';
 import { StakeDetailsContainer } from './HolographicConsensusCard.styled';
-
-interface IStakeDetails {
-  selectedStake: StakeOptions;
-  stakeDetails: IStakes;
-  tokenSymbol: string;
-}
 
 export const StakeDetails = ({
   selectedStake,
   stakeDetails,
   tokenSymbol,
+  tokenDecimals,
 }: IStakeDetails) => {
   return (
     <StakeDetailsContainer>
-      {stakeDetails[selectedStake].map((stake: IStake) => (
-        <Flex
-          direction="row"
-          justifyContent="space-between"
-          margin="6px 0px"
-          key={stake.address}
-        >
-          <span>{shortenAddress(stake.address)}</span>
-          <Text colorVariant="muted">
-            {stake.amount} {tokenSymbol}
-          </Text>
-        </Flex>
-      ))}
+      {stakeDetails[selectedStake].map((stake: IStake) => {
+        const roundedBalance = bigNumberToNumber(stake.amount, tokenDecimals);
+
+        return (
+          <Flex
+            direction="row"
+            justifyContent="space-between"
+            margin="6px 0px"
+            key={stake.staker}
+          >
+            <span>{shortenAddress(stake.staker)}</span>
+            <Text colorVariant="muted">
+              {roundedBalance} {tokenSymbol}
+            </Text>
+          </Flex>
+        );
+      })}
     </StakeDetailsContainer>
   );
 };

@@ -2,13 +2,14 @@ import { useMemo } from 'react';
 import { useNetwork } from 'wagmi';
 import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
+import { BigNumber } from 'ethers';
 
 import { getDaoProposalDocument, getDaoProposalQuery } from '.graphclient';
 import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { getApolloClient } from 'clients/apollo';
 import { ContractState, Proposal } from 'types/types.guilds.d';
+import { IStakes } from 'components/HolographicConsensusCard/types';
 import { useProposalCalls } from '../../rpc/useProposalCalls';
-import { BigNumber } from 'ethers';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -48,6 +49,8 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       state,
       totalVotes,
       scheme: { id: schemeId },
+      stakes,
+      totalStakes,
     } = proposal;
 
     let mappedContractState: ContractState;
@@ -73,6 +76,14 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
     const noVotes = BigNumber.from(totalVotes[0]);
     const yesVotes = BigNumber.from(totalVotes[1]);
 
+    // Stakes processing
+    const noStakes = stakes.filter(stake => stake.option === '1');
+    const yesStakes = stakes.filter(stake => stake.option === '2');
+    const parsedStakes: IStakes = {
+      for: yesStakes,
+      against: noStakes,
+    };
+
     return {
       id: id as `0x${string}`, // typecast to comply with template literal type
       creator: proposer,
@@ -87,8 +98,10 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       totalVotes: [noVotes, yesVotes],
       options: null,
       votes: null,
-      subDao: schemeId,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
+      subDao: schemeId,
+      stakes: parsedStakes,
+      totalStakes,
     };
   }, [data]);
 

@@ -1,5 +1,6 @@
 import { BigNumber } from 'ethers';
 import { Proposal } from 'types/types.guilds.d';
+import { TokenInfoWithType } from 'types/types';
 
 export type StakeOptions = 'for' | 'against';
 
@@ -24,4 +25,10 @@ export interface IStakeDetails {
   stakeDetails: IStakes;
   tokenSymbol: string;
   tokenDecimals: number;
+}
+
+export interface IHolographicConsensusModal {
+  tokenInfo: TokenInfoWithType;
+  userStakeTokenBalance: BigNumber;
+  speedometerValue: number;
 }

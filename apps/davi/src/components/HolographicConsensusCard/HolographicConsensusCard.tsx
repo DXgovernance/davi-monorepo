@@ -36,6 +36,7 @@ import {
 } from './HolographicConsensusCard.styled';
 import { StakeDetails } from './StakeDetails';
 import { IHolographicConsensusCard, StakeOptions } from './types';
+import { calculateSpeedometerValue } from './utils';
 
 export const HolographicConsensusCard = ({
   proposalStakeDetails,
@@ -102,6 +103,8 @@ export const HolographicConsensusCard = ({
 
   if (!stakeTokenAddress) return <></>;
 
+  const speedometerValue = calculateSpeedometerValue(proposalTotalStakes);
+
   return (
     <SidebarCard
       header={
@@ -117,7 +120,7 @@ export const HolographicConsensusCard = ({
       <SidebarCardContent>
         <Flex>
           <ReactSpeedometer
-            value={7735}
+            value={speedometerValue}
             minValue={0}
             maxValue={10000}
             width={170}
@@ -242,13 +245,13 @@ export const HolographicConsensusCard = ({
         <HolographicConsensusModal
           tokenInfo={stakeTokenInfo}
           userStakeTokenBalance={userStakeTokenBalance}
+          speedometerValue={speedometerValue}
         />
       </Modal>
     </SidebarCard>
   );
 };
 
-// TODO: get totalStaked
 // TODO: calculate speedometer value
 // TODO: lock logic
 // TODO: make generic big button (like LOCK button) and change disabled&hover styles

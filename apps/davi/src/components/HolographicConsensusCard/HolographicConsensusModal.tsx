@@ -6,12 +6,13 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { resolveUri } from 'utils';
-import { TokenInfoWithType } from 'types/types';
+
 import { Flex } from 'components/primitives/Layout';
 import { Button } from 'components/primitives/Button';
 import { Slider } from 'components/primitives/Forms/Slider';
 import { Text } from 'components/primitives/Typography';
 import { Avatar } from 'components/Avatar';
+import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
 
 import {
   LockButton,
@@ -19,18 +20,12 @@ import {
   StakeIconButton,
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
-import { StakeOptions } from './types';
-import { BigNumber } from 'ethers';
-import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
-
-interface IHolographicConsensusModal {
-  tokenInfo: TokenInfoWithType;
-  userStakeTokenBalance: BigNumber;
-}
+import { IHolographicConsensusModal, StakeOptions } from './types';
 
 export const HolographicConsensusModal = ({
   tokenInfo,
   userStakeTokenBalance,
+  speedometerValue,
 }: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -52,7 +47,7 @@ export const HolographicConsensusModal = ({
     <ModalContainer>
       <Flex>
         <ReactSpeedometer
-          value={7735}
+          value={speedometerValue}
           minValue={0}
           maxValue={10000}
           width={170}

@@ -38,6 +38,7 @@ import { ProposalVotesCard } from 'components/ProposalVotesCard';
 import { Flex } from 'components/primitives/Layout';
 import { IconButton } from 'components/primitives/Button';
 import { getBlockExplorerUrl } from 'provider';
+import { useSearchParams } from 'react-router-dom';
 
 const ProposalPage: React.FC = () => {
   const {
@@ -51,12 +52,13 @@ const ProposalPage: React.FC = () => {
         useTimeDetail,
       },
     },
-    name: governanceImplementationName,
   } = useHookStoreProvider();
   const { t } = useTranslation();
   const { connector } = useAccount();
   const { chainName, guildId, proposalId } = useTypedParams();
   const { chain } = useNetwork();
+  const [searchParams] = useSearchParams();
+  const subdaoId = searchParams.get('subdao');
 
   const { data: proposal, error } = useProposal(guildId, proposalId);
   const { data: guildConfig } = useGuildConfig(guildId);
@@ -80,17 +82,7 @@ const ProposalPage: React.FC = () => {
     return getBlockExplorerUrl(chain, proposal?.executionTransactionHash, 'tx');
   }, [chain, proposal?.executionTransactionHash]);
 
-  // TODO: implement scheme selector/fetcher
-  // ! For now it is hardcoded untill we implement a scheme selector / fetcher
-  const schemeAddress = useMemo(() => {
-    if (governanceImplementationName === 'Governance1_5') {
-      return '0x1c501f8d9079f263115600298423bc004dafc912';
-    } else {
-      return null;
-    }
-  }, [governanceImplementationName]);
-
-  const executeProposal = useExecuteProposal(guildId, schemeAddress);
+  const executeProposal = useExecuteProposal(guildId, subdaoId);
   const handleExecuteProposal = () => executeProposal(proposal);
 
   if (!proposalId || !proposal) {

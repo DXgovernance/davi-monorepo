@@ -8,7 +8,7 @@ import LandingPage from '../../support/pageObjects/LandingPage';
 import Guilds from '../../support/pageObjects/Guilds';
 import AnyGuildPage from '../../support/pageObjects/AnyGuildPage';
 import CreateDiscussionPage from '../../support/pageObjects/CreateDiscussionPage';
-import { clickAnywhereToClose, gnosisNetworkGuilds } from '../../utils';
+import { gnosisNetworkGuilds } from '../../utils';
 import { data } from '../../utils/constants'
 const url = Cypress.config().baseUrl;
 
@@ -19,11 +19,11 @@ describe('Check create discussion', () => {
 
     it('Click connect wallet and choose metamask', () => {
         Guilds.clickOpenWalletModalBtn();
-        cy.contains('MetaMask').eq(0).click();
+        LandingPage.chooseMetamaskWallet()
     });
 
     it('Accept metamask access', () => {
-        cy.acceptMetamaskAccess().should("be.true");
+        cy.acceptMetamaskAccess(false).should("be.true");
         cy.closeModal()
     });
 

@@ -3,7 +3,7 @@ type Scheme @entity {
   name: String!
   type: String!
   avatar: DAO!
-  votingMachine: String!
+  votingMachine: VotingMachine!
   controller: String!
   permissionRegistry: String!
   maxRepPercentageChange: BigInt!
@@ -38,5 +38,6 @@ type VotingMachine @entity {
   quietEndingPeriod: BigInt
   daoBounty: BigInt
   boostedVoteRequiredPercentage: BigInt
+  schemes: [Scheme!] @derivedFrom(field: "votingMachine")
 }
 

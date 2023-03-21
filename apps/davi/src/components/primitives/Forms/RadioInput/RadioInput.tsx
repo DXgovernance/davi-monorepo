@@ -7,10 +7,16 @@ const StyledRadioInput = styled.input<InputHTMLAttributes<HTMLInputElement>>`
   height: 20px;
   cursor: pointer;
   appearance: none;
+  -webkit-appearance: none;
 
-  background-color: ${({ theme }) => theme.colors.bg1};
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  border-radius: ${({ theme }) => theme.radii.curved};
+  border-radius: 50%;
+  border: 3px solid ${({ theme }) => theme.colors.bg1};
+  background: ${({ theme }) => theme.colors.bg1};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.text};
+
+  :checked {
+    background: ${({ theme }) => theme.colors.text};
+  }
 `;
 
 export const RadioInput: React.FC<InputProps<any>> = ({

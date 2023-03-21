@@ -384,6 +384,24 @@
       "reload": "Reload"
     }
   },
+  "schemes": {
+    "schemes_one": "Scheme",
+    "schemes_other": "Schemes",
+    "schemeParameters": "Scheme parameters",
+    "schemeForProposal": "Scheme for proposal",
+    "maxProposalTime": "Maximum proposal time",
+    "proposalTimeInBoost": "Proposal time in boost",
+    "proposalTimeInPreBoost": "Proposal time in pre boost",
+    "canManageSchemes": "Can manage schemes",
+    "canControlMainTreasury": "Can control main treasury",
+    "canChangeReputation": "Can change reputation",
+    "maxRepPercentageChange": "Maximum rep percentage change",
+    "backToScheme": "Back to Scheme",
+    "type": "Type",
+    "next": "Next",
+    "errorFetchingSchemes": "Error while fetching schemes",
+    "daoHasNoSchemes": "This DAO has no schemes registered"
+  },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",
     "amountIsRequired": "Amount is required",

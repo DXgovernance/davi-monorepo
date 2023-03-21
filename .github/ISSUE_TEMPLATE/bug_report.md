@@ -2,8 +2,9 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: 'Bug'
+labels: bug
 assignees: ''
+
 ---
 
 **Description**
@@ -23,12 +24,14 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+**Environment**
+- [ ] Production
+- [ ] QA
+- [ ] Develop
+
 **Device Information**
 
 - OS: [e.g. iOS]
 - Browser [e.g. chrome, safari]
 - Version [e.g. 22]
 - Device: [e.g. PC or mobile phone version]
-
-**Additional context**
-Add any other context about the problem here.

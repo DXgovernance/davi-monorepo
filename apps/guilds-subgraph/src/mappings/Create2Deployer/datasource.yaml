@@ -7,6 +7,6 @@ abis:
 entities:
   - Guild
 eventHandlers:
-  - event: Deployed(address,bytes32)
+  - event: Deployed(address,bytes32,uint256)
     handler: handleDeployedEvent
 

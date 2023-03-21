@@ -18,6 +18,7 @@ function useProposalMetadata(contentHash: string) {
       };
     } catch (e) {
       console.error(e);
+      return {};
     }
   }, [contentHash]);
 

@@ -25,6 +25,7 @@ import { Text } from 'components/primitives/Typography';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
 import { useERC20Balance } from 'hooks/Guilds/erc20/useERC20Balance';
+import { bigNumberToString } from 'hooks/Guilds/conversions/useBigNumberToString';
 
 import { HolographicConsensusModal } from './HolographicConsensusModal';
 import {
@@ -37,7 +38,8 @@ import { StakeDetails } from './StakeDetails';
 import { IHolographicConsensusCard, StakeOptions } from './types';
 
 export const HolographicConsensusCard = ({
-  proposalStakes,
+  proposalStakeDetails,
+  proposalTotalStakes,
   schemeId,
 }: IHolographicConsensusCard) => {
   const theme = useTheme();
@@ -150,14 +152,19 @@ export const HolographicConsensusCard = ({
             >
               <Flex direction="row" alignItems="center" gap="4px">
                 {isStakeDetailsOpen === true && (
-                  <StakesAmount>{proposalStakes?.against?.length}</StakesAmount>
+                  <StakesAmount>
+                    {proposalStakeDetails?.against?.length}
+                  </StakesAmount>
                 )}
                 <Avatar
                   src={resolveUri(stakeTokenInfo?.logoURI)}
                   defaultSeed={stakeTokenAddress}
                   size={20}
                 />
-                272.36
+                {bigNumberToString(
+                  proposalTotalStakes[0],
+                  stakeTokenInfo?.decimals
+                )}
               </Flex>
             </StakeNumberButton>
 
@@ -171,14 +178,19 @@ export const HolographicConsensusCard = ({
             >
               <Flex direction="row" alignItems="center" gap="4px">
                 {isStakeDetailsOpen === true && (
-                  <StakesAmount>{proposalStakes?.for?.length}</StakesAmount>
+                  <StakesAmount>
+                    {proposalStakeDetails?.for?.length}
+                  </StakesAmount>
                 )}
                 <Avatar
                   src={resolveUri(stakeTokenInfo?.logoURI)}
                   defaultSeed={stakeTokenAddress}
                   size={20}
                 />
-                314.15
+                {bigNumberToString(
+                  proposalTotalStakes[1],
+                  stakeTokenInfo?.decimals
+                )}
               </Flex>
             </StakeNumberButton>
           </StakeButtonsContainer>
@@ -187,7 +199,7 @@ export const HolographicConsensusCard = ({
               <CardDivider />
               <StakeDetails
                 selectedStake={showStakeOption}
-                stakeDetails={proposalStakes}
+                stakeDetails={proposalStakeDetails}
                 tokenSymbol={stakeTokenInfo?.symbol}
                 tokenDecimals={stakeTokenInfo?.decimals}
               />
@@ -236,6 +248,8 @@ export const HolographicConsensusCard = ({
   );
 };
 
+// TODO: get totalStaked
+// TODO: calculate speedometer value
 // TODO: lock logic
 // TODO: make generic big button (like LOCK button) and change disabled&hover styles
 // TODO: add color to proposal state pill
@@ -243,7 +257,6 @@ export const HolographicConsensusCard = ({
 // TODO: translations
 // TODO: stake: show ENS or address
 // TODO: if a user staked, it can only increase its stake on the previous option
-// TODO: calculate speedometer value
 // TODO: decimals in token balance and total staked
 // TODO: rename "for" and "against" to "yes" and "no"
 // ? border bottom of non-selected stake button?

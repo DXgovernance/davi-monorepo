@@ -50,7 +50,6 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       totalVotes,
       scheme: { id: schemeId },
       stakes,
-      totalStakes,
     } = proposal;
 
     let mappedContractState: ContractState;
@@ -84,6 +83,16 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       against: noStakes,
     };
 
+    // Total staked
+    const totalNoStakes = noStakes.reduce(
+      (acc, stake) => acc.add(stake.amount),
+      BigNumber.from(0)
+    );
+    const totalYesStakes = yesStakes.reduce(
+      (acc, stake) => acc.add(stake.amount),
+      BigNumber.from(0)
+    );
+
     return {
       id: id as `0x${string}`, // typecast to comply with template literal type
       creator: proposer,
@@ -101,7 +110,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       totalOptions: null, // Not used in the codebase but in the deploy scripts
       subDao: schemeId,
       stakes: parsedStakes,
-      totalStakes,
+      totalStaked: [totalNoStakes, totalYesStakes],
     };
   }, [data]);
 

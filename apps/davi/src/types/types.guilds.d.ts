@@ -25,7 +25,7 @@ export interface Proposal {
   votes?: Vote[];
   executionTransactionHash?: string;
   subDao?: string;
-  totalStakes?: BigNumber;
+  totalStaked?: [BigNumber, BigNumber];
   stakes?: IStakes;
 }
 

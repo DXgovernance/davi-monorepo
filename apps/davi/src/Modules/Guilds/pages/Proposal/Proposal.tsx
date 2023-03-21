@@ -206,7 +206,8 @@ const ProposalPage: React.FC = () => {
         />
         {consensus === 'holographic' && (
           <HolographicConsensusCard
-            proposalStakes={proposal?.stakes}
+            proposalStakeDetails={proposal?.stakes}
+            proposalTotalStakes={proposal?.totalStaked}
             schemeId={proposal?.subDao}
           />
         )}

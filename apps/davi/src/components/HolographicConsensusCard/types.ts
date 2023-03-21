@@ -1,4 +1,5 @@
 import { BigNumber } from 'ethers';
+import { Proposal } from 'types/types.guilds.d';
 
 export type StakeOptions = 'for' | 'against';
 
@@ -13,7 +14,8 @@ export interface IStakes {
 }
 
 export interface IHolographicConsensusCard {
-  proposalStakes: IStakes;
+  proposalStakeDetails: IStakes;
+  proposalTotalStakes: Proposal['totalStaked'];
   schemeId: string;
 }
 

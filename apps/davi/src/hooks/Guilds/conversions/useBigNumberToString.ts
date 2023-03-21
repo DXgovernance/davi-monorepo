@@ -15,3 +15,9 @@ export default function useBigNumberToString(
 
   return stakeAmountParsed;
 }
+
+export function bigNumberToString(number: BigNumber, decimals: number = 0) {
+  if (!number) return null;
+  let formatted = formatUnits(number, decimals);
+  return formatted;
+}

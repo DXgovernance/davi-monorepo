@@ -415,6 +415,12 @@ exports[`Filter Should match snapshot 1`] = `
                 class="c12 c13"
                 data-testid="action-dropdown-option"
               >
+                Erc20 Approve
+              </a>
+              <a
+                class="c12 c13"
+                data-testid="action-dropdown-option"
+              >
                 Erc20 Transfer
               </a>
               <a
@@ -452,12 +458,6 @@ exports[`Filter Should match snapshot 1`] = `
                 data-testid="action-dropdown-option"
               >
                 Set Guild Config
-              </a>
-              <a
-                class="c12 c13"
-                data-testid="action-dropdown-option"
-              >
-                Cow Limit Order Approve
               </a>
               <a
                 class="c12 c13"

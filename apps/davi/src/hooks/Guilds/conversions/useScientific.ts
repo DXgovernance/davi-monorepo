@@ -60,8 +60,6 @@ export const useScientific = () => {
 
     let formatted = convertScientificToDecimal(number);
 
-    debugger;
-
     if (roundingDecimals) {
       const roundedNumber =
         Math.round(Number(formatted) * Math.pow(10, roundingDecimals)) /

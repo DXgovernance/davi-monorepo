@@ -4,9 +4,7 @@ export enum SupportedChainId {
   GNOSIS_CHAIN = 100,
 }
 
-export type EnvConfigs = Record<SupportedChainId, string>;
-
-export const COW_CONFIG: EnvConfigs = {
+export const COW_CONFIG: Record<SupportedChainId, string> = {
   [SupportedChainId.MAINNET]: 'https://api.cow.fi/mainnet',
   [SupportedChainId.GNOSIS_CHAIN]: 'https://api.cow.fi/xdai',
   [SupportedChainId.GOERLI]: 'https://api.cow.fi/goerli',

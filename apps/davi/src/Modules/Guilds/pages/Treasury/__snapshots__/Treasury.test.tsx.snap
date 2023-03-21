@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Treasury Page Should render without data 1`] = `
+exports[`Treasury Page Should render message when there are no tokens 1`] = `
 .c4 {
   width: 100%;
   min-width: 200px;
@@ -35,6 +35,108 @@ exports[`Treasury Page Should render without data 1`] = `
   padding: 1px 24px 8px 24px;
 }
 
+.c6 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.c3 {
+  color: #DEFF4E;
+}
+
+.c5 {
+  margin: 0;
+  margin-left: -24px;
+  width: calc(100% + 48px);
+}
+
+<div>
+   
+  <div
+    class="c0 c1"
+  >
+    <h2
+      class="c2 c3"
+      size="1"
+    >
+      treasury.treasury
+    </h2>
+    <div
+      class="c4 c5"
+    />
+    <div
+      class="c0 c6"
+    >
+      treasury.noTreasuryAssets
+    </div>
+  </div>
+   
+</div>
+`;
+
+exports[`Treasury Page Should render with token data 1`] = `
+.c4 {
+  width: 100%;
+  min-width: 200px;
+  height: 1px;
+  background-color: #303338;
+  margin: 0;
+  padding: 0;
+}
+
+.c0 {
+  box-sizing: 'border-box';
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.c2 {
+  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.c2 strong,
+.c2 b {
+  font-weight: 600;
+}
+
+.c13 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c13 > img,
+.c13 span {
+  height: 24px;
+  width: 24px;
+}
+
+.c1 {
+  border-radius: 10px;
+  background-color: #181B1B;
+  padding: 1px 24px 8px 24px;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c3 {
   color: #DEFF4E;
 }
@@ -49,6 +151,10 @@ exports[`Treasury Page Should render without data 1`] = `
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
+}
+
+.c10 {
+  border-top: 1px solid #2F3533;
 }
 
 .c7 {
@@ -69,6 +175,35 @@ exports[`Treasury Page Should render without data 1`] = `
   text-align: right;
   font-size: 12px;
   color: #A1A6B0;
+}
+
+.c11 {
+  height: 24px;
+  padding: 12px 0px;
+  font-weight: 400;
+  text-align: left;
+  width: auto;
+}
+
+.c15 {
+  height: 24px;
+  padding: 12px 0px;
+  font-weight: 400;
+  text-align: right;
+  width: 20%;
+}
+
+.c14 {
+  margin-right: 0.6rem;
+}
+
+@media (max-width:960px) {
+  .c13 {
+    -webkit-align-items: flex-end;
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
 }
 
 <div>
@@ -104,7 +239,33 @@ exports[`Treasury Page Should render without data 1`] = `
           </th>
         </tr>
       </thead>
-      <tbody />
+      <tbody>
+        <tr
+          class="c10"
+        >
+          <td
+            class="c11"
+            width="auto"
+          >
+            <div
+              class="c0 c12"
+            >
+              <div
+                class="c13 c14"
+              />
+              <span>
+                WAGMI
+              </span>
+            </div>
+          </td>
+          <td
+            class="c15"
+            width="20%"
+          >
+            100
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
    

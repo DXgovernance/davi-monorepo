@@ -8,7 +8,10 @@ import { Scheme, VotingMachine } from '../../types/schema';
 import { Scheme as SchemeContract } from '../../types/DAOController/Scheme';
 import { VotingMachine as VotingMachineContract } from '../../types/DAOController/VotingMachine';
 
-import { Scheme as SchemeTemplate } from '../../types/templates';
+import {
+  Scheme as SchemeTemplate,
+  VotingMachine as VotingMachineTemplate,
+} from '../../types/templates';
 
 export function handleRegisterScheme(event: RegisterScheme): void {
   const controllerAddress = event.address;
@@ -86,6 +89,7 @@ export function handleRegisterScheme(event: RegisterScheme): void {
   votingMachine.save();
 
   SchemeTemplate.create(schemeAddress);
+  VotingMachineTemplate.create(votingMachineAddress);
 }
 
 export function handleUnregisterScheme(event: UnregisterScheme): void {

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ERC20ApproveInfoLine Should match snapshot 1`] = `
+.c0 {
+  margin-right: 0.5rem;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div>
+   
+  <span
+    class="c0"
+  >
+    <svg
+      fill="currentColor"
+      height="16"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 512 512"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M464 208L352 96 240 208m112-94.87V416M48 304l112 112 112-112m-112 94V96"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="32"
+      />
+    </svg>
+  </span>
+  <span
+    class="c0"
+  >
+    actionBuilder.approval.erc20Approval
+  </span>
+   
+</div>
+`;

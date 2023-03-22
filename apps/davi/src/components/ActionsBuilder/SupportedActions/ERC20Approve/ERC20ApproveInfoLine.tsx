@@ -8,7 +8,6 @@ import { useMemo } from 'react';
 
 const ERC20ApproveInfoLine: React.FC<ActionViewProps> = ({ decodedCall }) => {
   const { t } = useTranslation();
-  console.log({ decodedCall });
 
   const { chain } = useNetwork();
   const { tokens } = useTokenList(chain?.id, true);

@@ -170,7 +170,7 @@
       "selectTokensToSpend": "Seleccionar token a gastar",
       "approveSpendingCall": "Aprobar la llamada de gasto",
       "addressToWhichTheExpenseIsBeingAuthorized": "Dirección a la cual la transacción está siendo autorizada",
-      "amountBeingApproved": "Cantidad siendo aprobada",
+      "amountBeingApproved": "Monto siendo aprobado",
       "approveTokenSpending": "Aprobar el gasto de {{tokenSymbol}} token"
     },
     "config": {

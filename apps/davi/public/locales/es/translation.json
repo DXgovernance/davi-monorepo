@@ -180,7 +180,7 @@
       "lockTimeHasToBeHigherOrEqualToProposalTime": "El tiempo de Bloqueo tiene que ser mayor o igual al tiempo de Propuesta",
       "proposalTimeHasToBeLowerOrEqualToLockTime": "El tiempo de Propuesta tiene que ser menor o igual al tiempo de Bloqueo",
       "votingPowerPercentageForProposalExecutionHasToBeMoreThanZero": "El porcentaje del valor del voto para la ejecución tiene que ser más de 0",
-      "voteGasHasToBeEqualOrLowerThan117000": "el voto del gas tiene que ser igual o menor a 117000"
+      "voteGasHasToBeEqualOrLowerThan117000": "el gas del voto tiene que ser igual o menor a 117000"
     },
     "advanced": {
       "advancedOptions": "Opciones avanzadas",

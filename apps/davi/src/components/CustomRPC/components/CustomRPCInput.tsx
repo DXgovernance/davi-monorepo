@@ -85,6 +85,7 @@ export const CustomRPCInput: React.FC<CustomRPCInputProps> = ({ chain }) => {
             data-testid="rpc input"
             onChange={e => setRPCValue(e.target.value)}
             aria-label={'rpc input'}
+            placeholder={t('customRPC.enterURL')}
           />
         </ControlRow>
         <ErrorText>{error}</ErrorText>

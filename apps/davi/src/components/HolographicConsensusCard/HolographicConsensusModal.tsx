@@ -21,7 +21,7 @@ import {
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
 import { IHolographicConsensusModal, StakeOptions } from './types';
-import { calculateBNPercentage } from './utils';
+import { calculateBNPercentage, checkUserStakeOption } from './utils';
 
 export const HolographicConsensusModal = ({
   tokenInfo,
@@ -29,9 +29,16 @@ export const HolographicConsensusModal = ({
   speedometerValue,
   stakeOnProposal,
   proposalId,
+  stakeDetails,
+  userAddress,
+  proposalState,
 }: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
+
+  const previousStake = checkUserStakeOption(userAddress, stakeDetails);
+
+  // ? derive staked and selectedOption?
 
   const [staked, setStaked] = useState(BigNumber.from(0));
   const [stakePercentage, setStakePercentage] = useState('0');
@@ -42,8 +49,15 @@ export const HolographicConsensusModal = ({
     setStaked(stakedResult);
   };
 
-  const [selectedOption, setSelectedOption] = useState<BigNumber>(null);
-  const [selectedStake, setSelectedStake] = useState<StakeOptions>(null);
+  const [selectedOption, setSelectedOption] = useState<BigNumber>(
+    previousStake === 'for'
+      ? BigNumber.from(2)
+      : previousStake === 'against'
+      ? BigNumber.from(1)
+      : null
+  );
+  const [selectedStake, setSelectedStake] =
+    useState<StakeOptions>(previousStake);
 
   const handleSelectOption = (option: StakeOptions) => {
     const parsedOption =
@@ -87,7 +101,7 @@ export const HolographicConsensusModal = ({
           needleColor={theme.colors.white}
         />
         <Flex margin="-77px 0px 20px 0px">
-          <Text sizeVariant="small">Pending Boost</Text>
+          <Text sizeVariant="small">{proposalState}</Text>
         </Flex>
       </Flex>
 
@@ -103,6 +117,7 @@ export const HolographicConsensusModal = ({
             variant="against"
             onClick={() => handleSelectOption('against')}
             active={selectedStake === 'against'}
+            disabled={previousStake !== null}
           >
             <FiThumbsDown
               size="17px"
@@ -117,6 +132,7 @@ export const HolographicConsensusModal = ({
             variant="for"
             onClick={() => handleSelectOption('for')}
             active={selectedStake === 'for'}
+            disabled={previousStake !== null}
           >
             <FiThumbsUp
               size="17px"
@@ -126,6 +142,12 @@ export const HolographicConsensusModal = ({
             />
           </StakeIconButton>
         </Flex>
+        {previousStake && (
+          <Text colorVariant="muted" sizeVariant="small">
+            You cannot change your option since you already staked in this
+            proposal
+          </Text>
+        )}
         <Flex direction="row" justifyContent="space-between" margin="10px 0px">
           <Text colorVariant="muted">{t('members.locking.balance')}: </Text>
           <Flex direction="row" gap="4px">

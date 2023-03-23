@@ -210,6 +210,7 @@ const ProposalPage: React.FC = () => {
             proposalTotalStakes={proposal?.totalStaked}
             schemeId={proposal?.subDao}
             proposalId={proposalId}
+            proposalState={proposal?.holographicConsensusState}
           />
         )}
       </SidebarContent>

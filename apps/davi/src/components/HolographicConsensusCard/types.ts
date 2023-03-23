@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers';
-import { Proposal } from 'types/types.guilds.d';
+import { HolographicConsensusState, Proposal } from 'types/types.guilds.d';
 import { TokenInfoWithType } from 'types/types';
 import { WriterHooksInteface } from 'stores/types';
 
@@ -23,6 +23,7 @@ export interface IHolographicConsensusCard {
   proposalTotalStakes: Proposal['totalStaked'];
   schemeId: string;
   proposalId: string;
+  proposalState: HolographicConsensusState;
 }
 
 export interface IStakeDetails {
@@ -38,4 +39,7 @@ export interface IHolographicConsensusModal {
   speedometerValue: number;
   stakeOnProposal: ReturnType<IUseStakeOnProposal>;
   proposalId: string;
+  stakeDetails: IStakes;
+  userAddress: string;
+  proposalState: HolographicConsensusState;
 }

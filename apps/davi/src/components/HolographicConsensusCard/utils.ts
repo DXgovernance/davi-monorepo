@@ -1,5 +1,6 @@
 import { BigNumber, FixedNumber } from 'ethers';
 import { Proposal } from 'types/types.guilds.d';
+import { IStakes } from './types';
 
 export const calculateSpeedometerValue = (
   totalStaked: Proposal['totalStaked']
@@ -52,4 +53,21 @@ export const calculateBNPercentage = (
   const resultFixedInteger = resultFixed.toString().split('.')[0];
   const resultBN = BigNumber.from(resultFixedInteger);
   return resultBN;
+};
+
+export const checkUserStakeOption = (
+  userAddress: string,
+  stakeDetails: IStakes
+) => {
+  const userStakeFor = stakeDetails.for.find(
+    stake => stake.staker.toLowerCase() === userAddress.toLowerCase()
+  );
+  if (userStakeFor) return 'for';
+
+  const userStakeAgainst = stakeDetails.against.find(
+    stake => stake.staker.toLowerCase() === userAddress.toLowerCase()
+  );
+  if (userStakeAgainst) return 'against';
+
+  return null;
 };

@@ -27,6 +27,7 @@ export interface Proposal {
   subDao?: string;
   totalStaked?: [BigNumber, BigNumber];
   stakes?: IStakes;
+  holographicConsensusState?: HolographicConsensusState; // This is a very specific state for the holographic consensus, might be replaced for state
 }
 
 export enum ProposalState {
@@ -44,6 +45,18 @@ export enum ContractState {
   Executed = 'Executed',
   Failed = 'Failed',
 }
+
+export enum HolographicConsensusState {
+  None = 'None',
+  Expired = 'Expired',
+  ExecutedInQueue = 'Executed in queue',
+  ExecutedInBoost = 'Executed in boost',
+  Queued = 'Queued',
+  PreBoosted = 'Pre-boosted',
+  Boosted = 'Boosted',
+  QuietEndingPeriod = 'Quiet ending period',
+}
+
 export interface ProposalMetadata {
   description: string;
   voteOptions: string[];

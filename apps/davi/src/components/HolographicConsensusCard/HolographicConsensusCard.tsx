@@ -43,6 +43,7 @@ export const HolographicConsensusCard = ({
   proposalTotalStakes,
   schemeId,
   proposalId,
+  proposalState,
 }: IHolographicConsensusCard) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -54,6 +55,7 @@ export const HolographicConsensusCard = ({
   } = useHookStoreProvider();
   const { guildId: daoId } = useTypedParams();
   const { chain } = useNetwork();
+  const { tokens } = useTokenList(chain?.id);
 
   const {
     data: schemeData,
@@ -61,9 +63,6 @@ export const HolographicConsensusCard = ({
     isError,
     errorMessage,
   } = useGetSubDAOs(daoId, schemeId);
-  const { tokens } = useTokenList(chain?.id);
-
-  const stakeOnProposal = useStakeOnProposal(daoId, schemeId);
 
   let stakeTokenAddress: string = null;
   let stakeTokenInfo: TokenInfoWithType = null;
@@ -80,12 +79,15 @@ export const HolographicConsensusCard = ({
     stakeTokenAddress,
     userAddress
   );
+  const stakeOnProposal = useStakeOnProposal(daoId, schemeId);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStakeDetailsOpen, setIsStakeDetailsOpen] = useState(false);
   const [showStakeOption, setShowStakeOption] = useState<StakeOptions>('for');
 
-  if (isLoading) {
+  const speedometerValue = calculateSpeedometerValue(proposalTotalStakes);
+
+  if (isLoading || !stakeTokenAddress) {
     return (
       <SidebarCard>
         <Loading text loading style={{ margin: '24px' }} />
@@ -104,10 +106,6 @@ export const HolographicConsensusCard = ({
       </SidebarCard>
     );
   }
-
-  if (!stakeTokenAddress) return <></>;
-
-  const speedometerValue = calculateSpeedometerValue(proposalTotalStakes);
 
   return (
     <SidebarCard
@@ -143,7 +141,7 @@ export const HolographicConsensusCard = ({
             needleColor={theme.colors.white}
           />
           <Flex margin="-77px 0px 24px 0px">
-            <Text sizeVariant="small">Pending Boost</Text>
+            <Text sizeVariant="small">{proposalState}</Text>
           </Flex>
           <CardDivider />
           <StakeButtonsContainer>
@@ -252,22 +250,23 @@ export const HolographicConsensusCard = ({
           speedometerValue={speedometerValue}
           stakeOnProposal={stakeOnProposal}
           proposalId={proposalId}
+          stakeDetails={proposalStakeDetails}
+          userAddress={userAddress}
+          proposalState={proposalState}
         />
       </Modal>
     </SidebarCard>
   );
 };
 
-// TODO: stake logic
-// TODO: if a user staked, it can only increase its stake on the previous option
-// TODO: fetch proposal state
 // TODO: add color to proposal state pill
 // TODO: translations
 // TODO: stake: show ENS or address
-// TODO: decimals in token balance and total staked
-// TODO: make generic big button (like LOCK button) and change disabled&hover styles
-// TODO: fix bug: using the slider sometimes causes the staking value to show a lot of decimals
-// TODO: a way to show numbers with a fixed amount of decimals
+// TODO: potential reward
+// TODO: unlock time
+// TODO: modal title styling
+// TODO: clicking again in the staking details should close it
+// TODO: check margins
 // ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

@@ -1,6 +1,7 @@
 import { Button } from 'components/primitives/Button';
 import { SidebarCardContentWrapper } from 'components/SidebarCard/SidebarCard.styled';
 import styled, { css } from 'styled-components';
+import { HolographicConsensusState } from 'types/types.guilds.d';
 import { StakeOptions } from './types';
 
 export const StakeButtonsContainer = styled.div`
@@ -96,4 +97,31 @@ export const LockButton = styled(Button)`
     color: ${({ theme }) => theme.colors.yellow};
     opacity: 1;
   }
+`;
+
+export const ProposalStateSpan = styled.span<{
+  state: HolographicConsensusState;
+}>`
+  color: ${({ state, theme }) => {
+    switch (state) {
+      case HolographicConsensusState.None:
+        return theme.colors.grey;
+      case HolographicConsensusState.Expired:
+        return theme.colors.grey;
+      case HolographicConsensusState.ExecutedInQueue:
+        return theme.colors.grey;
+      case HolographicConsensusState.ExecutedInBoost:
+        return theme.colors.grey;
+      case HolographicConsensusState.Queued:
+        return theme.colors.text;
+      case HolographicConsensusState.PreBoosted:
+        return theme.colors.text;
+      case HolographicConsensusState.Boosted:
+        return theme.colors.active;
+      case HolographicConsensusState.QuietEndingPeriod:
+        return theme.colors.grey;
+      default:
+        return theme.colors.grey;
+    }
+  }};
 `;

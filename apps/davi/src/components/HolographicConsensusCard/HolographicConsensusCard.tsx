@@ -29,6 +29,7 @@ import { bigNumberToString } from 'hooks/Guilds/conversions/useBigNumberToString
 
 import { HolographicConsensusModal } from './HolographicConsensusModal';
 import {
+  ProposalStateSpan,
   StakeButtonsContainer,
   StakeIconButton,
   StakeNumberButton,
@@ -141,7 +142,11 @@ export const HolographicConsensusCard = ({
             needleColor={theme.colors.white}
           />
           <Flex margin="-77px 0px 24px 0px">
-            <Text sizeVariant="small">{proposalState}</Text>
+            <Text sizeVariant="small">
+              <ProposalStateSpan state={proposalState}>
+                {proposalState}
+              </ProposalStateSpan>
+            </Text>
           </Flex>
           <CardDivider />
           <StakeButtonsContainer>
@@ -259,13 +264,13 @@ export const HolographicConsensusCard = ({
   );
 };
 
-// TODO: add color to proposal state pill
 // TODO: translations
 // TODO: stake: show ENS or address
 // TODO: potential reward
 // TODO: unlock time
 // TODO: modal title styling
 // TODO: clicking again in the staking details should close it
+// TODO: fix: two children with the same key
 // TODO: check margins
 // ? border bottom of non-selected stake button?
 

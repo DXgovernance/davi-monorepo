@@ -157,7 +157,14 @@ export const HolographicConsensusCard = ({
               }
               onClick={() => {
                 setShowStakeOption('against');
-                if (isStakeDetailsOpen === false) setIsStakeDetailsOpen(true);
+                if (isStakeDetailsOpen === false) {
+                  setIsStakeDetailsOpen(true);
+                } else if (
+                  isStakeDetailsOpen === true &&
+                  showStakeOption === 'against'
+                ) {
+                  setIsStakeDetailsOpen(false);
+                }
               }}
             >
               <Flex direction="row" alignItems="center" gap="4px">
@@ -183,7 +190,14 @@ export const HolographicConsensusCard = ({
               active={isStakeDetailsOpen === true && showStakeOption === 'for'}
               onClick={() => {
                 setShowStakeOption('for');
-                if (isStakeDetailsOpen === false) setIsStakeDetailsOpen(true);
+                if (isStakeDetailsOpen === false) {
+                  setIsStakeDetailsOpen(true);
+                } else if (
+                  isStakeDetailsOpen === true &&
+                  showStakeOption === 'for'
+                ) {
+                  setIsStakeDetailsOpen(false);
+                }
               }}
             >
               <Flex direction="row" alignItems="center" gap="4px">
@@ -247,7 +261,11 @@ export const HolographicConsensusCard = ({
         isOpen={isModalOpen}
         onDismiss={() => setIsModalOpen(false)}
         maxWidth={380}
-        header={t('holographicConsensus.confirmPrediction')}
+        header={
+          <SidebarCardHeaderSpaced>
+            {t('holographicConsensus.confirmPrediction')}
+          </SidebarCardHeaderSpaced>
+        }
       >
         <HolographicConsensusModal
           tokenInfo={stakeTokenInfo}
@@ -265,12 +283,9 @@ export const HolographicConsensusCard = ({
 };
 
 // TODO: potential reward
-// TODO: unlock time
 // TODO: stake: show ENS or address
-// TODO: modal title styling
-// TODO: clicking again in the staking details should close it
-// TODO: fix: two children with the same key
 // TODO: check margins
+// TODO: unlock time: postponed untill useTimeDetail is implemented
 // ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

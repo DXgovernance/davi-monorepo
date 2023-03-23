@@ -197,7 +197,10 @@ export const HolographicConsensusModal = ({
           fullWidth
         >
           <Text colorVariant="muted">{t('members.locking.unlockTime')}</Text>
-          <Text bold>March 13th</Text>
+          {/*
+            //! Unlock time is hardcoded untill we implement useTimeDetail hook
+            */}
+          <Text bold>March 14, 2023, 3:54pm UTC</Text>
         </Flex>
         <Flex direction="row" fullWidth justifyContent="flex-start" gap="10px">
           <div>

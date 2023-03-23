@@ -8,6 +8,7 @@ type IUseStakeOnProposal = WriterHooksInteface['useStakeOnProposal'];
 export type StakeOptions = 'for' | 'against';
 
 export interface IStake {
+  id: string;
   staker: string;
   amount: BigNumber;
 }

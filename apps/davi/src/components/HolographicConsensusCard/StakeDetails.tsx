@@ -21,7 +21,7 @@ export const StakeDetails = ({
             direction="row"
             justifyContent="space-between"
             margin="6px 0px"
-            key={stake.staker}
+            key={stake.id}
           >
             <span>{shortenAddress(stake.staker)}</span>
             <Text colorVariant="muted">

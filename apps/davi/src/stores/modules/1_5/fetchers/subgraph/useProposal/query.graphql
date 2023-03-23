@@ -29,6 +29,7 @@ query getDaoProposal($id: ID!, $proposalId: ID!) {
           id
         }
         stakes {
+          id
           staker
           amount
           option

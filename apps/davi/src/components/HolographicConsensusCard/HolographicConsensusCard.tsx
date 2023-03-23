@@ -264,10 +264,9 @@ export const HolographicConsensusCard = ({
   );
 };
 
-// TODO: translations
-// TODO: stake: show ENS or address
 // TODO: potential reward
 // TODO: unlock time
+// TODO: stake: show ENS or address
 // TODO: modal title styling
 // TODO: clicking again in the staking details should close it
 // TODO: fix: two children with the same key

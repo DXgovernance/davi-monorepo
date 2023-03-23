@@ -144,8 +144,7 @@ export const HolographicConsensusModal = ({
         </Flex>
         {previousStake && (
           <Text colorVariant="muted" sizeVariant="small">
-            You cannot change your option since you already staked in this
-            proposal
+            {t('holographicConsensus.youCannotChangeYourPrediction')}
           </Text>
         )}
         <Flex direction="row" justifyContent="space-between" margin="10px 0px">
@@ -222,5 +221,3 @@ export const HolographicConsensusModal = ({
     </ModalContainer>
   );
 };
-
-// For now, progress styling only works on Firefox

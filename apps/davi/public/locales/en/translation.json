@@ -410,7 +410,8 @@
     "placeYourPrediction": "Place your prediction to steer the proposal",
     "potentialReward": "Potential reward",
     "lockWarning": "Your prediction will be locked until the proposal ends and you could lose your DXD if your prediction is wrong",
-    "stakeOnProposal": "Stake on proposal"
+    "stakeOnProposal": "Stake on proposal",
+    "youCannotChangeYourPrediction": "You cannot change your prediction since you already staked in this proposal"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",

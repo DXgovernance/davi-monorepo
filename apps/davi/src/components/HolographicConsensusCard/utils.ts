@@ -1,3 +1,4 @@
+import { BigNumber, FixedNumber } from 'ethers';
 import { Proposal } from 'types/types.guilds.d';
 
 export const calculateSpeedometerValue = (
@@ -19,4 +20,36 @@ export const calculateSpeedometerValue = (
     percentage = stakeDifference.mul(100).div(stakedAgainst).toNumber();
   }
   return 5000 + percentage * 50;
+};
+
+export const calculateBNPercentage = (
+  value: BigNumber,
+  percentage: string | number
+) => {
+  // percentage should be an integer (before being divided by 100)
+  // if a percentage has decimals, it trims them
+  // TODO: handle decimals?
+  if (typeof percentage === 'string') {
+    if (percentage.includes('.')) {
+      const percentageSplit = percentage.split('.');
+      percentage = percentageSplit[0];
+    }
+  }
+  if (typeof percentage === 'number') {
+    if (percentage % 1 !== 0) {
+      percentage = Math.trunc(percentage);
+    }
+  }
+
+  const valueFixed = FixedNumber.fromValue(value);
+  const percentageFixed = FixedNumber.fromValue(BigNumber.from(percentage));
+  const hundredFixed = FixedNumber.fromValue(BigNumber.from(100));
+
+  const resultFixed = valueFixed
+    .mulUnsafe(percentageFixed)
+    .divUnsafe(hundredFixed);
+
+  const resultFixedInteger = resultFixed.toString().split('.')[0];
+  const resultBN = BigNumber.from(resultFixedInteger);
+  return resultBN;
 };

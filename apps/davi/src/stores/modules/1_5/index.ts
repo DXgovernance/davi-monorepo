@@ -28,6 +28,7 @@ import {
   useExecuteProposal,
   useWithdrawTokens,
   useCreateProposal,
+  useStakeOnProposal,
 } from './writers';
 import { useVoteOnProposal } from './writers/useVoteOnProposal/useVoteOnProposal';
 
@@ -93,6 +94,7 @@ export const governance1_5Implementation: Readonly<FullGovernanceImplementation>
         useLockTokens: null,
         useVoteOnProposal,
         useWithdrawTokens,
+        useStakeOnProposal,
       },
     },
     capabilities: {

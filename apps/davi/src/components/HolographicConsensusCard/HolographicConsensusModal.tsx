@@ -4,9 +4,9 @@ import ReactSpeedometer from 'react-d3-speedometer';
 import { FiThumbsDown, FiThumbsUp, FiInfo } from 'react-icons/fi';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { BigNumber } from 'ethers';
 
 import { resolveUri } from 'utils';
-
 import { Flex } from 'components/primitives/Layout';
 import { Button } from 'components/primitives/Button';
 import { Slider } from 'components/primitives/Forms/Slider';
@@ -21,27 +21,48 @@ import {
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
 import { IHolographicConsensusModal, StakeOptions } from './types';
+import { calculateBNPercentage } from './utils';
 
 export const HolographicConsensusModal = ({
   tokenInfo,
   userStakeTokenBalance,
   speedometerValue,
+  stakeOnProposal,
+  proposalId,
 }: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const [selectedStake, setSelectedStake] = useState(null);
+  const [staked, setStaked] = useState(BigNumber.from(0));
   const [stakePercentage, setStakePercentage] = useState('0');
 
-  const handleSelectedStake = (option: StakeOptions) => {
-    if (selectedStake === option) setSelectedStake(null);
-    else setSelectedStake(option);
+  const handleStakeChange = (value: string) => {
+    const stakedResult = calculateBNPercentage(userStakeTokenBalance, value);
+    setStakePercentage(value);
+    setStaked(stakedResult);
   };
 
-  const roundedBalance = bigNumberToNumber(
+  const [selectedOption, setSelectedOption] = useState<BigNumber>(null);
+  const [selectedStake, setSelectedStake] = useState<StakeOptions>(null);
+
+  const handleSelectOption = (option: StakeOptions) => {
+    const parsedOption =
+      option === 'for' ? BigNumber.from(2) : BigNumber.from(1);
+
+    if (selectedStake === option) {
+      setSelectedOption(null);
+      setSelectedStake(null);
+    } else {
+      setSelectedOption(parsedOption);
+      setSelectedStake(option);
+    }
+  };
+
+  const userStakeTokenBalanceNumber = bigNumberToNumber(
     userStakeTokenBalance,
     tokenInfo?.decimals
   );
+  const stakedNumber = bigNumberToNumber(staked, tokenInfo?.decimals);
 
   return (
     <ModalContainer>
@@ -80,7 +101,7 @@ export const HolographicConsensusModal = ({
         >
           <StakeIconButton
             variant="against"
-            onClick={() => handleSelectedStake('against')}
+            onClick={() => handleSelectOption('against')}
             active={selectedStake === 'against'}
           >
             <FiThumbsDown
@@ -94,7 +115,7 @@ export const HolographicConsensusModal = ({
           </StakeIconButton>
           <StakeIconButton
             variant="for"
-            onClick={() => handleSelectedStake('for')}
+            onClick={() => handleSelectOption('for')}
             active={selectedStake === 'for'}
           >
             <FiThumbsUp
@@ -108,7 +129,7 @@ export const HolographicConsensusModal = ({
         <Flex direction="row" justifyContent="space-between" margin="10px 0px">
           <Text colorVariant="muted">{t('members.locking.balance')}: </Text>
           <Flex direction="row" gap="4px">
-            <Text bold>{roundedBalance}</Text>
+            <Text bold>{userStakeTokenBalanceNumber}</Text>
             <Avatar
               src={resolveUri(tokenInfo?.logoURI)}
               defaultSeed={tokenInfo?.address}
@@ -119,15 +140,15 @@ export const HolographicConsensusModal = ({
         </Flex>
         <Slider
           value={stakePercentage}
-          onChange={setStakePercentage}
+          onChange={handleStakeChange}
           min={'0'}
           max={'100'}
         />
         <Flex direction="row" justifyContent="space-between">
           <Text sizeVariant="big" bold>
-            {roundedBalance * (Number(stakePercentage) / 100)}
+            {stakedNumber}
           </Text>
-          <Button onClick={() => setStakePercentage('100')}>
+          <Button onClick={() => handleStakeChange('100')}>
             {t('members.locking.max')}
           </Button>
         </Flex>
@@ -167,6 +188,9 @@ export const HolographicConsensusModal = ({
         </Flex>
         <Flex margin="32px 0px 0px 0px" fullWidth>
           <LockButton
+            onClick={() => {
+              stakeOnProposal(proposalId, selectedOption, staked);
+            }}
             disabled={selectedStake === null || stakePercentage === '0'}
           >
             {t('members.locking.lock')} {tokenInfo?.symbol}

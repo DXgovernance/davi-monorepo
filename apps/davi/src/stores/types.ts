@@ -213,6 +213,16 @@ export interface WriterHooksInteface {
     tokenDecimals?: number,
     tokenSymbol?: string
   ) => Promise<void>;
+  useStakeOnProposal: (
+    daoAddress: string,
+    subDaoAddres?: string
+  ) => (
+    proposalId: string,
+    option: BigNumber,
+    stakeAmount: BigNumber,
+    title?: string,
+    cb?: (error?: any, txtHash?: any) => void
+  ) => Promise<void>;
 }
 
 interface HooksInterfaceWithFallback {

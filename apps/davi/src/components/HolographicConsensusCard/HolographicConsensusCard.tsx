@@ -42,12 +42,14 @@ export const HolographicConsensusCard = ({
   proposalStakeDetails,
   proposalTotalStakes,
   schemeId,
+  proposalId,
 }: IHolographicConsensusCard) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const {
     hooks: {
       fetchers: { useGetSubDAOs },
+      writers: { useStakeOnProposal },
     },
   } = useHookStoreProvider();
   const { guildId: daoId } = useTypedParams();
@@ -60,6 +62,8 @@ export const HolographicConsensusCard = ({
     errorMessage,
   } = useGetSubDAOs(daoId, schemeId);
   const { tokens } = useTokenList(chain?.id);
+
+  const stakeOnProposal = useStakeOnProposal(daoId, schemeId);
 
   let stakeTokenAddress: string = null;
   let stakeTokenInfo: TokenInfoWithType = null;
@@ -246,22 +250,24 @@ export const HolographicConsensusCard = ({
           tokenInfo={stakeTokenInfo}
           userStakeTokenBalance={userStakeTokenBalance}
           speedometerValue={speedometerValue}
+          stakeOnProposal={stakeOnProposal}
+          proposalId={proposalId}
         />
       </Modal>
     </SidebarCard>
   );
 };
 
-// TODO: calculate speedometer value
-// TODO: lock logic
-// TODO: make generic big button (like LOCK button) and change disabled&hover styles
-// TODO: add color to proposal state pill
+// TODO: stake logic
+// TODO: if a user staked, it can only increase its stake on the previous option
 // TODO: fetch proposal state
+// TODO: add color to proposal state pill
 // TODO: translations
 // TODO: stake: show ENS or address
-// TODO: if a user staked, it can only increase its stake on the previous option
 // TODO: decimals in token balance and total staked
-// TODO: rename "for" and "against" to "yes" and "no"
+// TODO: make generic big button (like LOCK button) and change disabled&hover styles
+// TODO: fix bug: using the slider sometimes causes the staking value to show a lot of decimals
+// TODO: a way to show numbers with a fixed amount of decimals
 // ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

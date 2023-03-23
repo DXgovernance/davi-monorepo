@@ -1,0 +1,1 @@
+export { useStakeOnProposal } from './useStakeOnProposal';

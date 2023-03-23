@@ -409,7 +409,8 @@
     "confirmPrediction": "Confirm prediction",
     "placeYourPrediction": "Place your prediction to steer the proposal",
     "potentialReward": "Potential reward",
-    "lockWarning": "Your prediction will be locked until the proposal ends and you could lose your DXD if your prediction is wrong"
+    "lockWarning": "Your prediction will be locked until the proposal ends and you could lose your DXD if your prediction is wrong",
+    "stakeOnProposal": "Stake on proposal"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",

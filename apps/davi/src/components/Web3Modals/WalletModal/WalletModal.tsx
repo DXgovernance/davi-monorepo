@@ -7,10 +7,10 @@ import {
   ConnectionError,
   Container,
   Language,
-  LanguageBar as WalletModalItem,
+  WalletModalItem,
   LanguageList,
-  LanguageTitle as WalletModalItemTitle,
-  LanguageValue as WalletModalItemValue,
+  WalletModalItemTitle,
+  WalletModalItemValue,
   TransactionsList,
   TransactionsListHeading,
 } from './WalletModal.styled';
@@ -70,7 +70,6 @@ export const WalletModal: React.FC<WalletModalProps> = ({
   }
 
   function getLanguageName(languageCode) {
-    // console.log({ languageCode });
     if (languageCode === 'en-US') return 'English';
     const nameGenerator = new Intl.DisplayNames(languageCode, {
       type: 'language',

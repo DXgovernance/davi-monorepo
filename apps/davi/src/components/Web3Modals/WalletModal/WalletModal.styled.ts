@@ -48,7 +48,7 @@ export const Language = styled.div`
   cursor: pointer;
 `;
 
-export const LanguageBar = styled.div`
+export const WalletModalItem = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0px 24px;
@@ -58,12 +58,12 @@ export const LanguageBar = styled.div`
   cursor: pointer;
 `;
 
-export const LanguageTitle = styled.div`
+export const WalletModalItemTitle = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
 `;
-export const LanguageValue = styled(LanguageTitle)`
+export const WalletModalItemValue = styled(WalletModalItemTitle)`
   cursor: pointer;
 `;
 

@@ -103,7 +103,7 @@
       "tokenAmount": "Cantidad de Tokens",
       "recipient": "Receptor",
       "ethereumAddress": "Dirección Ethereum",
-      "toAddress": "A la Dirección",
+      "toAddress": "Dirección del receptor",
       "address": "Dirección",
       "contract": "Contrato"
     },

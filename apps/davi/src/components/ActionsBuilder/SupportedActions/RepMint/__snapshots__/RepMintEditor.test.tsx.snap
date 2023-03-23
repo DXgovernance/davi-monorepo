@@ -346,7 +346,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
         <div
           class="c0 c2"
         >
-          repMint.repAmount
+          actionBuilder.repMint.repAmount
           <span
             class="c3"
           >

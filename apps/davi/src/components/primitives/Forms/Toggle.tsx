@@ -26,7 +26,7 @@ interface IToggle extends FormElementProps<boolean> {
 export const ToggleContainer = styled(Flex)<ToggleContainerProps>`
   width: ${({ width }) => width ?? 'auto'};
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-end'};
   margin-top: ${({ marginTop }) => marginTop ?? '0px'};
   gap: 10px;
 `;

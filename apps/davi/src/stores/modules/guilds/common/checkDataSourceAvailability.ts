@@ -8,6 +8,10 @@ export const checkDataSourceAvailability = async chainId => {
       return false;
     }
 
+    if (localStorage.getItem('decentralizeMode') === 'true') {
+      return false;
+    }
+
     const query = `{
     _meta {
       block {

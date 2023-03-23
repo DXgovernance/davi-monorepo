@@ -21,7 +21,9 @@
     "useDefaultValue": "use default value",
     "saveChanges": "Save Changes",
     "genericError": "Seems to be a problem with the url provided",
-    "wrongChain": "The url provided is not from chain {{chainName}}"
+    "wrongChain": "The url provided is not from chain {{chainName}}",
+    "decentralizeMode": "Decentralize mode",
+    "decentralizeModeTooltip": "This will disable subgraph and only use RPCs. Some functions will be lost"
   },
   "connections": {
     "switchWalletTo": "Switch Wallet to {{chainName}}",

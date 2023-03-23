@@ -23,6 +23,11 @@ export const CustomRPCHeader: React.FC<ChainOptionProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  const handleChange = () => {
+    localStorage.setItem(`customRPC[${chain.id}]`, '');
+    setIsDefaultValue(!isDefaultValue);
+  };
+
   return (
     <Flex direction="row">
       <ChainContainer>
@@ -33,7 +38,7 @@ export const CustomRPCHeader: React.FC<ChainOptionProps> = ({
         <ToggleLabel>{t('customRPC.useDefaultValue')}</ToggleLabel>
         <Toggle
           value={isDefaultValue}
-          onChange={() => setIsDefaultValue(!isDefaultValue)}
+          onChange={handleChange}
           small
           name="toggle-is-default-value"
         />

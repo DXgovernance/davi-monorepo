@@ -42,10 +42,9 @@ export const CustomRPCOption: React.FC<CustomRPCOptionProps> = ({ chain }) => {
 
   useEffect(() => {
     if (isDefaultValue) {
-      setLocalStorageRPC({ ...localStorageRPC, value: '' });
       setRPCValue('');
     }
-  }, [isDefaultValue, localStorageRPC]);
+  }, [isDefaultValue]);
 
   useEffect(() => {
     localStorage.setItem(localStorageRPC.key, localStorageRPC.value);
@@ -114,7 +113,8 @@ export const CustomRPCOption: React.FC<CustomRPCOptionProps> = ({ chain }) => {
             <SaveButton
               variant="tertiary"
               disabled={
-                rpcValue.trim() === '' || rpcValue === localStorageRPC.value
+                rpcValue.trim() === '' ||
+                rpcValue === localStorage.getItem(localStorageRPCKey)
               }
               onClick={() => handleRPCSave(chain)}
             >

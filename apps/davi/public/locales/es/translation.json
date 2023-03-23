@@ -139,7 +139,7 @@
       "recipient": "Destinatario",
       "recipientTooltip": "La dirección que va a recibir el REP creado.",
       "repPercent": "Reputación en %",
-      "repPercentTooltip": "El porcentaje de la reputación total suministrada que será creada.",
+      "repPercentTooltip": "El porcentaje de la reputación total que será creada.",
       "repAmount": "Cantidad de Reputación",
       "repAmountTooltip": "La cantidad de REP que será creada."
     },

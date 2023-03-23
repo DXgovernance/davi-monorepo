@@ -134,8 +134,8 @@
       "unknownToken": "Token desconocido"
     },
     "repMint": {
-      "mint": "Mint",
-      "mintRep": "Mint REP",
+      "mint": "Crear",
+      "mintRep": "Crear REP",
       "recipient": "Destinatario",
       "recipientTooltip": "La dirección que va a recibir el REP creado.",
       "repPercent": "Reputación en %",
@@ -184,7 +184,7 @@
     },
     "advanced": {
       "advancedOptions": "Opciones avanzadas",
-      "rawTransaction": "Transacción Raw",
+      "rawTransaction": "Transacción original",
       "value": "Valor",
       "data": "Datos",
       "advancedView": "Vista avanzada"

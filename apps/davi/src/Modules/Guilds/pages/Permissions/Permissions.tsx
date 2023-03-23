@@ -7,7 +7,7 @@ import AssetPermissions from './AssetPermissions';
 import FunctionCallPermissions from './FunctionCallPermissions';
 import { MainContainer, TabContainer, TabContent } from './Permissions.styled';
 
-const Permissions = () => {
+const Permissions = ({ subDaoAddress = null }) => {
   const { t } = useTranslation();
   const {
     hooks: {
@@ -16,9 +16,11 @@ const Permissions = () => {
   } = useHookStoreProvider();
   const { guildId: daoAddress } = useTypedParams();
 
-  const tokenPermissions = useGetAllPermissions(daoAddress, 'tokens');
+  const permissionsAddress = subDaoAddress ?? daoAddress;
+
+  const tokenPermissions = useGetAllPermissions(permissionsAddress, 'tokens');
   const functionCallPermissions = useGetAllPermissions(
-    daoAddress,
+    permissionsAddress,
     'functionCalls'
   );
 

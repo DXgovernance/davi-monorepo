@@ -73,7 +73,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
         ...decodedCall,
         args: {
           ...decodedCall.args,
-          to: values.recipient,
+          account: values.recipient,
           amount: ethers.utils.parseUnits(repAmount.toString()),
         },
       },
@@ -151,7 +151,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
         <ControlRow>
           <Control>
             <ControlLabel>
-              {t('repMint.repAmount')}
+              {t('actionBuilder.repMint.repAmount')}
               <Tooltip text={t('actionBuilder.repMint.repAmountTooltip')}>
                 <StyledIcon src={Info} />
               </Tooltip>

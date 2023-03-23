@@ -103,7 +103,7 @@
       "tokenAmount": "Cantidad de Tokens",
       "recipient": "Receptor",
       "ethereumAddress": "Dirección Ethereum",
-      "toAddress": "A la Dirección",
+      "toAddress": "Dirección del receptor",
       "address": "Dirección",
       "contract": "Contrato"
     },
@@ -139,7 +139,7 @@
       "recipient": "Destinatario",
       "recipientTooltip": "La dirección que va a recibir el REP creado.",
       "repPercent": "Reputación en %",
-      "repPercentTooltip": "El porcentaje de la reputación total suministrada que será creada.",
+      "repPercentTooltip": "El porcentaje de la reputación total que será creada.",
       "repAmount": "Cantidad de Reputación",
       "repAmountTooltip": "La cantidad de REP que será creada."
     },
@@ -170,7 +170,7 @@
       "selectTokensToSpend": "Seleccionar token a gastar",
       "approveSpendingCall": "Aprobar la llamada de gasto",
       "addressToWhichTheExpenseIsBeingAuthorized": "Dirección a la cual la transacción está siendo autorizada",
-      "amountBeingApproved": "Cantidad siendo aprobada",
+      "amountBeingApproved": "Monto siendo aprobado",
       "approveTokenSpending": "Aprobar el gasto de {{tokenSymbol}} token"
     },
     "config": {
@@ -180,7 +180,7 @@
       "lockTimeHasToBeHigherOrEqualToProposalTime": "El tiempo de Bloqueo tiene que ser mayor o igual al tiempo de Propuesta",
       "proposalTimeHasToBeLowerOrEqualToLockTime": "El tiempo de Propuesta tiene que ser menor o igual al tiempo de Bloqueo",
       "votingPowerPercentageForProposalExecutionHasToBeMoreThanZero": "El porcentaje del valor del voto para la ejecución tiene que ser más de 0",
-      "voteGasHasToBeEqualOrLowerThan117000": "el voto del gas tiene que ser igual o menor a 117000"
+      "voteGasHasToBeEqualOrLowerThan117000": "el gas del voto tiene que ser igual o menor a 117000"
     },
     "advanced": {
       "advancedOptions": "Opciones avanzadas",

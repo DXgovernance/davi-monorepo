@@ -11,7 +11,7 @@ import {
 import { Guild } from '../../types/schema';
 
 // TODO: Use .env for this if possible
-const deployedHashedBytecodesJSON = prod;
+const deployedHashedBytecodesJSON = local;
 
 const parsedJson = json.fromString(deployedHashedBytecodesJSON);
 const deployedHashedBytecodes = parsedJson.toArray();

@@ -23,13 +23,7 @@
     "guilds-subgraph#dev": {
       "cache": false
     },
-    "dxdao-contracts#setup": {
-      "outputs": ["types/**"]
-    },
     "dev": {},
-    "davi#build-graph-client": {
-      "dependsOn": ["dxdao-contracts#setup"]
-    },
     "build": {
       "dependsOn": ["^setup"]
     },

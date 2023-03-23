@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
-import { ERC20 } from 'dxdao-contracts/types';
-import { ERC20Guild } from 'dxdao-contracts/types/ERC20Guild';
+import { ERC20 } from '@dx-gov-test/dxdao-contracts/types';
+import { ERC20Guild } from '@dx-gov-test/dxdao-contracts/types/ERC20Guild';
 import { StakeTokensModalProps } from './types';
 import { GuildConfigProps } from 'types/types.guilds.d';
 

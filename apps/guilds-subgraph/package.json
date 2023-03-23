@@ -29,8 +29,6 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
-    "js-yaml": "^4.1.0",
-    "dxdao-contracts": "workspace:*"
+    "js-yaml": "^4.1.0"
   }
 }
-

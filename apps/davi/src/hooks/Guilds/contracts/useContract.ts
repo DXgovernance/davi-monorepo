@@ -3,14 +3,14 @@ import { Contract } from 'ethers';
 import { useProvider, useSigner } from 'wagmi';
 import { getContract } from '@wagmi/core';
 import VotingMachineContract from 'contracts/VotingMachine.json';
-import { VotingMachine } from 'dxdao-contracts/types/VotingMachine';
+import { VotingMachine } from '@dx-gov-test/dxdao-contracts/types/VotingMachine';
 
 import BaseERC20GuildContract from 'contracts/BaseERC20Guild.json';
-import { ERC20Guild } from 'dxdao-contracts/types/ERC20Guild';
+import { ERC20Guild } from '@dx-gov-test/dxdao-contracts/types/ERC20Guild';
 import ERC20_ABI from 'contracts/ERC20.json';
-import { ERC20 } from 'dxdao-contracts/types/ERC20';
+import { ERC20 } from '@dx-gov-test/dxdao-contracts/types/ERC20';
 import SchemeContract from 'contracts/Scheme.json';
-import { Scheme } from 'dxdao-contracts/types/Scheme';
+import { Scheme } from '@dx-gov-test/dxdao-contracts/types/Scheme';
 
 export default function useContract<T extends Contract>(
   contractId: string,

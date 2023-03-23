@@ -1,5 +1,6 @@
 require("dotenv").config();
 const baseConfig = require("./hardhat.config.base");
+// const baseConfig = require("@dx-gov-test/dxdao-contracts/hardhat.config");
 
 // Modify default config to work with develoment env by extending dxdao-contracts hardhat.config
 function getConfig(config) {
@@ -16,6 +17,8 @@ function getConfig(config) {
     disabled: !process.env.ETHERNAL_PASSWORD && !process.env.ETHERNAL_EMAIL, // If set to true, the plugin will be disabled, nohting will be synced, ethernal.push won't do anything either
     resetOnStart: "localhost", // Pass a workspace name to reset it automatically when restarting the node, note that if the workspace doesn't exist it won't error
   };
+
+  // config.typechain = null;
 
   return config;
 }

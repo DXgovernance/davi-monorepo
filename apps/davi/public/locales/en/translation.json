@@ -394,13 +394,14 @@
     "proposalTimeInPreBoost": "Proposal time in pre boost",
     "canManageSchemes": "Can manage schemes",
     "canControlMainTreasury": "Can control main treasury",
-    "canChangeReputation": "Can change reputation",
+    "canMakeAvatarCalls": "Can make avatar calls",
     "maxRepPercentageChange": "Maximum rep percentage change",
     "backToScheme": "Back to Scheme",
     "type": "Type",
     "next": "Next",
     "errorFetchingSchemes": "Error while fetching schemes",
-    "daoHasNoSchemes": "This DAO has no schemes registered"
+    "daoHasNoSchemes": "This DAO has no schemes registered",
+    "daoBounty": "DAO Bounty"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",

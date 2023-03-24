@@ -63,6 +63,7 @@ export const useGetSubDAOs: IUseGetSubDAOs = daoId => {
           scheme.votingMachine.preBoostedVotePeriodLimit,
         boostedVotePeriodLimit: scheme.votingMachine.boostedVotePeriodLimit,
         quietEndingPeriod: scheme.votingMachine.quietEndingPeriod,
+        daoBounty: scheme.votingMachine.boostedVoteRequiredPercentage,
       },
     };
   });

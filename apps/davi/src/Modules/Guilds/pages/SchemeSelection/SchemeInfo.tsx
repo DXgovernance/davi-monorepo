@@ -39,9 +39,48 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
     <CardBody>
       <SchemePropertiesGrid>
         <InfoDetail>
+          <span>{t('schemes.type')}</span>
+          <InfoDetailMuted>{selectedScheme.type}</InfoDetailMuted>
+        </InfoDetail>
+
+        <InfoDetail>
           <span>{t('proposal.quorum')}</span>
           <InfoDetailMuted>
             {formattedBoostedVoteRequiredPercentage}%
+          </InfoDetailMuted>
+        </InfoDetail>
+
+        {/* TODO: remove this? or is it another variable? */}
+        <InfoDetail>
+          <span>{t('proposal.quorum')}</span>
+          <InfoDetailMuted>
+            {formattedBoostedVoteRequiredPercentage}%
+          </InfoDetailMuted>
+        </InfoDetail>
+
+        <InfoDetail>
+          <span>{t('schemes.maxProposalTime')}</span>
+          <InfoDetailMuted>{formattedQuietEndingPeriod}</InfoDetailMuted>
+        </InfoDetail>
+
+        <InfoDetail>
+          <span>{t('schemes.proposalTimeInBoost')}</span>
+          <InfoDetailMuted>{formattedBoostedVotePeriodLimit}</InfoDetailMuted>
+        </InfoDetail>
+
+        <InfoDetail>
+          <span>{t('schemes.proposalTimeInPreBoost')}</span>
+          <InfoDetailMuted>
+            {formattedPreBoostedVotePeriodLimit}
+          </InfoDetailMuted>
+        </InfoDetail>
+
+        <InfoDetail>
+          {/* TODO: if we remove this, remove the translation as well */}
+          {/* <span>{t('schemes.canControlMainTreasury')}</span> */}
+          <span>{t('schemes.canMakeAvatarCalls')}</span>
+          <InfoDetailMuted>
+            {selectedScheme.canMakeAvatarCalls ? 'yes' : 'no'}
           </InfoDetailMuted>
         </InfoDetail>
 
@@ -53,37 +92,6 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
         </InfoDetail>
 
         <InfoDetail>
-          <span>{t('schemes.maxProposalTime')}</span>
-          <InfoDetailMuted>{formattedQuietEndingPeriod}</InfoDetailMuted>
-        </InfoDetail>
-
-        <InfoDetail>
-          <span>{t('schemes.canControlMainTreasury')}</span>
-          <InfoDetailMuted>
-            {selectedScheme.canMakeAvatarCalls ? 'yes' : 'no'}
-          </InfoDetailMuted>
-        </InfoDetail>
-
-        <InfoDetail>
-          <span>{t('schemes.proposalTimeInBoost')}</span>
-          <InfoDetailMuted>{formattedBoostedVotePeriodLimit}</InfoDetailMuted>
-        </InfoDetail>
-
-        <InfoDetail>
-          <span>{t('schemes.canChangeReputation')}</span>
-          <InfoDetailMuted>
-            {selectedScheme.canChangeReputation ? 'yes' : 'no'}
-          </InfoDetailMuted>
-        </InfoDetail>
-
-        <InfoDetail>
-          <span>{t('schemes.proposalTimeInPreBoost')}</span>
-          <InfoDetailMuted>
-            {formattedPreBoostedVotePeriodLimit}
-          </InfoDetailMuted>
-        </InfoDetail>
-
-        <InfoDetail>
           <span>{t('schemes.maxRepPercentageChange')}</span>
           <InfoDetailMuted>
             {selectedScheme.maxRepPercentageChange}%
@@ -91,8 +99,10 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
         </InfoDetail>
 
         <InfoDetail>
-          <span>{t('schemes.type')}</span>
-          <InfoDetailMuted>{selectedScheme.type}</InfoDetailMuted>
+          <span>{t('schemes.daoBounty')}</span>
+          <InfoDetailMuted>
+            {selectedScheme.votingMachine.daoBounty}
+          </InfoDetailMuted>
         </InfoDetail>
       </SchemePropertiesGrid>
     </CardBody>

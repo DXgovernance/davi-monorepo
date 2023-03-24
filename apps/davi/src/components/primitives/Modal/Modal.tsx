@@ -43,7 +43,6 @@ export const Modal: React.FC<ModalProps> = ({
   const [clickedOnBackdrop, setClickedOnBackdrop] = useState(false);
 
   const handleOnMouseDownOnBackdrop = e => {
-    e.stopPropagation();
     if (
       typeof e.target.className === 'string' &&
       e.target.className.includes(`backdropModal`)
@@ -53,7 +52,6 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   const handleOnMouseUpOnBackdrop = e => {
-    e.stopPropagation();
     if (
       typeof e.target.className === 'string' &&
       e.target.className.includes(`backdropModal`) &&

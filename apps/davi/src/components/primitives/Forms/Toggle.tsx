@@ -18,6 +18,7 @@ const StyledSwitch = styled(Switch)<ReactSwitchProps>`
 interface ToggleContainerProps {
   width?: string;
   marginTop?: string;
+  marginRight?: string;
 }
 
 interface IToggle extends FormElementProps<boolean> {
@@ -28,6 +29,7 @@ export const ToggleContainer = styled(Flex)<ToggleContainerProps>`
   flex-direction: row;
   justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-end'};
   margin-top: ${({ marginTop }) => marginTop ?? '0px'};
+  margin-right: ${({ marginRight }) => marginRight ?? '0px'};
   gap: 10px;
 `;
 

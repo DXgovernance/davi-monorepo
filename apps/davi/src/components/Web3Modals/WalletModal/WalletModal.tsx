@@ -28,6 +28,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
 import { supportedLanguages } from 'configs';
 import { CustomRPC } from 'components/CustomRPC/CustomRPC';
+import { DecentralizeMode } from 'components/DecentralizeMode/DecentralizeMode';
 
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
@@ -147,6 +148,8 @@ export const WalletModal: React.FC<WalletModalProps> = ({
               </WalletModalItemValue>
             </WalletModalItem>
           </>
+          <DecentralizeMode />
+
           <WalletInfoBox openOptions={() => setIsWalletsListActive(true)} />
           <Divider />
           <TransactionsList>

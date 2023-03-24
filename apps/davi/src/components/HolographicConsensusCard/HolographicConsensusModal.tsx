@@ -21,7 +21,11 @@ import {
   StakeSelectionContainer,
 } from './HolographicConsensusCard.styled';
 import { IHolographicConsensusModal, StakeOptions } from './types';
-import { calculateBNPercentage, checkUserStakeOption } from './utils';
+import {
+  calculateBNPercentage,
+  calculatePotentialReward,
+  checkUserStakeOption,
+} from './utils';
 
 export const HolographicConsensusModal = ({
   tokenInfo,
@@ -32,6 +36,8 @@ export const HolographicConsensusModal = ({
   stakeDetails,
   userAddress,
   proposalState,
+  proposalTotalStakes,
+  daoBounty,
 }: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -77,6 +83,19 @@ export const HolographicConsensusModal = ({
     tokenInfo?.decimals
   );
   const stakedNumber = bigNumberToNumber(staked, tokenInfo?.decimals);
+
+  const potentialReward = calculatePotentialReward(
+    stakeDetails,
+    staked,
+    userAddress,
+    selectedOption,
+    proposalTotalStakes,
+    daoBounty
+  );
+  const potentialRewardNumber = bigNumberToNumber(
+    potentialReward,
+    tokenInfo?.decimals
+  );
 
   return (
     <ModalContainer>
@@ -181,7 +200,7 @@ export const HolographicConsensusModal = ({
             {t('holographicConsensus.potentialReward')}
           </Text>
           <Flex direction="row" gap="4px">
-            <Text bold>1</Text>
+            <Text bold>{potentialRewardNumber}</Text>
             <Avatar
               src={resolveUri(tokenInfo?.logoURI)}
               defaultSeed={tokenInfo?.address}

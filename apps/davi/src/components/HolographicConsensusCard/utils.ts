@@ -71,3 +71,74 @@ export const checkUserStakeOption = (
 
   return null;
 };
+
+export const calculatePotentialReward = (
+  stakes: IStakes,
+  userCurrentStake: BigNumber,
+  userAddress: string,
+  userOption: BigNumber,
+  totalStaked: Proposal['totalStaked'],
+  daoBounty: BigNumber
+) => {
+  const userStakedOptionIndex: number = userOption.toNumber() - 1;
+  let userStakedOptionString: string;
+  if (userStakedOptionIndex === 0) userStakedOptionString = 'against';
+  if (userStakedOptionIndex === 1) userStakedOptionString = 'for';
+  if (!userStakedOptionString)
+    throw new Error('Invalid userStakedOptionString');
+
+  const stakedInUserVote: BigNumber =
+    totalStaked[userStakedOptionIndex].add(userCurrentStake);
+  const stakedInUserVoteFixed: FixedNumber =
+    FixedNumber.fromValue(stakedInUserVote);
+
+  const totalStakedWithoutDaoBounty = userCurrentStake
+    .add(totalStaked[0])
+    .add(totalStaked[1])
+    .sub(daoBounty);
+
+  // Calculate what the user staked
+  const previouslyStakedByUser = stakes[userStakedOptionString].reduce(
+    (acc: BigNumber, cur) => {
+      if (cur.staker.toLowerCase() === userAddress.toLowerCase()) {
+        return acc.add(cur.amount);
+      }
+      return acc;
+    },
+    BigNumber.from(0)
+  );
+
+  const totalUserStake = previouslyStakedByUser.add(userCurrentStake);
+
+  // Calculate the coefficient for the base reward
+
+  const initialRewardCoefficient = FixedNumber.fromValue(
+    totalStakedWithoutDaoBounty
+  ).divUnsafe(stakedInUserVoteFixed);
+
+  const initialReward = FixedNumber.fromValue(totalUserStake).mulUnsafe(
+    initialRewardCoefficient
+  );
+
+  const initialRewardBN = BigNumber.from(
+    initialReward.toString().split('.')[0]
+  );
+
+  // If the user voted for "NO", then the reward is just the initial reward
+  if (userOption.eq(1)) return initialRewardBN;
+
+  // If the user voted for "YES", then the reward is the initial reward + a percentage of the DAO bounty
+  const daoBountyRewardCoefficient = FixedNumber.fromValue(daoBounty).divUnsafe(
+    stakedInUserVoteFixed
+  );
+
+  const daoBountyReward = FixedNumber.fromValue(totalUserStake).mulUnsafe(
+    daoBountyRewardCoefficient
+  );
+
+  const daoBountyRewardBN = BigNumber.from(
+    daoBountyReward.toString().split('.')[0]
+  );
+
+  return initialRewardBN.add(daoBountyRewardBN);
+};

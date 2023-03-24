@@ -24,6 +24,7 @@ export interface IHolographicConsensusCard {
   schemeId: string;
   proposalId: string;
   proposalState: HolographicConsensusState;
+  daoBounty: BigNumber;
 }
 
 export interface IStakeDetails {
@@ -42,4 +43,6 @@ export interface IHolographicConsensusModal {
   stakeDetails: IStakes;
   userAddress: string;
   proposalState: HolographicConsensusState;
+  proposalTotalStakes: Proposal['totalStaked'];
+  daoBounty: BigNumber;
 }

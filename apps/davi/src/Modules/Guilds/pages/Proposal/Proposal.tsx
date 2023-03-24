@@ -211,6 +211,7 @@ const ProposalPage: React.FC = () => {
             schemeId={proposal?.subDao}
             proposalId={proposalId}
             proposalState={proposal?.holographicConsensusState}
+            daoBounty={proposal?.daoBounty}
           />
         )}
       </SidebarContent>

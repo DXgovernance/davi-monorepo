@@ -1,12 +1,18 @@
 import { BigNumber } from 'ethers';
+import { ZERO_ADDRESS } from 'utils';
 import {
+  mockDaoBounty,
   mockProposalStakeDetails,
   mockProposalStakeDetailsEmpty,
+  mockSelectedOption,
+  mockTotalStaked,
+  mockTotalStakedEmpty,
 } from './fixtures';
 import {
   calculateSpeedometerValue,
   calculateBNPercentage,
   checkUserStakeOption,
+  calculatePotentialReward,
 } from './utils';
 
 describe('calculateSpeedometerValue', () => {
@@ -115,7 +121,6 @@ describe('calculateBNPercentage', () => {
   });
 });
 
-// write test cases for checkUserStakeOption
 describe('checkUserStakeOption', () => {
   it("should return 'for' if the user staked for the proposal", () => {
     const userAddress = '0xc5b20ade9c9cd5e0cc087c62b26b815a4bc1881f';
@@ -152,5 +157,185 @@ describe('checkUserStakeOption', () => {
       mockProposalStakeDetails
     );
     expect(result).toEqual('for');
+  });
+});
+
+describe('calculatePotentialReward', () => {
+  describe('user staked for YES', () => {
+    it("if a user selected YES but has not staked and doesn't have any current stakes, the reward will be zero", () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(0);
+      const userOption = mockSelectedOption.yes;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(0).toString());
+    });
+
+    it("should return the reward if the user has staked for YES but doesn't have any current stakes", () => {
+      const userAddress = '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698';
+      const currentStake = BigNumber.from(0);
+      const userOption = mockSelectedOption.yes;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(124).toString());
+    });
+
+    it('should return the reward if the user has not staked but has current stakes for YES', () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(100);
+      const userOption = mockSelectedOption.yes;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(120).toString());
+    });
+
+    it('should return the reward if the user has staked for YES and has current stakes', () => {
+      const userAddress = '0xaf8eb8c3a5d9d900aa0b98e3df0bcc17d3c5f698';
+      const currentStake = BigNumber.from('100');
+      const userOption = mockSelectedOption.yes;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(242).toString());
+    });
+
+    it('should handle if daoBounty is zero', () => {});
+  });
+
+  describe('user staked for NO', () => {
+    it("if a user selected NO but has not staked and doesn't have any current stakes, the reward will be zero", () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(0);
+      const userOption = mockSelectedOption.no;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(0).toString());
+    });
+
+    it("should return the reward if the user has staked for NO but doesn't have any current stakes", () => {
+      const userAddress = '0x84eeb305da0a4309a696d43de9f79f04e66eb4f8';
+      const currentStake = BigNumber.from(0);
+      const userOption = mockSelectedOption.no;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(459).toString());
+    });
+
+    it('should return the reward if the user has not staked but has current stakes for NO', () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(100);
+      const userOption = mockSelectedOption.no;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(339).toString());
+    });
+
+    it('should return the reward if the user has staked for NO and has current stakes', () => {
+      const userAddress = '0x84eeb305da0a4309a696d43de9f79f04e66eb4f8';
+      const currentStake = BigNumber.from(100);
+      const userOption = mockSelectedOption.no;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetails,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(679).toString());
+    });
+  });
+
+  describe('should handle empty stakes', () => {
+    it('should return zero if there are no stakes, user has not staked and no current staked', () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(0);
+      const userOption = mockSelectedOption.yes;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetailsEmpty,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStaked,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(0).toString());
+    });
+
+    it('should return reward if there are no stakes, user has not staked and has current staked', () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(100);
+      const userOption = mockSelectedOption.yes;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetailsEmpty,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStakedEmpty,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(200).toString());
+    });
   });
 });

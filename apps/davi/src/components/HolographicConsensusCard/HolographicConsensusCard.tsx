@@ -45,6 +45,7 @@ export const HolographicConsensusCard = ({
   schemeId,
   proposalId,
   proposalState,
+  daoBounty,
 }: IHolographicConsensusCard) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -276,15 +277,17 @@ export const HolographicConsensusCard = ({
           stakeDetails={proposalStakeDetails}
           userAddress={userAddress}
           proposalState={proposalState}
+          proposalTotalStakes={proposalTotalStakes}
+          daoBounty={daoBounty}
         />
       </Modal>
     </SidebarCard>
   );
 };
 
-// TODO: potential reward
 // TODO: stake: show ENS or address
 // TODO: check margins
+// TODO: fix dao bounty stake not showing on subgraph
 // TODO: unlock time: postponed untill useTimeDetail is implemented
 // ? border bottom of non-selected stake button?
 

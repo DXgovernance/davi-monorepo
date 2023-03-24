@@ -28,6 +28,7 @@ export interface Proposal {
   totalStaked?: [BigNumber, BigNumber];
   stakes?: IStakes;
   holographicConsensusState?: HolographicConsensusState; // This is a very specific state for the holographic consensus, might be replaced for state
+  daoBounty?: BigNumber;
 }
 
 export enum ProposalState {

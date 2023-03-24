@@ -55,6 +55,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       scheme: { id: schemeId },
       stakes,
       votingMachineProposalState,
+      daoBounty,
     } = proposal;
 
     let mappedContractState: ContractState;
@@ -152,6 +153,7 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       stakes: parsedStakes,
       totalStaked: [totalNoStakes, totalYesStakes],
       holographicConsensusState: mappedHolographicConsensusState,
+      daoBounty,
     };
   }, [data]);
 

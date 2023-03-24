@@ -78,7 +78,7 @@ export const ModalContainer = styled.div`
 export const StakeSelectionContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  margin: 32px 0px;
+  margin: 8px 0 32px 0;
   padding: 16px 20px;
   border: 1px solid ${({ theme }) => theme.colors.border1};
   border-radius: ${({ theme }) => theme.radii.curved};

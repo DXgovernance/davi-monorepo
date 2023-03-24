@@ -44,16 +44,8 @@ export const HolographicConsensusModal = ({
 
   const previousStake = checkUserStakeOption(userAddress, stakeDetails);
 
-  // ? derive staked and selectedOption?
-
-  const [staked, setStaked] = useState(BigNumber.from(0));
   const [stakePercentage, setStakePercentage] = useState('0');
-
-  const handleStakeChange = (value: string) => {
-    const stakedResult = calculateBNPercentage(userStakeTokenBalance, value);
-    setStakePercentage(value);
-    setStaked(stakedResult);
-  };
+  const staked = calculateBNPercentage(userStakeTokenBalance, stakePercentage);
 
   const [selectedOption, setSelectedOption] = useState<BigNumber>(
     previousStake === 'for'
@@ -82,6 +74,7 @@ export const HolographicConsensusModal = ({
     userStakeTokenBalance,
     tokenInfo?.decimals
   );
+
   const stakedNumber = bigNumberToNumber(staked, tokenInfo?.decimals);
 
   const potentialReward = calculatePotentialReward(
@@ -180,7 +173,7 @@ export const HolographicConsensusModal = ({
         </Flex>
         <Slider
           value={stakePercentage}
-          onChange={handleStakeChange}
+          onChange={setStakePercentage}
           min={'0'}
           max={'100'}
         />
@@ -188,7 +181,7 @@ export const HolographicConsensusModal = ({
           <Text sizeVariant="big" bold>
             {stakedNumber}
           </Text>
-          <Button onClick={() => handleStakeChange('100')}>
+          <Button onClick={() => setStakePercentage('100')}>
             {t('members.locking.max')}
           </Button>
         </Flex>

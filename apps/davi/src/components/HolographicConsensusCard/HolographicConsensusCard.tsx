@@ -285,8 +285,8 @@ export const HolographicConsensusCard = ({
   );
 };
 
-// TODO: check margins
-// TODO: fix dao bounty stake not showing on subgraph
+// TODO: merge develop
+// TODO: move deploy scripts to davi
 // TODO: unlock time: postponed untill useTimeDetail is implemented
 // ? border bottom of non-selected stake button?
 

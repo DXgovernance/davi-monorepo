@@ -30,7 +30,6 @@ export const DecentralizeMode: React.FC = () => {
     <WalletModalItem>
       <WalletModalItemTitle>
         <BiShapePolygon size={24} />
-        {/* TODO: fix name */}
         {t('decentralizeMode.decentralizeMode')}
         <Tooltip
           text={t('decentralizeMode.decentralizeModeTooltip')}

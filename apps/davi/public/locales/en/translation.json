@@ -25,6 +25,10 @@
     "decentralizeMode": "Decentralize mode",
     "decentralizeModeTooltip": "This will disable subgraph and only use RPCs. Some functions will be lost"
   },
+  "decentralizeMode": {
+    "decentralizeMode": "Decentralize mode",
+    "decentralizeModeTooltip": "This will disable subgraph and only use RPCs. Some functions will be lost"
+  },
   "connections": {
     "switchWalletTo": "Switch Wallet to {{chainName}}",
     "connectWallet": "Connect Wallet",

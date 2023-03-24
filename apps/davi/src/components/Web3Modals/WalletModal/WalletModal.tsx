@@ -143,7 +143,6 @@ export const WalletModal: React.FC<WalletModalProps> = ({
                 {t('customRPC.customRPC')}
               </WalletModalItemTitle>
               <WalletModalItemValue>
-                {/* {getLanguageName(i18n.language)} */}
                 <FiChevronRight size={24} />
               </WalletModalItemValue>
             </WalletModalItem>

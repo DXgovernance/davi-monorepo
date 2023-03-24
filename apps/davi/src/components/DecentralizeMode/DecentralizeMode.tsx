@@ -31,9 +31,9 @@ export const DecentralizeMode: React.FC = () => {
       <WalletModalItemTitle>
         <BiShapePolygon size={24} />
         {/* TODO: fix name */}
-        {t('customRPC.decentralizeMode')}
+        {t('decentralizeMode.decentralizeMode')}
         <Tooltip
-          text={t('customRPC.decentralizeModeTooltip')}
+          text={t('decentralizeMode.decentralizeModeTooltip')}
           placement="bottom"
         >
           <StyledIcon src={Info} />

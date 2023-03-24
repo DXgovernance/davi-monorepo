@@ -29,7 +29,10 @@ export const checkDataSourceAvailability = async chainId => {
     );
     const { data, errors } = await response.json();
 
-    if (data?._meta?.block?.timestamp < Math.floor(Date.now() / 1000) - 600) {
+    if (
+      data?._meta?.block?.timestamp !== null &&
+      data?._meta?.block?.timestamp < Math.floor(Date.now() / 1000) - 600
+    ) {
       console.debug('Subgraph out of sync, using fallback');
       return false;
     }

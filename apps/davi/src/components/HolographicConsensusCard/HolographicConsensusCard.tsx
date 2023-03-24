@@ -285,7 +285,6 @@ export const HolographicConsensusCard = ({
   );
 };
 
-// TODO: stake: show ENS or address
 // TODO: check margins
 // TODO: fix dao bounty stake not showing on subgraph
 // TODO: unlock time: postponed untill useTimeDetail is implemented

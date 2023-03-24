@@ -15,6 +15,8 @@ import ERC20TransferInfoLine from './ERC20Transfer/ERC20TransferInfoLine';
 import GenericCallInfoLine from './GenericCall/GenericCallInfoLine';
 import RepMintEditor from './RepMint/RepMintEditor';
 import RepMintInfoLine from './RepMint/RepMintInfoLine';
+import RepBurnEditor from './RepBurn/RepBurnEditor';
+import RepBurnInfoLine from './RepBurn/RepBurnInfoLine';
 import SetPermissionsEditor from './SetPermissions/SetPermissionsEditor';
 import SetPermissionsInfoLine from './SetPermissions/SetPermissionsInfoLine';
 import UpdateENSContentEditor from './UpdateENSContent/UpdateENSContentEditor';
@@ -72,6 +74,12 @@ export const supportedActions: Record<
     infoLineView: RepMintInfoLine,
     summaryView: Summary,
     editor: RepMintEditor,
+  },
+  [SupportedAction.REP_BURN]: {
+    title: 'Burn Reputation',
+    infoLineView: RepBurnInfoLine,
+    summaryView: Summary,
+    editor: RepBurnEditor,
   },
   [SupportedAction.GENERIC_CALL]: {
     title: 'Generic Call',
@@ -144,6 +152,21 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
       from: '',
       callType: SupportedAction.REP_MINT,
       function: ERC20SnapshotRepContract.getFunction('mint'),
+      to: '',
+      value: BigNumber.from(0),
+      args: {
+        to: '',
+        amount: '',
+      },
+    },
+  },
+  [SupportedAction.REP_BURN]: {
+    id: '',
+    contract: ERC20SnapshotRepContract,
+    decodedCall: {
+      from: '',
+      callType: SupportedAction.REP_BURN,
+      function: ERC20SnapshotRepContract.getFunction('burn'),
       to: '',
       value: BigNumber.from(0),
       args: {
@@ -270,7 +293,7 @@ const isApprovalCall = (action: DecodedAction) => {
 
 /**
  * Importance:
- * 1. rep minting
+ * 1. rep minting & burning
  * 2. spending calls
  * 3. transfers.
  * 4. generic calls
@@ -279,6 +302,7 @@ const isApprovalCall = (action: DecodedAction) => {
 export const getActionPoints = (action: DecodedAction): number => {
   const type = action?.decodedCall?.callType;
   if (type === SupportedAction.REP_MINT) return 5;
+  if (type === SupportedAction.REP_BURN) return 5;
   if (isApprovalCall(action)) return 4;
   if (type === SupportedAction.ERC20_TRANSFER) return 3;
   if (type === SupportedAction.GENERIC_CALL) return 2;

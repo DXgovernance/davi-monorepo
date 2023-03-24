@@ -136,6 +136,8 @@
     "repMint": {
       "mint": "Mint",
       "mintRep": "Mint REP",
+      "burn": "Burn",
+      "burnRep": "Burn REP",
       "recipient": "Recipient",
       "recipientTooltip": "The address that will receive the REP minted.",
       "repPercent": "Reputation in %",

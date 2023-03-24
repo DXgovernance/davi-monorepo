@@ -226,6 +226,9 @@ const ActionModal: React.FC<ActionModalProps> = ({
       case SupportedAction.REP_MINT:
         defaultDecodedAction.decodedCall.to = guildConfig?.token;
         break;
+      case SupportedAction.REP_BURN:
+        defaultDecodedAction.decodedCall.to = guildConfig?.token;
+        break;
       case SupportedAction.SET_PERMISSIONS:
         defaultDecodedAction.decodedCall.args.from = guildId;
         defaultDecodedAction.decodedCall.to = guildConfig?.permissionRegistry;

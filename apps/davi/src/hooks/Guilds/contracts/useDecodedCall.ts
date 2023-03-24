@@ -23,6 +23,7 @@ import {
   ERC20_TRANSFER_SIGNATURE,
   SET_PERMISSION_SIGNATURE,
   MINT_REP_SIGNATURE,
+  MINT_BURN_SIGNATURE,
   ENS_UPDATE_CONTENT_SIGNATURE,
   SET_GUILD_CONFIG_SIGNATURE,
 } from 'utils';
@@ -44,6 +45,10 @@ const knownSigHashes: Record<string, { callType: SupportedAction; ABI: any }> =
     },
     [MINT_REP_SIGNATURE]: {
       callType: SupportedAction.REP_MINT,
+      ABI: ERC20SnapshotRep.abi,
+    },
+    [MINT_BURN_SIGNATURE]: {
+      callType: SupportedAction.REP_BURN,
       ABI: ERC20SnapshotRep.abi,
     },
     [ENS_UPDATE_CONTENT_SIGNATURE]: {

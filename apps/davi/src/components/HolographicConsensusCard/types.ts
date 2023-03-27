@@ -45,4 +45,5 @@ export interface IHolographicConsensusModal {
   proposalState: HolographicConsensusState;
   proposalTotalStakes: Proposal['totalStaked'];
   daoBounty: BigNumber;
+  votingMachineAddress: string;
 }

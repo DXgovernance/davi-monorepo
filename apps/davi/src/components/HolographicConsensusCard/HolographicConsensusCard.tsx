@@ -68,6 +68,12 @@ export const HolographicConsensusCard = ({
 
   let stakeTokenAddress: string = null;
   let stakeTokenInfo: TokenInfoWithType = null;
+  let votingMachineAddress: string = null;
+
+  if (schemeData && schemeData.length) {
+    const { votingMachine } = schemeData[0];
+    votingMachineAddress = votingMachine?.id;
+  }
 
   try {
     stakeTokenAddress = schemeData[0]?.votingMachine?.stakingTokenAddress;
@@ -279,14 +285,14 @@ export const HolographicConsensusCard = ({
           proposalState={proposalState}
           proposalTotalStakes={proposalTotalStakes}
           daoBounty={daoBounty}
+          votingMachineAddress={votingMachineAddress}
         />
       </Modal>
     </SidebarCard>
   );
 };
 
-// TODO: merge develop
-// TODO: move deploy scripts to davi
+// TODO: refactor scripts
 // TODO: unlock time: postponed untill useTimeDetail is implemented
 // ? border bottom of non-selected stake button?
 

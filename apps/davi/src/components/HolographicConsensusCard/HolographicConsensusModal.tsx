@@ -15,7 +15,7 @@ import { Avatar } from 'components/Avatar';
 import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
 
 import {
-  LockButton,
+  ConfirmStakeButton,
   ModalContainer,
   StakeIconButton,
   StakeSelectionContainer,
@@ -26,6 +26,8 @@ import {
   calculatePotentialReward,
   checkUserStakeOption,
 } from './utils';
+import { useERC20Allowance } from 'hooks/Guilds/erc20/useERC20Allowance';
+import { useHookStoreProvider } from 'stores';
 
 export const HolographicConsensusModal = ({
   tokenInfo,
@@ -38,14 +40,29 @@ export const HolographicConsensusModal = ({
   proposalState,
   proposalTotalStakes,
   daoBounty,
+  votingMachineAddress,
 }: IHolographicConsensusModal) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const {
+    hooks: {
+      writers: { useApproveTokens },
+    },
+  } = useHookStoreProvider();
 
   const previousStake = checkUserStakeOption(userAddress, stakeDetails);
 
   const [stakePercentage, setStakePercentage] = useState('0');
   const staked = calculateBNPercentage(userStakeTokenBalance, stakePercentage);
+
+  const approveTokens = useApproveTokens(tokenInfo?.address as `0x${string}`);
+
+  const { data: tokenAllowance } = useERC20Allowance(
+    tokenInfo?.address,
+    userAddress as `0x${string}`,
+    votingMachineAddress as `0x${string}`
+  );
+  const isTokenAmountAllowed = tokenAllowance?.gte(staked);
 
   const [selectedOption, setSelectedOption] = useState<BigNumber>(
     previousStake === 'for'
@@ -223,14 +240,24 @@ export const HolographicConsensusModal = ({
           </Text>
         </Flex>
         <Flex margin="32px 0px 0px 0px" fullWidth>
-          <LockButton
-            onClick={() => {
-              stakeOnProposal(proposalId, selectedOption, staked);
-            }}
-            disabled={selectedStake === null || stakePercentage === '0'}
-          >
-            {t('members.locking.lock')} {tokenInfo?.symbol}
-          </LockButton>
+          {isTokenAmountAllowed === true ? (
+            <ConfirmStakeButton
+              onClick={() => {
+                stakeOnProposal(proposalId, selectedOption, staked);
+              }}
+              disabled={selectedStake === null || stakePercentage === '0'}
+            >
+              {t('members.locking.lock')} {tokenInfo?.symbol}
+            </ConfirmStakeButton>
+          ) : (
+            <ConfirmStakeButton
+              onClick={() =>
+                approveTokens(votingMachineAddress, staked.toString())
+              }
+            >
+              {t('actionBuilder.approval.approve')} {tokenInfo?.symbol}
+            </ConfirmStakeButton>
+          )}
         </Flex>
       </Flex>
     </ModalContainer>

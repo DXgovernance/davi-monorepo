@@ -139,7 +139,8 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
       !sellToken ||
       !debouncedSellAmount ||
       quote ||
-      isUnitPriceOverridden
+      isUnitPriceOverridden ||
+      debouncedSellAmount === '0'
     ) {
       return () => {};
     }

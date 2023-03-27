@@ -84,7 +84,7 @@ export const StakeSelectionContainer = styled.div`
   border-radius: ${({ theme }) => theme.radii.curved};
 `;
 
-export const LockButton = styled(Button)`
+export const ConfirmStakeButton = styled(Button)`
   height: 2.5rem;
   width: 100%;
   font-weight: 600;

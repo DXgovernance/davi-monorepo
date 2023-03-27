@@ -80,6 +80,7 @@ export const calculatePotentialReward = (
   totalStaked: Proposal['totalStaked'],
   daoBounty: BigNumber
 ) => {
+  if (userOption === undefined || userOption === null) return BigNumber.from(0);
   const userStakedOptionIndex: number = userOption.toNumber() - 1;
   let userStakedOptionString: string;
   if (userStakedOptionIndex === 0) userStakedOptionString = 'against';

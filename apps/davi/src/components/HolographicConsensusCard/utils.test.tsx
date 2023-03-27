@@ -337,5 +337,22 @@ describe('calculatePotentialReward', () => {
 
       expect(result.toString()).toEqual(BigNumber.from(200).toString());
     });
+
+    it('if the user selected no option, it should return zero', () => {
+      const userAddress = ZERO_ADDRESS;
+      const currentStake = BigNumber.from(0);
+      const userOption = null;
+
+      const result = calculatePotentialReward(
+        mockProposalStakeDetailsEmpty,
+        currentStake,
+        userAddress,
+        userOption,
+        mockTotalStakedEmpty,
+        mockDaoBounty
+      );
+
+      expect(result.toString()).toEqual(BigNumber.from(0).toString());
+    });
   });
 });

@@ -142,6 +142,7 @@ export interface SubDAO {
   voteGas: BigNumber;
   voteGasBalance: BigNumber;
   votingMachine: {
+    id: string;
     stakingTokenAddress: string;
     boostedVoteRequiredPercentage: BigNumber;
     preBoostedVotePeriodLimit: BigNumber;

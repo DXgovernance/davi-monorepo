@@ -63,6 +63,7 @@ export const useGetSubDAOs: IUseGetSubDAOs = (daoId, schemeId) => {
       voteGas: scheme.voteGas,
       voteGasBalance: scheme.voteGasBalance,
       votingMachine: {
+        id: scheme.votingMachine.id,
         stakingTokenAddress: scheme.votingMachine.stakingTokenAddress,
         boostedVoteRequiredPercentage:
           scheme.votingMachine.boostedVoteRequiredPercentage,

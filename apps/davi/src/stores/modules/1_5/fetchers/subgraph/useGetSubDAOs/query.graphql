@@ -21,6 +21,7 @@ query getAllSchemes($id: ID!) {
       voteGas
       voteGasBalance
       votingMachine {
+        id
         stakingTokenAddress
         boostedVoteRequiredPercentage
         preBoostedVotePeriodLimit
@@ -54,6 +55,7 @@ query getScheme($id: ID!, $schemeId: ID!) {
       voteGas
       voteGasBalance
       votingMachine {
+        id
         stakingTokenAddress
         boostedVoteRequiredPercentage
         preBoostedVotePeriodLimit

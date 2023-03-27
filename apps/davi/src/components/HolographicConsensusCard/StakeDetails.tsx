@@ -1,11 +1,11 @@
+import { useEnsName } from 'wagmi';
+import { shortenAddress } from 'utils';
+import { useTranslation } from 'react-i18next';
 import { Flex } from 'components/primitives/Layout';
 import { Text } from 'components/primitives/Typography';
 import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
 import { IStake, IStakeDetails } from './types';
 import { StakeDetailsContainer } from './HolographicConsensusCard.styled';
-import { useEnsName } from 'wagmi';
-import { shortenAddress } from 'utils';
-import { useTranslation } from 'react-i18next';
 
 const Address = ({ address }: { address: `0x${string}` }) => {
   const { data: ensName } = useEnsName({ address, chainId: 1 });

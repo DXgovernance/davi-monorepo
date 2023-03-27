@@ -7,12 +7,14 @@ import { useTranslation } from 'react-i18next';
 import { BigNumber } from 'ethers';
 
 import { resolveUri } from 'utils';
+import { useHookStoreProvider } from 'stores';
 import { Flex } from 'components/primitives/Layout';
 import { Button } from 'components/primitives/Button';
 import { Slider } from 'components/primitives/Forms/Slider';
 import { Text } from 'components/primitives/Typography';
 import { Avatar } from 'components/Avatar';
 import { bigNumberToNumber } from 'hooks/Guilds/conversions/useBigNumberToNumber';
+import { useERC20Allowance } from 'hooks/Guilds/erc20/useERC20Allowance';
 
 import {
   ConfirmStakeButton,
@@ -26,8 +28,6 @@ import {
   calculatePotentialReward,
   checkUserStakeOption,
 } from './utils';
-import { useERC20Allowance } from 'hooks/Guilds/erc20/useERC20Allowance';
-import { useHookStoreProvider } from 'stores';
 
 export const HolographicConsensusModal = ({
   tokenInfo,
@@ -229,7 +229,7 @@ export const HolographicConsensusModal = ({
           {/*
             //! Unlock time is hardcoded untill we implement useTimeDetail hook
             */}
-          <Text bold>March 14, 2023, 3:54pm UTC</Text>
+          <Text bold>March 14 (not implemented)</Text>
         </Flex>
         <Flex direction="row" fullWidth justifyContent="flex-start" gap="10px">
           <div>

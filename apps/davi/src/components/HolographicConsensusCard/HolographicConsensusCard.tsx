@@ -293,6 +293,5 @@ export const HolographicConsensusCard = ({
 };
 
 // TODO: unlock time: postponed untill useTimeDetail is implemented
-// ? border bottom of non-selected stake button?
 
 // maxValue of the speedometer is 10_000, so it's akin a 100% plus two decimal places. A value like 77,35% would be 7735

@@ -5,6 +5,7 @@ import { IStake, IStakeDetails } from './types';
 import { StakeDetailsContainer } from './HolographicConsensusCard.styled';
 import { useEnsName } from 'wagmi';
 import { shortenAddress } from 'utils';
+import { useTranslation } from 'react-i18next';
 
 const Address = ({ address }: { address: `0x${string}` }) => {
   const { data: ensName } = useEnsName({ address, chainId: 1 });
@@ -17,26 +18,34 @@ export const StakeDetails = ({
   tokenSymbol,
   tokenDecimals,
 }: IStakeDetails) => {
+  const { t } = useTranslation();
+
   return (
     <StakeDetailsContainer>
-      {stakeDetails[selectedStake].map((stake: IStake) => {
-        const roundedBalance = bigNumberToNumber(stake.amount, tokenDecimals);
-        const address = stake.staker as `0x${string}`;
+      {stakeDetails[selectedStake].length === 0 ? (
+        <Text colorVariant="muted">
+          {t('holographicConsensus.thereAreNoStakes')}
+        </Text>
+      ) : (
+        stakeDetails[selectedStake].map((stake: IStake) => {
+          const roundedBalance = bigNumberToNumber(stake.amount, tokenDecimals);
+          const address = stake.staker as `0x${string}`;
 
-        return (
-          <Flex
-            direction="row"
-            justifyContent="space-between"
-            margin="6px 0px"
-            key={stake.id}
-          >
-            <Address address={address} />
-            <Text colorVariant="muted">
-              {roundedBalance} {tokenSymbol}
-            </Text>
-          </Flex>
-        );
-      })}
+          return (
+            <Flex
+              direction="row"
+              justifyContent="space-between"
+              margin="6px 0px"
+              key={stake.id}
+            >
+              <Address address={address} />
+              <Text colorVariant="muted">
+                {roundedBalance} {tokenSymbol}
+              </Text>
+            </Flex>
+          );
+        })
+      )}
     </StakeDetailsContainer>
   );
 };

@@ -13,13 +13,11 @@ query getDaoProposal($id: ID!, $proposalId: ID!) {
         preBoostedPhaseTime
         proposer
         schemeId
-        secondsFromTimeOutTillExecuteBoosted
         state
         submittedTime
         title
         to
         totalOptions
-        totalStakes
         value
         votingMachineExecutionState
         votingMachineProposalState
@@ -34,6 +32,7 @@ query getDaoProposal($id: ID!, $proposalId: ID!) {
           amount
           option
         }
+        daoRedeemedWinnings
       }
     }
   }

@@ -73,7 +73,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
         ...decodedCall,
         args: {
           ...decodedCall.args,
-          to: values.recipient,
+          account: values.recipient,
           amount: ethers.utils.parseUnits(repAmount.toString()),
         },
       },
@@ -134,6 +134,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
                   </ControlLabel>
                   <ControlRow>
                     <RepMintInput
+                      data-testid="reputation-in-percentage-field"
                       {...field}
                       onChange={value => {
                         field.onChange(value);
@@ -151,7 +152,7 @@ export const Mint: React.FC<ActionEditorProps> = ({
         <ControlRow>
           <Control>
             <ControlLabel>
-              {t('repMint.repAmount')}
+              {t('actionBuilder.repMint.repAmount')}
               <Tooltip text={t('actionBuilder.repMint.repAmountTooltip')}>
                 <StyledIcon src={Info} />
               </Tooltip>
@@ -161,7 +162,12 @@ export const Mint: React.FC<ActionEditorProps> = ({
             </ControlRow>
           </Control>
         </ControlRow>
-        <Button m="1rem 0 0" fullWidth type="submit">
+        <Button
+          m="1rem 0 0"
+          fullWidth
+          type="submit"
+          data-testid="save-action-button"
+        >
           {t('actionBuilder.action.saveAction')}
         </Button>
       </form>

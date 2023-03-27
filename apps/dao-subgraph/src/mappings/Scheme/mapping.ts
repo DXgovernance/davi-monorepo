@@ -124,9 +124,8 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
     .getParamsHash()
     .toHexString();
   proposal.daoBounty = proposalDataFromVotingMachine.getDaoBounty();
-  proposal.totalStakes = proposalDataFromVotingMachine.getTotalStakes();
-  proposal.secondsFromTimeOutTillExecuteBoosted =
-    proposalDataFromVotingMachine.getSecondsFromTimeOutTillExecuteBoosted();
+  proposal.daoRedeemedWinnings =
+    proposalDataFromVotingMachine.getDaoRedeemedWinnings();
   proposal.boostedPhaseTime = proposalTimes[1];
   proposal.preBoostedPhaseTime = proposalTimes[2];
 

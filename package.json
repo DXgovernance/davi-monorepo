@@ -28,7 +28,9 @@
     "test": "turbo run test --filter=\"./apps/**\"",
     "prepare": "husky install",
     "pre-commit": "turbo run pre-commit",
-    "format-check": "turbo run format-check --filter=!dxdao-contracts"
+    "format-check": "turbo run format-check --filter=!dxdao-contracts",
+    "clone-contracts": "rm -rf packages/dxdao-contracts && git clone https://github.com/DXgovernance/dxdao-contracts packages/dxdao-contracts && git submodule update --init && git submodule status",
+    "ci:install": "pnpm run clone-contracts && pnpm install"
   },
   "pnpm": {
     "overrides": {

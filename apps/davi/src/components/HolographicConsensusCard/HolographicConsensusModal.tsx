@@ -254,6 +254,7 @@ export const HolographicConsensusModal = ({
               onClick={() =>
                 approveTokens(votingMachineAddress, staked.toString())
               }
+              disabled={selectedStake === null || stakePercentage === '0'}
             >
               {t('actionBuilder.approval.approve')} {tokenInfo?.symbol}
             </ConfirmStakeButton>

@@ -314,7 +314,7 @@ describe('calculatePotentialReward', () => {
         currentStake,
         userAddress,
         userOption,
-        mockTotalStaked,
+        mockTotalStakedEmpty,
         mockDaoBounty
       );
 

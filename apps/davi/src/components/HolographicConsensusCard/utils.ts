@@ -93,6 +93,8 @@ export const calculatePotentialReward = (
   const stakedInUserVoteFixed: FixedNumber =
     FixedNumber.fromValue(stakedInUserVote);
 
+  if (stakedInUserVote.isZero()) return BigNumber.from(0);
+
   const totalStakedWithoutDaoBounty = userCurrentStake
     .add(totalStaked[0])
     .add(totalStaked[1])

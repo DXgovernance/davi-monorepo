@@ -292,7 +292,8 @@ export const HolographicConsensusCard = ({
   );
 };
 
-// TODO: refactor scripts
+// TODO: bug divide by zero
+// TODO: message if there are no stakes
 // TODO: unlock time: postponed untill useTimeDetail is implemented
 // ? border bottom of non-selected stake button?
 

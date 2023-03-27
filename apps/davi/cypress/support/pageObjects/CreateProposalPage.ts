@@ -13,7 +13,8 @@ class CreateProposalPage {
     actionList() { return cy.findAllByTestId('actions-modal-contract-list') }
     transferAction_Button() { return cy.findAllByTestId('erc20transfer-action') }
     setPermissionActionButton() { return cy.findAllByTestId('set-permission-action') }
-    mintREPActionButton() { return cy.findAllByTestId('rep-mint-action') }
+    mintREPAction_Button() { return cy.findAllByTestId('rep-mint-action') }
+    mintREPInPercentage_Field() { return cy.findAllByTestId('reputation-in-percentage-field') }
     updateENSContentActionButton() { return cy.findAllByTestId('ens-update-content-action') }
     setGuildConfigActionButton() { return cy.findAllByTestId('set-guild-config-action') }
     externalContractActionButton() { return cy.findAllByTestId('external-contracts-action') }
@@ -26,6 +27,7 @@ class CreateProposalPage {
     transferAmount_Field() { return cy.get('[name="amount"]') }
     transferToken_Dropdown() { return cy.get('[placeholder="Token"]') }
     saveTransferAction_Button() { return cy.findByTestId('submit-erc20transfer') }
+    saveMintRepAction_Button() { return cy.findByTestId('save-action-button') }
 
     //Metods
     clickOnCreateProposalButton() {
@@ -52,12 +54,20 @@ class CreateProposalPage {
         this.transferAction_Button().click()
     }
 
+    clickMintRepActionButton() {
+        this.mintREPAction_Button().click()
+    }
+
     enterTransferEthereumAddress(address) {
         this.transferEthereumAddress_Field().type(address)
     }
 
     enterTransferEthereumAmount(amount) {
         this.transferAmount_Field().type(amount)
+    }
+
+    enterMintReputationInPercentage(percentage) {
+        this.mintREPInPercentage_Field().type(percentage)
     }
 
     clickTokenDropdown() {
@@ -70,6 +80,10 @@ class CreateProposalPage {
 
     clickSaveTransferAction() {
         this.saveTransferAction_Button().click()
+    }
+
+    clickSaveMintRepAction() {
+        this.saveMintRepAction_Button().click()
     }
 
     clickOnCreateProposal() {

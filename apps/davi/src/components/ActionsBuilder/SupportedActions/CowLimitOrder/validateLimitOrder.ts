@@ -1,12 +1,11 @@
 import { BigNumber, utils } from 'ethers';
 import { FieldError } from 'react-hook-form';
 import { TFunction } from 'react-i18next';
-import { TokenInfoWithType } from 'types/types';
 import { removeNullValues } from 'utils';
 
 export interface ValidateLimitOrderValues {
-  buyToken: TokenInfoWithType;
-  sellToken: TokenInfoWithType;
+  buyToken: string;
+  sellToken: string;
   sellAmount: any;
   unitBuyPrice: any;
 }
@@ -31,7 +30,7 @@ const validateLimitOrder = (
   if (!buyToken) {
     errors.buyToken.message = t('inputValidation.buyTokenIsRequired');
     hasErrors = true;
-  } else if (buyToken.type === 'ERC20' && !utils.isAddress(buyToken.address)) {
+  } else if (!utils.isAddress(buyToken)) {
     errors.buyToken.message = t('inputValidation.invalidBuyTokenAddress');
     hasErrors = true;
   }
@@ -39,15 +38,12 @@ const validateLimitOrder = (
   if (!sellToken) {
     errors.sellToken.message = t('inputValidation.sellTokenIsRequired');
     hasErrors = true;
-  } else if (
-    sellToken.type === 'ERC20' &&
-    !utils.isAddress(sellToken.address)
-  ) {
+  } else if (!utils.isAddress(sellToken)) {
     errors.sellToken.message = t('inputValidation.invalidSellTokenAddress');
     hasErrors = true;
   }
 
-  if (buyToken?.address === sellToken?.address) {
+  if (buyToken === sellToken) {
     errors.buyToken.message = t(
       'inputValidation.buyAndSellTokensCannotBeTheSame'
     );

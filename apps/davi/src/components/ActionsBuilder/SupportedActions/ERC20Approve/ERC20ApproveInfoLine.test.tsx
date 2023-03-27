@@ -37,9 +37,7 @@ jest.mock('wagmi', () => ({
 
 describe('ERC20ApproveInfoLine', () => {
   it('Should match snapshot', () => {
-    const { container } = render(
-      <ERC20ApproveInfoLine decodedCall={null} />
-    );
+    const { container } = render(<ERC20ApproveInfoLine decodedCall={null} />);
     expect(container).toMatchSnapshot();
   });
 });

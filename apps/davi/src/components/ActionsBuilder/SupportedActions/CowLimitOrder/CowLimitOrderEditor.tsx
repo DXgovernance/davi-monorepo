@@ -1,15 +1,10 @@
 import { ActionEditorProps } from '..';
 import { Button } from 'components/primitives/Button';
 import { Controller, useForm } from 'react-hook-form';
-import { Avatar } from 'components/Avatar';
-import { TokenPicker } from 'components/TokenPicker';
 import { Input } from 'components/primitives/Forms/Input';
 import { TokenAmountInput } from 'components/primitives/Forms/TokenAmountInput';
 import { BigNumber, FixedNumber, utils } from 'ethers';
-import { useTokenList } from 'hooks/Guilds/tokens/useTokenList';
-import { useMemo, useState } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
-import { resolveUri } from 'utils/url';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Control,
   ControlLabel,
@@ -28,13 +23,21 @@ import {
   SwapQuoteError,
   UnitPriceContainer,
 } from './CowLimitOrderEditor.styled';
-import { formatUnits } from 'ethers/lib/utils';
 import { BiRefresh } from 'react-icons/bi';
 import { ERC20_APPROVE_SIGNATURE, getNetworkById } from 'utils';
 import { DecodedCall, SupportedAction } from 'components/ActionsBuilder/types';
-import { settlementContractAddress, vaultRelayerContractAddress } from 'hooks/Guilds/cow/config';
+import {
+  settlementContractAddress,
+  vaultRelayerContractAddress,
+} from 'hooks/Guilds/cow/config';
 import ERC20 from 'contracts/ERC20.json';
 import { Loading } from 'components/primitives/Loading';
+import { useDebounce } from 'hooks/Guilds/useDebounce';
+import { TokenPickerInput } from 'components/TokenPickerInput';
+import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
+import { Box } from 'components/primitives/Layout';
+import { formatUnits } from 'ethers/lib/utils';
+import useStringToBigNumber from 'hooks/Guilds/conversions/useStringToBigNumber';
 
 const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
   decodedCall,
@@ -46,114 +49,180 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
   const { guildId } = useTypedParams();
 
   const { chain } = useNetwork();
-  const { tokens } = useTokenList(chain?.id, true);
 
   const nativeTokenSymbol = useMemo(() => {
     return getNetworkById(chain?.id).nativeAsset.symbol;
   }, [chain]);
 
-  const {
-    getQuote,
-    createOrder,
-    getNativePrice,
-    error: cowError,
-  } = useCow();
+  const { getQuote, createOrder, getNativePrice, error: cowError } = useCow();
 
   const [quote, setQuote] = useState<CowQuote>(null);
-  const [isUnitPriceUpdated, setIsUnitPriceUpdated] = useState(false);
-  const [isTokensUpdated, setIsTokensUpdated] = useState(false);
+  const [isUnitPriceOverridden, setIsUnitPriceOverridden] = useState(false);
 
   const parsedData = useMemo(() => {
     if (!decodedCall) return null;
-
-    const buyToken = tokens.find(
-      token => token.address === decodedCall.optionalProps.buyToken.address
-    );
-    const sellToken = tokens.find(
-      token => token.address === decodedCall.optionalProps.sellToken.address
-    );
 
     /**
      * Only the sell amount will be used to calculate the quote since reversed quotes are not supported
      */
     return {
-      from: decodedCall.from,
-      to: decodedCall.from, // Swap to the guild itself
-      buyToken,
-      sellToken,
+      buyToken: decodedCall.optionalProps.buyToken,
+      sellToken: decodedCall.optionalProps.sellToken,
       sellAmount: decodedCall.optionalProps.sellAmount,
-      functionSignature: decodedCall.optionalProps.functionSignature,
     };
-  }, [decodedCall, tokens]);
+  }, [decodedCall]);
 
-  const { control, handleSubmit, getValues, trigger } = useForm({
+  const { control, handleSubmit, getValues, watch } = useForm({
     resolver: LimitOrder,
     context: { t },
     defaultValues: parsedData,
   });
 
-  const [isBuyTokenPickerOpen, setIsBuyTokenPickerOpen] =
-    useState<boolean>(false);
-  const [isSellTokenPickerOpen, setIsSellTokenPickerOpen] =
-    useState<boolean>(false);
+  const { buyToken, sellToken, sellAmount } = getValues();
+  const watchSellAmount = watch('sellAmount');
+  const watchSellToken = watch('sellToken');
+  const watchBuyToken = watch('buyToken');
+
+  const { data: sellTokenInfo } = useERC20Info(watchSellToken);
+  const { data: buyTokenInfo } = useERC20Info(watchBuyToken);
+
+  // useDebounce will make sure we're not spamming the cow api
+  const debouncedSellAmount = useDebounce(watchSellAmount, 200);
+
   const [unitBuyPrice, setUnitBuyPrice] = useState<string>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const buyAmount = useMemo(() => {
-    if (!quote) return null;
-
-    if (!isUnitPriceUpdated) {
-      return Number.parseFloat(
-        formatUnits(quote?.buyAmount, getValues('buyToken.decimals'))
-      ).toFixed(6);
-    }
-
-    const estimation = FixedNumber.from(1)
-      .divUnsafe(FixedNumber.from(unitBuyPrice))
-      .mulUnsafe(
-        FixedNumber.from(
-          formatUnits(quote?.sellAmount, getValues('sellToken.decimals'))
-        )
-      )
-      .round(6);
-
-    return estimation?.toString();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [unitBuyPrice, quote, getValues, isUnitPriceUpdated, isTokensUpdated]);
-
-  const onRequestQuote = async () => {
-    setIsLoading(true);
-    const isValid = await trigger();
+    if (!quote || !unitBuyPrice || unitBuyPrice === '0') return '';
 
     try {
-      // retrieve native price before getting the quote, 
-      // else if quote has an error will get it dismissed.
-      await retrieveNativePrice();
-
-      if (isValid) {
-        const quote = await getQuote({
-          buyToken: getValues('buyToken.address'),
-          sellToken: getValues('sellToken.address'),
-          sellAmount: BigNumber.from(getValues('sellAmount')).toString(),
-          receiver: decodedCall?.from,
-        });
-        setQuote(quote);
-      }
-      setIsUnitPriceUpdated(false);
-      setIsTokensUpdated(false);
-    } finally {
-      setIsLoading(false);
+      return FixedNumber.from(1)
+        .divUnsafe(FixedNumber.from(unitBuyPrice))
+        .mulUnsafe(
+          FixedNumber.from(
+            formatUnits(quote?.sellAmount, sellTokenInfo?.decimals)
+          )
+        )
+        .round(8)
+        ?.toString();
+    } catch (error) {
+      console.log(error);
+      return '0';
     }
+  }, [quote, unitBuyPrice, sellTokenInfo]);
+
+  const retrieveUnitprice = useCallback(async () => {
+    return await getNativePrice(buyToken, buyTokenInfo?.decimals);
+  }, [buyToken, getNativePrice, buyTokenInfo?.decimals]);
+
+  const handleUnitPriceChange = (value: string) => {
+    setUnitBuyPrice(value);
+    setIsUnitPriceOverridden(true);
   };
 
+  const isQuoteLoading = useMemo(() => {
+    if (
+      buyToken &&
+      sellToken &&
+      debouncedSellAmount &&
+      !quote &&
+      !isUnitPriceOverridden
+    ) {
+      return true;
+    }
+
+    return false;
+  }, [quote, buyToken, debouncedSellAmount, sellToken, isUnitPriceOverridden]);
+
+  useEffect(() => {
+    if (
+      !buyToken ||
+      !sellToken ||
+      !debouncedSellAmount ||
+      quote ||
+      isUnitPriceOverridden
+    ) {
+      return () => {};
+    }
+
+    let isActive = true;
+
+    const requestQuote = async () => {
+      try {
+        const quote = await getQuote({
+          buyToken: buyToken,
+          sellToken: sellToken,
+          sellAmount: BigNumber.from(debouncedSellAmount).toString(),
+          receiver: guildId,
+        });
+
+        if (isActive) {
+          setQuote(quote);
+          // setIsUnitPriceOverridden(false);
+        }
+      } catch (e: any) {
+        console.log('error getting quote ', e);
+      }
+    };
+
+    requestQuote();
+
+    return () => {
+      isActive = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    debouncedSellAmount,
+    buyToken,
+    sellToken,
+    guildId,
+    isUnitPriceOverridden,
+  ]);
+
+  useEffect(() => {
+    if (!buyToken || isUnitPriceOverridden || !sellToken) {
+      return () => {};
+    }
+
+    let isActive = true;
+
+    const requestUnitPrice = async () => {
+      try {
+        // retrieve native price before getting the quote,
+        // else if quote has an error will get it dismissed.
+        const unitPrice = await retrieveUnitprice();
+
+        if (isActive) {
+          setUnitBuyPrice(unitPrice?.toString());
+        }
+      } catch (e: any) {
+        console.log('error getting unit price ', e);
+      }
+    };
+
+    requestUnitPrice();
+
+    return () => {
+      isActive = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    buyToken,
+    sellToken,
+  ]);
+
+  const buyAmountBN = useStringToBigNumber(buyAmount, buyTokenInfo?.decimals);
+
   const submitAction = async (values: LimitOrderValues) => {
-    setIsLoading(true);
-    const orderId = await createOrder(quote);
+    const orderId = await createOrder({
+      ...quote,
+      buyAmount: buyAmountBN?.toString(),
+      sellAmount: sellAmount?.toString(),
+    });
     const ERC20Contract = new utils.Interface(ERC20.abi);
     const cowApprovalCall: DecodedCall = {
       ...decodedCall,
       callType: SupportedAction.ERC20_APPROVE,
-      to: values.sellToken.address,
+      to: values.sellToken,
       function: ERC20Contract.getFunction('approve'),
       args: {
         spender: vaultRelayerContractAddress,
@@ -179,31 +248,12 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
       },
     };
 
-    setIsLoading(false);
-
     if (isEdit) {
       // in case of edit mode we submit only one action that is being edited
-      return parsedData?.functionSignature === ERC20_APPROVE_SIGNATURE
-        ? onSubmit([cowApprovalCall])
-        : onSubmit([limitOrderCall]);
+      return onSubmit([limitOrderCall]);
     }
 
     return onSubmit([cowApprovalCall, limitOrderCall]);
-  };
-
-  const retrieveNativePrice = async () => {
-    setIsLoading(true);
-    const nativePrice = await getNativePrice(
-      getValues('buyToken')?.address,
-      getValues('buyToken')?.decimals
-    );
-    setUnitBuyPrice(nativePrice?.toString());
-    setIsLoading(false);
-  };
-
-  const handleUnitPriceChange = (value: string) => {
-    setUnitBuyPrice(value);
-    setIsUnitPriceUpdated(true);
   };
 
   return (
@@ -221,57 +271,22 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
                     <ControlLabel>
                       {t('actionBuilder.inputs.sellToken')}
                     </ControlLabel>
-                    {isLoading ? (
-                      <Loading
-                        loading
-                        text
-                        skeletonProps={{ height: '2.6rem' }}
-                      />
-                    ) : (
-                      <>
-                        <ControlRow
-                          onClick={() => setIsSellTokenPickerOpen(true)}
-                        >
-                          <Input
-                            {...field}
-                            value={field.value?.symbol}
-                            placeholder={t('actionBuilder.inputs.sellToken')}
-                            isInvalid={!!error?.message}
-                            icon={
-                              <div>
-                                {field.value && (
-                                  <Avatar
-                                    src={resolveUri(field.value?.logoURI)}
-                                    defaultSeed={field.value?.address}
-                                    size={18}
-                                  />
-                                )}
-                              </div>
-                            }
-                            iconRight={<FiChevronDown size={20} />}
-                            readOnly
-                          />
-                        </ControlRow>
-                        {!!error?.message && (
-                          <FieldError>{error.message}</FieldError>
-                        )}
-                      </>
+
+                    <TokenPickerInput
+                      {...field}
+                      placeholder={t('actionBuilder.inputs.sellToken')}
+                      onChange={sellToken => {
+                        setQuote(null);
+                        setIsUnitPriceOverridden(false);
+                        field.onChange(sellToken);
+                      }}
+                      value={field.value}
+                      readOnly
+                    />
+                    {!!error?.message && (
+                      <FieldError>{error.message}</FieldError>
                     )}
                   </Control>
-
-                  <TokenPicker
-                    {...field}
-                    walletAddress={guildId}
-                    isOpen={isSellTokenPickerOpen}
-                    onClose={() => setIsSellTokenPickerOpen(false)}
-                    showNativeToken={false}
-                    onSelect={sellToken => {
-                      field.onChange(sellToken);
-                      setIsSellTokenPickerOpen(false);
-                      setIsUnitPriceUpdated(false);
-                      setIsTokensUpdated(true);
-                    }}
-                  />
                 </>
               );
             }}
@@ -290,59 +305,22 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
                     <ControlLabel>
                       {t('actionBuilder.inputs.buyToken')}
                     </ControlLabel>
-                    {isLoading ? (
-                      <Loading
-                        loading
-                        text
-                        skeletonProps={{ height: '2.6rem' }}
-                      />
-                    ) : (
-                      <>
-                        <ControlRow
-                          onClick={() => setIsBuyTokenPickerOpen(true)}
-                        >
-                          <Input
-                            {...field}
-                            value={field.value?.symbol}
-                            placeholder={t('actionBuilder.inputs.buyToken')}
-                            isInvalid={!!error?.message}
-                            icon={
-                              <div>
-                                {field.value && (
-                                  <Avatar
-                                    src={resolveUri(field.value?.logoURI)}
-                                    defaultSeed={field.value?.address}
-                                    size={18}
-                                  />
-                                )}
-                              </div>
-                            }
-                            iconRight={<FiChevronDown size={20} />}
-                            readOnly
-                          />
-                        </ControlRow>
-                        {!!error?.message && (
-                          <FieldError>{error.message}</FieldError>
-                        )}
-                      </>
+
+                    <TokenPickerInput
+                      {...field}
+                      placeholder={t('actionBuilder.inputs.buyToken')}
+                      onChange={buyToken => {
+                        setQuote(null);
+                        setIsUnitPriceOverridden(false);
+                        field.onChange(buyToken);
+                      }}
+                      value={field.value}
+                      readOnly
+                    />
+                    {!!error?.message && (
+                      <FieldError>{error.message}</FieldError>
                     )}
                   </Control>
-
-                  <TokenPicker
-                    {...field}
-                    walletAddress={guildId}
-                    isOpen={isBuyTokenPickerOpen}
-                    onClose={() => setIsBuyTokenPickerOpen(false)}
-                    showNativeToken={false}
-                    onSelect={async buyToken => {
-                      field.onChange(buyToken);
-                      setIsBuyTokenPickerOpen(false);
-                      await retrieveNativePrice();
-                      setIsUnitPriceUpdated(false);
-                      setIsUnitPriceUpdated(false);
-                      setIsTokensUpdated(true);
-                    }}
-                  />
                 </>
               );
             }}
@@ -361,28 +339,24 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
                   <ControlLabel>
                     {t('actionBuilder.inputs.sellAmount')}
                   </ControlLabel>
-                  {isLoading ? (
-                    <Loading
-                      loading
-                      text
-                      skeletonProps={{ height: '2.6rem' }}
-                    />
-                  ) : (
-                    <>
-                      <ControlRow>
-                        <TokenAmountInput
-                          {...field}
-                          decimals={getValues('sellToken.decimals')}
-                          isInvalid={!!error?.message}
-                          onClick={() => setIsUnitPriceUpdated(true)}
-                        />
-                      </ControlRow>
+                  <>
+                    <ControlRow>
+                      <TokenAmountInput
+                        {...field}
+                        decimals={sellTokenInfo?.decimals}
+                        isInvalid={!!error?.message}
+                        onChange={sellAmount => {
+                          setIsUnitPriceOverridden(false);
+                          setQuote(null);
+                          field.onChange(sellAmount);
+                        }}
+                      />
+                    </ControlRow>
 
-                      {!!error?.message && (
-                        <FieldError>{error.message}</FieldError>
-                      )}
-                    </>
-                  )}
+                    {!!error?.message && (
+                      <FieldError>{error.message}</FieldError>
+                    )}
+                  </>
                 </Control>
               );
             }}
@@ -395,14 +369,18 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
             control={control}
             render={({ field: { ref, ...field }, fieldState }) => {
               const { error } = fieldState;
-              // const { unitSellPrice } = getValues();
               return (
                 <>
                   <Control>
                     <UnitPriceContainer>
                       <ControlLabel>
-                        {t('actionBuilder.inputs.unitBuyPrice')} in{' '}
-                        {isLoading ? (
+                        {buyTokenInfo?.symbol
+                          ? t('actionBuilder.inputs.pricePerToken', {
+                              token: buyTokenInfo?.symbol,
+                            })
+                          : t('actionBuilder.inputs.unitBuyPrice')}{' '}
+                        in{' '}
+                        {isQuoteLoading ? (
                           <Loading
                             loading
                             text
@@ -413,11 +391,20 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
                           <>{nativeTokenSymbol}</>
                         )}
                       </ControlLabel>
-                      {!isLoading && (
-                        <BiRefresh size={20} onClick={retrieveNativePrice} />
+                      {!isQuoteLoading && (
+                        <UnitPriceContainer
+                          onClick={async () => {
+                            const unitPrice = await retrieveUnitprice();
+                            setUnitBuyPrice(unitPrice?.toString());
+                            setIsUnitPriceOverridden(false);
+                          }}
+                        >
+                          <Box>Market Price</Box>
+                          <BiRefresh size={20} />
+                        </UnitPriceContainer>
                       )}
                     </UnitPriceContainer>
-                    {isLoading ? (
+                    {isQuoteLoading ? (
                       <Loading
                         loading
                         text
@@ -430,9 +417,9 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
                             {...field}
                             placeholder={'0.0'}
                             value={unitBuyPrice}
-                            onChange={e =>
-                              handleUnitPriceChange(e.target.value)
-                            }
+                            onChange={e => {
+                              handleUnitPriceChange(e.target.value);
+                            }}
                           />
                         </ControlRow>
                         {!!error && <FieldError>{error.message}</FieldError>}
@@ -449,10 +436,9 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
           <>
             <Control>
               <ControlLabel>
-                {t('actionBuilder.inputs.atLeastAmount')}{' '}
-                {getValues('buyToken.symbol')}
+                {t('actionBuilder.inputs.atLeastAmount')} {buyTokenInfo?.symbol}
               </ControlLabel>
-              {isLoading ? (
+              {isQuoteLoading ? (
                 <Loading loading text skeletonProps={{ height: '2.6rem' }} />
               ) : (
                 <>
@@ -471,50 +457,27 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
 
         {cowError && <SwapQuoteError>{cowError}</SwapQuoteError>}
 
-        <div style={{ display: 'flex' }}>
-          {isLoading ? (
-            <Loading
-              loading
-              text
-              skeletonProps={{ height: '2.6rem', width: '10rem' }}
-              style={{ margin: '1rem 0.5rem 0' }}
-            />
-          ) : (
-            <Button
-              m="1rem 0.5rem 0"
-              fullWidth
-              data-testid="submit-erc20transfer"
-              type="button"
-              variant="secondary"
-              onClick={onRequestQuote}
-            >
-              {'Market Price'}
-            </Button>
-          )}
-
-          {isLoading ? (
-            <Loading
-              loading
-              text
-              skeletonProps={{ height: '2.6rem', width: '10rem' }}
-              style={{ margin: '1rem 0 0' }}
-            />
-          ) : (
-            <Button
-              m="1rem 0 0"
-              fullWidth
-              data-testid="submit-cowLimitOrder"
-              type="submit"
-              disabled={!quote || isUnitPriceUpdated || isTokensUpdated}
-            >
-              {t('actionBuilder.action.saveAction')}
-            </Button>
-          )}
-        </div>
+        {isQuoteLoading ? (
+          <Loading
+            loading
+            text
+            skeletonProps={{ height: '2.6rem' }}
+            style={{ margin: '1rem 0 0' }}
+          />
+        ) : (
+          <Button
+            m="1rem 0 0"
+            fullWidth
+            data-testid="submit-cowLimitOrder"
+            type="submit"
+            disabled={!quote}
+          >
+            {t('actionBuilder.action.saveAction')}
+          </Button>
+        )}
       </form>
     </div>
   );
 };
 
 export default CowLimitOrderEditor;
-

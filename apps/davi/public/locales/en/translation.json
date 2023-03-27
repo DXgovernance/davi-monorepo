@@ -111,6 +111,7 @@
       "sellAmount": "Sell Amount",
       "buyAmount": "Buy Amount",
       "unitBuyPrice": "Unit Buy Price",
+      "pricePerToken": "Price Per {{token}} ",
       "atLeastAmount": "You receive at least"
     },
     "permissions": {

@@ -8,12 +8,10 @@ import { useNetwork } from 'wagmi';
 import { IoSwapVerticalOutline } from 'react-icons/io5';
 import { CowQuote, useCow } from 'hooks/Guilds/cow/useCow';
 import { BigNumber } from 'ethers';
-import { ERC20_APPROVE_SIGNATURE } from 'utils/constants';
 import { useTranslation } from 'react-i18next';
+import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 
-const CowLimitOrderInfoLine: React.FC<ActionViewProps> = ({
-  decodedCall,
-}) => {
+const CowLimitOrderInfoLine: React.FC<ActionViewProps> = ({ decodedCall }) => {
   const { t } = useTranslation();
 
   const { chain } = useNetwork();
@@ -34,26 +32,10 @@ const CowLimitOrderInfoLine: React.FC<ActionViewProps> = ({
   const parsedData = useMemo(() => {
     if (!decodedCall) return null;
 
-    const buyToken = tokens.find(
-      token =>
-        token.address?.toLowerCase() ===
-        decodedCall.optionalProps?.buyToken?.address?.toLowerCase()
-    );
-    const sellToken = tokens.find(
-      token =>
-        token.address?.toLowerCase() ===
-        decodedCall.optionalProps?.sellToken?.address?.toLowerCase()
-    );
-
     return {
       orderId: decodedCall.args.orderUid,
-      buyToken,
-      sellToken,
-      buyAmount: decodedCall.optionalProps.buyAmount,
-      sellAmount: decodedCall.optionalProps.sellAmount,
-      functionSignature: decodedCall.optionalProps.functionSignature,
     };
-  }, [decodedCall, tokens]);
+  }, [decodedCall]);
 
   useEffect(() => {
     if (!parsedData?.orderId) return;
@@ -83,25 +65,24 @@ const CowLimitOrderInfoLine: React.FC<ActionViewProps> = ({
     6
   );
 
+  const { data: buyTokenInfo } = useERC20Info(order?.buyToken);
+  const { data: sellTokenInfo } = useERC20Info(order?.sellToken);
+
   return (
     <>
       <Segment>
         <IoSwapVerticalOutline size={16} />
       </Segment>
       <Segment>
-        {!(parsedData?.functionSignature === ERC20_APPROVE_SIGNATURE)
-          ? `${t('actionBuilder.config.limitOrder')} ${roundedSellBalance} ${
-              parsedData?.sellToken?.symbol
-            }`
-          : t('actionBuilder.approval.setLimitOrderApproval')}
+        {`${t('actionBuilder.config.limitOrder')} ${roundedSellBalance} ${
+          sellTokenInfo?.symbol
+        }`}
       </Segment>
       <Segment>
-        {!(parsedData?.functionSignature === ERC20_APPROVE_SIGNATURE) && (
-          <FiArrowRight />
-        )}
+        <FiArrowRight />
       </Segment>
       <Segment>
-        {roundedBuyBalance} {parsedData?.buyToken?.symbol}
+        {roundedBuyBalance} {buyTokenInfo?.symbol}
       </Segment>
     </>
   );

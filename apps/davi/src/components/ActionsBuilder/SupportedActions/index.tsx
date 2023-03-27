@@ -151,7 +151,7 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
       },
       value: BigNumber.from(0),
       optionalProps: {
-        functionSignature: ''
+        functionSignature: '',
       },
     },
   },

@@ -54,7 +54,6 @@ export const useScientific = () => {
     }
   };
 
-
   const parseScientific = (number: number, roundingDecimals?: number) => {
     if (!number) return null;
 

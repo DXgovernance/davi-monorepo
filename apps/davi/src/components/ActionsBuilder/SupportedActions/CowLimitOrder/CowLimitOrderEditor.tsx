@@ -157,7 +157,6 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
 
         if (isActive) {
           setQuote(quote);
-          // setIsUnitPriceOverridden(false);
         }
       } catch (e: any) {
         console.log('error getting quote ', e);
@@ -187,8 +186,6 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
 
     const requestUnitPrice = async () => {
       try {
-        // retrieve native price before getting the quote,
-        // else if quote has an error will get it dismissed.
         const unitPrice = await retrieveUnitprice();
 
         if (isActive) {
@@ -205,10 +202,7 @@ const CowLimitOrderEditor: React.FC<ActionEditorProps> = ({
       isActive = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    buyToken,
-    sellToken,
-  ]);
+  }, [buyToken, sellToken]);
 
   const buyAmountBN = useStringToBigNumber(buyAmount, buyTokenInfo?.decimals);
 

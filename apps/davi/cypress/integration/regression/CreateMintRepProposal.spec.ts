@@ -1,5 +1,5 @@
 //
-// Filename: CreateTransferProposal.spec.ts
+// Filename: CreateMintRepProposal.spec.ts
 //
 
 /// <reference types="cypress" />
@@ -13,7 +13,7 @@ import { ACCOUNTS } from '../../utils/constants';
 import { data } from '../../utils/constants'
 const url = Cypress.config().baseUrl;
 
-describe('Check create transfer proposal', () => {
+describe('Check create mint rep proposal', () => {
     before(() => {
         cy.resetMetamaskAccount()
         cy.visit(url);
@@ -75,28 +75,20 @@ describe('Check create transfer proposal', () => {
         CreateProposalPage.clickAddActionButton()
     });
 
-    it('Click on transfer action', () => {
-        CreateProposalPage.clickTransferActionButton()
+    it('Click on mint rep action', () => {
+        CreateProposalPage.clickMintRepActionButton()
     });
 
     it('Enter Etherum address', () => {
         CreateProposalPage.enterTransferEthereumAddress(ACCOUNTS[0].address)
     });
 
-    it('Enter Transfer Ethereum amount', () => {
-        CreateProposalPage.enterTransferEthereumAmount(data.ethereumAmount)
+    it('Enter Mint reputation in percentage', () => {
+        CreateProposalPage.enterMintReputationInPercentage(data.mintRepPercentage)
     });
 
-    it('Click on token dropdown', () => {
-        CreateProposalPage.clickTokenDropdown()
-    });
-
-    it('Choose ETH Token', () => {
-        CreateProposalPage.chooseETHToken()
-    });
-
-    it('Click on save transfer action', () => {
-        CreateProposalPage.clickSaveTransferAction()
+    it('Click on save mint rep action', () => {
+        CreateProposalPage.clickSaveMintRepAction()
     });
 
     it('Click on create proposal on Proposal Page', () => {

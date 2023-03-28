@@ -15,11 +15,17 @@ import {
   ControlRow,
   ControlLabel,
 } from 'components/primitives/Forms/Control';
-import { Error, RepMintInput } from './styles';
+import { Error, RepBurnInput } from './styles';
 import { StyledIcon } from 'components/primitives/StyledIcon';
 import { AddressInput } from 'components/primitives/Forms/AddressInput';
 import { useHookStoreProvider } from 'stores';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
+import { Picker } from 'components/primitives/Forms/Picker';
+import AddressButton from 'components/AddressButton/AddressButton';
+import { shortenAddress } from 'utils';
+import { getBigNumberPercentage } from 'utils/bnPercentage';
+import { TransparentButton } from 'components/SwaprPicker/SwaprPicker.styled';
+import { Loading } from 'components/primitives/Loading';
 
 interface RepBurnFormValues {
   repPercent: string;
@@ -30,22 +36,26 @@ export const Burn: React.FC<ActionEditorProps> = ({
   onSubmit,
 }) => {
   const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [repAmount, setRepAmount] = useState<string>('0');
   const [account, setAccount] = useState<`0x${string}`>(null);
   const { data } = useTotalSupply({ decodedCall });
   const { tokenData } = useTokenData();
-  const { guildId: daoId } = useTypedParams();
+  const { guildId: daoAddress } = useTypedParams();
 
   const {
     hooks: {
-      fetchers: { useVotingPowerOf },
+      fetchers: { useVotingPowerOf, useGetMemberList },
     },
   } = useHookStoreProvider();
   const { data: currentVotingPower } = useVotingPowerOf({
-    contractAddress: daoId,
+    contractAddress: daoAddress,
     userAddress: account,
   });
   const currentVotingPowerNumber = useBigNumberToNumber(currentVotingPower, 18);
+
+  const { data: memberList, isLoading: isMemberListLoading } =
+    useGetMemberList(daoAddress);
 
   const totalSupply = useBigNumberToNumber(tokenData?.totalSupply, 18);
 
@@ -98,6 +108,28 @@ export const Burn: React.FC<ActionEditorProps> = ({
     ]);
   };
 
+  const memberPickerData = useMemo(() => {
+    // Create picker object of members
+    if (memberList !== undefined) {
+      return memberList?.map(member => {
+        console.log({ member });
+        console.log({ totalSupply });
+        return {
+          ...member,
+          title: shortenAddress(member?.address),
+          address: member?.address,
+          subtitle: shortenAddress(member?.address),
+          rightData: `${getBigNumberPercentage(
+            member?.tokensLocked,
+            tokenData?.totalSupply
+          )}%`,
+        };
+      });
+    }
+    return [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [memberList]);
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit(submitAction, console.error)}>
@@ -118,19 +150,60 @@ export const Burn: React.FC<ActionEditorProps> = ({
                     <StyledIcon src={Info} />
                   </Tooltip>
                 </ControlLabel>
+
                 <ControlRow>
-                  <AddressInput
-                    {...field}
-                    onChange={value => {
-                      field.onChange(value);
-                      if (value.startsWith('0x'))
-                        setAccount(value as `0x${string}`);
-                    }}
-                    isInvalid={!!error}
-                    name="recipient-address"
-                    aria-label="recipient address input"
-                    placeholder={t('actionBuilder.inputs.ethereumAddress')}
-                  />
+                  {isMemberListLoading ? (
+                    <TransparentButton
+                      variant="secondary"
+                      aria-label="Skeleton loading button"
+                      type="button"
+                    >
+                      <Loading loading text />
+                    </TransparentButton>
+                  ) : memberList?.length > 0 ? (
+                    <>
+                      <Picker
+                        data={memberPickerData}
+                        header={t('actionBuilder.repMint.burnRep')}
+                        isOpen={isModalOpen}
+                        onSelect={value => {
+                          field.onChange(value.address);
+                          setAccount(value.address as `0x${string}`);
+                          setIsModalOpen(false);
+                        }}
+                        onClose={() => setIsModalOpen(false)}
+                      />
+                      {!account ? (
+                        <TransparentButton
+                          variant="secondary"
+                          onClick={() => setIsModalOpen(true)}
+                          aria-label="Burn address picker"
+                          type="button"
+                          placeholder="Choose user"
+                        />
+                      ) : (
+                        <AddressButton
+                          address={account}
+                          onClick={() => setIsModalOpen(true)}
+                          aria-label="burn user picker"
+                          type="button"
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <AddressInput
+                      {...field}
+                      onChange={value => {
+                        field.onChange(value);
+                        if (value.startsWith('0x'))
+                          setAccount(value as `0x${string}`);
+                      }}
+                      isInvalid={!!error}
+                      name="recipient-address"
+                      aria-label="recipient address input"
+                      placeholder={t('actionBuilder.inputs.ethereumAddress')}
+                    />
+                  )}
                 </ControlRow>
                 {!!error && <Error>{error.message}</Error>}
               </Control>
@@ -156,7 +229,7 @@ export const Burn: React.FC<ActionEditorProps> = ({
                     </Tooltip>
                   </ControlLabel>
                   <ControlRow>
-                    <RepMintInput
+                    <RepBurnInput
                       {...field}
                       onChange={value => {
                         field.onChange(value);
@@ -180,7 +253,7 @@ export const Burn: React.FC<ActionEditorProps> = ({
               </Tooltip>
             </ControlLabel>
             <ControlRow>
-              <RepMintInput disabled value={repAmount?.toString()} readOnly />
+              <RepBurnInput disabled value={repAmount?.toString()} readOnly />
             </ControlRow>
           </Control>
         </ControlRow>

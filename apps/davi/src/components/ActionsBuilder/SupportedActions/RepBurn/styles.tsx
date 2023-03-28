@@ -7,7 +7,7 @@ export const StyledMintIcon = styled(StyledIcon)`
   margin: 0;
 `;
 
-export const RepMintInput = styled(NumericalInput)`
+export const RepBurnInput = styled(NumericalInput)`
   display: flex;
   align-items: center;
   width: 100%;

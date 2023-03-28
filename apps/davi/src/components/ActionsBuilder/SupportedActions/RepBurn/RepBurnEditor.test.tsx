@@ -15,6 +15,9 @@ jest.mock('stores', () => ({
         useVotingPowerOf: () => ({
           data: '0x0000',
         }),
+        useGetMemberList: () => {
+          return { memberList: [], isMemberListLoading: false };
+        },
       },
     },
   }),

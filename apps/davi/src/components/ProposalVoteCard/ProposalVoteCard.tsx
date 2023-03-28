@@ -205,6 +205,7 @@ const ProposalVoteCard = ({
           <VoteActionButtonContainer>
             <VoteActionButton
               disabled={!selectedOption}
+              variant="tertiary"
               onClick={() =>
                 handleVoteOnProposal({
                   hasNoVotingPower,

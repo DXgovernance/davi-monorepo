@@ -11,18 +11,31 @@ const POKT_NETWORK_URLS = {
   '100': 'https://poa-xdai.gateway.pokt.network/v1/lb/dda01e253305bbeac6507a80',
 };
 
-const pokt = jsonRpcProvider({
+const customProvider = jsonRpcProvider({
   rpc(chain) {
-    return { http: POKT_NETWORK_URLS[chain.id] } ?? null;
+    const localStorageRPC = localStorage.getItem(`customRPC[${chain.id}]`);
+    return localStorageRPC ? { http: localStorageRPC } : null;
   },
   priority: 1,
 });
 
-const alchemy = alchemyProvider({ apiKey: ALCHEMY_KEY, priority: 2 });
+const pokt = jsonRpcProvider({
+  rpc(chain) {
+    return { http: POKT_NETWORK_URLS[chain.id] } ?? null;
+  },
+  priority: 2,
+});
 
-const fallback = publicProvider({ priority: 3 });
+const alchemy = alchemyProvider({ apiKey: ALCHEMY_KEY, priority: 3 });
 
-export const providers: ChainProviderFn[] = [pokt, alchemy, fallback];
+const fallback = publicProvider({ priority: 4 });
+
+export const providers: ChainProviderFn[] = [
+  customProvider,
+  pokt,
+  alchemy,
+  fallback,
+];
 
 if (process.env.NODE_ENV === 'development') {
   const localhost = jsonRpcProvider({

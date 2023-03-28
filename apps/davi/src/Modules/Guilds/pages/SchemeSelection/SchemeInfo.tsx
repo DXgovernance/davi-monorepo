@@ -17,6 +17,13 @@ const humanizedTime = (time: string) => {
 
 export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
   const { t } = useTranslation();
+
+  const formattedQueuedVoteRequiredPercentage = BigNumber.from(
+    selectedScheme.votingMachine.queuedVoteRequiredPercentage
+  )
+    .div(100)
+    .toString();
+
   const formattedBoostedVoteRequiredPercentage = BigNumber.from(
     selectedScheme.votingMachine.boostedVoteRequiredPercentage
   )
@@ -46,13 +53,12 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
         <InfoDetail>
           <span>{t('proposal.quorum')}</span>
           <InfoDetailMuted>
-            {formattedBoostedVoteRequiredPercentage}%
+            {formattedQueuedVoteRequiredPercentage}%
           </InfoDetailMuted>
         </InfoDetail>
 
-        {/* TODO: remove this? or is it another variable? */}
         <InfoDetail>
-          <span>{t('proposal.quorum')}</span>
+          <span>{t('proposal.boostedQuoroum')}</span>
           <InfoDetailMuted>
             {formattedBoostedVoteRequiredPercentage}%
           </InfoDetailMuted>
@@ -64,11 +70,6 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
         </InfoDetail>
 
         <InfoDetail>
-          <span>{t('schemes.proposalTimeInBoost')}</span>
-          <InfoDetailMuted>{formattedBoostedVotePeriodLimit}</InfoDetailMuted>
-        </InfoDetail>
-
-        <InfoDetail>
           <span>{t('schemes.proposalTimeInPreBoost')}</span>
           <InfoDetailMuted>
             {formattedPreBoostedVotePeriodLimit}
@@ -76,8 +77,11 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
         </InfoDetail>
 
         <InfoDetail>
-          {/* TODO: if we remove this, remove the translation as well */}
-          {/* <span>{t('schemes.canControlMainTreasury')}</span> */}
+          <span>{t('schemes.proposalTimeInBoost')}</span>
+          <InfoDetailMuted>{formattedBoostedVotePeriodLimit}</InfoDetailMuted>
+        </InfoDetail>
+
+        <InfoDetail>
           <span>{t('schemes.canMakeAvatarCalls')}</span>
           <InfoDetailMuted>
             {selectedScheme.canMakeAvatarCalls ? 'yes' : 'no'}

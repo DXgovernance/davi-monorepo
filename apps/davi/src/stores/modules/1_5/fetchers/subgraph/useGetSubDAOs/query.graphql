@@ -27,6 +27,7 @@ query getSchemes($id: ID!) {
         boostedVotePeriodLimit
         quietEndingPeriod
         daoBounty
+        queuedVoteRequiredPercentage
       }
     }
   }

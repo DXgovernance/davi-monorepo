@@ -59,6 +59,8 @@ export const useGetSubDAOs: IUseGetSubDAOs = daoId => {
       votingMachine: {
         boostedVoteRequiredPercentage:
           scheme.votingMachine.boostedVoteRequiredPercentage,
+        queuedVoteRequiredPercentage:
+          scheme.votingMachine.queuedVoteRequiredPercentage,
         preBoostedVotePeriodLimit:
           scheme.votingMachine.preBoostedVotePeriodLimit,
         boostedVotePeriodLimit: scheme.votingMachine.boostedVotePeriodLimit,

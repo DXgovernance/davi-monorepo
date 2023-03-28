@@ -36,7 +36,7 @@ export const ChainContainer = styled.div`
   }
 `;
 
-export const Error = styled(ErrorLabel)`
+export const ErrorText = styled(ErrorLabel)`
   margin-top: 0.5rem;
 `;
 

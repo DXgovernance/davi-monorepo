@@ -7,10 +7,10 @@ import {
   ConnectionError,
   Container,
   Language,
-  LanguageBar as WalletModalItem,
+  WalletModalItem,
   LanguageList,
-  LanguageTitle as WalletModalItemTitle,
-  LanguageValue as WalletModalItemValue,
+  WalletModalItemTitle,
+  WalletModalItemValue,
   TransactionsList,
   TransactionsListHeading,
 } from './WalletModal.styled';
@@ -28,6 +28,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
 import { supportedLanguages } from 'configs';
 import { CustomRPC } from 'components/CustomRPC/CustomRPC';
+import { DecentralizeMode } from 'components/DecentralizeMode/DecentralizeMode';
 
 export const WalletModal: React.FC<WalletModalProps> = ({
   isOpen,
@@ -70,7 +71,6 @@ export const WalletModal: React.FC<WalletModalProps> = ({
   }
 
   function getLanguageName(languageCode) {
-    // console.log({ languageCode });
     if (languageCode === 'en-US') return 'English';
     const nameGenerator = new Intl.DisplayNames(languageCode, {
       type: 'language',
@@ -143,11 +143,12 @@ export const WalletModal: React.FC<WalletModalProps> = ({
                 {t('customRPC.customRPC')}
               </WalletModalItemTitle>
               <WalletModalItemValue>
-                {/* {getLanguageName(i18n.language)} */}
                 <FiChevronRight size={24} />
               </WalletModalItemValue>
             </WalletModalItem>
           </>
+          <DecentralizeMode />
+
           <WalletInfoBox openOptions={() => setIsWalletsListActive(true)} />
           <Divider />
           <TransactionsList>

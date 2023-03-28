@@ -1,2 +1,2 @@
-export { Chain } from './Chain';
-export { CustomRPCInput } from './CustomRPCInput';
+export { CustomRPCHeader } from './CustomRPCHeader';
+export { CustomRPCOption } from './CustomRPCOption';

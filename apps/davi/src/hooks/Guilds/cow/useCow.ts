@@ -52,14 +52,8 @@ export const useCow = () => {
   };
 
   const createOrder = async (quote: CowQuote) => {
-    const {
-      sellToken,
-      buyToken,
-      buyAmount,
-      sellAmount,
-      receiver,
-      feeAmount,
-    } = quote;
+    const { sellToken, buyToken, buyAmount, sellAmount, receiver, feeAmount } =
+      quote;
 
     setError('');
 

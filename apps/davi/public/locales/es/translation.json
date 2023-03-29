@@ -14,6 +14,19 @@
     "language": "Idioma",
     "languages": "Idiomas"
   },
+  "customRPC": {
+    "customRPC": "Personalizar RPC",
+    "customRPCUrl": "URL RPC Personalizado",
+    "enterURL": "Agregar URL",
+    "useDefaultValue": "usar valor default",
+    "saveChanges": "Guardar Cambios",
+    "genericError": "Hubo un problema con la url indicada",
+    "wrongChain": "La url indicada no es de la red {{chainName}}"
+  },
+  "decentralizeMode": {
+    "decentralizeMode": "Modo descentralizado",
+    "decentralizeModeTooltip": "Esta opción deshabilitará subgraph y usará solo RPCs. Se perderán algunas funciones"
+  },
   "connections": {
     "switchWalletTo": "Cambiar Monedero a {{chainName}}",
     "connectWallet": "Conectar Monedero",
@@ -433,3 +446,4 @@
   "showMore": "Mostrar más",
   "showLess": "Mostrar menos"
 }
+

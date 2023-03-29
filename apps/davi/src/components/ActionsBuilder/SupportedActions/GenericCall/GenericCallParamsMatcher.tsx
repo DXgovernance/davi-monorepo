@@ -44,7 +44,7 @@ export const renderGenericCallParamValue = (
       return `${param.value}`;
     case 'tokenAmount':
       // TODO: Handle number of decimals better
-      const number = BigNumber.from(param.value);
+      const number = BigNumber.from(param.value ?? 0);
       let formatted = Number.parseFloat(formatUnits(number, 18));
       return Math.round(formatted * Math.pow(10, 4)) / Math.pow(10, 4);
     case 'contentHash':

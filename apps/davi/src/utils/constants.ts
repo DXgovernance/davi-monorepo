@@ -14,6 +14,7 @@ export const SET_PERMISSION_SIGNATURE = '0x6cfe0489';
 export const MINT_REP_SIGNATURE = '0x40c10f19';
 export const ENS_UPDATE_CONTENT_SIGNATURE = '0x304e6ade';
 export const SET_GUILD_CONFIG_SIGNATURE = '0x123f6d67';
+export const COW_SET_PRE_SIG_SIGNATURE = '0xec6cb13f';
 
 export const ERC20_APPROVE_SIGNATURE = '0x095ea7b3';
 export const DEFAULT_TOKEN_DECIMALS = 18;

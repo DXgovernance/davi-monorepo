@@ -10,7 +10,7 @@ export interface CowQuote {
   buyToken: string;
   sellAmount: string;
   buyAmount: string;
-  deadLine: number;
+  validTo: number;
   feeAmount: string;
   receiver: string;
 }
@@ -55,7 +55,7 @@ export const useCow = () => {
     const {
       sellToken,
       buyToken,
-      deadLine,
+      validTo,
       buyAmount,
       sellAmount,
       receiver,
@@ -70,7 +70,7 @@ export const useCow = () => {
       sellToken,
       buyToken,
       partiallyFillable: false, // ("false" would be for a "Fill or Kill" order, "true" for allowing "Partial execution" which is not supported yet)
-      validTo: deadLine ?? Math.round(moment().add(7, 'days').valueOf() / 1000),
+      validTo: validTo ?? Math.round(moment().add(7, 'days').valueOf() / 1000),
       sellAmount,
       buyAmount,
       feeAmount,

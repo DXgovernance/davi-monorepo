@@ -102,7 +102,7 @@ export const encodeActions = async (
           ...newCall,
           approval: {
             ...decodedApprovalCall,
-            amount: decodedApprovalCall?.args?._value,
+            amount: decodedApprovalCall?.args?.amount,
             token: decodedApprovalCall?.to,
           },
         };

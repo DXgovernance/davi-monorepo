@@ -83,7 +83,8 @@
       "theRemovalCannotBeReverted": "The removal cannot be reverted",
       "removeAction": "Remove Action",
       "remove": "Remove",
-      "edit": "Edit"
+      "edit": "Edit",
+      "executeLimitOrder": "Execute limit order"
     },
     "options": {
       "against": "Against",

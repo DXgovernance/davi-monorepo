@@ -29,6 +29,7 @@ import RawTransactionInfoLine from './RawTransaction/RawTransactionInfoLine';
 import CowLimitOrderEditor from './CowLimitOrder/CowLimitOrderEditor';
 import CowLimitOrderInfoLine from './CowLimitOrder/CowLimitOrderInfoLine';
 import ERC20ApproveInfoLine from './ERC20Approve/ERC20ApproveInfoLine';
+import CowLimitOrderSummary from './CowLimitOrder/CowLimitOrderSummary';
 
 export interface SupportedActionMetadata {
   title: string;
@@ -115,6 +116,7 @@ export const supportedActions: Record<
     title: 'Limit Order',
     infoLineView: CowLimitOrderInfoLine,
     editor: CowLimitOrderEditor,
+    summaryView: CowLimitOrderSummary,
   },
 };
 const ERC20Contract = new utils.Interface(ERC20.abi);

@@ -9,7 +9,24 @@
   "projectDavi": {
     "projectDavi": "Project-DAVI"
   },
-  "governance": "Governance",
+  "governance": "ガバナンス",
+  "language": {
+    "language": "言語",
+    "languages": "言語"
+  },
+  "customRPC": {
+    "customRPC": "カスタムRPC",
+    "customRPCUrl": "カスタムRPC URL",
+    "enterURL": "URLを入力",
+    "useDefaultValue": "デフォルトの値を使う",
+    "saveChanges": "保存",
+    "genericError": "入力したURLに問題があります",
+    "wrongChain": "入力されたURLは{{chainName}}のネットワークではありません"
+  },
+  "decentralizeMode": {
+    "decentralizeMode": "分散型モード",
+    "decentralizeModeTooltip": "いくつかの機能が失われます"
+  },
   "connections": {
     "switchWalletTo": "{{chainName}}ネットワークにウォレットを換える",
     "connectWallet": "ウォレットに接続",
@@ -47,7 +64,7 @@
   },
   "proposals": {
     "proposals": "プロポーザル",
-    "proposals_zero": "プロポーザルがありません",
+    "proposals_zero": "プロポーザルなし",
     "proposals_one": "{{count}}件のプロポーザル",
     "proposals_other": "{{count}}件のプロポーザル",
     "allProposals": "全てのプロポーザル",

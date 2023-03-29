@@ -7,13 +7,9 @@ import {
   InfoDetailMuted,
 } from 'components/ProposalInfoCard/ProposalInfoCard.styled';
 import { CardBody, SchemePropertiesGrid } from './SchemeSelection.styled';
+import useTimeDifferenceHumanized from 'hooks/Guilds/time/useTimeDifferenceHumanized';
 
 type Scheme = getSchemesQuery['dao']['schemes'][0];
-
-const humanizedTime = (time: string) => {
-  const timeInSeconds = Number.parseInt(time);
-  return moment.duration(timeInSeconds, 'seconds').humanize({ ss: 1 });
-};
 
 export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
   const { t } = useTranslation();
@@ -30,16 +26,19 @@ export const SchemeInfo = ({ selectedScheme }: { selectedScheme: Scheme }) => {
     .div(100)
     .toString();
 
-  const formattedQuietEndingPeriod = humanizedTime(
-    selectedScheme.votingMachine.quietEndingPeriod
+  const formattedQuietEndingPeriod = useTimeDifferenceHumanized(
+    moment().add(selectedScheme.votingMachine.quietEndingPeriod, 'seconds')
   );
 
-  const formattedBoostedVotePeriodLimit = humanizedTime(
-    selectedScheme.votingMachine.boostedVotePeriodLimit
+  const formattedBoostedVotePeriodLimit = useTimeDifferenceHumanized(
+    moment().add(selectedScheme.votingMachine.boostedVotePeriodLimit, 'seconds')
   );
 
-  const formattedPreBoostedVotePeriodLimit = humanizedTime(
-    selectedScheme.votingMachine.preBoostedVotePeriodLimit
+  const formattedPreBoostedVotePeriodLimit = useTimeDifferenceHumanized(
+    moment().add(
+      selectedScheme.votingMachine.preBoostedVotePeriodLimit,
+      'seconds'
+    )
   );
 
   return (

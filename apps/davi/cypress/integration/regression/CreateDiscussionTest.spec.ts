@@ -12,7 +12,7 @@ import { gnosisNetworkGuilds } from '../../utils';
 import { data } from '../../utils/constants'
 const url = Cypress.config().baseUrl;
 
-describe('Check create discussion', () => {
+describe('Create discussion', () => {
     before(() => {
         cy.visit(url);
     });
@@ -35,12 +35,12 @@ describe('Check create discussion', () => {
         cy.allowMetamaskToAddNetwork()
     });
 
-    it('Allow to switch to gnosis', () => {
+    it('Allow to switch to gnosis network', () => {
         cy.allowMetamaskToSwitchNetwork()
     });
 
     it(`Visit first Guild on Gnosis network`, () => {
-        LandingPage.goToGuildPage(gnosisNetworkGuilds[0], 0);
+        LandingPage.goToGuildPage(gnosisNetworkGuilds[0]);
         AnyGuildPage.checkIfYouAreOnSelectedGuildPage(gnosisNetworkGuilds[0])
     });
 
@@ -53,7 +53,7 @@ describe('Check create discussion', () => {
     });
 
     it('Check if newly created discussion is showing', () => {
-        CreateDiscussionPage.clickNewDiscussion(data.discussionTitle)
+        CreateDiscussionPage.clickOnDiscussionWithTitle(data.discussionTitle)
         AnyGuildPage.checkDiscussionName(data.discussionTitle)
         AnyGuildPage.checkDiscussionDescription(data.discussionDescription)
     });

@@ -2,6 +2,8 @@
 import { faker } from '@faker-js/faker';
 
 export const data = {
+  automationDiscussionTitle: 'Automation Discussion',
+  automationDiscussionDescription: 'Automation Discussion description',
   discussionTitle: faker.lorem.word(),
   discussionDescription: faker.lorem.sentence(),
   proposalTitle: faker.lorem.word(),
@@ -59,6 +61,7 @@ export const localhostGuilds = [
   'DXdao DevOps Guild',
   'DXdao Treasury Guild',
   'DXgov Guild',
+  'Localhost Guild',
   'Operations Guild',
   'Swapr Guild',
   'Voice Guild'

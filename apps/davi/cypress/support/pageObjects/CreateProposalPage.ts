@@ -3,16 +3,17 @@
 //
 
 class CreateProposalPage {
+    //Selectors
     backToOverviewButton() { return cy.findAllByTestId('back-to-overview-btn') }
     proposalTitle_Field() { return cy.findAllByTestId('proposal-title-input') }
     proposalDescription_Field() { return cy.findAllByTestId('proposal-description-input') }
-    addOption_Butotn() { return cy.findAllByTestId('add-option-btn') }
+    addOption_Button() { return cy.findAllByTestId('add-option-btn') }
     addAction_Button() { return cy.findAllByTestId('add-action-btn') }
     editActionButton() { return cy.findAllByTestId('edit-action-btn') }
     modalTitle() { return cy.findAllByTestId('modal-title') }
     actionList() { return cy.findAllByTestId('actions-modal-contract-list') }
     transferAction_Button() { return cy.findAllByTestId('erc20transfer-action') }
-    setPermissionActionButton() { return cy.findAllByTestId('set-permission-action') }
+    setPermissionAction_Button() { return cy.findAllByTestId('set-permission-action') }
     mintREPAction_Button() { return cy.findAllByTestId('rep-mint-action') }
     mintREPInPercentage_Field() { return cy.findAllByTestId('reputation-in-percentage-field') }
     updateENSContentActionButton() { return cy.findAllByTestId('ens-update-content-action') }
@@ -29,7 +30,7 @@ class CreateProposalPage {
     saveTransferAction_Button() { return cy.findByTestId('submit-erc20transfer') }
     saveMintRepAction_Button() { return cy.findByTestId('save-action-button') }
 
-    //Metods
+    //Methods
     clickOnCreateProposalButton() {
         this.createProposal_Button().click()
     }
@@ -106,7 +107,7 @@ class CreateProposalPage {
     };
 
     checkAddOptionModal() {
-        this.addOption_Butotn().should('be.visible').click();
+        this.addOption_Button().should('be.visible').click();
         this.modalTitle().should('be.visible').contains('Add Option');
         cy.closeModal()
     };

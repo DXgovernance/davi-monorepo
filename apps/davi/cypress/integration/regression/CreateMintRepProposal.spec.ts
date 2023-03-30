@@ -9,11 +9,11 @@ import AnyGuildPage from '../../support/pageObjects/AnyGuildPage';
 import LandingPage from '../../support/pageObjects/LandingPage';
 import CreateDiscussionPage from '../../support/pageObjects/CreateDiscussionPage';
 import CreateProposalPage from '../../support/pageObjects/CreateProposalPage';
-import { ACCOUNTS } from '../../utils/constants';
-import { data } from '../../utils/constants'
+import { ACCOUNTS, data } from '../../utils/constants';
+import { localhostGuilds } from '../../utils';
 const url = Cypress.config().baseUrl;
 
-describe('Check create mint rep proposal', () => {
+describe('Create mint rep proposal', () => {
     before(() => {
         cy.resetMetamaskAccount()
         cy.visit(url);
@@ -29,8 +29,8 @@ describe('Check create mint rep proposal', () => {
         cy.closeModal()
     });
 
-    it(`Visit first Guild on Local network`, () => {
-        LandingPage.goToFirstGuild()
+    it(`Visit Localhost Guild on Local network`, () => {
+        LandingPage.goToGuildPage(localhostGuilds[5])
     });
 
     it('Check All Discussions page', () => {
@@ -38,32 +38,19 @@ describe('Check create mint rep proposal', () => {
         AnyGuildPage.checkIfYouAreOnAllDiscussionPage();
     });
 
-    it('Create Discussion on Local network', () => {
-        AnyGuildPage.createDiscussion_Button().click()
-        cy.confirmMetamaskSignatureRequest()
-        CreateDiscussionPage.enterTitle(data.discussionTitle)
-        CreateDiscussionPage.enterDiscussionDescription(data.discussionDescription)
-        CreateDiscussionPage.clickCreateDiscussion()
+    it('Go to Automation Discussion page', () => {
+        CreateDiscussionPage.clickOnDiscussionWithTitle(data.automationDiscussionTitle)
+        AnyGuildPage.checkDiscussionName(data.automationDiscussionTitle)
+        AnyGuildPage.checkDiscussionDescription(data.automationDiscussionDescription)
     });
 
-    it('Check All Discussions page', () => {
-        AnyGuildPage.goToAllDiscussionPage();
-        AnyGuildPage.checkIfYouAreOnAllDiscussionPage();
-    });
-
-    it('Check if newly created discussion is showing', () => {
-        CreateDiscussionPage.clickNewDiscussion(data.discussionTitle)
-        AnyGuildPage.checkDiscussionName(data.discussionTitle)
-        AnyGuildPage.checkDiscussionDescription(data.discussionDescription)
-    });
-
-    it('Click on create proposal on Discussion Page', () => {
+    it('Click on create proposal on Discussion page', () => {
         CreateProposalPage.clickOnCreateProposalButton()
         cy.confirmMetamaskSignatureRequest()
     });
 
-    it('Check proposal title proposal', () => {
-        CreateProposalPage.checkProposalTitle(data.discussionTitle)
+    it('Check title of newly proposal', () => {
+        CreateProposalPage.checkProposalTitle(data.automationDiscussionTitle)
     });
 
     it('Edit proposal title and description', () => {
@@ -79,7 +66,7 @@ describe('Check create mint rep proposal', () => {
         CreateProposalPage.clickMintRepActionButton()
     });
 
-    it('Enter Etherum address', () => {
+    it('Enter Ethereum address', () => {
         CreateProposalPage.enterTransferEthereumAddress(ACCOUNTS[0].address)
     });
 
@@ -91,16 +78,16 @@ describe('Check create mint rep proposal', () => {
         CreateProposalPage.clickSaveMintRepAction()
     });
 
-    it('Click on create proposal on Proposal Page', () => {
+    it('Click on create proposal on Proposal page', () => {
         CreateProposalPage.clickOnCreateProposal()
     });
 
-    it('Go to all proposals', () => {
+    it('Go to All Proposals page', () => {
         AnyGuildPage.goToFirstProposalPage();
         AnyGuildPage.checkIfYouAreOnProposalPage();
     });
 
-    it('Check if newly created propposal is showing', () => {
+    it('Check if newly created proposal is showing', () => {
         CreateProposalPage.clickNewProposal(data.proposalTitle)
         AnyGuildPage.checkProposalName(data.proposalTitle)
         AnyGuildPage.checkProposalDescription(data.proposalDescription)

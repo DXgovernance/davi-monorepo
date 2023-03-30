@@ -294,6 +294,7 @@
     "yourVotingPower": "Tu Poder de Votación",
     "increaseVotingPower": "Incrementar Poder de Votación",
     "locking": {
+      "lock": "Bloquear",
       "locked": "Bloqueado",
       "unlocked": "Desbloqueado",
       "unlockedIn": "Desbloqueado en",
@@ -301,6 +302,7 @@
       "withdraw": "Retirar",
       "balance": "Balance",
       "unlockDate": "Fecha de desbloqueo",
+      "unlockTime": "Tiempo de desbloqueo",
       "spending": "Gasto",
       "max": "Max",
       "stakeTokens": "Invertir {{token}} tokens",
@@ -431,5 +433,16 @@
   },
   "loading": "Cargando...",
   "showMore": "Mostrar más",
-  "showLess": "Mostrar menos"
+  "showLess": "Mostrar menos",
+  "holographicConsensus": {
+    "confirmPrediction": "Confirmar predicción",
+    "potentialReward": "Recompensa potencial",
+    "stakeOnProposal": "Apostar en la propuesta",
+    "predictions": "Predicciones",
+    "thereAreNoStakes": "No hay apuestas en esta opción",
+    "lockWarning": "Tu predicción estará bloqueada hasta que la propuesta termine y podrías perder tu DXD si tu predicción es incorrecta",
+    "placeYourPrediction": "Ingresa tu predicción para dirigir la propuesta",
+    "youCannotChangeYourPrediction": "No puedes cambiar tu predicción porque ya apostaste en esta propuesta"
+  }
 }
+

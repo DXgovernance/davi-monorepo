@@ -18,7 +18,7 @@ export const useApproveTokens: IUseApproveTokens = tokenAddress => {
   const handleApproveTokens: IHandleApproveTokens = useCallback(
     async (daoTokenVault, amount = MAX_UINT) => {
       createTransaction(
-        t('actionBuilder.approvals.approveTokenSpending', {
+        t('actionBuilder.approval.approveTokenSpending', {
           tokenSymbol: tokenInfo?.symbol,
         }),
         async () => tokenContract?.approve(daoTokenVault, amount)

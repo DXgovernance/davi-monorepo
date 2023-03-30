@@ -104,22 +104,16 @@ export const ProposalStateSpan = styled.span<{
 }>`
   color: ${({ state, theme }) => {
     switch (state) {
-      case HolographicConsensusState.None:
-        return theme.colors.grey;
-      case HolographicConsensusState.Expired:
-        return theme.colors.grey;
-      case HolographicConsensusState.ExecutedInQueue:
-        return theme.colors.grey;
-      case HolographicConsensusState.ExecutedInBoost:
-        return theme.colors.grey;
-      case HolographicConsensusState.Queued:
-        return theme.colors.text;
-      case HolographicConsensusState.PreBoosted:
-        return theme.colors.text;
       case HolographicConsensusState.Boosted:
         return theme.colors.active;
+      case HolographicConsensusState.Queued:
+      case HolographicConsensusState.PreBoosted:
+        return theme.colors.text;
+      case HolographicConsensusState.None:
+      case HolographicConsensusState.Expired:
+      case HolographicConsensusState.ExecutedInQueue:
+      case HolographicConsensusState.ExecutedInBoost:
       case HolographicConsensusState.QuietEndingPeriod:
-        return theme.colors.grey;
       default:
         return theme.colors.grey;
     }

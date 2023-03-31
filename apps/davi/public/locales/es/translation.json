@@ -241,7 +241,8 @@
     "information": "Información",
     "consensusSystem": "Sistema de Consenso",
     "proposalDuration": "Duración de la Propuesta",
-    "quorum": "Cuórum",
+    "quorum": "Quórum",
+    "boostedQuoroum": "Quórum impulsado",
     "backToOverview": "Regresar a la Vista General",
     "backToDiscussion": "Regresar a la Discusión",
     "originalDiscussion": "Discusión Original",
@@ -394,6 +395,24 @@
       "deletionMessage2": "Si solicita la eliminación su publicación podría ser removida de los nodos de Ceramic alojándolo.",
       "reload": "Recargar"
     }
+  },
+  "schemes": {
+    "schemes_one": "Esquema",
+    "schemes_other": "Esquemas",
+    "schemeParameters": "Parámetros del Esquema",
+    "schemeForProposal": "Esquema para la propuesta",
+    "maxProposalTime": "Tiempo máximo de propuesta",
+    "proposalTimeInBoost": "Tiempo de propuesta impulsada",
+    "proposalTimeInPreBoost": "Tiempo de propuesta en pre-impulso",
+    "canManageSchemes": "Puede gestionar esquemas",
+    "canMakeAvatarCalls": "Puede hacer llamadas al avatar",
+    "maxRepPercentageChange": "Máximo porcentaje de cambio de REP",
+    "backToScheme": "Volver al Esquema",
+    "type": "Tipo",
+    "next": "Siguiente",
+    "errorFetchingSchemes": "Error buscando los esquemas",
+    "daoHasNoSchemes": "Esta DAO no tiene esquemas registrados",
+    "daoBounty": "Recompensa de la DAO"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "La dirección del destinatario es requerida",

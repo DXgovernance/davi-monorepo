@@ -6,6 +6,7 @@ const DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
 const MONTH_IN_MILLIS = 1000 * 60 * 60 * 24 * 30;
 const HOUR_IN_MILLIS = 1000 * 60 * 60;
 const MINS_IN_MILLIS = 1000 * 60;
+const SECONDS_IN_MILLIS = 1000;
 
 /**
  * Translates from and to time difference into human readable date format
@@ -59,10 +60,11 @@ const useTimeDifferenceHumanized = (
     },
     {
       value: Math.floor(
-        ((((timeDifferenceInMilliSecs % YEAR_IN_MILLIS) % MONTH_IN_MILLIS) %
+        (((((timeDifferenceInMilliSecs % YEAR_IN_MILLIS) % MONTH_IN_MILLIS) %
           DAY_IN_MILLIS) %
           HOUR_IN_MILLIS) %
-          MINS_IN_MILLIS
+          MINS_IN_MILLIS) /
+          SECONDS_IN_MILLIS
       ),
       name: t('duration.seconds_other'),
     },
@@ -72,11 +74,7 @@ const useTimeDifferenceHumanized = (
 
   return levels
     .reduce((acc, level) => {
-      if (
-        level.value === 0 ||
-        level.name === t('duration.seconds_other') ||
-        measurementDepth === 0
-      ) {
+      if (level.value === 0 || measurementDepth === 0) {
         return acc;
       }
       measurementDepth--;

@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "clean": "turbo run clean",
-    "compile": "turbo run compile --filter=!./packages/dxdao-contracts",
-    "dev-scripts:dev": "turbo run dev --filter=\"dev-scripts\" --filter=!./packages/dxdao-contracts",
+    "compile": "turbo run compile",
+    "dev-scripts:dev": "turbo run dev --filter=\"dev-scripts\"",
     "graph-node:dev": "cd packages/graph-node && pnpm run dev",
     "graph-node:clean": "cd packages/graph-node && pnpm run clean",
     "subgraph:dev": "turbo run dev --filter=\"*-subgraph\" --filter=!./packages/*",
@@ -21,16 +21,14 @@
     "davi:dev": "cd apps/davi && pnpm run dev",
     "davi:dev-no-wait": "cd apps/davi && pnpm run dev --no-subgraph-wait --no-hardhat-wait",
     "davi:build-graph-client": "cd apps/davi && pnpm run build-graph-client",
-    "contracts:setup": "cd packages/dxdao-contracts && pnpm run setup",
     "davi:test": "turbo run test --filter=davi",
     "davi:build": "turbo run build --filter=davi",
     "davi:format": "turbo run format --filter=davi",
     "test": "turbo run test --filter=\"./apps/**\"",
     "prepare": "husky install",
     "pre-commit": "turbo run pre-commit",
-    "format-check": "turbo run format-check --filter=!dxdao-contracts",
-    "clone-contracts": "rm -rf packages/dxdao-contracts && git clone https://github.com/DXgovernance/dxdao-contracts packages/dxdao-contracts && git submodule update --init && git submodule status",
-    "ci:install": "pnpm run clone-contracts && pnpm install"
+    "format-check": "turbo run format-check",
+    "ci:install": "pnpm install"
   },
   "pnpm": {
     "overrides": {

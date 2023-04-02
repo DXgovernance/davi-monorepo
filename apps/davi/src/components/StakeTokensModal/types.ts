@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 import { ERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
-import { ERC20, ERC20Guild } from 'dxdao-contracts/types';
+import { ERC20, ERC20Guild } from '@dx-gov-test/dxdao-contracts/types';
 import React from 'react';
 import { GuildConfigProps } from 'types/types.guilds.d';
 

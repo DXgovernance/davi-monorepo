@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers';
-import { ERC20Guild } from 'dxdao-contracts/types';
+import { ERC20Guild } from '@dx-gov-test/dxdao-contracts/types';
 import { ProposalMetadata } from 'types/types.guilds';
 import { Moment } from 'moment';
 import { providers } from 'ethers';

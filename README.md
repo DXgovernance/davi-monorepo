@@ -10,7 +10,7 @@
 ## How to setup
 
 1. Create a fork of this repo.
-2. Clone your fork installing submodules `git clone --recurse-submodules [your-github-fork-url.git]`. If you clone this repo without `--recurse-submodules` be sure to go to `packages/dxdao-contracts` and clone necesary branch/commit pointed in `./.gitmodules` file. Or do `git submodule sync packages/dxdao-contracts` sync.
+2. Clone your fork installing submodules `git clone [your-github-fork-url.git]`.
 3. Install dependencies `pnpm i`
 4. Make an `.env` file in the `./packages/dev-scripts` folder (see `.env.example`) and write a seed phrase and deploy salt for hardhat.
 5. Make an `.env` file in the `./apps/davi` folder (see `.env.example`).

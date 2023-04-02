@@ -8,6 +8,7 @@ type IHandleCreateProposal = ReturnType<IUseCreateProposal>;
 
 export const useCreateProposal: IUseCreateProposal = (
   daoAddress: string,
+  subdaoId?: string,
   discussionRef?: string
 ) => {
   const handleCreateProposal: IHandleCreateProposal = useCallback(

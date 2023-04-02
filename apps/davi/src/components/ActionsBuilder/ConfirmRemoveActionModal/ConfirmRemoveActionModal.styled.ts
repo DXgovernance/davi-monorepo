@@ -9,7 +9,7 @@ export const TextContainer = styled.div`
   padding: 3rem 0 4rem;
 `;
 export const Title = styled(Heading)`
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text};
   text-align: center;
 `;

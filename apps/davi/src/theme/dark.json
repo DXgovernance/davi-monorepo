@@ -70,6 +70,7 @@
     "label": "12px",
     "mono": "14px",
     "body": "14px",
+    "bodyBig": "16px",
     "header1": "16px",
     "header2": "20px"
   },
@@ -81,9 +82,9 @@
     "header2": 1.2
   },
   "fontWeights": {
-    "regular": 500,
-    "medium": 600,
-    "bold": 700
+    "regular": 400,
+    "medium": 500,
+    "bold": 600
   },
   "radii": {
     "curved": "10px",

@@ -1,4 +1,4 @@
-query getSchemes($id: ID!) {
+query getAllSchemes($id: ID!) {
   dao(id: $id) {
     schemes {
       # scheme data
@@ -22,6 +22,42 @@ query getSchemes($id: ID!) {
       voteGas
       voteGasBalance
       votingMachine {
+        id
+        stakingTokenAddress
+        boostedVoteRequiredPercentage
+        preBoostedVotePeriodLimit
+        boostedVotePeriodLimit
+        quietEndingPeriod
+      }
+    }
+  }
+}
+
+query getScheme($id: ID!, $schemeId: ID!) {
+  dao(id: $id) {
+    schemes(where: { id: $schemeId }) {
+      # scheme data
+      id
+      name
+      averagesDownstakesOfBoosted
+      controller
+      isRegistered
+      orgBoostedProposalsCnt
+      paramsHash
+      permissionRegistry
+      stakingTokenBalance
+      # capabilities
+      canChangeReputation
+      canMakeAvatarCalls
+      canManageSchemes
+      maxGasPrice
+      maxRepPercentageChange
+      type
+      voteGas
+      voteGasBalance
+      votingMachine {
+        id
+        stakingTokenAddress
         boostedVoteRequiredPercentage
         preBoostedVotePeriodLimit
         boostedVotePeriodLimit

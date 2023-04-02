@@ -311,12 +311,14 @@
     "increaseVotingPower": "Increase Voting Power",
     "locking": {
       "locked": "Locked",
+      "lock": "Lock",
       "unlocked": "Unlocked",
       "unlockedIn": "Unlocked in",
       "staked": "Staked",
       "withdraw": "Withdraw",
       "balance": "Balance",
       "unlockDate": "Unlock Date",
+      "unlockTime": "Unlock time",
       "spending": "Spending",
       "max": "Max",
       "stakeTokens": "Stake {{token}} tokens",
@@ -415,6 +417,16 @@
     "errorFetchingSchemes": "Error while fetching schemes",
     "daoHasNoSchemes": "This DAO has no schemes registered",
     "daoBounty": "DAO Bounty"
+  },
+  "holographicConsensus": {
+    "predictions": "Predictions",
+    "confirmPrediction": "Confirm prediction",
+    "placeYourPrediction": "Place your prediction to steer the proposal",
+    "potentialReward": "Potential reward",
+    "lockWarning": "Your prediction will be locked until the proposal ends and you could lose your DXD if your prediction is wrong",
+    "stakeOnProposal": "Stake on proposal",
+    "youCannotChangeYourPrediction": "You cannot change your prediction since you already staked in this proposal",
+    "thereAreNoStakes": "There are no stakes for this option"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",

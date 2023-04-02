@@ -6,6 +6,7 @@ import styled, {
   ThemeProps,
 } from 'styled-components';
 import { Box } from 'components/primitives/Layout/Box';
+import { Divider } from 'components/Divider';
 
 export interface CardWrapperProps {
   customStyles?: string | FlattenInterpolation<ThemeProps<DefaultTheme>>;
@@ -58,3 +59,8 @@ export const Card: React.FC<CardProps> = ({
     </CardWrapper>
   );
 };
+
+export const CardDivider = styled(Divider)`
+  margin: 0;
+  width: calc(100% + 48px);
+`;

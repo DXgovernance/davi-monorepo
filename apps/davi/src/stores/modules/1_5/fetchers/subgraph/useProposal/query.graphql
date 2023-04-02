@@ -23,6 +23,15 @@ query getDaoProposal($id: ID!, $proposalId: ID!) {
         votingMachineProposalState
         winningVote
         totalVotes
+        scheme {
+          id
+        }
+        stakes {
+          id
+          staker
+          amount
+          option
+        }
         daoRedeemedWinnings
       }
     }

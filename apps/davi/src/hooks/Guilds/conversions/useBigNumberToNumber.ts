@@ -7,14 +7,25 @@ export default function useBigNumberToNumber(
   decimals: number,
   precision: number = 2
 ) {
-  const stakeAmountParsed = useMemo(() => {
-    if (!number || !decimals) return null;
-
-    let formatted = Number.parseFloat(formatUnits(number, decimals));
-    return (
-      Math.round(formatted * Math.pow(10, precision)) / Math.pow(10, precision)
-    );
-  }, [number, decimals, precision]);
+  // I don't think we need to memoize this function
+  // TODO: check if this is true
+  const stakeAmountParsed = useMemo(
+    () => bigNumberToNumber(number, decimals, precision),
+    [number, decimals, precision]
+  );
 
   return stakeAmountParsed;
+}
+
+export function bigNumberToNumber(
+  number: BigNumber,
+  decimals: number,
+  precision: number = 2
+) {
+  if (!number || decimals === null || decimals === undefined) return null;
+
+  let formatted = Number.parseFloat(formatUnits(number, decimals));
+  return (
+    Math.round(formatted * Math.pow(10, precision)) / Math.pow(10, precision)
+  );
 }

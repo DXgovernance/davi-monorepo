@@ -5,4 +5,5 @@ export {
   useCreateProposal,
   useExecuteProposal,
   useVoteOnProposal,
+  useStakeOnProposal,
 } from '../../common/writers';

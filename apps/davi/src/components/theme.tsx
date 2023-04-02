@@ -63,6 +63,7 @@ export interface GuildsTheme extends ThemeBase {
     label: string;
     mono: string;
     body: string;
+    bodyBig: string;
     header1: string;
     header2: string;
   };

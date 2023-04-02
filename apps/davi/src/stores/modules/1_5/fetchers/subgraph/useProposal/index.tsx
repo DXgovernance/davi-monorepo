@@ -2,13 +2,18 @@ import { useMemo } from 'react';
 import { useNetwork } from 'wagmi';
 import { unix } from 'moment';
 import { useQuery } from '@apollo/client';
+import { BigNumber } from 'ethers';
 
 import { getDaoProposalDocument, getDaoProposalQuery } from '.graphclient';
 import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { getApolloClient } from 'clients/apollo';
-import { ContractState, Proposal } from 'types/types.guilds.d';
+import {
+  ContractState,
+  HolographicConsensusState,
+  Proposal,
+} from 'types/types.guilds.d';
+import { IStakes } from 'components/HolographicConsensusCard/types';
 import { useProposalCalls } from '../../rpc/useProposalCalls';
-import { BigNumber } from 'ethers';
 
 type IUseProposal = FetcherHooksInterface['useProposal'];
 
@@ -47,6 +52,10 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       descriptionHash,
       state,
       totalVotes,
+      scheme: { id: schemeId },
+      stakes,
+      votingMachineProposalState,
+      daoBounty,
     } = proposal;
 
     let mappedContractState: ContractState;
@@ -69,8 +78,61 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
         break;
     }
 
+    let mappedHolographicConsensusState: HolographicConsensusState;
+
+    switch (votingMachineProposalState) {
+      case 'None':
+        mappedHolographicConsensusState = HolographicConsensusState.None;
+        break;
+      case 'Expired':
+        mappedHolographicConsensusState = HolographicConsensusState.Expired;
+        break;
+      case 'ExecutedInQueue':
+        mappedHolographicConsensusState =
+          HolographicConsensusState.ExecutedInQueue;
+        break;
+      case 'ExecutedInBoost':
+        mappedHolographicConsensusState =
+          HolographicConsensusState.ExecutedInBoost;
+        break;
+      case 'Queued':
+        mappedHolographicConsensusState = HolographicConsensusState.Queued;
+        break;
+      case 'PreBoosted':
+        mappedHolographicConsensusState = HolographicConsensusState.PreBoosted;
+        break;
+      case 'Boosted':
+        mappedHolographicConsensusState = HolographicConsensusState.Boosted;
+        break;
+      case 'QuietEndingPeriod':
+        mappedHolographicConsensusState =
+          HolographicConsensusState.QuietEndingPeriod;
+        break;
+      default:
+        mappedHolographicConsensusState = HolographicConsensusState.None;
+        break;
+    }
+
     const noVotes = BigNumber.from(totalVotes[0]);
     const yesVotes = BigNumber.from(totalVotes[1]);
+
+    // Stakes processing
+    const noStakes = stakes.filter(stake => stake.option === '1');
+    const yesStakes = stakes.filter(stake => stake.option === '2');
+    const parsedStakes: IStakes = {
+      for: yesStakes,
+      against: noStakes,
+    };
+
+    // Total staked
+    const totalNoStakes = noStakes.reduce(
+      (acc, stake) => acc.add(stake.amount),
+      BigNumber.from(0)
+    );
+    const totalYesStakes = yesStakes.reduce(
+      (acc, stake) => acc.add(stake.amount),
+      BigNumber.from(0)
+    );
 
     return {
       id: id as `0x${string}`, // typecast to comply with template literal type
@@ -87,6 +149,11 @@ export const useProposal: IUseProposal = (daoId, proposalId) => {
       options: null,
       votes: null,
       totalOptions: null, // Not used in the codebase but in the deploy scripts
+      subDao: schemeId,
+      stakes: parsedStakes,
+      totalStaked: [totalNoStakes, totalYesStakes],
+      holographicConsensusState: mappedHolographicConsensusState,
+      daoBounty,
     };
   }, [data]);
 

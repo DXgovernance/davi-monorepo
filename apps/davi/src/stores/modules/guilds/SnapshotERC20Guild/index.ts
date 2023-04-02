@@ -6,6 +6,7 @@ import {
   useLockTokens,
   useVoteOnProposal,
   useWithdrawTokens,
+  useStakeOnProposal,
 } from './writers';
 import {
   useGuildConfig as useGuildConfigFromSubgraph,
@@ -118,6 +119,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
         useLockTokens,
         useVoteOnProposal,
         useWithdrawTokens,
+        useStakeOnProposal,
       },
     },
     capabilities: {

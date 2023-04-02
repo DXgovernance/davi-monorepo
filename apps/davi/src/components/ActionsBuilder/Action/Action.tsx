@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { BigNumber } from 'ethers';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import { useHookStoreProvider } from 'stores';
 import { preventEmptyString } from 'utils';
@@ -25,7 +24,6 @@ import {
   CardHeader,
   CardLabel,
   CardWrapperWithMargin,
-  ChevronIcon,
   DetailWrapper,
   EditButtonWithMargin,
   GripWithMargin,
@@ -39,6 +37,7 @@ import {
 } from './Action.styled';
 import { useTransactionSimulation } from 'hooks/Guilds/useTenderlyApi';
 import { ExternalLink } from 'components/primitives/Links/ExternalLink';
+import { ExpandButton } from 'components/ExpandButton';
 
 interface ActionViewProps {
   call?: Call;
@@ -182,13 +181,10 @@ export const ActionRow: React.FC<ActionViewProps> = ({
               {t('actionBuilder.action.remove')}
             </EditButtonWithMargin>
           )}
-          <ChevronIcon onClick={() => setExpanded(!expanded)}>
-            {expanded ? (
-              <FiChevronUp height={16} />
-            ) : (
-              <FiChevronDown height={16} />
-            )}
-          </ChevronIcon>
+          <ExpandButton
+            expanded={expanded}
+            onClick={() => setExpanded(!expanded)}
+          />
         </CardActions>
       </CardHeader>
 

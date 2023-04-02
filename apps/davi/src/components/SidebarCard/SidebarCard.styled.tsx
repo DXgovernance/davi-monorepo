@@ -29,4 +29,25 @@ export const SidebarCardContentWrapper = styled(Box)`
   overflow: auto;
   max-height: 10rem;
   margin-bottom: 1rem;
+  padding: 0px 5px;
+
+  // Scrollbar styling
+  // Firefox
+  & {
+    scrollbar-width: 12px;
+    scrollbar-color: ${({ theme }) => theme.colors.active} transparent;
+  }
+
+  // Chrome, Edge, and Safari
+  &::-webkit-scrollbar {
+    width: 6px;
+    max-height: 24px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.active};
+    border-radius: 10px;
+  }
 `;

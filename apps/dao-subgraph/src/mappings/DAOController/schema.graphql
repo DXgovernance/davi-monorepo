@@ -29,6 +29,7 @@ type Scheme @entity {
 
 type VotingMachine @entity {
   id: ID!
+  stakingTokenAddress: String!
   queuedVoteRequiredPercentage: BigInt
   queuedVotePeriodLimit: BigInt
   boostedVotePeriodLimit: BigInt

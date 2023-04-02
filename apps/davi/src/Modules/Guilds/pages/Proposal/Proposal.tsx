@@ -39,6 +39,7 @@ import { Flex } from 'components/primitives/Layout';
 import { IconButton } from 'components/primitives/Button';
 import { getBlockExplorerUrl } from 'provider';
 import { useSearchParams } from 'react-router-dom';
+import { HolographicConsensusCard } from 'components/HolographicConsensusCard/HolographicConsensusCard';
 
 const ProposalPage: React.FC = () => {
   const {
@@ -52,6 +53,7 @@ const ProposalPage: React.FC = () => {
         useTimeDetail,
       },
     },
+    capabilities: { consensus },
   } = useHookStoreProvider();
   const { t } = useTranslation();
   const { connector } = useAccount();
@@ -202,6 +204,16 @@ const ProposalPage: React.FC = () => {
           guildConfig={guildConfig}
           quorum={quorum}
         />
+        {consensus === 'holographic' && (
+          <HolographicConsensusCard
+            proposalStakeDetails={proposal?.stakes}
+            proposalTotalStakes={proposal?.totalStaked}
+            schemeId={proposal?.subDao}
+            proposalId={proposalId}
+            proposalState={proposal?.holographicConsensusState}
+            daoBounty={proposal?.daoBounty}
+          />
+        )}
       </SidebarContent>
     </PageContainer>
   );

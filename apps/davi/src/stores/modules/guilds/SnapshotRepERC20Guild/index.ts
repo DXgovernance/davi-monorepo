@@ -6,6 +6,7 @@ import {
   useLockTokens,
   useVoteOnProposal,
   useWithdrawTokens,
+  useStakeOnProposal,
 } from './writers';
 import {
   useProposal,
@@ -117,6 +118,7 @@ export const snapshotRepERC20GuildImplementation: Readonly<FullGovernanceImpleme
         useLockTokens,
         useVoteOnProposal,
         useWithdrawTokens,
+        useStakeOnProposal,
       },
     },
     capabilities: {

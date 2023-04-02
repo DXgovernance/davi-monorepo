@@ -116,6 +116,7 @@
     "react": "^18.2.0",
     "react-app-rewired": "^2.1.8",
     "react-countdown": "^2.3.2",
+    "react-d3-speedometer": "^1.1.0",
     "react-datepicker": "^4.8.0",
     "react-device-detect": "^2.1.2",
     "react-diff-viewer": "^3.1.1",
@@ -133,11 +134,11 @@
     "react-switch": "^7.0.0",
     "react-toastify": "^8.1.0",
     "react-virtuoso": "^2.16.5",
+    "showdown": "^2.1.0",
     "styled-components": "^5.3.5",
     "swr": "^1.1.2",
     "ts-generator": "^0.1.1",
     "ts-node": "^10.9.1",
-    "showdown": "^2.1.0",
     "turndown": "^7.1.1",
     "typechain-target-ethers-v5": "^5.0.1",
     "typescript": "^4.9.3",
@@ -233,4 +234,3 @@
     ]
   }
 }
-

@@ -25,7 +25,7 @@ export const DaoIcon = styled.img`
 `;
 
 export const DaoTitle = styled(Heading)`
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text};
 `;
 

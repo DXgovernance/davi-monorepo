@@ -1,7 +1,8 @@
-import { Address, Bytes } from '@graphprotocol/graph-ts';
+import { Address, Bytes, BigInt, log } from '@graphprotocol/graph-ts';
 import { ProposalStateChange } from '../../types/DAOController/Scheme';
 import {
   Proposal,
+  Stake,
   StateLog,
   VotingMachineProposalStateLog,
 } from '../../types/schema';
@@ -54,6 +55,24 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
   let proposal = Proposal.load(proposalId.toHexString());
   if (!proposal) {
     proposal = new Proposal(proposalId.toHexString());
+
+    // Every proposal starts with a stake on the "NO" option equal to daoBounty
+    const stakeId = `${proposalId.toHexString()}-${schemeAddress.toHexString()}-${
+      event.block.timestamp
+    }-stake`;
+
+    const stake = new Stake(stakeId);
+    stake.amount = new BigInt(0);
+
+    stake.proposal = proposalId.toHexString();
+    stake.avatar = schemeContract.avatar().toHexString();
+    stake.staker = schemeAddress.toHexString();
+    stake.option = BigInt.fromString('1'); // NO option
+    stake.amount = proposalDataFromVotingMachine.getDaoBounty();
+    stake.timestamp = event.block.timestamp;
+    stake.txId = event.transaction.hash.toHexString();
+
+    stake.save();
   }
 
   // Scheme data

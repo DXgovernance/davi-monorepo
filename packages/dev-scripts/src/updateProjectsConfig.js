@@ -1,51 +1,51 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 /**
  * This script pull the latest deployment info and feed both davi, guild subgraph and 1.5 subgraph with necesary
  * development bytecodes and addresses created by the latest hardhat deployment
  */
 
-console.log("Executing apps/dev-scripts/src/updateProjectsConfig.js");
+console.log('Executing apps/dev-scripts/src/updateProjectsConfig.js');
 
-const bytecodesFilePath = path.resolve(__dirname, "../build/bytecodes.json");
-const addressesFilePath = path.resolve(__dirname, "../build/addresses.json");
+const bytecodesFilePath = path.resolve(__dirname, '../build/bytecodes.json');
+const addressesFilePath = path.resolve(__dirname, '../build/addresses.json');
 
 if (fs.existsSync(bytecodesFilePath)) {
   const bytecodes = require(bytecodesFilePath);
   const stringBytecodes = JSON.stringify(bytecodes, null, 2);
 
   // Write bytecodes to davi
-  console.log("Writing davi local bytecodes");
+  console.log('Writing davi local bytecodes');
   fs.writeFileSync(
-    path.resolve(__dirname, "../../../apps/davi/src/bytecodes/local.json"),
+    path.resolve(__dirname, '../../../apps/davi/src/bytecodes/local.json'),
     JSON.stringify(bytecodes, null, 2)
   );
 
   // Write bytecodes to subgraph
-  console.log("Writing subgraph local bytecodes");
+  console.log('Writing subgraph local bytecodes');
   fs.writeFileSync(
     path.resolve(
       __dirname,
-      "../../../apps/guilds-subgraph/src/mappings/Create2Deployer/local.ts"
+      '../../../apps/guilds-subgraph/src/mappings/Create2Deployer/local.ts'
     ),
     `export const local = ${JSON.stringify(stringBytecodes)};`
   );
 } else {
   console.error(
-    "Error:: Missing file: dev-scripts/build/bytecodes.json. Do you forget to run compile script from dev-scripts?. Try with `pnpm run dev --force`"
+    'Error:: Missing file: dev-scripts/build/bytecodes.json. Do you forget to run compile script from dev-scripts?. Try with `pnpm run dev --force`'
   );
   process.exit(1);
 }
 
 if (fs.existsSync(addressesFilePath)) {
   const addresses = require(addressesFilePath);
-  console.log("Using deployed addresses:", addresses);
+  console.log('Using deployed addresses:', addresses);
 
   // Write addresses to guild subgraph
-  console.log("Writing guild subgraph local networks.json");
+  console.log('Writing guild subgraph local networks.json');
   fs.writeFileSync(
-    path.resolve(__dirname, "../../../apps/guilds-subgraph/networks.json"),
+    path.resolve(__dirname, '../../../apps/guilds-subgraph/networks.json'),
     JSON.stringify(
       {
         private: {
@@ -69,9 +69,9 @@ if (fs.existsSync(addressesFilePath)) {
   );
 
   // Write addresses to 1.5 subgraph
-  console.log("Writing 1.5 subgraph local networks.json");
+  console.log('Writing 1.5 subgraph local networks.json');
   fs.writeFileSync(
-    path.resolve(__dirname, "../../../apps/dao-subgraph/networks.json"),
+    path.resolve(__dirname, '../../../apps/dao-subgraph/networks.json'),
     JSON.stringify(
       {
         private: {
@@ -99,10 +99,10 @@ if (fs.existsSync(addressesFilePath)) {
   );
 
   // Write addresses to davi
-  console.log("Writing davi localhost config.json");
+  console.log('Writing davi localhost config.json');
   const localhostPath = path.resolve(
     __dirname,
-    "../../../apps/davi/src/configs/localhost"
+    '../../../apps/davi/src/configs/localhost'
   );
   if (!fs.existsSync(localhostPath)) {
     fs.mkdirSync(localhostPath);
@@ -110,7 +110,7 @@ if (fs.existsSync(addressesFilePath)) {
   fs.writeFileSync(
     path.resolve(
       __dirname,
-      "../../../apps/davi/src/configs/localhost/config.json"
+      '../../../apps/davi/src/configs/localhost/config.json'
     ),
     JSON.stringify(
       {
@@ -120,6 +120,17 @@ if (fs.existsSync(addressesFilePath)) {
           },
           votingMachines: {},
         },
+        tokens: [
+          {
+            logoURI:
+              'https://assets.coingecko.com/coins/images/11148/thumb/dxdao.png?1607999331',
+            chainId: 1337,
+            address: '0xc1f771042aa85ee9969f40a4e126786dd3e795c6',
+            name: 'DXdao',
+            symbol: 'DXD',
+            decimals: 18,
+          },
+        ],
       },
       null,
       2

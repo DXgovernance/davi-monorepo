@@ -155,7 +155,10 @@ export interface FetcherHooksInterface {
     status: ProposalState,
     endTime: Moment
   ) => { detail: string; moment: Moment };
-  useGetSubDAOs: (daoId: string) => {
+  useGetSubDAOs: (
+    daoId: string,
+    schemeId?: string
+  ) => {
     data: SubDAO[];
     isLoading: boolean;
     errorMessage: string;
@@ -209,6 +212,16 @@ export interface WriterHooksInteface {
     amount: BigNumber,
     tokenDecimals?: number,
     tokenSymbol?: string
+  ) => Promise<void>;
+  useStakeOnProposal: (
+    daoAddress: string,
+    subDaoAddres?: string
+  ) => (
+    proposalId: string,
+    option: BigNumber,
+    stakeAmount: BigNumber,
+    title?: string,
+    cb?: (error?: any, txtHash?: any) => void
   ) => Promise<void>;
 }
 

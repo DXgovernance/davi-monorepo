@@ -61,6 +61,7 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c1 {
@@ -451,6 +452,7 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c1 {
@@ -658,6 +660,7 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c1 {
@@ -879,6 +882,7 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c1 {
@@ -1084,6 +1088,7 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  gap: 0;
 }
 
 .c1 {

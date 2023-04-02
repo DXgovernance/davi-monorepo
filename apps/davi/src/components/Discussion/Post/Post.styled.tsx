@@ -15,7 +15,7 @@ export const PostHeader = styled.div`
 `;
 
 export const PostCreatorName = styled.span`
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const PostCreatorAddressBadge = styled.span`

@@ -169,6 +169,7 @@ export interface WriterHooksInteface {
   ) => (daoTokenVault: string, amount?: string) => Promise<void>;
   useCreateProposal: (
     daoAddress: string,
+    subDaoAddress?: string,
     linkRef?: string
   ) => (
     title: string,

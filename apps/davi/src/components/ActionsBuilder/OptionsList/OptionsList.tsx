@@ -37,6 +37,7 @@ import { AddOptionWrapper, SimulationButton } from './OptionsList.styled';
 import { SimulationModal } from './SimulationModal';
 import { OptionsListProps, SimulationState } from './types';
 import { BigNumber } from 'ethers';
+import { useHookStoreProvider } from 'stores';
 
 export const OptionsList: React.FC<OptionsListProps> = ({
   isEditable,
@@ -51,6 +52,8 @@ export const OptionsList: React.FC<OptionsListProps> = ({
   const [clonedOptions, setClonedOptions] = useState<Option[]>(null);
   const recentlyMovedToNewContainer = useRef(false);
   const theme = useTheme();
+  const { name: governanceImplementationName } = useHookStoreProvider();
+
   useEffect(() => {
     requestAnimationFrame(() => {
       recentlyMovedToNewContainer.current = false;
@@ -378,7 +381,7 @@ export const OptionsList: React.FC<OptionsListProps> = ({
         </>
       )}
 
-      {isEditable && (
+      {isEditable && governanceImplementationName !== 'Governance1_5' && (
         <>
           <Divider />
           <AddOptionWrapper>

@@ -19,7 +19,7 @@ class CreateDiscussionPage {
         this.createDiscussion_Button().click()
     }
 
-    clickNewDiscussion(discussionName) {
+    clickOnDiscussionWithTitle(discussionName) {
         cy.contains(discussionName).click()
     }
 

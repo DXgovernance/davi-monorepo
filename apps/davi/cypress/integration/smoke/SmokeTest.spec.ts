@@ -10,7 +10,7 @@ import CreateProposalPage from '../../support/pageObjects/CreateProposalPage';
 import { gnosisNetworkGuilds } from '../../utils';
 const url = Cypress.config().baseUrl;
 
-describe('Check Project-DAVI', () => {
+describe('SMOKE test', () => {
 
     before(() => {
         cy.visit(url);
@@ -34,9 +34,9 @@ describe('Check Project-DAVI', () => {
     });
 
     // TODO: ATM only asserting Gnosis network
-    gnosisNetworkGuilds.forEach((guildName, i) => {
+    gnosisNetworkGuilds.forEach((guildName) => {
         it(`Visit ${guildName}`, () => {
-            LandingPage.goToGuildPage(guildName, i);
+            LandingPage.goToGuildPage(guildName);
             AnyGuildPage.checkIfYouAreOnSelectedGuildPage(guildName)
         });
 

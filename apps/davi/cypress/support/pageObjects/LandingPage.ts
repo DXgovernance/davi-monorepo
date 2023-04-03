@@ -58,7 +58,7 @@ class LandingPage {
     cy.contains('MetaMask').click();
   }
 
-  goToGuildPage(guildName, i) {
+  goToGuildPage(guildName) {
     cy.contains(guildName).click();
   };
 

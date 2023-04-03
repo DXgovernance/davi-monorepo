@@ -67,7 +67,7 @@ const CreateProposalPage: React.FC = () => {
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
-  const createProposal = useCreateProposal(guildId, discussionId);
+  const createProposal = useCreateProposal(guildId, subdaoId, discussionId);
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();

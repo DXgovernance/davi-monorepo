@@ -264,12 +264,14 @@
       "invalidContentHash": "Contenido hash inválido",
       "titleRequired": "El título es requerido",
       "atLeastOneOptionRequired": "Por lo menos una opción es requerida",
+      "mustBe2Options": "Deben ser 2 opciones",
       "atLeastOneActionPerOptionRequired": "Por lo menos una acción por opción es requerida",
       "optionsArrayIsEmpty": "Las opciones están vacías",
       "metadataUploadError": "Error en la carga de Metadatos",
       "genericProposalError": "Nos encontramos con un error.",
       "couldntFindTheProposal": "No pudimos encontrar esa propuesta",
-      "probablyNonExistent": "Probablemente no exista"
+      "probablyNonExistent": "Probablemente no exista",
+      "errorFetchingScheme": "Nos encontramos con un error buscando el esquema de la dao"
     }
   },
   "tokenPicker": {

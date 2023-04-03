@@ -266,12 +266,14 @@
       "invalidContentHash": "Invalid content hash",
       "titleRequired": "Title is required",
       "atLeastOneOptionRequired": "At least one option is required",
+      "mustBe2Options": "There must be 2 options",
       "atLeastOneActionPerOptionRequired": "At least one action per option is required",
       "optionsArrayIsEmpty": "Options array is empty",
       "metadataUploadError": "Metadata upload error",
       "genericProposalError": "We ran into an error.",
       "couldntFindTheProposal": "We couldn't find that proposal",
-      "probablyNonExistent": "It probably doesn't exist"
+      "probablyNonExistent": "It probably doesn't exist",
+      "errorFetchingScheme": "We ran into an error fetching the dao's Scheme"
     }
   },
   "tokenPicker": {

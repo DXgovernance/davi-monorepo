@@ -43,6 +43,54 @@ export const isValidGuildProposal = ({
   };
 };
 
+export const isValid1_5Proposal = ({
+  toArray,
+  dataArray,
+  valueArray,
+  totalOptions,
+  title,
+}: {
+  toArray: string[];
+  dataArray: string[];
+  valueArray: BigNumber[];
+  totalOptions: number;
+  title: string;
+}): { isValid: boolean; error?: string } => {
+  if (!title) {
+    return {
+      isValid: false,
+      error: i18next.t('proposal.errors.titleRequired'),
+    };
+  }
+  if (totalOptions === 0) {
+    return {
+      isValid: false,
+      error: i18next.t('proposal.errors.atLeastOneOptionRequired'),
+    };
+  }
+  if (totalOptions !== 2) {
+    return {
+      isValid: false,
+      error: i18next.t('proposal.errors.mustBe2Options'),
+    };
+  }
+  if (
+    toArray.length === 0 ||
+    dataArray.length === 0 ||
+    valueArray.length === 0
+  ) {
+    return {
+      isValid: false,
+      error: i18next.t('proposal.errors.atLeastOneActionPerOptionRequired'),
+    };
+  }
+
+  return {
+    isValid: true,
+    error: null,
+  };
+};
+
 export const isEnsName = (
   name: string
 ): { isValid: boolean; validationError: string } => {

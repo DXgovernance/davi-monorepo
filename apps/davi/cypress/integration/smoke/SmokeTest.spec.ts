@@ -7,7 +7,7 @@
 import LandingPage from '../../support/pageObjects/LandingPage';
 import AnyGuildPage from '../../support/pageObjects/AnyGuildPage';
 import CreateProposalPage from '../../support/pageObjects/CreateProposalPage';
-import { clickAnywhereToClose, ethereumNetworkGuilds, gnosisNetworkGuilds } from '../../utils';
+import { gnosisNetworkGuilds } from '../../utils';
 const url = Cypress.config().baseUrl;
 
 describe('Check Project-DAVI', () => {
@@ -20,13 +20,13 @@ describe('Check Project-DAVI', () => {
     it('Check Wallet options modal', () => {  
         LandingPage.openWalletModal();   
         LandingPage.checkWalletOptions();
-        clickAnywhereToClose();
+        cy.closeModal()
     });
 
     it('Check Network options modal', () => {  
         LandingPage.openNetworkModal();   
         LandingPage.checkNetworkOptions()
-        clickAnywhereToClose();
+        cy.closeModal()
     });
 
     it('Check Footer links', () => {

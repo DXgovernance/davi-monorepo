@@ -16,6 +16,7 @@ import {
   useGetAllPermissions as useGetAllPermissionsFromSubgraph,
   useGetVotes as useGetVotesFromSubgraph,
   useProposalVotesOfVoter as useProposalVotesOfVoterFromSubgraph,
+  useGetSubDAOs as useGetSubDAOsFromSubgraph,
 } from '../common/fetchers/subgraph';
 
 import {
@@ -33,6 +34,8 @@ import {
   useGetAllPermissions,
   useGetNumberOfActiveProposals,
   useGuildProposalIds,
+  useProposalState,
+  useTimeDetail,
 } from '../common/fetchers/rpc';
 import {
   useTotalLocked,
@@ -80,6 +83,9 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetNumberOfActiveProposals:
             useGetNumberOfActiveProposalsFromSubgraph,
           useGuildProposalIds: useGuildProposalIdsFromSubgraph,
+          useProposalState,
+          useTimeDetail,
+          useGetSubDAOs: useGetSubDAOsFromSubgraph,
         },
         fallback: {
           useProposal,
@@ -100,6 +106,9 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
           useGetAllPermissions,
           useGetNumberOfActiveProposals,
           useGuildProposalIds,
+          useProposalState,
+          useTimeDetail,
+          useGetSubDAOs: useGetSubDAOsFromSubgraph,
         },
       },
       writers: {
@@ -117,6 +126,7 @@ export const snapshotERC20GuildImplementation: Readonly<FullGovernanceImplementa
       consensus: 'quorum',
       votingStyle: 'competition',
       votingPowerTally: 'snapshot',
+      hasSubDAO: false,
     },
     checkDataSourceAvailability,
   };

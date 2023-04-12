@@ -1,0 +1,30 @@
+query getDaoProposal($id: ID!, $proposalId: ID!) {
+  dao(id: $id) {
+    schemes {
+      proposals(where: { id: $proposalId }) {
+        boostedPhaseTime
+        callData
+        callbacks
+        currentBoostedVotePeriodLimit
+        daoBounty
+        id
+        paramsHash
+        descriptionHash
+        preBoostedPhaseTime
+        proposer
+        schemeId
+        state
+        submittedTime
+        title
+        to
+        totalOptions
+        value
+        votingMachineExecutionState
+        votingMachineProposalState
+        winningVote
+        totalVotes
+        daoRedeemedWinnings
+      }
+    }
+  }
+}

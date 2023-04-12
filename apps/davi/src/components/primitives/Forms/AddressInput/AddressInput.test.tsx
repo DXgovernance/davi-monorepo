@@ -97,6 +97,14 @@ describe(`AddressInput`, () => {
 
       expect(addressAvatar).not.toBeInTheDocument();
     });
+
+    it(`shouldn't crash if receives value undefined`, async () => {
+      const result = render(
+        <AddressInput value={undefined} onChange={jest.fn()} />
+      );
+
+      expect(result).not.toBeNull();
+    });
   });
 
   describe(`ENS behaviour`, () => {

@@ -8,24 +8,24 @@
     "build": "./scripts/build.sh",
     "build-analyze": "pnpm cra-bundle-analyzer",
     "lint": "eslint src/",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\" \"scripts/*.{js,jsx,ts,tsx,json,md}\"",
-    "format-check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,md}\" \"scripts/*.{js,jsx,ts,tsx,json,md}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md,graphql}\" \"scripts/*.{js,jsx,ts,tsx,json,md}\"",
+    "format-check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,md,graphql}\" \"scripts/*.{js,jsx,ts,tsx,json,md}\"",
     "cy:run": "./scripts/integration.sh",
     "test:light": "react-app-rewired test --watch --detectOpenHandles",
     "test:e2e": "ETHERNAL_CONTRACTS=false start-server-and-test 'pnpm dev --no-browser' 3000 cy:run",
     "test": "react-app-rewired test --watchAll=false --verbose --testTimeout=10000",
     "test:coverage": "pnpm run test --coverage",
-    "runSmokeLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
-    "runRegressionLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json -s ./cypress/integration/regression/*.spec.ts",
+    "runSmokeLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json --config supportFile='cypress/support/index.ts' -s ./cypress/integration/smoke/SmokeTest.spec.ts",
+    "runRegressionLocal": "env-cmd -f .env synpress run --configFile ./cypress/config/local.json --config supportFile='cypress/support/index.ts' -s ./cypress/integration/regression/*.spec.ts",
     "test:regressionLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runRegressionLocal",
     "test:smokeLocal": "ETHERNAL_CONTRACTS=false start-server-and-test 'yarn dev --no-browser ' 3000 runSmokeLocal",
     "test:smokeQa": "env-cmd -f .env synpress run --configFile ./cypress/config/qa.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
     "test:smokeProd": "env-cmd -f .env synpress run --configFile ./cypress/config/prod.json -s ./cypress/integration/smoke/SmokeTest.spec.ts",
-    "updateContracts": "pnpm hardhat compile && node scripts/updateContracts.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-graph-client": "graphclient build && rm -rf src/.graphclient && mv .graphclient src",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "clean": "rm -rf src/.graphclient"
   },
   "engines": {
     "node": "^16.13.0"
@@ -51,6 +51,7 @@
     "@graphql-mesh/graphql": "^0.33.8",
     "@graphql-mesh/http": "^0.3.8",
     "@graphql-mesh/merger-bare": "^0.16.7",
+    "@graphql-mesh/merger-stitching": "^0.18.15",
     "@graphql-mesh/runtime": "^0.46.5",
     "@graphql-mesh/store": "^0.9.5",
     "@graphql-mesh/utils": "^0.43.5",
@@ -232,3 +233,4 @@
     ]
   }
 }
+

@@ -20,9 +20,8 @@ export const subgraphClientsUris: Record<
     [SupportedSubgraph.Governance1_5]: '',
   },
   [CHAIN_ID.GNOSIS]: {
-    [SupportedSubgraph.Guilds]:
-      'https://api.thegraph.com/subgraphs/name/dxgovernance/guild-subgraph-gnosis',
-    [SupportedSubgraph.Governance1_5]: '',
+    Guilds: process.env.REACT_APP_DXGOV_GUILD_GRAPHQL_ENDPOINT_GNOSIS,
+    'Governance1.5': process.env.REACT_APP_DXGOV_DAO_GRAPHQL_ENDPOINT_GNOSIS,
   },
   // testnets
   [CHAIN_ID.ARBITRUM_TESTNET]: {
@@ -34,10 +33,8 @@ export const subgraphClientsUris: Record<
     [SupportedSubgraph.Governance1_5]: '',
   },
   [CHAIN_ID.LOCALHOST]: {
-    [SupportedSubgraph.Guilds]:
-      'http://127.0.0.1:8000/subgraphs/name/dxdao/guilds',
-    [SupportedSubgraph.Governance1_5]:
-      'http://127.0.0.1:8000/subgraphs/name/dxdao/dxgov-1-5',
+    Guilds: 'http://127.0.0.1:8000/subgraphs/name/dxdao/guilds',
+    'Governance1.5': 'http://127.0.0.1:8000/subgraphs/name/dxdao/dao',
   },
 };
 

@@ -1,0 +1,11 @@
+type Permission @entity {
+  id: ID!
+  from: String!
+  to: String!
+  functionSignature: String!
+  isToken: Boolean!
+  valueAllowed: BigInt!
+  fromTime: BigInt!
+  allowed: Boolean!
+}
+

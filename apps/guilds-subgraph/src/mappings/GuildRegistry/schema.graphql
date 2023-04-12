@@ -6,6 +6,8 @@ type Guild @entity {
   proposalTime: BigInt
   lockTime: BigInt
   timeForExecution: BigInt
+  votingPowerPercentageForProposalCreation: BigInt
+  votingPowerPercentageForProposalExecution: BigInt
   votingPowerForProposalCreation: BigInt
   votingPowerForProposalExecution: BigInt
   voteGas: BigInt
@@ -15,14 +17,10 @@ type Guild @entity {
   minimumTokensLockedForProposalCreation: BigInt
   type: GuildType
   permissions: [GuildPermission!]! @derivedFrom(field: "guild")
-  proposals: [Proposal!]
-  members: [Member!]
+  proposals: [Proposal!] @derivedFrom(field: "guildId")
+  members: [Member!] @derivedFrom(field: "guildId")
   isActive: Boolean
   bytecodeHash: String
-}
-
-enum TokenType {
-  ERC20
 }
 
 enum GuildType {
@@ -34,7 +32,7 @@ enum GuildType {
 
 type Token @entity {
   id: ID!
-  type: TokenType!
+  type: String!
   name: String!
   symbol: String!
   decimals: Int!

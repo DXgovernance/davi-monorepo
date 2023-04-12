@@ -1,0 +1,1 @@
+export { useExecuteProposal } from './useExecuteProposal';

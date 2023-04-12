@@ -1,0 +1,82 @@
+type Proposal @entity {
+  id: ID!
+
+  # Scheme properties
+  scheme: Scheme! # Scheme adddress
+  to: [String!]
+  callData: [String!]
+  value: [BigInt!]
+  totalOptions: BigInt
+  state: ProposalState
+  title: String
+  descriptionHash: String
+  submittedTime: BigInt
+  snapshot: String
+
+  # VotingMachine properties
+  schemeId: String
+  callbacks: String
+  votingMachineProposalState: VotingMachineProposalState
+  votingMachineExecutionState: VotingMachineExecutionState
+  totalVotes: [BigInt!]
+  winningVote: BigInt
+  proposer: String
+  currentBoostedVotePeriodLimit: BigInt
+  paramsHash: String
+  daoBounty: BigInt
+  boostedPhaseTime: BigInt
+  preBoostedPhaseTime: BigInt
+  daoRedeemedWinnings: Boolean
+
+  # Related entities
+  votes: [Vote!] @derivedFrom(field: "proposal")
+  stakes: [Stake!] @derivedFrom(field: "proposal")
+  stateLogs: [StateLog!] @derivedFrom(field: "proposal")
+  votingMachineProposalStateLogs: [VotingMachineProposalStateLog!]
+    @derivedFrom(field: "proposal")
+}
+
+type StateLog @entity {
+  id: ID!
+  timestamp: BigInt!
+  txId: String!
+  state: ProposalState!
+  proposal: Proposal!
+}
+
+type VotingMachineProposalStateLog @entity {
+  id: ID!
+  timestamp: BigInt!
+  txId: String!
+  state: VotingMachineProposalState!
+  proposal: Proposal!
+}
+
+enum ProposalState {
+  None
+  Submitted
+  Rejected
+  Passed
+}
+
+enum VotingMachineProposalState {
+  None
+  Expired
+  ExecutedInQueue
+  ExecutedInBoost
+  Queued
+  PreBoosted
+  Boosted
+  QuietEndingPeriod
+}
+
+enum VotingMachineExecutionState {
+  None
+  Failed
+  QueueBarCrossed
+  QueueTimeOut
+  PreBoostedBarCrossed
+  BoostedTimeOut
+  BoostedBarCrossed
+}
+

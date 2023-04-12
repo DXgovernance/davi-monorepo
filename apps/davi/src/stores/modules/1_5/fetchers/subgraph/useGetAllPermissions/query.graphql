@@ -1,0 +1,38 @@
+query getAllDaoPermissions($from: String!) {
+  permissions(where: { from: $from }) {
+    id
+    isToken
+    to
+    valueAllowed
+    from
+    fromTime
+    functionSignature
+    allowed
+  }
+}
+
+query getAllDaoTokenPermissions($from: String!) {
+  permissions(where: { isToken: true, from: $from }) {
+    id
+    isToken
+    to
+    valueAllowed
+    from
+    fromTime
+    functionSignature
+    allowed
+  }
+}
+
+query getAllDaoFunctionCallPermissions($from: String!) {
+  permissions(where: { isToken: false, from: $from }) {
+    id
+    isToken
+    to
+    valueAllowed
+    from
+    fromTime
+    functionSignature
+    allowed
+  }
+}

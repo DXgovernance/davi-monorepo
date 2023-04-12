@@ -320,6 +320,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
               autocomplete="off"
               autocorrect="off"
               class="c8 c10"
+              data-testid="reputation-in-percentage-field"
               inputmode="decimal"
               maxlength="79"
               minlength="1"
@@ -346,7 +347,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
         <div
           class="c0 c2"
         >
-          repMint.repAmount
+          actionBuilder.repMint.repAmount
           <span
             class="c3"
           >
@@ -394,6 +395,7 @@ exports[`RepMintEditor Should match snapshot 1`] = `
     </div>
     <button
       class="c12"
+      data-testid="save-action-button"
       type="submit"
     >
       actionBuilder.action.saveAction

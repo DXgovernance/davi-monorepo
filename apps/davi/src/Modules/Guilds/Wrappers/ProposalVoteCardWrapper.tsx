@@ -43,11 +43,11 @@ const ProposalVoteCardWrapper = ({
     contractAddress: guildId,
     userAddress,
   });
+
   const { data: snapshotId } = useSnapshotId({
     contractAddress: guildId,
     proposalId,
   });
-
   // Get voting power without fallbackSnapshotId
   const { data: votingPowerAtProposalSnapshot } = useVotingPowerOf({
     contractAddress: guildId,
@@ -82,7 +82,7 @@ const ProposalVoteCardWrapper = ({
         atCurrentSnapshot: votingPowerAtProposalCurrentSnapshot,
       }}
       userVote={userVote}
-      votingMachineAddress={guildId}
+      guildId={guildId}
     />
   );
 };

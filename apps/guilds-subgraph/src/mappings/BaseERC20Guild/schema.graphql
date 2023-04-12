@@ -9,20 +9,20 @@ type Proposal @entity {
   title: String!
   contentHash: String!
   contractState: BigInt!
-  guildId: String!
+  guildId: Guild!
   totalVotes: [BigInt!]
-  votes: [Vote!]
-  options: [Option!]
+  votes: [Vote!] @derivedFrom(field: "proposalId")
+  options: [Option!] @derivedFrom(field: "proposalId")
   snapshotId: BigInt
-  # TODO: use correct metadata type (ProposalMetadata)
   metadata: String
   description: String
   executionTransactionHash: String
-  statesLog: [ProposalStateLog!]
+  statesLog: [ProposalStateLog!] @derivedFrom(field: "proposalId")
 }
 
 type ProposalStateLog @entity {
   id: ID!
+  proposalId: Proposal!
   state: BigInt!
   timestamp: BigInt!
   transactionHash: String!
@@ -31,31 +31,26 @@ type ProposalStateLog @entity {
 type Option @entity {
   id: ID!
   label: String
-  proposalId: String
-  actions: [Action!]
+  proposalId: Proposal!
+  actions: [Action!] @derivedFrom(field: "optionId")
   voteAmount: BigInt
-  votes: [Vote!]!
+  votes: [Vote!] @derivedFrom(field: "optionId")
 }
 
 type Action @entity {
   id: ID!
-  optionId: String!
+  optionId: Option!
   to: String!
   data: String!
   value: BigInt!
   from: String!
 }
 
-# type ProposalMetadata @entity {
-#   id: ID!
-#   description: String!
-#   voteOptions: [String!]
-# }
-
 type Vote @entity {
   id: ID!
-  proposalId: String!
+  proposalId: Proposal!
   option: BigInt!
+  optionId: Option!
   optionLabel: String
   voter: String!
   votingPower: BigInt!
@@ -64,6 +59,7 @@ type Vote @entity {
 
 type Member @entity {
   id: ID!
+  guildId: Guild!
   address: String!
   tokensLocked: BigInt!
 }

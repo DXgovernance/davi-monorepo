@@ -1,0 +1,1 @@
+export { useGetAllPermissions } from './useGetAllPermissions';

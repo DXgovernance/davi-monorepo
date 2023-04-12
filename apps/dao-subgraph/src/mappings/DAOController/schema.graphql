@@ -1,0 +1,43 @@
+type Scheme @entity {
+  id: ID!
+  name: String!
+  type: String!
+  avatar: DAO!
+  votingMachine: VotingMachine!
+  controller: String!
+  permissionRegistry: String!
+  maxRepPercentageChange: BigInt!
+  paramsHash: Bytes
+  isRegistered: Boolean
+  canManageSchemes: Boolean
+  canMakeAvatarCalls: Boolean
+  canChangeReputation: Boolean
+
+  # These properties are set in the struct of the
+  # VotingMachine, but don't emit events when
+  # modified in functions: _execute and setSchemeRefund
+  stakingTokenBalance: BigInt
+  voteGasBalance: BigInt
+  voteGas: BigInt
+  maxGasPrice: BigInt
+  averagesDownstakesOfBoosted: BigInt
+  orgBoostedProposalsCnt: BigInt
+
+  # Related entities
+  proposals: [Proposal!] @derivedFrom(field: "scheme")
+}
+
+type VotingMachine @entity {
+  id: ID!
+  queuedVoteRequiredPercentage: BigInt
+  queuedVotePeriodLimit: BigInt
+  boostedVotePeriodLimit: BigInt
+  preBoostedVotePeriodLimit: BigInt
+  thresholdConst: BigInt
+  limitExponentValue: BigInt
+  quietEndingPeriod: BigInt
+  daoBounty: BigInt
+  boostedVoteRequiredPercentage: BigInt
+  schemes: [Scheme!] @derivedFrom(field: "votingMachine")
+}
+

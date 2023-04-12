@@ -3,31 +3,13 @@ import { BigNumber } from 'ethers';
 import { useQuery } from '@apollo/client';
 import { getGuildConfigDocument, getGuildConfigQuery } from '.graphclient';
 import { ZERO_ADDRESS } from 'utils';
+import { GuildConfigProps } from 'types/types.guilds';
 import { FetcherHooksInterface, SupportedSubgraph } from 'stores/types';
 import { useVotingPowerForProposalExecution } from 'Modules/Guilds/Hooks/useVotingPowerForProposalExecution';
 import { useNetwork } from 'wagmi';
 import { getApolloClient } from 'clients/apollo';
 
 type IUseGuildConfig = FetcherHooksInterface['useGuildConfig'];
-
-export type GuildConfigProps = {
-  name: string;
-  token: `0x${string}`;
-  permissionRegistry: string;
-  proposalTime: BigNumber;
-  timeForExecution: BigNumber;
-  maxActiveProposals: BigNumber;
-  votingPowerForProposalCreation: BigNumber;
-  votingPowerForProposalExecution: BigNumber;
-  tokenVault: `0x${string}`;
-  lockTime: BigNumber;
-  voteGas: BigNumber;
-  maxGasPrice: BigNumber;
-  votingPowerPercentageForProposalExecution: BigNumber;
-  votingPowerPercentageForProposalCreation: BigNumber;
-  minimumMembersForProposalCreation: BigNumber;
-  minimumTokensLockedForProposalCreation: BigNumber;
-};
 
 export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
   const { chain } = useNetwork();
@@ -57,6 +39,8 @@ export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
       timeForExecution,
       maxActiveProposals,
       votingPowerForProposalCreation,
+      votingPowerPercentageForProposalCreation,
+      votingPowerPercentageForProposalExecution,
       lockTime,
       voteGas,
       maxGasPrice,
@@ -83,8 +67,14 @@ export const useGuildConfig: IUseGuildConfig = (guildAddress, proposalId?) => {
       lockTime: lockTime ? BigNumber?.from(lockTime) : undefined,
       voteGas: voteGas ? BigNumber?.from(voteGas) : undefined,
       maxGasPrice: maxGasPrice ? BigNumber?.from(maxGasPrice) : undefined,
-      votingPowerPercentageForProposalExecution: BigNumber.from(0),
-      votingPowerPercentageForProposalCreation: BigNumber.from(0),
+      votingPowerPercentageForProposalExecution:
+        votingPowerPercentageForProposalExecution
+          ? BigNumber?.from(votingPowerPercentageForProposalExecution)
+          : undefined,
+      votingPowerPercentageForProposalCreation:
+        votingPowerPercentageForProposalCreation
+          ? BigNumber?.from(votingPowerPercentageForProposalCreation)
+          : undefined,
       minimumMembersForProposalCreation: minimumMembersForProposalCreation
         ? BigNumber?.from(minimumMembersForProposalCreation)
         : undefined,

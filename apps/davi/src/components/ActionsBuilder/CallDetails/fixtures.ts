@@ -15,8 +15,8 @@ export const emptyDecodedCallMock: DecodedCall = {
   to: '',
   value: BigNumber.from(0),
   args: {
-    _to: '',
-    _value: BigNumber.from(0),
+    recipient: '',
+    amount: BigNumber.from(0),
   },
 };
 
@@ -27,8 +27,8 @@ export const decodedCallMock: DecodedCall = {
   to: '0x95a223299319022a842d0dfe4851c145a2f615b9',
   value: BigNumber.from(0),
   args: {
-    _to: '0x0000000000000000000000000000000000000000',
-    _value: BigNumber.from(1000),
+    recipient: '0x0000000000000000000000000000000000000000',
+    amount: BigNumber.from(1000),
   },
 };
 

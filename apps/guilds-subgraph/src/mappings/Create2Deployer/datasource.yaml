@@ -2,11 +2,11 @@ abis:
   - Create2Deployer
   - SnapshotRepERC20Guild
   - BaseERC20Guild
-  - ERC20
+  - ERC20Token
   - SnapshotERC20Guild
 entities:
   - Guild
 eventHandlers:
-  - event: Deployed(address,bytes32)
+  - event: Deployed(address,bytes32,uint256)
     handler: handleDeployedEvent
 

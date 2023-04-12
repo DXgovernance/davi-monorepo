@@ -9,7 +9,7 @@ import { BigNumber } from 'ethers';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { FiChevronLeft, FiX } from 'react-icons/fi';
 import { MdOutlinePreview, MdOutlineModeEdit } from 'react-icons/md';
 
@@ -54,6 +54,7 @@ const CreateProposalPage: React.FC = () => {
   const { guildId, chainName: chain } = useTypedParams();
   const [searchParams] = useSearchParams();
   const discussionId = searchParams.get('ref');
+  const subdaoId = searchParams.get('subdao');
 
   const { isLoading: isGuildAvailabilityLoading } = useContext(
     GuildAvailabilityContext
@@ -62,11 +63,13 @@ const CreateProposalPage: React.FC = () => {
     hooks: {
       writers: { useCreateProposal },
     },
+    capabilities: { hasSubDAO },
   } = useHookStoreProvider();
   const { orbis } = useOrbisContext();
 
   const createProposal = useCreateProposal(guildId, discussionId);
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const theme = useTheme();
   const [editMode, setEditMode] = useState(true);
@@ -96,7 +99,6 @@ const CreateProposalPage: React.FC = () => {
     Editor,
     EditorConfig,
     md: proposalBodyMd,
-    html: proposalBodyHTML,
     clear,
   } = useTextEditor({
     placeholder: t('createProposal.enterProposalDescription'),
@@ -210,9 +212,11 @@ const CreateProposalPage: React.FC = () => {
       dataArray.length === 0 &&
       valueArray.length === 0
     ) {
-      toArray.push(ZERO_ADDRESS);
-      dataArray.push(ZERO_HASH);
-      valueArray.push(BigNumber.from(0));
+      options.forEach(o => {
+        toArray.push(ZERO_ADDRESS);
+        dataArray.push(ZERO_HASH);
+        valueArray.push(BigNumber.from(0));
+      });
     }
 
     const otherFields = { options };
@@ -249,13 +253,19 @@ const CreateProposalPage: React.FC = () => {
 
   const isValid = useMemo(() => {
     if (!title) return false;
-    if (!proposalBodyHTML) return false;
-    if (!proposalBodyMd || !proposalBodyMd.length) return false;
+    if (!description) return false;
 
     return true;
-  }, [title, proposalBodyHTML, proposalBodyMd]);
+  }, [title, description]);
 
   if (isGuildAvailabilityLoading) return <Loading loading />;
+
+  const schemeSelectionUrl = `/${chain}/${guildId}/scheme-selection${location.search}`;
+  if (hasSubDAO === true && !subdaoId) {
+    navigate(schemeSelectionUrl);
+    return <></>;
+  }
+
   return (
     <PageContainer>
       <PageContent>
@@ -264,18 +274,35 @@ const CreateProposalPage: React.FC = () => {
           justifyContent="space-between"
           margin="0px 0px 24px"
         >
-          <StyledLink to={`/${chain}/${guildId}`} customStyles={linkStyles}>
-            <IconButton
-              variant="secondary"
-              iconLeft
-              padding={'0.6rem 0.8rem'}
-              marginTop={'5px;'}
-              data-testid="back-to-overview-btn"
-            >
-              <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
-              {t('proposal.backToOverview')}{' '}
-            </IconButton>
-          </StyledLink>
+          <div>
+            <StyledLink to={`/${chain}/${guildId}`} customStyles={linkStyles}>
+              <IconButton
+                variant="secondary"
+                iconLeft
+                padding={'0.6rem 0.8rem'}
+                marginTop={'5px;'}
+                data-testid="back-to-overview-btn"
+              >
+                <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
+                {t('proposal.backToOverview')}
+              </IconButton>
+            </StyledLink>
+
+            {hasSubDAO === true && (
+              <StyledLink to={schemeSelectionUrl} customStyles={linkStyles}>
+                <IconButton
+                  variant="secondary"
+                  iconLeft
+                  padding={'0.6rem 0.8rem'}
+                  marginTop={'5px;'}
+                  data-testid="back-to-scheme-btn"
+                >
+                  <FiChevronLeft style={{ marginRight: '15px' }} />{' '}
+                  {t('schemes.backToScheme')}
+                </IconButton>
+              </StyledLink>
+            )}
+          </div>
 
           <StyledButton
             onClick={handleToggleEditMode}

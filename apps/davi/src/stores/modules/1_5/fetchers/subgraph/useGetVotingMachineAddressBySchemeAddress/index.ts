@@ -1,0 +1,1 @@
+export { useGetVotingMachineAddressBySchemeAddress } from './useGetVotingMachineAddressBySchemeAddress';

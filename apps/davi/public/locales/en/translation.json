@@ -14,6 +14,19 @@
     "language": "Language",
     "languages": "Languages"
   },
+  "customRPC": {
+    "customRPC": "Custom RPC",
+    "customRPCUrl": "Custom RPC URL",
+    "enterURL": "Enter URL",
+    "useDefaultValue": "use default value",
+    "saveChanges": "Save Changes",
+    "genericError": "Seems to be a problem with the url provided",
+    "wrongChain": "The url provided is not from chain {{chainName}}"
+  },
+  "decentralizeMode": {
+    "decentralizeMode": "Decentralize mode",
+    "decentralizeModeTooltip": "This will disable subgraph and only use RPCs. Some functions will be lost"
+  },
   "connections": {
     "switchWalletTo": "Switch Wallet to {{chainName}}",
     "connectWallet": "Connect Wallet",
@@ -191,12 +204,14 @@
     },
     "simulations": {
       "simulateTransactions": "Simulate transactions",
+      "simulationPassed": "Simulation passed",
       "simulationFailed": "Simulation failed",
       "actionsVerified": "Actions verified",
       "actionsFailed": "Action verifications failed",
       "verifyingActions": "Verifying actions",
       "error": "Error while simulating transactions",
-      "poweredBy": "powered by"
+      "poweredBy": "powered by",
+      "viewOn": "View on"
     },
     "save": "Save",
     "core": "Core",
@@ -229,6 +244,7 @@
     "consensusSystem": "Consensus System",
     "proposalDuration": "Proposal Duration",
     "quorum": "Quorum",
+    "boostedQuoroum": "Boosted Quorum",
     "backToOverview": "Back to Overview",
     "backToDiscussion": "Back to Discussion",
     "originalDiscussion": "Original Discussion",
@@ -254,7 +270,9 @@
       "atLeastOneActionPerOptionRequired": "At least one action per option is required",
       "optionsArrayIsEmpty": "Options array is empty",
       "metadataUploadError": "Metadata upload error",
-      "genericProposalError": "We ran into an error."
+      "genericProposalError": "We ran into an error.",
+      "couldntFindTheProposal": "We couldn't find that proposal",
+      "probablyNonExistent": "It probably doesn't exist"
     }
   },
   "tokenPicker": {
@@ -379,6 +397,24 @@
       "deletionMessage2": "If you ask for deletion your post might be removed from the Ceramic nodes hosting it.",
       "reload": "Reload"
     }
+  },
+  "schemes": {
+    "schemes_one": "Scheme",
+    "schemes_other": "Schemes",
+    "schemeParameters": "Scheme parameters",
+    "schemeForProposal": "Scheme for proposal",
+    "maxProposalTime": "Maximum proposal time",
+    "proposalTimeInBoost": "Proposal time in boost",
+    "proposalTimeInPreBoost": "Proposal time in pre boost",
+    "canManageSchemes": "Can manage schemes",
+    "canMakeAvatarCalls": "Can make avatar calls",
+    "maxRepPercentageChange": "Maximum rep percentage change",
+    "backToScheme": "Back to Scheme",
+    "type": "Type",
+    "next": "Next",
+    "errorFetchingSchemes": "Error while fetching schemes",
+    "daoHasNoSchemes": "This DAO has no schemes registered",
+    "daoBounty": "DAO Bounty"
   },
   "inputValidation": {
     "recipientAddressIsRequired": "Recipient address is required",

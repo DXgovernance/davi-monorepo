@@ -5,33 +5,30 @@
       "dependsOn": ["^clean"]
     },
     "compile": {
-      "dependsOn": ["^compile", "clean"]
+      "dependsOn": ["clean"]
     },
     "setup": {
       "dependsOn": ["^setup", "compile"]
     },
-    "dxdao-contracts#compile": {
-      "dependsOn": ["clean"],
-      "outputs": ["artifacts/**"]
-    },
-    "dxdao-contracts#setup": {
-      "outputs": ["types/**"]
-    },
     "dev-scripts#compile": {
-      "dependsOn": ["^dxdao-contracts#compile", "^dxdao-contracts#setup"]
+      "cache": false
     },
     "dev-scripts#dev": {
       "dependsOn": ["dev-scripts#compile"],
       "outputs": ["build/**", "artifacts/**"]
     },
+    "dao-subgraph#dev": {
+      "cache": false
+    },
     "guilds-subgraph#dev": {
-      "dependsOn": ["^dev-scripts#compile"]
+      "cache": false
     },
-    "1-5-subgraph#dev": {
-      "dependsOn": ["^dev-scripts#compile"]
+    "dxdao-contracts#setup": {
+      "outputs": ["types/**"]
     },
-    "dev": {
-      "dependsOn": ["setup", "^dxdao-contracts#compile", "^dev-scripts#compile"]
+    "dev": {},
+    "davi#build-graph-client": {
+      "dependsOn": ["dxdao-contracts#setup"]
     },
     "build": {
       "dependsOn": ["^setup"]
@@ -39,10 +36,9 @@
     "lint": {
       "dependsOn": ["^setup"]
     },
-    "test": {
-      "dependsOn": ["^setup", "^dxdao-contracts#compile"]
-    },
+    "test": {},
     "pre-commit": {},
-    "format-check": {}
+    "format-check": {},
+    "format": {}
   }
 }

@@ -1,0 +1,434 @@
+{
+  "dao": {
+    "dao": "DAO",
+    "daos": "DAOs",
+    "guild": "Guild",
+    "guilds": "Guilds",
+    "create": "DAOを作る"
+  },
+  "projectDavi": {
+    "projectDavi": "Project-DAVI"
+  },
+  "governance": "ガバナンス",
+  "language": {
+    "language": "言語",
+    "languages": "言語"
+  },
+  "customRPC": {
+    "customRPC": "カスタムRPC",
+    "customRPCUrl": "カスタムRPC URL",
+    "enterURL": "URLを入力",
+    "useDefaultValue": "デフォルトの値を使う",
+    "saveChanges": "保存",
+    "genericError": "入力したURLに問題があります",
+    "wrongChain": "入力されたURLは{{chainName}}のネットワークではありません"
+  },
+  "decentralizeMode": {
+    "decentralizeMode": "分散型モード",
+    "decentralizeModeTooltip": "いくつかの機能が失われます"
+  },
+  "connections": {
+    "switchWalletTo": "{{chainName}}ネットワークにウォレットを換える",
+    "connectWallet": "ウォレットに接続",
+    "notConnected": "接続していません",
+    "switchNetworkTo": "{{chainName}}ネットワークに換える",
+    "disconnect": "接続をやめる",
+    "installMetamask": "Metamaskをインストールする",
+    "unsupportedNetwork": "ネットワークはサポートされていません",
+    "switchNetwork": "ネットワークを換える",
+    "errorConnecting": "接続エラー",
+    "pleaseSwitchNetwork": "サポートされていないネットワークに接続されています。サポートされているネットワークに接続してください。",
+    "account": "アカウント",
+    "connectToAWallet": "ウォレットに接続",
+    "connectedTo": "{{walletName}}ウォレットに接続されました",
+    "change": "変更",
+    "copiedAddress": "アドレスがコピーされました",
+    "copyAddress": "アドレスをコピー",
+    "changeConnection": "接続を変更",
+    "connectTheWalletToProceed": "手続きを進めるためにウォレットを接続してください"
+  },
+  "transactions": {
+    "waitingForConfirmation": "確認中",
+    "confirmThisTransactionInYourWallet": "このトランザクションをウォレットで確認してください",
+    "transactionSubmitted": "このトランザクションは提出されました",
+    "viewOnBlockExplorer": "ブロックエクスプローラーで見る",
+    "transactionRejected": "トランザクションが拒否されました",
+    "yourTransactionsWillAppearHere": "トランザクションはこちらで確認できます",
+    "recentTransactions": "最近のトランザクション",
+    "clearAll": "全てを削除"
+  },
+  "modals": {
+    "cancel": "キャンセル",
+    "dismiss": "やめる",
+    "close": "閉じる"
+  },
+  "proposals": {
+    "proposals": "プロポーザル",
+    "proposals_zero": "プロポーザルなし",
+    "proposals_one": "{{count}}件のプロポーザル",
+    "proposals_other": "{{count}}件のプロポーザル",
+    "allProposals": "全てのプロポーザル",
+    "noActiveProposalsMessage": "現在進行中のプロポーザルはありません",
+    "goToAllProposalsPage": "全てのプロポーザルページを見る"
+  },
+  "treasury": {
+    "treasury": "トレジャリー",
+    "assets": "資産",
+    "asset": "資産",
+    "tokenAmount": "トークンの量",
+    "errorLoadingTreasuries": "トレジャリーロードエラー",
+    "noTreasuryAssets": "トレジャリーに資産がありません"
+  },
+  "actionBuilder": {
+    "action": {
+      "actions_one": "アクション",
+      "actions_other": "アクション",
+      "addAction": "アクションを追加",
+      "saveAction": "アクションを保存",
+      "onChainActions_zero": "オンチェーンのアクションはありません",
+      "onChainActions_one": "{{count}}アクション",
+      "onChainActions_other": "{{count}}アクション",
+      "unknownAction": "不明のアクション",
+      "onchainAction": "オンチェーンのアクション",
+      "noOnchainAction": "オンチェーンのアクションなし",
+      "confirmRemoval": "取り下げますか",
+      "areYouSureYouWantToRemoveAction": "本当にこの承認を取り下げてもいいですか？",
+      "theRemovalCannotBeReverted": "この取り下げは元に戻すことはできません",
+      "removeAction": "取り下げを実行",
+      "remove": "取り下げ",
+      "edit": "編集"
+    },
+    "options": {
+      "against": "反対",
+      "for": "賛成",
+      "addOption": "選択肢を追加",
+      "editOption": "選択肢を編集",
+      "deleteOption": "選択肢を削除",
+      "optionLabel": "選択肢のラベル",
+      "option": "{{optionKey}}を選択",
+      "options": "選択肢"
+    },
+    "inputs": {
+      "amount": "合計",
+      "inWei": "weiに換算する",
+      "asset": "資産",
+      "token": "トークン",
+      "tokenAmount": "トークンの合計",
+      "recipient": "受取人",
+      "ethereumAddress": "イーサリアムアドレス",
+      "toAddress": "送信者アドレス",
+      "address": "アドレス",
+      "contract": "コントラクト"
+    },
+    "permissions": {
+      "permissions": "権限",
+      "anyAddress": "すべてのアドレス",
+      "maxValue": "最大値",
+      "setPermissions": "権限の設定",
+      "setPermissionsFor": "権限の設定:",
+      "setApprovalPermissionsFor": "承認の権限を設定:",
+      "setTransferPermissionsFor": "送金の権限を設定:",
+      "permissionDenied": "アクセスが拒否されました",
+      "permissionDeniedMessage": "DAOはこのアクションを実行する権限がありません",
+      "warningMessage": "警告",
+      "proposalNotExecuted": "このプロポーザルは実行できません。 本当に継続しますか？",
+      "function": "ファンクション",
+      "functionName": "ファンクション名",
+      "functionSignature": "ファンクション署名",
+      "assetTransfer": "資産を送金",
+      "functionCall": "ファンクションコール",
+      "functionCalls": "ファンクションコール",
+      "noPermissionsSet": "権限の設定なし",
+      "dataNotAvailable": "権限のデータはありません",
+      "allowedAmount": "許可された送金金額"
+    },
+    "transfer": {
+      "transfer": "送金",
+      "unknownToken": "不明のトークン"
+    },
+    "repMint": {
+      "mint": "ミント",
+      "mintRep": "評判のトークンをミントする",
+      "recipient": "受取人",
+      "recipientTooltip": "評判を受けるアドレス.",
+      "repPercent": "評判％",
+      "repPercentTooltip": "全評判のパーセンテージがミントされます",
+      "repAmount": "評判の合計",
+      "repAmountTooltip": "評判をミントする量"
+    },
+    "ens": {
+      "updateContentCoreAction": "ENSコンテンツを更新",
+      "nameTooltip": "このENS名が登録されます",
+      "ipfsHashToolTip": "このIPFSハッシュが設定されます",
+      "domain": "ドメイン",
+      "currentContent": "現在のコンテンツ",
+      "newContent": "新しいコンテンツ",
+      "updateContent": "ENS:コンテンツを更新",
+      "name": "ENS名",
+      "ipfsHash": "CID/IPFSハッシュ",
+      "none": "なし",
+      "expandLinesOfCode": "{{numLines}}コードラインを拡大",
+      "validation": {
+        "nameCannotBeEmpty": "名前が空欄です",
+        "domainNameInvalidLength": "ドメイン名の長さに問題があります",
+        "domainNameCannotIncludeSpaces": "ドメイン名にスペースは使用できません",
+        "domainCannotBeMoreThanThreeLevels": "3階層以上のドメインは使用できません(例:subdomain.domain.eth)",
+        "ipfsHashNotValid": "IPFSハッシュは問題があります",
+        "onlyCidV0Supported": "CID v0のみサポートされています"
+      }
+    },
+    "approval": {
+      "approve": "承認",
+      "spender": "承認された使用者",
+      "approveSpendingCall": "承認アクション",
+      "addressToWhichTheExpenseIsBeingAuthorized": "承認を使用された人のアドレス",
+      "amountBeingApproved": "承認する資産の量",
+      "approveTokenSpending": "{{tokenSymbol}}トークンの使用を承認"
+    },
+    "config": {
+      "setGuildConfig": "コンフィグを設定",
+      "noValueHasBeenUpdatedFromCurrentGuildConfig": "現在のコンフィグから値が更新されていません",
+      "proposalTimeHasToBeMoreThanZero": "プロポーザル時間は0以上が必要です",
+      "lockTimeHasToBeHigherOrEqualToProposalTime": "ロック時間はプロポーザル時間と同じかそれ以上である必要があります",
+      "proposalTimeHasToBeLowerOrEqualToLockTime": "プロポーザル時間はロック時間と同じかそれ以下である必要があります",
+      "votingPowerPercentageForProposalExecutionHasToBeMoreThanZero": "実行のための議決権のパーセンテージは0より大きい必要があります",
+      "voteGasHasToBeEqualOrLowerThan117000": "投票ガスは117000以下でなければなりません"
+    },
+    "advanced": {
+      "advancedOptions": "より詳細なオプション",
+      "rawTransaction": "ロートランザクション",
+      "value": "値",
+      "data": "データ",
+      "advancedView": "より細かく表示"
+    },
+    "simulations": {
+      "simulateTransactions": "トランザクションをシミュレートする",
+      "simulationFailed": "シミュレーション失敗",
+      "actionsVerified": "アクション検証済み",
+      "actionsFailed": "アクションの検証に失敗しました",
+      "verifyingActions": "アクションの検証",
+      "error": "トランザクションのシミュレーション中にエラーが発生しました",
+      "poweredBy": "powered by"
+    },
+    "save": "保存",
+    "core": "コア",
+    "externalContracts": "外部のコントラクト",
+    "decode": "デコード",
+    "interactWith": "金額",
+    "default": "デフォルト",
+    "pickSwaprPair": "スウォッパーのペアを選択",
+    "displayRawData": "ローデータを表示",
+    "displayFormattedData": "フォーマット済みデータを表示"
+  },
+  "voting": {
+    "castVote": "投票する",
+    "voteResults": "投票結果",
+    "vote": "投票",
+    "confirmVote": "投票を確認",
+    "voteQuestion": "本当に{{action}}へ投票しますか?",
+    "noRevertAction": "このアクションは元に戻すことができません",
+    "votingPower": "投票力",
+    "voteImpact": "投票の影響力",
+    "voteOnProposal": "投票するプロポーザル:",
+    "youVotedForOption": "\"{{optionLabel}}\"に{{amount}}で投票しました"
+  },
+  "proposal": {
+    "actions": {
+      "execute": "実行",
+      "executeProposal": "プロポーザルを実行"
+    },
+    "information": "情報",
+    "consensusSystem": "コンセンサスシステム",
+    "proposalDuration": "プロポーザル期間",
+    "quorum": "定足数",
+    "backToOverview": "全体へ戻る",
+    "seeAllProposals": "全てのプロポーザルを見る",
+    "createdBy": "作成者",
+    "proposalInfoCard": {
+      "consensusSystem": "コンセンサスシステム",
+      "proposalDuration": "プロポーザル期間",
+      "proposalHistory": "プロポーザル履歴"
+    },
+    "time": {
+      "expiredTimeAgo": "{{timeDifferenceHumanized}}前に期限切れ",
+      "expiresInTimeDetail": "{{timeDifferenceHumanized}}後に期限切れ",
+      "endingTimeLeft": "残り{{timeDifferenceHumanized}}",
+      "endedTimeAgo": "{{timeDifferenceHumanized}}前に終了",
+      "aFewSeconds": "残り数秒"
+    },
+    "errors": {
+      "proposalDescriptionError": "プロポーザルコンテンツの読み込み中にエラーが発生しました。ページを更新して、もう一度お試しください",
+      "invalidContentHash": "無効なコンテンツハッシュ",
+      "titleRequired": "タイトルが必要です",
+      "atLeastOneOptionRequired": "最低でも1つのオプションが必要です",
+      "atLeastOneActionPerOptionRequired": "オプションごとに最低でも1つのアクションが必要です",
+      "optionsArrayIsEmpty": "オプション配列が空欄です",
+      "metadataUploadError": "メタデータのアップロードエラー",
+      "genericProposalError": "エラーが発生しました."
+    }
+  },
+  "tokenPicker": {
+    "selectAToken": "トークンを選択する",
+    "searchToken": "トークンを検索"
+  },
+  "duration": {
+    "selectDuration": "期間を選択",
+    "seconds_one": "秒",
+    "seconds_other": "秒",
+    "minutes_one": "分",
+    "minutes_other": "分",
+    "mins": "分",
+    "hours_one": "時",
+    "hours_other": "時",
+    "days_one": "日",
+    "days_other": "日",
+    "months_one": "月",
+    "months_other": "月",
+    "years_one": "年",
+    "years_other": "年"
+  },
+  "members": {
+    "membership": "メンバーシップ",
+    "members": "メンバー",
+    "members_zero": "メンバーがいません",
+    "members_one": "{{count}} メンバー",
+    "members_other": "{{count}} メンバー",
+    "member": "メンバー",
+    "searchMemberOrAddress": "メンバーやアドレスを検索",
+    "noMembers": "このDAOにはメンバーがいません",
+    "membersNotAvailable": "メンバーの情報は利用できません",
+    "join": "参加する",
+    "yourVotingPower": "あなたの投票力",
+    "increaseVotingPower": "投票力を上げる",
+    "locking": {
+      "selectTokensToSpend": "使用するトークンを選ぶ",
+      "locked": "ロックされています",
+      "unlocked": "アンロック",
+      "unlockedIn": "ロック解除",
+      "staked": "ステーク",
+      "withdraw": "引き出す",
+      "balance": "残高",
+      "unlockDate": "ロック解除日",
+      "spending": "支出",
+      "max": "最大",
+      "stakeTokens": " {{token}}トークンをステーク",
+      "lockingTokens": "{{amount}} {{symbol}} をロックする",
+      "unlockAndWithdrawTokens": "{{amount}} {{symbol}}をアンロックし引き出す"
+    }
+  },
+  "settings": {
+    "settings": "設定"
+  },
+  "filter": {
+    "filter": "フィルター",
+    "search": "検索",
+    "searchTitleEnsAddress": "プロポーザルを検索",
+    "state": "進捗状況",
+    "reset": "リセット",
+    "type": "種類",
+    "currency": "トークン"
+  },
+  "createProposal": {
+    "createProposal": "プロポーザルを作成",
+    "title": "タイトル",
+    "enterProposalDescription": "プロポーザルの本文を書く",
+    "ipfs": {
+      "failedToUpload": "IPFSのアップロードに失敗しました。ページを更新し再度お試しください。",
+      "hashNotTheSame": "アップロードエラー",
+      "errorWhileUploading": "IPFSアップロード中にエラーが発生しました",
+      "error": "エラー"
+    },
+    "retry": "リトライ",
+    "createAnyway": "エラーを無視して作成"
+  },
+  "discussions": {
+    "allDiscussions": "全てのディスカッション",
+    "discussions_zero": "ディスカッションなし",
+    "discussions_one": "ディスカッション",
+    "discussions_other": "ディスカッション",
+    "thereAreNoDiscussions": "ディスカッションがありません",
+    "noMoreDiscussions": "これ以上ディスカッションはありません",
+    "createDiscussion": "ディスカッションを作成",
+    "createDiscussionWordy": "新しいディスカッションを作成",
+    "discussionPlaceholder": "ディスカッションのコメントを書く",
+    "title": "タイトル",
+    "postOptions": {
+      "edit": "編集",
+      "delete": "削除"
+    },
+    "postActions": {
+      "reply": "返信",
+      "toggleThread": "スレッドを切り替える",
+      "like": "いいね",
+      "haha": "笑",
+      "downvote": "反対票"
+    },
+    "activity": {
+      "discussionTitle": "アクティビティ",
+      "discussionEmpty": "まだコメントがありません",
+      "discussionLoadMore": "さらにコメントを読み込む",
+      "replyingTo": "返信相手",
+      "postEdited": "編集済み",
+      "postboxShare": "投稿",
+      "mentionsSearchLoading": "接続中...",
+      "postboxConnectWallet": "コメントを投稿するためにウォレットを接続する",
+      "postboxConnectCeramic": "ログイン",
+      "postboxConnectCeramicButton": "ログイン",
+      "postboxEditCancel": "キャンセル",
+      "postboxEditSave": "保存",
+      "removalMessage1": "本当にこの投稿を削除していいですか？",
+      "removalMessage2": "モデレーターの権限を使用するため、不適切な投稿にのみ行なってください。",
+      "deletionMessage1": "本当にこの投稿を消去していいですか？",
+      "deletionMessage2": "削除を依頼した場合、あなたの投稿がネットワークから削除される可能性があります。",
+      "reload": "リロード"
+    }
+  },
+  "inputValidation": {
+    "recipientAddressIsRequired": "受取人アドレスは必須です",
+    "amountIsRequired": "金額は必須です",
+    "invalidRecipientAddress": "受取人のアドレスが無効です",
+    "tokenIsRequired": "トークンは必須です",
+    "amountCannotBeZero": "金額を0にすることはできません",
+    "invalidAmount": "無効な金額です",
+    "invalidValue": "無効な値です",
+    "invalidTokenAddress": "無効なトークンアドレスです",
+    "dataIsNotAHexString": "入力されたデータは16進数ではありません",
+    "dataIsRequired": "データは必須です",
+    "eitherDataOrValueRequired": "データか値は必須です",
+    "dataIsOddLength": "データの長さに問題があります",
+    "reputationPercentageTooHigh": "評判のパーセンテージが高すぎます",
+    "reputationPercentIsRequired": "評判のパーセンテージは必須です",
+    "invalidFunctionName": "無効なファンクション名",
+    "encodedSignatureIsInvalid": "エンコードされた署名は無効です",
+    "invalidAddress": "無効のアドレスです",
+    "addressIsRequired": "アドレスは必須です",
+    "cantBeGreaterThan100": "100%を超えることはできません"
+  },
+  "daoErrors": {
+    "noDAOsRegistered": "このネットワークに登録したDAOがありません",
+    "daoNotAvailable": "DAOは利用不可です",
+    "daoNotAvailableOnThisNetwork": "このDAOはこのネットワークでの利用はできません",
+    "noDAOInThisAddress": "このアドレスに存在しないDAOです"
+  },
+  "404": {
+    "pageNotExist": "そのページは存在しません",
+    "makeSureCorrectAddress": "正しい宛先か確認してください",
+    "takeMeHome": "ホームに戻る"
+  },
+  "footer": {
+    "reportABug": "バグを報告",
+    "suggestAFeature": "フィーチャーを提案"
+  },
+  "offlinePage": {
+    "youAreNotOnline": "オフラインです",
+    "pleaseCheckYourInternetConnection": "インターネット接続を確認してください"
+  },
+  "loadingDao": "DAOを読み込み中",
+  "votes": "投票",
+  "hookStoreErrors": {
+    "methodNotSupported": "この方法はこのガバナンスで実装サポートされていません"
+  },
+  "loading": "読み込み中...",
+  "showMore": "さらに表示",
+  "showLess": "表示を減らす"
+}

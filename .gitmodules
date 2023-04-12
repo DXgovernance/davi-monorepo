@@ -1,4 +1,3 @@
 [submodule "dxdao-contracts"]
-	path = apps/dxdao-contracts
-	url = https://github.com/DXgovernance/dxdao-contracts.git
-    branch = feature/monorepo-setup-w-create2
+	path = packages/dxdao-contracts
+	url = "https://github.com/DXgovernance/dxdao-contracts.git#9dc284ce224962bd2e80e30bcdc2f863bb35a099"

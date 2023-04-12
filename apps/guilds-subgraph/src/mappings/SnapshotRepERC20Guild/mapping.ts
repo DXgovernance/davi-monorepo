@@ -5,9 +5,11 @@ import {
 import {
   ProposalStateChanged,
   VoteAdded,
+  TokensWithdrawn,
+  TokensLocked,
 } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
 import { BaseERC20Guild } from '../../types/templates/BaseERC20Guild/BaseERC20Guild';
-import { ERC20 } from '../../types/GuildRegistry/ERC20';
+import { ERC20Token } from '../../types/GuildRegistry/ERC20Token';
 import {
   Guild,
   Proposal,
@@ -20,8 +22,15 @@ import {
 } from '../../types/schema';
 import { ERC20SnapshotRep as ERC20SnapshotRepTemplate } from '../../types/templates';
 
-import { json, JSONValueKind, ipfs, BigInt, Address, log } from '@graphprotocol/graph-ts';
-import {membersSeed} from './seedState';
+import {
+  json,
+  JSONValueKind,
+  ipfs,
+  BigInt,
+  Address,
+  log,
+} from '@graphprotocol/graph-ts';
+import { membersSeed } from './seedState';
 
 // Handler to upgradable initializer event.
 export function handleGuildInitialized(event: GuildInitialized): void {
@@ -31,7 +40,7 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   //   Get token config
   let tokenAddress = contract.getToken();
 
-  let tokenContract = ERC20.bind(tokenAddress);
+  let tokenContract = ERC20Token.bind(tokenAddress);
   ERC20SnapshotRepTemplate.create(tokenAddress);
 
   let token = Token.load(tokenAddress.toHexString());
@@ -57,6 +66,10 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.proposalTime = contract.getProposalTime();
   guild.lockTime = contract.getLockTime();
   guild.timeForExecution = contract.getTimeForExecution();
+  guild.votingPowerPercentageForProposalCreation =
+    contract.votingPowerPercentageForProposalCreation();
+  guild.votingPowerPercentageForProposalExecution =
+    contract.votingPowerPercentageForProposalExecution();
   guild.votingPowerForProposalCreation =
     contract.getVotingPowerForProposalCreation();
   guild.votingPowerForProposalExecution =
@@ -69,32 +82,30 @@ export function handleGuildInitialized(event: GuildInitialized): void {
   guild.minimumTokensLockedForProposalCreation =
     contract.getMinimumTokensLockedForProposalCreation();
   guild.token = token.id;
-
-  const guildMembers: string[] = [];
+  guild.save();
 
   const seedJson = json.fromString(membersSeed);
   const seedJsonObj = seedJson.toObject();
-  const guildSeedData = seedJsonObj.get(guildAddress.toHexString())
+  const guildSeedData = seedJsonObj.get(guildAddress.toHexString());
   if (guildSeedData !== null) {
     const members = guildSeedData.toArray();
 
-    for (let i = 0; i <members.length; i++) {
+    for (let i = 0; i < members.length; i++) {
       let memberAddress = members[i].toString();
       let memberId = `${guildAddress.toHexString()}-${memberAddress}`;
-      
+
       let member = Member.load(memberId);
       if (!member) {
         member = new Member(memberId);
+        member.guildId = guildAddress.toHexString();
         member.address = memberAddress;
-        member.tokensLocked = contract.votingPowerOf(Address.fromString(memberAddress));
+        member.tokensLocked = contract.votingPowerOf(
+          Address.fromString(memberAddress)
+        );
         member.save();
       }
-      guildMembers.push(memberId);
     }
   }
-
-  guild.members = guildMembers;
-  guild.save();
 }
 
 export function handleProposalStateChange(event: ProposalStateChanged): void {
@@ -122,9 +133,6 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
     proposal.contentHash = proposalData.contentHash;
     proposal.totalVotes = proposalData.totalVotes;
     proposal.snapshotId = snapshotId;
-    proposal.votes = [];
-    proposal.options = [];
-    proposal.statesLog = [];
 
     let voteOptionsLabel: string[] = [];
 
@@ -164,12 +172,7 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
 
     for (let i = 0; i < amountOfOptions; i++) {
       let optionId = `${proposalId}-${i}`;
-
       let option = new Option(optionId);
-
-      let optionsCopy = proposal.options;
-      optionsCopy!.push(optionId);
-      proposal.options = optionsCopy;
 
       if (voteOptionsLabel.length == amountOfOptions) {
         if (i == 0) {
@@ -180,9 +183,8 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
       }
 
       option.proposalId = proposalId;
-      option.actions = [];
-      option.votes = [];
       option.voteAmount = new BigInt(0);
+      option.save();
 
       // Skip Option zero and return actions []
       if (i > 0) {
@@ -192,28 +194,13 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
           action.optionId = optionId;
           let actionIndex = actionsPerOption * (i - 1) + j;
 
-          if (option.actions) {
-            action.data = data[actionIndex];
-            action.from = address.toHexString();
-            action.to = to[actionIndex];
-            action.value = proposalData.value[actionIndex];
-          }
-          let actionsCopy = option.actions;
-          actionsCopy!.push(actionId);
-          option.actions = actionsCopy;
+          action.data = data[actionIndex];
+          action.from = address.toHexString();
+          action.to = to[actionIndex];
+          action.value = proposalData.value[actionIndex];
           action.save();
         }
       }
-
-      option.save();
-    }
-
-    let guild = Guild.load(address.toHexString());
-    if (guild) {
-      let proposalsCopy = guild.proposals;
-      proposalsCopy!.push(proposalId);
-      guild.proposals = proposalsCopy;
-      guild.save();
     }
   }
 
@@ -228,14 +215,11 @@ export function handleProposalStateChange(event: ProposalStateChanged): void {
   const proposalStateLogId = `${proposalId}-${newState}-${timestamp}`;
 
   let proposalStateLog = new ProposalStateLog(proposalStateLogId);
+  proposalStateLog.proposalId = proposalId;
   proposalStateLog.state = newState;
   proposalStateLog.timestamp = timestamp;
   proposalStateLog.transactionHash = event.transaction.hash.toHexString();
   proposalStateLog.save();
-
-  let proposalStatesLogCopy = proposal.statesLog;
-  proposalStatesLogCopy!.push(proposalStateLogId);
-  proposal.statesLog = proposalStatesLogCopy;
 
   proposal.contractState = newState;
   proposal.save();
@@ -248,46 +232,85 @@ export function handleVoting(event: VoteAdded): void {
   let contract = SnapshotRepERC20Guild.bind(event.address);
   const proposalData = contract.getProposal(event.params.proposalId);
 
+  let optionId = `${proposalId}-${event.params.option}`;
+  let option = Option.load(optionId);
+  if (!option) return;
+
   let vote = Vote.load(voteId);
   let proposal = Proposal.load(proposalId);
+  if (!proposal) return;
 
+  // Create vote
   if (!vote) {
     vote = new Vote(voteId);
     vote.proposalId = proposalId;
+    vote.option = event.params.option;
+    vote.optionId = optionId;
+    vote.optionLabel = option.label;
     vote.voter = event.params.voter.toHexString();
-    // TODO: change to event.params.option when merging refactor branch of dxdao-contracts
-    vote.option = event.params.action;
-    // TODO: check when one voter votes twice
-    if (proposal) {
-      let votesCopy = proposal.votes;
-      votesCopy!.push(voteId);
-      proposal.votes = votesCopy;
-
-      const newTotalVotes = proposalData.totalVotes;
-      proposal.totalVotes = newTotalVotes;
-
-      let optionId = `${proposalId}-${event.params.action}`;
-      let option = Option.load(optionId);
-      // update option data on vote event
-      if (!!option) {
-        let optionVotesCopy = option.votes;
-        const newVoteAmount = newTotalVotes[event.params.action.toI32()];
-        optionVotesCopy.push(voteId);
-
-        option.voteAmount = newVoteAmount;
-        option.votes = optionVotesCopy;
-        option.save();
-        vote.optionLabel = option.label;
-      }
-
-      proposal.save();
-    }
   }
-  // TODO: if vote exists update option.voteAmount and push new vote(?)
+
   vote.votingPower = event.params.votingPower;
   vote.transactionHash = event.transaction.hash.toHexString();
-
   vote.save();
+
+  const optionNumber = event.params.option.toI32();
+  option.voteAmount = proposalData.totalVotes[optionNumber];
+  option.save();
+
+  proposal.totalVotes = proposalData.totalVotes;
+  proposal.save();
+}
+
+export function handleTokenLocking(event: TokensLocked): void {
+  let guildAddress = event.address;
+  let contract = BaseERC20Guild.bind(guildAddress);
+
+  const guild = Guild.load(guildAddress.toHexString());
+
+  if (!guild) return;
+  // Update guild required vp to create and execute proposals
+  guild.votingPowerForProposalCreation =
+    contract.getVotingPowerForProposalCreation();
+  guild.votingPowerForProposalExecution =
+    contract.getVotingPowerForProposalExecution();
+  guild.save();
+
+  const memberId = `${guildAddress.toHexString()}-${event.params.voter.toHexString()}`;
+
+  let member = Member.load(memberId);
+
+  if (!member) {
+    member = new Member(memberId);
+    member.guildId = guildAddress.toHexString();
+    member.address = event.params.voter.toHexString();
+  }
+
+  member.tokensLocked = contract.votingPowerOf(event.params.voter);
+
+  member.save();
+}
+
+export function handleTokenWithdrawal(event: TokensWithdrawn): void {
+  let guildAddress = event.address;
+  let contract = BaseERC20Guild.bind(guildAddress);
+
+  const guild = Guild.load(guildAddress.toHexString());
+
+  if (!guild) return;
+
+  // Update guild required vp to create and execute proposals
+  guild.votingPowerForProposalCreation =
+    contract.getVotingPowerForProposalCreation();
+  guild.votingPowerForProposalExecution =
+    contract.getVotingPowerForProposalExecution();
+  guild.save();
+
+  const memberId = `${guildAddress.toHexString()}-${event.params.voter.toHexString()}`;
+
+  let member = Member.load(memberId);
+
+  member!.tokensLocked = contract.votingPowerOf(event.params.voter);
 }
 
 function isIPFS(contentHash: string): boolean {

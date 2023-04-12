@@ -10,7 +10,8 @@ query getGuildConfig($id: ID!) {
     timeForExecution
     maxActiveProposals
     votingPowerForProposalCreation
-    votingPowerForProposalExecution
+    votingPowerPercentageForProposalExecution
+    votingPowerPercentageForProposalCreation
     lockTime
     voteGas
     maxGasPrice
@@ -18,4 +19,3 @@ query getGuildConfig($id: ID!) {
     minimumTokensLockedForProposalCreation
   }
 }
-

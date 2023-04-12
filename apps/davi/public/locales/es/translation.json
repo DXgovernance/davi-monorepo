@@ -1,0 +1,468 @@
+{
+  "dao": {
+    "dao": "DAO",
+    "daos": "DAOs",
+    "guild": "Gremio",
+    "guilds": "Gremios",
+    "create": "Crear DAO"
+  },
+  "projectDavi": {
+    "projectDavi": "Project-DAVI"
+  },
+  "governance": "Governanza",
+  "language": {
+    "language": "Idioma",
+    "languages": "Idiomas"
+  },
+  "customRPC": {
+    "customRPC": "Personalizar RPC",
+    "customRPCUrl": "URL RPC Personalizado",
+    "enterURL": "Agregar URL",
+    "useDefaultValue": "usar valor default",
+    "saveChanges": "Guardar Cambios",
+    "genericError": "Hubo un problema con la url indicada",
+    "wrongChain": "La url indicada no es de la red {{chainName}}"
+  },
+  "decentralizeMode": {
+    "decentralizeMode": "Modo descentralizado",
+    "decentralizeModeTooltip": "Esta opción deshabilitará subgraph y usará solo RPCs. Se perderán algunas funciones"
+  },
+  "connections": {
+    "switchWalletTo": "Cambiar Monedero a {{chainName}}",
+    "connectWallet": "Conectar Monedero",
+    "notConnected": "No Conectado",
+    "switchNetworkTo": "Cambiar red a {{chainName}}",
+    "disconnect": "Desconectar",
+    "installMetamask": "Instalar Metamask",
+    "unsupportedNetwork": "Red No Admitida",
+    "switchNetwork": "Cambiar Red",
+    "errorConnecting": "Error conectando",
+    "pleaseSwitchNetwork": "Usted está actualmente conectado a una red no admitida. Por favor cambie a una red admitida para continuar.",
+    "account": "Cuenta",
+    "connectToAWallet": "Conectar a un monedero",
+    "connectedTo": "Conectado a {{walletName}}",
+    "change": "Cambiar",
+    "copiedAddress": "Dirección Copiada",
+    "copyAddress": "Copiar Dirección",
+    "changeConnection": "Cambiar Conexión",
+    "connectTheWalletToProceed": "Conectar el monedero para avanzar"
+  },
+  "transactions": {
+    "waitingForConfirmation": "Esperando Confirmación",
+    "confirmThisTransactionInYourWallet": "Confirme esta Transacción en su Monedero",
+    "transactionSubmitted": "Transacción Enviada",
+    "viewOnBlockExplorer": "Visualizar en el Explorador de Bloques",
+    "transactionRejected": "Transacción Rechazada",
+    "yourTransactionsWillAppearHere": "Sus transacciones aparecerán aquí...",
+    "recentTransactions": "Transacciones Recientes",
+    "clearAll": "Borrar Todo"
+  },
+  "modals": {
+    "cancel": "Cancelar",
+    "dismiss": "Descartar",
+    "close": "Cerrar"
+  },
+  "proposals": {
+    "proposals": "Propuestas",
+    "proposals_zero": "No hay propuestas",
+    "proposals_one": "{{count}} propuesta",
+    "proposals_other": "{{count}} propuestas",
+    "allProposals": "Todas las propuestas",
+    "noActiveProposalsMessage": "No hay propuestas activas",
+    "goToAllProposalsPage": "Ir a la página de todas las propuestas"
+  },
+  "treasury": {
+    "treasury": "Tesorería",
+    "assets": "activos",
+    "asset": "activo",
+    "tokenAmount": "Cantidad de Tokens",
+    "errorLoadingTreasuries": "Error al cargar tesorerías",
+    "noTreasuryAssets": "No hay activos de tesorería disponibles"
+  },
+  "actionBuilder": {
+    "action": {
+      "actions_one": "Acción",
+      "actions_other": "Acciones",
+      "addAction": "Añadir Acción",
+      "saveAction": "Guardar Acción",
+      "onChainActions_zero": "No hay acción on-chain",
+      "onChainActions_one": "{{count}} acción on-chain",
+      "onChainActions_other": "{{count}} acciones on-chain",
+      "unknownAction": "Acción Desconocida",
+      "onchainAction": "Acción On-chain",
+      "noOnchainAction": "No hay acción on-chain",
+      "confirmRemoval": "Confirmar Eliminación",
+      "areYouSureYouWantToRemoveAction": "¿Está seguro de que desea eliminar esta acción?",
+      "theRemovalCannotBeReverted": "La eliminación no puede ser revertida",
+      "removeAction": "Eliminar Acción",
+      "remove": "Eliminar",
+      "edit": "Editar"
+    },
+    "options": {
+      "against": "En contra",
+      "for": "A favor",
+      "addOption": "Añadir Opción",
+      "editOption": "Editar Opción",
+      "deleteOption": "Borrar Opción",
+      "optionLabel": "Etiqueta de la Opción",
+      "option": "Opción {{optionKey}}",
+      "options": "Opciones"
+    },
+    "inputs": {
+      "amount": "Cantidad",
+      "inWei": "Valor en wei",
+      "asset": "Activo",
+      "token": "Token",
+      "tokenAmount": "Cantidad de Tokens",
+      "recipient": "Receptor",
+      "ethereumAddress": "Dirección Ethereum",
+      "toAddress": "Dirección del receptor",
+      "address": "Dirección",
+      "contract": "Contrato"
+    },
+    "permissions": {
+      "permissions": "Permisos",
+      "anyAddress": "Cualquier Dirección",
+      "maxValue": "Valor Máximo",
+      "setPermissions": "Establecer Permisos",
+      "setPermissionsFor": "Establecer permisos para",
+      "setApprovalPermissionsFor": "Establecer permisos de aprobación para",
+      "setTransferPermissionsFor": "Establecer permisos de transferencia para",
+      "permissionDenied": "Permiso denegado",
+      "permissionDeniedMessage": "El DAO no tiene permiso para realizar esta acción",
+      "warningMessage": "Advertencia",
+      "proposalNotExecuted": "Esta propuesta no puede ser ejecutada. ¿Está seguro de que desea continuar?",
+      "function": "Función",
+      "functionName": "Nombre de la Función",
+      "functionSignature": "Firma de la Función",
+      "assetTransfer": "Transferencia de Activo",
+      "functionCall": "Llamada a la Función",
+      "functionCalls": "Llamadas a la Función",
+      "noPermissionsSet": "No hay permisos establecidos",
+      "dataNotAvailable": "Datos de permisos no disponibles",
+      "allowedAmount": "Cantidad permitida"
+    },
+    "transfer": {
+      "transfer": "Tranferir",
+      "unknownToken": "Token desconocido"
+    },
+    "repMint": {
+      "mint": "Crear",
+      "mintRep": "Crear REP",
+      "recipient": "Destinatario",
+      "recipientTooltip": "La dirección que va a recibir el REP creado.",
+      "repPercent": "Reputación en %",
+      "repPercentTooltip": "El porcentaje de la reputación total que será creada.",
+      "repAmount": "Cantidad de Reputación",
+      "repAmountTooltip": "La cantidad de REP que será creada."
+    },
+    "ens": {
+      "updateContentCoreAction": "Actualizar Contenido ENS",
+      "nameTooltip": "El nombre del nombre ENS que será registrado.",
+      "ipfsHashToolTip": "El hash del IPFS que será establecido",
+      "domain": "Dominio",
+      "currentContent": "Contenido actual",
+      "newContent": "Nuevo contenido",
+      "updateContent": "ENS: Actualizar Contenido",
+      "name": "Nombre ENS",
+      "ipfsHash": "Hash CID/IPFS",
+      "none": "Ninguno",
+      "expandLinesOfCode": "Expandir {{numLines}} líneas de código",
+      "validation": {
+        "nameCannotBeEmpty": "El nombre no puede estar vacío",
+        "domainNameInvalidLength": "Los nombres del dominio tienen una lóngitud inválida",
+        "domainNameCannotIncludeSpaces": "El nombre del dominio no puede incluir espacios",
+        "domainCannotBeMoreThanThreeLevels": "El dominio no puede tener más de tres niveles de profundidad (subdominio.dominio.eth)",
+        "ipfsHashNotValid": "El hash del IPFS no es válido",
+        "onlyCidV0Supported": "Únicamente se admite CID v0"
+      }
+    },
+    "approval": {
+      "approve": "Aprobar",
+      "spender": "gastador",
+      "selectTokensToSpend": "Seleccionar token a gastar",
+      "approveSpendingCall": "Aprobar la llamada de gasto",
+      "addressToWhichTheExpenseIsBeingAuthorized": "Dirección a la cual la transacción está siendo autorizada",
+      "amountBeingApproved": "Monto siendo aprobado",
+      "approveTokenSpending": "Aprobar el gasto de {{tokenSymbol}} token"
+    },
+    "config": {
+      "setGuildConfig": "Establecer Configuración de Gremio",
+      "noValueHasBeenUpdatedFromCurrentGuildConfig": "Ningún valor ha sido actualizado de la configuración actual de gremio",
+      "proposalTimeHasToBeMoreThanZero": "El tiempo de Propuesta tiene que ser más de 0",
+      "lockTimeHasToBeHigherOrEqualToProposalTime": "El tiempo de Bloqueo tiene que ser mayor o igual al tiempo de Propuesta",
+      "proposalTimeHasToBeLowerOrEqualToLockTime": "El tiempo de Propuesta tiene que ser menor o igual al tiempo de Bloqueo",
+      "votingPowerPercentageForProposalExecutionHasToBeMoreThanZero": "El porcentaje del valor del voto para la ejecución tiene que ser más de 0",
+      "voteGasHasToBeEqualOrLowerThan117000": "el gas del voto tiene que ser igual o menor a 117000"
+    },
+    "advanced": {
+      "advancedOptions": "Opciones avanzadas",
+      "rawTransaction": "Transacción original",
+      "value": "Valor",
+      "data": "Datos",
+      "advancedView": "Vista avanzada"
+    },
+    "simulations": {
+      "simulateTransactions": "Simular transacciones",
+      "simulationFailed": "Simulación fallida",
+      "actionsVerified": "Acciones verificadas",
+      "actionsFailed": "Verificación de acciones fallida",
+      "verifyingActions": "Verificando acciones",
+      "error": "Error durante la simulación de transacciones",
+      "poweredBy": "desarrollado por"
+    },
+    "save": "Guardar",
+    "core": "Centro",
+    "externalContracts": "Contratos Externos",
+    "decode": "Descodificar",
+    "interactWith": "Interactuar con",
+    "default": "Por defecto",
+    "pickSwaprPair": "Escoger par de Swapr",
+    "displayRawData": "Mostrar Datos Sin Procesar",
+    "displayFormattedData": "Mostrar datos formateados"
+  },
+  "voting": {
+    "castVote": "Emita su voto",
+    "voteResults": "Resultado de Votos",
+    "vote": "Votar",
+    "confirmVote": "Confirmar Voto",
+    "voteQuestion": "¿Está seguro de que desea votar {{action}}?",
+    "noRevertAction": "Esta acción no puede ser revertida",
+    "votingPower": "Poder de Votación",
+    "voteImpact": "Impacto de Voto",
+    "voteOnProposal": "Votar Propuesta",
+    "youVotedForOption": "Usted votó por la opción \"{{optionLabel}}\" con {{amount}}"
+  },
+  "proposal": {
+    "actions": {
+      "execute": "Ejecutar",
+      "executeProposal": "Ejecutar propuesta"
+    },
+    "information": "Información",
+    "consensusSystem": "Sistema de Consenso",
+    "proposalDuration": "Duración de la Propuesta",
+    "quorum": "Quórum",
+    "boostedQuoroum": "Quórum impulsado",
+    "backToOverview": "Regresar a la Vista General",
+    "backToDiscussion": "Regresar a la Discusión",
+    "originalDiscussion": "Discusión Original",
+    "seeAllProposals": "Ver todas las propuestas",
+    "createdBy": "Creado por",
+    "proposalInfoCard": {
+      "consensusSystem": "Sistema de Consenso",
+      "proposalDuration": "Duración de la Propuesta",
+      "proposalHistory": "Historial de la Propuesta"
+    },
+    "time": {
+      "expiredTimeAgo": "expirado hace {{timeDifferenceHumanized}}",
+      "expiresInTimeDetail": "expira en {{timeDifferenceHumanized}}",
+      "endingTimeLeft": "{{timeDifferenceHumanized}} restantes",
+      "endedTimeAgo": "finalizó hace {{timeDifferenceHumanized}}",
+      "aFewSeconds": "unos cuantos segundos"
+    },
+    "errors": {
+      "proposalDescriptionError": "Nos encontramos un error al intentar cargar el contenido de la propuesta. Por favor refresque la página e intente nuevamente.",
+      "invalidContentHash": "Contenido hash inválido",
+      "titleRequired": "El título es requerido",
+      "atLeastOneOptionRequired": "Por lo menos una opción es requerida",
+      "atLeastOneActionPerOptionRequired": "Por lo menos una acción por opción es requerida",
+      "optionsArrayIsEmpty": "Las opciones están vacías",
+      "metadataUploadError": "Error en la carga de Metadatos",
+      "genericProposalError": "Nos encontramos con un error.",
+      "couldntFindTheProposal": "No pudimos encontrar esa propuesta",
+      "probablyNonExistent": "Probablemente no exista"
+    }
+  },
+  "tokenPicker": {
+    "selectAToken": "Seleccionar un token",
+    "searchToken": "Buscar token"
+  },
+  "duration": {
+    "selectDuration": "Seleccionar duración",
+    "durationWarningMessage": "Por favor cambie la entrada {{value}} en la columna {{timeColumn}} ya que se encuentra por encima del límite. El valor máximo permitido es {{limit.max}}.",
+    "seconds_one": "segundo",
+    "seconds_other": "segundos",
+    "minutes_one": "minuto",
+    "minutes_other": "minutos",
+    "mins": "mins",
+    "hours_one": "hora",
+    "hours_other": "horas",
+    "days_one": "día",
+    "days_other": "días",
+    "months_one": "mes",
+    "months_other": "meses",
+    "years_one": "año",
+    "years_other": "años"
+  },
+  "members": {
+    "membership": "Membresía",
+    "members": "Miembros",
+    "members_zero": "No hay Miembros",
+    "members_one": "{{count}} Miembro",
+    "members_other": "{{count}} Miembros",
+    "member": "Miembro",
+    "searchMemberOrAddress": "Buscar miembro o dirección",
+    "noMembers": "Este DAO no tiene miembros",
+    "membersNotAvailable": "Los datos de miembros no están disponibles",
+    "join": "Unirse",
+    "yourVotingPower": "Tu Poder de Votación",
+    "increaseVotingPower": "Incrementar Poder de Votación",
+    "locking": {
+      "locked": "Bloqueado",
+      "unlocked": "Desbloqueado",
+      "unlockedIn": "Desbloqueado en",
+      "staked": "Invertido",
+      "withdraw": "Retirar",
+      "balance": "Balance",
+      "unlockDate": "Fecha de desbloqueo",
+      "spending": "Gasto",
+      "max": "Max",
+      "stakeTokens": "Invertir {{token}} tokens",
+      "lockingTokens": "Bloquear{{amount}} {{symbol}} tokens",
+      "unlockAndWithdrawTokens": "Desbloquear y retirar{{amount}} {{symbol}} tokens"
+    }
+  },
+  "settings": {
+    "settings": "Ajustes"
+  },
+  "filter": {
+    "filter": "Filtro",
+    "search": "Buscar",
+    "searchTitleEnsAddress": "Buscar propuesta",
+    "state": "Estado",
+    "reset": "Reiniciar",
+    "type": "Escribe",
+    "currency": "Token"
+  },
+  "createProposal": {
+    "createProposal": "Crear una Propuesta",
+    "title": "Título",
+    "enterProposalDescription": "Ingresar el cuerpo de la propuesta",
+    "ipfs": {
+      "failedToUpload": "Fallo al subir a IPFS, por favor refrescar la página e intentar de nuevo",
+      "hashNotTheSame": "El Hash devuelto por pinata no es el mismo que el hash local",
+      "errorWhileUploading": "Error durante la subida a IPFS",
+      "couldntUploadToPinata": "No se pudo subir y anclar a Pinata",
+      "error": "Error"
+    },
+    "retry": "Volver a intentar",
+    "createAnyway": "Crear de cualquier manera"
+  },
+  "editDiscussion": {
+    "editDiscussion": "Editar Discusión",
+    "savingChanges": "Guardando Cambios"
+  },
+  "discussions": {
+    "allDiscussions": "Todas las discusiones",
+    "discussions_zero": "No hay Discusiones",
+    "discussions_one": "Discusión",
+    "discussions_other": "Discusiones",
+    "thereAreNoDiscussions": "No hay discusiones",
+    "noMoreDiscussions": "No hay más discusiones",
+    "createDiscussion": "Crear Discusión",
+    "updateDiscussion": "Actualizar Discusión",
+    "createDiscussionWordy": "Crear una nueva discusión",
+    "discussionPlaceholder": "Escribir contenido de discusión",
+    "title": "Título",
+    "proposalOnOtherChain": "lo lamentamos, esta propuesta parece estar en otra cadena, intente cambiar a {{chain}} para verla",
+    "postOptions": {
+      "edit": "Editar",
+      "delete": "Borrar"
+    },
+    "postActions": {
+      "reply": "Responder",
+      "toggleThread": "Alternar hilo",
+      "like": "Me gusta",
+      "haha": "Haha",
+      "downvote": "Voto negativo"
+    },
+    "activity": {
+      "discussionTitle": "Actividad",
+      "discussionEmpty": "No hay comentarios aún",
+      "discussionLoadMore": "Cargar más comentarios",
+      "replyingTo": "Respondiéndole a",
+      "postEdited": "Editado",
+      "postboxShare": "Compartir",
+      "mentionsSearchLoading": "Cargando...",
+      "postboxConnectWallet": "Conectar monedero para empezar a compartir comentarios",
+      "postboxConnectCeramic": "Generar una nueva sesión de Ceramic para empezar a compartir comentarios",
+      "postboxConnectCeramicButton": "Generar sesión de Ceramic",
+      "postboxEditCancel": "Cancelar",
+      "postboxEditSave": "Guardar",
+      "removalMessage1": "¿Está seguro de que desea eliminar esta publicación?",
+      "removalMessage2": "Esto usa sus poderes de moderación y debería ser usado únicamente para contenido inapropiado.",
+      "deletionMessage1": "¿Está seguro de que desea borrar esta publicación?",
+      "deletionMessage2": "Si solicita la eliminación su publicación podría ser removida de los nodos de Ceramic alojándolo.",
+      "reload": "Recargar"
+    }
+  },
+  "schemes": {
+    "schemes_one": "Esquema",
+    "schemes_other": "Esquemas",
+    "schemeParameters": "Parámetros del Esquema",
+    "schemeForProposal": "Esquema para la propuesta",
+    "maxProposalTime": "Tiempo máximo de propuesta",
+    "proposalTimeInBoost": "Tiempo de propuesta impulsada",
+    "proposalTimeInPreBoost": "Tiempo de propuesta en pre-impulso",
+    "canManageSchemes": "Puede gestionar esquemas",
+    "canMakeAvatarCalls": "Puede hacer llamadas al avatar",
+    "maxRepPercentageChange": "Máximo porcentaje de cambio de REP",
+    "backToScheme": "Volver al Esquema",
+    "type": "Tipo",
+    "next": "Siguiente",
+    "errorFetchingSchemes": "Error buscando los esquemas",
+    "daoHasNoSchemes": "Esta DAO no tiene esquemas registrados",
+    "daoBounty": "Recompensa de la DAO"
+  },
+  "inputValidation": {
+    "recipientAddressIsRequired": "La dirección del destinatario es requerida",
+    "amountIsRequired": "La cantidad es requerida",
+    "invalidRecipientAddress": "Dirección del destinatario inválida",
+    "tokenIsRequired": "El Token es requerido",
+    "amountCannotBeZero": "La cantidad no puede ser cero",
+    "invalidAmount": "Cantidad inválida",
+    "invalidValue": "Valor inválido",
+    "invalidTokenAddress": "Dirección del token inválida",
+    "dataIsNotAHexString": "Los datos no son cadenas hexadecimales",
+    "dataIsRequired": "Los datos son requeridos",
+    "eitherDataOrValueRequired": "Se requieren datos o valor",
+    "dataIsOddLength": "Los datos tienen una longitud impar",
+    "reputationPercentageTooHigh": "El porcentaje de reputación es muy alto",
+    "reputationPercentIsRequired": "El porcentaje de reputación es requerido",
+    "invalidFunctionName": "Nombre de función inválido",
+    "encodedSignatureIsInvalid": "La firma codificada es inválida",
+    "invalidAddress": "Dirección inválida",
+    "addressIsRequired": "La dirección es requerida",
+    "cantBeGreaterThan100": "No puede ser mayor al 100%"
+  },
+  "daoErrors": {
+    "noDAOsRegistered": "No hay DAOs registradas en esta red",
+    "daoNotAvailable": "DAO no disponible",
+    "daoNotAvailableOnThisNetwork": "Este gremio no está disponible en esta red",
+    "noDAOInThisAddress": "No hay gremios existentes en esta dirección",
+    "unknownDAO": "DAO Desconocida",
+    "errorLoadingDAOsList": "Error durante la carga de la lista de DAOs"
+  },
+  "404": {
+    "pageNotExist": "Esa página no existe",
+    "makeSureCorrectAddress": "Asegúrese de haber escrito la dirección correcta",
+    "takeMeHome": "Llévame al inicio"
+  },
+  "footer": {
+    "reportABug": "Reportar un bug",
+    "suggestAFeature": "Sugerir una característica"
+  },
+  "offlinePage": {
+    "youAreNotOnline": "Usted no está Online",
+    "pleaseCheckYourInternetConnection": "Por favor verifique su conexión a internet"
+  },
+  "loadingDao": "Cargando DAO",
+  "votes": "Votos",
+  "hookStoreErrors": {
+    "methodNotSupported": "Este método no es compatible con esta implementación de governanza"
+  },
+  "loading": "Cargando...",
+  "showMore": "Mostrar más",
+  "showLess": "Mostrar menos"
+}
+

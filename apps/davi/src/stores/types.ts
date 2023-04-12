@@ -1,6 +1,13 @@
 import { BigNumber } from 'ethers';
+import { Moment } from 'moment';
 import { Option, Permission } from 'components/ActionsBuilder/types';
-import { Proposal, GuildConfigProps, Vote } from 'types/types.guilds.d';
+import {
+  Proposal,
+  GuildConfigProps,
+  Vote,
+  ProposalState,
+  SubDAO,
+} from 'types/types.guilds.d';
 
 interface GovernanceCapabilities {
   votingPower: 'soulbound' | 'hybrid' | 'liquid';
@@ -8,6 +15,7 @@ interface GovernanceCapabilities {
   consensus: 'holographic' | 'quorum';
   votingStyle: 'binary' | 'competition';
   votingPowerTally: 'snapshot' | 'live';
+  hasSubDAO: boolean;
 }
 // TODO: make a series of utils that parses the capabilities and translates them to a series of boolean flags, to make it easier to conditionally render UI elements
 
@@ -66,7 +74,11 @@ export interface FetcherHooksInterface {
   ) => {
     data: BigNumber;
   };
-  useDAOToken: (daoId: string) => { data: `0x${string}` };
+  useDAOToken: (daoId: string) => {
+    data: `0x${string}`;
+    isError: boolean;
+    isLoading: boolean;
+  };
   useIsProposalCreationAllowed: (
     daoId: string,
     userAddress: `0x${string}`
@@ -93,7 +105,7 @@ export interface FetcherHooksInterface {
   useVotingResults: (
     daoId: string,
     proposalId: `0x${string}`,
-    proposal: Proposal['totalVotes']
+    totalVotes: Proposal['totalVotes']
   ) => VoteData;
   useVotingPowerOf: (useVotingPowerOfProps: {
     contractAddress: string;
@@ -137,6 +149,18 @@ export interface FetcherHooksInterface {
     isError: boolean;
     isLoading: boolean;
   };
+  useProposalState: (proposal: Proposal) => ProposalState;
+  useTimeDetail: (
+    daoId: string,
+    status: ProposalState,
+    endTime: Moment
+  ) => { detail: string; moment: Moment };
+  useGetSubDAOs: (daoId: string) => {
+    data: SubDAO[];
+    isLoading: boolean;
+    errorMessage: string;
+    isError: boolean;
+  };
 }
 
 export interface WriterHooksInteface {
@@ -159,8 +183,9 @@ export interface WriterHooksInteface {
     cb: (error?: any, txtHash?: any) => void
   ) => Promise<void>;
   useExecuteProposal: (
-    daoAddress: string
-  ) => (proposalId: `0x${string}`) => Promise<void>;
+    daoAddress: string,
+    subDaoAddress?: string
+  ) => (proposal: Proposal) => Promise<void>;
   useLockTokens: (
     daoAddress: string
   ) => (
@@ -169,7 +194,8 @@ export interface WriterHooksInteface {
     symbol?: string
   ) => Promise<void>;
   useVoteOnProposal: (
-    daoAddress: string
+    daoAddress: string,
+    subDaoAddres?: string
   ) => (
     proposalId: string,
     option: BigNumber,

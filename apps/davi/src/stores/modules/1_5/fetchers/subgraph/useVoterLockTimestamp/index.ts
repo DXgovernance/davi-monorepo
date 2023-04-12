@@ -1,0 +1,1 @@
+export { useVoterLockTimestamp } from './useVoterLockTimestamp';

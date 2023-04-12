@@ -23,7 +23,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   const { name: parsedENSName } = useENS(value);
 
   const [localValue, setLocalValue] = useState(
-    (enableENSName && parsedENSName) || value
+    (enableENSName && parsedENSName) || value || ''
   );
 
   const [disabledState, setDisabledState] = useState(

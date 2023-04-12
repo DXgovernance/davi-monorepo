@@ -2,10 +2,8 @@ import { useTypedParams } from '../Hooks/useTypedParams';
 import { ProposalCard } from 'components/ProposalCard';
 import useENSAvatar from 'hooks/Guilds/ens/useENSAvatar';
 import { MAINNET_ID } from 'utils/constants';
-import useProposalState from 'hooks/Guilds/useProposalState';
 import { useFilter } from 'contexts/Guilds/filters';
 import { useAccount } from 'wagmi';
-import useTimeDetail from 'Modules/Guilds/Hooks/useTimeDetail';
 import { useHookStoreProvider } from 'stores';
 
 interface ProposalCardWrapperProps {
@@ -16,7 +14,12 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
 }) => {
   const {
     hooks: {
-      fetchers: { useProposal, useProposalVotesOfVoter },
+      fetchers: {
+        useProposal,
+        useProposalVotesOfVoter,
+        useProposalState,
+        useTimeDetail,
+      },
     },
   } = useHookStoreProvider();
   const { guildId, chainName } = useTypedParams();
@@ -31,6 +34,7 @@ const ProposalCardWrapper: React.FC<ProposalCardWrapperProps> = ({
     proposalId,
     address
   );
+
   const endTime = useTimeDetail(guildId, status, proposal?.endTime);
 
   return withFilters(

@@ -3,7 +3,11 @@ import { faker } from '@faker-js/faker';
 
 export const data = {
   discussionTitle: faker.lorem.word(),
-  discussionDescription: faker.lorem.sentence()
+  discussionDescription: faker.lorem.sentence(),
+  proposalTitle: faker.lorem.word(),
+  proposalDescription: faker.lorem.sentence(),
+  ethereumAmount: faker.datatype.number({ min: 0, max: 3, precision: 0.0001 }),
+  mintRepPercentage: faker.datatype.number({ min: 0, max: 100, precision: 0.1 })
 }
 
 export const ACCOUNTS = [

@@ -280,6 +280,7 @@ exports[`ProposalVoteCard matches the snapshot 1`] = `
   -ms-flex-pack: end;
   justify-content: flex-end;
   margin-top: 0px;
+  margin-right: 0px;
   gap: 10px;
 }
 

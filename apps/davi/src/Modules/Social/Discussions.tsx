@@ -31,8 +31,8 @@ const Discussions = () => {
     setIsLoading(true);
     let { data, error } = await orbis.getPosts(
       {
-        algorithm: 'all-context-master-posts',
         context: `DAVI-${guildId}`,
+        only_master: true,
       },
       page
     );

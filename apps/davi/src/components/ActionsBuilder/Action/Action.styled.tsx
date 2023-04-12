@@ -3,6 +3,7 @@ import { CardWrapper, Header } from 'components/Card';
 import { Box } from 'components/primitives/Layout/Box';
 import styled, { css } from 'styled-components';
 import { CardStatus } from './Action';
+import { TenderlyLogo } from '../OptionsList/SimulationModal/SimulationModal.styled';
 
 export const CardWrapperWithMargin = styled(CardWrapper)<{
   cardStatus?: CardStatus;
@@ -100,4 +101,23 @@ export const SectionHeader = styled(Box)`
 
 export const SectionBody = styled(Box)`
   color: ${({ theme }) => theme.colors.grey};
+`;
+
+export const SimulationError = styled(Box)`
+  color: ${({ theme }) => theme.colors.grey};
+  margin-top: 1rem;
+`;
+
+export const SimulationStatusContainer = styled(Box)`
+  margin-right: 0.6rem;
+`;
+
+export const SimulationLinkContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+export const TenderlyURLLogo = styled(TenderlyLogo)`
+  margin-top: 5px;
 `;

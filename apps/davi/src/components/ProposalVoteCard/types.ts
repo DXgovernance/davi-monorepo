@@ -46,7 +46,7 @@ export interface ProposalVoteCardProps {
   proposal: Proposal;
   votingPower: VotingPower;
   timestamp: number;
-  votingMachineAddress: string;
+  guildId: string;
   userVote?: UseProposalVotesOfVoterReturn;
 }
 

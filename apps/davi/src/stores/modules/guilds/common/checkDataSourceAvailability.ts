@@ -1,10 +1,15 @@
 import { subgraphClientsUris } from 'clients/apollo';
 import { SupportedSubgraph } from 'stores/types';
+import { LOCALHOST_ID } from 'utils';
 
 export const checkDataSourceAvailability = async chainId => {
   try {
     if (!subgraphClientsUris?.[chainId]?.[SupportedSubgraph.Guilds]) {
       console.debug('No subgraph URL for this chain, using fallback');
+      return false;
+    }
+
+    if (localStorage.getItem('decentralizeMode') === 'true') {
       return false;
     }
 
@@ -29,7 +34,11 @@ export const checkDataSourceAvailability = async chainId => {
     );
     const { data, errors } = await response.json();
 
-    if (data?._meta?.block?.timestamp < Math.floor(Date.now() / 1000) - 600) {
+    if (
+      data?._meta?.block?.timestamp !== null &&
+      data?._meta?.block?.timestamp < Math.floor(Date.now() / 1000) - 600 &&
+      chainId !== LOCALHOST_ID
+    ) {
       console.debug('Subgraph out of sync, using fallback');
       return false;
     }

@@ -1,0 +1,9 @@
+query getDaoNumberOfActiveProposals($id: ID!) {
+  dao(id: $id) {
+    schemes {
+      proposals(where: { state: Submitted }) {
+        id
+      }
+    }
+  }
+}

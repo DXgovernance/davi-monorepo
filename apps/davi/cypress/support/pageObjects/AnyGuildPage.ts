@@ -23,7 +23,6 @@ class AnyGuildPage {
   public currencyFilterOption: string;
   public searchbarBtn: string;
   public searchbarInputField: string;
-  public proposalPageTitle: string;
   public proposalPageBackButton: string;
   public allDiscussionPage: string;
   public firstDiscussionCard: string;
@@ -53,7 +52,6 @@ class AnyGuildPage {
     this.currencyFilterOption = 'currency-dropdown-option';
     this.searchbarBtn = 'search-btn-all-proposals';
     this.searchbarInputField = 'search-bar-all-proposals';
-    this.proposalPageTitle = 'proposal-page-title';
     this.proposalPageBackButton = 'proposal-back-btn';
     this.creatorName = 'creator-address-name';
     this.createProposalButton = 'create-proposal-button';
@@ -64,9 +62,10 @@ class AnyGuildPage {
     this.firstDiscussionTitle = 'discussion-title';
     this.discussionPageBackButton = 'discussion-back-btn';
   }
-  createDiscussion_Button() { return cy.findAllByTestId("create-discussion-btn");}
-  discussionPageTitle_Text() { return cy.findAllByTestId("discussion-page-title");}
-  discussionPageDescription_Text() { return cy.findAllByTestId("discussion-page-description");}
+  createDiscussion_Button() { return cy.findAllByTestId("create-discussion-btn") }
+  discussionPageTitle_Text() { return cy.findAllByTestId("discussion-page-title") }
+  discussionPageDescription_Text() { return cy.findAllByTestId("discussion-page-description") }
+  proposalPageTitle_Text() { return cy.findByTestId('proposal-page-title') }
 
   checkIfYouAreOnSelectedGuildPage(guildName) {
     cy.findAllByTestId(this.guildName).contains(guildName);
@@ -78,6 +77,14 @@ class AnyGuildPage {
 
   checkDiscussionDescription(discussionDescription) {
     this.discussionPageDescription_Text().should('include.text', discussionDescription)
+  }
+
+  checkProposalName(proposalName) {
+    this.proposalPageTitle_Text().should('include.text', proposalName)
+  }
+
+  checkProposalDescription(proposalDescription) {
+    this.discussionPageDescription_Text().should('include.text', proposalDescription)
   }
 
   // Governance page
@@ -195,7 +202,7 @@ class AnyGuildPage {
 
   // Proposal page
   checkIfYouAreOnProposalPage() {
-    cy.findByTestId(this.proposalPageTitle).should('be.visible');
+    this.proposalPageTitle_Text().should('be.visible');
     cy.findByTestId(this.creatorName).should('be.visible');
   };
 

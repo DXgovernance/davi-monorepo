@@ -30,6 +30,13 @@ let fullResponse = [
   null,
 ];
 
+jest.mock('hooks/Guilds/ens/useENS', () => ({
+  __esModule: true,
+  default: () => ({
+    name: '',
+  }),
+}));
+
 jest.mock('hooks/Guilds/useSwaprFetchPairs', () => ({
   __esModule: true,
   useSwaprFetchPairs: () => Promise.resolve(fullResponse),

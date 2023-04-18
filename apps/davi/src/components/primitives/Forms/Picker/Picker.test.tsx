@@ -8,6 +8,13 @@ import dxdaoIcon from 'assets/images/dxdao-icon.svg';
 const mockOnSelect = jest.fn();
 fullProps.onSelect = mockOnSelect;
 
+jest.mock('hooks/Guilds/ens/useENS', () => ({
+  __esModule: true,
+  default: () => ({
+    name: '',
+  }),
+}));
+
 describe('Picker', () => {
   let getByText;
   let getByPlaceholderText;

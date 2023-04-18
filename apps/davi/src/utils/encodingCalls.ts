@@ -5,21 +5,6 @@ import { decodeCall } from 'hooks/Guilds/contracts/useDecodedCall';
 import { RichContractData } from 'hooks/Guilds/contracts/useRichContractRegistry';
 import { ZERO_HASH } from './constants';
 
-export const encodeRepMint = (library, repAmount, to, avatar) => {
-  const repFunctionEncoded = library.eth.abi.encodeFunctionSignature(
-    'mintReputation(uint256,address,address)'
-  );
-
-  const repParamsEncoded = library.eth.abi
-    .encodeParameters(
-      ['uint256', 'address', 'address'],
-      [repAmount, to, avatar]
-    )
-    .substring(2);
-
-  return repFunctionEncoded + repParamsEncoded;
-};
-
 export const encodeErc20Approval = (library, to, amount) => {
   const erc20ApprovalFunctionEncoded = library.eth.abi.encodeFunctionSignature(
     'approve(address,uint256)'

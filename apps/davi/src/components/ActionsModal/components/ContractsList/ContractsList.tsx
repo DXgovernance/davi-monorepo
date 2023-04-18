@@ -79,6 +79,17 @@ const ContractsList: React.FC<ContractsListProps> = ({
             </ButtonLabel>
           </ActionsButton>
         ) : null}
+        {!!isRepGuild ? (
+          <ActionsButton
+            data-testid="rep-burn-action"
+            onClick={() => onSupportedActionSelect(SupportedAction.REP_BURN)}
+          >
+            <ButtonLabel>
+              <StyledIcon src={Mint} />
+              {t('actionBuilder.repMint.burnRep')}
+            </ButtonLabel>
+          </ActionsButton>
+        ) : null}
         {isAvailableOnENS(chain.id) ? (
           <ActionsButton
             data-testid="ens-update-content-action"

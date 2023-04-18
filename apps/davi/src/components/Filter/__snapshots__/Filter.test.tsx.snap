@@ -427,6 +427,12 @@ exports[`Filter Should match snapshot 1`] = `
                 class="c12 c13"
                 data-testid="action-dropdown-option"
               >
+                Rep Burn
+              </a>
+              <a
+                class="c12 c13"
+                data-testid="action-dropdown-option"
+              >
                 Generic Call
               </a>
               <a

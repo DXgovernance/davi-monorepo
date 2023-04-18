@@ -427,6 +427,23 @@ exports[`ActionsModal Should match snapshot 2 1`] = `
                 </button>
                 <button
                   class="c13 c14"
+                  data-testid="rep-burn-action"
+                >
+                  <div
+                    class="c15"
+                  >
+                    <div
+                      class="c16"
+                    >
+                      <svg>
+                        mint.svg
+                      </svg>
+                    </div>
+                    actionBuilder.repMint.burnRep
+                  </div>
+                </button>
+                <button
+                  class="c13 c14"
                   data-testid="set-guild-config-action"
                 >
                   <div

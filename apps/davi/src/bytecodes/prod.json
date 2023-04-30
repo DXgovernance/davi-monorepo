@@ -13,7 +13,7 @@
   },
   {
     "type": "SnapshotERC20Guild",
-    "deployedBytecodeHash": "0xcfe42d56f58ab49603c49e6c7ca4bd3d2260cec51d296e4a5cfa2a407e299b6c",
+    "deployedBytecodeHash": "0xde7ce3c98a37ed91e93fd9aba12a1e110d65e6a395f11fbf99042b485d73e8b3",
     "bytecodeHash": "",
     "features": ["SNAPSHOT"]
   }

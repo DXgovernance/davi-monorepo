@@ -41,7 +41,7 @@ exports[`WalletButton Should match snapshot and display connect wallet 1`] = `
 }
 
 .c0:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 <div>

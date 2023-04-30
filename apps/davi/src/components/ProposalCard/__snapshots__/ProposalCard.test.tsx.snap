@@ -157,7 +157,7 @@ exports[`ProposalCard ProposalCard Renders properly with data 1`] = `
 }
 
 .c20:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c6 {
@@ -671,7 +671,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option  1
 }
 
 .c20:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c6 {
@@ -1169,7 +1169,7 @@ exports[`ProposalCard ProposalCard Renders properly with more than one option co
 }
 
 .c20:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c6 {

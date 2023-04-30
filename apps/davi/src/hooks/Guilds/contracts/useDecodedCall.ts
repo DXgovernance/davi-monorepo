@@ -10,6 +10,7 @@ import ERC20SnapshotRep from 'contracts/ERC20SnapshotRep.json';
 import PermissionRegistry from 'contracts/PermissionRegistry.json';
 import ENSPublicResolver from 'contracts/ENSPublicResolver.json';
 import BaseERC20Guild from 'contracts/BaseERC20Guild.json';
+import CowSettlement from 'contracts/CowSettlement.json';
 
 import {
   ApproveSendTokens,
@@ -25,6 +26,7 @@ import {
   MINT_REP_SIGNATURE,
   ENS_UPDATE_CONTENT_SIGNATURE,
   SET_GUILD_CONFIG_SIGNATURE,
+  COW_SET_PRE_SIG_SIGNATURE,
 } from 'utils';
 import { lookUpContractWithSourcify } from 'utils/sourcify';
 
@@ -35,7 +37,7 @@ const knownSigHashes: Record<string, { callType: SupportedAction; ABI: any }> =
       ABI: ERC20.abi,
     },
     [ERC20_APPROVE_SIGNATURE]: {
-      callType: SupportedAction.GENERIC_CALL,
+      callType: SupportedAction.ERC20_APPROVE,
       ABI: ERC20.abi,
     },
     [SET_PERMISSION_SIGNATURE]: {
@@ -53,6 +55,10 @@ const knownSigHashes: Record<string, { callType: SupportedAction; ABI: any }> =
     [SET_GUILD_CONFIG_SIGNATURE]: {
       callType: SupportedAction.SET_GUILD_CONFIG,
       ABI: BaseERC20Guild.abi,
+    },
+    [COW_SET_PRE_SIG_SIGNATURE]: {
+      callType: SupportedAction.COW_SWAP_LIMIT_ORDER,
+      ABI: CowSettlement.abi,
     },
   };
 

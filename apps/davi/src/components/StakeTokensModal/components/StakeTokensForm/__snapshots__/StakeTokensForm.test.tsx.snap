@@ -143,7 +143,7 @@ exports[`StakeTokensForm StakeTokensForm renders properly 1`] = `
 }
 
 .c17:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {

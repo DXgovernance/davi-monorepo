@@ -41,7 +41,7 @@ exports[`GuestActions Should match snapshot with data 1`] = `
 }
 
 .c0:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c1,
@@ -110,7 +110,7 @@ exports[`GuestActions Should match snapshot without data 1`] = `
 }
 
 .c0:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 <div>

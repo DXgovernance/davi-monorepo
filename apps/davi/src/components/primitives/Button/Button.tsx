@@ -35,7 +35,7 @@ const variantStyles = (variant = 'primary') =>
       }
 
       :disabled {
-        color: ${({ theme }) => theme.colors.border1};
+        color: ${({ theme }) => theme.colors.border3};
       }
 
       ${({ active, selected }) =>

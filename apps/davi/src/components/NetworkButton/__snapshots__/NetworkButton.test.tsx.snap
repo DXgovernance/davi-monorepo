@@ -41,7 +41,7 @@ exports[`NetworkButton Should match snapshot and display network 1`] = `
 }
 
 .c0:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c1 svg,
@@ -118,7 +118,7 @@ exports[`NetworkButton Should match snapshot and display not connected status 1`
 }
 
 .c0:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 <div>

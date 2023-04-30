@@ -41,7 +41,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed with data 1`] = `
 }
 
 .c6:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -206,7 +206,7 @@ exports[`MemberInfoDropdown Should match snapshot in closed without data 1`] = `
 }
 
 .c6:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -416,7 +416,7 @@ exports[`MemberInfoDropdown Should match snapshot when open with data 1`] = `
 }
 
 .c6:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -581,7 +581,7 @@ exports[`MemberInfoDropdown Should match snapshot when open without data 1`] = `
 }
 
 .c6:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {

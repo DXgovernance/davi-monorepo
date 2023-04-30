@@ -41,7 +41,7 @@ exports[`ProposalCardWinningOption a tooltip shows after clicking in the action 
 }
 
 .c3:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -431,7 +431,7 @@ exports[`ProposalCardWinningOption if the option has only one action, no tooltip
 }
 
 .c3:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -638,7 +638,7 @@ exports[`ProposalCardWinningOption renders a loading component when the votes ar
 }
 
 .c3:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -859,7 +859,7 @@ exports[`ProposalCardWinningOption renders an indicator of the number of actions
 }
 
 .c3:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {
@@ -1064,7 +1064,7 @@ exports[`ProposalCardWinningOption renders properly with one action 1`] = `
 }
 
 .c3:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c0 {

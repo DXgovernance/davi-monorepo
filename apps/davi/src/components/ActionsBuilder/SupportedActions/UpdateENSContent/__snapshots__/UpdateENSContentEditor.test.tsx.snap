@@ -133,7 +133,7 @@ exports[`UpdateENSContentEditor Should match snapshot 1`] = `
 }
 
 .c10:disabled {
-  color: #303338;
+  color: #fff;
 }
 
 .c1 {

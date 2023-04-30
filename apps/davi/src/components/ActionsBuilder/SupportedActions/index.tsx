@@ -8,6 +8,7 @@ import {
 import ENSPublicResolver from 'contracts/ENSPublicResolver.json';
 import ERC20 from 'contracts/ERC20.json';
 import BaseERC20Guild from 'contracts/BaseERC20Guild.json';
+import CowSettlement from 'contracts/CowSettlement.json';
 import ERC20SnapshotRep from 'contracts/ERC20SnapshotRep.json';
 import PermissionRegistry from 'contracts/PermissionRegistry.json';
 import ERC20TransferEditor from './ERC20Transfer/ERC20TransferEditor';
@@ -25,6 +26,10 @@ import SetGuildConfigEditor from './SetGuildConfig/SetGuildConfigEditor';
 import Summary from './common/Summary';
 import RawTransactionEditor from './RawTransaction/RawTransactionEditor';
 import RawTransactionInfoLine from './RawTransaction/RawTransactionInfoLine';
+import CowLimitOrderEditor from './CowLimitOrder/CowLimitOrderEditor';
+import CowLimitOrderInfoLine from './CowLimitOrder/CowLimitOrderInfoLine';
+import ERC20ApproveInfoLine from './ERC20Approve/ERC20ApproveInfoLine';
+import CowLimitOrderSummary from './CowLimitOrder/CowLimitOrderSummary';
 
 export interface SupportedActionMetadata {
   title: string;
@@ -60,6 +65,11 @@ export const supportedActions: Record<
     infoLineView: ERC20TransferInfoLine,
     summaryView: Summary,
     editor: ERC20TransferEditor,
+  },
+  [SupportedAction.ERC20_APPROVE]: {
+    title: 'Approve',
+    infoLineView: ERC20ApproveInfoLine,
+    editor: null,
   },
   [SupportedAction.ERC20_TRANSFER]: {
     title: 'Transfer',
@@ -102,12 +112,19 @@ export const supportedActions: Record<
     summaryView: Summary,
     editor: SetGuildConfigEditor,
   },
+  [SupportedAction.COW_SWAP_LIMIT_ORDER]: {
+    title: 'Limit Order',
+    infoLineView: CowLimitOrderInfoLine,
+    editor: CowLimitOrderEditor,
+    summaryView: CowLimitOrderSummary,
+  },
 };
 const ERC20Contract = new utils.Interface(ERC20.abi);
 const BaseERC20GuildContract = new utils.Interface(BaseERC20Guild.abi);
 const ERC20SnapshotRepContract = new utils.Interface(ERC20SnapshotRep.abi);
 const ENSPublicResolverContract = new utils.Interface(ENSPublicResolver.abi);
 const PermissionRegistryContract = new utils.Interface(PermissionRegistry.abi);
+const CowSettlementContract = new utils.Interface(CowSettlement.abi);
 
 export const defaultValues: Record<SupportedAction, DecodedAction> = {
   [SupportedAction.NATIVE_TRANSFER]: {
@@ -120,6 +137,24 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
       to: '',
       value: '',
       args: null,
+    },
+  },
+  [SupportedAction.ERC20_APPROVE]: {
+    id: '',
+    contract: ERC20Contract,
+    decodedCall: {
+      from: '',
+      callType: SupportedAction.ERC20_APPROVE,
+      function: ERC20Contract.getFunction('approve'),
+      to: '',
+      args: {
+        spender: '',
+        amount: '',
+      },
+      value: BigNumber.from(0),
+      optionalProps: {
+        functionSignature: '',
+      },
     },
   },
   [SupportedAction.ERC20_TRANSFER]: {
@@ -244,6 +279,28 @@ export const defaultValues: Record<SupportedAction, DecodedAction> = {
       optionalProps: {},
     },
   },
+  [SupportedAction.COW_SWAP_LIMIT_ORDER]: {
+    id: '',
+    contract: CowSettlementContract,
+    decodedCall: {
+      from: '',
+      callType: SupportedAction.COW_SWAP_LIMIT_ORDER,
+      function: CowSettlementContract.getFunction('setPreSignature'),
+      to: '',
+      args: {
+        orderUid: '',
+        signed: '',
+      },
+      value: BigNumber.from(0),
+      optionalProps: {
+        sellAmount: '',
+        buyToken: '',
+        sellToken: '',
+        to: '',
+        functionSignature: '',
+      },
+    },
+  },
 };
 
 export const getInfoLineView = (actionType: SupportedAction) => {
@@ -262,25 +319,4 @@ export const getEditor = (actionType: SupportedAction) => {
   if (actionType == null) return null;
 
   return supportedActions[actionType].editor;
-};
-
-const isApprovalCall = (action: DecodedAction) => {
-  return !!action?.approval;
-};
-
-/**
- * Importance:
- * 1. rep minting
- * 2. spending calls
- * 3. transfers.
- * 4. generic calls
- *
- */
-export const getActionPoints = (action: DecodedAction): number => {
-  const type = action?.decodedCall?.callType;
-  if (type === SupportedAction.REP_MINT) return 5;
-  if (isApprovalCall(action)) return 4;
-  if (type === SupportedAction.ERC20_TRANSFER) return 3;
-  if (type === SupportedAction.GENERIC_CALL) return 2;
-  return 1;
 };

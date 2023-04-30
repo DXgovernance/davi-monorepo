@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { SwaprPickerProps } from './types';
+import { TokenPickerProps } from './types';
 import { useNetwork } from 'wagmi';
 import { Input } from 'components/primitives/Forms/Input';
 import { Avatar } from 'components/Avatar';
@@ -10,9 +10,10 @@ import TokenPicker from 'components/TokenPicker/TokenPicker';
 import { useERC20Info } from 'hooks/Guilds/erc20/useERC20Info';
 import { useTypedParams } from 'Modules/Guilds/Hooks/useTypedParams';
 
-const TokenPickerInput: React.FC<SwaprPickerProps> = ({
+const TokenPickerInput: React.FC<TokenPickerProps> = ({
   value: token,
   onChange,
+  ...rest
 }) => {
   const [isTokenPickerOpen, setIsTokenPickerOpen] = useState(false);
 
@@ -32,8 +33,9 @@ const TokenPickerInput: React.FC<SwaprPickerProps> = ({
     <>
       <div onClick={() => setIsTokenPickerOpen(true)}>
         <Input
-          value={tokenInfo?.symbol || ''}
           placeholder="Token"
+          {...rest}
+          value={tokenInfo?.symbol || ''}
           icon={
             <div>
               {token && (
